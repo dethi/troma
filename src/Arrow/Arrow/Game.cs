@@ -16,15 +16,19 @@ namespace Arrow
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Test test;
+
         public Game()
         {
-            graphics = new GraphicsDeviceManager(this);
+            this.graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            this.test = new Test(this.graphics, this.Content);
+            this.test.Initialize();
 
             base.Initialize();
         }
@@ -32,9 +36,10 @@ namespace Arrow
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            this.test.LoadContent(this.spriteBatch);
         }
 
         protected override void UnloadContent()
@@ -49,6 +54,7 @@ namespace Arrow
                 this.Exit();
 
             // TODO: Add your update logic here
+            this.test.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -58,6 +64,7 @@ namespace Arrow
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            this.test.Draw(gameTime);
 
             base.Draw(gameTime);
         }
