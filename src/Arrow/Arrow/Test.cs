@@ -27,9 +27,9 @@ namespace Arrow
         #endregion
 
         // Don't modify this methods
-        public Test(GraphicsDeviceManager graphics)
+        public Test(GraphicsDeviceManager graphics, ContentManager Content)
         {
-            Content.RootDirectory = "Content";
+            this.Content = Content;
             this.graphics = graphics;
         }
 

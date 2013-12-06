@@ -27,7 +27,7 @@ namespace Arrow
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.test = new Test(this.graphics);
+            this.test = new Test(this.graphics, this.Content);
             this.test.Initialize();
 
             base.Initialize();
