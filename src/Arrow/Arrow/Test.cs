@@ -20,6 +20,7 @@ namespace Arrow
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private ContentManager Content;
+        private GraphicsDevice GraphicsDevice;
 
         // TODO: Add your properties here
         #region Properties
@@ -27,8 +28,9 @@ namespace Arrow
         #endregion
 
         // Don't modify this methods
-        public Test(GraphicsDeviceManager graphics, ContentManager Content)
+        public Test(GraphicsDevice GraphicsDevice, GraphicsDeviceManager graphics, ContentManager Content)
         {
+            this.GraphicsDevice = GraphicsDevice;
             this.Content = Content;
             this.graphics = graphics;
         }
