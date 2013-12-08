@@ -13,10 +13,11 @@ namespace Arrow
 {
     public class Game : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
-        Test test;
+        public Player player { get; private set; }
+        private Test test;
 
         public Game()
         {
@@ -27,8 +28,11 @@ namespace Arrow
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.test = new Test(this.GraphicsDevice, this.graphics, this.Content);
+            this.test = new Test(this);
             this.test.Initialize();
+
+            this.player = new Player(this);
+            Components.Add(this.player);
 
             base.Initialize();
         }
@@ -39,7 +43,7 @@ namespace Arrow
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            this.test.LoadContent(this.spriteBatch);
+            this.test.LoadContent();
         }
 
         protected override void UnloadContent()
