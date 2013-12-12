@@ -17,22 +17,17 @@ namespace Arrow
     //
     class Test
     {
-        private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
-        private ContentManager Content;
-        private GraphicsDevice GraphicsDevice;
+        private Game game;
 
         // TODO: Add your properties here
         #region Properties
-        // Here
         #endregion
 
+
         // Don't modify this methods
-        public Test(GraphicsDevice GraphicsDevice, GraphicsDeviceManager graphics, ContentManager Content)
+        public Test(Game game)
         {
-            this.GraphicsDevice = GraphicsDevice;
-            this.Content = Content;
-            this.graphics = graphics;
+            this.game = game;
         }
 
         public void Initialize()
@@ -40,10 +35,8 @@ namespace Arrow
             // TODO: Add your initialization logic here
         }
 
-        public void LoadContent(SpriteBatch spriteBatch)
+        public void LoadContent()
         {
-            this.spriteBatch = spriteBatch;
-
             // TODO: use this.Content to load your game content here
         }
 

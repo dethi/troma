@@ -13,22 +13,38 @@ namespace Arrow
 {
     public class Game : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
-        Test test;
+        public Player player { get; private set; }
+        //private Test test;
 
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            /*
+            // Disable V-Sync, allow more than 60 FPS
+            this.IsFixedTimeStep = false;
+            this.graphics.SynchronizeWithVerticalRetrace = false;
+            this.graphics.ApplyChanges();
+            */
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.test = new Test(this.GraphicsDevice, this.graphics, this.Content);
-            this.test.Initialize();
+            
+            //this.test = new Test(this);
+            //this.test.Initialize();
+
+            this.player = new Player(this);
+            Components.Add(this.player);
+
+            Components.Add(new FPS(this));
+
+            //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
 
             base.Initialize();
         }
@@ -39,7 +55,7 @@ namespace Arrow
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            this.test.LoadContent(this.spriteBatch);
+            //this.test.LoadContent();
         }
 
         protected override void UnloadContent()
@@ -54,7 +70,7 @@ namespace Arrow
                 this.Exit();
 
             // TODO: Add your update logic here
-            this.test.Update(gameTime);
+            //this.test.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -64,7 +80,7 @@ namespace Arrow
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            this.test.Draw(gameTime);
+            //this.test.Draw(gameTime);
 
             base.Draw(gameTime);
         }
