@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arrow", "Arrow\Arrow\Arrow.csproj", "{270F3E65-7595-48E4-811F-FD8AFE1886FA}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "ArrowContent", "Arrow\ArrowContent\ArrowContent.contentproj", "{E03102F6-382C-4168-85B7-2F47DA74DDE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrowContent", "Arrow\ArrowContent\ArrowContent.contentproj", "{E03102F6-382C-4168-85B7-2F47DA74DDE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
