@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 
-namespace Bouton
+namespace Arrow
 {
     public class Button : Microsoft.Xna.Framework.DrawableGameComponent
     {
@@ -31,12 +31,13 @@ namespace Bouton
         {
             this.game = game;
             this.bouton = new Rectangle(x, y, width, height);
-            this.nameTextureIsOff = nameTextureIsOff;
-            this.nameTextureIsOn = nameTextureIsOn;
+            this.nameTextureIsOff = "Textures\\" + nameTextureIsOff;
+            this.nameTextureIsOn = "Textures\\" + nameTextureIsOn;
         }
 
         public override void Initialize()
         {
+            this.game.IsMouseVisible = true;
             this.spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
             base.Initialize();
         }
@@ -69,11 +70,13 @@ namespace Bouton
 
         public override void Draw(GameTime gameTime)
         {
+            this.spriteBatch.Begin();
             //Change l'image en fonction de la position du curseur
             if (isOn == false)
                 this.spriteBatch.Draw(this.textureIsOn, bouton, Color.White);
             else
                 this.spriteBatch.Draw(this.textureIsOff, bouton, Color.White);
+            this.spriteBatch.End();
 
             //Charge une nouvelle image si on clique
             if (isClick == true)

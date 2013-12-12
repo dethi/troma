@@ -43,6 +43,8 @@ namespace Arrow
 
             Components.Add(new FPS(this));
 
+            // Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
+
             base.Initialize();
         }
 
