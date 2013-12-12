@@ -23,6 +23,13 @@ namespace Arrow
         {
             this.graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            /*
+             * Disable V-Sync, allow more than 60 FPS
+            this.IsFixedTimeStep = false;
+            this.graphics.SynchronizeWithVerticalRetrace = false;
+            this.graphics.ApplyChanges();
+            */
         }
 
         protected override void Initialize()
@@ -33,6 +40,8 @@ namespace Arrow
 
             this.player = new Player(this);
             Components.Add(this.player);
+
+            Components.Add(new FPS(this));
 
             base.Initialize();
         }
