@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
     <Compile Include="FPS.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Player.cs" />
