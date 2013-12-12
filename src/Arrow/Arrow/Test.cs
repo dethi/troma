@@ -21,8 +21,6 @@ namespace Arrow
 
         // TODO: Add your properties here
         #region Properties
-        // Here
-        Model model;
         #endregion
 
 
@@ -40,7 +38,6 @@ namespace Arrow
         public void LoadContent()
         {
             // TODO: use this.Content to load your game content here
-            this.model = game.Content.Load<Model>("map");
         }
 
         public void Update(GameTime gameTime)
@@ -51,20 +48,6 @@ namespace Arrow
         public void Draw(GameTime gameTime)
         {
             // TODO: Add your drawing code here
-            foreach (ModelMesh mesh in this.model.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.World = game.player.world * Matrix.CreateRotationX(MathHelper.ToRadians(90));
-                    effect.View = game.player.view;
-                    effect.Projection = game.player.projection;
-
-                    effect.TextureEnabled = true;
-                    effect.LightingEnabled = true;
-                }
-
-                mesh.Draw();
-            }
         }
     }
 }

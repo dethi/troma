@@ -17,6 +17,8 @@ namespace Arrow
     //
     public class Player : Microsoft.Xna.Framework.GameComponent
     {
+        private Game game;
+
         public Matrix view { get; private set; }
         public Matrix projection { get; private set; }
         public Matrix world { get; private set; }
@@ -27,7 +29,9 @@ namespace Arrow
 
         public Player(Game game)
             : base(game)
-        { }
+        {
+            this.game = game;
+        }
 
         public override void Initialize()
         {
@@ -51,7 +55,7 @@ namespace Arrow
             // TODO: correct axies
             if (GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X != 0)
             {
-                this.world *= Matrix.CreateRotationZ(MathHelper.ToRadians(-1.1f *
+                this.game.map.position *= Matrix.CreateRotationZ(MathHelper.ToRadians(-1.1f *
                     GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X));
             }
             if (GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y != 0)

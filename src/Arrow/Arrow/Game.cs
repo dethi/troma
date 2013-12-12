@@ -17,7 +17,9 @@ namespace Arrow
         private SpriteBatch spriteBatch;
 
         public Player player { get; private set; }
-        private Test test;
+        //private Test test;
+
+        public FBX map;
 
         public Game()
         {
@@ -25,7 +27,7 @@ namespace Arrow
             Content.RootDirectory = "Content";
 
             /*
-             * Disable V-Sync, allow more than 60 FPS
+            // Disable V-Sync, allow more than 60 FPS
             this.IsFixedTimeStep = false;
             this.graphics.SynchronizeWithVerticalRetrace = false;
             this.graphics.ApplyChanges();
@@ -35,8 +37,9 @@ namespace Arrow
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.test = new Test(this);
-            this.test.Initialize();
+            
+            //this.test = new Test(this);
+            //this.test.Initialize();
 
             this.player = new Player(this);
             Components.Add(this.player);
@@ -52,7 +55,7 @@ namespace Arrow
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            this.test.LoadContent();
+            //this.test.LoadContent();
         }
 
         protected override void UnloadContent()
@@ -67,7 +70,7 @@ namespace Arrow
                 this.Exit();
 
             // TODO: Add your update logic here
-            this.test.Update(gameTime);
+            //this.test.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -77,7 +80,7 @@ namespace Arrow
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            this.test.Draw(gameTime);
+            //this.test.Draw(gameTime);
 
             base.Draw(gameTime);
         }
