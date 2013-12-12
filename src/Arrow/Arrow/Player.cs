@@ -55,7 +55,7 @@ namespace Arrow
             // TODO: correct axies
             if (GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X != 0)
             {
-                this.game.map.position *= Matrix.CreateRotationZ(MathHelper.ToRadians(-1.1f *
+                this.world *= Matrix.CreateRotationZ(MathHelper.ToRadians(-1.1f *
                     GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X));
             }
             if (GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y != 0)

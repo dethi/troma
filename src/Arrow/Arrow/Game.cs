@@ -19,8 +19,6 @@ namespace Arrow
         public Player player { get; private set; }
         //private Test test;
 
-        public FBX map;
-
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
@@ -46,7 +44,7 @@ namespace Arrow
 
             Components.Add(new FPS(this));
 
-            // Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
+            //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
 
             base.Initialize();
         }
