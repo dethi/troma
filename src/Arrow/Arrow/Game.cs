@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+
 namespace Arrow
 {
     public class Game : Microsoft.Xna.Framework.Game
@@ -16,7 +17,7 @@ namespace Arrow
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        public Player player { get; private set; }
+        public Player_tmp player { get; private set; }
         //private Test test;
 
         public Game()
@@ -39,8 +40,10 @@ namespace Arrow
             //this.test = new Test(this);
             //this.test.Initialize();
 
-            this.player = new Player(this);
-            Components.Add(this.player);
+            //this.player = new Player_tmp(this);
+            //Components.Add(this.player);
+
+            Components.Add(new Camera(this));
 
             Components.Add(new FPS(this));
 
