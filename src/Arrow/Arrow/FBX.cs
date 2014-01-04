@@ -21,49 +21,46 @@ namespace Arrow
         public Matrix position;
 
         public bool textureEnabled;
-        public bool lightingEnabled;
+        //public bool lightingEnabled;
 
-        public FBX(Game game, string nameModel)
+        public FBX(Game game, string nameModel) : this(game, nameModel, Matrix.Identity) { }
+
+        public FBX(Game game, string nameModel, Matrix position)
             : base(game)
         {
             this.game = game;
             this.nameModel = nameModel;
+            this.position = position;
         }
 
         public override void Initialize()
         {
-            this.textureEnabled = true;
-            this.lightingEnabled = true;
-            this.position = Matrix.Identity;
+            textureEnabled = true;
+            //lightingEnabled = true;
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            this.model = game.Content.Load<Model>("Models/" + nameModel);
+            model = game.Content.Load<Model>("Models/" + nameModel);
             base.LoadContent();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            foreach (ModelMesh mesh in this.model.Meshes)
+            foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    effect.World = this.position;
-                    effect.View = game.player.view;
-                    effect.Projection = game.player.projection;
+                    effect.TextureEnabled = textureEnabled;
+                    //effect.LightingEnabled = lightingEnabled;
+                    effect.EnableDefaultLighting();
 
-                    effect.TextureEnabled = this.textureEnabled;
-                    effect.LightingEnabled = this.lightingEnabled;
+                    effect.World = position;
+                    effect.Projection = game.camera.Projection;
+                    effect.View = game.camera.View;
                 }
-
                 mesh.Draw();
             }
 

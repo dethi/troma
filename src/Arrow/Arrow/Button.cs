@@ -31,8 +31,8 @@ namespace Arrow
         {
             this.game = game;
             this.bouton = new Rectangle(x, y, width, height);
-            this.nameTextureIsOff = "Textures\\" + nameTextureIsOff;
-            this.nameTextureIsOn = "Textures\\" + nameTextureIsOn;
+            this.nameTextureIsOff = "Textures/" + nameTextureIsOff;
+            this.nameTextureIsOn = "Textures/" + nameTextureIsOn;
         }
 
         public override void Initialize()

@@ -15,7 +15,7 @@ namespace Arrow
     //
     // Controls of the player
     //
-    public class Player : Microsoft.Xna.Framework.GameComponent
+    public class Player_tmp : Microsoft.Xna.Framework.GameComponent
     {
         private Game game;
 
@@ -27,7 +27,7 @@ namespace Arrow
         private Vector3 cameraTarget = new Vector3(0, 2f, 0);
         private Vector3 cameraUp = Vector3.Up;
 
-        public Player(Game game)
+        public Player_tmp(Game game)
             : base(game)
         {
             this.game = game;
