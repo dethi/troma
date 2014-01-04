@@ -17,12 +17,12 @@ namespace Arrow
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        public Player_tmp player { get; private set; }
-        //private Test test;
+        public Camera camera { get; private set; }
 
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
 
             /*
@@ -35,15 +35,10 @@ namespace Arrow
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            
-            //this.test = new Test(this);
-            //this.test.Initialize();
+            camera = new Camera(this, new Vector3(0, 5, 0));
+            Components.Add(camera);
 
-            //this.player = new Player_tmp(this);
-            //Components.Add(this.player);
-
-            Components.Add(new Camera(this));
+            Components.Add(new FBX(this, "grid100x100"));
 
             Components.Add(new FPS(this));
 
@@ -56,24 +51,16 @@ namespace Arrow
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
-            //this.test.LoadContent();
         }
 
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
+        protected override void UnloadContent() { }
 
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-
-            // TODO: Add your update logic here
-            //this.test.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -81,10 +68,6 @@ namespace Arrow
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-            //this.test.Draw(gameTime);
-
             base.Draw(gameTime);
         }
     }
