@@ -112,6 +112,7 @@
     <Compile Include="FBX.cs" />
     <Compile Include="FPS.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="ModelManager.cs" />
     <Compile Include="Player_tmp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

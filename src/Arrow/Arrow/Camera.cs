@@ -80,6 +80,7 @@ namespace Arrow
         public override void Update(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            KeyboardState kbs = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
 
             //
@@ -88,13 +89,13 @@ namespace Arrow
             #region Clavier
             Vector3 moveVector = Vector3.Zero;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            if (kbs.IsKeyDown(Keys.W))
                 moveVector.Z += 1;
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            if (kbs.IsKeyDown(Keys.S))
                 moveVector.Z += -1;
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            if (kbs.IsKeyDown(Keys.A))
                 moveVector.X += 1;
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            if (kbs.IsKeyDown(Keys.D))
                 moveVector.X += -1;
 
             if (moveVector != Vector3.Zero)
@@ -157,7 +158,7 @@ namespace Arrow
             cameraLookAt = cameraPosition + lookAtOffset;
         }
 
-        // Simule le mouvement (permet d'obtenir la nouvelle position de la camera)
+        // Permet d'obtenir la nouvelle position de la camera
         private Vector3 PreviewMove(Vector3 amount)
         {
             Matrix rotate = Matrix.CreateRotationY(cameraRotation.Y);
