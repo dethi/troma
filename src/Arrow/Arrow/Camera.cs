@@ -19,7 +19,7 @@ namespace Arrow
         private Vector3 cameraRotation;
         private float cameraSpeed;
         private Vector3 cameraLookAt;
-        private Vector3 mouseRotationBuffer;
+        private Vector3 rotationBuffer;
         private MouseState currentMouseState;
         private Vector2 originMouse;
         #endregion
@@ -80,63 +80,112 @@ namespace Arrow
         public override void Update(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            KeyboardState kbs = Keyboard.GetState();
-            currentMouseState = Mouse.GetState();
-
-            //
-            // Mouvement par le clavier
-            //
-            #region Clavier
             Vector3 moveVector = Vector3.Zero;
 
-            if (kbs.IsKeyDown(Keys.W))
-                moveVector.Z += 1;
-            if (kbs.IsKeyDown(Keys.S))
-                moveVector.Z += -1;
-            if (kbs.IsKeyDown(Keys.A))
-                moveVector.X += 1;
-            if (kbs.IsKeyDown(Keys.D))
-                moveVector.X += -1;
+            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            {
+                GamePadState gps = GamePad.GetState(PlayerIndex.One);
+
+                //
+                // Mouvement du personnage
+                //
+                #region ThumbStickLeft
+                
+                if (gps.ThumbSticks.Left.X != 0)
+                    moveVector.X -= gps.ThumbSticks.Left.X;
+                if (gps.ThumbSticks.Left.Y != 0)
+                    moveVector.Z += gps.ThumbSticks.Left.Y;
+
+                #endregion
+
+                //
+                // Orientation de la camera
+                //
+                #region ThumbStickRight
+
+                if (gps.ThumbSticks.Right.X != 0 || gps.ThumbSticks.Right.Y != 0)
+                {
+                    rotationBuffer.X -= 1.5f * gps.ThumbSticks.Right.X * dt;
+                    rotationBuffer.Y += 1.5f * gps.ThumbSticks.Right.Y * dt;
+
+                    if (rotationBuffer.Y < MathHelper.ToRadians(-75.0f))
+                    {
+                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
+                            MathHelper.ToRadians(-75.0f));
+                    }
+                    if (rotationBuffer.Y > MathHelper.ToRadians(75.0f))
+                    {
+                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
+                            MathHelper.ToRadians(75.0f));
+                    }
+
+                    Rotation = new Vector3(-MathHelper.Clamp(rotationBuffer.Y,
+                        MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
+                        MathHelper.WrapAngle(rotationBuffer.X), 0);
+                }
+
+                #endregion
+            }
+            else
+            {
+                KeyboardState kbs = Keyboard.GetState();
+                currentMouseState = Mouse.GetState();
+
+                //
+                // Mouvement du personnage
+                //
+                #region Keyboard
+
+                if (kbs.IsKeyDown(Keys.W))
+                    moveVector.Z += 1;
+                if (kbs.IsKeyDown(Keys.S))
+                    moveVector.Z += -1;
+                if (kbs.IsKeyDown(Keys.A))
+                    moveVector.X += 1;
+                if (kbs.IsKeyDown(Keys.D))
+                    moveVector.X += -1;
+
+                #endregion
+
+                //
+                // Orientation de la camera
+                //
+                #region Mouse
+                if (currentMouseState.X != originMouse.X || currentMouseState.Y != originMouse.Y)
+                {
+                    float deltaX = currentMouseState.X - originMouse.X;
+                    float deltaY = currentMouseState.Y - originMouse.Y;
+
+                    rotationBuffer.X -= 0.05f * deltaX * dt;
+                    rotationBuffer.Y -= 0.05f * deltaY * dt;
+
+                    if (rotationBuffer.Y < MathHelper.ToRadians(-75.0f))
+                    {
+                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
+                            MathHelper.ToRadians(-75.0f));
+                    }
+                    if (rotationBuffer.Y > MathHelper.ToRadians(75.0f))
+                    {
+                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
+                            MathHelper.ToRadians(75.0f));
+                    }
+
+                    Rotation = new Vector3(-MathHelper.Clamp(rotationBuffer.Y,
+                        MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
+                        MathHelper.WrapAngle(rotationBuffer.X), 0);
+
+                    Mouse.SetPosition((int)originMouse.X, (int)originMouse.Y);
+                }
+                #endregion
+            }
 
             if (moveVector != Vector3.Zero)
             {
                 moveVector.Normalize();
                 moveVector *= dt * cameraSpeed;
             }
-            #endregion
 
-            //
-            // Mouvement par la souris
-            //
-            #region Souris
-            if (currentMouseState.X != originMouse.X || currentMouseState.Y != originMouse.Y)
-            {
-                float deltaX = currentMouseState.X - originMouse.X;
-                float deltaY = currentMouseState.Y - originMouse.Y;
-
-                mouseRotationBuffer.X -= 0.05f * deltaX * dt;
-                mouseRotationBuffer.Y -= 0.05f * deltaY * dt;
-
-                if (mouseRotationBuffer.Y < MathHelper.ToRadians(-75.0f))
-                {
-                    mouseRotationBuffer.Y = mouseRotationBuffer.Y - (mouseRotationBuffer.Y -
-                        MathHelper.ToRadians(-75.0f));
-                }
-                if (mouseRotationBuffer.Y > MathHelper.ToRadians(75.0f))
-                {
-                    mouseRotationBuffer.Y = mouseRotationBuffer.Y - (mouseRotationBuffer.Y -
-                        MathHelper.ToRadians(75.0f));
-                }
-
-                Rotation = new Vector3(-MathHelper.Clamp(mouseRotationBuffer.Y,
-                    MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
-                    MathHelper.WrapAngle(mouseRotationBuffer.X), 0);
-
-                Mouse.SetPosition((int)originMouse.X, (int)originMouse.Y);
-            }
-            #endregion
-
-            // Effectue le mouvement (clavier + souris)
+            // Effectue le mouvement
             Move(moveVector);
 
             base.Update(gameTime);
