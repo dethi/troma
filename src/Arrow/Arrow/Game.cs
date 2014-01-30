@@ -22,7 +22,7 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
 
             /*
@@ -35,12 +35,13 @@ namespace Arrow
 
         protected override void Initialize()
         {
-            camera = new Camera(this, new Vector3(0, 5, 0));
+            camera = new Camera(this, new Vector3(0, 6.8f, 0));
             Components.Add(camera);
 
             Components.Add(new FBX(this, "grid100x100"));
 
             Components.Add(new FPS(this));
+            Components.Add(new DisplayPosition(this));
 
             //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
 
