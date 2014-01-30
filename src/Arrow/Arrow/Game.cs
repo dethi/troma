@@ -19,6 +19,8 @@ namespace Arrow
         private ModelManager modelManager;
 
         public Camera camera { get; private set; }
+        private Map map;
+        BasicEffect effect;
 
         public Game()
         {
@@ -26,7 +28,7 @@ namespace Arrow
             //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
 
-            modelManager = new ModelManager();
+            //modelManager = new ModelManager();
 
             /*
             // Disable V-Sync, allow more than 60 FPS
@@ -41,7 +43,8 @@ namespace Arrow
             camera = new Camera(this, new Vector3(0, 6.8f, 0));
             Components.Add(camera);
 
-            modelManager.AddModel(new FBX(this, "grid100x100"));
+            effect = new BasicEffect(GraphicsDevice);
+            map = new Map(GraphicsDevice);
 
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
@@ -66,7 +69,7 @@ namespace Arrow
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            modelManager.Update(gameTime);
+            //modelManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -74,7 +77,9 @@ namespace Arrow
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            modelManager.Draw(gameTime);
+            
+            //modelManager.Draw(gameTime);
+            map.Draw(camera, effect);
 
             base.Draw(gameTime);
         }

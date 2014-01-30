@@ -66,7 +66,7 @@ namespace Arrow
             cameraSpeed = speed;
 
             Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
-                Game.GraphicsDevice.Viewport.AspectRatio, 0.05f, 1000.0f);
+                game.GraphicsDevice.Viewport.AspectRatio, 0.05f, 1000.0f);
 
             // Initialise la position et la rotation de la camera
             MoveTo(position, rotation);
