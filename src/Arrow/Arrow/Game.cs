@@ -16,10 +16,11 @@ namespace Arrow
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private ModelManager modelManager;
+        //private ModelManager modelManager;
 
         public Camera camera { get; private set; }
-        //private Map map;
+
+        //private SquareMap map;
         //private BasicEffect effect;
 
         private HeightMap terrain;
@@ -47,7 +48,7 @@ namespace Arrow
             Components.Add(camera);
 
             //effect = new BasicEffect(GraphicsDevice);
-            //map = new Map(GraphicsDevice);
+            //map = new SquareMap(GraphicsDevice);
 
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
@@ -63,11 +64,11 @@ namespace Arrow
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             terrain = new HeightMap(GraphicsDevice,
-                Content.Load<Texture2D>("Textures/map_noise"),
+                Content.Load<Texture2D>("Textures/heightmap"),
                 Content.Load<Texture2D>("Textures/grass"),
                 32f,
-                500,
-                500,
+                128,
+                128,
                 3f);
 
             effect = Content.Load<Effect>("Effects/Terrain");

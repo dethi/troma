@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Arrow
 {
-    class Map
+    class SquareMap
     {
         public const int V_SIZE = 4;
         public const int MAP_WIDTH = 20 * V_SIZE;
@@ -17,7 +17,7 @@ namespace Arrow
         VertexBuffer floorBuffer;
         Color[] floorColors = new Color[2] { Color.White, Color.Gray };
 
-        public Map(GraphicsDevice device)
+        public SquareMap(GraphicsDevice device)
         {
             this.device = device;
             BuildFloorBuffer();

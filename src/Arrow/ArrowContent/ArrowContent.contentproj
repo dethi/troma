@@ -61,13 +61,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\grid100x100.fbx">
-      <Name>grid100x100</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Effects\Terrain.fx">
       <Name>Terrain</Name>
       <Importer>EffectImporter</Importer>
@@ -82,11 +75,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\map_noise.bmp">
-      <Name>map_noise</Name>
+    <Compile Include="Textures\heightmap.png">
+      <Name>heightmap</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
