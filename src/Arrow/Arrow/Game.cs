@@ -19,8 +19,11 @@ namespace Arrow
         private ModelManager modelManager;
 
         public Camera camera { get; private set; }
-        private Map map;
-        BasicEffect effect;
+        //private Map map;
+        //private BasicEffect effect;
+
+        private HeightMap terrain;
+        private Effect effect;
 
         public Game()
         {
@@ -43,8 +46,8 @@ namespace Arrow
             camera = new Camera(this, new Vector3(0, 6.8f, 0));
             Components.Add(camera);
 
-            effect = new BasicEffect(GraphicsDevice);
-            map = new Map(GraphicsDevice);
+            //effect = new BasicEffect(GraphicsDevice);
+            //map = new Map(GraphicsDevice);
 
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
@@ -58,6 +61,16 @@ namespace Arrow
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            terrain = new HeightMap(GraphicsDevice,
+                Content.Load<Texture2D>("Textures/map_noise"),
+                Content.Load<Texture2D>("Textures/grass"),
+                32f,
+                500,
+                500,
+                3f);
+
+            effect = Content.Load<Effect>("Effects/Terrain");
         }
 
         protected override void UnloadContent() { }
@@ -79,7 +92,8 @@ namespace Arrow
             GraphicsDevice.Clear(Color.CornflowerBlue);
             
             //modelManager.Draw(gameTime);
-            map.Draw(camera, effect);
+            //map.Draw(camera, effect);
+            terrain.Draw(camera, effect);
 
             base.Draw(gameTime);
         }
