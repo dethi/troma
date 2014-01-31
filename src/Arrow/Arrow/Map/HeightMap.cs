@@ -127,5 +127,34 @@ namespace Arrow
                 indices.Length, BufferUsage.WriteOnly);
             indexBuffer.SetData(indices);
         }
+
+        public float GetHeight(float x, float z)
+        {
+            int xmin = (int)Math.Floor(x);
+            int xmax = xmin + 1;
+            int zmin = (int)Math.Floor(z);
+            int zmax = zmin + 1;
+
+            if ((xmin < 0) || (zmin < 0) || (xmax > heights.GetUpperBound(0)) ||
+                (zmax > heights.GetUpperBound(1)))
+                return 0;
+            else
+            {
+                Vector3 p1 = new Vector3(xmin, heights[xmin, zmax], zmax);
+                Vector3 p2 = new Vector3(xmax, heights[xmax, zmin], zmin);
+                Vector3 p3;
+
+                if ((x - xmin) + (z - zmin) <= 1)
+                    p3 = new Vector3(xmin, heights[xmin, zmin], zmin);
+                else
+                    p3 = new Vector3(xmax, heights[xmax, zmax], zmax);
+
+                Plane plane = new Plane(p1, p2, p3);
+                Ray ray = new Ray(new Vector3(x, 0, z), Vector3.Up);
+                float? height = ray.Intersects(plane);
+
+                return (height.HasValue) ? height.Value : 0f;
+            }
+        }
     }
 }
