@@ -72,6 +72,8 @@ namespace Arrow
                 3f);
 
             effect = Content.Load<Effect>("Effects/Terrain");
+
+            SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
         }
 
         protected override void UnloadContent() { }
