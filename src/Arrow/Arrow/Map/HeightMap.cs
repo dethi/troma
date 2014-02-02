@@ -28,15 +28,27 @@ namespace Arrow
             ReadHeightMap(heightMap, terrainWidth, terrainHeight, heightScale);
             BuildVertexBuffer(terrainWidth, terrainHeight, heightScale);
             BuildIndexBuffer(terrainWidth, terrainHeight);
+            CalculateNormals();
         }
 
         public void Draw(Camera camera, Effect effect)
         {
+            Vector3 lightDirection = new Vector3(-1f, 1f, -1f);
+            lightDirection.Normalize();
+
             effect.CurrentTechnique = effect.Techniques["Technique1"];
+
             effect.Parameters["terrainTexture1"].SetValue(terrainTexture);
             effect.Parameters["World"].SetValue(Matrix.Identity);
             effect.Parameters["View"].SetValue(camera.View);
             effect.Parameters["Projection"].SetValue(camera.Projection);
+
+            effect.Parameters["lightDirection"].SetValue(lightDirection);
+            effect.Parameters["lightColor"].SetValue(new Vector4(1, 1, 1, 1));
+            effect.Parameters["lightBrightness"].SetValue(0.8f);
+
+            effect.Parameters["ambientLightLevel"].SetValue(0.15f);
+            effect.Parameters["ambientLightColor"].SetValue(new Vector4(0.98f, 0.92f, 0.24f, 1f));
 
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {
@@ -95,7 +107,7 @@ namespace Arrow
             }
 
             vertexBuffer = new VertexBuffer(device, typeof(VertexPositionNormalTexture),
-                vertices.Length, BufferUsage.WriteOnly);
+                vertices.Length, BufferUsage.None);
             vertexBuffer.SetData(vertices);
         }
 
@@ -124,8 +136,73 @@ namespace Arrow
             }
 
             indexBuffer = new IndexBuffer(device, IndexElementSize.SixteenBits,
-                indices.Length, BufferUsage.WriteOnly);
+                indices.Length, BufferUsage.None);
             indexBuffer.SetData(indices);
+        }
+
+        private void CalculateNormals()
+        {
+            VertexPositionNormalTexture[] vertices =
+                new VertexPositionNormalTexture[vertexBuffer.VertexCount];
+            short[] indices = new short[indexBuffer.IndexCount];
+
+            vertexBuffer.GetData(vertices);
+            indexBuffer.GetData(indices);
+
+            for (int x = 0; x < vertices.Length; x++)
+                vertices[x].Normal = Vector3.Zero;
+
+            int triangleCount = indices.Length / 3;
+
+            for (int x = 0; x < triangleCount; x++)
+            {
+                int v1 = indices[x * 3];
+                int v2 = indices[(x * 3) + 1];
+                int v3 = indices[(x * 3) + 2];
+
+                Vector3 firstSide = vertices[v2].Position - vertices[v1].Position;
+                Vector3 secondSide = vertices[v1].Position - vertices[v3].Position;
+                Vector3 triangleNormal = Vector3.Cross(firstSide, secondSide);
+                triangleNormal.Normalize();
+
+                vertices[v1].Normal += triangleNormal;
+                vertices[v2].Normal += triangleNormal;
+                vertices[v3].Normal += triangleNormal;
+            }
+
+            for (int x = 0; x < vertices.Length; x++)
+                vertices[x].Normal.Normalize();
+
+            vertexBuffer.SetData(vertices);
+        }
+
+        public float GetHeight(float x, float z)
+        {
+            int xmin = (int)Math.Floor(x);
+            int xmax = xmin + 1;
+            int zmin = (int)Math.Floor(z);
+            int zmax = zmin + 1;
+
+            if ((xmin < 0) || (zmin < 0) || (xmax > heights.GetUpperBound(0)) ||
+                (zmax > heights.GetUpperBound(1)))
+                return 0;
+            else
+            {
+                Vector3 p1 = new Vector3(xmin, heights[xmin, zmax], zmax);
+                Vector3 p2 = new Vector3(xmax, heights[xmax, zmin], zmin);
+                Vector3 p3;
+
+                if ((x - xmin) + (z - zmin) <= 1)
+                    p3 = new Vector3(xmin, heights[xmin, zmin], zmin);
+                else
+                    p3 = new Vector3(xmax, heights[xmax, zmax], zmax);
+
+                Plane plane = new Plane(p1, p2, p3);
+                Ray ray = new Ray(new Vector3(x, 0, z), Vector3.Up);
+                float? height = ray.Intersects(plane);
+
+                return (height.HasValue) ? height.Value : 0f;
+            }
         }
     }
 }
