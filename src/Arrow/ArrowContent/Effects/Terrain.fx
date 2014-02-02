@@ -9,16 +9,25 @@ sampler2D textureSampler = sampler_state {
 	AddressV = Wrap;
 };
 
+float3 lightDirection;
+float4 lightColor;
+float lightBrightness;
+
+float4 ambientLightColor;
+float ambientLightLevel;
+
 struct VertexShaderInput
 {
     float4 Position : POSITION0;
 	float2 TextureCoordinate : TEXCOORD0;
+	float3 Normal : NORMAL0;
 };
 
 struct VertexShaderOutput
 {
     float4 Position : POSITION0;
 	float2 TextureCoordinate : TEXCOORD0;
+	float4 LightingColor : COLOR0;
 };
 
 VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
@@ -31,12 +40,21 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 
     output.TextureCoordinate = input.TextureCoordinate;
 
+	float4 normal = normalize(mul(input.Normal, World));
+	float lightLevel = dot(normal, lightDirection);
+	output.LightingColor = saturate(lightColor * lightBrightness * lightLevel);
+
     return output;
 }
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
-    return tex2D(textureSampler, input.TextureCoordinate);
+    float4 pixelColor = tex2D(textureSampler, input.TextureCoordinate);
+	pixelColor *= input.LightingColor;
+	pixelColor += ambientLightColor * ambientLightLevel;
+	pixelColor.a = 1.0;
+	
+	return pixelColor;
 }
 
 technique Technique1
