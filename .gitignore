@@ -261,3 +261,11 @@ $RECYCLE.BIN/
 
 # xindy
 *.xdy
+
+
+# =========================
+# Compass SASS
+# =========================
+
+.sass-cache
+
