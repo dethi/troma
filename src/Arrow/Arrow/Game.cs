@@ -45,7 +45,6 @@ namespace Arrow
         protected override void Initialize()
         {
             camera = new Camera(this, new Vector3(0, 6.8f, 0));
-            Components.Add(camera);
 
             //effect = new BasicEffect(GraphicsDevice);
             //map = new SquareMap(GraphicsDevice);
@@ -86,6 +85,7 @@ namespace Arrow
                 this.Exit();
 
             //modelManager.Update(gameTime);
+            //camera.Update(gameTime);
 
             base.Update(gameTime);
         }
