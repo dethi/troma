@@ -56,7 +56,8 @@ namespace Arrow
             this.playerSpeed = playerSpeed;
             this.height = height;
 
-            this.cam = new Camera(game, new Vector3(pos.X, pos.Y + height, pos.Z), rot);
+            this.cam = Camera.Instance;
+            this.cam.New(game, new Vector3(pos.X, pos.Y + height, pos.Z), rot);
 
             int centerX = game.GraphicsDevice.Viewport.Width / 2;
             int centerY = game.GraphicsDevice.Viewport.Height / 2;

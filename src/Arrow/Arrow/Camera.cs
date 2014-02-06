@@ -12,12 +12,36 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Arrow
 {
-    public class Camera
+    public sealed class Camera
     {
+        #region Singleton
+        private static volatile Camera _instance;
+        private static object _syncRoot = new Object();
+
+        public static Camera Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_syncRoot)
+                    {
+                        if (_instance == null)
+                            _instance = new Camera();
+                    }
+                }
+
+                return _instance;
+            }
+        }
+
+        private Camera() { }
+        #endregion
+
         #region Attributes
-        protected Vector3 cameraPosition;
-        protected Vector3 cameraRotation;
-        protected float cameraSpeed;
+        private Vector3 cameraPosition;
+        private Vector3 cameraRotation;
+        private float cameraSpeed;
         private Vector3 cameraLookAt;
         #endregion
 
@@ -42,7 +66,7 @@ namespace Arrow
             }
         }
 
-        public Matrix Projection { get; protected set; }
+        public Matrix Projection { get; private set; }
 
         public Matrix View
         {
@@ -53,7 +77,8 @@ namespace Arrow
         }
         #endregion
 
-        public Camera(Game game, Vector3 position, Vector3 rotation)
+        // Initialise la caméra
+        public void New(Game game, Vector3 position, Vector3 rotation)
         {
             Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
                 game.GraphicsDevice.Viewport.AspectRatio, 0.05f, 1000.0f);

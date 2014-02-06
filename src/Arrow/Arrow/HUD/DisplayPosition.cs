@@ -38,8 +38,8 @@ namespace Arrow
 
         public override void Draw(GameTime gameTime)
         {
-            string str = String.Format("X: {0}\nY: {1}\nZ: {2}", game.camera.Position.X,
-                game.camera.Position.Y, game.camera.Position.Z);
+            string str = String.Format("X: {0}\nY: {1}\nZ: {2}", Camera.Instance.Position.X,
+                Camera.Instance.Position.Y, Camera.Instance.Position.Z);
             Vector2 size = this.spriteFont.MeasureString(str);
 
             this.spriteBatch.Begin();

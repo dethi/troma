@@ -18,7 +18,7 @@ namespace Arrow
         private SpriteBatch spriteBatch;
         //private ModelManager modelManager;
 
-        public Camera camera { get; private set; }
+        private Player player;
 
         //private SquareMap map;
         //private BasicEffect effect;
@@ -44,7 +44,7 @@ namespace Arrow
 
         protected override void Initialize()
         {
-            camera = new Camera(this, new Vector3(0, 6.8f, 0));
+            player = new Player(this);
 
             //effect = new BasicEffect(GraphicsDevice);
             //map = new SquareMap(GraphicsDevice);
@@ -85,7 +85,7 @@ namespace Arrow
                 this.Exit();
 
             //modelManager.Update(gameTime);
-            //camera.Update(gameTime);
+            player.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -96,7 +96,7 @@ namespace Arrow
             
             //modelManager.Draw(gameTime);
             //map.Draw(camera, effect);
-            terrain.Draw(camera, effect);
+            terrain.Draw(Camera.Instance, effect);
 
             base.Draw(gameTime);
         }
