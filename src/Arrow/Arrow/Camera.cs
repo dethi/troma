@@ -41,7 +41,6 @@ namespace Arrow
         #region Attributes
         private Vector3 cameraPosition;
         private Vector3 cameraRotation;
-        private float cameraSpeed;
         private Vector3 cameraLookAt;
         #endregion
 
@@ -77,7 +76,7 @@ namespace Arrow
         }
         #endregion
 
-        // Initialise la caméra
+        // Initialise la camera
         public void New(Game game, Vector3 position, Vector3 rotation)
         {
             Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
@@ -104,7 +103,7 @@ namespace Arrow
         }
 
         // Permet d'obtenir la nouvelle position de la camera
-        private Vector3 PreviewMove(Vector3 amount)
+        public Vector3 PreviewMove(Vector3 amount)
         {
             Matrix rotate = Matrix.CreateRotationY(cameraRotation.Y);
             Vector3 movement = new Vector3(amount.X, amount.Y, amount.Z);

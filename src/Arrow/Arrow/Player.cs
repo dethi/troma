@@ -9,12 +9,16 @@ namespace Arrow
 {
     class Player
     {
+        #region Attributes
         private float playerSpeed;
         private float height;
+
+        private float mapHeight;
 
         private MouseState currentMouseState;
         private Vector2 originMouse;
         private Vector3 rotationBuffer;
+        #endregion
 
         #region Properties
         public Camera cam { get; private set; }
@@ -48,7 +52,7 @@ namespace Arrow
         public Player(Game game, Vector3 pos, float height)
             : this(game, pos, height, Vector3.Zero) { }
 
-        public Player(Game game, Vector3 pos, float height, Vector3 rot) 
+        public Player(Game game, Vector3 pos, float height, Vector3 rot)
             : this(game, pos, height, rot, 40f) { }
 
         public Player(Game game, Vector3 pos, float height, Vector3 rot, float playerSpeed)
@@ -57,7 +61,7 @@ namespace Arrow
             this.height = height;
 
             this.cam = Camera.Instance;
-            this.cam.New(game, new Vector3(pos.X, pos.Y + height, pos.Z), rot);
+            this.cam.New(game, new Vector3(pos.X, pos.Y + height + mapHeight, pos.Z), rot);
 
             int centerX = game.GraphicsDevice.Viewport.Width / 2;
             int centerY = game.GraphicsDevice.Viewport.Height / 2;
@@ -66,7 +70,7 @@ namespace Arrow
         }
         #endregion
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, HeightMap map)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Vector3 moveVector = Vector3.Zero;
@@ -176,6 +180,13 @@ namespace Arrow
 
             // Effectue le mouvement
             cam.Move(moveVector);
+
+            float actualMapHeight = map.GetHeight(Position.X, Position.Z);
+            if (mapHeight != actualMapHeight)
+            {
+                Position = new Vector3(Position.X, mapHeight, Position.Z);
+                mapHeight = actualMapHeight;
+            }
         }
     }
 }

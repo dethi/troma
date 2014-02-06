@@ -68,7 +68,7 @@ namespace Arrow
                 32f,
                 128,
                 128,
-                3f);
+                8f);
 
             effect = Content.Load<Effect>("Effects/Terrain");
 
@@ -85,7 +85,7 @@ namespace Arrow
                 this.Exit();
 
             //modelManager.Update(gameTime);
-            player.Update(gameTime);
+            player.Update(gameTime, terrain);
 
             base.Update(gameTime);
         }
