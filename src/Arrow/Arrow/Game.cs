@@ -29,6 +29,7 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
+
             //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
 
@@ -72,7 +73,7 @@ namespace Arrow
 
             effect = Content.Load<Effect>("Effects/Terrain");
 
-            //SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
+            SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
         }
 
         protected override void UnloadContent() { }
@@ -93,7 +94,7 @@ namespace Arrow
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+
             //modelManager.Draw(gameTime);
             //map.Draw(camera, effect);
             terrain.Draw(Camera.Instance, effect);
