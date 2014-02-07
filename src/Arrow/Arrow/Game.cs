@@ -15,7 +15,7 @@ namespace Arrow
     public class Game : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
+        //private SpriteBatch spriteBatch;
         //private ModelManager modelManager;
 
         private Player player;
@@ -60,7 +60,7 @@ namespace Arrow
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            this.spriteBatch = new SpriteBatch(GraphicsDevice);
+            //this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
             terrain = new HeightMap(GraphicsDevice,
                 Content.Load<Texture2D>("Textures/heightmap"),
@@ -72,7 +72,7 @@ namespace Arrow
 
             effect = Content.Load<Effect>("Effects/Terrain");
 
-            SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
+            //SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
         }
 
         protected override void UnloadContent() { }
