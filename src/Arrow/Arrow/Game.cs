@@ -15,21 +15,19 @@ namespace Arrow
     public class Game : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
+        //private SpriteBatch spriteBatch;
         //private ModelManager modelManager;
 
-        public Camera camera { get; private set; }
+        private Player player;
 
-        //private SquareMap map;
-        //private BasicEffect effect;
-
-        private HeightMap terrain;
+        private HeightMap map;
         private Effect effect;
 
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
             //graphics.IsFullScreen = true;
+
             Content.RootDirectory = "Content";
 
             //modelManager = new ModelManager();
@@ -44,11 +42,7 @@ namespace Arrow
 
         protected override void Initialize()
         {
-            camera = new Camera(this, new Vector3(0, 6.8f, 0));
-            Components.Add(camera);
-
-            //effect = new BasicEffect(GraphicsDevice);
-            //map = new SquareMap(GraphicsDevice);
+            player = new Player(this);
 
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
@@ -61,15 +55,15 @@ namespace Arrow
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            this.spriteBatch = new SpriteBatch(GraphicsDevice);
+            //this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            terrain = new HeightMap(GraphicsDevice,
+            map = new HeightMap(GraphicsDevice,
                 Content.Load<Texture2D>("Textures/heightmap"),
                 Content.Load<Texture2D>("Textures/grass"),
                 32f,
                 128,
                 128,
-                3f);
+                8f);
 
             effect = Content.Load<Effect>("Effects/Terrain");
 
@@ -86,6 +80,7 @@ namespace Arrow
                 this.Exit();
 
             //modelManager.Update(gameTime);
+            player.Update(gameTime, map);
 
             base.Update(gameTime);
         }
@@ -93,10 +88,9 @@ namespace Arrow
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+
             //modelManager.Draw(gameTime);
-            //map.Draw(camera, effect);
-            terrain.Draw(camera, effect);
+            map.Draw(Camera.Instance, effect);
 
             base.Draw(gameTime);
         }

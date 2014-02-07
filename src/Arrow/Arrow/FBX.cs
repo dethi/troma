@@ -49,8 +49,8 @@ namespace Arrow
                     effect.EnableDefaultLighting();
 
                     effect.World = position;
-                    effect.Projection = game.camera.Projection;
-                    effect.View = game.camera.View;
+                    effect.Projection = Camera.Instance.Projection;
+                    effect.View = Camera.Instance.View;
                 }
                 mesh.Draw();
             }
