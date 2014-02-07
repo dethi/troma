@@ -108,13 +108,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
-    <Compile Include="Camera.cs" />
+    <Compile Include="Player\Camera.cs" />
     <Compile Include="HUD\DisplayPosition.cs" />
     <Compile Include="FBX.cs" />
     <Compile Include="HUD\FPS.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Map\HeightMap.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Player\Player.cs" />
     <Compile Include="SFXManager.cs" />
     <Compile Include="Map\SquareMap.cs" />
     <Compile Include="Menu.cs" />
