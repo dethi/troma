@@ -20,17 +20,14 @@ namespace Arrow
 
         private Player player;
 
-        //private SquareMap map;
-        //private BasicEffect effect;
-
-        private HeightMap terrain;
+        private HeightMap map;
         private Effect effect;
 
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-
             //graphics.IsFullScreen = true;
+
             Content.RootDirectory = "Content";
 
             //modelManager = new ModelManager();
@@ -47,9 +44,6 @@ namespace Arrow
         {
             player = new Player(this);
 
-            //effect = new BasicEffect(GraphicsDevice);
-            //map = new SquareMap(GraphicsDevice);
-
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
 
@@ -63,7 +57,7 @@ namespace Arrow
             // Create a new SpriteBatch, which can be used to draw textures.
             //this.spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            terrain = new HeightMap(GraphicsDevice,
+            map = new HeightMap(GraphicsDevice,
                 Content.Load<Texture2D>("Textures/heightmap"),
                 Content.Load<Texture2D>("Textures/grass"),
                 32f,
@@ -86,7 +80,7 @@ namespace Arrow
                 this.Exit();
 
             //modelManager.Update(gameTime);
-            player.Update(gameTime, terrain);
+            player.Update(gameTime, map);
 
             base.Update(gameTime);
         }
@@ -96,8 +90,7 @@ namespace Arrow
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //modelManager.Draw(gameTime);
-            //map.Draw(camera, effect);
-            terrain.Draw(Camera.Instance, effect);
+            map.Draw(Camera.Instance, effect);
 
             base.Draw(gameTime);
         }
