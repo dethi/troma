@@ -31,20 +31,11 @@ namespace Arrow
             this.game = game;
             this.nameModel = nameModel;
             this.position = position;
-        }
 
-        public override void Initialize()
-        {
             textureEnabled = true;
             //lightingEnabled = true;
 
-            base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
             model = game.Content.Load<Model>("Models/" + nameModel);
-            base.LoadContent();
         }
 
         public override void Draw(GameTime gameTime)
@@ -58,8 +49,8 @@ namespace Arrow
                     effect.EnableDefaultLighting();
 
                     effect.World = position;
-                    effect.Projection = game.camera.Projection;
-                    effect.View = game.camera.View;
+                    effect.Projection = Camera.Instance.Projection;
+                    effect.View = Camera.Instance.View;
                 }
                 mesh.Draw();
             }

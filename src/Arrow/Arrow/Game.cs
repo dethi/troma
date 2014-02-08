@@ -15,15 +15,22 @@ namespace Arrow
     public class Game : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
+        //private SpriteBatch spriteBatch;
+        //private ModelManager modelManager;
 
-        public Camera camera { get; private set; }
+        private Player player;
+
+        private HeightMap map;
+        private Effect effect;
 
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
             //graphics.IsFullScreen = true;
+
             Content.RootDirectory = "Content";
+
+            //modelManager = new ModelManager();
 
             /*
             // Disable V-Sync, allow more than 60 FPS
@@ -35,10 +42,7 @@ namespace Arrow
 
         protected override void Initialize()
         {
-            camera = new Camera(this, new Vector3(0, 6.8f, 0));
-            Components.Add(camera);
-
-            Components.Add(new FBX(this, "grid100x100"));
+            player = new Player(this);
 
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
@@ -51,7 +55,19 @@ namespace Arrow
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            this.spriteBatch = new SpriteBatch(GraphicsDevice);
+            //this.spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            map = new HeightMap(GraphicsDevice,
+                Content.Load<Texture2D>("Textures/heightmap"),
+                Content.Load<Texture2D>("Textures/grass"),
+                32f,
+                128,
+                128,
+                8f);
+
+            effect = Content.Load<Effect>("Effects/Terrain");
+
+            SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
         }
 
         protected override void UnloadContent() { }
@@ -63,12 +79,19 @@ namespace Arrow
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            //modelManager.Update(gameTime);
+            player.Update(gameTime, map);
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            //modelManager.Draw(gameTime);
+            map.Draw(Camera.Instance, effect);
+
             base.Draw(gameTime);
         }
     }
