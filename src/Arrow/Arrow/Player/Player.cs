@@ -222,7 +222,7 @@ namespace Arrow
             {
                 MouseState mouseState = Mouse.GetState();
 
-                if (mouseState.RightButton == ButtonState.Pressed)
+                if (mouseState.LeftButton == ButtonState.Pressed)
                     SFXManager.Play("Springfield", gameTime);
             }
         }
