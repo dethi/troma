@@ -80,7 +80,8 @@ namespace Arrow
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Fire(gameTime);
+            Shoot(gameTime);
+            Crouch();
             CameraOrientation(dt);
             Walk(dt);
             MapCollision(map);
@@ -209,7 +210,7 @@ namespace Arrow
             }
         }
 
-        private void Fire(GameTime gameTime)
+        private void Shoot(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
             {
@@ -224,6 +225,37 @@ namespace Arrow
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                     SFXManager.Play("Springfield", gameTime);
+            }
+        }
+
+        private void Crouch()
+        {
+            float actualHeight = height;
+
+            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            {
+                GamePadState gps = GamePad.GetState(PlayerIndex.One);
+
+                if (gps.IsButtonDown(Buttons.B))
+                    actualHeight = 4.8f;
+                else
+                    actualHeight = 7f;
+            }
+            else
+            {
+                KeyboardState kbs = Keyboard.GetState();
+
+                if (kbs.IsKeyDown(Keys.LeftControl))
+                    actualHeight = 4.8f;
+                else
+                    actualHeight = 7f;
+            }
+
+            if (height != actualHeight)
+            {
+                Vector3 pos = Position;
+                height = actualHeight;
+                Position = pos;
             }
         }
     }
