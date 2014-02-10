@@ -13,7 +13,6 @@ namespace Arrow
         /// <summary>
         /// Get the screen size of primary screen
         /// </summary>
-        /// <returns></returns>
         private Vector2 GetScreenSize()
         {
             return new Vector2(Screen.PrimaryScreen.Bounds.Width,
@@ -41,7 +40,7 @@ namespace Arrow
         {
             IsFixedTimeStep = false;
             graphics.SynchronizeWithVerticalRetrace = false;
-            
+
             graphics.ApplyChanges();
         }
     }

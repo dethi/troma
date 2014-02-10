@@ -76,7 +76,9 @@ namespace Arrow
         }
         #endregion
 
-        // Initialise la camera
+        /// <summary>
+        /// Create new camera
+        /// </summary>
         public void New(Game game, Vector3 position, Vector3 rotation)
         {
             Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
@@ -86,14 +88,20 @@ namespace Arrow
             MoveTo(position, rotation);
         }
 
-        // Configure la position et la rotation de la camera
+        /// <summary>
+        /// Change camera position and rotation
+        /// </summary>
+        /// <param name="pos">Position</param>
+        /// <param name="rot">Rotation</param>
         private void MoveTo(Vector3 pos, Vector3 rot)
         {
             Position = pos;
             Rotation = rot;
         }
 
-        // Met a jour le vecteur cameraLookAt
+        /// <summary>
+        /// Update look at vector
+        /// </summary>
         private void UpdateLookAt()
         {
             Matrix rotationMatrix = Matrix.CreateRotationX(cameraRotation.X) *
@@ -102,7 +110,10 @@ namespace Arrow
             cameraLookAt = cameraPosition + lookAtOffset;
         }
 
-        // Permet d'obtenir la nouvelle position de la camera
+        /// <summary>
+        /// Calculates the new position of the camera
+        /// </summary>
+        /// <param name="amount">Direction and scale of the movement</param>
         public Vector3 PreviewMove(Vector3 amount)
         {
             Matrix rotate = Matrix.CreateRotationY(cameraRotation.Y);
@@ -111,7 +122,10 @@ namespace Arrow
             return cameraPosition + movement;
         }
 
-        // Deplace la camera
+        /// <summary>
+        /// Move camera
+        /// </summary>
+        /// <param name="scale">Direction and scale of the movement</param>
         public void Move(Vector3 scale)
         {
             MoveTo(PreviewMove(scale), Rotation);
