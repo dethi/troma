@@ -4,7 +4,6 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>TROMA</title>
-	<link rel="icon" type="image/x-icon" href="img/favicon.ico" />
 	<link rel="stylesheet" href="stylesheets/app.css" />
 	<script src="bower_components/modernizr/modernizr.js"></script>
 </head>
@@ -29,6 +28,7 @@
 					<li class="active"><a href="#histoire">Histoire</a></li>
 					<li class="active"><a href="#equipe">Équipe</a></li>
 					<li class="active"><a href="#progression">Progression</a></li>
+					<li class="active"><a href="#Téléchargement">Téléchargement</a></li>
 				</ul>
 			</section>
 		</nav>
@@ -38,7 +38,7 @@
 		<div class="small-12 medium-12 large-12 columns">
 			<ul class="example-orbit" data-orbit>
 				<li>
-					<img src="http://lorempixel.com/1000/300" alt="slide 1" />
+					<img src="img/troma.png" alt="slide 1" />
 					<div class="orbit-caption">
 						Caption One.
 					</div>
@@ -59,22 +59,28 @@
 		</div>
 	</div>
 
+
 	<div class="row panel">
+
 		<div class="large-12 columns">
 			<h1>Une création unique...</h1>
 
 			<p>En 2014, <strong>Emagine Studio</strong> sera fier de vous présenter son tout premier projet. Une création qui vous plongera en plein coeur de la seconde guerre mondiale.</p>
 
+	</div>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<div class="row" id="histoire"> 
 		</div>
 	</div>
 
-	<div class="row" id="histoire">
+
+
+	<div class="row"> 
 		<div class="large-10 columns">
 			<h1>Histoire</h1>
 
@@ -84,15 +90,17 @@
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
 		</div>
 		<div class="large-2 columns">
 			<img src="img/eie.png" alt="tmp">
+			<div class="row" id="equipe">
 		</div>
 	</div>
 
 	<hr>
 
-	<div class="row" id="equipe">
+	<div class="row">
 		<div class="small-12 medium-12 large-12 columns">
 			<h1>L'équipe</h1>
 		</div>
@@ -151,21 +159,21 @@
 
 	<hr>
 
-	<div class="row clearfix" id="progression">
+
 		<div class="large-12 columns">
 			<div class="right panel" style="margin:1em;">
-				<p class="text-center" style="font-size: 6em; margin-bottom: 0;">10%</p>
+				<p class="text-center" style="font-size: 6em; margin-bottom: 0;">20%</p>
 
 				<!-- Container Width Classes: [small-# large-#] -->
 				<!-- Color Classes: [secondary alert success] -->
 				<!-- Radius Classes: [radius round] -->
 				<!-- Progress Width Classes: [1 - 100] -->
 				<div class="progress radius">
-					<span class="meter" style="width: 10%"></span>
+					<span class="meter" style="width: 20%"></span>
 				</div>
 			</div>
 
-			<h1>Progression</h1>
+			<h1>Progression</h1>	<div class="row clearfix" id="progression">
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -173,9 +181,37 @@
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<div class="row" id="histoire">
 
 		</div>
 	</div>
+
+	<hr>
+
+	<div class="row">
+		<div class="small-1 medium-1 large-3 columns">
+			<ul class="pricing-table">
+				<li class="title">Configuration minimale</li>
+				<li class="price">Free to Play</li>
+				<li class="bullet-item">Processeur Intel Core i3</li>
+				<li class="bullet-item">2Go de RAM</li>
+				<li class="bullet-item">25Go d'espace disque libre</li>
+				<li class="bullet-item">Carte graphique NVIDIA GetForce 7800</li>
+				<li class="cta-button"><a class="button" href="#">Téléchargement</a></li>
+			</ul>
+		</div>
+
+
+		<div class="small-3 medium-3 large-3 columns">
+			<ul class="clearing-thumbs" data-clearing>
+				<li><a href="img/eie.png"><img src="img/eie.png"></a></li>
+				<li><a href="img/troma.png"><img src="img/troma.png"></li>
+				<li><a href="img/epita.png"><img src="img/epita.png"></a></li>
+			</ul>
+		</div>
+	</div>
+
+
 
 	<div class="panel">
 		<div class="row text-center">
@@ -183,9 +219,9 @@
 				<img width="40%" src="img/epita.png" alt="Logo EPITA">
 			</div>
 			<div class="small-4 medium-4 large-4 columns">
-			</div>
+			</div>		
 			<div class="small-4 medium-4 large-4 columns">
-				<ul class="button-group">
+				<ul class="button-group">				
 					<li><a href="#" class="button small">Facebook</a></li>
 					<li><a href="#" class="button small">Twitter</a></li>
 				</ul>
