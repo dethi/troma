@@ -37,7 +37,6 @@ namespace Arrow
 
         public override void Initialize()
         {
-            this.game.IsMouseVisible = true;
             this.spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
             base.Initialize();
         }

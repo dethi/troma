@@ -48,6 +48,8 @@ namespace Arrow
             Components.Add(new DisplayPosition(this));
 
             //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
+            Components.Add(new Menu(this));
+
 
             base.Initialize();
         }
@@ -80,7 +82,12 @@ namespace Arrow
                 this.Exit();
 
             //modelManager.Update(gameTime);
-            player.Update(gameTime, map);
+
+            //VARIABLE GLOBALE EN ATTENTE
+            if (Menu.playerOff == false)
+            {
+                player.Update(gameTime, map);
+            }
 
             base.Update(gameTime);
         }
