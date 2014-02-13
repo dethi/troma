@@ -41,6 +41,21 @@ namespace Arrow
             base.LoadContent();
         }
 
+
+        public bool PlayerTrue()
+        {
+            if (menuActivate)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        
+        
         public override void Update(GameTime gameTime)
         {
             //rend la souris visible durant l activation du menu
@@ -54,7 +69,6 @@ namespace Arrow
                 this.game.IsMouseVisible = false;
                 playerOff = false;
             }
-                        
             bouton.Update(gameTime);
             base.Update(gameTime);
         }
