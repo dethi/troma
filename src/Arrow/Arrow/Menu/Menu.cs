@@ -73,8 +73,8 @@ namespace Arrow
         {
             double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
 
-            //detecte l activation du menu (Touche P)
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+            //detecte l'activation du menu (touche P ou bouton START Xbox)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.P))
             {
                 if (lastTime + 400 <= currentTime)
