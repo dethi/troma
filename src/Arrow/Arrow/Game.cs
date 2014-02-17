@@ -68,6 +68,8 @@ namespace Arrow
             effect = Content.Load<Effect>("Effects/Terrain");
 
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
+            SFXManager.AddSFX("Musique de fond", Content.Load<SoundEffect>("Sounds/Musique de fond"));
+            SFXManager.AddSFX("Bruit de pas", Content.Load<SoundEffect>("Sounds/Bruit de pas"));
         }
 
         protected override void UnloadContent() { }

@@ -83,7 +83,7 @@ namespace Arrow
             Shoot(gameTime);
             Crouch();
             CameraOrientation(dt);
-            Walk(dt);
+            Walk(dt, gameTime);
             MapCollision(map);
         }
 
@@ -91,7 +91,7 @@ namespace Arrow
         /// Move player
         /// </summary>
         /// <param name="dtSeconds">Total seconds elapsed since last update</param>
-        private void Walk(float dtSeconds)
+        private void Walk(float dtSeconds, GameTime gameTime)
         {
             Vector3 moveVector = Vector3.Zero;
 
@@ -130,10 +130,12 @@ namespace Arrow
             {
                 moveVector.Normalize();
                 moveVector *= dtSeconds * playerSpeed;
+                SFXManager.Play("Bruit de pas", gameTime);
             }
 
             // Effectue le mouvement
             cam.Move(moveVector);
+
         }
 
         /// <summary>

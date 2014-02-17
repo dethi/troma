@@ -25,7 +25,7 @@ namespace Arrow
             this.game = game;
         }
 
-        
+
         public void Quitter()
         {
             game.Exit();
@@ -68,6 +68,7 @@ namespace Arrow
         {
             boutonReprendre.Update(gameTime);
             boutonQuitter.Update(gameTime);
+            MenuSon(gameTime);
             base.Update(gameTime);
         }
 
@@ -83,6 +84,11 @@ namespace Arrow
                 boutonQuitter.Draw(gameTime);
             }
             base.Draw(gameTime);
+        }
+
+        public void MenuSon(GameTime gameTime)
+        {
+           SFXManager.Play("Musique de fond", gameTime);
         }
     }
 }
