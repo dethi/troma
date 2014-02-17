@@ -69,7 +69,7 @@ namespace Arrow
 
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
             SFXManager.AddSFX("Musique de fond", Content.Load<SoundEffect>("Sounds/Musique de fond"));
-            SFXManager.AddSFX("Bruit de pas", Content.Load<SoundEffect>("Sounds/Bruit de pas"));
+            SFXManager.AddSFX("Bruit de pas2", Content.Load<SoundEffect>("Sounds/Bruit de pas2"));
         }
 
         protected override void UnloadContent() { }

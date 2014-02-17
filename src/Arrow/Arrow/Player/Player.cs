@@ -130,7 +130,7 @@ namespace Arrow
             {
                 moveVector.Normalize();
                 moveVector *= dtSeconds * playerSpeed;
-                SFXManager.Play("Bruit de pas", gameTime);
+                SFXManager.Play("Bruit de pas2", gameTime);
             }
 
             // Effectue le mouvement
