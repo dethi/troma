@@ -80,12 +80,17 @@ namespace Arrow
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Fire(gameTime);
+            Shoot(gameTime);
+            Crouch();
             CameraOrientation(dt);
             Walk(dt);
             MapCollision(map);
         }
 
+        /// <summary>
+        /// Move player
+        /// </summary>
+        /// <param name="dtSeconds">Total seconds elapsed since last update</param>
         private void Walk(float dtSeconds)
         {
             Vector3 moveVector = Vector3.Zero;
@@ -131,6 +136,10 @@ namespace Arrow
             cam.Move(moveVector);
         }
 
+        /// <summary>
+        /// Change camera orientation
+        /// </summary>
+        /// <param name="dtSeconds">Total seconds elapsed since last update</param>
         private void CameraOrientation(float dtSeconds)
         {
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
@@ -198,6 +207,9 @@ namespace Arrow
             }
         }
 
+        /// <summary>
+        /// Prevents map collision
+        /// </summary>
         private void MapCollision(HeightMap map)
         {
             float actualMapHeight = map.GetHeight(Position.X, Position.Z);
@@ -209,7 +221,10 @@ namespace Arrow
             }
         }
 
-        private void Fire(GameTime gameTime)
+        /// <summary>
+        /// Shoot
+        /// </summary>
+        private void Shoot(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
             {
@@ -224,6 +239,40 @@ namespace Arrow
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                     SFXManager.Play("Springfield", gameTime);
+            }
+        }
+        
+        /// <summary>
+        /// Crouch (bad methods)
+        /// </summary>
+        private void Crouch()
+        {
+            float actualHeight = height;
+
+            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            {
+                GamePadState gps = GamePad.GetState(PlayerIndex.One);
+
+                if (gps.IsButtonDown(Buttons.B))
+                    actualHeight = 4.8f;
+                else
+                    actualHeight = 7f;
+            }
+            else
+            {
+                KeyboardState kbs = Keyboard.GetState();
+
+                if (kbs.IsKeyDown(Keys.LeftControl))
+                    actualHeight = 4.8f;
+                else
+                    actualHeight = 7f;
+            }
+
+            if (height != actualHeight)
+            {
+                Vector3 pos = Position;
+                height = actualHeight;
+                Position = pos;
             }
         }
     }

@@ -12,10 +12,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Arrow
 {
-    public class Game : Microsoft.Xna.Framework.Game
+    public partial class Game : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
-        //private SpriteBatch spriteBatch;
+
+        private SpriteBatch spriteBatch;
+        private Texture2D cross;
+
         //private ModelManager modelManager;
 
         private Player player;
@@ -26,18 +29,12 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            ActivateFullScreen();
+            //DisableVsync();
 
             Content.RootDirectory = "Content";
 
             //modelManager = new ModelManager();
-
-            /*
-            // Disable V-Sync, allow more than 60 FPS
-            this.IsFixedTimeStep = false;
-            this.graphics.SynchronizeWithVerticalRetrace = false;
-            this.graphics.ApplyChanges();
-            */
         }
 
         protected override void Initialize()
@@ -57,7 +54,8 @@ namespace Arrow
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            //this.spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            cross = Content.Load<Texture2D>("Cross");
 
             map = new HeightMap(GraphicsDevice,
                 Content.Load<Texture2D>("Textures/heightmap"),
@@ -98,6 +96,19 @@ namespace Arrow
 
             //modelManager.Draw(gameTime);
             map.Draw(Camera.Instance, effect);
+
+            //
+            // Display the cross in the center of the screen
+            //
+            #region Cross
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(cross,
+                new Vector2((GraphicsDevice.Viewport.Width / 2) - 8, (GraphicsDevice.Viewport.Height / 2) - 8),
+                Color.White);
+            spriteBatch.End();
+
+            #endregion
 
             base.Draw(gameTime);
         }

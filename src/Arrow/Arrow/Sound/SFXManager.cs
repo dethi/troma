@@ -13,11 +13,17 @@ namespace Arrow
             new Dictionary<string, SoundEffect>();
         private static double lastTime = 1000;
 
+        /// <summary>
+        /// Adds sound effect
+        /// </summary>
         public static void AddSFX(string name, SoundEffect effect)
         {
             soundEffects.Add(name, effect);
         }
 
+        /// <summary>
+        /// Play sound effect
+        /// </summary>
         public static void Play(string name, GameTime gameTime)
         {
             double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
