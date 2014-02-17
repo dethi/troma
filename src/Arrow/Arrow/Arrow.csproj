@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="MenuPause.cs" />
     <Compile Include="Player\Camera.cs" />
     <Compile Include="HUD\DisplayPosition.cs" />
     <Compile Include="FBX.cs" />

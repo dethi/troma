@@ -25,14 +25,21 @@ namespace Arrow
         private string nameTextureIsOn;
         private Texture2D textureIsOff;
         private Texture2D textureIsOn;
-
-        public Button(Game game, int x, int y, int width, int height, string nameTextureIsOff, string nameTextureIsOn)
+        
+        private float transparence;
+        
+        public delegate void Delegate();
+        MenuPause.Delegate boutonDelegate2;
+        
+        public Button(Game game, int x, int y, int width, int height, string nameTextureIsOff, string nameTextureIsOn, MenuPause.Delegate boutonDelegate, float transparence)
             : base(game)
         {
             this.game = game;
             this.bouton = new Rectangle(x, y, width, height);
             this.nameTextureIsOff = "Textures/" + nameTextureIsOff;
             this.nameTextureIsOn = "Textures/" + nameTextureIsOn;
+            boutonDelegate2 = boutonDelegate;
+            this.transparence = transparence;
         }
 
         public override void Initialize()
@@ -72,14 +79,17 @@ namespace Arrow
             this.spriteBatch.Begin();
             //Change l'image en fonction de la position du curseur
             if (isOn == false)
-                this.spriteBatch.Draw(this.textureIsOn, bouton, Color.White);
+                this.spriteBatch.Draw(this.textureIsOn, bouton, Color.White * transparence);
             else
-                this.spriteBatch.Draw(this.textureIsOff, bouton, Color.White);
+                this.spriteBatch.Draw(this.textureIsOff, bouton, Color.White * transparence);
             this.spriteBatch.End();
 
             //Charge une nouvelle image si on clique
             if (isClick == true)
-            { }
+            {
+                boutonDelegate2();
+                isClick = false;          
+            }
 
             base.Draw(gameTime);
         }

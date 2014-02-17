@@ -11,12 +11,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Arrow
 {
-    class Menu : Microsoft.Xna.Framework.DrawableGameComponent
+    public class Menu : Microsoft.Xna.Framework.DrawableGameComponent
     {
         public static bool playerOff = false;
+        
         private Game game;
-        private Button bouton;
-        private bool menuActivate = false;
+        
+        public bool menuActivate = false;
         private double lastTime = 0;
 
         public Menu(Game game)
@@ -27,11 +28,7 @@ namespace Arrow
 
         public override void Initialize()
         {
-            bouton = (new Button(game, 5,75, 32, 32, "textureIsOff", "textureIsOn"));
-            bouton.Initialize();
-
             this.game.IsMouseVisible = true;
-
 
             base.Initialize();
         }
@@ -53,9 +50,9 @@ namespace Arrow
                 return false;
             }
         }
-        
-        
-        
+
+
+
         public override void Update(GameTime gameTime)
         {
             //rend la souris visible durant l activation du menu
@@ -69,7 +66,6 @@ namespace Arrow
                 this.game.IsMouseVisible = false;
                 playerOff = false;
             }
-            bouton.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -94,11 +90,6 @@ namespace Arrow
                         menuActivate = true;
                     }
                 }
-            }
-
-            if (menuActivate)
-            {
-                bouton.Draw(gameTime);
             }
         }
     }

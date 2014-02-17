@@ -48,7 +48,7 @@ namespace Arrow
             Components.Add(new DisplayPosition(this));
 
             //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
-            Components.Add(new Menu(this));
+            Components.Add(new MenuPause(this));
 
 
             base.Initialize();
