@@ -41,6 +41,7 @@ namespace Arrow
         {
             bgSong = game.Content.Load<Song>("Sounds/BgSong");
             MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.2f;
         }
 
         private void PlaySong()
