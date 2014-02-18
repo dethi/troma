@@ -13,7 +13,7 @@ namespace Arrow
         private SpriteBatch spriteBatch;
 
         Texture2D fond;
-        private Rectangle rectangle = new Rectangle(0, 0, 2500, 2500);
+        private Rectangle rectangle;
 
         private Button boutonReprendre;
         private Button boutonQuitter;
@@ -23,21 +23,22 @@ namespace Arrow
             : base(game)
         {
             this.game = game;
+            rectangle = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
         }
 
         public override void Initialize()
         {
             this.spriteBatch = new SpriteBatch(this.game.GraphicsDevice);
-            fond = game.Content.Load<Texture2D>("Textures/troma");
-
+            fond = game.Content.Load<Texture2D>("Textures/overlay");
+            
             Delegate quitterDelegate = new Delegate(Quitter);
             Delegate reprendreDelegate = new Delegate(Reprendre);
 
-            boutonReprendre = (new Button(game, 300, 200, 128, 60, 
+            boutonReprendre = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, (game.GraphicsDevice.Viewport.Height / 2) - 50 - 70, 250, 100, 
                 "boutonReprendreOff", "boutonReprendre", reprendreDelegate, 1));
             boutonReprendre.Initialize();
 
-            boutonQuitter = (new Button(game, 300, 300, 128, 60, 
+            boutonQuitter = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, (game.GraphicsDevice.Viewport.Height / 2) - 50 + 70, 250, 100, 
                 "boutonQuitterOff", "boutonQuitter", quitterDelegate, 1));
             boutonQuitter.Initialize();
 
@@ -56,7 +57,7 @@ namespace Arrow
             if (DisplayMenu)
             {
                 this.spriteBatch.Begin();
-                this.spriteBatch.Draw(fond, rectangle, Color.White * 0.6f);
+                this.spriteBatch.Draw(fond, rectangle, Color.White * 0.8f);
                 this.spriteBatch.End();
 
                 boutonReprendre.Draw(gameTime);
