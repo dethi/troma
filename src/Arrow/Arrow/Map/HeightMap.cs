@@ -26,7 +26,7 @@ namespace Arrow
             this.textureScale = textureScale;
 
             ReadHeightMap(heightMap, terrainWidth, terrainHeight, heightScale);
-            BuildVertexBuffer(terrainWidth, terrainHeight, heightScale);
+            BuildVertexBuffer(terrainWidth, terrainHeight);
             BuildIndexBuffer(terrainWidth, terrainHeight);
             CalculateNormals();
         }
@@ -60,6 +60,11 @@ namespace Arrow
             }
         }
 
+        /// <summary>
+        /// Build matrice using the heighmap image
+        /// </summary>
+        /// <param name="heightMap">Heighmap image</param>
+        /// <param name="heightScale">Maximum height of the terrain</param>
         private void ReadHeightMap(Texture2D heightMap, int terrainWidth, int terrainHeight,
             float heightScale)
         {
@@ -92,7 +97,12 @@ namespace Arrow
             }
         }
 
-        private void BuildVertexBuffer(int width, int height, float heightScale)
+        /// <summary>
+        /// Build vertex buffer
+        /// </summary>
+        /// <param name="width">Terrain width</param>
+        /// <param name="height">Terrain height</param>
+        private void BuildVertexBuffer(int width, int height)
         {
             VertexPositionNormalTexture[] vertices = new VertexPositionNormalTexture[width * height];
 
@@ -111,20 +121,25 @@ namespace Arrow
             vertexBuffer.SetData(vertices);
         }
 
+        /// <summary>
+        /// Build index buffer
+        /// </summary>
+        /// <param name="width">Terrain width</param>
+        /// <param name="height">Terrain height</param>
         private void BuildIndexBuffer(int width, int height)
         {
             int indexCount = (width - 1) * (height - 1) * 6;
-            short[] indices = new short[indexCount];
+            int[] indices = new int[indexCount];
             int counter = 0;
 
-            for (short z = 0; z < height - 1; z++)
+            for (int z = 0; z < height - 1; z++)
             {
-                for (short x = 0; x < width - 1; x++)
+                for (int x = 0; x < width - 1; x++)
                 {
-                    short upperLeft = (short)(x + (z * width));
-                    short upperRight = (short)(upperLeft + 1);
-                    short lowerLeft = (short)(upperLeft + width);
-                    short lowerRight = (short)(upperLeft + width + 1);
+                    int upperLeft = x + (z * width);
+                    int upperRight = upperLeft + 1;
+                    int lowerLeft = upperLeft + width;
+                    int lowerRight = upperLeft + width + 1;
 
                     indices[counter++] = upperLeft;
                     indices[counter++] = lowerRight;
@@ -135,16 +150,19 @@ namespace Arrow
                 }
             }
 
-            indexBuffer = new IndexBuffer(device, IndexElementSize.SixteenBits,
+            indexBuffer = new IndexBuffer(device, IndexElementSize.ThirtyTwoBits,
                 indices.Length, BufferUsage.None);
             indexBuffer.SetData(indices);
         }
 
+        /// <summary>
+        /// Calculates normal of each vertices
+        /// </summary>
         private void CalculateNormals()
         {
             VertexPositionNormalTexture[] vertices =
                 new VertexPositionNormalTexture[vertexBuffer.VertexCount];
-            short[] indices = new short[indexBuffer.IndexCount];
+            int[] indices = new int[indexBuffer.IndexCount];
 
             vertexBuffer.GetData(vertices);
             indexBuffer.GetData(indices);
@@ -176,6 +194,9 @@ namespace Arrow
             vertexBuffer.SetData(vertices);
         }
 
+        /// <summary>
+        /// Search the height of a terrain point
+        /// </summary>
         public float GetHeight(float x, float z)
         {
             int xmin = (int)Math.Floor(x);

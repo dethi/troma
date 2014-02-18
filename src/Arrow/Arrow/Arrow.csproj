@@ -37,8 +37,8 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -85,6 +85,13 @@
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
@@ -119,6 +126,8 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -133,18 +142,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Button.cs" />
+    <Compile Include="HUD\MemoryUse.cs" />
+    <Compile Include="Sound\MenuSong.cs" />
+    <Compile Include="Menu\MenuPause.cs" />
+    <Compile Include="Menu\Button.cs" />
+    <Compile Include="ScreenMode.cs" />
     <Compile Include="Player\Camera.cs" />
     <Compile Include="HUD\DisplayPosition.cs" />
-    <Compile Include="FBX.cs" />
+    <Compile Include="Model\FBX.cs" />
     <Compile Include="HUD\FPS.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Map\HeightMap.cs" />
     <Compile Include="Player\Player.cs" />
-    <Compile Include="SFXManager.cs" />
+    <Compile Include="Sound\SFXManager.cs" />
     <Compile Include="Map\SquareMap.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="ModelManager.cs" />
+    <Compile Include="Menu\Menu.cs" />
+    <Compile Include="Model\ModelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
@@ -184,6 +197,9 @@
       <ProductName>Microsoft XNA Framework Redistributable 4.0</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\app.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

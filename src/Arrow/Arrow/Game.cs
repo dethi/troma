@@ -12,10 +12,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Arrow
 {
-    public class Game : Microsoft.Xna.Framework.Game
+    public partial class Game : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
-        //private SpriteBatch spriteBatch;
+
+        private SpriteBatch spriteBatch;
+        private Texture2D cross;
+
         //private ModelManager modelManager;
 
         private Player player;
@@ -23,31 +26,30 @@ namespace Arrow
         private HeightMap map;
         private Effect effect;
 
+        private MenuPause menuPause;
+
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            ActivateFullScreen();
+            //DisableVsync();
 
             Content.RootDirectory = "Content";
 
             //modelManager = new ModelManager();
-
-            /*
-            // Disable V-Sync, allow more than 60 FPS
-            this.IsFixedTimeStep = false;
-            this.graphics.SynchronizeWithVerticalRetrace = false;
-            this.graphics.ApplyChanges();
-            */
         }
 
         protected override void Initialize()
         {
-            player = new Player(this);
+            player = new Player(this, new Vector3(128, 10, 128));
 
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
+            Components.Add(new MemoryUse(this));
 
             //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
+            menuPause = new MenuPause(this);
+            menuPause.Initialize();
 
             base.Initialize();
         }
@@ -55,19 +57,24 @@ namespace Arrow
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            //this.spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            cross = Content.Load<Texture2D>("Cross");
 
             map = new HeightMap(GraphicsDevice,
                 Content.Load<Texture2D>("Textures/heightmap"),
                 Content.Load<Texture2D>("Textures/grass"),
                 32f,
-                128,
-                128,
-                8f);
+                513,
+                513,
+                10f);
 
             effect = Content.Load<Effect>("Effects/Terrain");
 
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
+            SFXManager.AddSFX("Marcher", Content.Load<SoundEffect>("Sounds/Marcher"));
+            SFXManager.AddSFX("Courir", Content.Load<SoundEffect>("Sounds/Courir"));
+
+            menuPause.LoadContent();
         }
 
         protected override void UnloadContent() { }
@@ -80,7 +87,11 @@ namespace Arrow
                 this.Exit();
 
             //modelManager.Update(gameTime);
-            player.Update(gameTime, map);
+
+            if (!menuPause.DisplayMenu)
+                player.Update(gameTime, map);
+
+            menuPause.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -91,6 +102,21 @@ namespace Arrow
 
             //modelManager.Draw(gameTime);
             map.Draw(Camera.Instance, effect);
+
+            //
+            // Display the cross in the center of the screen
+            //
+            #region Cross
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(cross,
+                new Vector2((GraphicsDevice.Viewport.Width / 2) - 8, (GraphicsDevice.Viewport.Height / 2) - 8),
+                Color.White);
+            spriteBatch.End();
+
+            #endregion
+
+            menuPause.Draw(gameTime);
 
             base.Draw(gameTime);
         }

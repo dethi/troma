@@ -11,6 +11,8 @@ namespace Arrow
     {
         #region Attributes
 
+        private Game game;
+
         private float playerSpeed;
         private float height;
 
@@ -62,11 +64,13 @@ namespace Arrow
 
         public Player(Game game, Vector3 pos, float height, Vector3 rot, float playerSpeed)
         {
+            this.game = game;
+
             this.playerSpeed = playerSpeed;
             this.height = height;
 
             this.cam = Camera.Instance;
-            this.cam.New(game, new Vector3(pos.X, pos.Y + height + mapHeight, pos.Z), rot);
+            this.cam.New(game, new Vector3(pos.X, pos.Y + height, pos.Z), rot);
 
             int centerX = game.GraphicsDevice.Viewport.Width / 2;
             int centerY = game.GraphicsDevice.Viewport.Height / 2;
@@ -80,13 +84,18 @@ namespace Arrow
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Fire(gameTime);
+            Shoot(gameTime);
+            Crouch();
             CameraOrientation(dt);
-            Walk(dt);
+            Walk(dt, gameTime);
             MapCollision(map);
         }
 
-        private void Walk(float dtSeconds)
+        /// <summary>
+        /// Move player
+        /// </summary>
+        /// <param name="dtSeconds">Total seconds elapsed since last update</param>
+        private void Walk(float dtSeconds, GameTime gameTime)
         {
             Vector3 moveVector = Vector3.Zero;
 
@@ -125,12 +134,26 @@ namespace Arrow
             {
                 moveVector.Normalize();
                 moveVector *= dtSeconds * playerSpeed;
+
+                if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || 
+                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
+                {
+                    moveVector *= 1.7f;
+                    SFXManager.Play("Courir", gameTime);
+                }
+                else
+                    SFXManager.Play("Marcher", gameTime);
             }
 
             // Effectue le mouvement
             cam.Move(moveVector);
+
         }
 
+        /// <summary>
+        /// Change camera orientation
+        /// </summary>
+        /// <param name="dtSeconds">Total seconds elapsed since last update</param>
         private void CameraOrientation(float dtSeconds)
         {
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
@@ -198,6 +221,9 @@ namespace Arrow
             }
         }
 
+        /// <summary>
+        /// Prevents map collision
+        /// </summary>
         private void MapCollision(HeightMap map)
         {
             float actualMapHeight = map.GetHeight(Position.X, Position.Z);
@@ -209,7 +235,10 @@ namespace Arrow
             }
         }
 
-        private void Fire(GameTime gameTime)
+        /// <summary>
+        /// Shoot
+        /// </summary>
+        private void Shoot(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
             {
@@ -224,6 +253,40 @@ namespace Arrow
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                     SFXManager.Play("Springfield", gameTime);
+            }
+        }
+
+        /// <summary>
+        /// Crouch (bad methods)
+        /// </summary>
+        private void Crouch()
+        {
+            float actualHeight = height;
+
+            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            {
+                GamePadState gps = GamePad.GetState(PlayerIndex.One);
+
+                if (gps.IsButtonDown(Buttons.B))
+                    actualHeight = 4.8f;
+                else
+                    actualHeight = 7f;
+            }
+            else
+            {
+                KeyboardState kbs = Keyboard.GetState();
+
+                if (kbs.IsKeyDown(Keys.LeftControl))
+                    actualHeight = 4.8f;
+                else
+                    actualHeight = 7f;
+            }
+
+            if (height != actualHeight)
+            {
+                Vector3 pos = Position;
+                height = actualHeight;
+                Position = pos;
             }
         }
     }

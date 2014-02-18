@@ -17,6 +17,7 @@ namespace Arrow
         private Game game;
         private SpriteBatch spriteBatch;
         private SpriteFont spriteFont;
+        private Camera camera;
 
         public DisplayPosition(Game game)
             : base(game)
@@ -26,7 +27,8 @@ namespace Arrow
 
         public override void Initialize()
         {
-            this.spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
+            this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
+            this.camera = Camera.Instance;
             base.Initialize();
         }
 
@@ -38,9 +40,8 @@ namespace Arrow
 
         public override void Draw(GameTime gameTime)
         {
-            string str = String.Format("X: {0}\nY: {1}\nZ: {2}", Camera.Instance.Position.X,
-                Camera.Instance.Position.Y, Camera.Instance.Position.Z);
-            Vector2 size = this.spriteFont.MeasureString(str);
+            string str = String.Format("X: {0}\nY: {1}\nZ: {2}", camera.Position.X,
+                camera.Position.Y, camera.Position.Z);
 
             this.spriteBatch.Begin();
             this.spriteBatch.DrawString(this.spriteFont, str,
