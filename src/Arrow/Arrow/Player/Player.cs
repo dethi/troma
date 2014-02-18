@@ -134,13 +134,15 @@ namespace Arrow
             {
                 moveVector.Normalize();
                 moveVector *= dtSeconds * playerSpeed;
-                KeyboardState kbs = Keyboard.GetState();
-                if (kbs.IsKeyDown(Keys.LeftShift))
+
+                if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || 
+                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
                 {
-                     moveVector = moveVector*1.7f;
-                     SFXManager.Play("Courir", gameTime);
+                    moveVector *= 1.7f;
+                    SFXManager.Play("Courir", gameTime);
                 }
-                SFXManager.Play("Marcher", gameTime);
+                else
+                    SFXManager.Play("Marcher", gameTime);
             }
 
             // Effectue le mouvement
@@ -253,7 +255,7 @@ namespace Arrow
                     SFXManager.Play("Springfield", gameTime);
             }
         }
-        
+
         /// <summary>
         /// Crouch (bad methods)
         /// </summary>

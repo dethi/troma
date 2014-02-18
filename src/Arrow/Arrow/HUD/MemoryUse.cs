@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -12,14 +12,15 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Arrow
 {
-    public class DisplayPosition : Microsoft.Xna.Framework.DrawableGameComponent
+    public class MemoryUse : Microsoft.Xna.Framework.DrawableGameComponent
     {
         private Game game;
         private SpriteBatch spriteBatch;
         private SpriteFont spriteFont;
-        private Camera camera;
+        private float memory;
 
-        public DisplayPosition(Game game)
+
+        public MemoryUse(Game game)
             : base(game)
         {
             this.game = game;
@@ -28,7 +29,6 @@ namespace Arrow
         public override void Initialize()
         {
             this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
-            this.camera = Camera.Instance;
             base.Initialize();
         }
 
@@ -38,14 +38,20 @@ namespace Arrow
             base.LoadContent();
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            memory = GC.GetTotalMemory(false) / 1048576f;
+            base.Update(gameTime);
+        }
+
         public override void Draw(GameTime gameTime)
         {
-            string str = String.Format("X: {0}\nY: {1}\nZ: {2}", camera.Position.X,
-                camera.Position.Y, camera.Position.Z);
+            string str = String.Format("{0:F3} Mo used", memory);
+            Vector2 size = this.spriteFont.MeasureString(str);
 
             this.spriteBatch.Begin();
             this.spriteBatch.DrawString(this.spriteFont, str,
-                new Vector2(5, 5), Color.Gold);
+                new Vector2(5, GraphicsDevice.Viewport.Height - size.Y - 5), Color.Gold);
             this.spriteBatch.End();
 
             base.Draw(gameTime);

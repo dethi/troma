@@ -11,7 +11,7 @@ namespace Arrow
     {
         private static Dictionary<string, SoundEffect> soundEffects =
             new Dictionary<string, SoundEffect>();
-        private static double lastTime = 1000;
+        private static double lastTime = 0;
 
         /// <summary>
         /// Adds sound effect
