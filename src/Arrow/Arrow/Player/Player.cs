@@ -134,6 +134,11 @@ namespace Arrow
             {
                 moveVector.Normalize();
                 moveVector *= dtSeconds * playerSpeed;
+                KeyboardState kbs = Keyboard.GetState();
+                if (kbs.IsKeyDown(Keys.LeftShift))
+                {
+                     moveVector = moveVector*1.7f;
+                }
                 SFXManager.Play("Bruit de pas2", gameTime);
             }
 
