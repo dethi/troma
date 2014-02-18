@@ -13,12 +13,10 @@ namespace Arrow
 {
     public class Menu
     {
-        public static bool playerOff = false;
-        
         private Game game;
-        
-        public bool menuActivate = false;
         private double lastTime = 0;
+
+        public bool DisplayMenu { get; protected set; }
 
         public Menu(Game game)
         {
@@ -28,11 +26,6 @@ namespace Arrow
         public virtual void Initialize()
         {
             this.game.IsMouseVisible = true;
-        }
-
-        public bool PlayerTrue()
-        {
-            return menuActivate;
         }
 
         public virtual void Update(GameTime gameTime)
@@ -46,21 +39,15 @@ namespace Arrow
                 if (lastTime + 400 <= currentTime)
                 {
                     lastTime = currentTime;
-                    menuActivate = !menuActivate;
+                    DisplayMenu = !DisplayMenu;
                 }
             }
 
             //rend la souris visible durant l'activation du menu
-            if (menuActivate)
-            {
+            if (DisplayMenu)
                 this.game.IsMouseVisible = true;
-                playerOff = true;
-            }
             else
-            {
                 this.game.IsMouseVisible = false;
-                playerOff = false;
-            }
         }
 
         public virtual void Draw(GameTime gameTime) { }

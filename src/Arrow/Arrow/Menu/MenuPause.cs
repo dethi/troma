@@ -52,7 +52,7 @@ namespace Arrow
 
         public override void Draw(GameTime gameTime)
         {
-            if (menuActivate)
+            if (DisplayMenu)
             {
                 this.spriteBatch.Begin();
                 this.spriteBatch.Draw(fond, rectangle, Color.White * 0.6f);
@@ -70,7 +70,7 @@ namespace Arrow
         }
         public void Reprendre()
         {
-            menuActivate = !menuActivate;
+            DisplayMenu = !DisplayMenu;
         }
 
         public void MenuSon(GameTime gameTime)

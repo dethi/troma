@@ -85,11 +85,8 @@ namespace Arrow
 
             //modelManager.Update(gameTime);
 
-            //VARIABLE GLOBALE EN ATTENTE
-            if (Menu.playerOff == false)
-            {
+            if (!menuPause.DisplayMenu)
                 player.Update(gameTime, map);
-            }
 
             menuPause.Update(gameTime);
 
