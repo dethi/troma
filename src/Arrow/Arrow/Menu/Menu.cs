@@ -13,7 +13,9 @@ namespace Arrow
 {
     public class Menu
     {
-        private Game game;
+        protected Game game;
+        protected AudioManager audio;
+
         private double lastTime = 0;
 
         public bool DisplayMenu { get; protected set; }
@@ -26,6 +28,12 @@ namespace Arrow
         public virtual void Initialize()
         {
             this.game.IsMouseVisible = true;
+            audio = new AudioManager(game);
+        }
+
+        public virtual void LoadContent()
+        {
+            audio.LoadContent();
         }
 
         public virtual void Update(GameTime gameTime)
@@ -49,9 +57,15 @@ namespace Arrow
 
             //rend la souris visible durant l'activation du menu
             if (DisplayMenu)
+            {
                 this.game.IsMouseVisible = true;
+                audio.SongPlayed = true;
+            }
             else
+            {
                 this.game.IsMouseVisible = false;
+                audio.SongPlayed = false;
+            }
         }
 
         public virtual void Draw(GameTime gameTime) { }

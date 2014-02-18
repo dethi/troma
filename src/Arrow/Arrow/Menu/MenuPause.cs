@@ -10,7 +10,6 @@ namespace Arrow
 {
     public class MenuPause : Menu
     {
-        private Game game;
         private SpriteBatch spriteBatch;
 
         Texture2D fond;
@@ -34,10 +33,12 @@ namespace Arrow
             Delegate quitterDelegate = new Delegate(Quitter);
             Delegate reprendreDelegate = new Delegate(Reprendre);
 
-            boutonReprendre = (new Button(game, 100, 100, 128, 32, "boutonReprendreOff", "boutonReprendre", reprendreDelegate, 1));
+            boutonReprendre = (new Button(game, 100, 100, 128, 32, 
+                "boutonReprendreOff", "boutonReprendre", reprendreDelegate, 1));
             boutonReprendre.Initialize();
 
-            boutonQuitter = (new Button(game, 100, 150, 128, 32, "boutonQuitterOff", "boutonQuitter", quitterDelegate, 1));
+            boutonQuitter = (new Button(game, 100, 150, 128, 32, 
+                "boutonQuitterOff", "boutonQuitter", quitterDelegate, 1));
             boutonQuitter.Initialize();
 
             base.Initialize();
@@ -47,7 +48,6 @@ namespace Arrow
         {
             boutonReprendre.Update(gameTime);
             boutonQuitter.Update(gameTime);
-            MenuSon(gameTime);
             base.Update(gameTime);
         }
 
@@ -64,7 +64,6 @@ namespace Arrow
             }
         }
 
-
         public void Quitter()
         {
             game.Exit();
@@ -76,11 +75,6 @@ namespace Arrow
                 game.GraphicsDevice.Viewport.Height / 2);
 
             DisplayMenu = !DisplayMenu;
-        }
-
-        public void MenuSon(GameTime gameTime)
-        {
-           SFXManager.Play("Musique de fond", gameTime);
         }
     }
 }
