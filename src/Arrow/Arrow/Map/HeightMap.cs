@@ -129,17 +129,17 @@ namespace Arrow
         private void BuildIndexBuffer(int width, int height)
         {
             int indexCount = (width - 1) * (height - 1) * 6;
-            short[] indices = new short[indexCount];
+            int[] indices = new int[indexCount];
             int counter = 0;
 
-            for (short z = 0; z < height - 1; z++)
+            for (int z = 0; z < height - 1; z++)
             {
-                for (short x = 0; x < width - 1; x++)
+                for (int x = 0; x < width - 1; x++)
                 {
-                    short upperLeft = (short)(x + (z * width));
-                    short upperRight = (short)(upperLeft + 1);
-                    short lowerLeft = (short)(upperLeft + width);
-                    short lowerRight = (short)(upperLeft + width + 1);
+                    int upperLeft = x + (z * width);
+                    int upperRight = upperLeft + 1;
+                    int lowerLeft = upperLeft + width;
+                    int lowerRight = upperLeft + width + 1;
 
                     indices[counter++] = upperLeft;
                     indices[counter++] = lowerRight;
@@ -150,7 +150,7 @@ namespace Arrow
                 }
             }
 
-            indexBuffer = new IndexBuffer(device, IndexElementSize.SixteenBits,
+            indexBuffer = new IndexBuffer(device, IndexElementSize.ThirtyTwoBits,
                 indices.Length, BufferUsage.None);
             indexBuffer.SetData(indices);
         }
@@ -162,7 +162,7 @@ namespace Arrow
         {
             VertexPositionNormalTexture[] vertices =
                 new VertexPositionNormalTexture[vertexBuffer.VertexCount];
-            short[] indices = new short[indexBuffer.IndexCount];
+            int[] indices = new int[indexBuffer.IndexCount];
 
             vertexBuffer.GetData(vertices);
             indexBuffer.GetData(indices);

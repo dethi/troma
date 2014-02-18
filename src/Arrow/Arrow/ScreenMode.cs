@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Arrow
 {
@@ -42,6 +43,20 @@ namespace Arrow
             graphics.SynchronizeWithVerticalRetrace = false;
 
             graphics.ApplyChanges();
+        }
+
+        public void DefaultChangeRasterizerState()
+        {
+            ChangeRasterizerState(CullMode.CullClockwiseFace, FillMode.Solid);
+        }
+
+        public void ChangeRasterizerState(CullMode cm, FillMode fl)
+        {
+            GraphicsDevice.RasterizerState = new RasterizerState()
+            {
+                CullMode = cm,
+                FillMode = fl
+            };
         }
     }
 }

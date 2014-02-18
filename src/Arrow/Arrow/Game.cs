@@ -41,7 +41,7 @@ namespace Arrow
 
         protected override void Initialize()
         {
-            player = new Player(this);
+            player = new Player(this, new Vector3(128, 10, 128));
 
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
@@ -63,9 +63,9 @@ namespace Arrow
                 Content.Load<Texture2D>("Textures/heightmap"),
                 Content.Load<Texture2D>("Textures/grass"),
                 32f,
-                128,
-                128,
-                8f);
+                513,
+                513,
+                10f);
 
             effect = Content.Load<Effect>("Effects/Terrain");
 
