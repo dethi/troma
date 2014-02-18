@@ -14,7 +14,7 @@ namespace Arrow
     public class Menu
     {
         protected Game game;
-        protected AudioManager audio;
+        protected MenuSong audio;
 
         private double lastTime = 0;
 
@@ -28,7 +28,7 @@ namespace Arrow
         public virtual void Initialize()
         {
             this.game.IsMouseVisible = true;
-            audio = new AudioManager(game);
+            audio = new MenuSong(game);
         }
 
         public virtual void LoadContent()
