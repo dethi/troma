@@ -40,6 +40,10 @@ namespace Arrow
                 {
                     lastTime = currentTime;
                     DisplayMenu = !DisplayMenu;
+
+                    Mouse.SetPosition(
+                        game.GraphicsDevice.Viewport.Width / 2,
+                        game.GraphicsDevice.Viewport.Height / 2);
                 }
             }
 

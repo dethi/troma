@@ -11,6 +11,8 @@ namespace Arrow
     {
         #region Attributes
 
+        private Game game;
+
         private float playerSpeed;
         private float height;
 
@@ -62,6 +64,8 @@ namespace Arrow
 
         public Player(Game game, Vector3 pos, float height, Vector3 rot, float playerSpeed)
         {
+            this.game = game;
+
             this.playerSpeed = playerSpeed;
             this.height = height;
 

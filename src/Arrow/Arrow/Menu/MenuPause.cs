@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
@@ -70,6 +71,10 @@ namespace Arrow
         }
         public void Reprendre()
         {
+            Mouse.SetPosition(
+                game.GraphicsDevice.Viewport.Width / 2,
+                game.GraphicsDevice.Viewport.Height / 2);
+
             DisplayMenu = !DisplayMenu;
         }
 
