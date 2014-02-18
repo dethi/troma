@@ -142,7 +142,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioManager.cs" />
+    <Compile Include="Sound\MenuSong.cs" />
     <Compile Include="Menu\MenuPause.cs" />
     <Compile Include="Menu\Button.cs" />
     <Compile Include="ScreenMode.cs" />

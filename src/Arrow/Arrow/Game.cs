@@ -71,6 +71,7 @@ namespace Arrow
 
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
             SFXManager.AddSFX("Bruit de pas2", Content.Load<SoundEffect>("Sounds/Bruit de pas2"));
+            SFXManager.AddSFX("Courir", Content.Load<SoundEffect>("Sounds/Courir"));
 
             menuPause.LoadContent();
         }
