@@ -15,10 +15,11 @@ namespace Arrow
         Texture2D fond;
         private Rectangle rectangle;
 
+        private double lastTime = 0;
+        
         private Button boutonReprendre;
         private Button boutonQuitter;
-        public delegate void Delegate();
-
+        
         public MenuPause(Game game)
             : base(game)
         {
@@ -31,8 +32,8 @@ namespace Arrow
             this.spriteBatch = new SpriteBatch(this.game.GraphicsDevice);
             fond = game.Content.Load<Texture2D>("Textures/overlay");
             
-            Delegate quitterDelegate = new Delegate(Quitter);
-            Delegate reprendreDelegate = new Delegate(Reprendre);
+            Menu.Delegate quitterDelegate = new Delegate(Quitter);
+            Menu.Delegate reprendreDelegate = new Delegate(Reprendre);
 
             boutonReprendre = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, (game.GraphicsDevice.Viewport.Height / 2) - 50 - 70, 250, 100, 
                 "boutonReprendreOff", "boutonReprendre", reprendreDelegate, 1));
@@ -47,6 +48,24 @@ namespace Arrow
 
         public override void Update(GameTime gameTime)
         {
+            double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
+
+            //detecte l'activation du menu (touche P ou bouton START Xbox)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed ||
+                Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                if (lastTime + 400 <= currentTime)
+                {
+                    lastTime = currentTime;
+                    DisplayMenu = !DisplayMenu;
+
+                    Mouse.SetPosition(
+                        game.GraphicsDevice.Viewport.Width / 2,
+                        game.GraphicsDevice.Viewport.Height / 2);
+                }
+            }
+
+            
             boutonReprendre.Update(gameTime);
             boutonQuitter.Update(gameTime);
             base.Update(gameTime);

@@ -16,9 +16,11 @@ namespace Arrow
         protected Game game;
         protected MenuSong audio;
 
-        private double lastTime = 0;
+        public delegate void Delegate();
 
         public bool DisplayMenu { get; protected set; }
+
+        public bool GameStart { get; protected set; }
 
         public Menu(Game game)
         {
@@ -37,26 +39,9 @@ namespace Arrow
         }
 
         public virtual void Update(GameTime gameTime)
-        {
-            double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
-
-            //detecte l'activation du menu (touche P ou bouton START Xbox)
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed ||
-                Keyboard.GetState().IsKeyDown(Keys.P))
-            {
-                if (lastTime + 400 <= currentTime)
-                {
-                    lastTime = currentTime;
-                    DisplayMenu = !DisplayMenu;
-
-                    Mouse.SetPosition(
-                        game.GraphicsDevice.Viewport.Width / 2,
-                        game.GraphicsDevice.Viewport.Height / 2);
-                }
-            }
-
+        {         
             //rend la souris visible durant l'activation du menu
-            if (DisplayMenu)
+            if (DisplayMenu || GameStart==false)
             {
                 this.game.IsMouseVisible = true;
                 audio.SongPlayed = true;

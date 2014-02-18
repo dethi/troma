@@ -1,0 +1,69 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace Arrow
+{
+    class MenuStart : Menu
+    {
+        protected Game game;
+        private SpriteBatch spriteBatch;
+
+        private Rectangle rectangle;
+        Texture2D fond;
+
+        private Button boutonJouer;
+
+        public MenuStart(Game game)
+            : base(game)
+        {
+            this.game = game;
+            rectangle = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
+        }
+
+        public override void Initialize()
+        {
+            GameStart = false;
+            this.spriteBatch = new SpriteBatch(this.game.GraphicsDevice);
+            fond = game.Content.Load<Texture2D>("Textures/debarquement");
+
+            Delegate jouerDelegate = new Delegate(Jouer);
+
+            boutonJouer = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, (game.GraphicsDevice.Viewport.Height / 2) - 50 - 70, 250, 100,
+                "boutonJouerOff", "boutonJouer", jouerDelegate, 1));
+            boutonJouer.Initialize();
+
+            base.Initialize();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (GameStart == false)
+            {
+                boutonJouer.Update(gameTime);
+                base.Update(gameTime);
+            }
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            if (GameStart == false)
+            {
+                this.spriteBatch.Begin();
+                this.spriteBatch.Draw(fond, rectangle, Color.White * 1f);
+                this.spriteBatch.End();
+
+                boutonJouer.Draw(gameTime);
+            }
+        }
+
+        public void Jouer()
+        {
+            GameStart = !GameStart;
+        }
+
+    }
+}

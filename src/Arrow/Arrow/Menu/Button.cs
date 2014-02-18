@@ -29,7 +29,7 @@ namespace Arrow
         private float transparence;
         
         public delegate void Delegate();
-        MenuPause.Delegate boutonDelegate2;
+        Menu.Delegate boutonDelegate2;
         
         public Button(Game game, int x, int y, int width, int height, string nameTextureIsOff, string nameTextureIsOn, MenuPause.Delegate boutonDelegate, float transparence)
             : base(game)

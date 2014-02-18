@@ -27,6 +27,7 @@ namespace Arrow
         private Effect effect;
 
         private MenuPause menuPause;
+        private MenuStart menuStart;
 
         public Game()
         {
@@ -50,6 +51,9 @@ namespace Arrow
             //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
             menuPause = new MenuPause(this);
             menuPause.Initialize();
+
+            menuStart = new MenuStart(this);
+            menuStart.Initialize();
 
             base.Initialize();
         }
@@ -75,6 +79,7 @@ namespace Arrow
             SFXManager.AddSFX("Courir", Content.Load<SoundEffect>("Sounds/Courir"));
 
             menuPause.LoadContent();
+            menuStart.LoadContent();
         }
 
         protected override void UnloadContent() { }
@@ -88,10 +93,15 @@ namespace Arrow
 
             //modelManager.Update(gameTime);
 
-            if (!menuPause.DisplayMenu)
-                player.Update(gameTime, map);
+            if (menuStart.GameStart)
+            {
+                if (!menuPause.DisplayMenu)
+                    player.Update(gameTime, map);
+            }
 
             menuPause.Update(gameTime);
+            menuStart.Update(gameTime);
+
 
             base.Update(gameTime);
         }
@@ -117,6 +127,8 @@ namespace Arrow
             #endregion
 
             menuPause.Draw(gameTime);
+            menuStart.Draw(gameTime);
+
 
             base.Draw(gameTime);
         }
