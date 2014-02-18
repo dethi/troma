@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
     public class MenuPause : Menu
     {
-        private Game game;
         private SpriteBatch spriteBatch;
 
         Texture2D fond;
@@ -25,56 +25,35 @@ namespace Arrow
             this.game = game;
         }
 
-
-        public void Quitter()
-        {
-            game.Exit();
-        }
-        public void Reprendre()
-        {
-            if (menuActivate)
-            {
-                menuActivate = false;
-            }
-            else
-            {
-                menuActivate = true;
-            }
-        }
-
         public override void Initialize()
         {
-            this.spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
+            this.spriteBatch = new SpriteBatch(this.game.GraphicsDevice);
             fond = game.Content.Load<Texture2D>("Textures/troma");
 
             Delegate quitterDelegate = new Delegate(Quitter);
             Delegate reprendreDelegate = new Delegate(Reprendre);
 
-            boutonReprendre = (new Button(game, 100, 100, 128, 32, "boutonReprendreOff", "boutonReprendre", reprendreDelegate, 1));
+            boutonReprendre = (new Button(game, 100, 100, 128, 32, 
+                "boutonReprendreOff", "boutonReprendre", reprendreDelegate, 1));
             boutonReprendre.Initialize();
 
-            boutonQuitter = (new Button(game, 100, 150, 128, 32, "boutonQuitterOff", "boutonQuitter", quitterDelegate, 1));
+            boutonQuitter = (new Button(game, 100, 150, 128, 32, 
+                "boutonQuitterOff", "boutonQuitter", quitterDelegate, 1));
             boutonQuitter.Initialize();
 
             base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
             boutonReprendre.Update(gameTime);
             boutonQuitter.Update(gameTime);
-            MenuSon(gameTime);
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (menuActivate)
+            if (DisplayMenu)
             {
                 this.spriteBatch.Begin();
                 this.spriteBatch.Draw(fond, rectangle, Color.White * 0.6f);
@@ -83,12 +62,19 @@ namespace Arrow
                 boutonReprendre.Draw(gameTime);
                 boutonQuitter.Draw(gameTime);
             }
-            base.Draw(gameTime);
         }
 
-        public void MenuSon(GameTime gameTime)
+        public void Quitter()
         {
-           SFXManager.Play("Musique de fond", gameTime);
+            game.Exit();
+        }
+        public void Reprendre()
+        {
+            Mouse.SetPosition(
+                game.GraphicsDevice.Viewport.Width / 2,
+                game.GraphicsDevice.Viewport.Height / 2);
+
+            DisplayMenu = !DisplayMenu;
         }
     }
 }

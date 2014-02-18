@@ -11,65 +11,32 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Arrow
 {
-    public class Menu : Microsoft.Xna.Framework.DrawableGameComponent
+    public class Menu
     {
-        public static bool playerOff = false;
-        
-        private Game game;
-        
-        public bool menuActivate = false;
+        protected Game game;
+        protected AudioManager audio;
+
         private double lastTime = 0;
 
+        public bool DisplayMenu { get; protected set; }
+
         public Menu(Game game)
-            : base(game)
         {
             this.game = game;
         }
 
-        public override void Initialize()
+        public virtual void Initialize()
         {
             this.game.IsMouseVisible = true;
-
-            base.Initialize();
+            audio = new AudioManager(game);
         }
 
-        protected override void LoadContent()
+        public virtual void LoadContent()
         {
-            base.LoadContent();
+            audio.LoadContent();
         }
 
-
-        public bool PlayerTrue()
-        {
-            if (menuActivate)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
-
-        public override void Update(GameTime gameTime)
-        {
-            //rend la souris visible durant l activation du menu
-            if (menuActivate)
-            {
-                this.game.IsMouseVisible = true;
-                playerOff = true;
-            }
-            else
-            {
-                this.game.IsMouseVisible = false;
-                playerOff = false;
-            }
-            base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
 
@@ -80,17 +47,27 @@ namespace Arrow
                 if (lastTime + 400 <= currentTime)
                 {
                     lastTime = currentTime;
+                    DisplayMenu = !DisplayMenu;
 
-                    if (menuActivate)
-                    {
-                        menuActivate = false;
-                    }
-                    else
-                    {
-                        menuActivate = true;
-                    }
+                    Mouse.SetPosition(
+                        game.GraphicsDevice.Viewport.Width / 2,
+                        game.GraphicsDevice.Viewport.Height / 2);
                 }
             }
+
+            //rend la souris visible durant l'activation du menu
+            if (DisplayMenu)
+            {
+                this.game.IsMouseVisible = true;
+                audio.SongPlayed = true;
+            }
+            else
+            {
+                this.game.IsMouseVisible = false;
+                audio.SongPlayed = false;
+            }
         }
+
+        public virtual void Draw(GameTime gameTime) { }
     }
 }

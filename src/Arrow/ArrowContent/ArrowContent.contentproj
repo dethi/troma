@@ -128,10 +128,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\Musique de fond.wav">
-      <Name>Musique de fond</Name>
+    <Compile Include="Sounds\BgSong.wav">
+      <Name>BgSong</Name>
       <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
+      <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>

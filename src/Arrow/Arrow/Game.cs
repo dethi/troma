@@ -26,6 +26,8 @@ namespace Arrow
         private HeightMap map;
         private Effect effect;
 
+        private MenuPause menuPause;
+
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
@@ -45,8 +47,8 @@ namespace Arrow
             Components.Add(new DisplayPosition(this));
 
             //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
-            Components.Add(new MenuPause(this));
-
+            menuPause = new MenuPause(this);
+            menuPause.Initialize();
 
             base.Initialize();
         }
@@ -68,8 +70,9 @@ namespace Arrow
             effect = Content.Load<Effect>("Effects/Terrain");
 
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
-            SFXManager.AddSFX("Musique de fond", Content.Load<SoundEffect>("Sounds/Musique de fond"));
             SFXManager.AddSFX("Bruit de pas2", Content.Load<SoundEffect>("Sounds/Bruit de pas2"));
+
+            menuPause.LoadContent();
         }
 
         protected override void UnloadContent() { }
@@ -83,11 +86,10 @@ namespace Arrow
 
             //modelManager.Update(gameTime);
 
-            //VARIABLE GLOBALE EN ATTENTE
-            if (Menu.playerOff == false)
-            {
+            if (!menuPause.DisplayMenu)
                 player.Update(gameTime, map);
-            }
+
+            menuPause.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -111,6 +113,8 @@ namespace Arrow
             spriteBatch.End();
 
             #endregion
+
+            menuPause.Draw(gameTime);
 
             base.Draw(gameTime);
         }
