@@ -68,6 +68,7 @@ namespace Arrow
             
             boutonReprendre.Update(gameTime);
             boutonQuitter.Update(gameTime);
+            
             base.Update(gameTime);
         }
 

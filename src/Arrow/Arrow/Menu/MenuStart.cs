@@ -41,16 +41,16 @@ namespace Arrow
 
         public override void Update(GameTime gameTime)
         {
-            if (GameStart == false)
+            if (!GameStart)
             {
                 boutonJouer.Update(gameTime);
-                base.Update(gameTime);
             }
+            base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (GameStart == false)
+            if (!GameStart)
             {
                 this.spriteBatch.Begin();
                 this.spriteBatch.Draw(fond, rectangle, Color.White * 1f);
