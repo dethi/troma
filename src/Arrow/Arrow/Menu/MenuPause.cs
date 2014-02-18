@@ -25,26 +25,9 @@ namespace Arrow
             this.game = game;
         }
 
-
-        public void Quitter()
-        {
-            game.Exit();
-        }
-        public void Reprendre()
-        {
-            if (menuActivate)
-            {
-                menuActivate = false;
-            }
-            else
-            {
-                menuActivate = true;
-            }
-        }
-
         public override void Initialize()
         {
-            this.spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
+            this.spriteBatch = new SpriteBatch(this.game.GraphicsDevice);
             fond = game.Content.Load<Texture2D>("Textures/troma");
 
             Delegate quitterDelegate = new Delegate(Quitter);
@@ -57,11 +40,6 @@ namespace Arrow
             boutonQuitter.Initialize();
 
             base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -83,7 +61,16 @@ namespace Arrow
                 boutonReprendre.Draw(gameTime);
                 boutonQuitter.Draw(gameTime);
             }
-            base.Draw(gameTime);
+        }
+
+
+        public void Quitter()
+        {
+            game.Exit();
+        }
+        public void Reprendre()
+        {
+            menuActivate = !menuActivate;
         }
 
         public void MenuSon(GameTime gameTime)

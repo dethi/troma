@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Arrow
 {
-    public class Menu : Microsoft.Xna.Framework.DrawableGameComponent
+    public class Menu
     {
         public static bool playerOff = false;
         
@@ -21,55 +21,21 @@ namespace Arrow
         private double lastTime = 0;
 
         public Menu(Game game)
-            : base(game)
         {
             this.game = game;
         }
 
-        public override void Initialize()
+        public virtual void Initialize()
         {
             this.game.IsMouseVisible = true;
-
-            base.Initialize();
         }
-
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-        }
-
 
         public bool PlayerTrue()
         {
-            if (menuActivate)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return menuActivate;
         }
 
-
-
-        public override void Update(GameTime gameTime)
-        {
-            //rend la souris visible durant l activation du menu
-            if (menuActivate)
-            {
-                this.game.IsMouseVisible = true;
-                playerOff = true;
-            }
-            else
-            {
-                this.game.IsMouseVisible = false;
-                playerOff = false;
-            }
-            base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
 
@@ -80,17 +46,23 @@ namespace Arrow
                 if (lastTime + 400 <= currentTime)
                 {
                     lastTime = currentTime;
-
-                    if (menuActivate)
-                    {
-                        menuActivate = false;
-                    }
-                    else
-                    {
-                        menuActivate = true;
-                    }
+                    menuActivate = !menuActivate;
                 }
             }
+
+            //rend la souris visible durant l'activation du menu
+            if (menuActivate)
+            {
+                this.game.IsMouseVisible = true;
+                playerOff = true;
+            }
+            else
+            {
+                this.game.IsMouseVisible = false;
+                playerOff = false;
+            }
         }
+
+        public virtual void Draw(GameTime gameTime) { }
     }
 }

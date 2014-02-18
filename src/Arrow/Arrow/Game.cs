@@ -26,6 +26,8 @@ namespace Arrow
         private HeightMap map;
         private Effect effect;
 
+        private MenuPause menuPause;
+
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
@@ -45,8 +47,8 @@ namespace Arrow
             Components.Add(new DisplayPosition(this));
 
             //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
-            Components.Add(new MenuPause(this));
-
+            menuPause = new MenuPause(this);
+            menuPause.Initialize();
 
             base.Initialize();
         }
@@ -89,6 +91,8 @@ namespace Arrow
                 player.Update(gameTime, map);
             }
 
+            menuPause.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -111,6 +115,8 @@ namespace Arrow
             spriteBatch.End();
 
             #endregion
+
+            menuPause.Draw(gameTime);
 
             base.Draw(gameTime);
         }
