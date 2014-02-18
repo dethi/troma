@@ -70,7 +70,7 @@ namespace Arrow
             effect = Content.Load<Effect>("Effects/Terrain");
 
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
-            SFXManager.AddSFX("Bruit de pas2", Content.Load<SoundEffect>("Sounds/Bruit de pas2"));
+            SFXManager.AddSFX("Marcher", Content.Load<SoundEffect>("Sounds/Marcher"));
             SFXManager.AddSFX("Courir", Content.Load<SoundEffect>("Sounds/Courir"));
 
             menuPause.LoadContent();

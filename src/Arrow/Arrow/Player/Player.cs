@@ -140,7 +140,7 @@ namespace Arrow
                      moveVector = moveVector*1.7f;
                      SFXManager.Play("Courir", gameTime);
                 }
-                SFXManager.Play("Bruit de pas2", gameTime);
+                SFXManager.Play("Marcher", gameTime);
             }
 
             // Effectue le mouvement

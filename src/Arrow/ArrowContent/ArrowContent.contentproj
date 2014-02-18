@@ -106,15 +106,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\Bruit de pas.wav">
-      <Name>Bruit de pas</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sounds\Bruit de pas2.wav">
-      <Name>Bruit de pas2</Name>
+    <Compile Include="Sounds\Marcher.wav">
+      <Name>Marcher</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
