@@ -33,11 +33,11 @@ namespace Arrow
             Delegate quitterDelegate = new Delegate(Quitter);
             Delegate reprendreDelegate = new Delegate(Reprendre);
 
-            boutonReprendre = (new Button(game, 100, 100, 128, 32, 
+            boutonReprendre = (new Button(game, 300, 200, 128, 60, 
                 "boutonReprendreOff", "boutonReprendre", reprendreDelegate, 1));
             boutonReprendre.Initialize();
 
-            boutonQuitter = (new Button(game, 100, 150, 128, 32, 
+            boutonQuitter = (new Button(game, 300, 300, 128, 60, 
                 "boutonQuitterOff", "boutonQuitter", quitterDelegate, 1));
             boutonQuitter.Initialize();
 
