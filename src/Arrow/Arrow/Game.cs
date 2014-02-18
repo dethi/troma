@@ -97,12 +97,11 @@ namespace Arrow
             {
                 if (!menuPause.DisplayMenu)
                     player.Update(gameTime, map);
+                menuPause.Update(gameTime);
             }
-
-            menuPause.Update(gameTime);
-            menuStart.Update(gameTime);
-
-
+            else
+                menuStart.Update(gameTime);
+            
             base.Update(gameTime);
         }
 
@@ -110,25 +109,28 @@ namespace Arrow
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //modelManager.Draw(gameTime);
-            map.Draw(Camera.Instance, effect);
+            if (menuStart.GameStart)
+            {
+                //modelManager.Draw(gameTime);
+                map.Draw(Camera.Instance, effect);
 
-            //
-            // Display the cross in the center of the screen
-            //
-            #region Cross
+                //
+                // Display the cross in the center of the screen
+                //
+                #region Cross
 
-            spriteBatch.Begin();
-            spriteBatch.Draw(cross,
-                new Vector2((GraphicsDevice.Viewport.Width / 2) - 8, (GraphicsDevice.Viewport.Height / 2) - 8),
-                Color.White);
-            spriteBatch.End();
+                spriteBatch.Begin();
+                spriteBatch.Draw(cross,
+                    new Vector2((GraphicsDevice.Viewport.Width / 2) - 8, (GraphicsDevice.Viewport.Height / 2) - 8),
+                    Color.White);
+                spriteBatch.End();
 
-            #endregion
+                #endregion
 
-            menuPause.Draw(gameTime);
-            menuStart.Draw(gameTime);
-
+                menuPause.Draw(gameTime);
+            }
+            else
+                menuStart.Draw(gameTime);
 
             base.Draw(gameTime);
         }

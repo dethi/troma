@@ -15,16 +15,18 @@ namespace Arrow
     {
         protected Game game;
         protected MenuSong audio;
+        protected SpriteBatch spriteBatch;
 
         public delegate void Delegate();
 
         public bool DisplayMenu { get; protected set; }
 
-        public bool GameStart { get; protected set; }
-
         public Menu(Game game)
         {
             this.game = game;
+            DisplayMenu = true;
+
+            this.spriteBatch = new SpriteBatch(this.game.GraphicsDevice);
         }
 
         public virtual void Initialize()
@@ -41,7 +43,7 @@ namespace Arrow
         public virtual void Update(GameTime gameTime)
         {         
             //rend la souris visible durant l'activation du menu
-            if (DisplayMenu || GameStart==false)
+            if (DisplayMenu)
             {
                 this.game.IsMouseVisible = true;
                 audio.SongPlayed = true;

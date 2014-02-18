@@ -10,8 +10,6 @@ namespace Arrow
 {
     public class MenuPause : Menu
     {
-        private SpriteBatch spriteBatch;
-
         Texture2D fond;
         private Rectangle rectangle;
 
@@ -29,7 +27,6 @@ namespace Arrow
 
         public override void Initialize()
         {
-            this.spriteBatch = new SpriteBatch(this.game.GraphicsDevice);
             fond = game.Content.Load<Texture2D>("Textures/overlay");
             
             Menu.Delegate quitterDelegate = new Delegate(Quitter);
@@ -64,7 +61,6 @@ namespace Arrow
                         game.GraphicsDevice.Viewport.Height / 2);
                 }
             }
-
             
             boutonReprendre.Update(gameTime);
             boutonQuitter.Update(gameTime);
