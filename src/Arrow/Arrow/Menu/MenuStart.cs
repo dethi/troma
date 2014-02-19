@@ -61,6 +61,7 @@ namespace Arrow
         {
             DisplayMenu = false;
             this.game.IsMouseVisible = false;
+            audio.SongPlayed = false;
             GameStart = true;
         }
 

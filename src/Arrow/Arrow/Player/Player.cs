@@ -90,7 +90,7 @@ namespace Arrow
             Shoot(gameTime);
             Crouch();
             CameraOrientation(dt);
-            Walk(dt, gameTime);
+            Walk(dt);
             MapCollision(map);
         }
 
@@ -98,7 +98,7 @@ namespace Arrow
         /// Move player
         /// </summary>
         /// <param name="dtSeconds">Total seconds elapsed since last update</param>
-        private void Walk(float dtSeconds, GameTime gameTime)
+        private void Walk(float dtSeconds)
         {
             Vector3 moveVector = Vector3.Zero;
 
@@ -141,11 +141,12 @@ namespace Arrow
                 if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || 
                     GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
                 {
-                    moveVector *= 1.7f;
-                    SFXManager.Play("Courir", gameTime);
+                    if (moveVector.Z > 0)
+                        moveVector.Z *= 1.7f;
+                    //SFXManager.Play("Courir");
                 }
-                else
-                    SFXManager.Play("Marcher", gameTime);
+                /*else
+                    SFXManager.Play("Marcher");*/
             }
 
             // Effectue le mouvement
@@ -248,7 +249,7 @@ namespace Arrow
                 GamePadState gps = GamePad.GetState(PlayerIndex.One);
 
                 if (gps.IsButtonDown(Buttons.RightTrigger))
-                    SFXManager.Play("Springfield", gameTime);
+                    SFXManager.Play("Springfield");
             }
             else
             {
@@ -258,7 +259,7 @@ namespace Arrow
                 {
                     if (!leftButtonPressed)
                     {
-                        SFXManager.Play("Springfield", gameTime);
+                        SFXManager.Play("Springfield");
                         leftButtonPressed = true;
                     }
                     else if (mouseState.LeftButton == ButtonState.Released)

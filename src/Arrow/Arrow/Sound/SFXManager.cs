@@ -11,7 +11,6 @@ namespace Arrow
     {
         private static Dictionary<string, SoundEffect> soundEffects =
             new Dictionary<string, SoundEffect>();
-        private static double lastTime = 0;
 
         /// <summary>
         /// Adds sound effect
@@ -24,16 +23,10 @@ namespace Arrow
         /// <summary>
         /// Play sound effect
         /// </summary>
-        public static void Play(string name, GameTime gameTime)
+        public static void Play(string name)
         {
-            double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
-
-            /*if (soundEffects.ContainsKey(name) &&
-                (lastTime + soundEffects[name].Duration.TotalMilliseconds <= currentTime))
-            {*/
+            if (soundEffects.ContainsKey(name))
                 soundEffects[name].Play();
-                lastTime = currentTime;
-            //}
         }
     }
 }
