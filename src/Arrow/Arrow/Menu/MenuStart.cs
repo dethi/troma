@@ -30,7 +30,7 @@ namespace Arrow
 
             Delegate jouerDelegate = new Delegate(Jouer);
 
-            boutonJouer = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, (game.GraphicsDevice.Viewport.Height / 2) - 50 - 70, 250, 100,
+            boutonJouer = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, (game.GraphicsDevice.Viewport.Height / 2) - 50 - 100, 250, 100,
                 "boutonJouerOff", "boutonJouer", jouerDelegate, 1));
             boutonJouer.Initialize();
 
