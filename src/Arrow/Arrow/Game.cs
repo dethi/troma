@@ -27,6 +27,7 @@ namespace Arrow
         private Effect effect;
 
         private MenuPause menuPause;
+        private MenuStart menuStart;
 
         public Game()
         {
@@ -50,6 +51,9 @@ namespace Arrow
             //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
             menuPause = new MenuPause(this);
             menuPause.Initialize();
+
+            menuStart = new MenuStart(this);
+            menuStart.Initialize();
 
             base.Initialize();
         }
@@ -75,6 +79,7 @@ namespace Arrow
             SFXManager.AddSFX("Courir", Content.Load<SoundEffect>("Sounds/Courir"));
 
             menuPause.LoadContent();
+            menuStart.LoadContent();
         }
 
         protected override void UnloadContent() { }
@@ -88,11 +93,15 @@ namespace Arrow
 
             //modelManager.Update(gameTime);
 
-            if (!menuPause.DisplayMenu)
-                player.Update(gameTime, map);
-
-            menuPause.Update(gameTime);
-
+            if (menuStart.GameStart)
+            {
+                if (!menuPause.DisplayMenu)
+                    player.Update(gameTime, map);
+                menuPause.Update(gameTime);
+            }
+            else
+                menuStart.Update(gameTime);
+            
             base.Update(gameTime);
         }
 
@@ -100,23 +109,28 @@ namespace Arrow
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //modelManager.Draw(gameTime);
-            map.Draw(Camera.Instance, effect);
+            if (menuStart.GameStart)
+            {
+                //modelManager.Draw(gameTime);
+                map.Draw(Camera.Instance, effect);
 
-            //
-            // Display the cross in the center of the screen
-            //
-            #region Cross
+                //
+                // Display the cross in the center of the screen
+                //
+                #region Cross
 
-            spriteBatch.Begin();
-            spriteBatch.Draw(cross,
-                new Vector2((GraphicsDevice.Viewport.Width / 2) - 8, (GraphicsDevice.Viewport.Height / 2) - 8),
-                Color.White);
-            spriteBatch.End();
+                spriteBatch.Begin();
+                spriteBatch.Draw(cross,
+                    new Vector2((GraphicsDevice.Viewport.Width / 2) - 8, (GraphicsDevice.Viewport.Height / 2) - 8),
+                    Color.White);
+                spriteBatch.End();
 
-            #endregion
+                #endregion
 
-            menuPause.Draw(gameTime);
+                menuPause.Draw(gameTime);
+            }
+            else
+                menuStart.Draw(gameTime);
 
             base.Draw(gameTime);
         }

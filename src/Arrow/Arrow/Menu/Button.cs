@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Arrow
 {
-    public class Button : Microsoft.Xna.Framework.DrawableGameComponent
+    public class Button
     {
         private Game game;
         private SpriteBatch spriteBatch;
@@ -20,19 +20,19 @@ namespace Arrow
         private Rectangle bouton;
         private bool isOn = false;
         private bool isClick = false;
+        private bool leftButtonPressed;
 
         private string nameTextureIsOff;
         private string nameTextureIsOn;
         private Texture2D textureIsOff;
         private Texture2D textureIsOn;
-        
+
         private float transparence;
-        
+
         public delegate void Delegate();
-        MenuPause.Delegate boutonDelegate2;
-        
+        Menu.Delegate boutonDelegate2;
+
         public Button(Game game, int x, int y, int width, int height, string nameTextureIsOff, string nameTextureIsOn, MenuPause.Delegate boutonDelegate, float transparence)
-            : base(game)
         {
             this.game = game;
             this.bouton = new Rectangle(x, y, width, height);
@@ -42,56 +42,60 @@ namespace Arrow
             this.transparence = transparence;
         }
 
-        public override void Initialize()
+        public void Initialize()
         {
-            this.spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
-            base.Initialize();
-        }
+            this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
-        protected override void LoadContent()
-        {
             textureIsOff = game.Content.Load<Texture2D>(nameTextureIsOff);
             textureIsOn = game.Content.Load<Texture2D>(nameTextureIsOn);
-            base.LoadContent();
         }
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             MouseState mouse = Mouse.GetState();
 
             // Test si on est sur l'image
             if ((mouse.X >= bouton.Left) && (mouse.X <= bouton.Right) && (mouse.Y >= bouton.Top) &&
                 (mouse.Y <= bouton.Bottom))
+            {
                 isOn = true;
+
+                if (mouse.LeftButton == ButtonState.Pressed || leftButtonPressed)
+                {
+                    if (!leftButtonPressed)
+                        leftButtonPressed = true;
+                    else if (mouse.LeftButton == ButtonState.Released)
+                    {
+                        leftButtonPressed = false;
+                        isClick = true;
+                    }
+                }
+            }
             else
+            {
                 isOn = false;
-
-            // Test si on clique sur l'image
-            if (mouse.LeftButton == ButtonState.Pressed && (mouse.X >= bouton.Left) &&
-                (mouse.X <= bouton.Right) && (mouse.Y >= bouton.Top) && (mouse.Y <= bouton.Bottom))
-                isClick = true;
-
-            base.Update(gameTime);
+                leftButtonPressed = false;
+            }
         }
 
-        public override void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             this.spriteBatch.Begin();
+
             //Change l'image en fonction de la position du curseur
-            if (isOn == false)
+            if (!isOn)
                 this.spriteBatch.Draw(this.textureIsOn, bouton, Color.White * transparence);
             else
                 this.spriteBatch.Draw(this.textureIsOff, bouton, Color.White * transparence);
+
             this.spriteBatch.End();
 
-            //Charge une nouvelle image si on clique
-            if (isClick == true)
+            // Appel la fonction si on clique
+            if (isClick)
             {
+                isClick = false;
                 boutonDelegate2();
-                isClick = false;          
             }
-
-            base.Draw(gameTime);
         }
     }
 }

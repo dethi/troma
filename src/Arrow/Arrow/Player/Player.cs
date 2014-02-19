@@ -21,6 +21,7 @@ namespace Arrow
         private MouseState currentMouseState;
         private Vector2 originMouse;
         private Vector3 rotationBuffer;
+        private bool leftButtonPressed;
 
         #endregion
 
@@ -76,6 +77,8 @@ namespace Arrow
             int centerY = game.GraphicsDevice.Viewport.Height / 2;
             originMouse = new Vector2(centerX, centerY);
             Mouse.SetPosition(centerX, centerY);
+
+            leftButtonPressed = false;
         }
 
         #endregion
@@ -87,7 +90,7 @@ namespace Arrow
             Shoot(gameTime);
             Crouch();
             CameraOrientation(dt);
-            Walk(dt, gameTime);
+            Walk(dt);
             MapCollision(map);
         }
 
@@ -95,7 +98,7 @@ namespace Arrow
         /// Move player
         /// </summary>
         /// <param name="dtSeconds">Total seconds elapsed since last update</param>
-        private void Walk(float dtSeconds, GameTime gameTime)
+        private void Walk(float dtSeconds)
         {
             Vector3 moveVector = Vector3.Zero;
 
@@ -138,11 +141,12 @@ namespace Arrow
                 if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || 
                     GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
                 {
-                    moveVector *= 1.7f;
-                    SFXManager.Play("Courir", gameTime);
+                    if (moveVector.Z > 0)
+                        moveVector.Z *= 1.7f;
+                    //SFXManager.Play("Courir");
                 }
-                else
-                    SFXManager.Play("Marcher", gameTime);
+                /*else
+                    SFXManager.Play("Marcher");*/
             }
 
             // Effectue le mouvement
@@ -244,15 +248,31 @@ namespace Arrow
             {
                 GamePadState gps = GamePad.GetState(PlayerIndex.One);
 
-                if (gps.IsButtonDown(Buttons.RightTrigger))
-                    SFXManager.Play("Springfield", gameTime);
+                if (gps.IsButtonDown(Buttons.RightTrigger) || leftButtonPressed)
+                {
+                    if (!leftButtonPressed)
+                    {
+                        SFXManager.Play("Springfield");
+                        leftButtonPressed = true;
+                    }
+                    else if (gps.IsButtonUp(Buttons.RightTrigger))
+                        leftButtonPressed = false;
+                }
             }
             else
             {
                 MouseState mouseState = Mouse.GetState();
 
-                if (mouseState.LeftButton == ButtonState.Pressed)
-                    SFXManager.Play("Springfield", gameTime);
+                if (mouseState.LeftButton == ButtonState.Pressed || leftButtonPressed)
+                {
+                    if (!leftButtonPressed)
+                    {
+                        SFXManager.Play("Springfield");
+                        leftButtonPressed = true;
+                    }
+                    else if (mouseState.LeftButton == ButtonState.Released)
+                        leftButtonPressed = false;
+                }
             }
         }
 
