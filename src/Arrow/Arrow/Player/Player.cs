@@ -248,8 +248,16 @@ namespace Arrow
             {
                 GamePadState gps = GamePad.GetState(PlayerIndex.One);
 
-                if (gps.IsButtonDown(Buttons.RightTrigger))
-                    SFXManager.Play("Springfield");
+                if (gps.IsButtonDown(Buttons.RightTrigger) || leftButtonPressed)
+                {
+                    if (!leftButtonPressed)
+                    {
+                        SFXManager.Play("Springfield");
+                        leftButtonPressed = true;
+                    }
+                    else if (gps.IsButtonUp(Buttons.RightTrigger))
+                        leftButtonPressed = false;
+                }
             }
             else
             {
