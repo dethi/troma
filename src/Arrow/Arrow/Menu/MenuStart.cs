@@ -59,8 +59,9 @@ namespace Arrow
 
         public void Jouer()
         {
+            DisplayMenu = false;
+            this.game.IsMouseVisible = false;
             GameStart = true;
-            DisplayMenu = !DisplayMenu;
         }
 
     }

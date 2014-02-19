@@ -22,7 +22,10 @@ namespace Arrow
             : base(game)
         {
             this.game = game;
-            rectangle = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
+            rectangle = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, 
+                game.GraphicsDevice.Viewport.Height);
+
+            DisplayMenu = false;
         }
 
         public override void Initialize()
@@ -32,11 +35,13 @@ namespace Arrow
             Menu.Delegate quitterDelegate = new Delegate(Quitter);
             Menu.Delegate reprendreDelegate = new Delegate(Reprendre);
 
-            boutonReprendre = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, (game.GraphicsDevice.Viewport.Height / 2) - 50 - 70, 250, 100, 
+            boutonReprendre = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, 
+                (game.GraphicsDevice.Viewport.Height / 2) - 50 - 70, 250, 100, 
                 "boutonReprendreOff", "boutonReprendre", reprendreDelegate, 1));
             boutonReprendre.Initialize();
 
-            boutonQuitter = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, (game.GraphicsDevice.Viewport.Height / 2) - 50 + 70, 250, 100, 
+            boutonQuitter = (new Button(game, (game.GraphicsDevice.Viewport.Width / 2) - 125, 
+                (game.GraphicsDevice.Viewport.Height / 2) - 50 + 70, 250, 100, 
                 "boutonQuitterOff", "boutonQuitter", quitterDelegate, 1));
             boutonQuitter.Initialize();
 
@@ -85,13 +90,15 @@ namespace Arrow
         {
             game.Exit();
         }
+
         public void Reprendre()
         {
+            DisplayMenu = false;
+            this.game.IsMouseVisible = false;
+
             Mouse.SetPosition(
                 game.GraphicsDevice.Viewport.Width / 2,
                 game.GraphicsDevice.Viewport.Height / 2);
-
-            DisplayMenu = !DisplayMenu;
         }
     }
 }

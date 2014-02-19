@@ -21,6 +21,7 @@ namespace Arrow
         private MouseState currentMouseState;
         private Vector2 originMouse;
         private Vector3 rotationBuffer;
+        private bool leftButtonPressed;
 
         #endregion
 
@@ -76,6 +77,8 @@ namespace Arrow
             int centerY = game.GraphicsDevice.Viewport.Height / 2;
             originMouse = new Vector2(centerX, centerY);
             Mouse.SetPosition(centerX, centerY);
+
+            leftButtonPressed = false;
         }
 
         #endregion
@@ -251,8 +254,16 @@ namespace Arrow
             {
                 MouseState mouseState = Mouse.GetState();
 
-                if (mouseState.LeftButton == ButtonState.Pressed)
-                    SFXManager.Play("Springfield", gameTime);
+                if (mouseState.LeftButton == ButtonState.Pressed || leftButtonPressed)
+                {
+                    if (!leftButtonPressed)
+                    {
+                        SFXManager.Play("Springfield", gameTime);
+                        leftButtonPressed = true;
+                    }
+                    else if (mouseState.LeftButton == ButtonState.Released)
+                        leftButtonPressed = false;
+                }
             }
         }
 

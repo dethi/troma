@@ -28,12 +28,12 @@ namespace Arrow
         {
             double currentTime = gameTime.TotalGameTime.TotalMilliseconds;
 
-            if (soundEffects.ContainsKey(name) &&
+            /*if (soundEffects.ContainsKey(name) &&
                 (lastTime + soundEffects[name].Duration.TotalMilliseconds <= currentTime))
-            {
+            {*/
                 soundEffects[name].Play();
                 lastTime = currentTime;
-            }
+            //}
         }
     }
 }

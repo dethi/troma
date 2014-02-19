@@ -20,17 +20,18 @@ namespace Arrow
         private Rectangle bouton;
         private bool isOn = false;
         private bool isClick = false;
+        private bool leftButtonPressed;
 
         private string nameTextureIsOff;
         private string nameTextureIsOn;
         private Texture2D textureIsOff;
         private Texture2D textureIsOn;
-        
+
         private float transparence;
-        
+
         public delegate void Delegate();
         Menu.Delegate boutonDelegate2;
-        
+
         public Button(Game game, int x, int y, int width, int height, string nameTextureIsOff, string nameTextureIsOn, MenuPause.Delegate boutonDelegate, float transparence)
         {
             this.game = game;
@@ -56,14 +57,25 @@ namespace Arrow
             // Test si on est sur l'image
             if ((mouse.X >= bouton.Left) && (mouse.X <= bouton.Right) && (mouse.Y >= bouton.Top) &&
                 (mouse.Y <= bouton.Bottom))
+            {
                 isOn = true;
-            else
-                isOn = false;
 
-            // Test si on clique sur l'image
-            if (mouse.LeftButton == ButtonState.Pressed && (mouse.X >= bouton.Left) &&
-                (mouse.X <= bouton.Right) && (mouse.Y >= bouton.Top) && (mouse.Y <= bouton.Bottom))
-                isClick = true;
+                if (mouse.LeftButton == ButtonState.Pressed || leftButtonPressed)
+                {
+                    if (!leftButtonPressed)
+                        leftButtonPressed = true;
+                    else if (mouse.LeftButton == ButtonState.Released)
+                    {
+                        leftButtonPressed = false;
+                        isClick = true;
+                    }
+                }
+            }
+            else
+            {
+                isOn = false;
+                leftButtonPressed = false;
+            }
         }
 
         public void Draw(GameTime gameTime)
@@ -78,11 +90,11 @@ namespace Arrow
 
             this.spriteBatch.End();
 
-            //Charge une nouvelle image si on clique
+            // Appel la fonction si on clique
             if (isClick)
             {
+                isClick = false;
                 boutonDelegate2();
-                isClick = false;          
             }
         }
     }
