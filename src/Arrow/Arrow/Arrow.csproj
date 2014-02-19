@@ -144,6 +144,7 @@
   <ItemGroup>
     <Compile Include="HUD\MemoryUse.cs" />
     <Compile Include="Menu\MenuStart.cs" />
+    <Compile Include="Player\PlayerConstants.cs" />
     <Compile Include="Sound\MenuSong.cs" />
     <Compile Include="Menu\MenuPause.cs" />
     <Compile Include="Menu\Button.cs" />

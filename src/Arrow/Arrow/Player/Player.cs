@@ -7,13 +7,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
-    class Player
+    partial class Player
     {
         #region Attributes
 
         private Game game;
 
-        private float playerSpeed;
         private float height;
 
         private float mapHeight;
@@ -55,23 +54,16 @@ namespace Arrow
             : this(game, Vector3.Zero) { }
 
         public Player(Game game, Vector3 pos)
-            : this(game, pos, 7) { }
+            : this(game, pos, Vector3.Zero) { }
 
-        public Player(Game game, Vector3 pos, float height)
-            : this(game, pos, height, Vector3.Zero) { }
-
-        public Player(Game game, Vector3 pos, float height, Vector3 rot)
-            : this(game, pos, height, rot, 40f) { }
-
-        public Player(Game game, Vector3 pos, float height, Vector3 rot, float playerSpeed)
+        public Player(Game game, Vector3 pos, Vector3 rot)
         {
             this.game = game;
 
-            this.playerSpeed = playerSpeed;
-            this.height = height;
+            this.height = HEIGHT;
 
             this.cam = Camera.Instance;
-            this.cam.New(game, new Vector3(pos.X, pos.Y + height, pos.Z), rot);
+            this.cam.New(game, new Vector3(pos.X, pos.Y + HEIGHT, pos.Z), rot);
 
             int centerX = game.GraphicsDevice.Viewport.Width / 2;
             int centerY = game.GraphicsDevice.Viewport.Height / 2;
@@ -121,13 +113,13 @@ namespace Arrow
 
                 KeyboardState kbs = Keyboard.GetState();
 
-                if (kbs.IsKeyDown(Keys.W))
+                if (kbs.IsKeyDown(KB_UP))
                     moveVector.Z += 1;
-                if (kbs.IsKeyDown(Keys.S))
+                if (kbs.IsKeyDown(KB_BOTTOM))
                     moveVector.Z += -1;
-                if (kbs.IsKeyDown(Keys.A))
+                if (kbs.IsKeyDown(KB_LEFT))
                     moveVector.X += 1;
-                if (kbs.IsKeyDown(Keys.D))
+                if (kbs.IsKeyDown(KB_RIGHT))
                     moveVector.X += -1;
 
                 #endregion
@@ -136,13 +128,13 @@ namespace Arrow
             if (moveVector != Vector3.Zero)
             {
                 moveVector.Normalize();
-                moveVector *= dtSeconds * playerSpeed;
+                moveVector *= dtSeconds * WALK_SPEED;
 
-                if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || 
+                if (Keyboard.GetState().IsKeyDown(KB_RUN) || 
                     GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
                 {
                     if (moveVector.Z > 0)
-                        moveVector.Z *= 1.7f;
+                        moveVector.Z *= COEF_RUN_SPEED;
                     //SFXManager.Play("Courir");
                 }
                 /*else
@@ -281,31 +273,31 @@ namespace Arrow
         /// </summary>
         private void Crouch()
         {
-            float actualHeight = height;
+            float currentHeight = height;
 
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
             {
                 GamePadState gps = GamePad.GetState(PlayerIndex.One);
 
                 if (gps.IsButtonDown(Buttons.B))
-                    actualHeight = 4.8f;
+                    currentHeight = CROUCH_HEIGHT;
                 else
-                    actualHeight = 7f;
+                    currentHeight = HEIGHT;
             }
             else
             {
                 KeyboardState kbs = Keyboard.GetState();
 
-                if (kbs.IsKeyDown(Keys.LeftControl))
-                    actualHeight = 4.8f;
+                if (kbs.IsKeyDown(KB_CROUCH))
+                    currentHeight = CROUCH_HEIGHT;
                 else
-                    actualHeight = 7f;
+                    currentHeight = HEIGHT;
             }
 
-            if (height != actualHeight)
+            if (height != currentHeight)
             {
                 Vector3 pos = Position;
-                height = actualHeight;
+                height = currentHeight;
                 Position = pos;
             }
         }
