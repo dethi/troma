@@ -34,19 +34,19 @@ namespace Arrow
             //DisableVsync();
 
             Content.RootDirectory = "Content";
-
-            //modelManager = new ModelManager();
         }
 
         protected override void Initialize()
         {
-            player = new Player(this, new Vector3(128, 10, 128));
+            Camera camera = Camera.Instance;
+            camera.New(this, Vector3.Zero, Vector3.Zero);
+
+            player = new Player(this, new Vector3(128, 50, 128));
 
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
             Components.Add(new MemoryUse(this));
 
-            //Components.Add(new Button(this, 10, 10 ,32 ,32, "textureIsOff", "textureIsOn"));
             menuPause = new MenuPause(this);
             menuPause.Initialize();
 
@@ -73,8 +73,8 @@ namespace Arrow
             effect = Content.Load<Effect>("Effects/Terrain");
 
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
-            SFXManager.AddSFX("Marcher", Content.Load<SoundEffect>("Sounds/Marcher"));
-            SFXManager.AddSFX("Courir", Content.Load<SoundEffect>("Sounds/Courir"));
+            SFXManager.AddSFX("Walk", Content.Load<SoundEffect>("Sounds/Walk"));
+            SFXManager.AddSFX("Run", Content.Load<SoundEffect>("Sounds/Run"));
 
             menuPause.LoadContent();
             menuStart.LoadContent();
@@ -110,7 +110,7 @@ namespace Arrow
             if (menuStart.GameStart)
             {
                 //modelManager.Draw(gameTime);
-                map.Draw(Camera.Instance, effect);
+                map.Draw(effect);
 
                 //
                 // Display the cross in the center of the screen

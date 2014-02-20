@@ -11,7 +11,8 @@ namespace Arrow
     public class MenuSong
     {
         private Game game;
-        private Song bgSong;
+
+        private Song song;
         private bool songPlayed;
 
         public bool SongPlayed
@@ -39,14 +40,14 @@ namespace Arrow
 
         public void LoadContent()
         {
-            bgSong = game.Content.Load<Song>("Sounds/BgSong");
+            song = game.Content.Load<Song>("Sounds/MenuSong");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.2f;
         }
 
         private void PlaySong()
         {
-            MediaPlayer.Play(bgSong);
+            MediaPlayer.Play(song);
         }
 
         private void StopSong()

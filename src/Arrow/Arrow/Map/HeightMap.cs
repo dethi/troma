@@ -9,7 +9,10 @@ namespace Arrow
 {
     class HeightMap
     {
+        #region Attributes
+
         private Game game;
+        private Camera camera;
 
         private VertexBuffer vertexBuffer;
         private IndexBuffer indexBuffer;
@@ -18,6 +21,8 @@ namespace Arrow
         private float textureScale;
         private float[,] heights;
 
+        #endregion
+
         public HeightMap(Game game, Texture2D heightMap, Texture2D terrainTexture,
             float textureScale, int terrainWidth, int terrainHeight, float heightScale)
         {
@@ -25,13 +30,15 @@ namespace Arrow
             this.terrainTexture = terrainTexture;
             this.textureScale = textureScale;
 
+            camera = Camera.Instance;
+
             ReadHeightMap(heightMap, terrainWidth, terrainHeight, heightScale);
             BuildVertexBuffer(terrainWidth, terrainHeight);
             BuildIndexBuffer(terrainWidth, terrainHeight);
             CalculateNormals();
         }
 
-        public void Draw(Camera camera, Effect effect)
+        public void Draw(Effect effect)
         {
             game.ResetGraphicsDeviceFor3D();
 

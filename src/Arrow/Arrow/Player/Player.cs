@@ -63,7 +63,7 @@ namespace Arrow
             this.height = HEIGHT;
 
             this.cam = Camera.Instance;
-            this.cam.New(game, new Vector3(pos.X, pos.Y + HEIGHT, pos.Z), rot);
+            Position = pos;
 
             int centerX = game.GraphicsDevice.Viewport.Width / 2;
             int centerY = game.GraphicsDevice.Viewport.Height / 2;
@@ -135,10 +135,10 @@ namespace Arrow
                 {
                     if (moveVector.Z > 0)
                         moveVector.Z *= COEF_RUN_SPEED;
-                    //SFXManager.Play("Courir");
+                    //SFXManager.Play("Run");
                 }
                 /*else
-                    SFXManager.Play("Marcher");*/
+                    SFXManager.Play("Walk");*/
             }
 
             // Effectue le mouvement
@@ -226,8 +226,8 @@ namespace Arrow
 
             if (mapHeight != actualMapHeight)
             {
-                Position = new Vector3(Position.X, mapHeight, Position.Z);
                 mapHeight = actualMapHeight;
+                Position = new Vector3(Position.X, mapHeight, Position.Z);
             }
         }
 
