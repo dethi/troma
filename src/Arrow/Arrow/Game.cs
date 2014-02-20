@@ -14,12 +14,10 @@ namespace Arrow
 {
     public partial class Game : Microsoft.Xna.Framework.Game
     {
-        private GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
 
         private SpriteBatch spriteBatch;
         private Texture2D cross;
-
-        //private ModelManager modelManager;
 
         private Player player;
 
@@ -64,13 +62,13 @@ namespace Arrow
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cross = Content.Load<Texture2D>("Cross");
 
-            map = new HeightMap(GraphicsDevice,
+            map = new HeightMap(this,
                 Content.Load<Texture2D>("Textures/heightmap"),
                 Content.Load<Texture2D>("Textures/grass"),
                 32f,
                 513,
                 513,
-                10f);
+                50f);
 
             effect = Content.Load<Effect>("Effects/Terrain");
 

@@ -148,7 +148,7 @@
     <Compile Include="Sound\MenuSong.cs" />
     <Compile Include="Menu\MenuPause.cs" />
     <Compile Include="Menu\Button.cs" />
-    <Compile Include="ScreenMode.cs" />
+    <Compile Include="GraphicsMode.cs" />
     <Compile Include="Player\Camera.cs" />
     <Compile Include="HUD\DisplayPosition.cs" />
     <Compile Include="Model\FBX.cs" />

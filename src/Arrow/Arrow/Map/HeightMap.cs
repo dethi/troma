@@ -9,19 +9,19 @@ namespace Arrow
 {
     class HeightMap
     {
+        private Game game;
+
         private VertexBuffer vertexBuffer;
         private IndexBuffer indexBuffer;
-
-        private GraphicsDevice device;
 
         private Texture2D terrainTexture;
         private float textureScale;
         private float[,] heights;
 
-        public HeightMap(GraphicsDevice device, Texture2D heightMap, Texture2D terrainTexture,
+        public HeightMap(Game game, Texture2D heightMap, Texture2D terrainTexture,
             float textureScale, int terrainWidth, int terrainHeight, float heightScale)
         {
-            this.device = device;
+            this.game = game;
             this.terrainTexture = terrainTexture;
             this.textureScale = textureScale;
 
@@ -33,6 +33,8 @@ namespace Arrow
 
         public void Draw(Camera camera, Effect effect)
         {
+            game.ResetGraphicsDeviceFor3D();
+
             Vector3 lightDirection = new Vector3(-1f, 1f, -1f);
             lightDirection.Normalize();
 
@@ -53,9 +55,9 @@ namespace Arrow
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
-                device.SetVertexBuffer(vertexBuffer);
-                device.Indices = indexBuffer;
-                device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, vertexBuffer.VertexCount,
+                game.GraphicsDevice.SetVertexBuffer(vertexBuffer);
+                game.GraphicsDevice.Indices = indexBuffer;
+                game.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, vertexBuffer.VertexCount,
                     0, indexBuffer.IndexCount / 3);
             }
         }
@@ -116,7 +118,7 @@ namespace Arrow
                 }
             }
 
-            vertexBuffer = new VertexBuffer(device, typeof(VertexPositionNormalTexture),
+            vertexBuffer = new VertexBuffer(game.GraphicsDevice, typeof(VertexPositionNormalTexture),
                 vertices.Length, BufferUsage.None);
             vertexBuffer.SetData(vertices);
         }
@@ -150,7 +152,7 @@ namespace Arrow
                 }
             }
 
-            indexBuffer = new IndexBuffer(device, IndexElementSize.ThirtyTwoBits,
+            indexBuffer = new IndexBuffer(game.GraphicsDevice, IndexElementSize.ThirtyTwoBits,
                 indices.Length, BufferUsage.None);
             indexBuffer.SetData(indices);
         }
