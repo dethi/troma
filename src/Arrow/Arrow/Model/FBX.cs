@@ -40,6 +40,8 @@ namespace Arrow
 
         public override void Draw(GameTime gameTime)
         {
+            game.ResetGraphicsDeviceFor3D();
+
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)

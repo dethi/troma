@@ -49,18 +49,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\textureIsOff.png">
-      <Name>textureIsOff</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\textureIsOn.png">
-      <Name>textureIsOn</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Effects\Terrain.fx">
       <Name>Terrain</Name>
       <Importer>EffectImporter</Importer>
@@ -92,15 +80,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\BgSong.wav">
-      <Name>BgSong</Name>
+    <Compile Include="Sounds\MenuSong.wav">
+      <Name>MenuSong</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\Marcher.wav">
-      <Name>Marcher</Name>
+    <Compile Include="Sounds\Walk.wav">
+      <Name>Walk</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
@@ -145,8 +133,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\Courir.wav">
-      <Name>Courir</Name>
+    <Compile Include="Sounds\Run.wav">
+      <Name>Run</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>

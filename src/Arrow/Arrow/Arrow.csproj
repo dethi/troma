@@ -37,7 +37,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -126,8 +126,6 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -144,10 +142,11 @@
   <ItemGroup>
     <Compile Include="HUD\MemoryUse.cs" />
     <Compile Include="Menu\MenuStart.cs" />
+    <Compile Include="Player\PlayerConstants.cs" />
     <Compile Include="Sound\MenuSong.cs" />
     <Compile Include="Menu\MenuPause.cs" />
     <Compile Include="Menu\Button.cs" />
-    <Compile Include="ScreenMode.cs" />
+    <Compile Include="GraphicsMode.cs" />
     <Compile Include="Player\Camera.cs" />
     <Compile Include="HUD\DisplayPosition.cs" />
     <Compile Include="Model\FBX.cs" />
