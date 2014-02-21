@@ -63,7 +63,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Compile Include="Textures\essai.png">
+      <Name>essai</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sounds\Springfield.wav">
@@ -151,6 +155,56 @@
       <Name>debarquement</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\antitank.fbx">
+      <Name>antitank</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+    <Compile Include="Models\bandbags.fbx">
+      <Name>bandbags</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+    <Compile Include="Models\barbed_barrier.fbx">
+      <Name>barbed_barrier</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+    <Compile Include="Models\barn.fbx">
+      <Name>barn</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+    <Compile Include="Models\barrel.fbx">
+      <Name>barrel</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+    <Compile Include="Models\house.fbx">
+      <Name>house</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+    <Compile Include="Models\table.fbx">
+      <Name>table</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+    <Compile Include="Models\wood_barrier.fbx">
+      <Name>wood_barrier</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

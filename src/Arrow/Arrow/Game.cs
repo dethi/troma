@@ -24,13 +24,22 @@ namespace Arrow
         private HeightMap map;
         private Effect effect;
 
+        private FBX house; // Déclaration des différents modeles fbx
+        private FBX barn;
+        private FBX wood_barrier;
+        private FBX barbed_barrier;
+        private FBX bandbags;
+        private FBX antitank;
+        private FBX table;
+        private ModelManager mapobject; // Déclaration du ModelManager qui contiendra tous les models
+
         private MenuPause menuPause;
         private MenuStart menuStart;
 
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            ActivateFullScreen();
+            //ActivateFullScreen();
             //DisableVsync();
 
             Content.RootDirectory = "Content";
@@ -41,7 +50,7 @@ namespace Arrow
             Camera camera = Camera.Instance;
             camera.New(this, Vector3.Zero, Vector3.Zero);
 
-            player = new Player(this, new Vector3(128, 50, 128));
+            player = new Player(this, new Vector3(128, 10, 128));
 
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
@@ -63,14 +72,30 @@ namespace Arrow
             cross = Content.Load<Texture2D>("Cross");
 
             map = new HeightMap(this,
-                Content.Load<Texture2D>("Textures/heightmap"),
+                Content.Load<Texture2D>("Textures/essai"), //heigth map a majorité blanche pour la hauteur du sol (désolé je ne vois pas comment dire ca autrement :p)
                 Content.Load<Texture2D>("Textures/grass"),
                 32f,
                 513,
                 513,
-                50f);
+                10f);
 
             effect = Content.Load<Effect>("Effects/Terrain");
+
+            house = new FBX(this, "house", 20, 10, 20); // Instanciation du model dans le jeu en cours au coordonnées en parametres
+            barn = new FBX(this, "barn", 50, 10, 200);
+            wood_barrier = new FBX(this, "wood_barrier", 20, 10, 50);
+            barbed_barrier = new FBX(this, "barbed_barrier", 20, 10, 100);
+            bandbags = new FBX(this, "bandbags", 50, 10, 50);
+            antitank = new FBX(this, "antitank", 50, 10, 128);
+            table = new FBX(this, "table", 100, 10, 128);
+            mapobject = new ModelManager(); // Instanciation du ModelManager
+            mapobject.AddModel(house); // Ajout du model au ModelManager
+            mapobject.AddModel(barn);
+            mapobject.AddModel(wood_barrier);
+            mapobject.AddModel(barbed_barrier);
+            mapobject.AddModel(bandbags);
+            mapobject.AddModel(antitank);
+            mapobject.AddModel(table);
 
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
             SFXManager.AddSFX("Walk", Content.Load<SoundEffect>("Sounds/Walk"));
@@ -109,7 +134,7 @@ namespace Arrow
 
             if (menuStart.GameStart)
             {
-                //modelManager.Draw(gameTime);
+                mapobject.Draw(gameTime);
                 map.Draw(effect);
 
                 //

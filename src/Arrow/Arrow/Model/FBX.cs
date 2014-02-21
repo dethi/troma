@@ -19,18 +19,19 @@ namespace Arrow
         private string nameModel;
         private Model model;
         public Matrix position;
-
+        
         public bool textureEnabled;
         //public bool lightingEnabled;
 
-        public FBX(Game game, string nameModel) : this(game, nameModel, Matrix.Identity) { }
+        public FBX(Game game, string nameModel, int x, int y, int z) : this(game, nameModel, Matrix.Identity, x ,y, z) { }
 
-        public FBX(Game game, string nameModel, Matrix position)
+        /*Constructeur FBX positionne le model "nameModel" a la position (x,y,z)*/
+        public FBX(Game game, string nameModel, Matrix position, int x, int y, int z)
             : base(game)
         {
             this.game = game;
             this.nameModel = nameModel;
-            this.position = position;
+            this.position = position * Matrix.CreateTranslation(x, y, z); // Modifie la matrice identity et affecte la position (x,y,z);
 
             textureEnabled = true;
             //lightingEnabled = true;
@@ -58,6 +59,6 @@ namespace Arrow
             }
 
             base.Draw(gameTime);
-        }
+        }                
     }
 }
