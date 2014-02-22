@@ -23,6 +23,7 @@ namespace Arrow
         private Vector3 velocity;
         private bool jumped;
         private int recharge = 0;
+        private bool reload;
 
         #endregion
 
@@ -76,6 +77,7 @@ namespace Arrow
 
             velocity = new Vector3(0, 1, 0);
             jumped = false;
+            reload = false;
         }
 
         #endregion
@@ -265,8 +267,7 @@ namespace Arrow
                     {
                         if (recharge > 7)
                         {
-                            SFXManager.Play("Empty Gun");
-
+                            SFXManager.Play("Empty_Gun");
                         }
                         else
                         {
@@ -281,10 +282,18 @@ namespace Arrow
                 }
                 else
                 {
-                    if (Keyboard.GetState().IsKeyDown(Keys.R))
+                    if (Keyboard.GetState().IsKeyDown(Keys.R) || reload)
                     {
-                        SFXManager.Play("Reload");
-                        recharge = 0;
+                        if (!reload)
+                        {
+                            SFXManager.Play("Reload");
+                            recharge = 0;
+                            reload = true;
+                        }
+                        else if (Keyboard.GetState().IsKeyUp(Keys.R))
+                        {
+                            reload = false;
+                        }
                     }
                 }
             }

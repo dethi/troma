@@ -215,8 +215,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\Empty Gun.wav">
-      <Name>Empty Gun</Name>
+    <Compile Include="Sounds\Empty_Gun.wav">
+      <Name>Empty_Gun</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
