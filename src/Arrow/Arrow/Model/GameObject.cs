@@ -17,22 +17,30 @@ namespace Arrow
         private Game game;
         private Camera camera;
 
-        private string nameModel;
+        public string modelName { get; private set; }
         private Model model;
         public Matrix position;
 
-        public GameObject(Game game, string nameModel, Vector3 pos)
+        #region Constructor
+
+        public GameObject(Game game, string modelName) 
+            : this(game, modelName, Vector2.Zero) { }
+
+        public GameObject(Game game, string modelName, Vector2 pos)
+            : this(game, modelName, new Vector3(pos.X, game.map.GetHeight(pos.X, pos.Y), pos.Y)) { }
+
+        public GameObject(Game game, string modelName, Vector3 pos)
         {
             this.game = game;
             this.camera = Camera.Instance;
 
-            this.nameModel = nameModel;
-
-            // Modifie la matrice identity et affecte la position (x,y,z);
+            this.modelName = modelName;
             this.position = Matrix.CreateTranslation(pos);
 
-            model = game.Content.Load<Model>("Models/" + nameModel);
+            model = game.Content.Load<Model>("Models/" + modelName);
         }
+
+        #endregion
 
         public void Draw(GameTime gameTime)
         {

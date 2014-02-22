@@ -19,19 +19,12 @@ namespace Arrow
         private SpriteBatch spriteBatch;
         private Texture2D cross;
 
-        private Player player;
+        public Player player { get; private set; }
 
-        private HeightMap map;
+        public HeightMap map { get; private set; }
         private Effect mapEffect;
 
         private ModelManager mapObject;
-        private GameObject house;
-        private GameObject barn;
-        private GameObject wood_barrier;
-        private GameObject barbed_barrier;
-        private GameObject bandbags;
-        private GameObject antitank;
-        private GameObject table;
 
         private MenuPause menuPause;
         private MenuStart menuStart;
@@ -56,7 +49,7 @@ namespace Arrow
             Components.Add(new DisplayPosition(this));
             Components.Add(new MemoryUse(this));
 
-            mapObject = new ModelManager();
+            mapObject = new ModelManager(this);
 
             menuPause = new MenuPause(this);
             menuPause.Initialize();
@@ -89,21 +82,13 @@ namespace Arrow
 
             #region Models
 
-            house = new GameObject(this, "house", new Vector3(20, 10, 20));
-            barn = new GameObject(this, "barn", new Vector3(50, 10, 200));
-            wood_barrier = new GameObject(this, "wood_barrier", new Vector3(20, 10, 50));
-            barbed_barrier = new GameObject(this, "barbed_barrier", new Vector3(20, 10, 100));
-            bandbags = new GameObject(this, "bandbags", new Vector3(50, 10, 50));
-            antitank = new GameObject(this, "antitank", new Vector3(50, 10, 128));
-            table = new GameObject(this, "table", new Vector3(100, 10, 128));
-
-            mapObject.AddModel(house);
-            mapObject.AddModel(barn);
-            mapObject.AddModel(wood_barrier);
-            mapObject.AddModel(barbed_barrier);
-            mapObject.AddModel(bandbags);
-            mapObject.AddModel(antitank);
-            mapObject.AddModel(table);
+            mapObject.AddModel("house", new Vector2(20, 20));
+            mapObject.AddModel("barn", new Vector2(50, 200));
+            mapObject.AddModel("wood_barrier", new Vector2(20, 50));
+            mapObject.AddModel("barbed_barrier", new Vector2(20, 100));
+            mapObject.AddModel("bandbags", new Vector2(50, 50));
+            mapObject.AddModel("antitank", new Vector2(50, 128));
+            mapObject.AddModel("table", new Vector2(100, 128));
 
             #endregion
 

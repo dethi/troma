@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
-    partial class Player
+    public partial class Player
     {
         #region Attributes
 
@@ -324,6 +324,9 @@ namespace Arrow
             }
         }
 
+        /// <summary>
+        /// Jump
+        /// </summary>
         private void Jump(HeightMap map)
         {
             if (!jumped)
