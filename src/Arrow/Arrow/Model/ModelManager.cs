@@ -8,37 +8,50 @@ namespace Arrow
 {
     public class ModelManager
     {
-        public List<FBX> Models { get; private set; }
+        private Game game;
+        public Dictionary<string, GameObject> Models { get; private set; }
 
-        public ModelManager()
+        public ModelManager(Game game)
         {
-            Models = new List<FBX>();
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            foreach (FBX item in Models)
-            {
-                item.Update(gameTime);
-            }
+            this.game = game;
+            Models = new Dictionary<string, GameObject>();
         }
 
         public void Draw(GameTime gameTime)
         {
-            foreach (FBX item in Models)
+            foreach (KeyValuePair<string, GameObject> item in Models)
             {
-                item.Draw(gameTime);
+                item.Value.Draw(gameTime);
             }
         }
 
-        public void AddModel(FBX item)
+        #region AddModel
+
+        public void AddModel(string modelName)
         {
-            Models.Add(item);
+            AddModel(new GameObject(game, modelName));
         }
 
-        public void RemoveModel(int index)
+        public void AddModel(string modelName, Vector2 pos)
         {
-            Models.RemoveAt(index);
+            AddModel(new GameObject(game, modelName, pos));
+        }
+
+        public void AddModel(string modelName, Vector3 pos)
+        {
+            AddModel(new GameObject(game, modelName, pos));
+        }
+
+        public void AddModel(GameObject item)
+        {
+            Models.Add(item.modelName, item);
+        }
+
+        #endregion
+
+        public void RemoveModel(string modelName)
+        {
+            Models.Remove(modelName);
         }
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Arrow
 {
-    static class SFXManager
+    public static class SFXManager
     {
         private static Dictionary<string, SoundEffect> soundEffects =
             new Dictionary<string, SoundEffect>();

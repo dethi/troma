@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
-    partial class Player
+    public partial class Player
     {
         #region Attributes
 
@@ -15,12 +15,13 @@ namespace Arrow
 
         private float height;
 
-        private float mapHeight;
-
         private MouseState currentMouseState;
         private Vector2 originMouse;
         private Vector3 rotationBuffer;
         private bool leftButtonPressed;
+
+        private Vector3 velocity;
+        private bool jumped;
 
         #endregion
 
@@ -71,6 +72,9 @@ namespace Arrow
             Mouse.SetPosition(centerX, centerY);
 
             leftButtonPressed = false;
+
+            velocity = new Vector3(0, 1, 0);
+            jumped = false;
         }
 
         #endregion
@@ -84,6 +88,7 @@ namespace Arrow
             CameraOrientation(dt);
             Walk(dt);
             MapCollision(map);
+            Jump(map);
         }
 
         /// <summary>
@@ -222,13 +227,10 @@ namespace Arrow
         /// </summary>
         private void MapCollision(HeightMap map)
         {
-            float actualMapHeight = map.GetHeight(Position.X, Position.Z);
+            float mapHeight = map.GetHeight(Position.X, Position.Z);
 
-            if (mapHeight != actualMapHeight)
-            {
-                mapHeight = actualMapHeight;
+            if (!jumped && Position.Y != mapHeight)
                 Position = new Vector3(Position.X, mapHeight, Position.Z);
-            }
         }
 
         /// <summary>
@@ -269,7 +271,7 @@ namespace Arrow
         }
 
         /// <summary>
-        /// Crouch (bad methods)
+        /// Crouch
         /// </summary>
         private void Crouch()
         {
@@ -299,6 +301,31 @@ namespace Arrow
                 Vector3 pos = Position;
                 height = currentHeight;
                 Position = pos;
+            }
+        }
+
+        /// <summary>
+        /// Jump
+        /// </summary>
+        private void Jump(HeightMap map)
+        {
+            if (!jumped)
+            {
+                velocity.Y = 1;
+
+                if (Keyboard.GetState().IsKeyDown(KB_JUMP) ||
+                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A))
+                {
+                    jumped = true;
+                }
+            }
+            else
+            {
+                Position += velocity;
+                velocity.Y -= 0.05f;
+
+                if (Position.Y <= map.GetHeight(Position.X, Position.Z))
+                    jumped = false;
             }
         }
     }

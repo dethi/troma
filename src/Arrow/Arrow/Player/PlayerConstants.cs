@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
-    partial class Player
+    public partial class Player
     {
         const float HEIGHT = 7;
         const float CROUCH_HEIGHT = 4.8f;
@@ -29,5 +29,6 @@ namespace Arrow
 
         const Keys KB_CROUCH = Keys.LeftControl;
         const Keys KB_RUN = Keys.LeftShift;
+        const Keys KB_JUMP = Keys.Space;
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Arrow
 {
-    class MenuStart : Menu
+    public class MenuStart : Menu
     {
         public bool GameStart { get; private set; }
 

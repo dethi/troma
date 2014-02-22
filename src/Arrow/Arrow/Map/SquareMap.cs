@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Arrow
 {
-    class SquareMap
+    public class SquareMap
     {
         public const int V_SIZE = 4;
         public const int MAP_WIDTH = 20 * V_SIZE;

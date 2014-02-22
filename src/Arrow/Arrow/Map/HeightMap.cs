@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Arrow
 {
-    class HeightMap
+    public class HeightMap
     {
         #region Attributes
 
