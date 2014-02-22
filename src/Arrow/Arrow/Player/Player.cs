@@ -22,6 +22,9 @@ namespace Arrow
         private Vector3 rotationBuffer;
         private bool leftButtonPressed;
 
+        private Vector3 velocity;
+        private bool hasPressedSpace;
+
         #endregion
 
         #region Properties
@@ -71,6 +74,9 @@ namespace Arrow
             Mouse.SetPosition(centerX, centerY);
 
             leftButtonPressed = false;
+
+            velocity = new Vector3(0, 1, 0);
+            hasPressedSpace = false;
         }
 
         #endregion
@@ -84,6 +90,7 @@ namespace Arrow
             CameraOrientation(dt);
             Walk(dt);
             MapCollision(map);
+            Jump(map);
         }
 
         /// <summary>
@@ -299,6 +306,32 @@ namespace Arrow
                 Vector3 pos = Position;
                 height = currentHeight;
                 Position = pos;
+            }
+        }
+
+        private void Jump(HeightMap map)
+        {            
+            if (hasPressedSpace == false)
+            {
+                velocity.Y = 1;
+                velocity.X = 0;
+                velocity.Z = 0;
+            }
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                hasPressedSpace = true;
+            }
+
+            if (hasPressedSpace == true)
+            {
+                Position += velocity;
+                velocity.Y -= 0.05f;
+            }
+
+            if (hasPressedSpace == true && Position.Y <= map.GetHeight(Position.X, Position.Z) + 0.2f)
+            {
+                hasPressedSpace = !hasPressedSpace;
             }
         }
     }
