@@ -39,7 +39,7 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            ActivateFullScreen();
+           // ActivateFullScreen();
             //DisableVsync();
 
             Content.RootDirectory = "Content";
@@ -112,6 +112,8 @@ namespace Arrow
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
             SFXManager.AddSFX("Walk", Content.Load<SoundEffect>("Sounds/Walk"));
             SFXManager.AddSFX("Run", Content.Load<SoundEffect>("Sounds/Run"));
+            SFXManager.AddSFX("Reload", Content.Load<SoundEffect>("Sounds/Reload"));
+            SFXManager.AddSFX("Empty Gun", Content.Load<SoundEffect>("Sounds/Empty Gun"));
 
             #endregion
 

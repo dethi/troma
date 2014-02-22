@@ -22,6 +22,7 @@ namespace Arrow
 
         private Vector3 velocity;
         private bool jumped;
+        private int recharge = 0;
 
         #endregion
 
@@ -135,7 +136,7 @@ namespace Arrow
                 moveVector.Normalize();
                 moveVector *= dtSeconds * WALK_SPEED;
 
-                if (Keyboard.GetState().IsKeyDown(KB_RUN) || 
+                if (Keyboard.GetState().IsKeyDown(KB_RUN) ||
                     GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
                 {
                     if (moveVector.Z > 0)
@@ -236,6 +237,7 @@ namespace Arrow
         /// <summary>
         /// Shoot
         /// </summary>
+        ///                
         private void Shoot(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
@@ -261,11 +263,29 @@ namespace Arrow
                 {
                     if (!leftButtonPressed)
                     {
-                        SFXManager.Play("Springfield");
+                        if (recharge > 7)
+                        {
+                            SFXManager.Play("Empty Gun");
+
+                        }
+                        else
+                        {
+                            recharge++;
+                            SFXManager.Play("Springfield");
+                        }
                         leftButtonPressed = true;
                     }
+
                     else if (mouseState.LeftButton == ButtonState.Released)
                         leftButtonPressed = false;
+                }
+                else
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.R))
+                    {
+                        SFXManager.Play("Reload");
+                        recharge = 0;
+                    }
                 }
             }
         }
