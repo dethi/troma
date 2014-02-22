@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
-    partial class Player
+    public partial class Player
     {
         const float HEIGHT = 7;
         const float CROUCH_HEIGHT = 4.8f;

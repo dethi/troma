@@ -70,7 +70,6 @@ namespace Arrow
         {
             GraphicsDevice.BlendState = BlendState.Opaque;
             GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-            //GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
         }
     }
 }
