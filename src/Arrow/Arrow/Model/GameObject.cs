@@ -12,34 +12,29 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Arrow
 {
-    public class FBX : Microsoft.Xna.Framework.DrawableGameComponent
+    public class GameObject
     {
         private Game game;
+        private Camera camera;
 
         private string nameModel;
         private Model model;
         public Matrix position;
-        
-        public bool textureEnabled;
-        //public bool lightingEnabled;
 
-        public FBX(Game game, string nameModel, int x, int y, int z) : this(game, nameModel, Matrix.Identity, x ,y, z) { }
-
-        /*Constructeur FBX positionne le model "nameModel" a la position (x,y,z)*/
-        public FBX(Game game, string nameModel, Matrix position, int x, int y, int z)
-            : base(game)
+        public GameObject(Game game, string nameModel, Vector3 pos)
         {
             this.game = game;
-            this.nameModel = nameModel;
-            this.position = position * Matrix.CreateTranslation(x, y, z); // Modifie la matrice identity et affecte la position (x,y,z);
+            this.camera = Camera.Instance;
 
-            textureEnabled = true;
-            //lightingEnabled = true;
+            this.nameModel = nameModel;
+
+            // Modifie la matrice identity et affecte la position (x,y,z);
+            this.position = Matrix.CreateTranslation(pos);
 
             model = game.Content.Load<Model>("Models/" + nameModel);
         }
 
-        public override void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             game.ResetGraphicsDeviceFor3D();
 
@@ -47,18 +42,15 @@ namespace Arrow
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    effect.TextureEnabled = textureEnabled;
-                    //effect.LightingEnabled = lightingEnabled;
                     effect.EnableDefaultLighting();
 
                     effect.World = position;
-                    effect.Projection = Camera.Instance.Projection;
-                    effect.View = Camera.Instance.View;
+                    effect.Projection = camera.Projection;
+                    effect.View = camera.View;
                 }
+
                 mesh.Draw();
             }
-
-            base.Draw(gameTime);
         }                
     }
 }
