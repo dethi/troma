@@ -29,5 +29,6 @@ namespace Arrow
 
         const Keys KB_CROUCH = Keys.LeftControl;
         const Keys KB_RUN = Keys.LeftShift;
+        const Keys KB_JUMP = Keys.Space;
     }
 }

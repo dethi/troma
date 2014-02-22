@@ -149,7 +149,7 @@
     <Compile Include="GraphicsMode.cs" />
     <Compile Include="Player\Camera.cs" />
     <Compile Include="HUD\DisplayPosition.cs" />
-    <Compile Include="Model\FBX.cs" />
+    <Compile Include="Model\GameObject.cs" />
     <Compile Include="HUD\FPS.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Map\HeightMap.cs" />

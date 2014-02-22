@@ -22,16 +22,16 @@ namespace Arrow
         private Player player;
 
         private HeightMap map;
-        private Effect effect;
+        private Effect mapEffect;
 
-        private FBX house; // Déclaration des différents modeles fbx
-        private FBX barn;
-        private FBX wood_barrier;
-        private FBX barbed_barrier;
-        private FBX bandbags;
-        private FBX antitank;
-        private FBX table;
-        private ModelManager mapobject; // Déclaration du ModelManager qui contiendra tous les models
+        private ModelManager mapObject;
+        private GameObject house;
+        private GameObject barn;
+        private GameObject wood_barrier;
+        private GameObject barbed_barrier;
+        private GameObject bandbags;
+        private GameObject antitank;
+        private GameObject table;
 
         private MenuPause menuPause;
         private MenuStart menuStart;
@@ -39,7 +39,7 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            //ActivateFullScreen();
+            ActivateFullScreen();
             //DisableVsync();
 
             Content.RootDirectory = "Content";
@@ -56,6 +56,8 @@ namespace Arrow
             Components.Add(new DisplayPosition(this));
             Components.Add(new MemoryUse(this));
 
+            mapObject = new ModelManager();
+
             menuPause = new MenuPause(this);
             menuPause.Initialize();
 
@@ -71,41 +73,55 @@ namespace Arrow
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cross = Content.Load<Texture2D>("Cross");
 
+            #region Map
+
             map = new HeightMap(this,
-                Content.Load<Texture2D>("Textures/essai"), //heigth map a majorité blanche pour la hauteur du sol (désolé je ne vois pas comment dire ca autrement :p)
+                Content.Load<Texture2D>("Textures/essai"),
                 Content.Load<Texture2D>("Textures/grass"),
                 32f,
                 513,
                 513,
                 10f);
 
-            effect = Content.Load<Effect>("Effects/Terrain");
+            mapEffect = Content.Load<Effect>("Effects/Terrain");
 
-            house = new FBX(this, "house", 20, 10, 20); // Instanciation du model dans le jeu en cours au coordonnées en parametres
-            barn = new FBX(this, "barn", 50, 10, 200);
-            wood_barrier = new FBX(this, "wood_barrier", 20, 10, 50);
-            barbed_barrier = new FBX(this, "barbed_barrier", 20, 10, 100);
-            bandbags = new FBX(this, "bandbags", 50, 10, 50);
-            antitank = new FBX(this, "antitank", 50, 10, 128);
-            table = new FBX(this, "table", 100, 10, 128);
-            mapobject = new ModelManager(); // Instanciation du ModelManager
-            mapobject.AddModel(house); // Ajout du model au ModelManager
-            mapobject.AddModel(barn);
-            mapobject.AddModel(wood_barrier);
-            mapobject.AddModel(barbed_barrier);
-            mapobject.AddModel(bandbags);
-            mapobject.AddModel(antitank);
-            mapobject.AddModel(table);
+            #endregion
+
+            #region Models
+
+            house = new GameObject(this, "house", new Vector3(20, 10, 20));
+            barn = new GameObject(this, "barn", new Vector3(50, 10, 200));
+            wood_barrier = new GameObject(this, "wood_barrier", new Vector3(20, 10, 50));
+            barbed_barrier = new GameObject(this, "barbed_barrier", new Vector3(20, 10, 100));
+            bandbags = new GameObject(this, "bandbags", new Vector3(50, 10, 50));
+            antitank = new GameObject(this, "antitank", new Vector3(50, 10, 128));
+            table = new GameObject(this, "table", new Vector3(100, 10, 128));
+
+            mapObject.AddModel(house);
+            mapObject.AddModel(barn);
+            mapObject.AddModel(wood_barrier);
+            mapObject.AddModel(barbed_barrier);
+            mapObject.AddModel(bandbags);
+            mapObject.AddModel(antitank);
+            mapObject.AddModel(table);
+
+            #endregion
+
+            #region Sound
 
             SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
             SFXManager.AddSFX("Walk", Content.Load<SoundEffect>("Sounds/Walk"));
             SFXManager.AddSFX("Run", Content.Load<SoundEffect>("Sounds/Run"));
 
+            #endregion
+
+            #region Menu
+
             menuPause.LoadContent();
             menuStart.LoadContent();
-        }
 
-        protected override void UnloadContent() { }
+            #endregion
+        }
 
         protected override void Update(GameTime gameTime)
         {
@@ -113,8 +129,6 @@ namespace Arrow
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-
-            //modelManager.Update(gameTime);
 
             if (menuStart.GameStart)
             {
@@ -134,8 +148,8 @@ namespace Arrow
 
             if (menuStart.GameStart)
             {
-                mapobject.Draw(gameTime);
-                map.Draw(effect);
+                map.Draw(mapEffect);
+                mapObject.Draw(gameTime);
 
                 //
                 // Display the cross in the center of the screen

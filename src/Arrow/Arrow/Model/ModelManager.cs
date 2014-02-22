@@ -8,30 +8,22 @@ namespace Arrow
 {
     public class ModelManager
     {
-        public List<FBX> Models { get; private set; }
+        public List<GameObject> Models { get; private set; }
 
         public ModelManager()
         {
-            Models = new List<FBX>();
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            foreach (FBX item in Models)
-            {
-                item.Update(gameTime);
-            }
+            Models = new List<GameObject>();
         }
 
         public void Draw(GameTime gameTime)
         {
-            foreach (FBX item in Models)
+            foreach (GameObject item in Models)
             {
                 item.Draw(gameTime);
             }
         }
 
-        public void AddModel(FBX item)
+        public void AddModel(GameObject item)
         {
             Models.Add(item);
         }
