@@ -22,7 +22,7 @@ namespace Arrow
 
         private Vector3 velocity;
         private bool jumped;
-        private int recharge = 0;
+        private int munition;
         private bool reload;
 
         #endregion
@@ -77,6 +77,8 @@ namespace Arrow
 
             velocity = new Vector3(0, 1, 0);
             jumped = false;
+
+            munition = 8;
             reload = false;
         }
 
@@ -265,36 +267,29 @@ namespace Arrow
                 {
                     if (!leftButtonPressed)
                     {
-                        if (recharge > 7)
-                        {
+                        if (munition < 1)
                             SFXManager.Play("Empty_Gun");
-                        }
                         else
                         {
-                            recharge++;
                             SFXManager.Play("Springfield");
+                            munition--;
                         }
+
                         leftButtonPressed = true;
                     }
-
                     else if (mouseState.LeftButton == ButtonState.Released)
                         leftButtonPressed = false;
                 }
-                else
+                else if (Keyboard.GetState().IsKeyDown(Keys.R) || reload)
                 {
-                    if (Keyboard.GetState().IsKeyDown(Keys.R) || reload)
+                    if (!reload)
                     {
-                        if (!reload)
-                        {
-                            SFXManager.Play("Reload");
-                            recharge = 0;
-                            reload = true;
-                        }
-                        else if (Keyboard.GetState().IsKeyUp(Keys.R))
-                        {
-                            reload = false;
-                        }
+                        SFXManager.Play("Reload");
+                        munition = 8;
+                        reload = true;
                     }
+                    else if (Keyboard.GetState().IsKeyUp(Keys.R))
+                        reload = false;
                 }
             }
         }
