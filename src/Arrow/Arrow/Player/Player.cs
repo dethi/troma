@@ -251,7 +251,14 @@ namespace Arrow
                 {
                     if (!leftButtonPressed)
                     {
-                        SFXManager.Play("Springfield");
+                        if (munition < 1)
+                            SFXManager.Play("Empty_Gun");
+                        else
+                        {
+                            SFXManager.Play("Springfield");
+                            munition--;
+                        }
+
                         leftButtonPressed = true;
                     }
                     else if (gps.IsButtonUp(Buttons.RightTrigger))
@@ -265,7 +272,7 @@ namespace Arrow
                         munition = 8;
                         reload = true;
                     }
-                    else if (Keyboard.GetState().IsKeyUp(Keys.R))
+                    else if (gps.IsButtonUp(Buttons.X))
                         reload = false;
                 }
             }
@@ -290,7 +297,7 @@ namespace Arrow
                     else if (mouseState.LeftButton == ButtonState.Released)
                         leftButtonPressed = false;
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.R) || reload)
+                else if (Keyboard.GetState().IsKeyDown(KB_RELOAD) || reload)
                 {
                     if (!reload)
                     {
@@ -298,7 +305,7 @@ namespace Arrow
                         munition = 8;
                         reload = true;
                     }
-                    else if (Keyboard.GetState().IsKeyUp(Keys.R))
+                    else if (Keyboard.GetState().IsKeyUp(KB_RELOAD))
                         reload = false;
                 }
             }
