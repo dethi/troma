@@ -22,6 +22,8 @@ namespace Arrow
 
         private Vector3 velocity;
         private bool jumped;
+        private int munition;
+        private bool reload;
 
         #endregion
 
@@ -75,6 +77,9 @@ namespace Arrow
 
             velocity = new Vector3(0, 1, 0);
             jumped = false;
+
+            munition = 8;
+            reload = false;
         }
 
         #endregion
@@ -135,7 +140,7 @@ namespace Arrow
                 moveVector.Normalize();
                 moveVector *= dtSeconds * WALK_SPEED;
 
-                if (Keyboard.GetState().IsKeyDown(KB_RUN) || 
+                if (Keyboard.GetState().IsKeyDown(KB_RUN) ||
                     GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
                 {
                     if (moveVector.Z > 0)
@@ -235,7 +240,7 @@ namespace Arrow
 
         /// <summary>
         /// Shoot
-        /// </summary>
+        /// </summary>              
         private void Shoot(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
@@ -252,6 +257,17 @@ namespace Arrow
                     else if (gps.IsButtonUp(Buttons.RightTrigger))
                         leftButtonPressed = false;
                 }
+                else if (gps.IsButtonDown(Buttons.X)|| reload)
+                {
+                    if (!reload)
+                    {
+                        SFXManager.Play("Reload");
+                        munition = 8;
+                        reload = true;
+                    }
+                    else if (Keyboard.GetState().IsKeyUp(Keys.R))
+                        reload = false;
+                }
             }
             else
             {
@@ -261,11 +277,29 @@ namespace Arrow
                 {
                     if (!leftButtonPressed)
                     {
-                        SFXManager.Play("Springfield");
+                        if (munition < 1)
+                            SFXManager.Play("Empty_Gun");
+                        else
+                        {
+                            SFXManager.Play("Springfield");
+                            munition--;
+                        }
+
                         leftButtonPressed = true;
                     }
                     else if (mouseState.LeftButton == ButtonState.Released)
                         leftButtonPressed = false;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.R) || reload)
+                {
+                    if (!reload)
+                    {
+                        SFXManager.Play("Reload");
+                        munition = 8;
+                        reload = true;
+                    }
+                    else if (Keyboard.GetState().IsKeyUp(Keys.R))
+                        reload = false;
                 }
             }
         }
