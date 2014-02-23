@@ -240,8 +240,7 @@ namespace Arrow
 
         /// <summary>
         /// Shoot
-        /// </summary>
-        ///                
+        /// </summary>              
         private void Shoot(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).IsConnected)
@@ -257,6 +256,17 @@ namespace Arrow
                     }
                     else if (gps.IsButtonUp(Buttons.RightTrigger))
                         leftButtonPressed = false;
+                }
+                else if (gps.IsButtonDown(Buttons.X)|| reload)
+                {
+                    if (!reload)
+                    {
+                        SFXManager.Play("Reload");
+                        munition = 8;
+                        reload = true;
+                    }
+                    else if (Keyboard.GetState().IsKeyUp(Keys.R))
+                        reload = false;
                 }
             }
             else
