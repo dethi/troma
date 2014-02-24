@@ -32,7 +32,7 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-           // ActivateFullScreen();
+            ActivateFullScreen();
             //DisableVsync();
 
             Content.RootDirectory = "Content";
@@ -94,11 +94,8 @@ namespace Arrow
 
             #region Sound
 
-            SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
             SFXManager.AddSFX("Walk", Content.Load<SoundEffect>("Sounds/Walk"));
             SFXManager.AddSFX("Run", Content.Load<SoundEffect>("Sounds/Run"));
-            SFXManager.AddSFX("Reload", Content.Load<SoundEffect>("Sounds/Reload"));
-            SFXManager.AddSFX("Empty_Gun", Content.Load<SoundEffect>("Sounds/Empty_Gun"));
 
             #endregion
 
@@ -136,7 +133,8 @@ namespace Arrow
             if (menuStart.GameStart)
             {
                 map.Draw(mapEffect);
-                mapObject.Draw(gameTime);
+                mapObject.Draw();
+                player.Draw();
 
                 //
                 // Display the cross in the center of the screen

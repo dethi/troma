@@ -42,7 +42,7 @@ namespace Arrow
 
         #endregion
 
-        public void Draw(GameTime gameTime)
+        public void Draw()
         {
             game.ResetGraphicsDeviceFor3D();
 
