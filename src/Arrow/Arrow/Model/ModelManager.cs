@@ -17,11 +17,11 @@ namespace Arrow
             Models = new Dictionary<string, GameObject>();
         }
 
-        public void Draw(GameTime gameTime)
+        public void Draw()
         {
             foreach (KeyValuePair<string, GameObject> item in Models)
             {
-                item.Value.Draw(gameTime);
+                item.Value.Draw();
             }
         }
 

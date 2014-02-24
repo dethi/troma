@@ -136,7 +136,7 @@ namespace Arrow
             if (menuStart.GameStart)
             {
                 map.Draw(mapEffect);
-                mapObject.Draw(gameTime);
+                mapObject.Draw();
 
                 //
                 // Display the cross in the center of the screen
