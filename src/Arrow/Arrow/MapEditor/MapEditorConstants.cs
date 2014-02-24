@@ -13,5 +13,7 @@ namespace Arrow
         const Keys x_moins = Keys.Down;
         const Keys z_plus = Keys.Left;
         const Keys z_moins = Keys.Right;
+        const Keys next_object = Keys.N;
+        const Keys previous_object = Keys.B;
     }
 }

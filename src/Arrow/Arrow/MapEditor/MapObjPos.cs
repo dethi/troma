@@ -13,13 +13,17 @@ namespace Arrow
         private bool x_moins_pressed;
         private bool z_plus_pressed;
         private bool z_moins_pressed;
+        private bool previous_object_pressed;
+        private bool next_object_pressed;
 
         public MapObjPos()
         {
             x_plus_pressed = false;
             x_moins_pressed = false;
             z_plus_pressed = false;
-            z_moins_pressed= false;
+            z_moins_pressed = false;
+            previous_object_pressed = false;
+            next_object_pressed = false;
         }
 
         public Vector3 Change_x_z(Vector3 pos)
@@ -28,7 +32,7 @@ namespace Arrow
             {
                 if (!x_plus_pressed)
                 {
-                    pos.X = (pos.X + 1); 
+                    pos.X++; 
                     x_plus_pressed = true;
                 }
                 else if (Keyboard.GetState().IsKeyUp(x_plus))
@@ -40,7 +44,7 @@ namespace Arrow
             {
                 if (!x_moins_pressed)
                 {
-                    pos.X = (pos.X - 1);
+                    pos.X--;
                     x_moins_pressed = true;
                 }
                 else if (Keyboard.GetState().IsKeyUp(x_moins))
@@ -52,7 +56,7 @@ namespace Arrow
             {
                 if (!z_plus_pressed)
                 {
-                    pos.Z = (pos.Z + 1);
+                    pos.Z++;
                     z_plus_pressed = true;
                 }
                 else if (Keyboard.GetState().IsKeyUp(z_plus))
@@ -64,7 +68,7 @@ namespace Arrow
             {
                 if (!z_moins_pressed)
                 {
-                    pos.Z = (pos.Z - 1);
+                    pos.Z--;
                     z_moins_pressed = true;
                 }
                 else if (Keyboard.GetState().IsKeyUp(z_moins))
@@ -72,8 +76,50 @@ namespace Arrow
                     z_moins_pressed = false;
                 }
             }
-
             return pos;
+        }
+
+        public void Change_i(ref int ieme, int max)
+        {
+            if (Keyboard.GetState().IsKeyDown(previous_object) || previous_object_pressed)
+            {
+                if (!previous_object_pressed)
+                {
+                    if (ieme > 1)
+                    {
+                        ieme--;
+                        previous_object_pressed = true;
+                    }
+                    else
+                    {
+                        ieme = max;
+                    }
+                }
+                else if (Keyboard.GetState().IsKeyUp(previous_object))
+                {
+                    previous_object_pressed = false;
+                }
+            }
+            else if (Keyboard.GetState().IsKeyDown(next_object) || next_object_pressed)
+            {
+                if (!next_object_pressed)
+                {
+                    if (ieme < max)
+                    {
+                        ieme++;
+                        next_object_pressed = true;
+                    }
+                    else
+                    {
+                        ieme = 0;
+                    }
+                }
+                else if (Keyboard.GetState().IsKeyUp(next_object))
+                {
+                    next_object_pressed = false;
+                }
+            }
+
         }
     }
 }

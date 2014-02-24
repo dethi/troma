@@ -26,6 +26,8 @@ namespace Arrow
 
         private ModelManager mapObject;
         private MapObjPos mapobjpos;
+        private int min;
+        private int max;
 
         private MenuPause menuPause;
         private MenuStart menuStart;
@@ -96,6 +98,8 @@ namespace Arrow
             mapObject.AddModel("barrel", new Vector2(50, 50));
             mapObject.AddModel("soldier", new Vector2(250, 250));
             mapObject.AddModel("cible_homme", new Vector2(300, 300));
+            min = 0;
+            max = mapObject.Models.Count - 1;
 
             #endregion
 
@@ -123,8 +127,8 @@ namespace Arrow
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-            
-            mapObject.MoveModel(new Vector4(mapobjpos.Change_x_z(mapObject.Models.ElementAt(1).Value.position.Translation), 1)); // appel de la méthode movemodel
+            mapobjpos.Change_i(ref min, max);
+            mapObject.MoveModel(new Vector4(mapobjpos.Change_x_z(mapObject.Models.ElementAt(min).Value.position.Translation),min)); // appel de la méthode movemodel
 
             if (menuStart.GameStart)
             {

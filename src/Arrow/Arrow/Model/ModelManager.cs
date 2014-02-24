@@ -53,14 +53,7 @@ namespace Arrow
         {
             Models.Remove(modelName);
         }
-
-        /*public void MoveModel(int i, Vector3 pos) // methode qui va modifier la position du ieme fbx du model manager
-        {
-            GameObject item = this.Models.ElementAt(i).Value;
-            item.position = Matrix.CreateTranslation(new Vector3(pos.X, game.map.GetHeight(pos.X, pos.Z), pos.Z));
-            Console.WriteLine(this.Models.ElementAt(i).Key + " position : " + pos.X + " x ," + pos.Y + " y ," + pos.Z + " z ,");
-        }*/
-
+       
         public void MoveModel(Vector4 i_pos) // methode qui va modifier la position du ieme fbx du model manager
         {
             GameObject item = this.Models.ElementAt((int)i_pos.W).Value;
