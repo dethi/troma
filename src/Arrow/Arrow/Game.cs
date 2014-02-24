@@ -134,6 +134,7 @@ namespace Arrow
             {
                 map.Draw(mapEffect);
                 mapObject.Draw();
+                player.Draw();
 
                 //
                 // Display the cross in the center of the screen

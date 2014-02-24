@@ -39,12 +39,15 @@ namespace Arrow
         #endregion
 
         #region Attributes
+
         private Vector3 cameraPosition;
         private Vector3 cameraRotation;
         private Vector3 cameraLookAt;
+
         #endregion
 
         #region Properties
+
         public Vector3 Position
         {
             get { return cameraPosition; }
@@ -65,6 +68,11 @@ namespace Arrow
             }
         }
 
+        public Vector3 LookAt
+        {
+            get { return cameraLookAt; }
+        }
+
         public Matrix Projection { get; private set; }
 
         public Matrix View
@@ -74,6 +82,7 @@ namespace Arrow
                 return Matrix.CreateLookAt(cameraPosition, cameraLookAt, Vector3.Up);
             }
         }
+
         #endregion
 
         /// <summary>

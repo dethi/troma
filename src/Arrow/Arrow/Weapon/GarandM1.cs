@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Arrow
 {
@@ -20,6 +21,7 @@ namespace Arrow
             sfx_empty_loader = "GarandM1_empty";
             sfx_reload = "GarandM1_reload";
 
+            model = new GameObject(game, "m1", Vector3.Zero);
             Initialize();
         }
     }

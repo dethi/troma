@@ -92,6 +92,11 @@ namespace Arrow
             Jump(map);
         }
 
+        public void Draw()
+        {
+            weapon.Draw();
+        }
+
         /// <summary>
         /// Move player
         /// </summary>

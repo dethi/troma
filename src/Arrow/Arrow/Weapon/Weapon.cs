@@ -10,6 +10,8 @@ namespace Arrow
 {
     public abstract partial class Weapon
     {
+        #region Attributes
+
         protected Game game;
         protected Camera camera;
 
@@ -25,11 +27,14 @@ namespace Arrow
         protected string sfx_reload;
 
         protected GameObject model;
+        protected Vector3 position;
 
         protected bool shoot_pressed;
         protected bool reload_pressed;
 
         protected double dt_last_shoot;
+
+        #endregion
 
         protected bool empty_loader
         {
@@ -128,7 +133,14 @@ namespace Arrow
             }
         }
 
-        //public void Draw() { }
+        public void Draw()
+        {
+            position = camera.PreviewMove(new Vector3(-0.5f, -1.5f, 0));
+            model.position = Matrix.CreateRotationX(camera.Rotation.X) *
+                Matrix.CreateRotationY(camera.Rotation.Y) *
+                Matrix.CreateTranslation(position);
+            model.Draw();
+        }
 
         protected void Shoot(GameTime gameTime)
         {
