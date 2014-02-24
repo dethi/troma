@@ -29,6 +29,8 @@ namespace Arrow
         private int min;
         private int max;
 
+        private DisplayPostionFbx dpfbx;
+
         private MenuPause menuPause;
         private MenuStart menuStart;
 
@@ -48,9 +50,12 @@ namespace Arrow
 
             player = new Player(this, new Vector3(128, 10, 128));
 
+            dpfbx = new DisplayPostionFbx(this);
+
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
             Components.Add(new MemoryUse(this));
+            Components.Add(dpfbx);
 
             mapObject = new ModelManager(this);
             mapobjpos = new MapObjPos();
@@ -69,7 +74,7 @@ namespace Arrow
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cross = Content.Load<Texture2D>("Cross");
-
+            
 
 
             #region Map
@@ -98,8 +103,12 @@ namespace Arrow
             mapObject.AddModel("barrel", new Vector2(50, 50));
             mapObject.AddModel("soldier", new Vector2(250, 250));
             mapObject.AddModel("cible_homme", new Vector2(300, 300));
+
+            #region MapEditor
             min = 0;
             max = mapObject.Models.Count - 1;
+            dpfbx.AssociateModel(mapObject);
+            #endregion
 
             #endregion
 
@@ -127,8 +136,12 @@ namespace Arrow
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+            
+            #region MapEditor
             mapobjpos.Change_i(ref min, max);
             mapObject.MoveModel(new Vector4(mapobjpos.Change_x_z(mapObject.Models.ElementAt(min).Value.position.Translation),min)); // appel de la méthode movemodel
+            dpfbx.Upieme(min);
+            #endregion
 
             if (menuStart.GameStart)
             {

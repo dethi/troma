@@ -58,7 +58,7 @@ namespace Arrow
         {
             GameObject item = this.Models.ElementAt((int)i_pos.W).Value;
             item.position = Matrix.CreateTranslation(new Vector3(i_pos.X, game.map.GetHeight(i_pos.X, i_pos.Z), i_pos.Z));
-            Console.WriteLine(this.Models.ElementAt((int)i_pos.W).Key + " position : " + i_pos.X + " x ," + i_pos.Y + " y ," + i_pos.Z + " z ,");
+            //Console.WriteLine(this.Models.ElementAt((int)i_pos.W).Key + " position : " + i_pos.X + " x ," + i_pos.Y + " y ," + i_pos.Z + " z ,");
         }
     }
 }
