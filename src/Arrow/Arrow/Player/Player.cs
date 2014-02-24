@@ -25,6 +25,8 @@ namespace Arrow
         private int munition;
         private bool reload;
 
+        private Weapon weapon;
+
         #endregion
 
         #region Properties
@@ -80,6 +82,8 @@ namespace Arrow
 
             munition = 8;
             reload = false;
+
+            weapon = new Springfield(game);
         }
 
         #endregion
@@ -243,72 +247,7 @@ namespace Arrow
         /// </summary>              
         private void Shoot(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).IsConnected)
-            {
-                GamePadState gps = GamePad.GetState(PlayerIndex.One);
-
-                if (gps.IsButtonDown(Buttons.RightTrigger) || leftButtonPressed)
-                {
-                    if (!leftButtonPressed)
-                    {
-                        if (munition < 1)
-                            SFXManager.Play("Empty_Gun");
-                        else
-                        {
-                            SFXManager.Play("Springfield");
-                            munition--;
-                        }
-
-                        leftButtonPressed = true;
-                    }
-                    else if (gps.IsButtonUp(Buttons.RightTrigger))
-                        leftButtonPressed = false;
-                }
-                else if (gps.IsButtonDown(Buttons.X)|| reload)
-                {
-                    if (!reload)
-                    {
-                        SFXManager.Play("Reload");
-                        munition = 8;
-                        reload = true;
-                    }
-                    else if (gps.IsButtonUp(Buttons.X))
-                        reload = false;
-                }
-            }
-            else
-            {
-                MouseState mouseState = Mouse.GetState();
-
-                if (mouseState.LeftButton == ButtonState.Pressed || leftButtonPressed)
-                {
-                    if (!leftButtonPressed)
-                    {
-                        if (munition < 1)
-                            SFXManager.Play("Empty_Gun");
-                        else
-                        {
-                            SFXManager.Play("Springfield");
-                            munition--;
-                        }
-
-                        leftButtonPressed = true;
-                    }
-                    else if (mouseState.LeftButton == ButtonState.Released)
-                        leftButtonPressed = false;
-                }
-                else if (Keyboard.GetState().IsKeyDown(KB_RELOAD) || reload)
-                {
-                    if (!reload)
-                    {
-                        SFXManager.Play("Reload");
-                        munition = 8;
-                        reload = true;
-                    }
-                    else if (Keyboard.GetState().IsKeyUp(KB_RELOAD))
-                        reload = false;
-                }
-            }
+            weapon.Update(gameTime);
         }
 
         /// <summary>

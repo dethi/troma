@@ -94,11 +94,11 @@ namespace Arrow
 
             #region Sound
 
-            SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
+            //SFXManager.AddSFX("Springfield", Content.Load<SoundEffect>("Sounds/Springfield"));
             SFXManager.AddSFX("Walk", Content.Load<SoundEffect>("Sounds/Walk"));
             SFXManager.AddSFX("Run", Content.Load<SoundEffect>("Sounds/Run"));
-            SFXManager.AddSFX("Reload", Content.Load<SoundEffect>("Sounds/Reload"));
-            SFXManager.AddSFX("Empty_Gun", Content.Load<SoundEffect>("Sounds/Empty_Gun"));
+            //SFXManager.AddSFX("Reload", Content.Load<SoundEffect>("Sounds/Reload"));
+            //SFXManager.AddSFX("Empty_Gun", Content.Load<SoundEffect>("Sounds/Empty_Gun"));
 
             #endregion
 

@@ -14,7 +14,7 @@ namespace Arrow
         protected Camera camera;
 
         protected int nb_munition;
-        protected int nb_munitions_per_loader;
+        protected int nb_munition_per_loader;
         protected int nb_loader;
 
         protected bool automatic_weapon;
@@ -44,22 +44,25 @@ namespace Arrow
 
             shoot_pressed = false;
             reload_pressed = false;
+        }
 
+        protected void Initialize()
+        {
             if (automatic_weapon)
                 rof = 0;
 
-            nb_munition = nb_munitions_per_loader;
+            nb_munition = nb_munition_per_loader;
             nb_loader--;
 
             SFXManager.AddSFX(
-                sfx_shoot, 
+                sfx_shoot,
                 game.Content.Load<SoundEffect>("Sounds/" + sfx_shoot));
             SFXManager.AddSFX(
-                sfx_empty_loader, 
+                sfx_empty_loader,
                 game.Content.Load<SoundEffect>("Sounds/" + sfx_empty_loader));
             SFXManager.AddSFX(
-                sfx_reload, 
-                game.Content.Load<SoundEffect>("Sounds/" + sfx_shoot));
+                sfx_reload,
+                game.Content.Load<SoundEffect>("Sounds/" + sfx_reload));
         }
 
         public void Update(GameTime gameTime)
@@ -144,7 +147,7 @@ namespace Arrow
 
         protected bool IsRespectROF(double dt_current)
         {
-            return automatic_weapon || ((dt_current - dt_last_shoot) > rof);
+            return automatic_weapon || (Math.Abs(dt_current - dt_last_shoot) >= rof);
         }
 
         protected void Reload()
@@ -153,7 +156,7 @@ namespace Arrow
             {
                 SFXManager.Play(sfx_reload);
                 nb_loader--;
-                nb_munition = nb_munitions_per_loader;
+                nb_munition = nb_munition_per_loader;
             }
         }
     }
