@@ -18,7 +18,6 @@ namespace Arrow
         private MouseState currentMouseState;
         private Vector2 originMouse;
         private Vector3 rotationBuffer;
-        private bool leftButtonPressed;
 
         private Vector3 velocity;
         private bool jumped;
@@ -73,12 +72,10 @@ namespace Arrow
             originMouse = new Vector2(centerX, centerY);
             Mouse.SetPosition(centerX, centerY);
 
-            leftButtonPressed = false;
-
             velocity = new Vector3(0, 1, 0);
             jumped = false;
 
-            weapon = new Springfield(game);
+            weapon = new GarandM1(game);
         }
 
         #endregion

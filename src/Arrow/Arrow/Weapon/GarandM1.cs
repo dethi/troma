@@ -5,20 +5,20 @@ using System.Text;
 
 namespace Arrow
 {
-    class Springfield : Weapon
+    class GarandM1 : Weapon
     {
-        public Springfield(Game game)
+        public GarandM1(Game game)
             : base(game)
         {
             nb_munition_per_loader = 8;
-            nb_loader = 2;
+            nb_loader = 10;
 
             automatic_weapon = false;
             rof = 0.5f;
 
-            sfx_shoot = "Springfield";
-            sfx_empty_loader = "Empty_Gun";
-            sfx_reload = "Reload";
+            sfx_shoot = "GarandM1";
+            sfx_empty_loader = "GarandM1_empty";
+            sfx_reload = "GarandM1_reload";
 
             Initialize();
         }

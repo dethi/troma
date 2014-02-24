@@ -70,8 +70,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\Springfield.wav">
-      <Name>Springfield</Name>
+    <Compile Include="Sounds\GarandM1.wav">
+      <Name>GarandM1</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
@@ -208,15 +208,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\Reload.wav">
-      <Name>Reload</Name>
+    <Compile Include="Sounds\GarandM1_reload.wav">
+      <Name>GarandM1_reload</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\Empty_Gun.wav">
-      <Name>Empty_Gun</Name>
+    <Compile Include="Sounds\GarandM1_empty.wav">
+      <Name>GarandM1_empty</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
