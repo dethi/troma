@@ -124,7 +124,7 @@ namespace Arrow
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
             
-            mapObject.MoveModel(1, mapobjpos.Change_x_z(mapObject.Models.ElementAt(1).Value.position.Translation)); // appel de la méthode movemodel
+            mapObject.MoveModel(new Vector4(mapobjpos.Change_x_z(mapObject.Models.ElementAt(1).Value.position.Translation), 1)); // appel de la méthode movemodel
 
             if (menuStart.GameStart)
             {
