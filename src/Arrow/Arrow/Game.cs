@@ -25,6 +25,7 @@ namespace Arrow
         private Effect mapEffect;
 
         private ModelManager mapObject;
+        private MapObjPos mapobjpos;
 
         private MenuPause menuPause;
         private MenuStart menuStart;
@@ -32,7 +33,7 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            ActivateFullScreen();
+            //ActivateFullScreen();
             //DisableVsync();
 
             Content.RootDirectory = "Content";
@@ -50,6 +51,7 @@ namespace Arrow
             Components.Add(new MemoryUse(this));
 
             mapObject = new ModelManager(this);
+            mapobjpos = new MapObjPos();
 
             menuPause = new MenuPause(this);
             menuPause.Initialize();
@@ -66,15 +68,17 @@ namespace Arrow
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cross = Content.Load<Texture2D>("Cross");
 
+
+
             #region Map
 
             map = new HeightMap(this,
-                Content.Load<Texture2D>("Textures/essai"),
+                Content.Load<Texture2D>("Textures/essai1"),
                 Content.Load<Texture2D>("Textures/grass"),
                 32f,
                 513,
                 513,
-                10f);
+                0f);
 
             mapEffect = Content.Load<Effect>("Effects/Terrain");
 
@@ -86,9 +90,12 @@ namespace Arrow
             mapObject.AddModel("barn", new Vector2(50, 200));
             mapObject.AddModel("wood_barrier", new Vector2(20, 50));
             mapObject.AddModel("barbed_barrier", new Vector2(20, 100));
-            mapObject.AddModel("bandbags", new Vector2(50, 50));
+            mapObject.AddModel("bandbags", new Vector2(150, 150));
             mapObject.AddModel("antitank", new Vector2(50, 128));
             mapObject.AddModel("table", new Vector2(100, 128));
+            mapObject.AddModel("barrel", new Vector2(50, 50));
+            mapObject.AddModel("soldier", new Vector2(250, 250));
+            mapObject.AddModel("cible_homme", new Vector2(300, 300));
 
             #endregion
 
@@ -116,6 +123,8 @@ namespace Arrow
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+            
+            mapObject.MoveModel(1, mapobjpos.Change_x_z(mapObject.Models.ElementAt(1).Value.position.Translation)); // appel de la méthode movemodel
 
             if (menuStart.GameStart)
             {
