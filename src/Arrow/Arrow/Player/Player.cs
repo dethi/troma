@@ -22,8 +22,6 @@ namespace Arrow
 
         private Vector3 velocity;
         private bool jumped;
-        private int munition;
-        private bool reload;
 
         private Weapon weapon;
 
@@ -79,9 +77,6 @@ namespace Arrow
 
             velocity = new Vector3(0, 1, 0);
             jumped = false;
-
-            munition = 8;
-            reload = false;
 
             weapon = new Springfield(game);
         }
