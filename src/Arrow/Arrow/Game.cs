@@ -37,7 +37,7 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            //ActivateFullScreen();
+            ActivateFullScreen();
             //DisableVsync();
 
             Content.RootDirectory = "Content";
@@ -96,7 +96,7 @@ namespace Arrow
             mapObject.AddModel("house", new Vector2(0, 512));
             mapObject.AddModel("barn", new Vector2(60, 512));
             mapObject.AddModel("shelter", new Vector2(0, 412));
-            mapObject.AddModel("wood_barrier", new Vector2(20, 50));
+            mapObject.AddModel("wood_barrier", new Vector2(0, 400));
             mapObject.AddModel("barbed_barrier", new Vector2(20, 100));
             mapObject.AddModel("bandbags", new Vector2(150, 150));
             mapObject.AddModel("antitank", new Vector2(50, 128));
@@ -105,6 +105,9 @@ namespace Arrow
             mapObject.AddModel("soldier", new Vector2(250, 250));
             mapObject.AddModel("cible_homme", new Vector2(300, 300));
             mapObject.AddModel("m1", new Vector3(350, 5.5f, 350));
+            mapObject.AddModel("truck_allemand", new Vector2(122, 206));
+            //mapObject.AddModel("truck_allemand_casse", new Vector2(40, 355));
+            mapObject.AddModel("farm", new Vector2(0, 262));
 
 
             #region MapEditor
