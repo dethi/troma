@@ -93,6 +93,7 @@ namespace Arrow
                     else
                     {
                         ieme = max;
+                        previous_object_pressed = true;
                     }
                 }
                 else if (Keyboard.GetState().IsKeyUp(previous_object))
@@ -112,6 +113,7 @@ namespace Arrow
                     else
                     {
                         ieme = 0;
+                        next_object_pressed = true;
                     }
                 }
                 else if (Keyboard.GetState().IsKeyUp(next_object))

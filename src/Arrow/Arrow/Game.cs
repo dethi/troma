@@ -48,7 +48,7 @@ namespace Arrow
             Camera camera = Camera.Instance;
             camera.New(this, Vector3.Zero, Vector3.Zero);
 
-            player = new Player(this, new Vector3(128, 10, 128));
+            player = new Player(this, new Vector3(80, 10, 460));
 
             dpfbx = new DisplayPostionFbx(this);
 
@@ -93,16 +93,19 @@ namespace Arrow
 
             #region Models
 
-            mapObject.AddModel("house", new Vector2(20, 20));
-            mapObject.AddModel("barn", new Vector2(50, 200));
+            mapObject.AddModel("house", new Vector2(0, 512));
+            mapObject.AddModel("barn", new Vector2(60, 512));
+            mapObject.AddModel("shelter", new Vector2(0, 412));
             mapObject.AddModel("wood_barrier", new Vector2(20, 50));
             mapObject.AddModel("barbed_barrier", new Vector2(20, 100));
             mapObject.AddModel("bandbags", new Vector2(150, 150));
             mapObject.AddModel("antitank", new Vector2(50, 128));
-            mapObject.AddModel("table", new Vector2(100, 128));
-            mapObject.AddModel("barrel", new Vector2(50, 50));
+            mapObject.AddModel("table", new Vector2(58, 400));
+            mapObject.AddModel("barrel", new Vector2(58, 405));
             mapObject.AddModel("soldier", new Vector2(250, 250));
             mapObject.AddModel("cible_homme", new Vector2(300, 300));
+            mapObject.AddModel("m1", new Vector3(350, 5.5f, 350));
+
 
             #region MapEditor
             min = 0;
@@ -163,6 +166,7 @@ namespace Arrow
             {
                 map.Draw(mapEffect);
                 mapObject.Draw(gameTime);
+                
 
                 //
                 // Display the cross in the center of the screen
