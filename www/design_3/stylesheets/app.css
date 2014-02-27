@@ -1,3 +1,31 @@
+/* line 1203, ../scss/_settings.scss */
+.facebook {
+  display: inline-block;
+  padding-left: 64px;
+  width: 64px;
+  height: 64px;
+  background: url("../img/social/facebook.png") 0 0 no-repeat;
+}
+
+/* line 1211, ../scss/_settings.scss */
+.facebook:hover, .facebook:active, .facebook:focus {
+  background-position: 0 -64px;
+}
+
+/* line 1215, ../scss/_settings.scss */
+.twitter {
+  display: inline-block;
+  padding-left: 64px;
+  width: 64px;
+  height: 64px;
+  background: url("../img/social/twitter.png") 0 0 no-repeat;
+}
+
+/* line 1223, ../scss/_settings.scss */
+.twitter:hover, .twitter:active, .twitter:focus {
+  background-position: 0 -64px;
+}
+
 /* line 259, ../bower_components/foundation/scss/foundation/components/_global.scss */
 meta.foundation-version {
   font-family: "/5.1.0/";
@@ -156,6 +184,117 @@ textarea {
 /* line 367, ../bower_components/foundation/scss/foundation/components/_global.scss */
 select {
   width: 100%;
+}
+
+/* Panels */
+/* line 70, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d8d8d8;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  background: #f2f2f2;
+}
+/* line 48, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel > :first-child {
+  margin-top: 0;
+}
+/* line 49, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel > :last-child {
+  margin-bottom: 0;
+}
+/* line 54, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p {
+  color: #333333;
+}
+/* line 58, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6 {
+  line-height: 1;
+  margin-bottom: 0.625rem;
+}
+/* line 60, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel h1.subheader, .panel h2.subheader, .panel h3.subheader, .panel h4.subheader, .panel h5.subheader, .panel h6.subheader {
+  line-height: 1.4;
+}
+/* line 72, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel.callout {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b6edff;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  background: #ecfaff;
+}
+/* line 48, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel.callout > :first-child {
+  margin-top: 0;
+}
+/* line 49, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel.callout > :last-child {
+  margin-bottom: 0;
+}
+/* line 54, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6, .panel.callout p {
+  color: #333333;
+}
+/* line 58, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6 {
+  line-height: 1;
+  margin-bottom: 0.625rem;
+}
+/* line 60, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel.callout h1.subheader, .panel.callout h2.subheader, .panel.callout h3.subheader, .panel.callout h4.subheader, .panel.callout h5.subheader, .panel.callout h6.subheader {
+  line-height: 1.4;
+}
+/* line 74, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel.callout a {
+  color: #008cba;
+}
+/* line 79, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.panel.radius {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* line 1233, ../scss/_settings.scss */
+.footer {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d8d8d8;
+  margin-bottom: 1.25rem;
+  padding: 10px;
+  background: #f2f2f2;
+  margin-top: 50px;
+  margin-bottom: 0px;
+  background: #616161 url("../img/shadows-footer.png") 0 0 repeat-x;
+}
+/* line 48, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.footer > :first-child {
+  margin-top: 0;
+}
+/* line 49, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.footer > :last-child {
+  margin-bottom: 0;
+}
+/* line 54, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.footer h1, .footer h2, .footer h3, .footer h4, .footer h5, .footer h6, .footer p {
+  color: #333333;
+}
+/* line 58, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.footer h1, .footer h2, .footer h3, .footer h4, .footer h5, .footer h6 {
+  line-height: 1;
+  margin-bottom: 0.625rem;
+}
+/* line 60, ../bower_components/foundation/scss/foundation/components/_panels.scss */
+.footer h1.subheader, .footer h2.subheader, .footer h3.subheader, .footer h4.subheader, .footer h5.subheader, .footer h6.subheader {
+  line-height: 1.4;
+}
+
+/* line 1242, ../scss/_settings.scss */
+.copyright {
+  padding-top: 4px;
+  margin: 0;
 }
 
 /* line 203, ../bower_components/foundation/scss/foundation/components/_grid.scss */
@@ -4323,77 +4462,6 @@ ul.pagination li {
 .pagination-centered ul.pagination li {
   float: none;
   display: inline-block;
-}
-
-/* Panels */
-/* line 70, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #d8d8d8;
-  margin-bottom: 1.25rem;
-  padding: 1.25rem;
-  background: #f2f2f2;
-}
-/* line 48, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel > :first-child {
-  margin-top: 0;
-}
-/* line 49, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel > :last-child {
-  margin-bottom: 0;
-}
-/* line 54, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p {
-  color: #333333;
-}
-/* line 58, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6 {
-  line-height: 1;
-  margin-bottom: 0.625rem;
-}
-/* line 60, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel h1.subheader, .panel h2.subheader, .panel h3.subheader, .panel h4.subheader, .panel h5.subheader, .panel h6.subheader {
-  line-height: 1.4;
-}
-/* line 72, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel.callout {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #b6edff;
-  margin-bottom: 1.25rem;
-  padding: 1.25rem;
-  background: #ecfaff;
-}
-/* line 48, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel.callout > :first-child {
-  margin-top: 0;
-}
-/* line 49, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel.callout > :last-child {
-  margin-bottom: 0;
-}
-/* line 54, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6, .panel.callout p {
-  color: #333333;
-}
-/* line 58, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6 {
-  line-height: 1;
-  margin-bottom: 0.625rem;
-}
-/* line 60, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel.callout h1.subheader, .panel.callout h2.subheader, .panel.callout h3.subheader, .panel.callout h4.subheader, .panel.callout h5.subheader, .panel.callout h6.subheader {
-  line-height: 1.4;
-}
-/* line 74, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel.callout a {
-  color: #008cba;
-}
-/* line 79, ../bower_components/foundation/scss/foundation/components/_panels.scss */
-.panel.radius {
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
 }
 
 /* Pricing Tables */

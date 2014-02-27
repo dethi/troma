@@ -1192,3 +1192,54 @@
 //
 
 // $include-html-visibility-classes: $include-html-classes;
+
+//
+// SOCIAL LINKS
+//
+
+$icon-size: 64px;
+$icon-offset: -1 * $icon-size;
+
+.facebook {
+    display:inline-block;
+    padding-left:$icon-size;
+    width:$icon-size;
+    height:$icon-size;
+    background:url("../img/social/facebook.png") 0 0 no-repeat;
+}
+
+.facebook:hover, .facebook:active, .facebook:focus {
+    background-position:0 $icon-offset;
+}
+
+.twitter {
+    display:inline-block;
+    padding-left:$icon-size;
+    width:$icon-size;
+    height:$icon-size;
+    background:url("../img/social/twitter.png") 0 0 no-repeat;
+}
+
+.twitter:hover, .twitter:active, .twitter:focus {
+    background-position:0 $icon-offset;
+}
+
+//
+// FOOTER
+//
+
+@import "foundation/components/panels";
+
+.footer {
+    @include panel(
+        $padding:10px
+    );
+    margin-top: 50px;
+    margin-bottom:0px;
+    background: lighten(black, 38%) url("../img/shadows-footer.png") 0 0 repeat-x;
+}
+
+.copyright {
+    padding-top:4px;
+    margin:0;
+}
