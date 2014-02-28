@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{E03102F6-382C-4168-85B7-2F47DA74DDE7}</ProjectGuid>
@@ -70,31 +70,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sounds\GarandM1.wav">
-      <Name>GarandM1</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="cross.png">
       <Name>Cross</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sounds\MenuSong.wav">
-      <Name>MenuSong</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sounds\Walk.wav">
-      <Name>Walk</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -134,13 +113,6 @@
       <Name>boutonReprendreOff</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sounds\Run.wav">
-      <Name>Run</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -193,20 +165,6 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sounds\GarandM1_reload.wav">
-      <Name>GarandM1_reload</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sounds\GarandM1_empty.wav">
-      <Name>GarandM1_empty</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -851,6 +809,38 @@
       <Name>textmapde</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sounds\GarandM1.wav">
+      <Name>GarandM1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sounds\GarandM1_empty.wav">
+      <Name>GarandM1_empty</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sounds\GarandM1_reload.wav">
+      <Name>GarandM1_reload</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sounds\MenuSong.wav">
+      <Name>MenuSong</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Sounds\Run.wav">
+      <Name>Run</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sounds\Walk.wav">
+      <Name>Walk</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
