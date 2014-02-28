@@ -32,7 +32,7 @@
 
 				<!-- Partie droite -->
 				<ul class="right">
-					<li class="active"><a href="#">Nous contacter</a></li>
+					<li class="active"><a href="#" data-reveal-id="contact">Contactez-nous</a></li>
 				</ul>
 			</section>
 		</nav>
@@ -102,7 +102,7 @@
 			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 		</div>
 
-		<div class="small-12 medium-2 columns">
+		<div class="small-12 medium-2 columns text-center">
 			<img src="img/eie.png" alt="Logo Emagine Studio">
 		</div>
 	</div>
@@ -130,11 +130,11 @@
 	<div class="row">
 		<!-- Thibault -->
 		<div class="small-12 medium-6 large-3 columns">
-				<p>
+				<p class="text-center">
 					<img class="th" src="img/profil/thibault.jpg" alt="Thibault (aka) Dethi">
 				</p>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -144,11 +144,11 @@
 
 		<!-- Anthony -->
 		<div class="small-12 medium-6 large-3 columns">
-				<p>
+				<p class="text-center">
 					<img class="th" src="img/profil/anthony.jpg" alt="Anthony (aka) AnthonySG">
 				</p>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -158,11 +158,11 @@
 
 		<!-- Rémy -->
 		<div class="small-12 medium-6 large-3 columns">
-				<p>
+				<p class="text-center">
 					<img class="th" src="img/profil/remy.jpg" alt="Rémy (aka) Shadows">
 				</p>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -172,11 +172,11 @@
 
 		<!-- Marc -->
 		<div class="small-12 medium-6 large-3 columns">
-				<p>
+				<p class="text-center">
 					<img class="th" src="img/profil/marc.jpg" alt="Marc (aka) Leshlague">
 				</p>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -204,8 +204,22 @@
 		</div>
 	</div>
 
+	<!-- Pop-up contact -->
+	<div id="contact" class="reveal-modal small" data-reveal>
+		<h2>Contactez-nous</h2>
+
+		<p>Vous pouvez nous <a href="mailto:deutsc_t@epita.fr?subject=[TROMA]">envoyer un email</a>, ou alors discuter avec l'équipe sur notre page Facebook ou notre compte Twitter.</p>
+
+		<p class="text-center">
+			<a href="https://www.facebook.com/EmagineStudio2018" class="facebook"></a>
+			<a href="https://twitter.com/Emagine_Studio" class="twitter"></a>
+		</p>
+
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+
 	<!-- Script JS -->
-	<script src="bower_components/jquery/jquery.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/foundation/js/foundation.min.js"></script>
 	<script src="js/app.js"></script>
 </body>
