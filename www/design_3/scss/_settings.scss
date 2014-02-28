@@ -1127,8 +1127,8 @@
 // $topbar-bg: $topbar-bg-color;
 
 // Height and margin
-// $topbar-height: 45px;
-// $topbar-margin-bottom: 0;
+$topbar-height: 45px;
+$topbar-margin-bottom: $topbar-height;
 
 // Controlling the styles for the title in the top bar
 // $topbar-title-weight: normal;
@@ -1242,4 +1242,13 @@ $icon-offset: -1 * $icon-size;
 .copyright {
     padding-top:4px;
     margin:0;
+}
+
+//
+// Ancre
+//
+
+.ancre {
+    padding-top: $topbar-height !important;
+    margin-top: -1 * $topbar-height !important;
 }
