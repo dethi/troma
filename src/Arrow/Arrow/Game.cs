@@ -25,11 +25,15 @@ namespace Arrow
         private Effect mapEffect;
 
         private ModelManager mapObject;
-        private MapObjPos mapobjpos;
-        private int min;
-        private int max;
 
-        private DisplayPostionFbx dpfbx;
+        #if EDITOR_MODE
+
+        private MapObjPos mapObjectPos;
+        private int minNbObject;
+        private int maxNbObject;
+        private DisplayPostionFbx hudPosObject;
+
+        #endif
 
         private MenuPause menuPause;
         private MenuStart menuStart;
@@ -50,15 +54,20 @@ namespace Arrow
 
             player = new Player(this, new Vector3(80, 10, 460));
 
-            dpfbx = new DisplayPostionFbx(this);
-
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
             Components.Add(new MemoryUse(this));
-            Components.Add(dpfbx);
 
             mapObject = new ModelManager(this);
-            mapobjpos = new MapObjPos();
+
+            #if EDITOR_MODE
+
+            hudPosObject = new DisplayPostionFbx(this);
+            Components.Add(hudPosObject);
+            
+            mapObjectPos = new MapObjPos();
+
+            #endif
 
             menuPause = new MenuPause(this);
             menuPause.Initialize();
@@ -75,8 +84,6 @@ namespace Arrow
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cross = Content.Load<Texture2D>("Cross");
             
-
-
             #region Map
 
             map = new HeightMap(this,
@@ -96,7 +103,8 @@ namespace Arrow
             mapObject.AddModel("house", new Vector2(0, 511));
             mapObject.AddModel("barn", new Vector2(60, 511));
             
-            #region wood_barrier 
+            #region wood_barrier
+
             mapObject.AddModel("shelter", new Vector2(0, 411));
             mapObject.AddModel("wood_barrier/wood_barrier_0", new Vector2(119, 101));
             mapObject.AddModel("wood_barrier/wood_barrier_1", new Vector2(119, 91));
@@ -121,9 +129,11 @@ namespace Arrow
             mapObject.AddModel("wood_barrier/wood_barrier_20", new Vector2(19, 1));
             mapObject.AddModel("wood_barrier/wood_barrier_21", new Vector2(9, 1));
             mapObject.AddModel("wood_barrier/wood_barrier_22", new Vector2(0, 1));
+
             #endregion
 
             #region barbed_barrier
+
             mapObject.AddModel("barbed_barrier/barbed_barrier_0", new Vector2(160, 0));
             mapObject.AddModel("barbed_barrier/barbed_barrier_1", new Vector2(160, 9));
             mapObject.AddModel("barbed_barrier/barbed_barrier_2", new Vector2(160, 18));
@@ -181,6 +191,7 @@ namespace Arrow
             mapObject.AddModel("barbed_barrier/barbed_barrier_51", new Vector2(160, 493));
             mapObject.AddModel("barbed_barrier/barbed_barrier_52", new Vector2(160, 502));
             mapObject.AddModel("barbed_barrier/barbed_barrier_53", new Vector2(160, 511));
+
             #endregion
 
             mapObject.AddModel("bandbags", new Vector2(150, 150));
@@ -189,19 +200,19 @@ namespace Arrow
             mapObject.AddModel("barrel", new Vector2(58, 405));
             mapObject.AddModel("soldier", new Vector2(250, 250));
             mapObject.AddModel("cible_homme", new Vector2(300, 300));
-            mapObject.AddModel("m1", new Vector3(350, 5.5f, 350));
             mapObject.AddModel("truck_allemand", new Vector2(122, 206));
             //mapObject.AddModel("truck_allemand_casse", new Vector2(40, 355));
             mapObject.AddModel("farm", new Vector2(0, 262));
 
-
-            #region MapEditor
-            min = 0;
-            max = mapObject.Models.Count - 1;
-            dpfbx.AssociateModel(mapObject);
             #endregion
 
-            #endregion
+            #if EDITOR_MODE
+
+            minNbObject = 0;
+            maxNbObject = mapObject.Models.Count - 1;
+            hudPosObject.AssociateModel(mapObject);
+
+            #endif
 
             #region Sound
 
@@ -228,11 +239,15 @@ namespace Arrow
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
             
-            #region MapEditor
-            mapobjpos.Change_i(ref min, max);
-            mapObject.MoveModel(new Vector4(mapobjpos.Change_x_z(mapObject.Models.ElementAt(min).Value.position.Translation),min)); // appel de la méthode movemodel
-            dpfbx.Upieme(min);
-            #endregion
+            #if EDITOR_MODE
+
+            mapObjectPos.Change_i(ref minNbObject, maxNbObject);
+            mapObject.MoveModel(new Vector4(
+                mapObjectPos.Change_x_z(mapObject.Models.ElementAt(minNbObject).Value.position.Translation),
+                minNbObject));
+            hudPosObject.Upieme(minNbObject);
+
+            #endif
 
             if (menuStart.GameStart)
             {

@@ -232,14 +232,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\m1.fbx">
-      <Name>m1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\shelter.fbx">
       <Name>shelter</Name>
       <Importer>FbxImporter</Importer>
