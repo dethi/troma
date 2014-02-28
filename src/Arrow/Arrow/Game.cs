@@ -31,8 +31,8 @@ namespace Arrow
         private MapObjPos mapObjectPos;
         private int minNbObject;
         private int maxNbObject;
-        private DisplayPostionFbx hudPosObject;
-
+        private DisplayPosObject hudPosObject;
+        
         #endif
 
         private MenuPause menuPause;
@@ -62,7 +62,7 @@ namespace Arrow
 
             #if EDITOR_MODE
 
-            hudPosObject = new DisplayPostionFbx(this);
+            hudPosObject = new DisplayPosObject(this);
             Components.Add(hudPosObject);
             
             mapObjectPos = new MapObjPos();

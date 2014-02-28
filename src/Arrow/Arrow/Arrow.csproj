@@ -144,7 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HUD\MemoryUse.cs" />
-    <Compile Include="MapEditor\DisplayPostionFbx.cs" />
+    <Compile Include="MapEditor\DisplayPosObject.cs" />
     <Compile Include="MapEditor\MapEditorConstants.cs" />
     <Compile Include="MapEditor\MapObjPos.cs" />
     <Compile Include="Menu\MenuStart.cs" />

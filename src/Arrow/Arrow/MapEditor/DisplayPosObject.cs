@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Arrow
 {
-    public class DisplayPostionFbx : Microsoft.Xna.Framework.DrawableGameComponent
+    public class DisplayPosObject : Microsoft.Xna.Framework.DrawableGameComponent
     {
         private Game game;
         private ModelManager modelmanager;
@@ -23,7 +23,7 @@ namespace Arrow
         private Vector3 translation;
 
 
-        public DisplayPostionFbx(Game game)
+        public DisplayPosObject(Game game)
             : base(game)
         {
             this.game = game;

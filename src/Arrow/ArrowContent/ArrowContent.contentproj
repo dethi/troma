@@ -209,7 +209,6 @@
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\m1.fbx">
       <Name>m1</Name>
