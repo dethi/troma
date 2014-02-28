@@ -13,12 +13,12 @@ namespace Arrow
 
         const float WALK_SPEED = 40f;
         const float COEF_RUN_SPEED = 1.7f;
-
+        
         const Keys KB_UP = Keys.W;
         const Keys KB_BOTTOM = Keys.S;
         const Keys KB_LEFT = Keys.A;
         const Keys KB_RIGHT = Keys.D;
-
+        
         /*
         // AZERTY KEYBOARD
         const Keys KB_UP = Keys.Z;
