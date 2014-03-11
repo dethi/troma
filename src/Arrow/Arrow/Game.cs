@@ -54,9 +54,13 @@ namespace Arrow
 
             player = new Player(this, new Vector3(80, 10, 460));
 
+            #if !BUILD
+
             Components.Add(new FPS(this));
             Components.Add(new DisplayPosition(this));
             Components.Add(new MemoryUse(this));
+
+            #endif
 
             mapObject = new ModelManager(this);
 
@@ -87,8 +91,8 @@ namespace Arrow
             #region Map
 
             map = new HeightMap(this,
-                Content.Load<Texture2D>("Textures/textmapde"),
-                Content.Load<Texture2D>("Textures/textmaptest"),
+                Content.Load<Texture2D>("Textures/Ferme/heightmap"),
+                Content.Load<Texture2D>("Textures/Ferme/texture"),
                 513f,
                 513,
                 513,
@@ -194,11 +198,11 @@ namespace Arrow
             mapObject.AddModel("house", new Vector2(0, 511));
             mapObject.AddModel("barn", new Vector2(60, 511));
             mapObject.AddModel("bandbags", new Vector2(150, 150));
-            mapObject.AddModel("antitank", new Vector2(50, 128));
+            //mapObject.AddModel("antitank", new Vector2(50, 128));
             mapObject.AddModel("table", new Vector2(58, 400));
             mapObject.AddModel("barrel", new Vector2(58, 405));
-            mapObject.AddModel("soldier", new Vector2(250, 250));
-            mapObject.AddModel("cible_homme", new Vector2(300, 300));
+            //mapObject.AddModel("soldier", new Vector2(250, 250));
+            //mapObject.AddModel("cible_homme", new Vector2(300, 300));
             mapObject.AddModel("truck_allemand", new Vector2(122, 206));
             //mapObject.AddModel("truck_allemand_casse", new Vector2(40, 355));
             mapObject.AddModel("farm", new Vector2(0, 262));
