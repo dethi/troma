@@ -172,7 +172,7 @@ Pour la prochaine soutenance, Marc devra réaliser des animations sous Blender q
 
 \subsection{Création du terrain}
 
-Au moment de la conception du terrain, nous avions décidé que celui-ci contiendrait une tranchée. Pour cela il fallait que l'on soit capable d'afficher un sol ayant du relief. Nous sommes donc partis sur la technique de l'Heightmap. Cette technique nous permet de créer facilement du relief à partir d'une simple image, de même dimension que le terrain, en se basant uniquement sur le niveau de gris de chaque pixel. On rappel que le niveau de gris correspond à la moyenne des composantes d'un pixel : \( \dfrac{R + G + B}{3} \). 
+Au moment de la conception du terrain, nous avions décidé que celui-ci contiendrait une tranchée. Pour cela il fallait que l'on soit capable d'afficher un sol ayant du relief. Thibault a donc utilisé la technique de l'Heightmap. Cette technique nous permet de créer facilement du relief à partir d'une simple image, de même dimension que le terrain, en se basant uniquement sur le niveau de gris de chaque pixel. On rappel que le niveau de gris correspond à la moyenne des composantes d'un pixel : \( \dfrac{R + G + B}{3} \). 
 
 \begin{figure}[htbp]
 \centering
@@ -201,7 +201,7 @@ Une fois que l'on connait l'ensemble des valeurs \( y \), on applique celles-ci 
 
 Pour gérer l'importation et l’affichage nous nous servons basiquement du Content Pipeline d’XNA.
 
-Une fois les modèles réalisés nous avons été confronté à plusieurs problèmes : la taille des modèles, leur orientation, et l’affichage de toutes les faces. Par exemple les modèles étaientt trop grands ou alors certaines faces ne s’affichaient pas. De plus tous les modèles apparaissaient retournés de \ang{90} selon l'axe X.
+Une fois les modèles réalisés nous avons été confronté à plusieurs problèmes : la taille des modèles, leur orientation, et l’affichage de toutes les faces. Par exemple les modèles étaient trop grands ou alors certaines faces ne s’affichaient pas. De plus tous les modèles apparaissaient retournés de \ang{90} selon l'axe X.
 
 Les problèmes ont été résolus assez rapidement après quelques recherches.
 
