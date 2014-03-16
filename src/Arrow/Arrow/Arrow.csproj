@@ -19,7 +19,7 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>\\psf\Home\Documents\Git\Troma-build\build\</PublishUrl>
+    <PublishUrl>\\psf\Home\Documents\Git\troma-build\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -29,15 +29,15 @@
     <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://www.dethi.fr/Troma-build/build/</InstallUrl>
-    <UpdateUrl>http://www.dethi.fr/Troma-build/build/</UpdateUrl>
-    <SupportUrl>http://www.emagine-studio.com</SupportUrl>
+    <InstallUrl>http://build.troma.eu/</InstallUrl>
+    <UpdateUrl>http://build.troma.eu/</UpdateUrl>
+    <SupportUrl>http://www.troma.eu/</SupportUrl>
     <ProductName>Troma</ProductName>
     <PublisherName>Emagine Studio</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
