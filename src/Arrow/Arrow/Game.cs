@@ -25,6 +25,7 @@ namespace Arrow
         private Effect mapEffect;
 
         private ModelManager mapObject;
+        private GameObject skydome;
 
         #if EDITOR_MODE
 
@@ -102,8 +103,15 @@ namespace Arrow
 
             #endregion
 
+            #region Skydome
+
+            skydome = new GameObject(this, "skydome", new Vector2(256, 256));
+            skydome.lightingEnabled = false;
+
+            #endregion
+
             #region Models
-            
+
             #region wood_barrier
 
             mapObject.AddModel("shelter", new Vector2(0, 411));
@@ -263,11 +271,12 @@ namespace Arrow
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkOliveGreen);
 
             if (menuStart.GameStart)
             {
                 map.Draw(mapEffect);
+                skydome.Draw();
                 mapObject.Draw();
                 player.Draw();
 

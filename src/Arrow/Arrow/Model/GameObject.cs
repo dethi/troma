@@ -21,6 +21,8 @@ namespace Arrow
         private Model model;
         public Matrix position;
 
+        public bool lightingEnabled;
+
         #region Constructor
 
         public GameObject(Game game, string modelName) 
@@ -37,6 +39,8 @@ namespace Arrow
             this.modelName = modelName;
             this.position = Matrix.CreateTranslation(pos);
 
+            this.lightingEnabled = true;
+
             model = game.Content.Load<Model>("Models/" + modelName);
         }
 
@@ -51,6 +55,7 @@ namespace Arrow
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
+                    effect.LightingEnabled = lightingEnabled;
 
                     effect.World = position;
                     effect.Projection = camera.Projection;
