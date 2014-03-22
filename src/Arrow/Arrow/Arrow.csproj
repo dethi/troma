@@ -144,10 +144,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HUD\MemoryUse.cs" />
+    <Compile Include="Input\InputAction.cs" />
+    <Compile Include="Input\InputConfiguration.cs" />
     <Compile Include="MapEditor\DisplayPosObject.cs" />
     <Compile Include="MapEditor\MapEditorConstants.cs" />
     <Compile Include="MapEditor\MapObjPos.cs" />
     <Compile Include="Menu\MenuStart.cs" />
+    <Compile Include="Input\InputState.cs" />
     <Compile Include="Player\PlayerConstants.cs" />
     <Compile Include="Sound\MenuSong.cs" />
     <Compile Include="Menu\MenuPause.cs" />
