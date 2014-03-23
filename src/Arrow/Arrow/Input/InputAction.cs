@@ -9,9 +9,11 @@ namespace Arrow
 {
     public partial class InputState
     {
-        public Vector3 PlayerMove()
+        #region Player
+
+        public bool PlayerMove(out Vector3 moveVector)
         {
-            Vector3 moveVector = Vector3.Zero;
+            moveVector = Vector3.Zero;
 
             if (isGamePadConnected)
             {
@@ -22,20 +24,35 @@ namespace Arrow
             }
             else
             {
-                if (IsDown(mapping.KB_UP))
+                if (IsDown(KeyActions.Up))
                     moveVector.Z += 1;
-                if (IsDown(mapping.KB_BOTTOM))
+                if (IsDown(KeyActions.Bottom))
                     moveVector.Z += -1;
-                if (IsDown(mapping.KB_LEFT))
+                if (IsDown(KeyActions.Left))
                     moveVector.X += 1;
-                if (IsDown(mapping.KB_RIGHT))
+                if (IsDown(KeyActions.Right))
                     moveVector.X += -1;
             }
 
             if (moveVector != Vector3.Zero)
+            {
                 moveVector.Normalize();
-
-            return moveVector;
+                return true;
+            }
+            else
+                return false;
         }
+
+        public bool PlayerCrouch()
+        {
+            return IsDown(KeyActions.Crouch) || IsDown(Buttons.B);
+        }
+
+        public bool PlayerJump()
+        {
+            return IsDown(KeyActions.Jump) || IsDown(Buttons.A);
+        }
+
+        #endregion
     }
 }

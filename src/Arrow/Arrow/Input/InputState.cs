@@ -12,7 +12,19 @@ namespace Arrow
         Left,
         Middle,
         Right
-    };
+    }
+
+    public enum KeyActions
+    {
+        Up,
+        Bottom,
+        Left,
+        Right,
+        Crouch,
+        Run,
+        Jump,
+        Reload
+    }
 
     public partial class InputState
     {
@@ -76,15 +88,30 @@ namespace Arrow
 
         #region Keyboard
 
+        public bool IsPressed(KeyActions keyAction)
+        {
+            return IsPressed(mapping.Parse(keyAction));
+        }
+
         public bool IsPressed(Keys key)
         {
             return CurrentKeyboardState.IsKeyDown(key) &&
                 LastKeyboardState.IsKeyUp(key);
         }
 
+        public bool IsDown(KeyActions keyAction)
+        {
+            return IsDown(mapping.Parse(keyAction));
+        }
+
         public bool IsDown(Keys key)
         {
             return CurrentKeyboardState.IsKeyDown(key);
+        }
+
+        public bool IsUp(KeyActions keyAction)
+        {
+            return IsUp(mapping.Parse(keyAction));
         }
 
         public bool IsUp(Keys key)

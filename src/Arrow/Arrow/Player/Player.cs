@@ -12,6 +12,7 @@ namespace Arrow
         #region Attributes
 
         private Game game;
+        private InputState input;
 
         private float height;
 
@@ -52,15 +53,16 @@ namespace Arrow
 
         #region Constructor
 
-        public Player(Game game)
-            : this(game, Vector3.Zero) { }
+        public Player(Game game, InputState input)
+            : this(game, input, Vector3.Zero) { }
 
-        public Player(Game game, Vector3 pos)
-            : this(game, pos, Vector3.Zero) { }
+        public Player(Game game, InputState input, Vector3 pos)
+            : this(game, input, pos, Vector3.Zero) { }
 
-        public Player(Game game, Vector3 pos, Vector3 rot)
+        public Player(Game game, InputState input, Vector3 pos, Vector3 rot)
         {
             this.game = game;
+            this.input = input;
 
             this.height = HEIGHT;
 
@@ -105,44 +107,11 @@ namespace Arrow
         {
             Vector3 moveVector = Vector3.Zero;
 
-            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            if (input.PlayerMove(out moveVector))
             {
-                #region ThumbStickLeft
-
-                GamePadState gps = GamePad.GetState(PlayerIndex.One);
-
-                if (gps.ThumbSticks.Left.X != 0)
-                    moveVector.X -= gps.ThumbSticks.Left.X;
-                if (gps.ThumbSticks.Left.Y != 0)
-                    moveVector.Z += gps.ThumbSticks.Left.Y;
-
-                #endregion
-            }
-            else
-            {
-                #region Keyboard
-
-                KeyboardState kbs = Keyboard.GetState();
-
-                if (kbs.IsKeyDown(KB_UP))
-                    moveVector.Z += 1;
-                if (kbs.IsKeyDown(KB_BOTTOM))
-                    moveVector.Z += -1;
-                if (kbs.IsKeyDown(KB_LEFT))
-                    moveVector.X += 1;
-                if (kbs.IsKeyDown(KB_RIGHT))
-                    moveVector.X += -1;
-
-                #endregion
-            }
-
-            if (moveVector != Vector3.Zero)
-            {
-                moveVector.Normalize();
                 moveVector *= dtSeconds * WALK_SPEED;
 
-                if (Keyboard.GetState().IsKeyDown(KB_RUN) ||
-                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
+                if (input.IsDown(KeyActions.Run) || input.IsDown(Buttons.LeftStick))
                 {
                     if (moveVector.Z > 0)
                         moveVector.Z *= COEF_RUN_SPEED;
@@ -254,24 +223,10 @@ namespace Arrow
         {
             float currentHeight = height;
 
-            if (GamePad.GetState(PlayerIndex.One).IsConnected)
-            {
-                GamePadState gps = GamePad.GetState(PlayerIndex.One);
-
-                if (gps.IsButtonDown(Buttons.B))
-                    currentHeight = CROUCH_HEIGHT;
-                else
-                    currentHeight = HEIGHT;
-            }
+            if (input.PlayerCrouch())
+                currentHeight = CROUCH_HEIGHT;
             else
-            {
-                KeyboardState kbs = Keyboard.GetState();
-
-                if (kbs.IsKeyDown(KB_CROUCH))
-                    currentHeight = CROUCH_HEIGHT;
-                else
-                    currentHeight = HEIGHT;
-            }
+                currentHeight = HEIGHT;
 
             if (height != currentHeight)
             {
@@ -289,12 +244,7 @@ namespace Arrow
             if (!jumped)
             {
                 velocity.Y = 1;
-
-                if (Keyboard.GetState().IsKeyDown(KB_JUMP) ||
-                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A))
-                {
-                    jumped = true;
-                }
+                jumped = input.PlayerJump();
             }
             else
             {

@@ -9,27 +9,31 @@ namespace Arrow
 {
     public class InputConfiguration
     {
-        #if BUILD
+        private Dictionary<KeyActions, Keys> mapping;
 
-        // AZERTY KEYBOARD
-        public readonly Keys KB_UP = Keys.Z;
-        public readonly Keys KB_BOTTOM = Keys.S;
-        public readonly Keys KB_LEFT = Keys.Q;
-        public readonly Keys KB_RIGHT = Keys.D;
-        
-        #else
+        public InputConfiguration()
+        {
+            mapping = new Dictionary<KeyActions, Keys>()
+            {
+                { KeyActions.Up,        Keys.W },
+                { KeyActions.Bottom,    Keys.S },
+                { KeyActions.Left,      Keys.A },
+                { KeyActions.Right,     Keys.D },
+                { KeyActions.Crouch,    Keys.LeftControl },
+                { KeyActions.Run,       Keys.LeftShift },
+                { KeyActions.Jump,      Keys.Space },
+                { KeyActions.Reload,    Keys.R },
+            };
+        }
 
-        // QWERTY KEYBOARD
-        public readonly Keys KB_UP = Keys.W;
-        public readonly Keys KB_BOTTOM = Keys.S;
-        public readonly Keys KB_LEFT = Keys.A;
-        public readonly Keys KB_RIGHT = Keys.D;
+        public Keys Parse(KeyActions keyAction)
+        {
+            Keys key;
 
-        #endif
-
-        public readonly Keys KB_CROUCH = Keys.LeftControl;
-        public readonly Keys KB_RUN = Keys.LeftShift;
-        public readonly Keys KB_JUMP = Keys.Space;
-        public readonly Keys KB_RELOAD = Keys.R;
+            if (mapping.TryGetValue(keyAction, out key))
+                return key;
+            else
+                throw new KeyNotFoundException();
+        }
     }
 }
