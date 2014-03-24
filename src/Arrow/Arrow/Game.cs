@@ -54,14 +54,15 @@ namespace Arrow
             Camera camera = Camera.Instance;
             camera.New(this, Vector3.Zero, Vector3.Zero);
 
-            input = new InputState();
+            input = new InputState(new Vector2(GraphicsDevice.Viewport.Width / 2, 
+                GraphicsDevice.Viewport.Height / 2));
 
             player = new Player(this, input, new Vector3(80, 10, 460));
 
             #if !BUILD
 
             Components.Add(new FPS(this));
-            //Components.Add(new DisplayPosition(this));
+            Components.Add(new DisplayPosition(this));
             Components.Add(new MemoryUse(this));
 
             #endif

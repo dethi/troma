@@ -111,7 +111,7 @@ namespace Arrow
             {
                 moveVector *= dtSeconds * WALK_SPEED;
 
-                if (input.IsDown(KeyActions.Run) || input.IsDown(Buttons.LeftStick))
+                if (input.PlayerRun())
                 {
                     if (moveVector.Z > 0)
                         moveVector.Z *= COEF_RUN_SPEED;

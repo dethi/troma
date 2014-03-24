@@ -43,6 +43,11 @@ namespace Arrow
                 return false;
         }
 
+        public bool PlayerRun()
+        {
+            return IsDown(KeyActions.Run) || IsDown(Buttons.LeftStick);
+        }
+
         public bool PlayerCrouch()
         {
             return IsDown(KeyActions.Crouch) || IsDown(Buttons.B);

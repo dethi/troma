@@ -39,8 +39,9 @@ namespace Arrow
 
         public MouseState CurrentMouseState { get; private set; }
         public MouseState LastMouseState { get; private set; }
+        private Vector2 mouseOrigin;
 
-        public InputState()
+        public InputState(Vector2 mouseOrigin)
         {
             mapping = new InputConfiguration();
 
@@ -48,6 +49,9 @@ namespace Arrow
             isGamePadConnected = false;
             CurrentKeyboardState = new KeyboardState();
             CurrentMouseState = new MouseState();
+
+            this.mouseOrigin = mouseOrigin;
+            MouseResetPos();
         }
 
         public void Update()
@@ -167,6 +171,11 @@ namespace Arrow
         private bool _IsUp(ButtonState currentState)
         {
             return currentState == ButtonState.Released;
+        }
+
+        public void MouseResetPos()
+        {
+            Mouse.SetPosition((int)mouseOrigin.X, (int)mouseOrigin.Y);
         }
 
         #endregion
