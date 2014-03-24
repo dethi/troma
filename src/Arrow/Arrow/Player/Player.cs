@@ -16,8 +16,6 @@ namespace Arrow
 
         private float height;
 
-        private MouseState currentMouseState;
-        private Vector2 originMouse;
         private Vector3 rotationBuffer;
 
         private Vector3 velocity;
@@ -68,11 +66,7 @@ namespace Arrow
 
             this.cam = Camera.Instance;
             Position = pos;
-
-            int centerX = game.GraphicsDevice.Viewport.Width / 2;
-            int centerY = game.GraphicsDevice.Viewport.Height / 2;
-            originMouse = new Vector2(centerX, centerY);
-            Mouse.SetPosition(centerX, centerY);
+            rotationBuffer = Vector3.Zero;
 
             velocity = new Vector3(0, 1, 0);
             jumped = false;
@@ -132,68 +126,16 @@ namespace Arrow
         /// <param name="dtSeconds">Total seconds elapsed since last update</param>
         private void CameraOrientation(float dtSeconds)
         {
-            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            if (input.PlayerRotate(ref rotationBuffer, dtSeconds))
             {
-                #region ThumbStickRight
+                if (rotationBuffer.Y < MathHelper.ToRadians(-75.0f))
+                    rotationBuffer.Y -= (rotationBuffer.Y - MathHelper.ToRadians(-75.0f));
+                if (rotationBuffer.Y > MathHelper.ToRadians(75.0f))
+                    rotationBuffer.Y -= (rotationBuffer.Y - MathHelper.ToRadians(75.0f));
 
-                GamePadState gps = GamePad.GetState(PlayerIndex.One);
-
-                if (gps.ThumbSticks.Right.X != 0 || gps.ThumbSticks.Right.Y != 0)
-                {
-                    rotationBuffer.X -= 1.5f * gps.ThumbSticks.Right.X * dtSeconds;
-                    rotationBuffer.Y += 1.5f * gps.ThumbSticks.Right.Y * dtSeconds;
-
-                    if (rotationBuffer.Y < MathHelper.ToRadians(-75.0f))
-                    {
-                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
-                            MathHelper.ToRadians(-75.0f));
-                    }
-                    if (rotationBuffer.Y > MathHelper.ToRadians(75.0f))
-                    {
-                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
-                            MathHelper.ToRadians(75.0f));
-                    }
-
-                    cam.Rotation = new Vector3(-MathHelper.Clamp(rotationBuffer.Y,
-                        MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
-                        MathHelper.WrapAngle(rotationBuffer.X), 0);
-                }
-
-                #endregion
-            }
-            else
-            {
-                #region Mouse
-
-                currentMouseState = Mouse.GetState();
-
-                if (currentMouseState.X != originMouse.X || currentMouseState.Y != originMouse.Y)
-                {
-                    float deltaX = currentMouseState.X - originMouse.X;
-                    float deltaY = currentMouseState.Y - originMouse.Y;
-
-                    rotationBuffer.X -= 0.05f * deltaX * dtSeconds;
-                    rotationBuffer.Y -= 0.05f * deltaY * dtSeconds;
-
-                    if (rotationBuffer.Y < MathHelper.ToRadians(-75.0f))
-                    {
-                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
-                            MathHelper.ToRadians(-75.0f));
-                    }
-                    if (rotationBuffer.Y > MathHelper.ToRadians(75.0f))
-                    {
-                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
-                            MathHelper.ToRadians(75.0f));
-                    }
-
-                    cam.Rotation = new Vector3(-MathHelper.Clamp(rotationBuffer.Y,
-                        MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
-                        MathHelper.WrapAngle(rotationBuffer.X), 0);
-
-                    Mouse.SetPosition((int)originMouse.X, (int)originMouse.Y);
-                }
-
-                #endregion
+                cam.Rotation = new Vector3(-MathHelper.Clamp(rotationBuffer.Y,
+                    MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
+                    MathHelper.WrapAngle(rotationBuffer.X), 0);
             }
         }
 
