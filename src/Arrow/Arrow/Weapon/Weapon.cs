@@ -26,7 +26,7 @@ namespace Arrow
         protected string sfx_empty_loader;
         protected string sfx_reload;
 
-        protected GameObject model;
+        protected Entity model;
         protected Vector3 position;
 
         protected bool shoot_pressed;

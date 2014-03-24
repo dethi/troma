@@ -21,7 +21,7 @@ namespace Arrow
             sfx_empty_loader = "GarandM1_empty";
             sfx_reload = "GarandM1_reload";
 
-            model = new GameObject(game, "m1", Vector3.Zero);
+            model = new Entity(game, "m1", Vector3.Zero);
             Initialize();
         }
     }

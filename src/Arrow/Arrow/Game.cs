@@ -26,7 +26,7 @@ namespace Arrow
         private Effect mapEffect;
 
         private ModelManager mapObject;
-        private GameObject skydome;
+        private Entity skydome;
 
         #if EDITOR_MODE
 
@@ -109,7 +109,7 @@ namespace Arrow
 
             #region Skydome
 
-            skydome = new GameObject(this, "skydome", new Vector2(256, 256));
+            skydome = new Entity(this, "skydome", new Vector2(256, 256));
             skydome.lightingEnabled = false;
 
             #endregion
