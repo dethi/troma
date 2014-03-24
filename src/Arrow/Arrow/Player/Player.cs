@@ -12,11 +12,10 @@ namespace Arrow
         #region Attributes
 
         private Game game;
+        private InputState input;
 
         private float height;
 
-        private MouseState currentMouseState;
-        private Vector2 originMouse;
         private Vector3 rotationBuffer;
 
         private Vector3 velocity;
@@ -52,25 +51,22 @@ namespace Arrow
 
         #region Constructor
 
-        public Player(Game game)
-            : this(game, Vector3.Zero) { }
+        public Player(Game game, InputState input)
+            : this(game, input, Vector3.Zero) { }
 
-        public Player(Game game, Vector3 pos)
-            : this(game, pos, Vector3.Zero) { }
+        public Player(Game game, InputState input, Vector3 pos)
+            : this(game, input, pos, Vector3.Zero) { }
 
-        public Player(Game game, Vector3 pos, Vector3 rot)
+        public Player(Game game, InputState input, Vector3 pos, Vector3 rot)
         {
             this.game = game;
+            this.input = input;
 
             this.height = HEIGHT;
 
             this.cam = Camera.Instance;
             Position = pos;
-
-            int centerX = game.GraphicsDevice.Viewport.Width / 2;
-            int centerY = game.GraphicsDevice.Viewport.Height / 2;
-            originMouse = new Vector2(centerX, centerY);
-            Mouse.SetPosition(centerX, centerY);
+            rotationBuffer = Vector3.Zero;
 
             velocity = new Vector3(0, 1, 0);
             jumped = false;
@@ -105,44 +101,11 @@ namespace Arrow
         {
             Vector3 moveVector = Vector3.Zero;
 
-            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            if (input.PlayerMove(out moveVector))
             {
-                #region ThumbStickLeft
-
-                GamePadState gps = GamePad.GetState(PlayerIndex.One);
-
-                if (gps.ThumbSticks.Left.X != 0)
-                    moveVector.X -= gps.ThumbSticks.Left.X;
-                if (gps.ThumbSticks.Left.Y != 0)
-                    moveVector.Z += gps.ThumbSticks.Left.Y;
-
-                #endregion
-            }
-            else
-            {
-                #region Keyboard
-
-                KeyboardState kbs = Keyboard.GetState();
-
-                if (kbs.IsKeyDown(KB_UP))
-                    moveVector.Z += 1;
-                if (kbs.IsKeyDown(KB_BOTTOM))
-                    moveVector.Z += -1;
-                if (kbs.IsKeyDown(KB_LEFT))
-                    moveVector.X += 1;
-                if (kbs.IsKeyDown(KB_RIGHT))
-                    moveVector.X += -1;
-
-                #endregion
-            }
-
-            if (moveVector != Vector3.Zero)
-            {
-                moveVector.Normalize();
                 moveVector *= dtSeconds * WALK_SPEED;
 
-                if (Keyboard.GetState().IsKeyDown(KB_RUN) ||
-                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftStick))
+                if (input.PlayerRun())
                 {
                     if (moveVector.Z > 0)
                         moveVector.Z *= COEF_RUN_SPEED;
@@ -163,68 +126,16 @@ namespace Arrow
         /// <param name="dtSeconds">Total seconds elapsed since last update</param>
         private void CameraOrientation(float dtSeconds)
         {
-            if (GamePad.GetState(PlayerIndex.One).IsConnected)
+            if (input.PlayerRotate(ref rotationBuffer, dtSeconds))
             {
-                #region ThumbStickRight
+                if (rotationBuffer.Y < MathHelper.ToRadians(-75.0f))
+                    rotationBuffer.Y -= (rotationBuffer.Y - MathHelper.ToRadians(-75.0f));
+                if (rotationBuffer.Y > MathHelper.ToRadians(75.0f))
+                    rotationBuffer.Y -= (rotationBuffer.Y - MathHelper.ToRadians(75.0f));
 
-                GamePadState gps = GamePad.GetState(PlayerIndex.One);
-
-                if (gps.ThumbSticks.Right.X != 0 || gps.ThumbSticks.Right.Y != 0)
-                {
-                    rotationBuffer.X -= 1.5f * gps.ThumbSticks.Right.X * dtSeconds;
-                    rotationBuffer.Y += 1.5f * gps.ThumbSticks.Right.Y * dtSeconds;
-
-                    if (rotationBuffer.Y < MathHelper.ToRadians(-75.0f))
-                    {
-                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
-                            MathHelper.ToRadians(-75.0f));
-                    }
-                    if (rotationBuffer.Y > MathHelper.ToRadians(75.0f))
-                    {
-                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
-                            MathHelper.ToRadians(75.0f));
-                    }
-
-                    cam.Rotation = new Vector3(-MathHelper.Clamp(rotationBuffer.Y,
-                        MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
-                        MathHelper.WrapAngle(rotationBuffer.X), 0);
-                }
-
-                #endregion
-            }
-            else
-            {
-                #region Mouse
-
-                currentMouseState = Mouse.GetState();
-
-                if (currentMouseState.X != originMouse.X || currentMouseState.Y != originMouse.Y)
-                {
-                    float deltaX = currentMouseState.X - originMouse.X;
-                    float deltaY = currentMouseState.Y - originMouse.Y;
-
-                    rotationBuffer.X -= 0.05f * deltaX * dtSeconds;
-                    rotationBuffer.Y -= 0.05f * deltaY * dtSeconds;
-
-                    if (rotationBuffer.Y < MathHelper.ToRadians(-75.0f))
-                    {
-                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
-                            MathHelper.ToRadians(-75.0f));
-                    }
-                    if (rotationBuffer.Y > MathHelper.ToRadians(75.0f))
-                    {
-                        rotationBuffer.Y = rotationBuffer.Y - (rotationBuffer.Y -
-                            MathHelper.ToRadians(75.0f));
-                    }
-
-                    cam.Rotation = new Vector3(-MathHelper.Clamp(rotationBuffer.Y,
-                        MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
-                        MathHelper.WrapAngle(rotationBuffer.X), 0);
-
-                    Mouse.SetPosition((int)originMouse.X, (int)originMouse.Y);
-                }
-
-                #endregion
+                cam.Rotation = new Vector3(-MathHelper.Clamp(rotationBuffer.Y,
+                    MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
+                    MathHelper.WrapAngle(rotationBuffer.X), 0);
             }
         }
 
@@ -254,24 +165,10 @@ namespace Arrow
         {
             float currentHeight = height;
 
-            if (GamePad.GetState(PlayerIndex.One).IsConnected)
-            {
-                GamePadState gps = GamePad.GetState(PlayerIndex.One);
-
-                if (gps.IsButtonDown(Buttons.B))
-                    currentHeight = CROUCH_HEIGHT;
-                else
-                    currentHeight = HEIGHT;
-            }
+            if (input.PlayerCrouch())
+                currentHeight = CROUCH_HEIGHT;
             else
-            {
-                KeyboardState kbs = Keyboard.GetState();
-
-                if (kbs.IsKeyDown(KB_CROUCH))
-                    currentHeight = CROUCH_HEIGHT;
-                else
-                    currentHeight = HEIGHT;
-            }
+                currentHeight = HEIGHT;
 
             if (height != currentHeight)
             {
@@ -289,12 +186,7 @@ namespace Arrow
             if (!jumped)
             {
                 velocity.Y = 1;
-
-                if (Keyboard.GetState().IsKeyDown(KB_JUMP) ||
-                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A))
-                {
-                    jumped = true;
-                }
+                jumped = input.PlayerJump();
             }
             else
             {

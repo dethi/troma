@@ -20,6 +20,7 @@ namespace Arrow
         private Texture2D cross;
 
         public Player player { get; private set; }
+        private InputState input;
 
         public HeightMap map { get; private set; }
         private Effect mapEffect;
@@ -42,7 +43,7 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            ActivateFullScreen();
+            //ActivateFullScreen();
             //DisableVsync();
 
             Content.RootDirectory = "Content";
@@ -53,7 +54,10 @@ namespace Arrow
             Camera camera = Camera.Instance;
             camera.New(this, Vector3.Zero, Vector3.Zero);
 
-            player = new Player(this, new Vector3(80, 10, 460));
+            input = new InputState(new Vector2(GraphicsDevice.Viewport.Width / 2, 
+                GraphicsDevice.Viewport.Height / 2));
+
+            player = new Player(this, input, new Vector3(80, 10, 460));
 
             #if !BUILD
 
@@ -246,6 +250,8 @@ namespace Arrow
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            input.Update();
             
             #if EDITOR_MODE
 
@@ -287,7 +293,8 @@ namespace Arrow
 
                 spriteBatch.Begin();
                 spriteBatch.Draw(cross,
-                    new Vector2((GraphicsDevice.Viewport.Width / 2) - 8, (GraphicsDevice.Viewport.Height / 2) - 8),
+                    new Vector2((GraphicsDevice.Viewport.Width / 2) - 8, 
+                        (GraphicsDevice.Viewport.Height / 2) - 8),
                     Color.White);
                 spriteBatch.End();
 
