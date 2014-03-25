@@ -2,13 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-
 
 namespace Arrow
 {
@@ -17,7 +11,7 @@ namespace Arrow
         private Game game;
         private Camera camera;
 
-        public string modelName { get; private set; }
+        public string entityName { get; private set; }
         private Model model;
         public Matrix position;
 
@@ -25,23 +19,23 @@ namespace Arrow
 
         #region Constructor
 
-        public Entity(Game game, string modelName) 
-            : this(game, modelName, Vector2.Zero) { }
+        public Entity(Game game, string entityName)
+            : this(game, entityName, Vector2.Zero) { }
 
-        public Entity(Game game, string modelName, Vector2 pos)
-            : this(game, modelName, new Vector3(pos.X, game.map.GetHeight(pos.X, pos.Y), pos.Y)) { }
+        public Entity(Game game, string entityName, Vector2 pos)
+            : this(game, entityName, new Vector3(pos.X, game.map.GetHeight(pos.X, pos.Y), pos.Y)) { }
 
-        public Entity(Game game, string modelName, Vector3 pos)
+        public Entity(Game game, string entityName, Vector3 pos)
         {
             this.game = game;
             this.camera = Camera.Instance;
 
-            this.modelName = modelName;
+            this.entityName = entityName;
             this.position = Matrix.CreateTranslation(pos);
 
             this.lightingEnabled = true;
 
-            model = game.Content.Load<Model>("Models/" + modelName);
+            model = game.Content.Load<Model>("Models/" + entityName);
         }
 
         #endregion

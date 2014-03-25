@@ -148,7 +148,7 @@
     <Compile Include="Input\InputConfiguration.cs" />
     <Compile Include="MapEditor\DisplayPosObject.cs" />
     <Compile Include="MapEditor\MapEditorConstants.cs" />
-    <Compile Include="MapEditor\MapObjPos.cs" />
+    <Compile Include="MapEditor\EntityPos.cs" />
     <Compile Include="Menu\MenuStart.cs" />
     <Compile Include="Input\InputState.cs" />
     <Compile Include="Player\PlayerConstants.cs" />
@@ -166,7 +166,7 @@
     <Compile Include="Sound\SFXManager.cs" />
     <Compile Include="Map\SquareMap.cs" />
     <Compile Include="Menu\Menu.cs" />
-    <Compile Include="Model\ModelManager.cs" />
+    <Compile Include="Model\EntityManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Weapon\GarandM1.cs" />

@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Arrow
 {
     public class DisplayPosObject : Microsoft.Xna.Framework.DrawableGameComponent
     {
         private Game game;
-        private ModelManager modelmanager;
+        private EntityManager modelmanager;
         private int ieme_model;
+
         private SpriteBatch spriteBatch;
         private SpriteFont spriteFont;
-        private string fbx_name;
-        private string fbx_x;
-        private string fbx_y;
-        private string fbx_z;
+
+        private string entity_name;
+        private string entity_x;
+        private string entity_y;
+        private string entity_z;
+
         private Vector3 scale;
         private Quaternion rotation;
         private Vector3 translation;
@@ -31,7 +34,7 @@ namespace Arrow
         
         public override void Initialize()
         {
-            this.modelmanager = new ModelManager(game);
+            this.modelmanager = new EntityManager(game);
             this.spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
             base.Initialize();
         }
@@ -42,19 +45,21 @@ namespace Arrow
             base.LoadContent();
         }
 
-        public void AssociateModel(ModelManager mod)
-        {
-            this.modelmanager = mod;
-        }
-
         public override void Update(GameTime gameTime)
         {
-            modelmanager.Models.ElementAt(ieme_model).Value.position.Decompose(out scale, out rotation, out translation);
-            this.fbx_name = modelmanager.Models.ElementAt(ieme_model).Key;
-            this.fbx_x = translation.X.ToString();
-            this.fbx_y = translation.Y.ToString();
-            this.fbx_z = translation.Z.ToString();
+            modelmanager.Entities.ElementAt(ieme_model).Value.position.Decompose(out scale, out rotation, out translation);
+
+            this.entity_name = modelmanager.Entities.ElementAt(ieme_model).Key;
+            this.entity_x = translation.X.ToString();
+            this.entity_y = translation.Y.ToString();
+            this.entity_z = translation.Z.ToString();
+
             base.Update(gameTime);
+        }
+
+        public void AssociateModel(EntityManager mod)
+        {
+            this.modelmanager = mod;
         }
 
         public void Upieme(int ieme)
@@ -64,7 +69,7 @@ namespace Arrow
 
         public override void Draw(GameTime gameTime)
         {
-            string str = fbx_name + "\n" + "X: " + fbx_x + "\n" + "Y: " + fbx_y + "\n" + "Z: " + fbx_z;
+            string str = entity_name + "\n" + "X: " + entity_x + "\n" + "Y: " + entity_y + "\n" + "Z: " + entity_z;
             Vector2 size = this.spriteFont.MeasureString(str);
 
             this.spriteBatch.Begin();

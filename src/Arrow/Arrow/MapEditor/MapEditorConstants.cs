@@ -7,13 +7,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
-    public partial class MapObjPos
+    public partial class EntityPos
     {
-        const Keys x_plus = Keys.Up;
-        const Keys x_moins = Keys.Down;
-        const Keys z_plus = Keys.Left;
-        const Keys z_moins = Keys.Right;
-        const Keys next_object = Keys.N;
-        const Keys previous_object = Keys.B;
+        const Keys KB_X_MORE = Keys.Up;
+        const Keys KB_X_LESS = Keys.Down;
+        const Keys KB_Z_MORE = Keys.Left;
+        const Keys KB_Z_LESS = Keys.Right;
+        const Keys KB_SPEED = Keys.RightControl;
+        const Keys KB_NEXT_OBJ = Keys.N;
+        const Keys KB_PREVIOUS_OBJ = Keys.B;
     }
 }
