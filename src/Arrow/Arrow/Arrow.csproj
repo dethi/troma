@@ -148,7 +148,12 @@
     <Compile Include="Input\InputConfiguration.cs" />
     <Compile Include="MapEditor\DisplayPosObject.cs" />
     <Compile Include="MapEditor\MapEditorConstants.cs" />
+<<<<<<< Updated upstream
     <Compile Include="MapEditor\EntityPos.cs" />
+=======
+    <Compile Include="MapEditor\MapObjPos.cs" />
+    <Compile Include="Map\MapManager.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Menu\MenuStart.cs" />
     <Compile Include="Input\InputState.cs" />
     <Compile Include="Player\PlayerConstants.cs" />
