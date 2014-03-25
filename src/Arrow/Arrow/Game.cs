@@ -24,6 +24,7 @@ namespace Arrow
 
         public HeightMap map { get; private set; }
         private Effect mapEffect;
+        private MapManager mapManager;
 
         private EntityManager entities;
         private Entity skydome;
@@ -95,13 +96,17 @@ namespace Arrow
             
             #region Map
 
-            map = new HeightMap(this,
-                Content.Load<Texture2D>("Textures/Ferme/heightmap"),
-                Content.Load<Texture2D>("Textures/Ferme/texture"),
+            mapManager = new MapManager(this,
+                "Textures/Ferme/heightmap",
+                "Textures/Ferme/texture",
                 513f,
                 513,
                 513,
-                20f);
+                20f,
+                2,
+                2);
+
+            map = mapManager.GetMap(new Vector3(0, 0, 0));
 
             mapEffect = Content.Load<Effect>("Effects/Terrain");
 
@@ -266,7 +271,10 @@ namespace Arrow
             if (menuStart.GameStart)
             {
                 if (!menuPause.DisplayMenu)
+                {
+                    map = mapManager.GetMap(player.Position);
                     player.Update(gameTime, map);
+                }
                 menuPause.Update(gameTime);
             }
             else
@@ -281,7 +289,7 @@ namespace Arrow
 
             if (menuStart.GameStart)
             {
-                map.Draw(mapEffect);
+                mapManager.Draw(mapEffect);
                 skydome.Draw();
                 entities.Draw();
                 player.Draw();

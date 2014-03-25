@@ -18,21 +18,31 @@ namespace Arrow
         private IndexBuffer indexBuffer;
 
         private Texture2D terrainTexture;
+        private Texture2D heightMapTexture;
+
         private float textureScale;
         private float[,] heights;
 
+        private int offsetX;
+        private int offsetZ;
+
         #endregion
 
-        public HeightMap(Game game, Texture2D heightMap, Texture2D terrainTexture,
-            float textureScale, int terrainWidth, int terrainHeight, float heightScale)
+        public HeightMap(Game game, string heightMapT, string terrainT,
+            float textureScale, int terrainWidth, int terrainHeight, 
+            float heightScale, int offsetX, int offsetZ)
         {
             this.game = game;
-            this.terrainTexture = terrainTexture;
+            this.terrainTexture = game.Content.Load<Texture2D>(terrainT);
             this.textureScale = textureScale;
+            this.heightMapTexture = game.Content.Load<Texture2D>(heightMapT);
+
+            this.offsetX = offsetX * (terrainWidth - 1);
+            this.offsetZ = offsetZ * (terrainHeight - 1);
 
             camera = Camera.Instance;
 
-            ReadHeightMap(heightMap, terrainWidth, terrainHeight, heightScale);
+            ReadHeightMap(heightMapTexture, terrainWidth, terrainHeight, heightScale);
             BuildVertexBuffer(terrainWidth, terrainHeight);
             BuildIndexBuffer(terrainWidth, terrainHeight);
             CalculateNormals();
@@ -48,7 +58,7 @@ namespace Arrow
             effect.CurrentTechnique = effect.Techniques["Technique1"];
 
             effect.Parameters["terrainTexture1"].SetValue(terrainTexture);
-            effect.Parameters["World"].SetValue(Matrix.Identity);
+            effect.Parameters["World"].SetValue(Matrix.Identity * Matrix.CreateTranslation(offsetX, 0, offsetZ));
             effect.Parameters["View"].SetValue(camera.View);
             effect.Parameters["Projection"].SetValue(camera.Projection);
 
