@@ -23,7 +23,6 @@ namespace Arrow
         private InputState input;
 
         public HeightMap map { get; private set; }
-        public MapManager mapManager;
         private Effect mapEffect;
 
         private EntityManager entities;
@@ -46,6 +45,7 @@ namespace Arrow
             this.graphics = new GraphicsDeviceManager(this);
             //ActivateFullScreen();
             //DisableVsync();
+
             Content.RootDirectory = "Content";
         }
 
@@ -95,17 +95,13 @@ namespace Arrow
             
             #region Map
 
-            mapManager = new MapManager(this,
-                "Textures/Ferme/heightmap",
-                "Textures/Ferme/texture",
+            map = new HeightMap(this,
+                Content.Load<Texture2D>("Textures/Ferme/heightmap"),
+                Content.Load<Texture2D>("Textures/Ferme/texture"),
                 513f,
                 513,
                 513,
-                20f,
-                3,
-                3);
-
-            map = mapManager.GetMap(new Vector3(0, 0, 0));
+                20f);
 
             mapEffect = Content.Load<Effect>("Effects/Terrain");
 
@@ -250,8 +246,6 @@ namespace Arrow
 
         protected override void Update(GameTime gameTime)
         {
-            //map = mapManager.GetMap(player.Position);
-
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -272,9 +266,8 @@ namespace Arrow
             if (menuStart.GameStart)
             {
                 if (!menuPause.DisplayMenu)
-                    map = mapManager.GetMap(player.Position);
                     player.Update(gameTime, map);
-                    menuPause.Update(gameTime);
+                menuPause.Update(gameTime);
             }
             else
                 menuStart.Update(gameTime);
@@ -288,8 +281,7 @@ namespace Arrow
 
             if (menuStart.GameStart)
             {
-                mapManager.Draw(mapEffect);
-
+                map.Draw(mapEffect);
                 skydome.Draw();
                 entities.Draw();
                 player.Draw();
