@@ -52,12 +52,12 @@ namespace Arrow
             Entities.Remove(entityName);
         }
        
-        public void MoveModel(Vector4 i_pos)
+        public void MoveEntity(Vector4 i_pos)
         {
             Entity item = this.Entities.ElementAt((int)i_pos.W).Value;
             item.position = Matrix.CreateTranslation(new Vector3(
-                    i_pos.X, 
-                    game.map.GetHeight(i_pos.X, i_pos.Z), 
+                    i_pos.X,
+                    game.mapManager.GetHeight(i_pos.X, i_pos.Z), 
                     i_pos.Z));
         }
     }

@@ -34,6 +34,17 @@ namespace Arrow
             }
         }
 
+        public void Draw(Effect effect)
+        {
+            for (int x = 0; x < nbMapX; x++)
+            {
+                for (int y = 0; y < nbMapY; y++)
+                {
+                    mapTab[x, y].Draw(effect);
+                }
+            }
+        }
+
         public HeightMap GetMap(Vector3 pos)
         {
             int x = (int)pos.X / terrainWidth;
@@ -51,15 +62,9 @@ namespace Arrow
             return mapTab[x, y];
         }
 
-        public void Draw(Effect effect)
+        public float GetHeight(float x, float z)
         {
-            for (int x = 0; x < nbMapX; x++)
-            {
-                for (int y = 0; y < nbMapY; y++)
-                {
-                    mapTab[x, y].Draw(effect);
-                }
-            }
+            return GetMap(new Vector3(x, 0, z)).GetHeight(x, z);
         }
     }
 }

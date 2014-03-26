@@ -23,7 +23,7 @@ namespace Arrow
             : this(game, entityName, Vector2.Zero) { }
 
         public Entity(Game game, string entityName, Vector2 pos)
-            : this(game, entityName, new Vector3(pos.X, game.map.GetHeight(pos.X, pos.Y), pos.Y)) { }
+            : this(game, entityName, new Vector3(pos.X, game.mapManager.GetHeight(pos.X, pos.Y), pos.Y)) { }
 
         public Entity(Game game, string entityName, Vector3 pos)
         {

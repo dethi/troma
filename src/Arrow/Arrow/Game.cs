@@ -22,9 +22,8 @@ namespace Arrow
         public Player player { get; private set; }
         private InputState input;
 
-        public HeightMap map { get; private set; }
+        public MapManager mapManager { get; private set; }
         private Effect mapEffect;
-        private MapManager mapManager;
 
         private EntityManager entities;
         private Entity skydome;
@@ -105,8 +104,6 @@ namespace Arrow
                 20f,
                 2,
                 2);
-
-            map = mapManager.GetMap(new Vector3(0, 0, 0));
 
             mapEffect = Content.Load<Effect>("Effects/Terrain");
 
@@ -271,10 +268,7 @@ namespace Arrow
             if (menuStart.GameStart)
             {
                 if (!menuPause.DisplayMenu)
-                {
-                    map = mapManager.GetMap(player.Position);
-                    player.Update(gameTime, map);
-                }
+                    player.Update(gameTime, mapManager);
                 menuPause.Update(gameTime);
             }
             else
@@ -290,7 +284,7 @@ namespace Arrow
             if (menuStart.GameStart)
             {
                 mapManager.Draw(mapEffect);
-                skydome.Draw();
+                //skydome.Draw();
                 entities.Draw();
                 player.Draw();
 

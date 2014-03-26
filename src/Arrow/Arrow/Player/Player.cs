@@ -76,7 +76,7 @@ namespace Arrow
 
         #endregion
 
-        public void Update(GameTime gameTime, HeightMap map)
+        public void Update(GameTime gameTime, MapManager map)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -142,7 +142,7 @@ namespace Arrow
         /// <summary>
         /// Prevents map collision
         /// </summary>
-        private void MapCollision(HeightMap map)
+        private void MapCollision(MapManager map)
         {
             float mapHeight = map.GetHeight(Position.X, Position.Z);
 
@@ -181,7 +181,7 @@ namespace Arrow
         /// <summary>
         /// Jump
         /// </summary>
-        private void Jump(HeightMap map)
+        private void Jump(MapManager map)
         {
             if (!jumped)
             {
