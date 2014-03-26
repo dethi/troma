@@ -5,6 +5,8 @@ texture terrainTexture1;
 
 sampler2D textureSampler = sampler_state {
 	Texture = (terrainTexture1);
+	MagFilter = Linear;
+	MinFilter = Linear;
 	AddressU = Wrap;
 	AddressV = Wrap;
 };

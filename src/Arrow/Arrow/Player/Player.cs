@@ -144,10 +144,10 @@ namespace Arrow
         /// </summary>
         private void MapCollision(MapManager map)
         {
-            float mapHeight = map.GetHeight(Position.X, Position.Z);
+            float? mapHeight = map.GetHeight(Position.X, Position.Z);
 
-            if (!jumped && Position.Y != mapHeight)
-                Position = new Vector3(Position.X, mapHeight, Position.Z);
+            if (!jumped && mapHeight.HasValue && Position.Y != mapHeight)
+                Position = new Vector3(Position.X, mapHeight.Value, Position.Z);
         }
 
         /// <summary>

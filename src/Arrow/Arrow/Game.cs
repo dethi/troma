@@ -258,7 +258,7 @@ namespace Arrow
             #if EDITOR_MODE
 
             entityPos.Change_i(ref currentEntity, maxEntity);
-            entities.MoveModel(new Vector4(
+            entities.MoveEntity(new Vector4(
                 entityPos.Change_x_z(entities.Entities.ElementAt(currentEntity).Value.position.Translation),
                 currentEntity));
             HUDPosObj.Upieme(currentEntity);
@@ -284,7 +284,7 @@ namespace Arrow
             if (menuStart.GameStart)
             {
                 mapManager.Draw(mapEffect);
-                //skydome.Draw();
+                skydome.Draw();
                 entities.Draw();
                 player.Draw();
 

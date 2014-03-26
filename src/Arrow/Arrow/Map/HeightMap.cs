@@ -58,7 +58,7 @@ namespace Arrow
             effect.CurrentTechnique = effect.Techniques["Technique1"];
 
             effect.Parameters["terrainTexture1"].SetValue(terrainTexture);
-            effect.Parameters["World"].SetValue(Matrix.Identity * Matrix.CreateTranslation(offsetX, 0, offsetZ));
+            effect.Parameters["World"].SetValue(Matrix.Identity);
             effect.Parameters["View"].SetValue(camera.View);
             effect.Parameters["Projection"].SetValue(camera.Projection);
 
@@ -129,7 +129,7 @@ namespace Arrow
             {
                 for (int z = 0; z < height; z++)
                 {
-                    vertices[x + z * width].Position = new Vector3(x, heights[x, z], z);
+                    vertices[x + z * width].Position = new Vector3(x + offsetX, heights[x, z], z + offsetZ);
                     vertices[x + z * width].TextureCoordinate = new Vector2(
                         (float)x / textureScale, (float)z / textureScale);
                 }
@@ -216,7 +216,7 @@ namespace Arrow
         /// <summary>
         /// Search the height of a terrain point
         /// </summary>
-        public float GetHeight(float x, float z)
+        public float? GetHeight(float x, float z)
         {
             int xmin = (int)Math.Floor(x);
             int xmax = xmin + 1;
@@ -225,7 +225,7 @@ namespace Arrow
 
             if ((xmin < 0) || (zmin < 0) || (xmax > heights.GetUpperBound(0)) ||
                 (zmax > heights.GetUpperBound(1)))
-                return 0;
+                return null;
             else
             {
                 Vector3 p1 = new Vector3(xmin, heights[xmin, zmax], zmax);
@@ -241,7 +241,7 @@ namespace Arrow
                 Ray ray = new Ray(new Vector3(x, 0, z), Vector3.Up);
                 float? height = ray.Intersects(plane);
 
-                return (height.HasValue) ? height.Value : 0f;
+                return height;
             }
         }
     }

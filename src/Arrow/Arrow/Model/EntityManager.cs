@@ -55,10 +55,12 @@ namespace Arrow
         public void MoveEntity(Vector4 i_pos)
         {
             Entity item = this.Entities.ElementAt((int)i_pos.W).Value;
-            item.position = Matrix.CreateTranslation(new Vector3(
-                    i_pos.X,
-                    game.mapManager.GetHeight(i_pos.X, i_pos.Z), 
-                    i_pos.Z));
+            float? pos_Y = game.mapManager.GetHeight(i_pos.X, i_pos.Z);
+
+            pos_Y = (pos_Y.HasValue) ? pos_Y.Value : 0;
+
+            item.position = Matrix.CreateTranslation(
+                new Vector3(i_pos.X, pos_Y.Value, i_pos.Z));
         }
     }
 }

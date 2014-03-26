@@ -10,26 +10,35 @@ namespace Arrow
 {
     public class MapManager
     {
-        private HeightMap[,] mapTab;
+        private HeightMap[,] maps;
         private int nbMapX;
-        private int nbMapY;
+        private int nbMapZ;
         private int terrainWidth;
         private int terrainHeight;
 
         public MapManager(Game game, string heightMapT, string terrainT,
-            float textureScale, int terrainWidth, int terrainHeight, float heightScale, int nbMapX, int nbMapY)
+            float textureScale, int terrainWidth, int terrainHeight, 
+            float heightScale, int nbMapX, int nbMapZ)
         {
             this.nbMapX = nbMapX;
-            this.nbMapY = nbMapY;
+            this.nbMapZ = nbMapZ;
             this.terrainWidth = terrainWidth;
             this.terrainHeight = terrainHeight;
-            this.mapTab = new HeightMap[nbMapX, nbMapY];
+            this.maps = new HeightMap[nbMapX, nbMapZ];
 
             for (int x = 0; x < nbMapX; x++)
             {
-                for (int y = 0; y < nbMapY; y++)
+                for (int z = 0; z < nbMapZ; z++)
                 {
-                    mapTab[x, y] = new HeightMap(game, heightMapT + x, terrainT + y, textureScale, terrainWidth, terrainHeight, heightScale, x, y);
+                    maps[x, z] = new HeightMap(game, 
+                        heightMapT + x, 
+                        terrainT + z, 
+                        textureScale, 
+                        terrainWidth, 
+                        terrainHeight, 
+                        heightScale, 
+                        x, 
+                        z);
                 }
             }
         }
@@ -38,33 +47,32 @@ namespace Arrow
         {
             for (int x = 0; x < nbMapX; x++)
             {
-                for (int y = 0; y < nbMapY; y++)
-                {
-                    mapTab[x, y].Draw(effect);
-                }
+                for (int z = 0; z < nbMapZ; z++)
+                    maps[x, z].Draw(effect);
             }
         }
 
-        public HeightMap GetMap(Vector3 pos)
+        public HeightMap GetMap(float x, float z)
         {
-            int x = (int)pos.X / terrainWidth;
-            int y = (int)pos.Z / terrainHeight;
+            int map_x = (int)x / terrainWidth;
+            int map_z = (int)z / terrainHeight;
 
-            if (x > nbMapX - 1)
-                x = nbMapX - 1;
-            if (y > nbMapY - 1)
-                y = nbMapY - 1;
-            if (x < 0)
-                x = 0;
-            if (y < 0)
-                y = 0;
+            if (map_x >= nbMapX)
+                map_x = nbMapX - 1;
+            else if (map_x < 0)
+                map_x = 0;
 
-            return mapTab[x, y];
+            if (map_z >= nbMapZ)
+                map_z = nbMapZ - 1;
+            else if (z < 0)
+                map_z = 0;
+
+            return maps[map_x, map_z];
         }
 
-        public float GetHeight(float x, float z)
+        public float? GetHeight(float x, float z)
         {
-            return GetMap(new Vector3(x, 0, z)).GetHeight(
+            return GetMap(x, z).GetHeight(
                 (x % terrainWidth), 
                 (z % terrainHeight));
         }
