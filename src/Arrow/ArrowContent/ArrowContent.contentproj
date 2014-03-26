@@ -763,20 +763,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Ferme\texture.png">
-      <Name>texture</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Textures\Ferme\heightmap.png">
-      <Name>heightmap</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sounds\GarandM1.wav">
       <Name>GarandM1</Name>
       <Importer>WavImporter</Importer>
@@ -817,23 +803,93 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Ferme\heightmap0.png">
-      <Name>heightmap0</Name>
+    <Compile Include="Textures\Ferme\heightmap%280,0%29.png">
+      <Name>heightmap%280,0%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\heightmap1.png">
-      <Name>heightmap1</Name>
+    <Compile Include="Textures\Ferme\heightmap%280,1%29.png">
+      <Name>heightmap%280,1%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture0.png">
-      <Name>texture0</Name>
+    <Compile Include="Textures\Ferme\heightmap%280,2%29.png">
+      <Name>heightmap%280,2%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture1.png">
-      <Name>texture1</Name>
+    <Compile Include="Textures\Ferme\heightmap%281,0%29.png">
+      <Name>heightmap%281,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\heightmap%281,1%29.png">
+      <Name>heightmap%281,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\heightmap%281,2%29.png">
+      <Name>heightmap%281,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\heightmap%282,0%29.png">
+      <Name>heightmap%282,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\heightmap%282,1%29.png">
+      <Name>heightmap%282,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\heightmap%282,2%29.png">
+      <Name>heightmap%282,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\texture%280,0%29.png">
+      <Name>texture%280,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\texture%280,1%29.png">
+      <Name>texture%280,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\texture%280,2%29.png">
+      <Name>texture%280,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\texture%281,0%29.png">
+      <Name>texture%281,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\texture%281,1%29.png">
+      <Name>texture%281,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\texture%281,2%29.png">
+      <Name>texture%281,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\texture%282,0%29.png">
+      <Name>texture%282,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\texture%282,1%29.png">
+      <Name>texture%282,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Ferme\texture%282,2%29.png">
+      <Name>texture%282,2%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

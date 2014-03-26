@@ -30,9 +30,9 @@ namespace Arrow
             {
                 for (int z = 0; z < nbMapZ; z++)
                 {
-                    maps[x, z] = new HeightMap(game, 
-                        heightMapT + x, 
-                        terrainT + z, 
+                    maps[x, z] = new HeightMap(game,
+                        heightMapT + "(" + x + "," + z + ")",
+                        terrainT + "(" + x + "," + z + ")", 
                         textureScale, 
                         terrainWidth, 
                         terrainHeight, 
