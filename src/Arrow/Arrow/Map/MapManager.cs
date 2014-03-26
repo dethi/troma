@@ -64,7 +64,9 @@ namespace Arrow
 
         public float GetHeight(float x, float z)
         {
-            return GetMap(new Vector3(x, 0, z)).GetHeight(x, z);
+            return GetMap(new Vector3(x, 0, z)).GetHeight(
+                (x % terrainWidth), 
+                (z % terrainHeight));
         }
     }
 }
