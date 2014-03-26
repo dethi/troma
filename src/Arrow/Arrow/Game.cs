@@ -102,8 +102,8 @@ namespace Arrow
                 513,
                 513,
                 20f,
-                2,
-                2);
+                3,
+                3);
 
             mapEffect = Content.Load<Effect>("Effects/Terrain");
 
