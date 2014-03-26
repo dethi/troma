@@ -22,7 +22,7 @@ namespace Arrow
         public Player player { get; private set; }
         private InputState input;
 
-        public HeightMap map { get; private set; }
+        public MapManager mapManager { get; private set; }
         private Effect mapEffect;
 
         private EntityManager entities;
@@ -95,13 +95,15 @@ namespace Arrow
             
             #region Map
 
-            map = new HeightMap(this,
-                Content.Load<Texture2D>("Textures/Ferme/heightmap"),
-                Content.Load<Texture2D>("Textures/Ferme/texture"),
+            mapManager = new MapManager(this,
+                "Textures/Ferme/heightmap",
+                "Textures/Ferme/texture",
                 513f,
                 513,
                 513,
-                20f);
+                20f,
+                3,
+                3);
 
             mapEffect = Content.Load<Effect>("Effects/Terrain");
 
@@ -256,7 +258,7 @@ namespace Arrow
             #if EDITOR_MODE
 
             entityPos.Change_i(ref currentEntity, maxEntity);
-            entities.MoveModel(new Vector4(
+            entities.MoveEntity(new Vector4(
                 entityPos.Change_x_z(entities.Entities.ElementAt(currentEntity).Value.position.Translation),
                 currentEntity));
             HUDPosObj.Upieme(currentEntity);
@@ -266,7 +268,7 @@ namespace Arrow
             if (menuStart.GameStart)
             {
                 if (!menuPause.DisplayMenu)
-                    player.Update(gameTime, map);
+                    player.Update(gameTime, mapManager);
                 menuPause.Update(gameTime);
             }
             else
@@ -281,7 +283,7 @@ namespace Arrow
 
             if (menuStart.GameStart)
             {
-                map.Draw(mapEffect);
+                mapManager.Draw(mapEffect);
                 skydome.Draw();
                 entities.Draw();
                 player.Draw();

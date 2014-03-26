@@ -18,21 +18,31 @@ namespace Arrow
         private IndexBuffer indexBuffer;
 
         private Texture2D terrainTexture;
+        private Texture2D heightMapTexture;
+
         private float textureScale;
         private float[,] heights;
 
+        private int offsetX;
+        private int offsetZ;
+
         #endregion
 
-        public HeightMap(Game game, Texture2D heightMap, Texture2D terrainTexture,
-            float textureScale, int terrainWidth, int terrainHeight, float heightScale)
+        public HeightMap(Game game, string heightMapT, string terrainT,
+            float textureScale, int terrainWidth, int terrainHeight, 
+            float heightScale, int offsetX, int offsetZ)
         {
             this.game = game;
-            this.terrainTexture = terrainTexture;
+            this.terrainTexture = game.Content.Load<Texture2D>(terrainT);
             this.textureScale = textureScale;
+            this.heightMapTexture = game.Content.Load<Texture2D>(heightMapT);
+
+            this.offsetX = offsetX * (terrainWidth - 1);
+            this.offsetZ = offsetZ * (terrainHeight - 1);
 
             camera = Camera.Instance;
 
-            ReadHeightMap(heightMap, terrainWidth, terrainHeight, heightScale);
+            ReadHeightMap(heightMapTexture, terrainWidth, terrainHeight, heightScale);
             BuildVertexBuffer(terrainWidth, terrainHeight);
             BuildIndexBuffer(terrainWidth, terrainHeight);
             CalculateNormals();
@@ -119,7 +129,7 @@ namespace Arrow
             {
                 for (int z = 0; z < height; z++)
                 {
-                    vertices[x + z * width].Position = new Vector3(x, heights[x, z], z);
+                    vertices[x + z * width].Position = new Vector3(x + offsetX, heights[x, z], z + offsetZ);
                     vertices[x + z * width].TextureCoordinate = new Vector2(
                         (float)x / textureScale, (float)z / textureScale);
                 }
@@ -206,7 +216,7 @@ namespace Arrow
         /// <summary>
         /// Search the height of a terrain point
         /// </summary>
-        public float GetHeight(float x, float z)
+        public float? GetHeight(float x, float z)
         {
             int xmin = (int)Math.Floor(x);
             int xmax = xmin + 1;
@@ -215,7 +225,7 @@ namespace Arrow
 
             if ((xmin < 0) || (zmin < 0) || (xmax > heights.GetUpperBound(0)) ||
                 (zmax > heights.GetUpperBound(1)))
-                return 0;
+                return null;
             else
             {
                 Vector3 p1 = new Vector3(xmin, heights[xmin, zmax], zmax);
@@ -231,7 +241,7 @@ namespace Arrow
                 Ray ray = new Ray(new Vector3(x, 0, z), Vector3.Up);
                 float? height = ray.Intersects(plane);
 
-                return (height.HasValue) ? height.Value : 0f;
+                return height;
             }
         }
     }
