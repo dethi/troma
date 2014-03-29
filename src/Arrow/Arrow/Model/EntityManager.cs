@@ -55,7 +55,7 @@ namespace Arrow
         public void MoveEntity(Vector4 i_pos)
         {
             Entity item = this.Entities.ElementAt((int)i_pos.W).Value;
-            float? pos_Y = game.mapManager.GetHeight(i_pos.X, i_pos.Z);
+            float? pos_Y = 0; //game.mapManager.GetHeight(i_pos.X, i_pos.Z);
 
             pos_Y = (pos_Y.HasValue) ? pos_Y.Value : 0;
 

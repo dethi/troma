@@ -14,8 +14,19 @@ namespace Arrow
 {
     public partial class Game : Microsoft.Xna.Framework.Game
     {
-        public GraphicsDeviceManager graphics;
+        #region Fields
 
+        GraphicsDeviceManager graphics;
+        ScreenManager screenManager;
+
+        // Prelaod any assets using by UI rendering
+        static readonly string[] preloadAssets =
+        {
+        };
+
+        #endregion
+
+        /*
         private SpriteBatch spriteBatch;
         private Texture2D cross;
 
@@ -39,7 +50,13 @@ namespace Arrow
 
         private MenuPause menuPause;
         private MenuStart menuStart;
+         * */
 
+        #region Initialization
+
+        /// <summary>
+        /// The main game constructor.
+        /// </summary>
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
@@ -47,8 +64,12 @@ namespace Arrow
             //DisableVsync();
 
             Content.RootDirectory = "Content";
+
+            screenManager = new ScreenManager(this);
+            Components.Add(screenManager);
         }
 
+        /*
         protected override void Initialize()
         {
             Camera camera = Camera.Instance;
@@ -86,9 +107,17 @@ namespace Arrow
 
             base.Initialize();
         }
+        */
 
+        /// <summary>
+        /// Load graphics content.
+        /// </summary>
         protected override void LoadContent()
         {
+            foreach (string asset in preloadAssets)
+                Content.Load<object>(asset);
+
+            /*
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cross = Content.Load<Texture2D>("Cross");
@@ -244,8 +273,12 @@ namespace Arrow
             menuStart.LoadContent();
 
             #endregion
+             * */
         }
 
+        #endregion
+
+        /*
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
@@ -253,6 +286,7 @@ namespace Arrow
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            
             input.Update();
             
             #if EDITOR_MODE
@@ -274,13 +308,19 @@ namespace Arrow
             else
                 menuStart.Update(gameTime);
             
+
             base.Update(gameTime);
         }
+         * */
+
+
+        #region Draw
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkOliveGreen);
-
+            graphics.GraphicsDevice.Clear(Color.DarkOliveGreen);
+            
+            /*
             if (menuStart.GameStart)
             {
                 mapManager.Draw(mapEffect);
@@ -306,8 +346,11 @@ namespace Arrow
             }
             else
                 menuStart.Draw(gameTime);
+            */
 
             base.Draw(gameTime);
         }
+
+        #endregion
     }
 }

@@ -24,12 +24,18 @@ namespace Arrow
         {
             screens = new List<GameScreen>();
             screensToUpdate = new List<GameScreen>();
-            //input = new InputState();
+
+            input = new InputState();
         }
 
         public override void Initialize()
         {
             base.Initialize();
+
+            input.MouseOrigin = new Vector2(
+                GraphicsDevice.Viewport.Width / 2,
+                GraphicsDevice.Viewport.Height / 2);
+
             isInitialized = true;
         }
 

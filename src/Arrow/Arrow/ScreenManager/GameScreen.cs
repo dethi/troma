@@ -16,6 +16,8 @@ namespace Arrow
 
     public abstract class GameScreen
     {
+        private Game game;
+
         public ScreenManager ScreenManager { get; internal set; }
         public ScreenState ScreenState { get; protected set; }
 
@@ -44,8 +46,10 @@ namespace Arrow
             }
         }
 
-        public GameScreen()
+        public GameScreen(Game game)
         {
+            this.game = game;
+
             ScreenState = ScreenState.TransitionOn;
             IsExiting = false;
             IsPopup = false;
