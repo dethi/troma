@@ -58,7 +58,7 @@ namespace Arrow
         public virtual void UnloadContent() { }
         public virtual void Draw(GameTime gameTime) { }
 
-        public void Update(GameTime gameTime, bool hasFocus, 
+        public virtual void Update(GameTime gameTime, bool hasFocus, 
             bool isVisible) 
         {
             this.hasFocus = hasFocus;
