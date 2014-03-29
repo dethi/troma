@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace Arrow
+{
+    public class ScreenManager : DrawableGameComponent
+    {
+        private List<GameScreen> screens;
+        private List<GameScreen> screensToUpdate;
+        private InputState input;
+
+        private ContentManager content;
+        private SpriteBatch spriteBatch;
+
+        private bool isInitialized;
+
+        public ScreenManager(Game game)
+            : base(game)
+        {
+            screens = new List<GameScreen>();
+            screensToUpdate = new List<GameScreen>();
+            //input = new InputState();
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            isInitialized = true;
+        }
+
+        protected override void LoadContent()
+        {
+            content = Game.Content;
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            foreach (GameScreen s in screens)
+                s.LoadContent();
+        }
+
+        protected override void UnloadContent()
+        {
+            foreach (GameScreen s in screens)
+                s.UnloadContent();
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            foreach (GameScreen s in screens)
+            {
+                if (s.ScreenState != ScreenState.Hidden)
+                    s.Draw(gameTime);
+            }
+        }
+
+        public void AddScreen(GameScreen s)
+        {
+            s.ScreenManager = this;
+            s.IsExiting = false;
+
+            if (isInitialized)
+                s.LoadContent();
+
+            screens.Add(s);
+        }
+
+        public void RemoveScreen(GameScreen s)
+        {
+            if (isInitialized)
+                s.UnloadContent();
+
+            screens.Remove(s);
+            screensToUpdate.Remove(s);
+        }
+    }
+}
