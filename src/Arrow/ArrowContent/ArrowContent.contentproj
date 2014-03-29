@@ -803,92 +803,92 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Ferme\heightmap%280,0%29.png">
+    <Compile Include="Textures\Farm\heightmap%280,0%29.png">
       <Name>heightmap%280,0%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\heightmap%280,1%29.png">
+    <Compile Include="Textures\Farm\heightmap%280,1%29.png">
       <Name>heightmap%280,1%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\heightmap%280,2%29.png">
+    <Compile Include="Textures\Farm\heightmap%280,2%29.png">
       <Name>heightmap%280,2%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\heightmap%281,0%29.png">
+    <Compile Include="Textures\Farm\heightmap%281,0%29.png">
       <Name>heightmap%281,0%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\heightmap%281,1%29.png">
+    <Compile Include="Textures\Farm\heightmap%281,1%29.png">
       <Name>heightmap%281,1%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\heightmap%281,2%29.png">
+    <Compile Include="Textures\Farm\heightmap%281,2%29.png">
       <Name>heightmap%281,2%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\heightmap%282,0%29.png">
+    <Compile Include="Textures\Farm\heightmap%282,0%29.png">
       <Name>heightmap%282,0%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\heightmap%282,1%29.png">
+    <Compile Include="Textures\Farm\heightmap%282,1%29.png">
       <Name>heightmap%282,1%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\heightmap%282,2%29.png">
+    <Compile Include="Textures\Farm\heightmap%282,2%29.png">
       <Name>heightmap%282,2%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture%280,0%29.png">
+    <Compile Include="Textures\Farm\texture%280,0%29.png">
       <Name>texture%280,0%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture%280,1%29.png">
+    <Compile Include="Textures\Farm\texture%280,1%29.png">
       <Name>texture%280,1%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture%280,2%29.png">
+    <Compile Include="Textures\Farm\texture%280,2%29.png">
       <Name>texture%280,2%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture%281,0%29.png">
+    <Compile Include="Textures\Farm\texture%281,0%29.png">
       <Name>texture%281,0%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture%281,1%29.png">
+    <Compile Include="Textures\Farm\texture%281,1%29.png">
       <Name>texture%281,1%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture%281,2%29.png">
+    <Compile Include="Textures\Farm\texture%281,2%29.png">
       <Name>texture%281,2%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture%282,0%29.png">
+    <Compile Include="Textures\Farm\texture%282,0%29.png">
       <Name>texture%282,0%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture%282,1%29.png">
+    <Compile Include="Textures\Farm\texture%282,1%29.png">
       <Name>texture%282,1%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Ferme\texture%282,2%29.png">
+    <Compile Include="Textures\Farm\texture%282,2%29.png">
       <Name>texture%282,2%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

@@ -16,7 +16,7 @@ namespace Arrow
 
     public abstract class GameScreen
     {
-        private Game game;
+        protected Game game;
 
         public ScreenManager ScreenManager { get; internal set; }
         public ScreenState ScreenState { get; protected set; }
@@ -70,8 +70,9 @@ namespace Arrow
             if (IsExiting)
             {
                 ScreenState = ScreenState.TransitionOff;
-                
-                //gerer transition
+
+                if (!UpdateTransition(gameTime, TransitionOffTime, 1))
+                    ScreenManager.RemoveScreen(this);
             }
             else if (!isVisible)
             {
@@ -89,7 +90,7 @@ namespace Arrow
             }
         }
 
-        public virtual void HandleInput(InputState input) { }
+        public virtual void HandleInput(GameTime gameTime, InputState input) { }
 
         private bool UpdateTransition(GameTime gameTime, TimeSpan time, int direction)
         {

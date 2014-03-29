@@ -34,7 +34,7 @@ namespace Arrow
         
         public override void Initialize()
         {
-            this.modelmanager = new EntityManager(game);
+            //this.modelmanager = new EntityManager(game);
             this.spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
             base.Initialize();
         }

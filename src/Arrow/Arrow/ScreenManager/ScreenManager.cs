@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
@@ -66,6 +67,11 @@ namespace Arrow
         public override void Update(GameTime gameTime)
         {
             input.Update();
+
+            // Allows the game to exit
+            if (input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
+                Game.Exit();
+
             screensToUpdate.Clear();
 
             foreach (GameScreen s in screens)
@@ -86,7 +92,7 @@ namespace Arrow
                 {
                     if (hasFocus)
                     {
-                        s.HandleInput(input);
+                        s.HandleInput(gameTime, input);
                         hasFocus = false;
                     }
 
