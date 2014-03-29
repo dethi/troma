@@ -57,6 +57,39 @@ namespace Arrow
             }
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            input.Update();
+            screensToUpdate.Clear();
+
+            foreach (GameScreen s in screens)
+                screensToUpdate.Add(s);
+
+            bool hasFocus = Game.IsActive;
+            bool isVisible = true;
+
+            while (screensToUpdate.Count > 0)
+            {
+                GameScreen s = screensToUpdate[screensToUpdate.Count - 1];
+                screensToUpdate.RemoveAt(screensToUpdate.Count - 1);
+
+                s.Update(gameTime, hasFocus, isVisible);
+
+                if (s.ScreenState == ScreenState.TransitionOn || 
+                    s.ScreenState == ScreenState.Active)
+                {
+                    if (hasFocus)
+                    {
+                        s.HandleInput(input);
+                        hasFocus = false;
+                    }
+
+                    if (!s.IsPopup)
+                        isVisible = false;
+                }
+            }
+        }
+
         public void AddScreen(GameScreen s)
         {
             s.ScreenManager = this;
