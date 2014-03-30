@@ -11,14 +11,20 @@ namespace Arrow
 {
     public class ScreenManager : DrawableGameComponent
     {
+        #region Fields
+
         private List<GameScreen> screens;
         private List<GameScreen> screensToUpdate;
         private InputState input;
 
         private ContentManager content;
-        private SpriteBatch spriteBatch;
+        public SpriteBatch SpriteBatch { get; private set; }
 
         private bool isInitialized;
+
+        #endregion
+
+        #region Initialization
 
         public ScreenManager(Game game)
             : base(game)
@@ -43,7 +49,7 @@ namespace Arrow
         protected override void LoadContent()
         {
             content = Game.Content;
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             foreach (GameScreen s in screens)
                 s.LoadContent();
@@ -54,6 +60,8 @@ namespace Arrow
             foreach (GameScreen s in screens)
                 s.UnloadContent();
         }
+
+        #endregion
 
         public override void Draw(GameTime gameTime)
         {
@@ -90,13 +98,13 @@ namespace Arrow
                 if (s.ScreenState == ScreenState.TransitionOn || 
                     s.ScreenState == ScreenState.Active)
                 {
-                    if (hasFocus)
+                    if (hasFocus && !s.IsHUD)
                     {
                         s.HandleInput(gameTime, input);
                         hasFocus = false;
                     }
 
-                    if (!s.IsPopup)
+                    if (!s.IsHUD)
                         isVisible = false;
                 }
             }

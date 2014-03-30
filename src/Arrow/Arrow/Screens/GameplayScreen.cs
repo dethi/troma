@@ -13,7 +13,6 @@ namespace Arrow
         #region Fields
 
         private ContentManager content;
-        private SpriteBatch spriteBatch;
 
         private Camera camera;
         private Player player;
@@ -42,9 +41,6 @@ namespace Arrow
             player = new Player(game, new Vector3(80, 10, 460));
         }
 
-        /// <summary>
-        /// Load graphics content for the game
-        /// </summary>
         public override void LoadContent()
         {
             if (content == null)
@@ -53,7 +49,6 @@ namespace Arrow
             camera.New(game, Vector3.Zero, Vector3.Zero);
             player.Position = new Vector3(80, 10, 460);
 
-            spriteBatch = new SpriteBatch(ScreenManager.GraphicsDevice);
             cross = content.Load<Texture2D>("Cross");
 
             mapEffect = content.Load<Effect>("Effects/Terrain");
@@ -221,13 +216,13 @@ namespace Arrow
             //
             #region Cross
 
-            spriteBatch.Begin();
-            spriteBatch.Draw(
+            ScreenManager.SpriteBatch.Begin();
+            ScreenManager.SpriteBatch.Draw(
                 cross,
                 new Vector2((ScreenManager.GraphicsDevice.Viewport.Width / 2) - 8,
                     (ScreenManager.GraphicsDevice.Viewport.Height / 2) - 8),
                 Color.White);
-            spriteBatch.End();
+            ScreenManager.SpriteBatch.End();
 
             #endregion
         }

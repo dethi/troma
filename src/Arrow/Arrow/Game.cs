@@ -57,6 +57,7 @@ namespace Arrow
             Components.Add(screenManager);
 
             screenManager.AddScreen(new GameplayScreen(this));
+            screenManager.AddScreen(new DebugScreen(this));
         }
 
         /*

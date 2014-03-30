@@ -143,9 +143,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Screens\DebugScreen.cs" />
     <Compile Include="Screens\GameplayScreen.cs" />
     <Compile Include="ScreenManager\GameScreen.cs" />
-    <Compile Include="HUD\MemoryUse.cs" />
     <Compile Include="Input\InputAction.cs" />
     <Compile Include="Input\InputConfiguration.cs" />
     <Compile Include="MapEditor\DisplayPosObject.cs" />
@@ -161,9 +161,7 @@
     <Compile Include="Menu\Button.cs" />
     <Compile Include="GraphicsMode.cs" />
     <Compile Include="Player\Camera.cs" />
-    <Compile Include="HUD\DisplayPosition.cs" />
     <Compile Include="Model\Entity.cs" />
-    <Compile Include="HUD\FPS.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Map\HeightMap.cs" />
     <Compile Include="Player\Player.cs" />

@@ -16,19 +16,19 @@ namespace Arrow
 
     public abstract class GameScreen
     {
+        #region Fields
+
         protected Game game;
 
         public ScreenManager ScreenManager { get; internal set; }
         public ScreenState ScreenState { get; protected set; }
 
-        public bool IsExiting { get; protected internal set; }
         protected bool hasFocus;
-
-        public bool IsPopup { get; protected set; }
+        public bool IsExiting { get; protected internal set; }
+        public bool IsHUD { get; protected set; }
 
         public TimeSpan TransitionOnTime { get; protected set; }
         public TimeSpan TransitionOffTime { get; protected set; }
-
         public float TransitionPosition { get; protected set; }
 
         public float TransitionAlpha
@@ -46,13 +46,15 @@ namespace Arrow
             }
         }
 
+        #endregion
+
         public GameScreen(Game game)
         {
             this.game = game;
 
             ScreenState = ScreenState.TransitionOn;
             IsExiting = false;
-            IsPopup = false;
+            IsHUD = false;
             TransitionOnTime = TimeSpan.Zero;
             TransitionOffTime = TimeSpan.Zero;
             TransitionPosition = 1;
@@ -61,6 +63,7 @@ namespace Arrow
         public virtual void LoadContent() { }
         public virtual void UnloadContent() { }
         public virtual void Draw(GameTime gameTime) { }
+        public virtual void HandleInput(GameTime gameTime, InputState input) { }
 
         public virtual void Update(GameTime gameTime, bool hasFocus, 
             bool isVisible) 
@@ -89,8 +92,6 @@ namespace Arrow
                     ScreenState = ScreenState.Active;
             }
         }
-
-        public virtual void HandleInput(GameTime gameTime, InputState input) { }
 
         private bool UpdateTransition(GameTime gameTime, TimeSpan time, int direction)
         {
