@@ -77,7 +77,7 @@ namespace Arrow
             input.Update();
 
             // Allows the game to exit
-            if (input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
+            if (input.IsDown(Buttons.Back) || input.IsDown(Keys.Escape))
                 Game.Exit();
 
             screensToUpdate.Clear();

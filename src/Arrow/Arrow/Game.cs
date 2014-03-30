@@ -57,20 +57,17 @@ namespace Arrow
             Components.Add(screenManager);
 
             screenManager.AddScreen(new GameplayScreen(this));
+
+            #if !BUILD
+
             screenManager.AddScreen(new DebugScreen(this));
+
+            #endif
         }
 
         /*
         protected override void Initialize()
         {
-            #if !BUILD
-
-            Components.Add(new FPS(this));
-            Components.Add(new DisplayPosition(this));
-            Components.Add(new MemoryUse(this));
-
-            #endif
-
             #if EDITOR_MODE
 
             HUDPosObj = new DisplayPosObject(this);
