@@ -20,8 +20,6 @@ namespace Arrow
         private Vector3 velocity;
         private bool jumped;
 
-        //private Weapon weapon;
-
         #endregion
 
         #region Properties
@@ -68,8 +66,6 @@ namespace Arrow
 
             velocity = new Vector3(0, 1, 0);
             jumped = false;
-
-            //weapon = new GarandM1(game);
         }
 
         #endregion
@@ -92,7 +88,6 @@ namespace Arrow
 
         public void Draw()
         {
-            //weapon.Draw();
         }
 
         /// <summary>
@@ -111,10 +106,7 @@ namespace Arrow
                 {
                     if (moveVector.Z > 0)
                         moveVector.Z *= COEF_RUN_SPEED;
-                    //SFXManager.Play("Run");
                 }
-                /*else
-                    SFXManager.Play("Walk");*/
             }
 
             // Effectue le mouvement
@@ -157,7 +149,6 @@ namespace Arrow
         /// </summary>              
         private void Shoot(GameTime gameTime)
         {
-            //weapon.Update(gameTime);
         }
 
         /// <summary>
