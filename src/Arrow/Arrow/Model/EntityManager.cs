@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Arrow
 {
@@ -39,6 +40,19 @@ namespace Arrow
         public void AddEntity(string entityName, Vector3 pos)
         {
             AddEntity(new Entity(game, entityName, pos));
+        }
+
+        public void AddEntity(Model model, Vector2 pos)
+        {
+            AddEntity(new Entity(game, model, new Vector3(
+                pos.X,
+                maps.GetHeight(pos.X, pos.Y).Value,
+                pos.Y)));
+        }
+
+        public void AddEntity(Model model, Vector3 pos)
+        {
+            AddEntity(new Entity(game, model, pos));
         }
 
         public void AddEntity(Entity item)

@@ -72,94 +72,99 @@ namespace Arrow
 
             #region Models
 
-            #region wood_barrier
+            #region Wood barrier
 
-            entities.AddEntity("shelter", new Vector2(0, 411));
-            entities.AddEntity("wood_barrier/wood_barrier_0", new Vector2(119, 101));
-            entities.AddEntity("wood_barrier/wood_barrier_1", new Vector2(119, 91));
-            entities.AddEntity("wood_barrier/wood_barrier_2", new Vector2(119, 81));
-            entities.AddEntity("wood_barrier/wood_barrier_3", new Vector2(119, 71));
-            entities.AddEntity("wood_barrier/wood_barrier_4", new Vector2(119, 61));
-            entities.AddEntity("wood_barrier/wood_barrier_5", new Vector2(119, 51));
-            entities.AddEntity("wood_barrier/wood_barrier_6", new Vector2(119, 41));
-            entities.AddEntity("wood_barrier/wood_barrier_7", new Vector2(119, 31));
-            entities.AddEntity("wood_barrier/wood_barrier_8", new Vector2(119, 21));
-            entities.AddEntity("wood_barrier/wood_barrier_9", new Vector2(119, 11));
-            entities.AddEntity("wood_barrier/wood_barrier_10", new Vector2(119, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_11", new Vector2(109, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_12", new Vector2(99, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_13", new Vector2(89, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_14", new Vector2(79, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_15", new Vector2(69, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_16", new Vector2(59, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_17", new Vector2(49, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_18", new Vector2(39, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_19", new Vector2(29, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_20", new Vector2(19, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_21", new Vector2(9, 1));
-            entities.AddEntity("wood_barrier/wood_barrier_22", new Vector2(0, 1));
+            Model woodBarrierX = content.Load<Model>("Models/wood_barrier_x");
+            Model woodBarrierZ = content.Load<Model>("Models/wood_barrier_z");
+
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 101));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 91));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 81));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 71));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 61));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 51));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 41));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 31));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 21));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 11));
+            entities.AddEntity(woodBarrierZ, new Vector2(119, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(109, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(99, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(89, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(79, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(69, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(59, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(49, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(39, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(29, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(19, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(9, 1));
+            entities.AddEntity(woodBarrierX, new Vector2(0, 1));
 
             #endregion
 
-            #region barbed_barrier
+            #region Barbed barrier
 
-            entities.AddEntity("barbed_barrier/barbed_barrier_0", new Vector2(160, 0));
-            entities.AddEntity("barbed_barrier/barbed_barrier_1", new Vector2(160, 9));
-            entities.AddEntity("barbed_barrier/barbed_barrier_2", new Vector2(160, 18));
-            entities.AddEntity("barbed_barrier/barbed_barrier_3", new Vector2(160, 27));
-            entities.AddEntity("barbed_barrier/barbed_barrier_4", new Vector2(160, 36));
-            entities.AddEntity("barbed_barrier/barbed_barrier_5", new Vector2(160, 45));
-            entities.AddEntity("barbed_barrier/barbed_barrier_6", new Vector2(160, 54));
-            entities.AddEntity("barbed_barrier/barbed_barrier_7", new Vector2(160, 63));
-            entities.AddEntity("barbed_barrier/barbed_barrier_8", new Vector2(160, 72));
-            entities.AddEntity("barbed_barrier/barbed_barrier_9", new Vector2(160, 81));
-            entities.AddEntity("barbed_barrier/barbed_barrier_10", new Vector2(160, 90));
-            entities.AddEntity("barbed_barrier/barbed_barrier_11", new Vector2(160, 99));
-            entities.AddEntity("barbed_barrier/barbed_barrier_12", new Vector2(160, 108));
-            entities.AddEntity("barbed_barrier/barbed_barrier_13", new Vector2(160, 117));
-            entities.AddEntity("barbed_barrier/barbed_barrier_14", new Vector2(160, 126));
-            entities.AddEntity("barbed_barrier/barbed_barrier_15", new Vector2(160, 135));
-            entities.AddEntity("barbed_barrier/barbed_barrier_16", new Vector2(160, 144));
-            entities.AddEntity("barbed_barrier/barbed_barrier_17", new Vector2(160, 153));
-            entities.AddEntity("barbed_barrier/barbed_barrier_18", new Vector2(160, 162));
-            entities.AddEntity("barbed_barrier/barbed_barrier_19", new Vector2(160, 171));
-            entities.AddEntity("barbed_barrier/barbed_barrier_20", new Vector2(160, 180));
-            entities.AddEntity("barbed_barrier/barbed_barrier_21", new Vector2(160, 189));
-            entities.AddEntity("barbed_barrier/barbed_barrier_22", new Vector2(160, 198));
-            entities.AddEntity("barbed_barrier/barbed_barrier_23", new Vector2(160, 207));
-            entities.AddEntity("barbed_barrier/barbed_barrier_24", new Vector2(160, 216));
-            entities.AddEntity("barbed_barrier/barbed_barrier_25", new Vector2(160, 225));
-            entities.AddEntity("barbed_barrier/barbed_barrier_26", new Vector2(160, 234));
-            entities.AddEntity("barbed_barrier/barbed_barrier_27", new Vector2(160, 242));
-            entities.AddEntity("barbed_barrier/barbed_barrier_28", new Vector2(160, 251));
-            entities.AddEntity("barbed_barrier/barbed_barrier_29", new Vector2(160, 260));
-            entities.AddEntity("barbed_barrier/barbed_barrier_30", new Vector2(160, 269));
-            entities.AddEntity("barbed_barrier/barbed_barrier_31", new Vector2(160, 278));
-            entities.AddEntity("barbed_barrier/barbed_barrier_32", new Vector2(160, 287));
-            entities.AddEntity("barbed_barrier/barbed_barrier_33", new Vector2(160, 296));
-            entities.AddEntity("barbed_barrier/barbed_barrier_34", new Vector2(160, 305));
-            entities.AddEntity("barbed_barrier/post_0", new Vector2(160, 315));
+            Model barbedBarrierZ = content.Load<Model>("Models/barbed_barrier_z");
+            Model postBarrier = content.Load<Model>("Models/post_barrier");
 
-            entities.AddEntity("barbed_barrier/post_1", new Vector2(160, 340));
-            entities.AddEntity("barbed_barrier/barbed_barrier_35", new Vector2(160, 349));
-            entities.AddEntity("barbed_barrier/barbed_barrier_36", new Vector2(160, 358));
-            entities.AddEntity("barbed_barrier/barbed_barrier_37", new Vector2(160, 367));
-            entities.AddEntity("barbed_barrier/barbed_barrier_38", new Vector2(160, 376));
-            entities.AddEntity("barbed_barrier/barbed_barrier_39", new Vector2(160, 385));
-            entities.AddEntity("barbed_barrier/barbed_barrier_40", new Vector2(160, 394));
-            entities.AddEntity("barbed_barrier/barbed_barrier_41", new Vector2(160, 403));
-            entities.AddEntity("barbed_barrier/barbed_barrier_42", new Vector2(160, 412));
-            entities.AddEntity("barbed_barrier/barbed_barrier_43", new Vector2(160, 421));
-            entities.AddEntity("barbed_barrier/barbed_barrier_44", new Vector2(160, 430));
-            entities.AddEntity("barbed_barrier/barbed_barrier_45", new Vector2(160, 439));
-            entities.AddEntity("barbed_barrier/barbed_barrier_46", new Vector2(160, 448));
-            entities.AddEntity("barbed_barrier/barbed_barrier_47", new Vector2(160, 457));
-            entities.AddEntity("barbed_barrier/barbed_barrier_48", new Vector2(160, 466));
-            entities.AddEntity("barbed_barrier/barbed_barrier_49", new Vector2(160, 475));
-            entities.AddEntity("barbed_barrier/barbed_barrier_50", new Vector2(160, 484));
-            entities.AddEntity("barbed_barrier/barbed_barrier_51", new Vector2(160, 493));
-            entities.AddEntity("barbed_barrier/barbed_barrier_52", new Vector2(160, 502));
-            entities.AddEntity("barbed_barrier/barbed_barrier_53", new Vector2(160, 511));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 0));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 9));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 18));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 27));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 36));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 45));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 54));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 63));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 72));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 81));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 90));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 99));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 108));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 117));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 126));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 135));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 144));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 153));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 162));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 171));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 180));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 189));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 198));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 207));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 216));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 225));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 234));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 242));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 251));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 260));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 269));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 278));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 287));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 296));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 305));
+            entities.AddEntity(postBarrier, new Vector2(160, 315));
+
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 340));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 349));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 358));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 367));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 376));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 385));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 394));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 403));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 412));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 421));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 430));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 439));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 448));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 457));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 466));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 475));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 484));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 493));
+            entities.AddEntity(barbedBarrierZ, new Vector2(160, 502));
+            entities.AddEntity(postBarrier, new Vector2(160, 511));
 
             #endregion
 
@@ -170,6 +175,7 @@ namespace Arrow
             entities.AddEntity("barrel", new Vector2(58, 405));
             entities.AddEntity("truck_allemand", new Vector2(122, 206));
             entities.AddEntity("farm", new Vector2(0, 262));
+            entities.AddEntity("shelter", new Vector2(0, 411));
 
             #endregion
 

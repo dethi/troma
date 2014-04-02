@@ -11,28 +11,28 @@ namespace Arrow
         private Game game;
         private Camera camera;
 
-        public string entityName { get; private set; }
         private Model model;
         public Matrix position;
-
         public bool lightingEnabled;
-
-        #region Constructor
 
         public Entity(Game game, string entityName, Vector3 pos)
         {
             this.game = game;
-            this.camera = Camera.Instance;
-
-            this.entityName = entityName;
-            this.position = Matrix.CreateTranslation(pos);
-
-            this.lightingEnabled = true;
+            camera = Camera.Instance;
+            position = Matrix.CreateTranslation(pos);
+            lightingEnabled = true;
 
             model = game.Content.Load<Model>("Models/" + entityName);
         }
 
-        #endregion
+        public Entity(Game game, Model entityModel, Vector3 pos)
+        {
+            this.game = game;
+            camera = Camera.Instance;
+            model = entityModel;
+            position = Matrix.CreateTranslation(pos);
+            lightingEnabled = true;
+        }
 
         public void Draw()
         {
