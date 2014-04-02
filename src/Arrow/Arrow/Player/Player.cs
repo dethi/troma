@@ -12,7 +12,6 @@ namespace Arrow
         #region Attributes
 
         private Game game;
-        private InputState input;
 
         private float height;
 
@@ -20,8 +19,6 @@ namespace Arrow
 
         private Vector3 velocity;
         private bool jumped;
-
-        private Weapon weapon;
 
         #endregion
 
@@ -51,16 +48,15 @@ namespace Arrow
 
         #region Constructor
 
-        public Player(Game game, InputState input)
-            : this(game, input, Vector3.Zero) { }
+        public Player(Game game)
+            : this(game, Vector3.Zero) { }
 
-        public Player(Game game, InputState input, Vector3 pos)
-            : this(game, input, pos, Vector3.Zero) { }
+        public Player(Game game, Vector3 pos)
+            : this(game, pos, Vector3.Zero) { }
 
-        public Player(Game game, InputState input, Vector3 pos, Vector3 rot)
+        public Player(Game game, Vector3 pos, Vector3 rot)
         {
             this.game = game;
-            this.input = input;
 
             this.height = HEIGHT;
 
@@ -70,34 +66,35 @@ namespace Arrow
 
             velocity = new Vector3(0, 1, 0);
             jumped = false;
-
-            weapon = new GarandM1(game);
         }
 
         #endregion
 
         public void Update(GameTime gameTime, MapManager map)
         {
+            Shoot(gameTime);
+            MapCollision(map);
+        }
+
+        public void HandleInput(GameTime gameTime, InputState input, MapManager map)
+        {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Shoot(gameTime);
-            Crouch();
-            CameraOrientation(dt);
-            Walk(dt);
-            MapCollision(map);
-            Jump(map);
+            Crouch(input);
+            CameraOrientation(input, dt);
+            Walk(input, dt);
+            Jump(input, map);
         }
 
         public void Draw()
         {
-            weapon.Draw();
         }
 
         /// <summary>
         /// Move player
         /// </summary>
         /// <param name="dtSeconds">Total seconds elapsed since last update</param>
-        private void Walk(float dtSeconds)
+        private void Walk(InputState input, float dtSeconds)
         {
             Vector3 moveVector = Vector3.Zero;
 
@@ -109,10 +106,7 @@ namespace Arrow
                 {
                     if (moveVector.Z > 0)
                         moveVector.Z *= COEF_RUN_SPEED;
-                    //SFXManager.Play("Run");
                 }
-                /*else
-                    SFXManager.Play("Walk");*/
             }
 
             // Effectue le mouvement
@@ -124,7 +118,7 @@ namespace Arrow
         /// Change camera orientation
         /// </summary>
         /// <param name="dtSeconds">Total seconds elapsed since last update</param>
-        private void CameraOrientation(float dtSeconds)
+        private void CameraOrientation(InputState input, float dtSeconds)
         {
             if (input.PlayerRotate(ref rotationBuffer, dtSeconds))
             {
@@ -155,13 +149,12 @@ namespace Arrow
         /// </summary>              
         private void Shoot(GameTime gameTime)
         {
-            weapon.Update(gameTime);
         }
 
         /// <summary>
         /// Crouch
         /// </summary>
-        private void Crouch()
+        private void Crouch(InputState input)
         {
             float currentHeight = height;
 
@@ -181,7 +174,7 @@ namespace Arrow
         /// <summary>
         /// Jump
         /// </summary>
-        private void Jump(MapManager map)
+        private void Jump(InputState input, MapManager map)
         {
             if (!jumped)
             {

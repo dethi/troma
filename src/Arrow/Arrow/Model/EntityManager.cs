@@ -9,11 +9,14 @@ namespace Arrow
     public class EntityManager
     {
         private Game game;
+        private MapManager maps;
+
         public Dictionary<string, Entity> Entities { get; private set; }
 
-        public EntityManager(Game game)
+        public EntityManager(Game game, MapManager maps)
         {
             this.game = game;
+            this.maps = maps;
             Entities = new Dictionary<string, Entity>();
         }
 
@@ -25,14 +28,12 @@ namespace Arrow
 
         #region AddEntity
 
-        public void AddEntity(string entityName)
-        {
-            AddEntity(new Entity(game, entityName));
-        }
-
         public void AddEntity(string entityName, Vector2 pos)
         {
-            AddEntity(new Entity(game, entityName, pos));
+            AddEntity(new Entity(game, entityName, new Vector3(
+                pos.X, 
+                maps.GetHeight(pos.X, pos.Y).Value, 
+                pos.Y)));
         }
 
         public void AddEntity(string entityName, Vector3 pos)
@@ -50,17 +51,6 @@ namespace Arrow
         public void RemoveEntity(string entityName)
         {
             Entities.Remove(entityName);
-        }
-       
-        public void MoveEntity(Vector4 i_pos)
-        {
-            Entity item = this.Entities.ElementAt((int)i_pos.W).Value;
-            float? pos_Y = game.mapManager.GetHeight(i_pos.X, i_pos.Z);
-
-            pos_Y = (pos_Y.HasValue) ? pos_Y.Value : 0;
-
-            item.position = Matrix.CreateTranslation(
-                new Vector3(i_pos.X, pos_Y.Value, i_pos.Z));
         }
     }
 }

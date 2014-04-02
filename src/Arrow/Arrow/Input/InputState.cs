@@ -39,9 +39,20 @@ namespace Arrow
 
         public MouseState CurrentMouseState { get; private set; }
         public MouseState LastMouseState { get; private set; }
+
         private Vector2 mouseOrigin;
 
-        public InputState(Vector2 mouseOrigin)
+        public Vector2 MouseOrigin
+        {
+            get { return mouseOrigin; }
+            set
+            {
+                mouseOrigin = value;
+                MouseResetPos();
+            }
+        }
+
+        public InputState()
         {
             mapping = new InputConfiguration();
 
@@ -49,9 +60,7 @@ namespace Arrow
             isGamePadConnected = false;
             CurrentKeyboardState = new KeyboardState();
             CurrentMouseState = new MouseState();
-
-            this.mouseOrigin = mouseOrigin;
-            MouseResetPos();
+            mouseOrigin = Vector2.Zero;
         }
 
         public void Update()
