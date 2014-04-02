@@ -10,8 +10,9 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 
-namespace Arrow
+namespace Arrow.Deprecated
 {
+    [Obsolete("Not used anymore", true)]
     public class Button
     {
         private Game game;

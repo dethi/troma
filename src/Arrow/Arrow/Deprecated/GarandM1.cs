@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Arrow
+namespace Arrow.Deprecated
 {
+    [Obsolete("Not used anymore", true)]
     class GarandM1 : Weapon
     {
         public GarandM1(Game game)

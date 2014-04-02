@@ -11,19 +11,19 @@ namespace Arrow
         private Game game;
         private MapManager maps;
 
-        public Dictionary<string, Entity> Entities { get; private set; }
+        public List<Entity> Entities { get; private set; }
 
         public EntityManager(Game game, MapManager maps)
         {
             this.game = game;
             this.maps = maps;
-            Entities = new Dictionary<string, Entity>();
+            Entities = new List<Entity>();
         }
 
         public void Draw()
         {
-            foreach (KeyValuePair<string, Entity> item in Entities)
-                item.Value.Draw();
+            foreach (Entity item in Entities)
+                item.Draw();
         }
 
         #region AddEntity
@@ -43,14 +43,9 @@ namespace Arrow
 
         public void AddEntity(Entity item)
         {
-            Entities.Add(item.entityName, item);
+            Entities.Add(item);
         }
 
         #endregion
-
-        public void RemoveEntity(string entityName)
-        {
-            Entities.Remove(entityName);
-        }
     }
 }

@@ -148,9 +148,6 @@
     <Compile Include="ScreenManager\GameScreen.cs" />
     <Compile Include="Input\InputAction.cs" />
     <Compile Include="Input\InputConfiguration.cs" />
-    <Compile Include="Deprecated\DisplayPosObject.cs" />
-    <Compile Include="Deprecated\MapEditorConstants.cs" />
-    <Compile Include="Deprecated\EntityPos.cs" />
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="Deprecated\MenuStart.cs" />
     <Compile Include="Input\InputState.cs" />

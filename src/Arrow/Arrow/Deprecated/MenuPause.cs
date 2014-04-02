@@ -6,8 +6,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Arrow
+namespace Arrow.Deprecated
 {
+    [Obsolete("Not used anymore", true)]
     public class MenuPause : Menu
     {
         Texture2D fond;

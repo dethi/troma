@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
-namespace Arrow
+namespace Arrow.Deprecated
 {
     public abstract partial class Weapon
     {

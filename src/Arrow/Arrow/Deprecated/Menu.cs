@@ -9,8 +9,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace Arrow
+namespace Arrow.Deprecated
 {
+    [Obsolete("Not used anymore", true)]
     public class Menu
     {
         protected Game game;

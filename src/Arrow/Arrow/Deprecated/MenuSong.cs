@@ -6,8 +6,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 
-namespace Arrow
+namespace Arrow.Deprecated
 {
+    [Obsolete("Not used anymore", true)]
     public class MenuSong
     {
         private Game game;
