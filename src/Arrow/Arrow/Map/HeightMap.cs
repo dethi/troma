@@ -87,9 +87,6 @@ namespace Arrow
         private void ReadHeightMap(Texture2D heightMap, int terrainWidth, int terrainHeight,
             float heightScale)
         {
-            float min = float.MaxValue;
-            float max = float.MinValue;
-
             heights = new float[terrainWidth, terrainHeight];
 
             Color[] heightMapData = new Color[heightMap.Width * heightMap.Height];
@@ -100,19 +97,8 @@ namespace Arrow
                 for (int z = 0; z < terrainHeight; z++)
                 {
                     byte height = heightMapData[x + z * terrainWidth].R;
-                    heights[x, z] = (float)height / 255f;
-
-                    max = MathHelper.Max(max, heights[x, z]);
-                    min = MathHelper.Min(min, heights[x, z]);
+                    heights[x, z] = (float)(height / 255f) * heightScale;
                 }
-            }
-
-            float range = max - min;
-
-            for (int x = 0; x < terrainWidth; x++)
-            {
-                for (int z = 0; z < terrainHeight; z++)
-                    heights[x, z] = ((heights[x, z] - min) / range) * heightScale;
             }
         }
 
