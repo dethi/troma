@@ -16,7 +16,7 @@ namespace Arrow
     {
         #region Fields
 
-        GraphicsDeviceManager graphics;
+        internal GraphicsDeviceManager graphics { get; private set; }
         ScreenManager screenManager;
 
         // Prelaod any assets using by UI rendering
@@ -42,7 +42,8 @@ namespace Arrow
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
 
-            screenManager.AddScreen(new GameplayScreen(this));
+            //screenManager.AddScreen(new GameplayScreen(this));
+            screenManager.AddScreen(new TestScreen(this));
 
             #if !BUILD
 

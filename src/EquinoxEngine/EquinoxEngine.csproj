@@ -98,6 +98,7 @@
     <Compile Include="QuadNode.cs" />
     <Compile Include="QuadNodeVertex.cs" />
     <Compile Include="QuadTree.cs" />
+    <Compile Include="TestCamera.cs" />
     <Compile Include="TreeVertexCollection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

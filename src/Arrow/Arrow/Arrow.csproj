@@ -177,6 +177,10 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EquinoxEngine\EquinoxEngine.csproj">
+      <Project>{9EAE13BE-F7ED-4D2B-A3C4-A1BA9C6D144A}</Project>
+      <Name>EquinoxEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ArrowContent\ArrowContent.contentproj">
       <Name>ArrowContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>

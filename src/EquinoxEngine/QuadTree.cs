@@ -13,6 +13,8 @@ namespace EquinoxEngine
         private Vector3 _position;
         private int _topNodeSize;
 
+        private QuadNode _activeNode;
+
         private Vector3 _cameraPosition;
         private Vector3 _lastCameraPosition;
 
@@ -22,8 +24,9 @@ namespace EquinoxEngine
         public Matrix Projection;
 
         public BasicEffect Effect;
-
         public GraphicsDevice Device;
+
+        public int MinimumDepth;
 
         public int TopNodeSize
         {
@@ -89,19 +92,26 @@ namespace EquinoxEngine
 
         public void Update(GameTime gameTime)
         {
-            if (_cameraPosition == _lastCameraPosition)
-                return;
+            if (_cameraPosition != _lastCameraPosition)
+            {
+                Effect.View = View;
+                Effect.Projection = Projection;
 
-            Effect.View = View;
-            Effect.Projection = Projection;
+                _lastCameraPosition = _cameraPosition;
+                IndexCount = 0;
 
-            _lastCameraPosition = _cameraPosition;
-            IndexCount = 0;
+                _rootNode.Merge();
+                _rootNode.EnforceMinimumDepth();
+                _activeNode = _rootNode.DeepestNodeWithPoint(CameraPosition);
 
-            _rootNode.SetActivateVertices();
+                if (_activeNode != null)
+                    _activeNode.Split();
 
-            _buffers.UpdateIndexBuffer(Indices, IndexCount);
-            _buffers.SwapBuffer();
+                _rootNode.SetActiveVertices();
+
+                _buffers.UpdateIndexBuffer(Indices, IndexCount);
+                _buffers.SwapBuffer();
+            }
         }
 
         public void Draw(GameTime gameTime)
