@@ -27,6 +27,7 @@ namespace EquinoxEngine
         public GraphicsDevice Device;
 
         public int MinimumDepth;
+        public bool Cull;
 
         public int TopNodeSize
         {
@@ -49,8 +50,8 @@ namespace EquinoxEngine
             set { _cameraPosition = value; }
         }
 
-        internal BoundingFrustum ViewFrustrum { get; set; }
-        internal int IndexCount { get; set; }
+        public BoundingFrustum ViewFrustrum { get; private set; }
+        public int IndexCount { get; private set; }
 
         #endregion
 
@@ -67,6 +68,7 @@ namespace EquinoxEngine
 
             View = viewMatrix;
             Projection = projectionMatrix;
+            ViewFrustrum = new BoundingFrustum(viewMatrix * projectionMatrix);
 
             #region BasicEffect
 
@@ -96,6 +98,7 @@ namespace EquinoxEngine
             {
                 Effect.View = View;
                 Effect.Projection = Projection;
+                ViewFrustrum.Matrix = View * Projection;
 
                 _lastCameraPosition = _cameraPosition;
                 IndexCount = 0;

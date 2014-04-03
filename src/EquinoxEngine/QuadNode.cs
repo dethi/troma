@@ -74,6 +74,11 @@ namespace EquinoxEngine
             internal set { _isActive = value; }
         }
 
+        public bool IsInView
+        {
+            get { return Contains(_parentTree.ViewFrustrum); }
+        }
+
         #endregion
 
         public QuadNode(NodeType nodeType, int nodeSize, int nodeDepth,
@@ -334,78 +339,81 @@ namespace EquinoxEngine
 
         internal void SetActiveVertices()
         {
-            if (_isSplit && this.HasChildren)
+            if (!_parentTree.Cull || IsInView)
             {
-                ChildTopLeft.SetActiveVertices();
-                ChildTopRight.SetActiveVertices();
-                ChildBottomLeft.SetActiveVertices();
-                ChildBottomRight.SetActiveVertices();
-            }
-            else
-            {
-                #region Top Triangle(s)
-
-                _parentTree.UpdateBuffer(VertexCenter.Index);
-                _parentTree.UpdateBuffer(VertexTopLeft.Index);
-
-                if (VertexTop.Activated)
+                if (_isSplit && this.HasChildren)
                 {
-                    _parentTree.UpdateBuffer(VertexTop.Index);
+                    ChildTopLeft.SetActiveVertices();
+                    ChildTopRight.SetActiveVertices();
+                    ChildBottomLeft.SetActiveVertices();
+                    ChildBottomRight.SetActiveVertices();
+                }
+                else
+                {
+                    #region Top Triangle(s)
 
                     _parentTree.UpdateBuffer(VertexCenter.Index);
-                    _parentTree.UpdateBuffer(VertexTop.Index);
-                }
-                _parentTree.UpdateBuffer(VertexTopRight.Index);
+                    _parentTree.UpdateBuffer(VertexTopLeft.Index);
 
-                #endregion
+                    if (VertexTop.Activated)
+                    {
+                        _parentTree.UpdateBuffer(VertexTop.Index);
 
-                #region Right Triangle(s)
+                        _parentTree.UpdateBuffer(VertexCenter.Index);
+                        _parentTree.UpdateBuffer(VertexTop.Index);
+                    }
+                    _parentTree.UpdateBuffer(VertexTopRight.Index);
 
-                _parentTree.UpdateBuffer(VertexCenter.Index);
-                _parentTree.UpdateBuffer(VertexTopRight.Index);
+                    #endregion
 
-                if (VertexRight.Activated)
-                {
-                    _parentTree.UpdateBuffer(VertexRight.Index);
-
-                    _parentTree.UpdateBuffer(VertexCenter.Index);
-                    _parentTree.UpdateBuffer(VertexRight.Index);
-                }
-                _parentTree.UpdateBuffer(VertexBottomRight.Index);
-
-                #endregion
-
-                #region Bottom Triangle(s)
-
-                _parentTree.UpdateBuffer(VertexCenter.Index);
-                _parentTree.UpdateBuffer(VertexBottomRight.Index);
-
-                if (VertexBottom.Activated)
-                {
-                    _parentTree.UpdateBuffer(VertexBottom.Index);
+                    #region Right Triangle(s)
 
                     _parentTree.UpdateBuffer(VertexCenter.Index);
-                    _parentTree.UpdateBuffer(VertexBottom.Index);
-                }
-                _parentTree.UpdateBuffer(VertexBottomLeft.Index);
+                    _parentTree.UpdateBuffer(VertexTopRight.Index);
 
-                #endregion
+                    if (VertexRight.Activated)
+                    {
+                        _parentTree.UpdateBuffer(VertexRight.Index);
 
-                #region Left Triangle(s)
+                        _parentTree.UpdateBuffer(VertexCenter.Index);
+                        _parentTree.UpdateBuffer(VertexRight.Index);
+                    }
+                    _parentTree.UpdateBuffer(VertexBottomRight.Index);
 
-                _parentTree.UpdateBuffer(VertexCenter.Index);
-                _parentTree.UpdateBuffer(VertexBottomLeft.Index);
+                    #endregion
 
-                if (VertexLeft.Activated)
-                {
-                    _parentTree.UpdateBuffer(VertexLeft.Index);
+                    #region Bottom Triangle(s)
 
                     _parentTree.UpdateBuffer(VertexCenter.Index);
-                    _parentTree.UpdateBuffer(VertexLeft.Index);
-                }
-                _parentTree.UpdateBuffer(VertexTopLeft.Index);
+                    _parentTree.UpdateBuffer(VertexBottomRight.Index);
 
-                #endregion
+                    if (VertexBottom.Activated)
+                    {
+                        _parentTree.UpdateBuffer(VertexBottom.Index);
+
+                        _parentTree.UpdateBuffer(VertexCenter.Index);
+                        _parentTree.UpdateBuffer(VertexBottom.Index);
+                    }
+                    _parentTree.UpdateBuffer(VertexBottomLeft.Index);
+
+                    #endregion
+
+                    #region Left Triangle(s)
+
+                    _parentTree.UpdateBuffer(VertexCenter.Index);
+                    _parentTree.UpdateBuffer(VertexBottomLeft.Index);
+
+                    if (VertexLeft.Activated)
+                    {
+                        _parentTree.UpdateBuffer(VertexLeft.Index);
+
+                        _parentTree.UpdateBuffer(VertexCenter.Index);
+                        _parentTree.UpdateBuffer(VertexLeft.Index);
+                    }
+                    _parentTree.UpdateBuffer(VertexTopLeft.Index);
+
+                    #endregion
+                }
             }
         }
 
@@ -457,6 +465,11 @@ namespace EquinoxEngine
             return (Bounds.Contains(point) == ContainmentType.Contains);
         }
 
+        public bool Contains(BoundingFrustum boundingFrustrum)
+        {
+            return Bounds.Intersects(boundingFrustrum);
+        }
+
         /// <summary>
         /// Recursive search of the deepest node that contains the point
         /// </summary>
@@ -484,52 +497,54 @@ namespace EquinoxEngine
         /// </summary>
         public void Split()
         {
-            // Make sure parent node is split
-            if (_parent != null && !_parent.IsSplit)
-                _parent.Split();
-
-            if (CanSplit)
+            if (!_parentTree.Cull || IsInView)
             {
-                if (HasChildren)
+                // Make sure parent node is split
+                if (_parent != null && !_parent.IsSplit)
+                    _parent.Split();
+
+                if (CanSplit)
                 {
-                    ChildTopLeft.Activate();
-                    ChildTopRight.Activate();
-                    ChildBottomLeft.Activate();
-                    ChildBottomRight.Activate();
+                    if (HasChildren)
+                    {
+                        ChildTopLeft.Activate();
+                        ChildTopRight.Activate();
+                        ChildBottomLeft.Activate();
+                        ChildBottomRight.Activate();
 
-                    _isActive = false;
+                        _isActive = false;
+                    }
+                    else
+                        _isActive = true;
+
+                    _isSplit = true;
+                    VertexTop.Activated = true;
+                    VertexLeft.Activated = true;
+                    VertexRight.Activated = true;
+                    VertexBottom.Activated = true;
                 }
-                else
-                    _isActive = true;
 
-                _isSplit = true;
-                VertexTop.Activated = true;
-                VertexLeft.Activated = true;
-                VertexRight.Activated = true;
-                VertexBottom.Activated = true;
+                // Make sure neighbor parents are split
+                EnsureNeighborParentSplit(NeighborTop);
+                EnsureNeighborParentSplit(NeighborRight);
+                EnsureNeighborParentSplit(NeighborBottom);
+                EnsureNeighborParentSplit(NeighborLeft);
+
+                // Make sure neighbor vertices are active
+                if (NeighborTop != null)
+                    NeighborTop.VertexBottom.Activated = true;
+
+                if (NeighborRight != null)
+                    NeighborRight.VertexLeft.Activated = true;
+
+                if (NeighborBottom != null)
+                    NeighborBottom.VertexTop.Activated = true;
+
+                if (NeighborLeft != null)
+                    NeighborLeft.VertexRight.Activated = true;
             }
-
-            // Make sure neighbor parents are split
-            EnsureNeighborParentSplit(NeighborTop);
-            EnsureNeighborParentSplit(NeighborRight);
-            EnsureNeighborParentSplit(NeighborBottom);
-            EnsureNeighborParentSplit(NeighborLeft);
-
-            // Make sure neighbor vertices are active
-            if (NeighborTop != null)
-                NeighborTop.VertexBottom.Activated = true;
-
-            if (NeighborRight != null)
-                NeighborRight.VertexLeft.Activated = true;
-
-            if (NeighborBottom != null)
-                NeighborBottom.VertexTop.Activated = true;
-
-            if (NeighborLeft != null)
-                NeighborLeft.VertexRight.Activated = true;
-
         }
-        
+
         /// <summary>
         /// Make sure neighbor parents are split
         /// </summary>

@@ -1,4 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -43,13 +47,14 @@ namespace Arrow
 
             Texture2D heightmap = content.Load<Texture2D>("hmSmall");
 
-            _camera = new TestCamera(new Vector3(320, 600, 500), 
-                new Vector3(320, 0, 400), _device, 7000f);
+            _camera = new TestCamera(new Vector3(300, 50, 300), 
+                new Vector3(300, 0, 100), _device, 7000f);
 
             _quadTree = new QuadTree(Vector3.Zero, heightmap, 
                 _camera.View, _camera.Projection, _device, 1);
 
             _quadTree.MinimumDepth = 0;
+            _quadTree.Cull = true;
             _quadTree.Effect.Texture = content.Load<Texture2D>("jigsaw");
 
             _isWire = false;
@@ -78,12 +83,23 @@ namespace Arrow
             _quadTree.Projection = _camera.Projection;
             _quadTree.CameraPosition = _camera.Position;
             _quadTree.Update(gameTime);
+
+            game.Window.Title = String.Format("Triangles Rendered: {0} - Culling Enabled: {1}", 
+                _quadTree.IndexCount / 3, _quadTree.Cull);
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
         {
+            if (input.IsPressed(Keys.C))
+                _quadTree.Cull = !_quadTree.Cull;
+
             if (input.IsPressed(Keys.W))
                 _isWire = !_isWire;
+
+            if (input.IsDown(Keys.Up))
+                _camera.Move(new Vector3(0, 0, -0.5f));
+            else if (input.IsDown(Keys.Down))
+                _camera.Move(new Vector3(0, 0, 0.5f));
         }
 
         public override void Draw(GameTime gameTime)
