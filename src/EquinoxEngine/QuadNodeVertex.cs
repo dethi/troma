@@ -1,4 +1,4 @@
-﻿namespace FlowEngine
+﻿namespace EquinoxEngine
 {
     public struct QuadNodeVertex
     {
