@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using EquinoxEngine;
+using EquinoxEngine.Terrain;
 
 namespace Arrow
 {

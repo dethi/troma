@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace EquinoxEngine
+namespace EquinoxEngine.Terrain
 {
     public class TreeVertexCollection
     {

@@ -1,4 +1,4 @@
-﻿namespace EquinoxEngine
+﻿namespace EquinoxEngine.Terrain
 {
     public struct QuadNodeVertex
     {

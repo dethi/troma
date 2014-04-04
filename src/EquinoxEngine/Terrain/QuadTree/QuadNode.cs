@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace EquinoxEngine
+namespace EquinoxEngine.Terrain
 {
     public class QuadNode
     {
