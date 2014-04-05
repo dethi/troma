@@ -26,6 +26,9 @@ namespace Arrow
             };
         }
 
+        /// <summary>
+        /// Return the key for this action
+        /// </summary>
         public Keys Parse(KeyActions keyAction)
         {
             Keys key;

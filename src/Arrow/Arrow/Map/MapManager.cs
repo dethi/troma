@@ -16,6 +16,17 @@ namespace Arrow
         private int terrainWidth;
         private int terrainHeight;
 
+        /// <summary>
+        /// Manage a set of terrain
+        /// </summary>
+        /// <param name="heightMapT">Heighmap texture</param>
+        /// <param name="terrainT">Terrain texture</param>
+        /// <param name="textureScale">Size of terrain texture</param>
+        /// <param name="terrainWidth">Terrain width (X)</param>
+        /// <param name="terrainHeight">Terrain height (Z)</param>
+        /// <param name="heightScale">Max terrain depth (Y)</param>
+        /// <param name="nbMapX">Number of map (X)</param>
+        /// <param name="nbMapZ">Number of map (Z)</param>
         public MapManager(Game game, string heightMapT, string terrainT,
             float textureScale, int terrainWidth, int terrainHeight, 
             float heightScale, int nbMapX, int nbMapZ)
@@ -52,6 +63,9 @@ namespace Arrow
             }
         }
 
+        /// <summary>
+        /// Return the instance of the map that contains the (X,Z) position
+        /// </summary>
         public HeightMap GetMap(float x, float z)
         {
             int map_x = (int)x / terrainWidth;
@@ -70,6 +84,9 @@ namespace Arrow
             return maps[map_x, map_z];
         }
 
+        /// <summary>
+        /// Search the Y position of a terrain point
+        /// </summary>
         public float? GetHeight(float x, float z)
         {
             return GetMap(x, z).GetHeight(

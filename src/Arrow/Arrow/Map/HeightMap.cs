@@ -28,6 +28,17 @@ namespace Arrow
 
         #endregion
 
+        /// <summary>
+        /// Build a terrain
+        /// </summary>
+        /// <param name="heightMapT">Heighmap texture</param>
+        /// <param name="terrainT">Terrain texture</param>
+        /// <param name="textureScale">Size of terrain texture</param>
+        /// <param name="terrainWidth">Terrain width (X)</param>
+        /// <param name="terrainHeight">Terrain height (Z)</param>
+        /// <param name="heightScale">Max terrain depth (Y)</param>
+        /// <param name="offsetX">X first position</param>
+        /// <param name="offsetZ">Z first position</param>
         public HeightMap(Game game, string heightMapT, string terrainT,
             float textureScale, int terrainWidth, int terrainHeight, 
             float heightScale, int offsetX, int offsetZ)
@@ -83,7 +94,7 @@ namespace Arrow
         /// Build matrice using the heighmap image
         /// </summary>
         /// <param name="heightMap">Heighmap image</param>
-        /// <param name="heightScale">Maximum height of the terrain</param>
+        /// <param name="heightScale">Max depth (Y) of the terrain</param>
         private void ReadHeightMap(Texture2D heightMap, int terrainWidth, int terrainHeight,
             float heightScale)
         {
@@ -200,7 +211,7 @@ namespace Arrow
         }
 
         /// <summary>
-        /// Search the height of a terrain point
+        /// Search the Y position of a terrain point
         /// </summary>
         public float? GetHeight(float x, float z)
         {

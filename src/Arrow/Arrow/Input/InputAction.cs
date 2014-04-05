@@ -11,6 +11,11 @@ namespace Arrow
     {
         #region Player
 
+        /// <summary>
+        /// Check if the player should rotate
+        /// </summary>
+        /// <param name="dt">Time elapsed in seconds</param>
+        /// <returns>True if there is a rotation</returns>
         public bool PlayerRotate(ref Vector3 rotationBuffer, float dt)
         {
             if (isGamePadConnected && (CurrentGamePadState.ThumbSticks.Right.X != 0 ||
@@ -33,6 +38,10 @@ namespace Arrow
                 return false;
         }
 
+        /// <summary>
+        /// Check if the player should move
+        /// </summary>
+        /// <returns>True if there is a move</returns>
         public bool PlayerMove(out Vector3 moveVector)
         {
             moveVector = Vector3.Zero;
@@ -65,16 +74,25 @@ namespace Arrow
                 return false;
         }
 
+        /// <summary>
+        /// Check if the player should run
+        /// </summary>
         public bool PlayerRun()
         {
             return IsDown(KeyActions.Run) || IsDown(Buttons.LeftStick);
         }
 
+        /// <summary>
+        /// Check if the player should crouch
+        /// </summary>
         public bool PlayerCrouch()
         {
             return IsDown(KeyActions.Crouch) || IsDown(Buttons.B);
         }
 
+        /// <summary>
+        /// Check if the player should jump
+        /// </summary>
         public bool PlayerJump()
         {
             return IsDown(KeyActions.Jump) || IsDown(Buttons.A);
