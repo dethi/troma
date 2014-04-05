@@ -12,6 +12,7 @@ using EquinoxEngine.Terrain;
 
 namespace Arrow
 {
+    [Obsolete("Not used anymore", true)]
     public class TestScreen : GameScreen
     {
         #region Fields
@@ -48,10 +49,10 @@ namespace Arrow
 
             Texture2D heightmap = content.Load<Texture2D>("hmSmall");
 
-            _camera = new TestCamera(new Vector3(300, 50, 300), 
+            _camera = new TestCamera(new Vector3(300, 50, 300),
                 new Vector3(300, 0, 100), _device, 7000f);
 
-            _quadTree = new QuadTree(Vector3.Zero, heightmap, 
+            _quadTree = new QuadTree(Vector3.Zero, heightmap,
                 _camera.View, _camera.Projection, _device, 1);
 
             _quadTree.MinimumDepth = 0;
@@ -85,7 +86,7 @@ namespace Arrow
             _quadTree.CameraPosition = _camera.Position;
             _quadTree.Update(gameTime);
 
-            game.Window.Title = String.Format("Triangles Rendered: {0} - Culling Enabled: {1}", 
+            game.Window.Title = String.Format("Triangles Rendered: {0} - Culling Enabled: {1}",
                 _quadTree.IndexCount / 3, _quadTree.Cull);
         }
 

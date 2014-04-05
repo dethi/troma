@@ -42,8 +42,7 @@ namespace Arrow
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
 
-            //screenManager.AddScreen(new GameplayScreen(this));
-            screenManager.AddScreen(new TestScreen(this));
+            screenManager.AddScreen(new GameplayScreen(this));
 
             #if !BUILD
 
