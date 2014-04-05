@@ -16,7 +16,7 @@ namespace Arrow
     {
         #region Fields
 
-        GraphicsDeviceManager graphics;
+        internal GraphicsDeviceManager graphics { get; private set; }
         ScreenManager screenManager;
 
         // Prelaod any assets using by UI rendering

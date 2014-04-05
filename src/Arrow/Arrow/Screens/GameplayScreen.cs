@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Arrow
 {
-    class GameplayScreen : GameScreen
+    public class GameplayScreen : GameScreen
     {
         #region Fields
 

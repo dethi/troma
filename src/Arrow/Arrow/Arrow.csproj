@@ -162,6 +162,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Map\HeightMap.cs" />
     <Compile Include="Player\Player.cs" />
+    <Compile Include="Screens\TestScreen.cs" />
     <Compile Include="Sound\SFXManager.cs" />
     <Compile Include="Deprecated\Menu.cs" />
     <Compile Include="Model\EntityManager.cs" />
@@ -176,6 +177,10 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EquinoxEngine\EquinoxEngine.csproj">
+      <Project>{9EAE13BE-F7ED-4D2B-A3C4-A1BA9C6D144A}</Project>
+      <Name>EquinoxEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ArrowContent\ArrowContent.contentproj">
       <Name>ArrowContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>

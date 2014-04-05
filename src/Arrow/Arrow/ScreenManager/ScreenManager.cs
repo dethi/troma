@@ -110,6 +110,9 @@ namespace Arrow
             }
         }
 
+        /// <summary>
+        /// Add a screen
+        /// </summary>
         public void AddScreen(GameScreen s)
         {
             s.ScreenManager = this;
@@ -121,6 +124,9 @@ namespace Arrow
             screens.Add(s);
         }
 
+        /// <summary>
+        /// Remove a screen
+        /// </summary>
         public void RemoveScreen(GameScreen s)
         {
             if (isInitialized)
