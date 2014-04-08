@@ -189,11 +189,20 @@ namespace Arrow
             }
             else
             {
-                entities.AddEntity("Town/gare", new Vector2(0, 0));
-                entities.AddEntity("Town/batiment1", new Vector2(256, 256));
-                entities.AddEntity("Town/batiment2", new Vector2(100, 100));
-                entities.AddEntity("Town/batiment3", new Vector2(400, 400));
+                entities.AddEntity("Town/gare", new Vector2(768, 685));
 
+                Model batiment1X = content.Load<Model>("Models/Town/batiment1");
+                entities.AddEntity(batiment1X, new Vector2(768, 405));
+                entities.AddEntity(batiment1X, new Vector2(888, 405));
+
+                Model batiment1bisX = content.Load<Model>("Models/Town/batiment1bis");
+                entities.AddEntity(batiment1bisX, new Vector2(1128, 525));
+                entities.AddEntity(batiment1bisX, new Vector2(1128, 645));
+
+                //entities.AddEntity("Town/batiment2", new Vector2(100, 100));
+                entities.AddEntity("Town/batiment3", new Vector2(1128, 405));
+
+                #region rail
                 Model railX = content.Load<Model>("Models/Town/rail");
                 entities.AddEntity(railX, new Vector2(0, 775));
                 entities.AddEntity(railX, new Vector2(120, 775));
@@ -211,21 +220,23 @@ namespace Arrow
                 entities.AddEntity(railX, new Vector2(1560, 775));
                 entities.AddEntity(railX, new Vector2(1680, 775));
 
-                entities.AddEntity(railX, new Vector2(0, 784));
-                entities.AddEntity(railX, new Vector2(120, 784));
-                entities.AddEntity(railX, new Vector2(240, 784));
-                entities.AddEntity(railX, new Vector2(360, 784));
-                entities.AddEntity(railX, new Vector2(480, 784));
-                entities.AddEntity(railX, new Vector2(600, 784));
-                entities.AddEntity(railX, new Vector2(720, 784));
-                entities.AddEntity(railX, new Vector2(840, 784));
-                entities.AddEntity(railX, new Vector2(960, 784));
-                entities.AddEntity(railX, new Vector2(1080, 784));
-                entities.AddEntity(railX, new Vector2(1200, 784));
-                entities.AddEntity(railX, new Vector2(1320, 784));
-                entities.AddEntity(railX, new Vector2(1440, 784));
-                entities.AddEntity(railX, new Vector2(1560, 784));
-                entities.AddEntity(railX, new Vector2(1680, 784));
+                entities.AddEntity(railX, new Vector2(0, 790));
+                entities.AddEntity(railX, new Vector2(120, 790));
+                entities.AddEntity(railX, new Vector2(240, 790));
+                entities.AddEntity(railX, new Vector2(360, 790));
+                entities.AddEntity(railX, new Vector2(480, 790));
+                entities.AddEntity(railX, new Vector2(600, 790));
+                entities.AddEntity(railX, new Vector2(720, 790));
+                entities.AddEntity(railX, new Vector2(840, 790));
+                entities.AddEntity(railX, new Vector2(960, 790));
+                entities.AddEntity(railX, new Vector2(1080, 790));
+                entities.AddEntity(railX, new Vector2(1200, 790));
+                entities.AddEntity(railX, new Vector2(1320, 790));
+                entities.AddEntity(railX, new Vector2(1440, 790));
+                entities.AddEntity(railX, new Vector2(1560, 790));
+                entities.AddEntity(railX, new Vector2(1680, 790));
+
+                #endregion
             }
         }
 
