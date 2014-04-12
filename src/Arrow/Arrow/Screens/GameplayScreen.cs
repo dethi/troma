@@ -40,7 +40,7 @@ namespace Arrow
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
             camera = Camera.Instance;
-            player = new Player(game, new Vector3(80, 10, 460));
+            player = new Player(game, new Vector3(800, 10, 600));
             mode_jeu = "Town";
         }
 
@@ -50,7 +50,7 @@ namespace Arrow
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             camera.New(game, Vector3.Zero, Vector3.Zero);
-            player.Position = new Vector3(80, 10, 460);
+            player.Position = new Vector3(800, 10, 600);
 
             cross = content.Load<Texture2D>("Cross");
 
@@ -190,14 +190,17 @@ namespace Arrow
             else
             {
                 entities.AddEntity("Town/gare", new Vector2(768, 685));
+                entities.AddEntity("Town/eglise", new Vector2(1008, 445));
+                entities.AddEntity("Town/mairie", new Vector2(1008, 565));
+                entities.AddEntity("Town/poste", new Vector2(648, 525));
 
                 Model batiment1X = content.Load<Model>("Models/Town/batiment1");
                 entities.AddEntity(batiment1X, new Vector2(768, 405));
                 entities.AddEntity(batiment1X, new Vector2(888, 405));
 
-                Model batiment1bisX = content.Load<Model>("Models/Town/batiment1bis");
-                entities.AddEntity(batiment1bisX, new Vector2(1128, 525));
-                entities.AddEntity(batiment1bisX, new Vector2(1128, 645));
+                //Model batiment1bisX = content.Load<Model>("Models/Town/batiment1bis");
+                //entities.AddEntity(batiment1bisX, new Vector2(1128, 525));
+                //entities.AddEntity(batiment1bisX, new Vector2(1128, 645));
 
                 //entities.AddEntity("Town/batiment2", new Vector2(100, 100));
                 entities.AddEntity("Town/batiment3", new Vector2(1128, 405));
