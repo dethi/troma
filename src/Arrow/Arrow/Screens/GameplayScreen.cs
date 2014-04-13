@@ -41,7 +41,7 @@ namespace Arrow
 
             camera = Camera.Instance;
             player = new Player(game, new Vector3(800, 10, 600));
-            carte = "Farm";
+            carte = "Town";
         }
 
         public override void LoadContent()
@@ -194,10 +194,12 @@ namespace Arrow
                 entities.AddEntity("Town/eglise", new Vector2(1008, 445));
                 entities.AddEntity("Town/mairie", new Vector2(1008, 565));
                 entities.AddEntity("Town/poste", new Vector2(648, 525));
-
-                Model batiment1X = content.Load<Model>("Models/Town/batiment1");
-                entities.AddEntity(batiment1X, new Vector2(768, 405));
-                entities.AddEntity(batiment1X, new Vector2(888, 405));
+                entities.AddEntity("Town/immeuble", new Vector2(768, 405));
+                                
+                Model batiment1X = content.Load<Model>("Models/Town/batiment2");
+                entities.AddEntity(batiment1X, new Vector2(608, 525));
+                entities.AddEntity(batiment1X, new Vector2(728, 645));
+                entities.AddEntity(batiment1X, new Vector2(608, 645));
 
                 entities.AddEntity("Town/batiment3", new Vector2(1128, 405));
 
