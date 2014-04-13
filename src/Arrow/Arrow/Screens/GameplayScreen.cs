@@ -25,7 +25,7 @@ namespace Arrow
         private EntityManager entities;
         private Texture2D cross;
 
-        private string mode_jeu;
+        private string carte;
 
         private float pauseAlpha;
 
@@ -41,7 +41,7 @@ namespace Arrow
 
             camera = Camera.Instance;
             player = new Player(game, new Vector3(800, 10, 600));
-            mode_jeu = "Town";
+            carte = "Farm";
         }
 
         public override void LoadContent()
@@ -56,8 +56,8 @@ namespace Arrow
 
             mapEffect = content.Load<Effect>("Effects/Terrain");
             maps = new MapManager(game,
-                "Textures/" + mode_jeu + "/heightmap",
-                "Textures/" + mode_jeu + "/texture",
+                "Textures/" + carte + "/heightmap",
+                "Textures/" + carte + "/texture",
                 513f,
                 513,
                 513,
@@ -67,7 +67,7 @@ namespace Arrow
 
             entities = new EntityManager(game, maps);
 
-            if (mode_jeu == "Farm")
+            if (carte == "Farm")
             {
                 
                 skydome = new Entity(game, "skydome", new Vector3(
@@ -80,8 +80,8 @@ namespace Arrow
 
                 #region Wood barrier
 
-                Model woodBarrierX = content.Load<Model>("Models/wood_barrier_x");
-                Model woodBarrierZ = content.Load<Model>("Models/wood_barrier_z");
+                Model woodBarrierX = content.Load<Model>("Models/Farm/wood_barrier_x");
+                Model woodBarrierZ = content.Load<Model>("Models/Farm/wood_barrier_z");
 
                 entities.AddEntity(woodBarrierZ, new Vector2(119, 101));
                 entities.AddEntity(woodBarrierZ, new Vector2(119, 91));
@@ -111,8 +111,8 @@ namespace Arrow
 
                 #region Barbed barrier
 
-                Model barbedBarrierZ = content.Load<Model>("Models/barbed_barrier_z");
-                Model postBarrier = content.Load<Model>("Models/post_barrier");
+                Model barbedBarrierZ = content.Load<Model>("Models/Farm/barbed_barrier_z");
+                Model postBarrier = content.Load<Model>("Models/Farm/post_barrier");
 
                 entities.AddEntity(barbedBarrierZ, new Vector2(160, 0));
                 entities.AddEntity(barbedBarrierZ, new Vector2(160, 9));
@@ -174,14 +174,14 @@ namespace Arrow
 
                 #endregion
 
-                entities.AddEntity("house", new Vector2(0, 511));
-                entities.AddEntity("barn", new Vector2(60, 511));
-                entities.AddEntity("bandbags", new Vector2(150, 150));
-                entities.AddEntity("table", new Vector2(58, 400));
-                entities.AddEntity("barrel", new Vector2(58, 405));
-                entities.AddEntity("truck_allemand", new Vector2(122, 206));
-                entities.AddEntity("farm", new Vector2(0, 262));
-                entities.AddEntity("shelter", new Vector2(0, 411));
+                entities.AddEntity("Farm/house", new Vector2(0, 511));
+                entities.AddEntity("Farm/barn", new Vector2(60, 511));
+                entities.AddEntity("Farm/bandbags", new Vector2(150, 150));
+                entities.AddEntity("Farm/table", new Vector2(58, 400));
+                entities.AddEntity("Farm/barrel", new Vector2(58, 405));
+                entities.AddEntity("Farm/truck_allemand", new Vector2(122, 206));
+                entities.AddEntity("Farm/farm", new Vector2(0, 262));
+                entities.AddEntity("Farm/shelter", new Vector2(0, 411));
 
                 #endregion
 
@@ -190,6 +190,7 @@ namespace Arrow
             else
             {
                 entities.AddEntity("Town/gare", new Vector2(768, 685));
+                entities.AddEntity("Town/quai", new Vector2(768, 813));
                 entities.AddEntity("Town/eglise", new Vector2(1008, 445));
                 entities.AddEntity("Town/mairie", new Vector2(1008, 565));
                 entities.AddEntity("Town/poste", new Vector2(648, 525));
@@ -198,11 +199,6 @@ namespace Arrow
                 entities.AddEntity(batiment1X, new Vector2(768, 405));
                 entities.AddEntity(batiment1X, new Vector2(888, 405));
 
-                //Model batiment1bisX = content.Load<Model>("Models/Town/batiment1bis");
-                //entities.AddEntity(batiment1bisX, new Vector2(1128, 525));
-                //entities.AddEntity(batiment1bisX, new Vector2(1128, 645));
-
-                //entities.AddEntity("Town/batiment2", new Vector2(100, 100));
                 entities.AddEntity("Town/batiment3", new Vector2(1128, 405));
 
                 #region rail
