@@ -363,18 +363,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="hmSmall.bmp">
-      <Name>hmSmall</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="jigsaw.png">
-      <Name>jigsaw</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Textures\Town\heightmap%280,0%29.png">
       <Name>heightmap%280,0%29</Name>
       <Importer>TextureImporter</Importer>
