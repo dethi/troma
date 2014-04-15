@@ -109,37 +109,37 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\antitank.fbx">
+    <Compile Include="Models\Farm\antitank.fbx">
       <Name>antitank</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
     </Compile>
-    <Compile Include="Models\bandbags.fbx">
+    <Compile Include="Models\Farm\bandbags.fbx">
       <Name>bandbags</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
     </Compile>
-    <Compile Include="Models\barn.fbx">
+    <Compile Include="Models\Farm\barn.fbx">
       <Name>barn</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
     </Compile>
-    <Compile Include="Models\barrel.fbx">
+    <Compile Include="Models\Farm\barrel.fbx">
       <Name>barrel</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
     </Compile>
-    <Compile Include="Models\house.fbx">
+    <Compile Include="Models\Farm\house.fbx">
       <Name>house</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
     </Compile>
-    <Compile Include="Models\table.fbx">
+    <Compile Include="Models\Farm\table.fbx">
       <Name>table</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -147,7 +147,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\m1.fbx">
+    <Compile Include="Models\Farm\m1.fbx">
       <Name>m1</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -156,7 +156,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\soldier.fbx">
+    <Compile Include="Models\Farm\soldier.fbx">
       <Name>soldier</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -164,14 +164,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\cible_homme.fbx">
+    <Compile Include="Models\Farm\cible_homme.fbx">
       <Name>cible_homme</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\shelter.fbx">
+    <Compile Include="Models\Farm\shelter.fbx">
       <Name>shelter</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -179,7 +179,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\truck_allemand.fbx">
+    <Compile Include="Models\Farm\truck_allemand.fbx">
       <Name>truck_allemand</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -187,7 +187,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\truck_allemand_casse.fbx">
+    <Compile Include="Models\Farm\truck_allemand_casse.fbx">
       <Name>truck_allemand_casse</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -196,7 +196,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\farm.fbx">
+    <Compile Include="Models\Farm\farm.fbx">
       <Name>farm</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -204,7 +204,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\post_barrier.fbx">
+    <Compile Include="Models\Farm\post_barrier.fbx">
       <Name>post_barrier</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -242,14 +242,6 @@
       <Name>Walk</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\skydome.fbx">
-      <Name>skydome</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -345,7 +337,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\barbed_barrier_z.fbx">
+    <Compile Include="Models\Farm\barbed_barrier_z.fbx">
       <Name>barbed_barrier_z</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -354,7 +346,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wood_barrier_x.fbx">
+    <Compile Include="Models\Farm\wood_barrier_x.fbx">
       <Name>wood_barrier_x</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -362,7 +354,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wood_barrier_z.fbx">
+    <Compile Include="Models\Farm\wood_barrier_z.fbx">
       <Name>wood_barrier_z</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
@@ -371,15 +363,193 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="hmSmall.bmp">
-      <Name>hmSmall</Name>
+    <Compile Include="Textures\Town\heightmap%280,0%29.png">
+      <Name>heightmap%280,0%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="jigsaw.png">
-      <Name>jigsaw</Name>
+    <Compile Include="Textures\Town\heightmap%280,1%29.png">
+      <Name>heightmap%280,1%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%280,2%29.png">
+      <Name>heightmap%280,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%281,0%29.png">
+      <Name>heightmap%281,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%281,1%29.png">
+      <Name>heightmap%281,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%281,2%29.png">
+      <Name>heightmap%281,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%282,0%29.png">
+      <Name>heightmap%282,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%282,1%29.png">
+      <Name>heightmap%282,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%282,2%29.png">
+      <Name>heightmap%282,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Town\texture%280,0%29.png">
+      <Name>texture%280,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\texture%280,1%29.png">
+      <Name>texture%280,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\texture%280,2%29.png">
+      <Name>texture%280,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\texture%281,0%29.png">
+      <Name>texture%281,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\texture%281,1%29.png">
+      <Name>texture%281,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\texture%281,2%29.png">
+      <Name>texture%281,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\texture%282,0%29.png">
+      <Name>texture%282,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\texture%282,1%29.png">
+      <Name>texture%282,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\texture%282,2%29.png">
+      <Name>texture%282,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Town\batiment1.fbx">
+      <Name>batiment1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+      <ProcessorParameters_RotationY>90</ProcessorParameters_RotationY>
+    </Compile>
+    <Compile Include="Models\Town\batiment2.fbx">
+      <Name>batiment2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+      <ProcessorParameters_RotationY>90</ProcessorParameters_RotationY>
+    </Compile>
+    <Compile Include="Models\Town\batiment3.fbx">
+      <Name>batiment3</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+      <ProcessorParameters_RotationY>90</ProcessorParameters_RotationY>
+    </Compile>
+    <Compile Include="Models\Town\gare.fbx">
+      <Name>gare</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+      <ProcessorParameters_RotationY>-90</ProcessorParameters_RotationY>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Town\rail.fbx">
+      <Name>rail</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Town\batiment1bis.fbx">
+      <Name>batiment1bis</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+      <ProcessorParameters_RotationY>90</ProcessorParameters_RotationY>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Town\eglise.fbx">
+      <Name>eglise</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+      <ProcessorParameters_RotationY>-90</ProcessorParameters_RotationY>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Town\mairie.fbx">
+      <Name>mairie</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+      <ProcessorParameters_RotationY>-90</ProcessorParameters_RotationY>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Town\poste.fbx">
+      <Name>poste</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Town\quai.fbx">
+      <Name>quai</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\skydome.fbx">
+      <Name>skydome</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Town\immeuble.fbx">
+      <Name>immeuble</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_RotationX>-90</ProcessorParameters_RotationX>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

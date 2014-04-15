@@ -35,7 +35,7 @@ namespace Arrow
         {
             this.graphics = new GraphicsDeviceManager(this);
             //ActivateFullScreen();
-            //DisableVsync();
+            DisableVsync();
 
             Content.RootDirectory = "Content";
 
