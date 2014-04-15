@@ -2000,7 +2000,7 @@ Objects:  {
 		}
 		UseMipMap: 0
 		Filename: "mairie.png"
-		RelativeFilename: "C:\Users\Marc\Desktop\Town\Modele definitif\mairie.png"
+		RelativeFilename: "mairie.png"
 	}
 	Video: "Video::toit_mairie_png", "Clip" {
 		Type: "Clip"
@@ -2021,7 +2021,7 @@ Objects:  {
 		}
 		UseMipMap: 0
 		Filename: "toit_mairie.png"
-		RelativeFilename: "C:\Users\Marc\Desktop\Town\Modele definitif\toit_mairie.png"
+		RelativeFilename: "toit_mairie.png"
 	}
 	Texture: "Texture::mairie_png", "TextureVideoClip" {
 		Type: "TextureVideoClip"
@@ -2046,7 +2046,7 @@ Objects:  {
 		}
 		Media: "Video::mairie_png"
 		FileName: "mairie.png"
-		RelativeFilename: "C:\Users\Marc\Desktop\Town\Modele definitif\mairie.png"
+		RelativeFilename: "mairie.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
@@ -2075,7 +2075,7 @@ Objects:  {
 		}
 		Media: "Video::toit_mairie_png"
 		FileName: "toit_mairie.png"
-		RelativeFilename: "C:\Users\Marc\Desktop\Town\Modele definitif\toit_mairie.png"
+		RelativeFilename: "toit_mairie.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"

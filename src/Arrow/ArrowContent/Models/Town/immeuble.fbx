@@ -545,7 +545,7 @@ Objects:  {
 		}
 		UseMipMap: 0
 		Filename: "immeuble.png"
-		RelativeFilename: "C:\Users\Marc\Desktop\Town\Modele definitif\immeuble.png"
+		RelativeFilename: "immeuble.png"
 	}
 	Video: "Video::toit_png", "Clip" {
 		Type: "Clip"
@@ -566,7 +566,7 @@ Objects:  {
 		}
 		UseMipMap: 0
 		Filename: "toit.png"
-		RelativeFilename: "C:\Users\Marc\Desktop\Town\Modele definitif\toit.png"
+		RelativeFilename: "toit.png"
 	}
 	Texture: "Texture::immeuble_png", "TextureVideoClip" {
 		Type: "TextureVideoClip"
@@ -591,7 +591,7 @@ Objects:  {
 		}
 		Media: "Video::immeuble_png"
 		FileName: "immeuble.png"
-		RelativeFilename: "C:\Users\Marc\Desktop\Town\Modele definitif\immeuble.png"
+		RelativeFilename: "immeuble.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
@@ -620,7 +620,7 @@ Objects:  {
 		}
 		Media: "Video::toit_png"
 		FileName: "toit.png"
-		RelativeFilename: "C:\Users\Marc\Desktop\Town\Modele definitif\toit.png"
+		RelativeFilename: "toit.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
