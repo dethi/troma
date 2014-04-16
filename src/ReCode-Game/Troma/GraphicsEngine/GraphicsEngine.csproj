@@ -95,7 +95,9 @@
     <Compile Include="Camera\FirstPersonView.cs" />
     <Compile Include="Camera\ICamera.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Terrain\HeightMap.cs" />
+    <Compile Include="Size.cs" />
+    <Compile Include="Terrain\Heightmap.cs" />
+    <Compile Include="Terrain\TerrainInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

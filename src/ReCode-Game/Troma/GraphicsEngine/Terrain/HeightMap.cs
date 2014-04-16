@@ -6,7 +6,7 @@ using GraphicsEngine.Camera;
 
 namespace GraphicsEngine.Terrain
 {
-    public class HeightMap
+    public class Heightmap
     {
         #region Fields
 
@@ -24,7 +24,7 @@ namespace GraphicsEngine.Terrain
         /// <summary>
         /// Build a terrain
         /// </summary>
-        public HeightMap(Game game, Effect effect, TerrainInfo terrainInfo)
+        public Heightmap(Game game, Effect effect, TerrainInfo terrainInfo)
         {
             this.game = game;
             this.effect = effect;
@@ -47,7 +47,7 @@ namespace GraphicsEngine.Terrain
 
             effect.CurrentTechnique = effect.Techniques["Technique1"];
 
-            effect.Parameters["terrainTexture1"].SetValue(terrainInfo.Texture);
+            effect.Parameters["terrainTexture"].SetValue(terrainInfo.Texture);
             effect.Parameters["World"].SetValue(Matrix.Identity);
             effect.Parameters["View"].SetValue(camera.View);
             effect.Parameters["Projection"].SetValue(camera.Projection);
