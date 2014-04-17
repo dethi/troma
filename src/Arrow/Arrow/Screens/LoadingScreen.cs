@@ -75,7 +75,7 @@ namespace Arrow
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            spriteFont = content.Load<SpriteFont>("Fonts/Debug");
+            spriteFont = content.Load<SpriteFont>("Fonts/Texture");
         }
         
         public override void Draw(GameTime gameTime)
@@ -101,19 +101,21 @@ namespace Arrow
             {
                 SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
 
-                const string message = "Loading...";
+                const string message = "Chargement...";
 
                 // Center the text in the viewport.
                 Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
                 Vector2 viewportSize = new Vector2(viewport.Width, viewport.Height);
                 Vector2 textSize = spriteFont.MeasureString(message);
                 Vector2 textPosition = (viewportSize - textSize) / 2;
+                float scale = 2 * game.GraphicsDevice.Viewport.Width / 1980;
+                Vector2 origin = new Vector2(0, 0);
 
                 Color color = Color.White * TransitionAlpha;
 
                 // Draw the text.
                 spriteBatch.Begin();
-                spriteBatch.DrawString(spriteFont, message, textPosition, color);
+                spriteBatch.DrawString(spriteFont, message, textPosition, color, 0, origin, scale, SpriteEffects.None, 0);
                 spriteBatch.End();
             }
         }

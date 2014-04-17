@@ -44,7 +44,7 @@ namespace Arrow
                 selectionFade = 0;
         }
         
-        public virtual void Draw(MenuScreen screen, bool isSelected, GameTime gameTime)
+        public virtual void Draw(MenuScreen screen, bool isSelected, GameTime gameTime, Game game)
         {            
             Color color = isSelected ? selectedColor : nonselectedColor;
 
@@ -53,8 +53,7 @@ namespace Arrow
 
             float pulsate = (float)Math.Sin(time * 6) + 1;
 
-            float scale = 0.75f + selectionFade* 0.5f + selectionFade * pulsate * 0.1f;
-
+            float scale = ((0.75f + selectionFade * 0.5f + selectionFade * pulsate * 0.1f) * game.GraphicsDevice.Viewport.Width)/1980;
             // Modify the alpha to fade text out during transitions.
             color *= screen.TransitionAlpha;
 

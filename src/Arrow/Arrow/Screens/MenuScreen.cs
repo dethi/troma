@@ -89,7 +89,7 @@ namespace Arrow
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
 
             // start at Y = 175; each X value is generated per entry
-            Vector2 position = new Vector2(0f, 300f);
+            Vector2 position = new Vector2(0f, (400f*game.GraphicsDevice.Viewport.Width)/1980);
 
             // update each menu entry's location in turn
             for (int i = 0; i < menuEntries.Count; i++)
@@ -108,7 +108,7 @@ namespace Arrow
                 menuEntry.Position = position;
 
                 // move down for the next entry the size of this entry
-                position.Y += menuEntry.GetHeight(this) + 30;
+                position.Y += (menuEntry.GetHeight(this) + (150 *  game.GraphicsDevice.Viewport.Width))/1980;
             }
         }
 
@@ -143,7 +143,7 @@ namespace Arrow
 
                 bool isSelected = IsActive && (i == selectedEntry);
 
-                menuEntry.Draw(this, isSelected, gameTime);
+                menuEntry.Draw(this, isSelected, gameTime, game);
             }
 
             // Make the menu slide into place during transitions, using a
@@ -152,10 +152,10 @@ namespace Arrow
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
 
             // Draw the menu title centered on the screen
-            Vector2 titlePosition = new Vector2(graphics.Viewport.Width / 2, 80);
+            Vector2 titlePosition = new Vector2(graphics.Viewport.Width / 2, 120*game.GraphicsDevice.Viewport.Width/1980);
             Vector2 titleOrigin = font.MeasureString(menuTitle) / 2;
             Color titleColor = new Color(100, 100, 100) * TransitionAlpha;
-            float titleScale = 2f;
+            float titleScale = 2f*game.GraphicsDevice.Viewport.Width/1980;
 
             titlePosition.Y -= transitionOffset * 100;
 

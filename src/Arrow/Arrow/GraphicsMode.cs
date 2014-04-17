@@ -12,7 +12,7 @@ namespace Arrow
         /// <summary>
         /// Get the screen size of primary screen
         /// </summary>
-        private Vector2 GetScreenSize()
+        public Vector2 GetScreenSize()
         {
             return new Vector2(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
                 GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
