@@ -13,7 +13,6 @@ namespace Arrow
         bool loadingIsSlow;
         bool otherScreensAreGone;
         GameScreen[] screensToLoad;
-        Game game;
         private ContentManager content;
         private SpriteFont spriteFont;
 
@@ -23,7 +22,6 @@ namespace Arrow
         {
             this.loadingIsSlow = loadingIsSlow;
             this.screensToLoad = screensToLoad;
-            this.game = game;
 
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
         }

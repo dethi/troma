@@ -14,9 +14,9 @@ namespace Arrow
         List<MenuEntry> menuEntries = new List<MenuEntry>();
         int selectedEntry = 0;
         string menuTitle;
-        int x = 0;
-        int y = 0;
-        int z = 0;
+        int x1 = 0;
+        int x2 = 0;
+        int x3 = 0;
 
         private ContentManager content;
         private SpriteFont font;
@@ -149,35 +149,29 @@ namespace Arrow
             spriteBatch.Draw(fond, rectangle, Color.White * TransitionAlpha);
 
 
+            if (x1 < 1900){x1 += 20;}
+            else { x1 = 0; }
+            
+            if (x2 > 0){x2 -= 10;}
+            else { x2 = 2100; }
+            
+            if (x3 > 0){x3 -= 25;}
+            else { x3 = 2500; }
 
-            if (x < 1900)
-            {
-                x += 20;
-            }
-            else { x = 0; }
-            if (y > 0)
-            {
-                y -= 10;
-            }
-            else { y = 2100; }
-            if (z > 0)
-            {
-                z -= 25;
-            }
-            else { z = 2500; }
+            int taille = game.GraphicsDevice.Viewport.Width;
 
-            Rectangle rectangleBas1 = new Rectangle((0 + x) * game.GraphicsDevice.Viewport.Width / 1920,
-                                                        1050 * game.GraphicsDevice.Viewport.Width / 1800,
-                                                        150 * game.GraphicsDevice.Viewport.Width / 1920,
-                                                            8 * game.GraphicsDevice.Viewport.Width / 1920);
-            Rectangle rectangleBas2 = new Rectangle((0 + y) * game.GraphicsDevice.Viewport.Width / 1920,
-                                                       1060 * game.GraphicsDevice.Viewport.Width / 1800,
-                                                       170 * game.GraphicsDevice.Viewport.Width / 1920,
-                                                       6 * game.GraphicsDevice.Viewport.Width / 1920);
-            Rectangle rectangleBas3 = new Rectangle((0 + z) * game.GraphicsDevice.Viewport.Width / 1920,
-                                                       1040 * game.GraphicsDevice.Viewport.Width / 1800,
-                                                       130 * game.GraphicsDevice.Viewport.Width / 1920,
-                                                       4 * game.GraphicsDevice.Viewport.Width / 1920);
+            Rectangle rectangleBas1 = new Rectangle((0 + x1) * taille / 1920,
+                                                        1050 * taille / 1920,
+                                                        150 * taille / 1920,
+                                                            8 * taille / 1920);
+            Rectangle rectangleBas2 = new Rectangle((0 + x2) * taille / 1920,
+                                                       1060 * taille / 1920,
+                                                       170 * taille / 1920,
+                                                       6 * taille / 1920);
+            Rectangle rectangleBas3 = new Rectangle((0 + x3) * taille / 1920,
+                                                       1040 * taille / 1920,
+                                                       130 * taille / 1920,
+                                                       4 * taille / 1920);
             spriteBatch.Draw(fond2, rectangleBas1, c);
             spriteBatch.Draw(fond2, rectangleBas2, c);
             spriteBatch.Draw(fond2, rectangleBas3, c);
