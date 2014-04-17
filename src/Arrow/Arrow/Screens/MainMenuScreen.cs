@@ -16,7 +16,7 @@ namespace Arrow
             MenuEntry exitMenuEntry = new MenuEntry("Quitter");
 
             // Hook up menu event handlers.
-            //playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
+            playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
             //optionsMenuEntry.Selected += OptionsMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
 
@@ -26,9 +26,10 @@ namespace Arrow
             MenuEntries.Add(exitMenuEntry);
         }
 
-        void PlayGameMenuEntrySelected(object sender)
+        void PlayGameMenuEntrySelected(object sender, EventArgs e)
         {
-            
+            LoadingScreen.Load(game, ScreenManager, true,
+                               new GameplayScreen(game));
         }
 
         /*void OptionsMenuEntrySelected(object sender, PlayerIndexEventArgs e)

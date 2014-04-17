@@ -53,7 +53,7 @@ namespace Arrow
 
             float pulsate = (float)Math.Sin(time * 6) + 1;
 
-            float scale = 0.75f + selectionFade;
+            float scale = 0.75f + selectionFade* 0.5f + selectionFade * pulsate * 0.1f;
 
             // Modify the alpha to fade text out during transitions.
             color *= screen.TransitionAlpha;

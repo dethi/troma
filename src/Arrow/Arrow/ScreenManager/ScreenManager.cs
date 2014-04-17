@@ -136,5 +136,10 @@ namespace Arrow
             screens.Remove(s);
             screensToUpdate.Remove(s);
         }
+
+        public GameScreen[] GetScreens()
+        {
+            return screens.ToArray();
+        }
     }
 }
