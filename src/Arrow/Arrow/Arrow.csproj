@@ -143,6 +143,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Screens\MainMenuScreen.cs" />
+    <Compile Include="Screens\MenuEntry.cs" />
     <Compile Include="Screens\DebugScreen.cs" />
     <Compile Include="Screens\GameplayScreen.cs" />
     <Compile Include="ScreenManager\GameScreen.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Map\HeightMap.cs" />
     <Compile Include="Player\Player.cs" />
+    <Compile Include="Screens\MenuScreen.cs" />
     <Compile Include="Screens\TestScreen.cs" />
     <Compile Include="Sound\SFXManager.cs" />
     <Compile Include="Deprecated\Menu.cs" />

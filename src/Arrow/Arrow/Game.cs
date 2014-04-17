@@ -34,15 +34,16 @@ namespace Arrow
         public Game()
         {
             this.graphics = new GraphicsDeviceManager(this);
-            //ActivateFullScreen();
-            DisableVsync();
+            ActivateFullScreen();
+            //DisableVsync();
 
             Content.RootDirectory = "Content";
 
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
 
-            screenManager.AddScreen(new GameplayScreen(this));
+            //screenManager.AddScreen(new GameplayScreen(this))
+            screenManager.AddScreen(new MainMenuScreen(this));
 
             #if !BUILD
 

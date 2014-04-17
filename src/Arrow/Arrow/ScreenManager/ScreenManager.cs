@@ -16,6 +16,7 @@ namespace Arrow
         private List<GameScreen> screens;
         private List<GameScreen> screensToUpdate;
         private InputState input;
+        
 
         private ContentManager content;
         public SpriteBatch SpriteBatch { get; private set; }
