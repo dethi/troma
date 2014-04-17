@@ -145,9 +145,8 @@ namespace Arrow
 
             Color c = new Color(20, 15, 10) * TransitionAlpha;
 
-            Vector2 origin = new Vector2(0, 0);
             Rectangle rectangle = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
-            spriteBatch.Draw(fond, rectangle, rectangle, Color.White * TransitionAlpha, 0, origin, SpriteEffects.None, 0);
+            spriteBatch.Draw(fond, rectangle, Color.White * TransitionAlpha);
 
 
 
@@ -167,10 +166,18 @@ namespace Arrow
             }
             else { z = 2500; }
 
-
-            Rectangle rectangleBas1 = new Rectangle(0 + x, 1050, 150, 8);
-            Rectangle rectangleBas2 = new Rectangle(0 + y, 1060, 170, 6);
-            Rectangle rectangleBas3 = new Rectangle(0 + z, 1040, 130, 4);
+            Rectangle rectangleBas1 = new Rectangle((0 + x) * game.GraphicsDevice.Viewport.Width / 1920,
+                                                        1050 * game.GraphicsDevice.Viewport.Width / 1800,
+                                                        150 * game.GraphicsDevice.Viewport.Width / 1920,
+                                                            8 * game.GraphicsDevice.Viewport.Width / 1920);
+            Rectangle rectangleBas2 = new Rectangle((0 + y) * game.GraphicsDevice.Viewport.Width / 1920,
+                                                       1060 * game.GraphicsDevice.Viewport.Width / 1800,
+                                                       170 * game.GraphicsDevice.Viewport.Width / 1920,
+                                                       6 * game.GraphicsDevice.Viewport.Width / 1920);
+            Rectangle rectangleBas3 = new Rectangle((0 + z) * game.GraphicsDevice.Viewport.Width / 1920,
+                                                       1040 * game.GraphicsDevice.Viewport.Width / 1800,
+                                                       130 * game.GraphicsDevice.Viewport.Width / 1920,
+                                                       4 * game.GraphicsDevice.Viewport.Width / 1920);
             spriteBatch.Draw(fond2, rectangleBas1, c);
             spriteBatch.Draw(fond2, rectangleBas2, c);
             spriteBatch.Draw(fond2, rectangleBas3, c);
