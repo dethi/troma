@@ -14,6 +14,9 @@ namespace Arrow
         List<MenuEntry> menuEntries = new List<MenuEntry>();
         int selectedEntry = 0;
         string menuTitle;
+        int x = 0;
+        int y = 0;
+        int z = 0;
 
         private ContentManager content;
         private SpriteFont font;
@@ -26,9 +29,9 @@ namespace Arrow
         {
             get { return menuEntries; }
         }
-        
+
         public MenuScreen(string menuTitle, Game game)
-            :base(game)
+            : base(game)
         {
             this.menuTitle = menuTitle;
 
@@ -47,7 +50,7 @@ namespace Arrow
         public override void HandleInput(GameTime gameTime, InputState input)
         {
             // Move to the previous menu entry?
-            if (input.IsPressed(Keys.Down)||(input.IsPressed(Buttons.DPadDown)))
+            if (input.IsPressed(Keys.Down) || (input.IsPressed(Buttons.DPadDown)))
             {
                 selectedEntry++;
 
@@ -89,7 +92,7 @@ namespace Arrow
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
 
             // start at Y = 175; each X value is generated per entry
-            Vector2 position = new Vector2(0f, (400f*game.GraphicsDevice.Viewport.Width)/1920);
+            Vector2 position = new Vector2(0f, (400f * game.GraphicsDevice.Viewport.Width) / 1920);
 
             // update each menu entry's location in turn
             for (int i = 0; i < menuEntries.Count; i++)
@@ -108,7 +111,7 @@ namespace Arrow
                 menuEntry.Position = position;
 
                 // move down for the next entry the size of this entry
-                position.Y += (menuEntry.GetHeight(this) + (150 *  game.GraphicsDevice.Viewport.Width))/1920;
+                position.Y += (menuEntry.GetHeight(this) + (200 * game.GraphicsDevice.Viewport.Width)) / 1920;
             }
         }
 
@@ -136,10 +139,42 @@ namespace Arrow
 
             spriteBatch.Begin();
 
-            Texture2D fond = game.Content.Load<Texture2D>("Textures/drapeau2");
-            Vector2 origin = new Vector2(0,0);
+            // fond d ecran
+            Texture2D fond = game.Content.Load<Texture2D>("Textures/America");
+            Texture2D fond2 = game.Content.Load<Texture2D>("Textures/white");
+
+            Color c = new Color(20, 15, 10) * TransitionAlpha;
+
+            Vector2 origin = new Vector2(0, 0);
             Rectangle rectangle = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
             spriteBatch.Draw(fond, rectangle, rectangle, Color.White * TransitionAlpha, 0, origin, SpriteEffects.None, 0);
+
+
+
+            if (x < 1900)
+            {
+                x += 20;
+            }
+            else { x = 0; }
+            if (y > 0)
+            {
+                y -= 10;
+            }
+            else { y = 2100; }
+            if (z > 0)
+            {
+                z -= 25;
+            }
+            else { z = 2500; }
+
+
+            Rectangle rectangleBas1 = new Rectangle(0 + x, 1050, 150, 8);
+            Rectangle rectangleBas2 = new Rectangle(0 + y, 1060, 170, 6);
+            Rectangle rectangleBas3 = new Rectangle(0 + z, 1040, 130, 4);
+            spriteBatch.Draw(fond2, rectangleBas1, c);
+            spriteBatch.Draw(fond2, rectangleBas2, c);
+            spriteBatch.Draw(fond2, rectangleBas3, c);
+
 
             // Draw each menu entry in turn.
             for (int i = 0; i < menuEntries.Count; i++)
@@ -157,10 +192,10 @@ namespace Arrow
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
 
             // Draw the menu title centered on the screen
-            Vector2 titlePosition = new Vector2(graphics.Viewport.Width / 2, 120*game.GraphicsDevice.Viewport.Width/1920);
+            Vector2 titlePosition = new Vector2(graphics.Viewport.Width / 2, 120 * game.GraphicsDevice.Viewport.Width / 1920);
             Vector2 titleOrigin = font.MeasureString(menuTitle) / 2;
             Color titleColor = new Color(100, 100, 100) * TransitionAlpha;
-            float titleScale = 2f*game.GraphicsDevice.Viewport.Width/1920;
+            float titleScale = 2f * game.GraphicsDevice.Viewport.Width / 1920;
 
             titlePosition.Y -= transitionOffset * 100;
 

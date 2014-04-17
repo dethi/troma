@@ -101,7 +101,7 @@ namespace Arrow
             {
                 SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
 
-                const string message = "Chargement...";
+                const string message = "Chargement";
 
                 // Center the text in the viewport.
                 float scale = 1.1f * game.GraphicsDevice.Viewport.Width / 1920;

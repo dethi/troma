@@ -567,15 +567,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\drapeau.jpg">
-      <Name>drapeau</Name>
+    <Compile Include="Textures\drapeau2.bmp">
+      <Name>drapeau2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\drapeau2.bmp">
-      <Name>drapeau2</Name>
+    <Compile Include="Textures\America.png">
+      <Name>America</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\white.png">
+      <Name>white</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

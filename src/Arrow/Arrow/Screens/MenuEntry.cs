@@ -12,8 +12,7 @@ namespace Arrow
         string text;
         float selectionFade;
         Vector2 position;
-        Color selectedColor = new Color(255, 0, 50);
-        Color nonselectedColor = new Color(200, 200, 200);
+        Color nonselectedColor = new Color(150, 145, 140);
 
         public string Text
         {
@@ -45,13 +44,19 @@ namespace Arrow
         }
         
         public virtual void Draw(MenuScreen screen, bool isSelected, GameTime gameTime, Game game)
-        {            
-            Color color = isSelected ? selectedColor : nonselectedColor;
+        {
 
-            // Pulsate the size of the selected menu entry.
+            // Pulsate the size of the selected menu entry.            
             double time = gameTime.TotalGameTime.TotalSeconds;
-
             float pulsate = (float)Math.Sin(time * 6) + 1;
+            
+            float r = 64 * pulsate/700 ;
+            float g = 56 * pulsate/700;
+            float b = 48 * pulsate/700 ;
+            Color selectedColor = new Color(r, g, b);
+
+            Color color = isSelected ? selectedColor : nonselectedColor;
+            
 
             float scale = ((0.75f + selectionFade * 0.5f + selectionFade * pulsate * 0.1f) * game.GraphicsDevice.Viewport.Width)/1980;
             // Modify the alpha to fade text out during transitions.
@@ -64,7 +69,7 @@ namespace Arrow
 
             Vector2 origin = new Vector2(0, font.LineSpacing/2);
 
-            spriteBatch.DrawString(font, text, position, color, -.35f,
+            spriteBatch.DrawString(font, text, position, color, -0.35f,
                                    origin, scale, SpriteEffects.None, 0);
         }
 
