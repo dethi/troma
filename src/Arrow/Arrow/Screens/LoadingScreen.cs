@@ -104,7 +104,7 @@ namespace Arrow
                 const string message = "Chargement...";
 
                 // Center the text in the viewport.
-                float scale = 1.1f * game.GraphicsDevice.Viewport.Width / 1980;
+                float scale = 1.1f * game.GraphicsDevice.Viewport.Width / 1920;
                 Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
                 Vector2 viewportSize = new Vector2(viewport.Width, viewport.Height);
                 Vector2 textSize = spriteFont.MeasureString(message) * scale;
