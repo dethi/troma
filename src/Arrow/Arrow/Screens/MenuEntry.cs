@@ -13,6 +13,7 @@ namespace Arrow
         float selectionFade;
         Vector2 position;
         Color nonselectedColor = new Color(150, 145, 140);
+        
 
         public string Text
         {

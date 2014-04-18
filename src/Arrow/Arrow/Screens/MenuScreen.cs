@@ -141,40 +141,41 @@ namespace Arrow
 
             // fond d ecran
             Texture2D fond = game.Content.Load<Texture2D>("Textures/America");
-            Texture2D fond2 = game.Content.Load<Texture2D>("Textures/white");
+            Texture2D fond2 = game.Content.Load<Texture2D>("Textures/balle3");
+            Texture2D fond3 = game.Content.Load<Texture2D>("Textures/balle4");
 
-            Color c = new Color(20, 15, 10) * TransitionAlpha;
+            Color c = new Color(120, 110, 100) * TransitionAlpha;
 
             Rectangle rectangle = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
             spriteBatch.Draw(fond, rectangle, Color.White * TransitionAlpha);
 
+            int taille = game.GraphicsDevice.Viewport.Width;
+            int hauteur = game.GraphicsDevice.Viewport.Height;
 
-            if (x1 < 1900){x1 += 20;}
+            if (x1 < 2200){x1 += 20;}
             else { x1 = 0; }
             
-            if (x2 > 0){x2 -= 10;}
-            else { x2 = 2100; }
+            if (x2 > 0){x2 -= 15;}
+            else { x2 = 3800; }
             
-            if (x3 > 0){x3 -= 25;}
-            else { x3 = 2500; }
-
-            int taille = game.GraphicsDevice.Viewport.Width;
+            if (x3 > 0){x3 -= 22;}
+            else { x3 = 3100; }
 
             Rectangle rectangleBas1 = new Rectangle((0 + x1) * taille / 1920,
-                                                        1050 * taille / 1920,
-                                                        150 * taille / 1920,
-                                                            8 * taille / 1920);
+                                                        hauteur - (60 * taille/1920) ,
+                                                        60 * taille / 1920,
+                                                            60 * taille / 1920);
             Rectangle rectangleBas2 = new Rectangle((0 + x2) * taille / 1920,
-                                                       1060 * taille / 1920,
-                                                       170 * taille / 1920,
-                                                       6 * taille / 1920);
+                                                       hauteur - (80 * taille / 1920),
+                                                       50 * taille / 1920,
+                                                       50 * taille / 1920);
             Rectangle rectangleBas3 = new Rectangle((0 + x3) * taille / 1920,
-                                                       1040 * taille / 1920,
-                                                       130 * taille / 1920,
-                                                       4 * taille / 1920);
+                                                       hauteur - (30 * taille / 1920),
+                                                       40 * taille / 1920,
+                                                       40 * taille / 1920);
             spriteBatch.Draw(fond2, rectangleBas1, c);
-            spriteBatch.Draw(fond2, rectangleBas2, c);
-            spriteBatch.Draw(fond2, rectangleBas3, c);
+            spriteBatch.Draw(fond3, rectangleBas2, c);
+            spriteBatch.Draw(fond3, rectangleBas3, c);
 
 
             // Draw each menu entry in turn.
