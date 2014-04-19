@@ -193,7 +193,7 @@ namespace Arrow
                 entities.AddEntity("Town/quai", new Vector2(768, 813));
                 entities.AddEntity("Town/eglise", new Vector2(1008, 445));
                 entities.AddEntity("Town/mairie", new Vector2(1008, 565));
-                entities.AddEntity("Town/poste", new Vector2(648, 525));
+                entities.AddEntity("Town/poste", new Vector2(728, 525));
                 entities.AddEntity("Town/immeuble", new Vector2(768, 405));
                                 
                 Model batiment1X = content.Load<Model>("Models/Town/batiment2");
