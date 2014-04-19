@@ -195,10 +195,11 @@ namespace Arrow
                 entities.AddEntity("Town/mairie", new Vector2(1008, 565));
                 entities.AddEntity("Town/poste", new Vector2(728, 525));
                 entities.AddEntity("Town/immeuble", new Vector2(768, 405));
+                entities.AddEntity("Town/hotel", new Vector2(728, 645));
                                 
                 Model batiment1X = content.Load<Model>("Models/Town/batiment2");
                 entities.AddEntity(batiment1X, new Vector2(608, 525));
-                entities.AddEntity(batiment1X, new Vector2(728, 645));
+                //entities.AddEntity(batiment1X, new Vector2(728, 645));
                 entities.AddEntity(batiment1X, new Vector2(608, 645));
 
                 entities.AddEntity("Town/batiment3", new Vector2(1128, 405));
