@@ -143,36 +143,41 @@ namespace Arrow
             Texture2D fond = game.Content.Load<Texture2D>("Textures/America");
             Texture2D fond2 = game.Content.Load<Texture2D>("Textures/balle3");
             Texture2D fond3 = game.Content.Load<Texture2D>("Textures/balle4");
+            Texture2D fond4 = game.Content.Load<Texture2D>("Textures/eie");
 
             Color c = new Color(120, 110, 100) * TransitionAlpha;
 
-            Rectangle rectangle = new Rectangle(0, 0, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
+            int largeur = game.GraphicsDevice.Viewport.Width;
+            int hauteur = game.GraphicsDevice.Viewport.Height;
+            
+            Rectangle rectangle = new Rectangle(0, 0, largeur, hauteur);
             spriteBatch.Draw(fond, rectangle, Color.White * TransitionAlpha);
 
-            int taille = game.GraphicsDevice.Viewport.Width;
-            int hauteur = game.GraphicsDevice.Viewport.Height;
+            Rectangle logo = new Rectangle(largeur - 100, hauteur - 100, 100, 100);
+            spriteBatch.Draw(fond4, logo, Color.White * TransitionAlpha * 0.4f );
 
-            if (x1 < 2200){x1 += 20;}
+
+            if (x1 < 2100){x1 += 12;}
             else { x1 = 0; }
             
             if (x2 > 0){x2 -= 15;}
-            else { x2 = 3800; }
+            else { x2 = 3500; }
             
             if (x3 > 0){x3 -= 22;}
-            else { x3 = 3100; }
+            else { x3 = 2800; }
 
-            Rectangle rectangleBas1 = new Rectangle((0 + x1) * taille / 1920,
-                                                        hauteur - (60 * taille/1920) ,
-                                                        60 * taille / 1920,
-                                                            60 * taille / 1920);
-            Rectangle rectangleBas2 = new Rectangle((0 + x2) * taille / 1920,
-                                                       hauteur - (80 * taille / 1920),
-                                                       50 * taille / 1920,
-                                                       50 * taille / 1920);
-            Rectangle rectangleBas3 = new Rectangle((0 + x3) * taille / 1920,
-                                                       hauteur - (30 * taille / 1920),
-                                                       40 * taille / 1920,
-                                                       40 * taille / 1920);
+            Rectangle rectangleBas1 = new Rectangle((0 + x1) * largeur / 1920,
+                                                        hauteur - (60 * largeur/1920) ,
+                                                        60 * largeur / 1920,
+                                                            60 * largeur / 1920);
+            Rectangle rectangleBas2 = new Rectangle((0 + x2) * largeur / 1920,
+                                                       hauteur - (80 * largeur / 1920),
+                                                       50 * largeur / 1920,
+                                                       50 * largeur / 1920);
+            Rectangle rectangleBas3 = new Rectangle((0 + x3) * largeur / 1920,
+                                                       hauteur - (30 * largeur / 1920),
+                                                       40 * largeur / 1920,
+                                                       40 * largeur / 1920);
             spriteBatch.Draw(fond2, rectangleBas1, c);
             spriteBatch.Draw(fond3, rectangleBas2, c);
             spriteBatch.Draw(fond3, rectangleBas3, c);
@@ -196,8 +201,11 @@ namespace Arrow
             // Draw the menu title centered on the screen
             Vector2 titlePosition = new Vector2(graphics.Viewport.Width / 2, 120 * game.GraphicsDevice.Viewport.Width / 1920);
             Vector2 titleOrigin = font.MeasureString(menuTitle) / 2;
-            Color titleColor = new Color(100, 100, 100) * TransitionAlpha;
-            float titleScale = 2f * game.GraphicsDevice.Viewport.Width / 1920;
+            Color titleColor = new Color(0, 0, 0) * TransitionAlpha;
+            
+            double time = (gameTime.TotalGameTime.TotalSeconds)/3;
+            float pulsate = (float)Math.Sin(time * 6) + 1;
+            float titleScale = 1.5f * game.GraphicsDevice.Viewport.Width / 1920 + (0.03f*pulsate);
 
             titlePosition.Y -= transitionOffset * 100;
 
