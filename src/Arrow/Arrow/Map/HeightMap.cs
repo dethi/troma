@@ -78,7 +78,7 @@ namespace Arrow
             effect.Parameters["lightBrightness"].SetValue(0.8f);
 
             effect.Parameters["ambientLightLevel"].SetValue(0.15f);
-            effect.Parameters["ambientLightColor"].SetValue(new Vector4(0.98f, 0.92f, 0.24f, 1f));
+            //effect.Parameters["ambientLightColor"].SetValue(new Vector4(0.98f, 0.92f, 0.24f, 1f));
 
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {

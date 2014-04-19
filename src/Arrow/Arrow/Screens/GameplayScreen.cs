@@ -58,7 +58,7 @@ namespace Arrow
             maps = new MapManager(game,
                 "Textures/" + carte + "/heightmap",
                 "Textures/" + carte + "/texture",
-                513f,
+                32f,
                 513,
                 513,
                 20f,
