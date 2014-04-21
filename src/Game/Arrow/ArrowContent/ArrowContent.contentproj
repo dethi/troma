@@ -356,53 +356,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Town\heightmap%280,0%29.png">
-      <Name>heightmap%280,0%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\Town\heightmap%280,1%29.png">
-      <Name>heightmap%280,1%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\Town\heightmap%280,2%29.png">
-      <Name>heightmap%280,2%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\Town\heightmap%281,0%29.png">
-      <Name>heightmap%281,0%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\Town\heightmap%281,1%29.png">
-      <Name>heightmap%281,1%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\Town\heightmap%281,2%29.png">
-      <Name>heightmap%281,2%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\Town\heightmap%282,0%29.png">
-      <Name>heightmap%282,0%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\Town\heightmap%282,1%29.png">
-      <Name>heightmap%282,1%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\Town\heightmap%282,2%29.png">
-      <Name>heightmap%282,2%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Textures\Town\texture%280,0%29.png">
       <Name>texture%280,0%29</Name>
       <Importer>TextureImporter</Importer>
@@ -598,6 +551,53 @@
   <ItemGroup>
     <Compile Include="Textures\eie.png">
       <Name>eie</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Town\heightmap%280,0%29.png">
+      <Name>heightmap%280,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%280,1%29.png">
+      <Name>heightmap%280,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%280,2%29.png">
+      <Name>heightmap%280,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%281,0%29.png">
+      <Name>heightmap%281,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%281,1%29.png">
+      <Name>heightmap%281,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%281,2%29.png">
+      <Name>heightmap%281,2%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%282,0%29.png">
+      <Name>heightmap%282,0%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%282,1%29.png">
+      <Name>heightmap%282,1%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Town\heightmap%282,2%29.png">
+      <Name>heightmap%282,2%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
