@@ -6,10 +6,7 @@ namespace TerrainAutomator
     {
         public static Image CropImage(Image img, Rectangle cropArea)
         {
-            Bitmap bmp = new Bitmap(img);
-            Bitmap bmpCrop = bmp.Clone(cropArea, bmp.PixelFormat);
-
-            return (Image)(bmpCrop);
+            return ((Bitmap)img).Clone(cropArea, img.PixelFormat);
         }
 
         public static Image resizeImage(Image img, Size newSize)
