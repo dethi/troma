@@ -122,10 +122,6 @@
       <Project>{121AB8A9-2001-4CBE-80B3-A6E2E95B2E56}</Project>
       <Name>GameEngine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\GraphicsEngine\GraphicsEngine.csproj">
-      <Project>{4DF14D68-1927-445C-B960-E8B822845DEF}</Project>
-      <Name>GraphicsEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TromaContent\TromaContent.contentproj">
       <Name>TromaContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
