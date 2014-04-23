@@ -10,8 +10,6 @@ namespace GameEngine.EntitySystem
         #region Fields
         private bool _enabled = true;
 
-        private readonly Entity _entity;
-
         public event EventHandler<EventArgs> EnabledChanged;
 
         #endregion
@@ -39,19 +37,6 @@ namespace GameEngine.EntitySystem
                         EnabledChanged(this, EventArgs.Empty);
                 }
             }
-        }
-
-        #endregion
-
-        #region Parent Entity getter
-
-        /// <summary>
-        /// Alternate getter for this Component's parent entity.
-        /// </summary>
-        /// <returns></returns>
-        public Entity GetParent()
-        {
-            return _entity;
         }
 
         #endregion

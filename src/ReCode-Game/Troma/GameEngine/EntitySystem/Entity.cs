@@ -89,7 +89,7 @@ namespace GameEngine.EntitySystem
         /// <summary>
         /// Update all updateable components in the entity
         /// </summary>
-        public override void Update()
+        public void Update()
         {
             _tempUpdateableComponents.Clear();
             _tempUpdateableComponents.AddRange(_updateableComponents);
@@ -107,7 +107,7 @@ namespace GameEngine.EntitySystem
         /// Draws all drawable components in the entity
         /// </summary>
         /// <param name="spriteBatch">the spritebatch used for drawing</param>
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             _tempDrawableComponents.Clear();
             _tempDrawableComponents.AddRange(_drawableComponents);
@@ -121,7 +121,7 @@ namespace GameEngine.EntitySystem
             }
         }
 
-        public override void DrawHUD(SpriteBatch spriteBatch)
+        public void DrawHUD(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < _tempDrawableComponents.Count; i++)
             {
@@ -158,19 +158,11 @@ namespace GameEngine.EntitySystem
 
             //if the component can be updated, add it to that list
             if (updateable != null)
-            {
                 _updateableComponents.Add(updateable);
-                updateable.UpdateOrderChanged += OnComponentUpdateOrderChanged;
-                OnComponentUpdateOrderChanged(this, EventArgs.Empty);
-            }
 
             //if the component can be draw, add it to that list
             if (drawable != null)
-            {
                 _drawableComponents.Add(drawable);
-                drawable.DrawOrderChanged += OnComponentDrawOrderChanged;
-                OnComponentDrawOrderChanged(this, EventArgs.Empty);
-            }
 
             //if the entity has already initialized, call this item's initialize and start methods
             if (_isInitialized)
@@ -197,17 +189,11 @@ namespace GameEngine.EntitySystem
 
                 //if the component was updateable, remove it from that list
                 if (updateable != null)
-                {
                     _updateableComponents.Remove(updateable);
-                    updateable.UpdateOrderChanged -= OnComponentUpdateOrderChanged;
-                }
 
                 //if the component was drawable, remove it from that list
                 if (drawable != null)
-                {
                     _drawableComponents.Remove(drawable);
-                    drawable.DrawOrderChanged -= OnComponentDrawOrderChanged;
-                }
 
                 return true;
             }
@@ -253,7 +239,7 @@ namespace GameEngine.EntitySystem
             return null;
         }
 
-        public override void Destroy()
+        public void Destroy()
         {
             //unload all the content for any drawable components
             for (int i = 0; i < _drawableComponents.Count; i++)

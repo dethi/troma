@@ -14,20 +14,9 @@ namespace GameEngine.EntitySystem
         bool Visible { get; }
 
         /// <summary>
-        /// Gets the order in which the component should be drawn. 
-        /// Components with smaller values are drawn first.
-        /// </summary>
-        int DrawOrder { get; }
-
-        /// <summary>
         /// Invoked when the Visible property changes.
         /// </summary>
         event EventHandler<EventArgs> VisibleChanged;
-
-        /// <summary>
-        /// Invoked when the DrawOrder property changes.
-        /// </summary>
-        event EventHandler<EventArgs> DrawOrderChanged;
 
         /// <summary>
         /// Draws the component.
