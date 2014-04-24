@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using GameEngine.Input;
 using Microsoft.Xna.Framework.Content;
 
-namespace GameEngine.Screen
+namespace GameEngine
 {
     public enum ScreenState
     {
@@ -71,7 +70,7 @@ namespace GameEngine.Screen
             FileManager.Content = content;
         }
 
-        public void UnloadContent()
+        public virtual void UnloadContent()
         {
             content.Unload();
         }

@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameEngine.EntitySystem
+namespace GameEngine
 {
     public class DrawableEntityComponent : UpdateableEntityComponent, IEntityDrawable
     {

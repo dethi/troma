@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using GameEngine;
-using GameEngine.Camera;
-using GameEngine.Input;
 
 namespace Troma
 {
@@ -19,6 +17,7 @@ namespace Troma
 
         private const float WALK_SPEED = 40f;
         private const float COEF_RUN_SPEED = 1.7f;
+        private const float RUN_SPEED = WALK_SPEED * COEF_RUN_SPEED;
 
         private const float JUMP_SPEED = 32f;
 
@@ -47,7 +46,7 @@ namespace Troma
             set
             {
                 _position = value;
-                _view.Position = new Vector3(_position.X, _viewPosY, _position.Z);
+                _view.Position = new Vector3(_position.X, viewPosY, _position.Z);
             }
         }
 
@@ -61,9 +60,20 @@ namespace Troma
             }
         }
 
-        private float _viewPosY
+        /// <summary>
+        /// Y position of the head
+        /// </summary>
+        private float viewPosY
         {
             get { return _position.Y + _height; }
+        }
+
+        /// <summary>
+        /// (X,Z) position
+        /// </summary>
+        private Vector2 pos2D
+        {
+            get { return new Vector2(Position.X, Position.Z); }
         }
 
         #endregion
@@ -197,25 +207,10 @@ namespace Troma
             return _position + movement;
         }
 
-
-
-
-
+        //
         // Vieux code
         //
-        //
-        //
-        //
         /*
-        public void Update(GameTime gameTime, MapManager map)
-        {
-            MapCollision(map);
-        }
-
-        public void HandleInput(GameTime gameTime, InputState input, MapManager map)
-        {
-            Jump(input, map);
-        }
 
         private void MapCollision(MapManager map)
         {

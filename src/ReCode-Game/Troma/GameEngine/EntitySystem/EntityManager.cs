@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameEngine.EntitySystem
+namespace GameEngine
 {
     /// <summary>
     /// Manages all the entities in the game

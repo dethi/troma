@@ -42,34 +42,5 @@ namespace Troma
 
             graphics.ApplyChanges();
         }
-
-        /// <summary>
-        /// Reset RasterizerState to the default value
-        /// </summary>
-        public void DefaultChangeRasterizerState()
-        {
-            ChangeRasterizerState(CullMode.CullClockwiseFace, FillMode.Solid);
-        }
-
-        /// <summary>
-        /// Allow to change the RasterizerState
-        /// </summary>
-        public void ChangeRasterizerState(CullMode cm, FillMode fl)
-        {
-            GraphicsDevice.RasterizerState = new RasterizerState()
-            {
-                CullMode = cm,
-                FillMode = fl
-            };
-        }
-
-        /// <summary>
-        /// Change the value of GraphicsDevice in order to display correctly 3D
-        /// </summary>
-        public void ResetGraphicsDeviceFor3D()
-        {
-            GraphicsDevice.BlendState = BlendState.Opaque;
-            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-        }
     }
 }

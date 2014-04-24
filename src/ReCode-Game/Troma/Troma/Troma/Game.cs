@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using GameEngine.Screen;
-using Troma.Screens;
+using GameEngine;
 
 namespace Troma
 {
@@ -36,14 +35,13 @@ namespace Troma
             Content.RootDirectory = "Content";
 
             screenManager = new ScreenManager(this);
+            screenManager.Initialize();
             Components.Add(screenManager);
 
-            //screenManager.AddScreen(new GameplayScreen(this));
+            screenManager.AddScreen(new TestScreen(this));
 
 #if !BUILD
-
             screenManager.AddScreen(new DebugScreen(this));
-
 #endif
         }
 

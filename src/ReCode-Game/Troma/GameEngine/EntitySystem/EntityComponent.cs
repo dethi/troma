@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GameEngine.EntitySystem
+namespace GameEngine
 {
     /// <summary>
     /// Extend from this class when just needing a large container for values

@@ -6,9 +6,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using GameEngine;
-using GameEngine.Screen;
 
-namespace Troma.Screens
+namespace Troma
 {
     public class DebugScreen : GameScreen
     {

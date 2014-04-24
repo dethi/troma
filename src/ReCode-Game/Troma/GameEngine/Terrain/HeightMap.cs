@@ -5,15 +5,13 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using GameEngine.Camera;
 
-namespace GameEngine.Terrain
+namespace GameEngine
 {
     public class HeightMap
     {
         #region Fields
 
-        Game game;
         Effect effect;
         TerrainInfo terrainInfo;
 
@@ -27,9 +25,8 @@ namespace GameEngine.Terrain
         /// <summary>
         /// Build a terrain
         /// </summary>
-        public HeightMap(Game game, Effect effect, TerrainInfo terrainInfo)
+        public HeightMap(Effect effect, TerrainInfo terrainInfo)
         {
-            this.game = game;
             this.effect = effect;
             this.terrainInfo = terrainInfo;
 
@@ -65,9 +62,9 @@ namespace GameEngine.Terrain
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
-                game.GraphicsDevice.SetVertexBuffer(vertexBuffer);
-                game.GraphicsDevice.Indices = indexBuffer;
-                game.GraphicsDevice.DrawIndexedPrimitives(
+                GameServices.GraphicsDevice.SetVertexBuffer(vertexBuffer);
+                GameServices.GraphicsDevice.Indices = indexBuffer;
+                GameServices.GraphicsDevice.DrawIndexedPrimitives(
                     PrimitiveType.TriangleList, 0, 0, vertexBuffer.VertexCount,
                     0, indexBuffer.IndexCount / 3);
             }
@@ -119,7 +116,7 @@ namespace GameEngine.Terrain
                 }
             }
 
-            vertexBuffer = new VertexBuffer(game.GraphicsDevice, typeof(VertexPositionNormalTexture),
+            vertexBuffer = new VertexBuffer(GameServices.Game.GraphicsDevice, typeof(VertexPositionNormalTexture),
                 vertices.Length, BufferUsage.None);
             vertexBuffer.SetData(vertices);
         }
@@ -153,7 +150,7 @@ namespace GameEngine.Terrain
                 }
             }
 
-            indexBuffer = new IndexBuffer(game.GraphicsDevice, IndexElementSize.ThirtyTwoBits,
+            indexBuffer = new IndexBuffer(GameServices.Game.GraphicsDevice, IndexElementSize.ThirtyTwoBits,
                 indices.Length, BufferUsage.None);
             indexBuffer.SetData(indices);
         }

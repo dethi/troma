@@ -6,9 +6,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using GameEngine.Input;
 
-namespace GameEngine.Screen
+namespace GameEngine
 {
     public class ScreenManager : DrawableGameComponent
     {
@@ -31,6 +30,8 @@ namespace GameEngine.Screen
             screens = new List<GameScreen>();
             screensToUpdate = new List<GameScreen>();
             input = new InputState();
+
+            isInitialized = false;
         }
 
         public override void Initialize()

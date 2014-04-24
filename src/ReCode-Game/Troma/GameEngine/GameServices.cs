@@ -49,5 +49,38 @@ namespace GameEngine
         }
 
         #endregion
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Reset RasterizerState to the default value
+        /// </summary>
+        public static void DefaultChangeRasterizerState()
+        {
+            ChangeRasterizerState(CullMode.CullClockwiseFace, FillMode.Solid);
+        }
+
+        /// <summary>
+        /// Allow to change the RasterizerState
+        /// </summary>
+        public static void ChangeRasterizerState(CullMode cm, FillMode fl)
+        {
+            _graphicsDevice.RasterizerState = new RasterizerState()
+            {
+                CullMode = cm,
+                FillMode = fl
+            };
+        }
+
+        /// <summary>
+        /// Change the value of GraphicsDevice in order to display correctly 3D
+        /// </summary>
+        public static void ResetGraphicsDeviceFor3D()
+        {
+            _graphicsDevice.BlendState = BlendState.Opaque;
+            _graphicsDevice.DepthStencilState = DepthStencilState.Default;
+        }
+
+        #endregion
     }
 }
