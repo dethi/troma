@@ -106,6 +106,7 @@
     <Compile Include="EntitySystem\Components\Transform.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GameServices.cs" />
+    <Compile Include="Physics.cs" />
     <Compile Include="Screen\GameScreen.cs" />
     <Compile Include="Input\InputConfiguration.cs" />
     <Compile Include="Input\InputState.cs" />
