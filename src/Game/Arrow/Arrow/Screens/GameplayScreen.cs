@@ -196,10 +196,18 @@ namespace Arrow
                 entities.AddEntity("Town/poste", new Vector2(728, 525));
                 entities.AddEntity("Town/immeuble", new Vector2(768, 405));
                 entities.AddEntity("Town/hotel", new Vector2(728, 645));
+                entities.AddEntity("Town/fontaine", new Vector2(848, 565));
+
                 entities.AddEntity("Town/immeuble2", new Vector2(728, 405));
                 entities.AddEntity("Town/immeuble2", new Vector2(608, 405));
-                entities.AddEntity("Town/fontaine", new Vector2(848, 565));
-                                
+
+                entities.AddEntity("Town/maison", new Vector2(1160, 525));
+                entities.AddEntity("Town/maison", new Vector2(1160, 405));
+                entities.AddEntity("Town/maison", new Vector2(1160, 645));
+
+                entities.AddEntity("Town/barriere_train_gauche", new Vector2(1120, 760));
+                entities.AddEntity("Town/barriere_train_droite", new Vector2(1140, 800));
+
                 Model batiment1X = content.Load<Model>("Models/Town/batiment2");
                 entities.AddEntity(batiment1X, new Vector2(608, 525));
                 //entities.AddEntity(batiment1X, new Vector2(728, 645));
