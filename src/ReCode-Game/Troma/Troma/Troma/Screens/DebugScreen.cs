@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using GameEngine;
 using GameEngine.Screen;
 
 namespace Troma.Screens
@@ -13,8 +14,6 @@ namespace Troma.Screens
     {
         #region Fields
 
-        ContentManager content;
-        SpriteBatch spriteBatch;
         SpriteFont spriteFont;
 
         float memory;
@@ -33,16 +32,9 @@ namespace Troma.Screens
 
         public override void LoadContent()
         {
-            if (content == null)
-                content = new ContentManager(ScreenManager.Game.Services, "Content");
+            base.LoadContent();
 
-            spriteBatch = ScreenManager.SpriteBatch;
-            spriteFont = content.Load<SpriteFont>("Fonts/Debug");
-        }
-
-        public override void UnloadContent()
-        {
-            content.Unload();
+            spriteFont = FileManager.Load<SpriteFont>("Fonts/Debug");
         }
 
         #endregion
@@ -67,9 +59,9 @@ namespace Troma.Screens
             Vector2 pos = new Vector2(5,
                 ScreenManager.GraphicsDevice.Viewport.Height - size.Y - 5);
 
-            spriteBatch.Begin();
-            spriteBatch.DrawString(spriteFont, debug, pos, Color.Gold);
-            spriteBatch.End();
+            GameServices.SpriteBatch.Begin();
+            GameServices.SpriteBatch.DrawString(spriteFont, debug, pos, Color.Gold);
+            GameServices.SpriteBatch.End();
         }
     }
 }

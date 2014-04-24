@@ -51,8 +51,6 @@ namespace GameEngine.EntitySystem
             _updateableComponents.Clear();
             _drawableComponents.Clear();
 
-            //AddComponent(new TransformWidget(this));
-
             EntityManager.AddEntity(this);
         }
 

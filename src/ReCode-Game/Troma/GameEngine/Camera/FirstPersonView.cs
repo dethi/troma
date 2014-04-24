@@ -64,17 +64,6 @@ namespace GameEngine.Camera
         }
 
         /// <summary>
-        /// Change camera position and rotation
-        /// </summary>
-        /// <param name="pos">Position</param>
-        /// <param name="rot">Rotation</param>
-        private void MoveTo(Vector3 pos, Vector3 rot)
-        {
-            Position = pos;
-            Rotation = rot;
-        }
-
-        /// <summary>
         /// Update look at vector
         /// </summary>
         private void UpdateLookAt()
@@ -89,7 +78,7 @@ namespace GameEngine.Camera
         /// Calculates the new position of the camera
         /// </summary>
         /// <param name="amount">Direction and scale of the movement</param>
-        public Vector3 PreviewMove(Vector3 amount)
+        private Vector3 PreviewMove(Vector3 amount)
         {
             Matrix rotate = Matrix.CreateRotationY(cameraRotation.Y);
             Vector3 movement = new Vector3(amount.X, amount.Y, amount.Z);
@@ -104,6 +93,17 @@ namespace GameEngine.Camera
         public void Move(Vector3 scale)
         {
             MoveTo(PreviewMove(scale), Rotation);
+        }
+
+        /// <summary>
+        /// Change camera position and rotation
+        /// </summary>
+        /// <param name="pos">Position</param>
+        /// <param name="rot">Rotation</param>
+        public void MoveTo(Vector3 pos, Vector3 rot)
+        {
+            Position = pos;
+            Rotation = rot;
         }
     }
 }

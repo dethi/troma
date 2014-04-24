@@ -95,6 +95,7 @@
     <Compile Include="Camera\FirstPersonView.cs" />
     <Compile Include="Camera\ICamera.cs" />
     <Compile Include="EntitySystem\EntityManager.cs" />
+    <Compile Include="EntitySystem\IEntityTemplate.cs" />
     <Compile Include="EntitySystem\UpdateableEntityComponent.cs" />
     <Compile Include="EntitySystem\DrawableEntityComponent.cs" />
     <Compile Include="EntitySystem\Entity.cs" />
@@ -102,6 +103,9 @@
     <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="EntitySystem\IEntityDrawable.cs" />
     <Compile Include="EntitySystem\IEntityUpdateable.cs" />
+    <Compile Include="EntitySystem\Components\Transform.cs" />
+    <Compile Include="FileManager.cs" />
+    <Compile Include="GameServices.cs" />
     <Compile Include="Screen\GameScreen.cs" />
     <Compile Include="Input\InputConfiguration.cs" />
     <Compile Include="Input\InputState.cs" />
@@ -110,6 +114,9 @@
     <Compile Include="Size.cs" />
     <Compile Include="Terrain\HeightMap.cs" />
     <Compile Include="Terrain\TerrainInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EntitySystem\Template\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

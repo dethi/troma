@@ -9,7 +9,7 @@ using GameEngine.Camera;
 
 namespace GameEngine.Terrain
 {
-    public class Heightmap
+    public class HeightMap
     {
         #region Fields
 
@@ -27,7 +27,7 @@ namespace GameEngine.Terrain
         /// <summary>
         /// Build a terrain
         /// </summary>
-        public Heightmap(Game game, Effect effect, TerrainInfo terrainInfo)
+        public HeightMap(Game game, Effect effect, TerrainInfo terrainInfo)
         {
             this.game = game;
             this.effect = effect;

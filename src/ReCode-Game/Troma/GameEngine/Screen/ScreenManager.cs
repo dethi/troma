@@ -17,9 +17,7 @@ namespace GameEngine.Screen
         private List<GameScreen> screens;
         private List<GameScreen> screensToUpdate;
         private InputState input;
-
         private ContentManager content;
-        public SpriteBatch SpriteBatch { get; private set; }
 
         private bool isInitialized;
 
@@ -32,13 +30,14 @@ namespace GameEngine.Screen
         {
             screens = new List<GameScreen>();
             screensToUpdate = new List<GameScreen>();
-
             input = new InputState();
         }
 
         public override void Initialize()
         {
             base.Initialize();
+
+            GameServices.Initialize(Game, GraphicsDevice);
 
             input.MouseOrigin = new Vector2(
                 GraphicsDevice.Viewport.Width / 2,
@@ -50,10 +49,11 @@ namespace GameEngine.Screen
         protected override void LoadContent()
         {
             content = Game.Content;
-            SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             foreach (GameScreen s in screens)
                 s.LoadContent();
+
+            FileManager.Content = content;
         }
 
         protected override void UnloadContent()
@@ -123,6 +123,7 @@ namespace GameEngine.Screen
                 s.LoadContent();
 
             screens.Add(s);
+            FileManager.Content = content;
         }
 
         /// <summary>

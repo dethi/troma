@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using GameEngine.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace GameEngine.Screen
 {
@@ -20,6 +21,7 @@ namespace GameEngine.Screen
         #region Fields
 
         protected Game game;
+        protected ContentManager content;
 
         public ScreenManager ScreenManager { get; internal set; }
         public ScreenState ScreenState { get; protected set; }
@@ -61,8 +63,19 @@ namespace GameEngine.Screen
             TransitionPosition = 1;
         }
 
-        public virtual void LoadContent() { }
-        public virtual void UnloadContent() { }
+        public virtual void LoadContent() 
+        {
+            if (content == null)
+                content = new ContentManager(ScreenManager.Game.Services, "Content");
+
+            FileManager.Content = content;
+        }
+
+        public void UnloadContent()
+        {
+            content.Unload();
+        }
+
         public virtual void Draw(GameTime gameTime) { }
         public virtual void HandleInput(GameTime gameTime, InputState input) { }
 
