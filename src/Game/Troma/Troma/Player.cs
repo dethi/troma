@@ -19,7 +19,7 @@ namespace Troma
         private const float COEF_RUN_SPEED = 1.7f;
         private const float RUN_SPEED = WALK_SPEED * COEF_RUN_SPEED;
 
-        private const float JUMP_SPEED = 80;
+        private const float JUMP_SPEED = 60;
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace Troma
         private bool isCrouched;
         private bool touchGround;
 
-        private HeightMap terrain;
+        private ITerrain terrain;
 
         public Vector3 Position
         {
@@ -92,7 +92,7 @@ namespace Troma
             _view = view;
         }
 
-        public void Initialize(HeightMap terrain)
+        public void Initialize(ITerrain terrain)
         {
             _height = HEIGHT;
             _position = _initPosition;

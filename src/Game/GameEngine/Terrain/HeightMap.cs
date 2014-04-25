@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameEngine
 {
-    public class HeightMap
+    public class HeightMap : ITerrain
     {
         #region Fields
 
@@ -58,7 +58,7 @@ namespace GameEngine
             effect.Parameters["lightColor"].SetValue(new Vector4(1, 1, 1, 1));
             effect.Parameters["lightBrightness"].SetValue(0.8f);
 
-            effect.Parameters["ambientLightLevel"].SetValue(0.15f);
+            effect.Parameters["ambientLightLevel"].SetValue(0.23f);
             effect.Parameters["ambientLightColor"].SetValue(new Vector4(0.98f, 0.92f, 0.24f, 1f));
 
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
@@ -81,7 +81,7 @@ namespace GameEngine
         /// <param name="depth">Max depth of the terrain</param>
         private void ReadHeightMap(Texture2D heightmap, int width, int height, float depth)
         {
-            depths = new float[terrainInfo.Size.Width, terrainInfo.Size.Height];
+            depths = new float[width, height];
 
             Color[] heightmapData = new Color[heightmap.Width * heightmap.Height];
             heightmap.GetData(heightmapData);
@@ -89,8 +89,10 @@ namespace GameEngine
             for (int x = 0; x < width; x++)
             {
                 for (int z = 0; z < height; z++)
-                    depths[x, z] = (float)(heightmapData[x * width + z].R / 255f)
+                {
+                    depths[x, z] = (float)(heightmapData[x + z * width].R / 255f)
                         * depth + terrainInfo.Position.Y;
+                }
             }
         }
 
@@ -152,8 +154,8 @@ namespace GameEngine
                 }
             }
 
-            indexBuffer = new IndexBuffer(game.GraphicsDevice, IndexElementSize.ThirtyTwoBits,
-                indices.Length, BufferUsage.None);
+            indexBuffer = new IndexBuffer(game.GraphicsDevice, 
+                IndexElementSize.ThirtyTwoBits, indices.Length, BufferUsage.None);
             indexBuffer.SetData(indices);
         }
 
@@ -169,16 +171,16 @@ namespace GameEngine
             vertexBuffer.GetData(vertices);
             indexBuffer.GetData(indices);
 
-            for (int x = 0; x < vertices.Length; x++)
-                vertices[x].Normal = Vector3.Zero;
+            for (int i = 0; i < vertices.Length; i++)
+                vertices[i].Normal = Vector3.Zero;
 
             int triangleCount = indices.Length / 3;
 
-            for (int x = 0; x < triangleCount; x++)
+            for (int i = 0; i < triangleCount; i++)
             {
-                int v1 = indices[x * 3];
-                int v2 = indices[(x * 3) + 1];
-                int v3 = indices[(x * 3) + 2];
+                int v1 = indices[i * 3];
+                int v2 = indices[(i * 3) + 1];
+                int v3 = indices[(i * 3) + 2];
 
                 Vector3 firstSide = vertices[v2].Position - vertices[v1].Position;
                 Vector3 secondSide = vertices[v1].Position - vertices[v3].Position;
@@ -190,8 +192,8 @@ namespace GameEngine
                 vertices[v3].Normal += triangleNormal;
             }
 
-            for (int x = 0; x < vertices.Length; x++)
-                vertices[x].Normal.Normalize();
+            for (int i = 0; i < vertices.Length; i++)
+                vertices[i].Normal.Normalize();
 
             vertexBuffer.SetData(vertices);
         }

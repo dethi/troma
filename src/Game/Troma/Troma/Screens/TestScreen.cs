@@ -14,7 +14,7 @@ namespace Troma
 
         private FirstPersonView camera;
         private Player player;
-        private HeightMap terrain;
+        private ITerrain terrain;
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace Troma
             TerrainInfo terrainInfo = new TerrainInfo()
             {
                 Position = Vector3.Zero,
-                Size = new Size(512, 512),
+                Size = new Size(513, 513),
                 Depth = 8,
                 Texture = terrainTexture,
                 TextureScale = 512,

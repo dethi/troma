@@ -114,6 +114,7 @@
     <Compile Include="Screen\ScreenManager.cs" />
     <Compile Include="Size.cs" />
     <Compile Include="Terrain\HeightMap.cs" />
+    <Compile Include="Terrain\ITerrain.cs" />
     <Compile Include="Terrain\TerrainInfo.cs" />
   </ItemGroup>
   <ItemGroup>
