@@ -11,9 +11,9 @@ FBXHeaderExtension:  {
 		Year: 2014
 		Month: 04
 		Day: 25
-		Hour: 22
-		Minute: 54
-		Second: 30
+		Hour: 23
+		Minute: 43
+		Second: 46
 		Millisecond: 0
 	}
 	Creator: "FBX SDK/FBX Plugins build 20070228"
@@ -21,7 +21,7 @@ FBXHeaderExtension:  {
 		FlagPLE: 0
 	}
 }
-CreationTime: "2014-04-25 22:54:30:000"
+CreationTime: "2014-04-25 23:43:46:000"
 Creator: "Blender version 2.70 (sub 0)"
 
 ; Object definitions
@@ -19616,7 +19616,7 @@ Objects:  {
 			}
 		}
 	}
-	Material: "Material::Material_001__poste_png", "" {
+	Material: "Material::Material_001__maison2_png", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -19676,7 +19676,7 @@ Objects:  {
 			Property: "Reflectivity", "double", "",0
 		}
 	}
-	Material: "Material::None__poste_toit_png", "" {
+	Material: "Material::None__maison_toit2_png", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -19727,14 +19727,14 @@ Objects:  {
 		Filename: "fenetre.png"
 		RelativeFilename: "fenetre.png"
 	}
-	Video: "Video::poste_png", "Clip" {
+	Video: "Video::maison2_png", "Clip" {
 		Type: "Clip"
 		Properties60:  {
 			Property: "FrameRate", "double", "",0
 			Property: "LastFrame", "int", "",0
 			Property: "Width", "int", "",0
 			Property: "Height", "int", "",0
-			Property: "Path", "charptr", "", "poste.png"
+			Property: "Path", "charptr", "", "maison2.png"
 			Property: "StartFrame", "int", "",0
 			Property: "StopFrame", "int", "",0
 			Property: "PlaySpeed", "double", "",1
@@ -19745,17 +19745,17 @@ Objects:  {
 			Property: "AccessMode", "enum", "",0
 		}
 		UseMipMap: 0
-		Filename: "poste.png"
-		RelativeFilename: "poste.png"
+		Filename: "maison2.png"
+		RelativeFilename: "maison2.png"
 	}
-	Video: "Video::poste_toit_png", "Clip" {
+	Video: "Video::maison_toit2_png", "Clip" {
 		Type: "Clip"
 		Properties60:  {
 			Property: "FrameRate", "double", "",0
 			Property: "LastFrame", "int", "",0
 			Property: "Width", "int", "",0
 			Property: "Height", "int", "",0
-			Property: "Path", "charptr", "", "poste_toit.png"
+			Property: "Path", "charptr", "", "maison_toit2.png"
 			Property: "StartFrame", "int", "",0
 			Property: "StopFrame", "int", "",0
 			Property: "PlaySpeed", "double", "",1
@@ -19766,8 +19766,8 @@ Objects:  {
 			Property: "AccessMode", "enum", "",0
 		}
 		UseMipMap: 0
-		Filename: "poste_toit.png"
-		RelativeFilename: "poste_toit.png"
+		Filename: "maison_toit2.png"
+		RelativeFilename: "maison_toit2.png"
 	}
 	Texture: "Texture::fenetre_png", "TextureVideoClip" {
 		Type: "TextureVideoClip"
@@ -19798,10 +19798,10 @@ Objects:  {
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Texture: "Texture::poste_png", "TextureVideoClip" {
+	Texture: "Texture::maison2_png", "TextureVideoClip" {
 		Type: "TextureVideoClip"
 		Version: 202
-		TextureName: "Texture::poste_png"
+		TextureName: "Texture::maison2_png"
 		Properties60:  {
 			Property: "Translation", "Vector", "A+",0,0,0
 			Property: "Rotation", "Vector", "A+",0,0,0
@@ -19819,18 +19819,18 @@ Objects:  {
 			Property: "TextureScalingPivot", "Vector3D", "",0,0,0
 			Property: "VideoProperty", "object", ""
 		}
-		Media: "Video::poste_png"
-		FileName: "poste.png"
-		RelativeFilename: "poste.png"
+		Media: "Video::maison2_png"
+		FileName: "maison2.png"
+		RelativeFilename: "maison2.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Texture: "Texture::poste_toit_png", "TextureVideoClip" {
+	Texture: "Texture::maison_toit2_png", "TextureVideoClip" {
 		Type: "TextureVideoClip"
 		Version: 202
-		TextureName: "Texture::poste_toit_png"
+		TextureName: "Texture::maison_toit2_png"
 		Properties60:  {
 			Property: "Translation", "Vector", "A+",0,0,0
 			Property: "Rotation", "Vector", "A+",0,0,0
@@ -19848,9 +19848,9 @@ Objects:  {
 			Property: "TextureScalingPivot", "Vector3D", "",0,0,0
 			Property: "VideoProperty", "object", ""
 		}
-		Media: "Video::poste_toit_png"
-		FileName: "poste_toit.png"
-		RelativeFilename: "poste_toit.png"
+		Media: "Video::maison_toit2_png"
+		FileName: "maison_toit2.png"
+		RelativeFilename: "maison_toit2.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
@@ -19915,23 +19915,23 @@ Relations:  {
 	}
 	Model: "Model::Camera Switcher", "CameraSwitcher" {
 	}
-	Material: "Material::Material_001__poste_png", "" {
+	Material: "Material::Material_001__maison2_png", "" {
 	}
 	Material: "Material::Material__fenetre_png", "" {
 	}
-	Material: "Material::None__poste_toit_png", "" {
+	Material: "Material::None__maison_toit2_png", "" {
 	}
 	Texture: "Texture::fenetre_png", "TextureVideoClip" {
 	}
-	Texture: "Texture::poste_png", "TextureVideoClip" {
+	Texture: "Texture::maison2_png", "TextureVideoClip" {
 	}
-	Texture: "Texture::poste_toit_png", "TextureVideoClip" {
+	Texture: "Texture::maison_toit2_png", "TextureVideoClip" {
 	}
 	Video: "Video::fenetre_png", "Clip" {
 	}
-	Video: "Video::poste_png", "Clip" {
+	Video: "Video::maison2_png", "Clip" {
 	}
-	Video: "Video::poste_toit_png", "Clip" {
+	Video: "Video::maison_toit2_png", "Clip" {
 	}
 }
 
@@ -19943,14 +19943,14 @@ Connections:  {
 	Connect: "OO", "Model::Maison", "Model::Scene"
 	Connect: "OO", "Model::Maison_toit", "Model::Scene"
 	Connect: "OO", "Material::Material__fenetre_png", "Model::Maison_fenetre"
-	Connect: "OO", "Material::Material_001__poste_png", "Model::Maison"
-	Connect: "OO", "Material::None__poste_toit_png", "Model::Maison_toit"
+	Connect: "OO", "Material::Material_001__maison2_png", "Model::Maison"
+	Connect: "OO", "Material::None__maison_toit2_png", "Model::Maison_toit"
 	Connect: "OO", "Texture::fenetre_png", "Model::Maison_fenetre"
-	Connect: "OO", "Texture::poste_png", "Model::Maison"
-	Connect: "OO", "Texture::poste_toit_png", "Model::Maison_toit"
+	Connect: "OO", "Texture::maison2_png", "Model::Maison"
+	Connect: "OO", "Texture::maison_toit2_png", "Model::Maison_toit"
 	Connect: "OO", "Video::fenetre_png", "Texture::fenetre_png"
-	Connect: "OO", "Video::poste_png", "Texture::poste_png"
-	Connect: "OO", "Video::poste_toit_png", "Texture::poste_toit_png"
+	Connect: "OO", "Video::maison2_png", "Texture::maison2_png"
+	Connect: "OO", "Video::maison_toit2_png", "Texture::maison_toit2_png"
 }
 ;Takes and animation section
 ;----------------------------------------------------

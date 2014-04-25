@@ -200,25 +200,19 @@ namespace Arrow
                 entities.AddEntity("Town/barriere_train_gauche", new Vector2(1120, 760));
                 entities.AddEntity("Town/barriere_train_droite", new Vector2(1140, 800));
                 entities.AddEntity("Town/garde_passage_a_niveau", new Vector2(1165, 840));
-
                 entities.AddEntity("Town/immeuble2", new Vector2(728, 405));
                 entities.AddEntity("Town/immeuble2", new Vector2(608, 405));
-
                 entities.AddEntity("Town/immeuble3", new Vector2(848, 1000));
                 entities.AddEntity("Town/immeuble3", new Vector2(968, 1000));
-
-                entities.AddEntity("Town/maison", new Vector2(1160, 525));
-                entities.AddEntity("Town/maison", new Vector2(1160, 405));
-                entities.AddEntity("Town/maison", new Vector2(1160, 645));
-
+                entities.AddEntity("Town/maison", new Vector2(1160, 325));
+                entities.AddEntity("Town/maison", new Vector2(1160, 445));
+                entities.AddEntity("Town/maison", new Vector2(1160, 565));
                 entities.AddEntity("Town/cimetiere", new Vector2(1100, 1100));
+                entities.AddEntity("Town/maison2", new Vector2(528, 525));
+                entities.AddEntity("Town/maison2", new Vector2(528, 645));
 
-                Model batiment1X = content.Load<Model>("Models/Town/batiment2");
-                entities.AddEntity(batiment1X, new Vector2(608, 525));
-                //entities.AddEntity(batiment1X, new Vector2(728, 645));
-                entities.AddEntity(batiment1X, new Vector2(608, 645));
-
-                entities.AddEntity("Town/batiment3", new Vector2(1128, 405));
+                
+                entities.AddEntity("Town/immeuble4", new Vector2(1008, 405));
 
                 #region tombe
                 entities.AddEntity("Town/tombe", new Vector2(1110, 1110));
