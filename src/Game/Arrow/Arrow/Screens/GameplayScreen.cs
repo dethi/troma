@@ -190,7 +190,7 @@ namespace Arrow
             else
             {
                 entities.AddEntity("Town/gare", new Vector2(768, 685));
-                entities.AddEntity("Town/quai", new Vector2(768, 813));
+                entities.AddEntity("Town/quai", new Vector2(968, 813));
                 entities.AddEntity("Town/eglise", new Vector2(1008, 445));
                 entities.AddEntity("Town/mairie", new Vector2(1008, 565));
                 entities.AddEntity("Town/poste", new Vector2(728, 525));

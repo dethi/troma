@@ -10,10 +10,10 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2014
 		Month: 04
-		Day: 13
-		Hour: 17
-		Minute: 15
-		Second: 17
+		Day: 25
+		Hour: 16
+		Minute: 28
+		Second: 54
 		Millisecond: 0
 	}
 	Creator: "FBX SDK/FBX Plugins build 20070228"
@@ -21,15 +21,15 @@ FBXHeaderExtension:  {
 		FlagPLE: 0
 	}
 }
-CreationTime: "2014-04-13 17:15:17:000"
-Creator: "Blender version 2.69 (sub 0)"
+CreationTime: "2014-04-25 16:28:54:000"
+Creator: "Blender version 2.70 (sub 0)"
 
 ; Object definitions
 ;------------------------------------------------------------------
 
 Definitions:  {
 	Version: 100
-	Count: 3
+	Count: 5
 	ObjectType: "Model" {
 		Count: 1
 	}
@@ -37,6 +37,12 @@ Definitions:  {
 		Count: 1
 	}
 	ObjectType: "Material" {
+		Count: 1
+	}
+	ObjectType: "Texture" {
+		Count: 1
+	}
+	ObjectType: "Video" {
 		Count: 1
 	}
 	ObjectType: "Pose" {
@@ -51,7 +57,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Model: "Model::Cube", "Mesh" {
+	Model: "Model::Gare_quai", "Mesh" {
 		Version: 232
 		Properties60:  {
 			Property: "QuaternionInterpolate", "bool", "",0
@@ -130,28 +136,53 @@ Objects:  {
 		MultiTake: 1
 		Shading: Y
 		Culling: "CullingOff"
-		Vertices: 200.000000,20.000000,0.000000,200.000000,0.000000,0.000000,-0.000000,0.000000,0.000000,0.000000,20.000000,0.000000,
-		          200.000000,20.000000,4.000000,200.000000,-0.000001,4.000000,-0.000000,0.000000,4.000000,0.000000,20.000000,4.000000
-		PolygonVertexIndex: 0,1,2,-4,4,7,6,-6,0,4,5,-2,1,5,6,-3,2,6,7,-4,4,0,3,-8
+		Vertices: 0.000000,0.000000,0.000000,0.000000,200.000000,0.000000,20.000000,200.000000,0.000000,20.000000,0.000000,0.000000,
+		          0.000000,0.000000,4.000000,0.000000,200.000000,4.000000,20.000000,200.000000,4.000000,20.000000,0.000000,4.000000,
+		          0.000000,100.000000,4.000000,0.000000,100.000000,0.000000,20.000000,100.000000,4.000000,20.000000,100.000000,0.000000
+		PolygonVertexIndex: 8,5,1,-10,5,6,2,-2,10,7,3,-12,7,4,0,-4,10,6,5,-9,4,8,9,-1,6,10,11,-3,7,10,8,-5
 		GeometryVersion: 124
 		LayerElementNormal: 0 {
 			Version: 101
 			Name: ""
 			MappingInformationType: "ByPolygonVertex"
 			ReferenceInformationType: "Direct"
-			Normals: 0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,
-			         0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,
+			Normals: -1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,
+			         0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,
 			         1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,
-			         -0.000000,-1.000000,-0.000000,-0.000000,-1.000000,-0.000000,-0.000000,-1.000000,-0.000000,-0.000000,-1.000000,-0.000000,
-			         -1.000000,0.000000,-0.000000,-1.000000,0.000000,-0.000000,-1.000000,0.000000,-0.000000,-1.000000,0.000000,-0.000000,
-			         0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000
+			         0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,
+			         0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,
+			         -1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,-1.000000,0.000000,0.000000,
+			         1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,
+			         0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000,0.000000,0.000000,1.000000
 		}
 		LayerElementSmoothing: 0 {
 			Version: 102
 			Name: ""
 			MappingInformationType: "ByPolygon"
 			ReferenceInformationType: "Direct"
-			Smoothing: 0,0,0,0,0,0
+			Smoothing: 0,0,0,0,0,0,0,0
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "UVMap"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: 0.999800,0.759849,0.999813,0.291478,0.999800,0.642208,0.000187,0.819215,0.000187,0.760397,0.200112,0.877488,
+			    0.999800,0.642756,0.999800,0.818670,0.999813,0.292024,0.200487,0.819215,0.000187,0.701028,0.000187,0.877488,
+			    0.000187,0.759849,0.400412,0.819215,0.400412,0.877488,0.999800,0.583933,0.000187,0.292024,0.999813,0.583387,
+			    0.000187,0.291478,0.000187,0.642208,0.999800,0.760395,0.000187,0.583387,0.000187,0.818670,0.000187,0.583936,
+			    0.999800,0.701577,0.200113,0.819215,0.000187,0.642754,0.999813,0.000115,0.200487,0.877488,0.999800,0.701028,
+			    0.000187,0.000115,0.000187,0.701574
+			UVIndex: 31,24,0,12,9,13,14,28,7,22,4,20,5,11,3,25,16,8,17,21,26,6,29,10,2,19,23,15,30,27,1,18
+		}
+		LayerElementTexture: 0 {
+			Version: 101
+			Name: "UVMap"
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			BlendMode: "Translucent"
+			TextureAlpha: 1
+			TextureId: 0
 		}
 		LayerElementMaterial: 0 {
 			Version: 101
@@ -171,12 +202,20 @@ Objects:  {
 				TypedIndex: 0
 			}
 			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementTexture"
+				TypedIndex: 0
+			}
+			LayerElement:  {
 				Type: "LayerElementMaterial"
 				TypedIndex: 0
 			}
 		}
 	}
-	Material: "Material::Material", "" {
+	Material: "Material::Material_003__gare_quai_png", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -206,6 +245,56 @@ Objects:  {
 			Property: "Reflectivity", "double", "",0
 		}
 	}
+	Video: "Video::gare_quai_png", "Clip" {
+		Type: "Clip"
+		Properties60:  {
+			Property: "FrameRate", "double", "",0
+			Property: "LastFrame", "int", "",0
+			Property: "Width", "int", "",0
+			Property: "Height", "int", "",0
+			Property: "Path", "charptr", "", "gare_quai.png"
+			Property: "StartFrame", "int", "",0
+			Property: "StopFrame", "int", "",0
+			Property: "PlaySpeed", "double", "",1
+			Property: "Offset", "KTime", "",0
+			Property: "InterlaceMode", "enum", "",0
+			Property: "FreeRunning", "bool", "",0
+			Property: "Loop", "bool", "",0
+			Property: "AccessMode", "enum", "",0
+		}
+		UseMipMap: 0
+		Filename: "gare_quai.png"
+		RelativeFilename: "gare_quai.png"
+	}
+	Texture: "Texture::gare_quai_png", "TextureVideoClip" {
+		Type: "TextureVideoClip"
+		Version: 202
+		TextureName: "Texture::gare_quai_png"
+		Properties60:  {
+			Property: "Translation", "Vector", "A+",0,0,0
+			Property: "Rotation", "Vector", "A+",0,0,0
+			Property: "Scaling", "Vector", "A+",1,1,1
+			Property: "Texture alpha", "Number", "A+",0
+			Property: "TextureTypeUse", "enum", "",0
+			Property: "CurrentTextureBlendMode", "enum", "",1
+			Property: "UseMaterial", "bool", "",0
+			Property: "UseMipMap", "bool", "",0
+			Property: "CurrentMappingType", "enum", "",0
+			Property: "UVSwap", "bool", "",0
+			Property: "WrapModeU", "enum", "",0
+			Property: "WrapModeV", "enum", "",0
+			Property: "TextureRotationPivot", "Vector3D", "",0,0,0
+			Property: "TextureScalingPivot", "Vector3D", "",0,0,0
+			Property: "VideoProperty", "object", ""
+		}
+		Media: "Video::gare_quai_png"
+		FileName: "gare_quai.png"
+		RelativeFilename: "gare_quai.png"
+		ModelUVTranslation: 0,0
+		ModelUVScaling: 1,1
+		Texture_Alpha_Source: "None"
+		Cropping: 0,0,0,0
+	}
 	Pose: "Pose::BIND_POSES", "BindPose" {
 		Type: "BindPose"
 		Version: 100
@@ -213,7 +302,7 @@ Objects:  {
 		}
 		NbPoseNodes: 1
 		PoseNode:  {
-			Node: "Model::Cube"
+			Node: "Model::Gare_quai"
 			Matrix: 0.000000075497901,0.000000000000000,-1.000000000000000,0.000000000000000,-1.000000000000000,0.000000000000000,-0.000000075497901,0.000000000000000,0.000000000000000,1.000000000000000,0.000000000000000,0.000000000000000,0.000000000000000,0.000000000000000,0.000000000000000,1.000000000000000
 		}
 	}
@@ -235,7 +324,7 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Relations:  {
-	Model: "Model::Cube", "Mesh" {
+	Model: "Model::Gare_quai", "Mesh" {
 	}
 	Model: "Model::Producer Perspective", "Camera" {
 	}
@@ -253,7 +342,11 @@ Relations:  {
 	}
 	Model: "Model::Camera Switcher", "CameraSwitcher" {
 	}
-	Material: "Material::Material", "" {
+	Material: "Material::Material_003__gare_quai_png", "" {
+	}
+	Texture: "Texture::gare_quai_png", "TextureVideoClip" {
+	}
+	Video: "Video::gare_quai_png", "Clip" {
 	}
 }
 
@@ -261,8 +354,10 @@ Relations:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	Connect: "OO", "Model::Cube", "Model::Scene"
-	Connect: "OO", "Material::Material", "Model::Cube"
+	Connect: "OO", "Model::Gare_quai", "Model::Scene"
+	Connect: "OO", "Material::Material_003__gare_quai_png", "Model::Gare_quai"
+	Connect: "OO", "Texture::gare_quai_png", "Model::Gare_quai"
+	Connect: "OO", "Video::gare_quai_png", "Texture::gare_quai_png"
 }
 ;Takes and animation section
 ;----------------------------------------------------
@@ -276,7 +371,7 @@ Takes:  {
 
 		;Models animation
 		;----------------------------------------------------
-		Model: "Model::Cube" {
+		Model: "Model::Gare_quai" {
 			Version: 1.1
 			Channel: "Transform" {
 				Channel: "T" {
