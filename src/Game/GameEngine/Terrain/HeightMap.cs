@@ -203,10 +203,10 @@ namespace GameEngine
         {
             Vector3 positionOnHeightmap = pos - terrainInfo.Position;
 
-            return (positionOnHeightmap.X > 0 &&
-                positionOnHeightmap.X < terrainInfo.Size.Width &&
-                positionOnHeightmap.Z > 0 &&
-                positionOnHeightmap.Z < terrainInfo.Size.Height);
+            return (0 < positionOnHeightmap.X &&
+                positionOnHeightmap.X < terrainInfo.Size.Width - 1 &&
+                0 < positionOnHeightmap.Z &&
+                positionOnHeightmap.Z < terrainInfo.Size.Height - 1);
         }
 
         /// <summary>

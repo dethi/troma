@@ -138,5 +138,13 @@ namespace GameEngine
             screens.Remove(s);
             screensToUpdate.Remove(s);
         }
+
+        /// <summary>
+        /// Return an array that contains all screen
+        /// </summary>
+        public GameScreen[] GetScreens()
+        {
+            return screens.ToArray();
+        }
     }
 }

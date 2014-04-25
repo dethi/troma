@@ -38,6 +38,7 @@ namespace Troma
             Components.Add(screenManager);
 
             screenManager.AddScreen(new TestScreen(this));
+            //screenManager.AddScreen(new MainMenuScreen(this));
 
 #if !BUILD
             screenManager.AddScreen(new DebugScreen(this));
