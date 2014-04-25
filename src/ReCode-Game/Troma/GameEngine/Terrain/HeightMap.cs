@@ -12,6 +12,7 @@ namespace GameEngine
     {
         #region Fields
 
+        Game game;
         Effect effect;
         TerrainInfo terrainInfo;
 
@@ -25,8 +26,9 @@ namespace GameEngine
         /// <summary>
         /// Build a terrain
         /// </summary>
-        public HeightMap(Effect effect, TerrainInfo terrainInfo)
+        public HeightMap(Game game, Effect effect, TerrainInfo terrainInfo)
         {
+            this.game = game;
             this.effect = effect;
             this.terrainInfo = terrainInfo;
 
@@ -116,7 +118,7 @@ namespace GameEngine
                 }
             }
 
-            vertexBuffer = new VertexBuffer(GameServices.Game.GraphicsDevice, typeof(VertexPositionNormalTexture),
+            vertexBuffer = new VertexBuffer(game.GraphicsDevice, typeof(VertexPositionNormalTexture),
                 vertices.Length, BufferUsage.None);
             vertexBuffer.SetData(vertices);
         }
@@ -150,7 +152,7 @@ namespace GameEngine
                 }
             }
 
-            indexBuffer = new IndexBuffer(GameServices.Game.GraphicsDevice, IndexElementSize.ThirtyTwoBits,
+            indexBuffer = new IndexBuffer(game.GraphicsDevice, IndexElementSize.ThirtyTwoBits,
                 indices.Length, BufferUsage.None);
             indexBuffer.SetData(indices);
         }

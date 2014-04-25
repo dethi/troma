@@ -25,16 +25,14 @@ namespace Troma
         {
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
-
-            camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
-            player = new Player(new Vector3(0, 70, 0), Vector3.Zero, camera);
         }
 
         public override void LoadContent()
         {
             base.LoadContent();
 
-            player.Initialize();
+            camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
+            player = new Player(new Vector3(5, 15, 5), Vector3.Zero, camera);
 
             Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
             Texture2D terrainTexture = FileManager.Load<Texture2D>("Terrains/texture");
@@ -44,13 +42,14 @@ namespace Troma
             {
                 Position = Vector3.Zero,
                 Size = new Size(512, 512),
-                Depth = 18,
+                Depth = 8,
                 Texture = terrainTexture,
                 TextureScale = 512,
                 Heighmap = terrainHeighmap
             };
 
-            terrain = new HeightMap(terrainEffect, terrainInfo);
+            terrain = new HeightMap(game, terrainEffect, terrainInfo);
+            player.Initialize(terrain);
 
             game.ResetElapsedTime();
         }

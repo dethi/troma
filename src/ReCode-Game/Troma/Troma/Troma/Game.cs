@@ -30,12 +30,11 @@ namespace Troma
         {
             graphics = new GraphicsDeviceManager(this);
             //ActivateFullScreen();
-            DisableVsync();
+            //DisableVsync();
 
             Content.RootDirectory = "Content";
 
             screenManager = new ScreenManager(this);
-            screenManager.Initialize();
             Components.Add(screenManager);
 
             screenManager.AddScreen(new TestScreen(this));
@@ -43,6 +42,12 @@ namespace Troma
 #if !BUILD
             screenManager.AddScreen(new DebugScreen(this));
 #endif
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+            screenManager.Initialize();
         }
 
         /// <summary>

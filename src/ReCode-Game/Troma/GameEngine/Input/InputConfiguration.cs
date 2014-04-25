@@ -18,7 +18,7 @@ namespace GameEngine
                 { KeyActions.Bottom,    Keys.S },
                 { KeyActions.Left,      Keys.A },
                 { KeyActions.Right,     Keys.D },
-                { KeyActions.Crouch,    Keys.LeftControl },
+                { KeyActions.Crouch,    Keys.C },
                 { KeyActions.Run,       Keys.LeftShift },
                 { KeyActions.Jump,      Keys.Space },
                 { KeyActions.Reload,    Keys.R },

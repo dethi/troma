@@ -7,6 +7,6 @@ namespace GameEngine
 {
     public static class Physics
     {
-        public const float Gravity = 39.24f;
+        public const float Gravity = -9261.38f;
     }
 }

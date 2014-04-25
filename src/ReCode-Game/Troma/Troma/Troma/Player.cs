@@ -13,13 +13,13 @@ namespace Troma
 
         private const float HEIGHT = 7;
         private const float CROUCH_HEIGHT = 4.8f;
-        private const float CROUCH_SPEED = 2f;
+        private const float CROUCH_SPEED = 15;
 
         private const float WALK_SPEED = 40f;
         private const float COEF_RUN_SPEED = 1.7f;
         private const float RUN_SPEED = WALK_SPEED * COEF_RUN_SPEED;
 
-        private const float JUMP_SPEED = 32f;
+        private const float JUMP_SPEED = 80;
 
         #endregion
 
@@ -36,9 +36,14 @@ namespace Troma
         private Vector3 move;
         private Vector3 rotate;
         private Vector3 rotationBuffer;
+
         private Vector3 velocity;
+        private Vector3 acceleration;
+
         private bool isCrouched;
-        private bool hasJumping;
+        private bool touchGround;
+
+        private HeightMap terrain;
 
         public Vector3 Position
         {
@@ -87,7 +92,7 @@ namespace Troma
             _view = view;
         }
 
-        public void Initialize()
+        public void Initialize(HeightMap terrain)
         {
             _height = HEIGHT;
             _position = _initPosition;
@@ -97,15 +102,21 @@ namespace Troma
             rotate = Vector3.Zero;
             rotationBuffer = Vector3.Zero;
             velocity = Vector3.Zero;
+            acceleration = Vector3.Zero;
 
             isCrouched = false;
-            hasJumping = false;
+            touchGround = false;
+
+            this.terrain = terrain;
+
+            MoveTo(_position, _rotation);
         }
 
         #endregion
 
         public void Update(GameTime gameTime)
         {
+            GroundCollision();
         }
 
 
@@ -116,6 +127,9 @@ namespace Troma
             Crouch(dt, input);
             Jump(dt, input);
             Move(dt, input);
+
+            // Apply movement
+            MoveTo(PreviewMove(move, rotate.Y), rotate);
         }
 
         public void Draw()
@@ -146,17 +160,14 @@ namespace Troma
 
                 rotate = new Vector3(
                     -MathHelper.Clamp(rotationBuffer.Y, MathHelper.ToRadians(-75.0f), MathHelper.ToRadians(75.0f)),
-                    MathHelper.WrapAngle(rotationBuffer.X), 
+                    MathHelper.WrapAngle(rotationBuffer.X),
                     0);
             }
-
-            // Apply movement
-            MoveTo(PreviewMove(move, rotate.Y), rotate);
         }
 
         private void Crouch(float dt, InputState input)
         {
-            if ((!isCrouched && _height < HEIGHT) || 
+            if ((!isCrouched && _height < HEIGHT) ||
                 (isCrouched && _height > CROUCH_HEIGHT))
             {
                 float moveAxisY = CROUCH_SPEED * dt;
@@ -172,16 +183,41 @@ namespace Troma
 
         private void Jump(float dt, InputState input)
         {
-            if (!hasJumping && !isCrouched)
+            if (!touchGround)
+                acceleration.Y = Physics.Gravity;
+            else
             {
-                hasJumping = input.PlayerJump();
-
-                if (hasJumping)
-                    velocity.Y += JUMP_SPEED;
+                acceleration.Y = 0;
+                velocity.Y = 0;
             }
 
-            // Apply gravity
-            velocity.Y -= Physics.Gravity * dt;
+            if (touchGround && input.PlayerJump())
+            {
+                velocity.Y = JUMP_SPEED;
+                touchGround = false;
+            }
+
+            velocity += acceleration * dt * dt;
+            _position += velocity * dt;
+        }
+
+        private void GroundCollision()
+        {
+            if (!touchGround)
+            {
+                float? y = null;
+
+                try
+                {
+                    y = terrain.GetY(pos2D.X, pos2D.Y);
+                }
+                catch (ArgumentOutOfRangeException) { }
+
+                if (!y.HasValue)
+                    y = -10000;
+
+                touchGround = (_position.Y <= y.Value);
+            }
         }
 
         /// <summary>
@@ -206,19 +242,5 @@ namespace Troma
 
             return _position + movement;
         }
-
-        //
-        // Vieux code
-        //
-        /*
-
-        private void MapCollision(MapManager map)
-        {
-            float? mapHeight = map.GetHeight(Position.X, Position.Z);
-
-            if (!jumped && mapHeight.HasValue && Position.Y != mapHeight)
-                Position = new Vector3(Position.X, mapHeight.Value, Position.Z);
-        }
-         */
     }
 }
