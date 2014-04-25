@@ -273,7 +273,7 @@ namespace GameEngine
         /// </summary>
         public bool PlayerCrouch()
         {
-            return IsDown(KeyActions.Crouch) || IsDown(Buttons.B);
+            return IsPressed(KeyActions.Crouch) || IsPressed(Buttons.B);
         }
 
         /// <summary>

@@ -33,9 +33,9 @@ namespace GameEngine
             this.terrainInfo = terrainInfo;
 
             ReadHeightMap(
-                terrainInfo.Heighmap, 
-                terrainInfo.Size.Width, 
-                terrainInfo.Size.Height, 
+                terrainInfo.Heighmap,
+                terrainInfo.Size.Width,
+                terrainInfo.Size.Height,
                 terrainInfo.Depth);
             BuildVertexBuffer(terrainInfo.Size.Width, terrainInfo.Size.Height);
             BuildIndexBuffer(terrainInfo.Size.Width, terrainInfo.Size.Height);
@@ -89,7 +89,7 @@ namespace GameEngine
             for (int x = 0; x < width; x++)
             {
                 for (int z = 0; z < height; z++)
-                    depths[x, z] = (float)(heightmapData[x * width + z].R / 255f) 
+                    depths[x, z] = (float)(heightmapData[x * width + z].R / 255f)
                         * depth + terrainInfo.Position.Y;
             }
         }
@@ -108,8 +108,8 @@ namespace GameEngine
                 for (int z = 0; z < height; z++)
                 {
                     vertices[x + z * width].Position = new Vector3(
-                        terrainInfo.Position.X + x, 
-                        depths[x, z], 
+                        terrainInfo.Position.X + x,
+                        depths[x, z],
                         terrainInfo.Position.Z + z);
 
                     vertices[x + z * width].TextureCoordinate = new Vector2(
@@ -197,36 +197,43 @@ namespace GameEngine
         }
 
         /// <summary>
-        /// Search the Y position of a terrain point
+        /// Check if the position is on the terrain
         /// </summary>
-        public float? GetY(float x, float z)
+        public bool IsOnTerrain(Vector3 pos)
         {
-            int xmin = (int)Math.Floor(x);
+            Vector3 positionOnHeightmap = pos - terrainInfo.Position;
+
+            return (positionOnHeightmap.X > 0 &&
+                positionOnHeightmap.X < terrainInfo.Size.Width &&
+                positionOnHeightmap.Z > 0 &&
+                positionOnHeightmap.Z < terrainInfo.Size.Height);
+        }
+
+        /// <summary>
+        /// Search the Y position of a terrain point.
+        /// Throw an IndexOutOfRangeException if position isn't on the terrain.
+        /// </summary>
+        public float GetY(Vector3 pos)
+        {
+            int xmin = (int)Math.Floor(pos.X);
             int xmax = xmin + 1;
-            int zmin = (int)Math.Floor(z);
+            int zmin = (int)Math.Floor(pos.Z);
             int zmax = zmin + 1;
 
-            if ((xmin < 0) || (xmax > depths.GetUpperBound(0)))
-                throw new ArgumentOutOfRangeException(String.Format("X: [ {0} ; {1} ]", xmin, xmax));
-            else if ((zmin < 0) || (zmax > depths.GetUpperBound(1)))
-                throw new ArgumentOutOfRangeException(String.Format("Z: [ {0} ; {1} ]", zmin, zmax));
+            Vector3 p1 = new Vector3(xmin, depths[xmin, zmax], zmax);
+            Vector3 p2 = new Vector3(xmax, depths[xmax, zmin], zmin);
+            Vector3 p3;
+
+            if ((pos.X - xmin) + (pos.Z - zmin) <= 1)
+                p3 = new Vector3(xmin, depths[xmin, zmin], zmin);
             else
-            {
-                Vector3 p1 = new Vector3(xmin, depths[xmin, zmax], zmax);
-                Vector3 p2 = new Vector3(xmax, depths[xmax, zmin], zmin);
-                Vector3 p3;
+                p3 = new Vector3(xmax, depths[xmax, zmax], zmax);
 
-                if ((x - xmin) + (z - zmin) <= 1)
-                    p3 = new Vector3(xmin, depths[xmin, zmin], zmin);
-                else
-                    p3 = new Vector3(xmax, depths[xmax, zmax], zmax);
+            Plane plane = new Plane(p1, p2, p3);
+            Ray ray = new Ray(new Vector3(pos.X, 0, pos.Z), Vector3.Up);
+            float? height = ray.Intersects(plane);
 
-                Plane plane = new Plane(p1, p2, p3);
-                Ray ray = new Ray(new Vector3(x, 0, z), Vector3.Up);
-                float? height = ray.Intersects(plane);
-
-                return height;
-            }
+            return height.Value;
         }
     }
 }

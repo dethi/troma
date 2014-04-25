@@ -177,8 +177,8 @@ namespace Troma
                 else
                     _height = Math.Min(HEIGHT, _height + moveAxisY);
             }
-            else
-                isCrouched = input.PlayerCrouch();
+            else if (input.PlayerCrouch())
+                isCrouched = !isCrouched;
         }
 
         private void Jump(float dt, InputState input)
@@ -195,6 +195,7 @@ namespace Troma
             {
                 velocity.Y = JUMP_SPEED;
                 touchGround = false;
+                isCrouched = false;
             }
 
             velocity += acceleration * dt * dt;
@@ -203,21 +204,17 @@ namespace Troma
 
         private void GroundCollision()
         {
-            if (!touchGround)
+            if (terrain.IsOnTerrain(_position))
             {
-                float? y = null;
+                float y = terrain.GetY(_position);
 
-                try
-                {
-                    y = terrain.GetY(pos2D.X, pos2D.Y);
-                }
-                catch (ArgumentOutOfRangeException) { }
-
-                if (!y.HasValue)
-                    y = -10000;
-
-                touchGround = (_position.Y <= y.Value);
+                if (touchGround)
+                    _position.Y = y;
+                else
+                    touchGround = (y - 2 <= _position.Y) && (_position.Y <= y + 0.1f);
             }
+            else
+                touchGround = false;
         }
 
         /// <summary>
