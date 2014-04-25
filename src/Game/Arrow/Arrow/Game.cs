@@ -52,6 +52,12 @@ namespace Arrow
             #endif
         }
 
+        protected override void Initialize()
+        {
+            base.Initialize();
+            screenManager.Initialize();
+        }
+
         /// <summary>
         /// Load graphics content
         /// </summary>
