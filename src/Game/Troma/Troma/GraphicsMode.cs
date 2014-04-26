@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Troma
 {
-    public partial class Game
+    public partial class Troma
     {
         /// <summary>
         /// Get the screen size of primary screen

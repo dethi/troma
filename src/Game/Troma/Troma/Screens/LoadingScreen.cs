@@ -39,6 +39,12 @@ namespace Troma
             screenManager.AddScreen(loadingScreen);
         }
 
+        public override void LoadContent()
+        {
+            base.LoadContent();
+            spriteFont = FileManager.Load<SpriteFont>("Fonts/Menu");
+        }
+
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
             bool coveredByOtherScreen)
         {
@@ -62,12 +68,6 @@ namespace Troma
 
                 ScreenManager.Game.ResetElapsedTime();
             }
-        }
-
-        public override void LoadContent()
-        {
-            base.LoadContent();
-            spriteFont = FileManager.Load<SpriteFont>("Fonts/Menu");
         }
 
         public override void Draw(GameTime gameTime)

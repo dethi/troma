@@ -13,7 +13,7 @@ namespace Troma
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game game = new Game())
+            using (Troma game = new Troma())
             {
                 game.Run();
             }

@@ -7,7 +7,7 @@ using GameEngine;
 
 namespace Troma
 {
-    public partial class Game : Microsoft.Xna.Framework.Game
+    public partial class Troma : Microsoft.Xna.Framework.Game
     {
         #region Fields
 
@@ -26,7 +26,7 @@ namespace Troma
         /// <summary>
         /// The main game constructor
         /// </summary>
-        public Game()
+        public Troma()
         {
             graphics = new GraphicsDeviceManager(this);
             //ActivateFullScreen();
