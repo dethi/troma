@@ -10,10 +10,10 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2014
 		Month: 04
-		Day: 25
-		Hour: 23
-		Minute: 57
-		Second: 17
+		Day: 26
+		Hour: 11
+		Minute: 49
+		Second: 04
 		Millisecond: 0
 	}
 	Creator: "FBX SDK/FBX Plugins build 20070228"
@@ -21,7 +21,7 @@ FBXHeaderExtension:  {
 		FlagPLE: 0
 	}
 }
-CreationTime: "2014-04-25 23:57:17:000"
+CreationTime: "2014-04-26 11:49:04:000"
 Creator: "Blender version 2.70 (sub 0)"
 
 ; Object definitions
@@ -29,7 +29,7 @@ Creator: "Blender version 2.70 (sub 0)"
 
 Definitions:  {
 	Version: 100
-	Count: 5
+	Count: 9
 	ObjectType: "Model" {
 		Count: 2
 	}
@@ -37,6 +37,12 @@ Definitions:  {
 		Count: 2
 	}
 	ObjectType: "Material" {
+		Count: 2
+	}
+	ObjectType: "Texture" {
+		Count: 2
+	}
+	ObjectType: "Video" {
 		Count: 2
 	}
 	ObjectType: "Pose" {
@@ -203,6 +209,52 @@ Objects:  {
 			ReferenceInformationType: "Direct"
 			Smoothing: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "UVMap"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: 0.100871,0.694855,0.364466,0.931246,0.073667,0.853012,0.363621,0.667651,0.338106,0.588573,0.048152,0.878527,
+			    0.231824,0.852167,0.442700,0.931246,0.073667,0.536698,0.311747,0.588573,0.338106,0.642136,0.048152,0.852167,
+			    0.007686,0.082554,0.100871,0.562213,0.205465,0.878527,0.337262,0.721215,0.739618,0.338374,0.179949,0.852167,
+			    0.048152,0.536698,0.021793,0.773089,0.338106,0.615777,0.047308,0.852167,0.983624,0.082806,0.310902,0.641292,
+			    0.363621,0.642136,0.100871,0.589417,0.007598,0.082787,0.310902,0.720370,0.179949,0.878527,0.047308,0.536698,
+			    0.007598,0.082806,0.311747,0.667651,0.363621,0.563058,0.363621,0.615777,0.047308,0.853012,0.100027,0.536698,
+			    0.310902,0.694855,0.337262,0.641292,0.983624,0.082785,0.311747,0.721215,0.739618,0.338375,0.231824,0.773933,
+			    0.074512,0.536698,0.073667,0.878527,0.363621,0.721215,0.100871,0.536698,0.048152,0.853012,0.100027,0.746730,
+			    0.206309,0.878527,0.311747,0.614932,0.047308,0.746730,0.048152,0.746730,0.100871,0.641292,0.048152,0.826652,
+			    0.205465,0.852167,0.311747,0.642136,0.311747,0.641292,0.285387,0.957605,0.337262,0.615777,0.310902,0.642136,
+			    0.047308,0.826652,0.643752,0.905442,0.338106,0.721215,0.310902,0.694011,0.021793,0.826652,0.337262,0.642136,
+			    0.100871,0.694011,0.363621,0.641292,0.021793,0.799449,0.206309,0.852167,0.643752,0.577620,0.338106,0.667651,
+			    0.971574,0.905442,0.206309,0.853012,0.100871,0.667651,0.363621,0.614932,0.100871,0.721215,0.284543,0.957605,
+			    0.231824,0.878527,0.021793,0.746730,0.205465,0.826652,0.311747,0.563058,0.073667,0.746730,0.363621,0.931246,
+			    0.100871,0.668496,0.231824,0.747574,0.364466,0.721215,0.389981,0.721215,0.739618,0.338375,0.338106,0.614932,
+			    0.205465,0.853012,0.021793,0.853012,0.390825,0.721215,0.337262,0.667651,0.390825,0.931246,0.231824,0.825808,
+			    0.310902,0.721215,0.259028,0.957605,0.100871,0.614932,0.206309,0.826652,0.310902,0.746730,0.021793,0.536698,
+			    0.338106,0.931246,0.311747,0.615777,0.337262,0.931246,0.416340,0.931246,0.337262,0.563058,0.310902,0.747574,
+			    0.363621,0.589417,0.231824,0.773089,0.179949,0.826652,0.251605,0.338207,0.983712,0.082890,0.021793,0.773933,
+			    0.442700,0.721215,0.259028,0.747574,0.337262,0.588573,0.231824,0.799449,0.338106,0.589417,0.021793,0.800293,
+			    0.179949,0.853012,0.021793,0.747574,0.416340,0.721215,0.231824,0.853012,0.100871,0.642136,0.311747,0.931246,
+			    0.337262,0.589417,0.100871,0.615777,0.310902,0.668496,0.338106,0.641292,0.231824,0.826652,0.389981,0.931246,
+			    0.021793,0.852167,0.310902,0.615777,0.310902,0.667651,0.417185,0.721215,0.251604,0.338206,0.073667,0.826652,
+			    0.311747,0.589417,0.021793,0.825808,0.983712,0.082890,0.310902,0.536698,0.310902,0.562213,0.417185,0.931246,
+			    0.074512,0.746730,0.100871,0.720370,0.251604,0.338356,0.310902,0.589417,0.284543,0.747574,0.363621,0.588573,
+			    0.310902,0.957605,0.021793,0.878527,0.251604,0.338375,0.285387,0.747574,0.338106,0.563058,0.310902,0.614932,
+			    0.073667,0.852167,0.337262,0.614932,0.231824,0.800293,0.739618,0.338355,0.007686,0.082552,0.971574,0.577620,
+			    0.047308,0.878527,0.100871,0.746730
+			UVIndex: 24,10,71,3,65,55,31,93,33,20,129,67,58,103,56,37,2,46,5,43,34,91,151,162,50,29,101,79,19,109,85,121,82,8,18,51,68,117,41,113,47,35,42,144,30,22,88,152,161,72,61,70,160,112,16,136,26,38,159,146,12,140,40,111,
+			         137,53,11,156,163,100,96,76,104,15,39,125,139,95,158,119,83,44,62,102,60,64,132,21,145,27,36,0,123,73,48,78,87,86,1,131,90,120,28,14,63,128,84,66,130,99,69,6,105,122,92,94,80,110,17,54,74,134,59,124,108,118,89,75,
+			         150,107,153,57,126,138,49,157,52,23,133,127,32,154,4,149,7,114,135,143,142,141,45,13,106,81,9,116,77,148,115,97,155,147,25,98
+		}
+		LayerElementTexture: 0 {
+			Version: 101
+			Name: "UVMap"
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			BlendMode: "Translucent"
+			TextureAlpha: 1
+			TextureId: 0
+		}
 		LayerElementMaterial: 0 {
 			Version: 101
 			Name: ""
@@ -218,6 +270,10 @@ Objects:  {
 			}
 			LayerElement:  {
 				Type: "LayerElementSmoothing"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
 				TypedIndex: 0
 			}
 			LayerElement:  {
@@ -330,6 +386,25 @@ Objects:  {
 			ReferenceInformationType: "Direct"
 			Smoothing: 0,0,0,0
 		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "UVMap"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: 0.000000,1.000000,0.999999,-0.000000,-0.000000,0.000001,-0.000000,0.250000,1.000000,0.249999,0.000000,0.750000,
+			    0.000000,0.500000,1.000000,0.250000,0.000000,0.500000,1.000000,0.999999,1.000000,0.749999,-0.000000,0.250000,
+			    1.000000,0.499999,1.000000,0.749999,0.000000,0.750000
+			UVIndex: 6,11,7,12,1,4,3,2,12,13,14,8,0,5,10,9
+		}
+		LayerElementTexture: 0 {
+			Version: 101
+			Name: "UVMap"
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			BlendMode: "Translucent"
+			TextureAlpha: 1
+			TextureId: 0
+		}
 		LayerElementMaterial: 0 {
 			Version: 101
 			Name: ""
@@ -348,6 +423,10 @@ Objects:  {
 				TypedIndex: 0
 			}
 			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+			LayerElement:  {
 				Type: "LayerElementTexture"
 				TypedIndex: 0
 			}
@@ -357,7 +436,7 @@ Objects:  {
 			}
 		}
 	}
-	Material: "Material::Material_001", "" {
+	Material: "Material::Material_001__immeuble4_png", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -387,7 +466,7 @@ Objects:  {
 			Property: "Reflectivity", "double", "",0
 		}
 	}
-	Material: "Material::None", "" {
+	Material: "Material::None__immeuble_toit_png", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -416,6 +495,106 @@ Objects:  {
 			Property: "Opacity", "double", "",1.0
 			Property: "Reflectivity", "double", "",0
 		}
+	}
+	Video: "Video::immeuble4_png", "Clip" {
+		Type: "Clip"
+		Properties60:  {
+			Property: "FrameRate", "double", "",0
+			Property: "LastFrame", "int", "",0
+			Property: "Width", "int", "",0
+			Property: "Height", "int", "",0
+			Property: "Path", "charptr", "", "immeuble4.png"
+			Property: "StartFrame", "int", "",0
+			Property: "StopFrame", "int", "",0
+			Property: "PlaySpeed", "double", "",1
+			Property: "Offset", "KTime", "",0
+			Property: "InterlaceMode", "enum", "",0
+			Property: "FreeRunning", "bool", "",0
+			Property: "Loop", "bool", "",0
+			Property: "AccessMode", "enum", "",0
+		}
+		UseMipMap: 0
+		Filename: "immeuble4.png"
+		RelativeFilename: "immeuble4.png"
+	}
+	Video: "Video::immeuble_toit_png", "Clip" {
+		Type: "Clip"
+		Properties60:  {
+			Property: "FrameRate", "double", "",0
+			Property: "LastFrame", "int", "",0
+			Property: "Width", "int", "",0
+			Property: "Height", "int", "",0
+			Property: "Path", "charptr", "", "immeuble_toit.png"
+			Property: "StartFrame", "int", "",0
+			Property: "StopFrame", "int", "",0
+			Property: "PlaySpeed", "double", "",1
+			Property: "Offset", "KTime", "",0
+			Property: "InterlaceMode", "enum", "",0
+			Property: "FreeRunning", "bool", "",0
+			Property: "Loop", "bool", "",0
+			Property: "AccessMode", "enum", "",0
+		}
+		UseMipMap: 0
+		Filename: "immeuble_toit.png"
+		RelativeFilename: "immeuble_toit.png"
+	}
+	Texture: "Texture::immeuble4_png", "TextureVideoClip" {
+		Type: "TextureVideoClip"
+		Version: 202
+		TextureName: "Texture::immeuble4_png"
+		Properties60:  {
+			Property: "Translation", "Vector", "A+",0,0,0
+			Property: "Rotation", "Vector", "A+",0,0,0
+			Property: "Scaling", "Vector", "A+",1,1,1
+			Property: "Texture alpha", "Number", "A+",0
+			Property: "TextureTypeUse", "enum", "",0
+			Property: "CurrentTextureBlendMode", "enum", "",1
+			Property: "UseMaterial", "bool", "",0
+			Property: "UseMipMap", "bool", "",0
+			Property: "CurrentMappingType", "enum", "",0
+			Property: "UVSwap", "bool", "",0
+			Property: "WrapModeU", "enum", "",0
+			Property: "WrapModeV", "enum", "",0
+			Property: "TextureRotationPivot", "Vector3D", "",0,0,0
+			Property: "TextureScalingPivot", "Vector3D", "",0,0,0
+			Property: "VideoProperty", "object", ""
+		}
+		Media: "Video::immeuble4_png"
+		FileName: "immeuble4.png"
+		RelativeFilename: "immeuble4.png"
+		ModelUVTranslation: 0,0
+		ModelUVScaling: 1,1
+		Texture_Alpha_Source: "None"
+		Cropping: 0,0,0,0
+	}
+	Texture: "Texture::immeuble_toit_png", "TextureVideoClip" {
+		Type: "TextureVideoClip"
+		Version: 202
+		TextureName: "Texture::immeuble_toit_png"
+		Properties60:  {
+			Property: "Translation", "Vector", "A+",0,0,0
+			Property: "Rotation", "Vector", "A+",0,0,0
+			Property: "Scaling", "Vector", "A+",1,1,1
+			Property: "Texture alpha", "Number", "A+",1
+			Property: "TextureTypeUse", "enum", "",0
+			Property: "CurrentTextureBlendMode", "enum", "",1
+			Property: "UseMaterial", "bool", "",0
+			Property: "UseMipMap", "bool", "",0
+			Property: "CurrentMappingType", "enum", "",0
+			Property: "UVSwap", "bool", "",0
+			Property: "WrapModeU", "enum", "",0
+			Property: "WrapModeV", "enum", "",0
+			Property: "TextureRotationPivot", "Vector3D", "",0,0,0
+			Property: "TextureScalingPivot", "Vector3D", "",0,0,0
+			Property: "VideoProperty", "object", ""
+		}
+		Media: "Video::immeuble_toit_png"
+		FileName: "immeuble_toit.png"
+		RelativeFilename: "immeuble_toit.png"
+		ModelUVTranslation: 0,0
+		ModelUVScaling: 1,1
+		Texture_Alpha_Source: "None"
+		Cropping: 0,0,0,0
 	}
 	Pose: "Pose::BIND_POSES", "BindPose" {
 		Type: "BindPose"
@@ -470,9 +649,17 @@ Relations:  {
 	}
 	Model: "Model::Camera Switcher", "CameraSwitcher" {
 	}
-	Material: "Material::Material_001", "" {
+	Material: "Material::Material_001__immeuble4_png", "" {
 	}
-	Material: "Material::None", "" {
+	Material: "Material::None__immeuble_toit_png", "" {
+	}
+	Texture: "Texture::immeuble4_png", "TextureVideoClip" {
+	}
+	Texture: "Texture::immeuble_toit_png", "TextureVideoClip" {
+	}
+	Video: "Video::immeuble4_png", "Clip" {
+	}
+	Video: "Video::immeuble_toit_png", "Clip" {
 	}
 }
 
@@ -482,8 +669,12 @@ Relations:  {
 Connections:  {
 	Connect: "OO", "Model::Cube_002", "Model::Scene"
 	Connect: "OO", "Model::Cube_001", "Model::Scene"
-	Connect: "OO", "Material::None", "Model::Cube_002"
-	Connect: "OO", "Material::Material_001", "Model::Cube_001"
+	Connect: "OO", "Material::None__immeuble_toit_png", "Model::Cube_002"
+	Connect: "OO", "Material::Material_001__immeuble4_png", "Model::Cube_001"
+	Connect: "OO", "Texture::immeuble_toit_png", "Model::Cube_002"
+	Connect: "OO", "Texture::immeuble4_png", "Model::Cube_001"
+	Connect: "OO", "Video::immeuble4_png", "Texture::immeuble4_png"
+	Connect: "OO", "Video::immeuble_toit_png", "Texture::immeuble_toit_png"
 }
 ;Takes and animation section
 ;----------------------------------------------------
