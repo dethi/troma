@@ -71,6 +71,7 @@ namespace Troma
         {
             GameServices.ResetGraphicsDeviceFor3D();
             terrain.Draw(camera);
+            //DrawingAxes.Draw(camera);
         }
     }
 }

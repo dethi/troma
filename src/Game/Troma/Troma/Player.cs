@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using GameEngine;
 
 namespace Troma
@@ -127,6 +128,14 @@ namespace Troma
             Crouch(dt, input);
             Jump(dt, input);
             Move(dt, input);
+
+            // Debug
+            /*
+            if (input.IsPressed(Keys.Z))
+                _position.Y += 5;
+            else if (input.IsPressed(Keys.X))
+                _position.Y -= 5;
+             */
 
             // Apply movement
             MoveTo(PreviewMove(move, rotate.Y), rotate);

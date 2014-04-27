@@ -94,6 +94,7 @@
   <ItemGroup>
     <Compile Include="Camera\FirstPersonView.cs" />
     <Compile Include="Camera\ICamera.cs" />
+    <Compile Include="Debug\DrawingAxes.cs" />
     <Compile Include="EntitySystem\EntityManager.cs" />
     <Compile Include="EntitySystem\IEntityTemplate.cs" />
     <Compile Include="EntitySystem\UpdateableEntityComponent.cs" />
