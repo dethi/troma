@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace GameEngine
 {
@@ -20,6 +21,6 @@ namespace GameEngine
         /// <summary>
         /// Updates the component.
         /// </summary>
-        void Update();
+        void Update(GameTime gameTime);
     }
 }

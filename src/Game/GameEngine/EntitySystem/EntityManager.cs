@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
@@ -57,35 +58,33 @@ namespace GameEngine
         /// <summary>
         /// Updates All Entities in the manager
         /// </summary>
-        /// <param name="gameTime">Timing Values</param>
-        public static void Update()
+        public static void Update(GameTime gameTime)
         {
             _currentList.Clear();
             _currentList.AddRange(_masterList);
 
             for (int i = 0; i < _currentList.Count; i++)
             {
-                _currentList[i].Update();
+                _currentList[i].Update(gameTime);
             }
         }
 
         /// <summary>
         /// Draws all entities in the manager
         /// </summary>
-        /// <param name="gameTime">Timing Values</param>
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw(GameTime gameTime, ICamera camera)
         {
             for (int i = 0; i < _currentList.Count; i++)
             {
-                _currentList[i].Draw(spriteBatch);
+                _currentList[i].Draw(gameTime, camera);
             }
         }
 
-        public static void DrawHUD(SpriteBatch spriteBatch)
+        public static void DrawHUD(GameTime gameTime)
         {
             for (int i = 0; i < _currentList.Count; i++)
             {
-                _currentList[i].DrawHUD(spriteBatch);
+                _currentList[i].DrawHUD(gameTime);
             }
         }
 
@@ -94,9 +93,8 @@ namespace GameEngine
         #region Public Methods
 
         /// <summary>
-        /// Creates a New Entity.  Alternately, The entity could be created in the traditional way.
+        /// Creates a New Entity.
         /// </summary>
-        /// <returns></returns>
         public static Entity CreateNew()
         {
             return new Entity();
@@ -117,7 +115,6 @@ namespace GameEngine
         /// <summary>
         /// Adds an entity to the manager
         /// </summary>
-        /// <param name="aEntity"></param>
         public static void AddEntity(Entity aEntity)
         {
             //add entity to the master list

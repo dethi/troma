@@ -12,6 +12,12 @@ namespace GameEngine
     {
         private readonly Entity _entity;
         private string _name;
+        protected List<String> _requiredComponents;
+
+        public List<String> RequiredComponents
+        {
+            get { return _requiredComponents; }
+        }
 
         public string Name
         {
@@ -26,11 +32,22 @@ namespace GameEngine
 
         public EntityComponent(Entity aParent)
         {
-            this._entity = aParent;
+            _entity = aParent;
+            _requiredComponents = new List<string>();
         }
 
         public virtual void Initialize() { }
 
-        public virtual void Start() { }
+        public virtual void Start()
+        {
+            foreach (string component in _requiredComponents)
+            {
+                if (!_entity.HasComponent(component))
+                {
+                    throw new KeyNotFoundException("This entity don't have the " +
+                        component + " component.");
+                }
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace GameEngine
         public Vector3 Rotation;
         public Vector3 Scale;
 
-        public Matrix TransformMatrix
+        public Matrix World
         {
             get
             {

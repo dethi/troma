@@ -87,7 +87,7 @@ namespace GameEngine
         /// <summary>
         /// Update all updateable components in the entity
         /// </summary>
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             _tempUpdateableComponents.Clear();
             _tempUpdateableComponents.AddRange(_updateableComponents);
@@ -96,7 +96,7 @@ namespace GameEngine
             {
                 if (_tempUpdateableComponents[i].Enabled)
                 {
-                    _tempUpdateableComponents[i].Update();
+                    _tempUpdateableComponents[i].Update(gameTime);
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace GameEngine
         /// Draws all drawable components in the entity
         /// </summary>
         /// <param name="spriteBatch">the spritebatch used for drawing</param>
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, ICamera camera)
         {
             _tempDrawableComponents.Clear();
             _tempDrawableComponents.AddRange(_drawableComponents);
@@ -114,18 +114,18 @@ namespace GameEngine
             {
                 if (_tempDrawableComponents[i].Visible)
                 {
-                    _tempDrawableComponents[i].Draw(spriteBatch);
+                    _tempDrawableComponents[i].Draw(gameTime, camera);
                 }
             }
         }
 
-        public void DrawHUD(SpriteBatch spriteBatch)
+        public void DrawHUD(GameTime gameTime)
         {
             for (int i = 0; i < _tempDrawableComponents.Count; i++)
             {
                 if (_tempDrawableComponents[i].Visible)
                 {
-                    _tempDrawableComponents[i].DrawHUD(spriteBatch);
+                    _tempDrawableComponents[i].DrawHUD(gameTime);
                 }
             }
         }
@@ -213,20 +213,25 @@ namespace GameEngine
             return this.Components.ContainsKey(aComponent.Name);
         }
 
+        public bool HasComponent(string aComponent)
+        {
+            return this.Components.ContainsKey(aComponent);
+        }
+
         /// <summary>
         /// Gets a component inside the entity based on that component's name property.
         /// </summary>
         /// <param name="aComponentName">The name of the desired component</param>
         /// <returns>the component as an entity component.</returns>
-        public UpdateableEntityComponent GetComponent(string aComponentName)
+        public IEntityComponent GetComponent(string aComponentName)
         {
             if (this.Components.ContainsKey(aComponentName))
-                return Components[aComponentName] as UpdateableEntityComponent;
+                return Components[aComponentName] as IEntityComponent;
             else
                 throw new ArgumentOutOfRangeException(aComponentName);
         }
 
-        public T GetComponent<T>() where T : UpdateableEntityComponent
+        public T GetComponent<T>() where T : EntityComponent
         {
             for (int i = 0; i < _components.Count; i++)
             {
@@ -239,13 +244,6 @@ namespace GameEngine
 
         public void Destroy()
         {
-            //unload all the content for any drawable components
-            for (int i = 0; i < _drawableComponents.Count; i++)
-            {
-                DrawableEntityComponent drawable = _drawableComponents[i] as DrawableEntityComponent;
-                drawable.UnloadContent();
-            }
-
             //remove all the components from this entity
             RemoveAllComponents();
         }

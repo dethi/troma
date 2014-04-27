@@ -95,6 +95,8 @@
     <Compile Include="Camera\FirstPersonView.cs" />
     <Compile Include="Camera\ICamera.cs" />
     <Compile Include="Debugging\DrawingAxes.cs" />
+    <Compile Include="EntitySystem\Components\CollisionBox.cs" />
+    <Compile Include="EntitySystem\Components\Model3D.cs" />
     <Compile Include="EntitySystem\EntityManager.cs" />
     <Compile Include="EntitySystem\IEntityTemplate.cs" />
     <Compile Include="EntitySystem\UpdateableEntityComponent.cs" />

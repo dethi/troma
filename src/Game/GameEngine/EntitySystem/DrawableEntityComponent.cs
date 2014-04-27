@@ -7,15 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
 {
-    public class DrawableEntityComponent : UpdateableEntityComponent, IEntityDrawable
+    public class DrawableEntityComponent : EntityComponent, IEntityDrawable
     {
         #region Fields
 
-        private bool _visible = true;
-
         public event EventHandler<EventArgs> VisibleChanged;
-
-        public Vector3 DrawPosition = Vector3.Zero;
+        private bool _visible = true;
 
         /// <summary>
         /// Determines whether this component should be drawn or not.
@@ -45,7 +42,7 @@ namespace GameEngine
         /// <summary>
         /// Constructor for the drawable component.
         /// </summary>
-        /// <param name="aParent">the parent entity.  Chains to base constructor</param>
+        /// <param name="aParent">The parent entity</param>
         public DrawableEntityComponent(Entity aParent)
             : base(aParent)
         {
@@ -63,48 +60,28 @@ namespace GameEngine
         /// <summary>
         /// Gather references to other components here, called after Initialize.
         /// </summary>
-        public override void Start()
-        {
-        }
+        public override void Start() { }
 
         /// <summary>
-        /// Load the content for this entity, use the Services content manager.
+        /// Load the content for this entity.
         /// </summary>
         protected virtual void LoadContent() { }
 
-        /// <summary>
-        /// Unload this entity's content.
-        /// </summary>
-        public virtual void UnloadContent() { }
-
         #endregion
 
-        #region Update and Draw
-
-        public override void Update()
-        {
-        }
+        /// <summary>
+        /// Draw the component.
+        /// </summary>
+        public virtual void Draw(GameTime gameTime, ICamera camera) { }
 
         /// <summary>
-        /// Used to draw the component.
+        /// Draw HUD
         /// </summary>
-        /// <param name="spriteBatch">Spritebatch to be used in drawing (from EntityManager)</param>
-        /// <param name="gameTime">drawing timing values</param>
-        public virtual void Draw(SpriteBatch spriteBatch) { }
-
-        public virtual void DrawHUD(SpriteBatch spriteBatch) { }
-
-        #endregion
-
-        #region  Event Handler methods
+        public virtual void DrawHUD(GameTime gameTime) { }
 
         /// <summary>
         /// Called when the visible value is changed.
         /// </summary>
-        /// <param name="sender">the component in question.</param>
-        /// <param name="e">Empty Event Args</param>
         protected virtual void OnVisibleChanged(object sender, EventArgs e) { }
-
-        #endregion
     }
 }

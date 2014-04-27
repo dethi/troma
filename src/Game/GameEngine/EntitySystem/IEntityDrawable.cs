@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
@@ -21,8 +22,11 @@ namespace GameEngine
         /// <summary>
         /// Draws the component.
         /// </summary>
-        void Draw(SpriteBatch spriteBatch);
+        void Draw(GameTime gameTime, ICamera camera);
 
-        void DrawHUD(SpriteBatch spriteBatch);
+        /// <summary>
+        /// Draw HUD
+        /// </summary>
+        void DrawHUD(GameTime gameTime);
     }
 }
