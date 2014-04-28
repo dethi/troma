@@ -40,7 +40,7 @@ namespace Troma
             screenManager.AddScreen(new TestScreen(this));
             //screenManager.AddScreen(new MainMenuScreen(this));
 
-#if !BUILD
+#if DEBUG
             screenManager.AddScreen(new DebugScreen(this));
 #endif
         }
@@ -66,7 +66,7 @@ namespace Troma
 
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.Black);
+            graphics.GraphicsDevice.Clear(Color.SkyBlue);
             base.Draw(gameTime);
         }
 

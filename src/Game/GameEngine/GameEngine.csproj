@@ -95,10 +95,7 @@
     <Compile Include="Camera\FirstPersonView.cs" />
     <Compile Include="Camera\ICamera.cs" />
     <Compile Include="Debugging\DrawingAxes.cs" />
-    <Compile Include="EntitySystem\Components\CollisionBox.cs" />
-    <Compile Include="EntitySystem\Components\Model3D.cs" />
     <Compile Include="EntitySystem\EntityManager.cs" />
-    <Compile Include="EntitySystem\Template\GameObject.cs" />
     <Compile Include="EntitySystem\UpdateableEntityComponent.cs" />
     <Compile Include="EntitySystem\DrawableEntityComponent.cs" />
     <Compile Include="EntitySystem\Entity.cs" />
@@ -106,11 +103,10 @@
     <Compile Include="EntitySystem\IEntityComponent.cs" />
     <Compile Include="EntitySystem\IEntityDrawable.cs" />
     <Compile Include="EntitySystem\IEntityUpdateable.cs" />
-    <Compile Include="EntitySystem\Components\Transform.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GameServices.cs" />
     <Compile Include="Physics.cs" />
-    <Compile Include="RenderState.cs" />
+    <Compile Include="LightInfo.cs" />
     <Compile Include="Screen\GameScreen.cs" />
     <Compile Include="Input\InputConfiguration.cs" />
     <Compile Include="Input\InputState.cs" />

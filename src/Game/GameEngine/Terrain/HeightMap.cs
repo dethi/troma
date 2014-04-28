@@ -12,9 +12,8 @@ namespace GameEngine
     {
         #region Fields
 
-        private Game game;
-        private Effect effect;
-        private TerrainInfo terrainInfo;
+        private Effect _effect;
+        private TerrainInfo _terrainInfo;
 
         private VertexBuffer vertexBuffer;
         private IndexBuffer indexBuffer;
@@ -23,42 +22,55 @@ namespace GameEngine
 
         #endregion
 
+        #region Initialization
+
         /// <summary>
         /// Build a terrain
         /// </summary>
         public HeightMap(Game game, Effect effect, TerrainInfo terrainInfo)
         {
-            this.game = game;
-            this.effect = effect;
-            this.terrainInfo = terrainInfo;
+            _effect = effect;
+            _terrainInfo = terrainInfo;
 
-            ReadHeightMap(
-                terrainInfo.Heighmap,
-                terrainInfo.Size.Width,
-                terrainInfo.Size.Height,
-                terrainInfo.Depth);
-            BuildVertexBuffer(terrainInfo.Size.Width, terrainInfo.Size.Height);
-            BuildIndexBuffer(terrainInfo.Size.Width, terrainInfo.Size.Height);
-            CalculateNormals();
+            Initialize();
         }
+
+        private void Initialize()
+        {
+            ReadHeightMap(
+                _terrainInfo.Heighmap,
+                _terrainInfo.Size.Width,
+                _terrainInfo.Size.Height,
+                _terrainInfo.Depth);
+            BuildVertexBuffer(_terrainInfo.Size.Width, _terrainInfo.Size.Height);
+            BuildIndexBuffer(_terrainInfo.Size.Width, _terrainInfo.Size.Height);
+            CalculateNormals();
+
+            #region Initialize Effect
+
+            _effect.CurrentTechnique = _effect.Techniques["Technique1"];
+
+            _effect.Parameters["terrainTexture"].SetValue(_terrainInfo.Texture);
+            _effect.Parameters["World"].SetValue(Matrix.Identity);
+
+            _effect.Parameters["lightDirection"].SetValue(LightInfo.LightDirection);
+            _effect.Parameters["lightColor"].SetValue(LightInfo.DiffuseColor);
+            _effect.Parameters["lightBrightness"].SetValue(LightInfo.DiffuseIntensity);
+
+            _effect.Parameters["ambientLightLevel"].SetValue(LightInfo.AmbientIntensity);
+            _effect.Parameters["ambientLightColor"].SetValue(LightInfo.AmbientColor);
+
+            #endregion
+        }
+
+        #endregion
 
         public void Draw(ICamera camera)
         {
-            effect.CurrentTechnique = effect.Techniques["Technique1"];
+            _effect.Parameters["View"].SetValue(camera.View);
+            _effect.Parameters["Projection"].SetValue(camera.Projection);
 
-            effect.Parameters["terrainTexture"].SetValue(terrainInfo.Texture);
-            effect.Parameters["World"].SetValue(Matrix.Identity);
-            effect.Parameters["View"].SetValue(camera.View);
-            effect.Parameters["Projection"].SetValue(camera.Projection);
-
-            effect.Parameters["lightDirection"].SetValue(RenderState.LightDirection);
-            effect.Parameters["lightColor"].SetValue(RenderState.LightColor);
-            effect.Parameters["lightBrightness"].SetValue(RenderState.LightBrightness);
-
-            effect.Parameters["ambientLightLevel"].SetValue(RenderState.AmbientLightLevel);
-            effect.Parameters["ambientLightColor"].SetValue(RenderState.AmbientLightColor);
-
-            foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+            foreach (EffectPass pass in _effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
                 GameServices.GraphicsDevice.SetVertexBuffer(vertexBuffer);
@@ -88,7 +100,7 @@ namespace GameEngine
                 for (int z = 0; z < height; z++)
                 {
                     depths[x, z] = (float)(heightmapData[x + z * width].R / 255f)
-                        * depth + terrainInfo.Position.Y;
+                        * depth + _terrainInfo.Position.Y;
                 }
             }
         }
@@ -107,18 +119,18 @@ namespace GameEngine
                 for (int z = 0; z < height; z++)
                 {
                     vertices[x + z * width].Position = new Vector3(
-                        terrainInfo.Position.X + x,
+                        _terrainInfo.Position.X + x,
                         depths[x, z],
-                        terrainInfo.Position.Z + z);
+                        _terrainInfo.Position.Z + z);
 
                     vertices[x + z * width].TextureCoordinate = new Vector2(
-                        (float)x / terrainInfo.TextureScale,
-                        (float)z / terrainInfo.TextureScale);
+                        (float)x / _terrainInfo.TextureScale,
+                        (float)z / _terrainInfo.TextureScale);
                 }
             }
 
-            vertexBuffer = new VertexBuffer(game.GraphicsDevice, typeof(VertexPositionNormalTexture),
-                vertices.Length, BufferUsage.None);
+            vertexBuffer = new VertexBuffer(GameServices.GraphicsDevice, 
+                typeof(VertexPositionNormalTexture), vertices.Length, BufferUsage.None);
             vertexBuffer.SetData(vertices);
         }
 
@@ -151,7 +163,7 @@ namespace GameEngine
                 }
             }
 
-            indexBuffer = new IndexBuffer(game.GraphicsDevice, 
+            indexBuffer = new IndexBuffer(GameServices.GraphicsDevice, 
                 IndexElementSize.ThirtyTwoBits, indices.Length, BufferUsage.None);
             indexBuffer.SetData(indices);
         }
@@ -200,12 +212,12 @@ namespace GameEngine
         /// </summary>
         public bool IsOnTerrain(Vector3 pos)
         {
-            Vector3 positionOnHeightmap = pos - terrainInfo.Position;
+            Vector3 positionOnHeightmap = pos - _terrainInfo.Position;
 
             return (0 < positionOnHeightmap.X &&
-                positionOnHeightmap.X < terrainInfo.Size.Width - 1 &&
+                positionOnHeightmap.X < _terrainInfo.Size.Width - 1 &&
                 0 < positionOnHeightmap.Z &&
-                positionOnHeightmap.Z < terrainInfo.Size.Height - 1);
+                positionOnHeightmap.Z < _terrainInfo.Size.Height - 1);
         }
 
         /// <summary>

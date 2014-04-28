@@ -38,9 +38,6 @@ namespace GameEngine
         {
             base.Initialize();
 
-            GameServices.Initialize(Game, GraphicsDevice);
-            RenderState.Initialize();
-
             input.MouseOrigin = new Vector2(
                 GraphicsDevice.Viewport.Width / 2,
                 GraphicsDevice.Viewport.Height / 2);
@@ -51,6 +48,9 @@ namespace GameEngine
         protected override void LoadContent()
         {
             content = Game.Content;
+
+            GameServices.Initialize(Game, GraphicsDevice);
+            LightInfo.Initialize();
 
             foreach (GameScreen s in screens)
                 s.LoadContent();

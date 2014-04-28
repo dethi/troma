@@ -12,26 +12,43 @@ namespace GameEngine
         private static VertexPositionColor[] lines = new VertexPositionColor[6]
         {
             new VertexPositionColor(new Vector3(0, 0, 0), Color.Red),
-            new VertexPositionColor(new Vector3(0.1f, 0, 0), Color.Red),
+            new VertexPositionColor(new Vector3(0.005f, 0, 0), Color.Red),
             new VertexPositionColor(new Vector3(0, 0, 0), Color.Green),
-            new VertexPositionColor(new Vector3(0, 0.1f, 0), Color.Green),
+            new VertexPositionColor(new Vector3(0, 0.005f, 0), Color.Green),
             new VertexPositionColor(new Vector3(0, 0, 0), Color.Blue),
-            new VertexPositionColor(new Vector3(0, 0, 0.1f), Color.Blue)
+            new VertexPositionColor(new Vector3(0, 0, 0.005f), Color.Blue)
         };
+
+        private static BasicEffect _effect;
+
+        public static void Initialize()
+        {
+            _effect = new BasicEffect(GameServices.GraphicsDevice);
+            _effect.VertexColorEnabled = true;
+        }
 
         /// <summary>
         /// Drawing 3D axes
         /// </summary>
         public static void Draw(ICamera camera)
         {
-            BasicEffect effect = new BasicEffect(GameServices.GraphicsDevice);
+            Texture2D pixel = new Texture2D(GameServices.GraphicsDevice, 1, 1);
+            pixel.SetData(new[] { Color.White });
 
-            effect.World = Matrix.Identity * Matrix.CreateTranslation(camera.LookAt);
-            effect.View = camera.View;
-            effect.Projection = camera.Projection;
-            effect.VertexColorEnabled = true;
+            GameServices.SpriteBatch.Begin();
+            GameServices.SpriteBatch.Draw(pixel, new Rectangle(0, 0, 100, 100), Color.White * 0.6f);
+            GameServices.SpriteBatch.End();
 
-            foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+            GameServices.ResetGraphicsDeviceFor3D();
+
+            Vector3 pos = GameServices.GraphicsDevice.Viewport.Unproject(
+                new Vector3(50, 60, 0.4f), camera.Projection, camera.View, Matrix.Identity);
+
+            _effect.World = Matrix.Identity * Matrix.CreateTranslation(pos);
+            _effect.View = camera.View;
+            _effect.Projection = camera.Projection;
+
+            foreach (EffectPass pass in _effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
                 GameServices.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(

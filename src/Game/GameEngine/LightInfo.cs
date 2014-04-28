@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameEngine
 {
-    public static class RenderState
+    public static class LightInfo
     {
         private static Vector3 _lightDirection;
 
@@ -20,20 +20,20 @@ namespace GameEngine
             }
         }
 
-        public static Vector4 LightColor;
-        public static float LightBrightness;
+        public static Vector4 DiffuseColor;
+        public static float DiffuseIntensity;
 
-        public static Vector4 AmbientLightColor;
-        public static float AmbientLightLevel;
+        public static Vector4 AmbientColor;
+        public static float AmbientIntensity;
 
         public static void Initialize()
         {
-            LightDirection = new Vector3(-1f, 1f, -1f);
-            LightColor = new Vector4(1, 1, 1, 1);
-            LightBrightness = 0.8f;
+            LightDirection = new Vector3(0, 1, -1);
+            DiffuseColor = Color.White.ToVector4();
+            DiffuseIntensity = 1;
 
-            AmbientLightColor = new Vector4(0.98f, 0.92f, 0.24f, 1);
-            AmbientLightLevel = 0.23f;
+            AmbientColor = Color.LightYellow.ToVector4();
+            AmbientIntensity = 0.18f;
         }
     }
 }

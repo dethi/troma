@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameEngine;
 
-namespace GameEngine
+namespace Troma
 {
     public class GameObject
     {
@@ -15,6 +16,10 @@ namespace GameEngine
             entity.AddComponent(new Transform(entity, pos));
             entity.AddComponent(new Model3D(entity, model, effect));
             entity.AddComponent(new CollisionBox(entity));
+
+#if DEBUG
+            entity.AddComponent(new DrawCollisionBox(entity));
+#endif
         }
     }
 }

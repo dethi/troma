@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameEngine;
 
-namespace GameEngine
+namespace Troma
 {
     public class CollisionBox : EntityComponent
     {
@@ -29,6 +30,8 @@ namespace GameEngine
         private void GenerateBoundingBox()
         {
             Model model = Entity.GetComponent<Model3D>().Model;
+            Matrix world = Entity.GetComponent<Transform>().World;
+
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
 
@@ -57,6 +60,9 @@ namespace GameEngine
                         max = Vector3.Max(max, transformedPosition);
                     }
                 }
+
+                min = Vector3.Transform(min, world);
+                max = Vector3.Transform(max, world);
 
                 BoxList.Add(new BoundingBox(min, max));
             }

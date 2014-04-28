@@ -58,11 +58,6 @@ namespace GameEngine
         }
 
         /// <summary>
-        /// Gather references to other components here, called after Initialize.
-        /// </summary>
-        public override void Start() { }
-
-        /// <summary>
         /// Load the content for this entity.
         /// </summary>
         protected virtual void LoadContent() { }
