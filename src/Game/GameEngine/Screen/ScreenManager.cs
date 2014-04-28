@@ -39,6 +39,7 @@ namespace GameEngine
             base.Initialize();
 
             GameServices.Initialize(Game, GraphicsDevice);
+            RenderState.Initialize();
 
             input.MouseOrigin = new Vector2(
                 GraphicsDevice.Viewport.Width / 2,

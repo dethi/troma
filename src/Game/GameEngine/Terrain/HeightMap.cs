@@ -12,14 +12,14 @@ namespace GameEngine
     {
         #region Fields
 
-        Game game;
-        Effect effect;
-        TerrainInfo terrainInfo;
+        private Game game;
+        private Effect effect;
+        private TerrainInfo terrainInfo;
 
-        VertexBuffer vertexBuffer;
-        IndexBuffer indexBuffer;
+        private VertexBuffer vertexBuffer;
+        private IndexBuffer indexBuffer;
 
-        float[,] depths;
+        private float[,] depths;
 
         #endregion
 
@@ -44,9 +44,6 @@ namespace GameEngine
 
         public void Draw(ICamera camera)
         {
-            Vector3 lightDirection = new Vector3(-1f, 1f, -1f);
-            lightDirection.Normalize();
-
             effect.CurrentTechnique = effect.Techniques["Technique1"];
 
             effect.Parameters["terrainTexture"].SetValue(terrainInfo.Texture);
@@ -54,12 +51,12 @@ namespace GameEngine
             effect.Parameters["View"].SetValue(camera.View);
             effect.Parameters["Projection"].SetValue(camera.Projection);
 
-            effect.Parameters["lightDirection"].SetValue(lightDirection);
-            effect.Parameters["lightColor"].SetValue(new Vector4(1, 1, 1, 1));
-            effect.Parameters["lightBrightness"].SetValue(0.8f);
+            effect.Parameters["lightDirection"].SetValue(RenderState.LightDirection);
+            effect.Parameters["lightColor"].SetValue(RenderState.LightColor);
+            effect.Parameters["lightBrightness"].SetValue(RenderState.LightBrightness);
 
-            effect.Parameters["ambientLightLevel"].SetValue(0.23f);
-            effect.Parameters["ambientLightColor"].SetValue(new Vector4(0.98f, 0.92f, 0.24f, 1f));
+            effect.Parameters["ambientLightLevel"].SetValue(RenderState.AmbientLightLevel);
+            effect.Parameters["ambientLightColor"].SetValue(RenderState.AmbientLightColor);
 
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {
