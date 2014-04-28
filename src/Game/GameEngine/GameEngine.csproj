@@ -98,7 +98,7 @@
     <Compile Include="EntitySystem\Components\CollisionBox.cs" />
     <Compile Include="EntitySystem\Components\Model3D.cs" />
     <Compile Include="EntitySystem\EntityManager.cs" />
-    <Compile Include="EntitySystem\IEntityTemplate.cs" />
+    <Compile Include="EntitySystem\Template\GameObject.cs" />
     <Compile Include="EntitySystem\UpdateableEntityComponent.cs" />
     <Compile Include="EntitySystem\DrawableEntityComponent.cs" />
     <Compile Include="EntitySystem\Entity.cs" />
@@ -120,9 +120,7 @@
     <Compile Include="Terrain\ITerrain.cs" />
     <Compile Include="Terrain\TerrainInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EntitySystem\Template\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

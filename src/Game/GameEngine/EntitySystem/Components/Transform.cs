@@ -10,7 +10,7 @@ namespace GameEngine
     {
         public Vector3 Position;
         public Vector3 Rotation;
-        public Vector3 Scale;
+        public float Scale;
 
         public Matrix World
         {
@@ -22,7 +22,23 @@ namespace GameEngine
             }
         }
 
-        public Transform(Entity aParent, Vector3 pos, Vector3 rot, Vector3 scale)
+        /// <summary>
+        /// (X,Z) position
+        /// </summary>
+        public Vector2 Pos2D
+        {
+            get { return new Vector2(Position.X, Position.Z); }
+        }
+
+        public Transform(Entity aParent)
+            : this(aParent, Vector3.Zero, Vector3.Zero, 1)
+        { }
+
+        public Transform(Entity aParent, Vector3 pos)
+            : this(aParent, pos, Vector3.Zero, 1)
+        { }
+
+        public Transform(Entity aParent, Vector3 pos, Vector3 rot, float scale)
             : base(aParent)
         {
             Name = "Transform";

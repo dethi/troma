@@ -9,7 +9,7 @@ namespace GameEngine
 {
     public class Model3D : DrawableEntityComponent
     {
-        private Model _model;
+        public Model Model;
         private Effect _effect;
 
         public Model3D(Entity aParent, string model, Effect effect)
@@ -19,7 +19,7 @@ namespace GameEngine
             _requiredComponents.Add("Transform");
 
             _effect = effect;
-            _model = FileManager.Load<Model>("Models/" + model);
+            Model = FileManager.Load<Model>("Models/" + model);
         }
 
         public override void Draw(GameTime gameTime, ICamera camera)

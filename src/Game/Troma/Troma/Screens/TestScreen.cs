@@ -31,6 +31,8 @@ namespace Troma
         {
             base.LoadContent();
 
+            EntityManager.Clear();
+
             camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
             player = new Player(new Vector3(5, 15, 5), Vector3.Zero, camera);
 
@@ -51,6 +53,8 @@ namespace Troma
             terrain = new HeightMap(game, terrainEffect, terrainInfo);
             player.Initialize(terrain);
 
+            //GameObject.BuildEntity(new Vector3(122, 8, 206), "truck_allemand", null);
+
             game.ResetElapsedTime();
         }
 
@@ -60,6 +64,7 @@ namespace Troma
         {
             base.Update(gameTime, hasFocus, isVisible);
             player.Update(gameTime);
+            //EntityManager.Update(gameTime);
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
@@ -71,7 +76,10 @@ namespace Troma
         {
             GameServices.ResetGraphicsDeviceFor3D();
             terrain.Draw(camera);
+            //EntityManager.Draw(gameTime, camera);
             //DrawingAxes.Draw(camera);
+
+            //EntityManager.DrawHUD(gameTime);
         }
     }
 }

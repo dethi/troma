@@ -67,19 +67,19 @@ namespace Troma
         }
 
         /// <summary>
+        /// (X,Z) position
+        /// </summary>
+        public Vector2 Pos2D
+        {
+            get { return new Vector2(Position.X, Position.Z); }
+        }
+
+        /// <summary>
         /// Y position of the head
         /// </summary>
         private float viewPosY
         {
             get { return _position.Y + _height; }
-        }
-
-        /// <summary>
-        /// (X,Z) position
-        /// </summary>
-        private Vector2 pos2D
-        {
-            get { return new Vector2(Position.X, Position.Z); }
         }
 
         #endregion
