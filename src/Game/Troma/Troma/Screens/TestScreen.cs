@@ -32,6 +32,7 @@ namespace Troma
             base.LoadContent();
 
             EntityManager.Clear();
+            CollisionManager.Clear();
 
             camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
             player = new Player(new Vector3(5, 15, 5), Vector3.Zero, camera);
@@ -53,10 +54,18 @@ namespace Troma
             terrain = new HeightMap(game, terrainEffect, terrainInfo);
             player.Initialize(terrain);
 
+            List<Vector3> modelPos = new List<Vector3>();
+            modelPos.Add(new Vector3(100, 8, 100));
+            modelPos.Add(new Vector3(100, 8, 80));
+            modelPos.Add(new Vector3(100, 8, 60));
+            modelPos.Add(new Vector3(100, 8, 40));
+            modelPos.Add(new Vector3(100, 8, 20));
+
             Effect modelEffect = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
-            GameObject.BuildEntity(new Vector3(100, 8, 100), "truck_allemand", modelEffect);
+            VectGameObject.BuildEntity(modelPos.ToArray(), "truck_allemand", modelEffect);
 
             EntityManager.Initialize();
+            CollisionManager.Initialize();
 
 #if DEBUG
             DrawingAxes.Initialize();
@@ -72,6 +81,7 @@ namespace Troma
             base.Update(gameTime, hasFocus, isVisible);
             player.Update(gameTime);
             EntityManager.Update(gameTime);
+            CollisionManager.Update(gameTime);
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
@@ -86,6 +96,7 @@ namespace Troma
             EntityManager.Draw(gameTime, camera);
 
 #if DEBUG
+            CollisionManager.Draw(gameTime, camera);
             DrawingAxes.Draw(camera);
 #endif
 

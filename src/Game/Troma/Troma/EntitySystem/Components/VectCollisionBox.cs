@@ -8,15 +8,16 @@ using GameEngine;
 
 namespace Troma
 {
-    public class CollisionBox : EntityComponent
+    public class VectCollisionBox : EntityComponent
     {
         public List<BoundingBox> BoxList { get; private set; }
 
-        public CollisionBox(Entity aParent)
+        public VectCollisionBox(Entity aParent)
             : base(aParent)
         {
-            Name = "CollisionBox";
+            Name = "VectCollisionBox";
             _requiredComponents.Add("Model3D");
+            _requiredComponents.Add("VectTransform");
 
             BoxList = new List<BoundingBox>();
         }
@@ -30,9 +31,10 @@ namespace Troma
 
         private void GenerateBoundingBox()
         {
-            Model model = Entity.GetComponent<Model3D>().Model;
-            Matrix world = Entity.GetComponent<Transform>().World;
+            Func<int, Matrix> GetWorld = Entity.GetComponent<VectTransform>().GetWorld;
+            int length = Entity.GetComponent<VectTransform>().Length;
 
+            Model model = Entity.GetComponent<Model3D>().Model;
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
 
@@ -62,10 +64,13 @@ namespace Troma
                     }
                 }
 
-                min = Vector3.Transform(min, world);
-                max = Vector3.Transform(max, world);
+                for (int i = 0; i < length; i++)
+                {
+                    Vector3 _min = Vector3.Transform(min, GetWorld(i));
+                    Vector3 _max = Vector3.Transform(max, GetWorld(i));
 
-                BoxList.Add(new BoundingBox(min, max));
+                    BoxList.Add(new BoundingBox(_min, _max));
+                }
             }
         }
     }

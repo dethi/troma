@@ -111,8 +111,13 @@
   <ItemGroup>
     <Compile Include="EntitySystem\Components\CollisionBox.cs" />
     <Compile Include="EntitySystem\Components\DrawCollisionBox.cs" />
+    <Compile Include="EntitySystem\Components\DrawModel3D.cs" />
     <Compile Include="EntitySystem\Components\Model3D.cs" />
     <Compile Include="EntitySystem\Components\Transform.cs" />
+    <Compile Include="EntitySystem\Components\VectCollisionBox.cs" />
+    <Compile Include="EntitySystem\Components\VectDrawModel3D.cs" />
+    <Compile Include="EntitySystem\Components\VectTransform.cs" />
+    <Compile Include="EntitySystem\Template\VectGameObject.cs" />
     <Compile Include="GraphicsMode.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
     <Compile Include="Screens\MenuScreen.cs" />
@@ -121,6 +126,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="EntitySystem\Template\GameObject.cs" />
+    <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Troma.cs" />
     <Compile Include="Screens\DebugScreen.cs" />
     <Compile Include="Screens\MenuEntry.cs" />
