@@ -95,6 +95,7 @@
     <Compile Include="Camera\FirstPersonView.cs" />
     <Compile Include="Camera\ICamera.cs" />
     <Compile Include="CollisionManager.cs" />
+    <Compile Include="Debugging\BoundingSphereRenderer.cs" />
     <Compile Include="Debugging\NbVects.cs" />
     <Compile Include="Debugging\SysDebug.cs" />
     <Compile Include="Debugging\XConsole.cs" />
