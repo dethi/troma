@@ -128,7 +128,6 @@
     <Compile Include="EntitySystem\Template\GameObject.cs" />
     <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Troma.cs" />
-    <Compile Include="Screens\DebugScreen.cs" />
     <Compile Include="Screens\MenuEntry.cs" />
     <Compile Include="Screens\TestScreen.cs" />
   </ItemGroup>

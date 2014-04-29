@@ -31,6 +31,11 @@ namespace Troma
         {
             base.LoadContent();
 
+#if DEBUG
+            XConsole.Initialize();
+            DrawingAxes.Initialize();
+#endif
+
             EntityManager.Clear();
             CollisionManager.Clear();
 
@@ -61,15 +66,11 @@ namespace Troma
             modelPos.Add(new Vector3(100, 8, 40));
             modelPos.Add(new Vector3(100, 8, 20));
 
-            Effect modelEffect = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
+            Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
             VectGameObject.BuildEntity(modelPos.ToArray(), "truck_allemand", modelEffect);
 
             EntityManager.Initialize();
             CollisionManager.Initialize();
-
-#if DEBUG
-            DrawingAxes.Initialize();
-#endif
 
             game.ResetElapsedTime();
         }
@@ -82,6 +83,10 @@ namespace Troma
             player.Update(gameTime);
             EntityManager.Update(gameTime);
             CollisionManager.Update(gameTime);
+
+#if DEBUG
+            XConsole.Update(gameTime);
+#endif
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
@@ -97,7 +102,8 @@ namespace Troma
 
 #if DEBUG
             CollisionManager.Draw(gameTime, camera);
-            DrawingAxes.Draw(camera);
+            DrawingAxes.Draw(gameTime, camera);
+            XConsole.DrawHUD(gameTime);
 #endif
 
             EntityManager.DrawHUD(gameTime);

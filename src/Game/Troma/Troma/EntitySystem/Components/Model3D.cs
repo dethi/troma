@@ -21,6 +21,14 @@ namespace Troma
 
             Model = FileManager.Load<Model>("Models/" + model);
             ModelName = model;
+
+#if DEBUG
+            foreach(ModelMesh mesh in Model.Meshes)
+            {
+                foreach(ModelMeshPart meshPart in mesh.MeshParts)
+                    NbVects.Add(meshPart.NumVertices);
+            }
+#endif
         }
     }
 }

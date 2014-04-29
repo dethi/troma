@@ -111,6 +111,10 @@ namespace Troma
             this.terrain = terrain;
 
             MoveTo(_position, _rotation);
+
+#if DEBUG
+            XConsole.AddDebug(Debug);
+#endif
         }
 
         #endregion
@@ -143,6 +147,13 @@ namespace Troma
 
         public void Draw()
         {
+        }
+
+        public string Debug(GameTime gameTime)
+        {
+            return String.Format(new System.Globalization.CultureInfo("en-GB"),
+                "Pos: ({0:F1}; {1:F1}; {2:F1})",
+                _position.X, _position.Y, _position.Z);
         }
 
         private void Move(float dt, InputState input)

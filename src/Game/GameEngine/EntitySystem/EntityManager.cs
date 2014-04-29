@@ -49,6 +49,10 @@ namespace GameEngine
             }
 
             _isInitialized = true;
+
+#if DEBUG
+            XConsole.AddDebug(Debug);
+#endif
         }
 
         #endregion
@@ -86,6 +90,11 @@ namespace GameEngine
             {
                 _currentList[i].DrawHUD(gameTime);
             }
+        }
+
+        public static string Debug(GameTime gameTime)
+        {
+            return ("N_entity: " + Count);
         }
 
         #endregion

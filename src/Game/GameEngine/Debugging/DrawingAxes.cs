@@ -34,7 +34,7 @@ namespace GameEngine
         /// <summary>
         /// Drawing 3D axes
         /// </summary>
-        public static void Draw(ICamera camera)
+        public static void Draw(GameTime gameTime, ICamera camera)
         {
             GameServices.SpriteBatch.Begin();
             GameServices.SpriteBatch.Draw(_pixel, new Rectangle(0, 0, 100, 100), Color.White * 0.6f);

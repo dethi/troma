@@ -207,7 +207,7 @@ namespace Troma
 
 #if DEBUG
             CollisionManager.Draw(gameTime, camera);
-            DrawingAxes.Draw(camera);
+            DrawingAxes.Draw(gameTime,camera);
 #endif
 
             EntityManager.DrawHUD(gameTime);

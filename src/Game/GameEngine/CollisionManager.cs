@@ -48,6 +48,10 @@ namespace GameEngine
             _effect = new BasicEffect(GameServices.GraphicsDevice);
             _effect.World = Matrix.Identity;
             _effect.VertexColorEnabled = true;
+
+#if DEBUG
+            XConsole.AddDebug(Debug);
+#endif
         }
 
         #endregion
@@ -88,6 +92,11 @@ namespace GameEngine
                         bBoxIndices, 0, 12);
                 }
             }
+        }
+
+        public static string Debug(GameTime gameTime)
+        {
+            return ("N_Box: " + Count);
         }
 
         public static void DrawHUD(GameTime gameTime)

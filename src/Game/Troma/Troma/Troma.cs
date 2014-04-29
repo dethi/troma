@@ -39,10 +39,6 @@ namespace Troma
 
             screenManager.AddScreen(new TestScreen(this));
             //screenManager.AddScreen(new MainMenuScreen(this));
-
-#if DEBUG
-            screenManager.AddScreen(new DebugScreen(this));
-#endif
         }
 
         protected override void Initialize()
