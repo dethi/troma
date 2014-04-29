@@ -46,6 +46,10 @@ namespace GameEngine
             BuildIndexBuffer(_terrainInfo.Size.Width, _terrainInfo.Size.Height);
             CalculateNormals();
 
+#if DEBUG
+            NbVects.Add(vertexBuffer.VertexCount);
+#endif
+
             #region Initialize Effect
 
             _effect.CurrentTechnique = _effect.Techniques["Technique1"];

@@ -67,7 +67,7 @@ namespace Troma
             modelPos.Add(new Vector3(100, 8, 20));
 
             Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
-            GameObject.BuildEntity(modelPos[0], "quai", modelEffect);
+            GameObject.BuildEntity(modelPos[0], "hotel", modelEffect);
 
             EntityManager.Initialize();
             CollisionManager.Initialize();
