@@ -50,24 +50,37 @@ namespace Troma
             {
                 Position = Vector3.Zero,
                 Size = new Size(513, 513),
-                Depth = 8,
+                Depth = 0,
                 Texture = terrainTexture,
                 TextureScale = 512,
                 Heighmap = terrainHeighmap
             };
 
+            float y = 0;
+
             terrain = new HeightMap(game, terrainEffect, terrainInfo);
             player.Initialize(terrain);
 
             List<Vector3> modelPos = new List<Vector3>();
-            modelPos.Add(new Vector3(100, 8, 100));
-            modelPos.Add(new Vector3(100, 8, 80));
-            modelPos.Add(new Vector3(100, 8, 60));
-            modelPos.Add(new Vector3(100, 8, 40));
-            modelPos.Add(new Vector3(100, 8, 20));
+            modelPos.Add(new Vector3(0, y, 200));
+            modelPos.Add(new Vector3(120, y, 200));
+            modelPos.Add(new Vector3(240, y, 200));
+            modelPos.Add(new Vector3(360, y, 200));
+            modelPos.Add(new Vector3(480, y, 200));
+            modelPos.Add(new Vector3(0, y, 210));
+            modelPos.Add(new Vector3(120, y, 210));
+            modelPos.Add(new Vector3(240, y, 210));
+            modelPos.Add(new Vector3(360, y, 210));
+            modelPos.Add(new Vector3(480, y, 210));
 
             Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
-            GameObject.BuildEntity(modelPos[0], "hotel", modelEffect);
+            VectGameObject.BuildEntity(modelPos.ToArray(), "rail", modelEffect);
+            GameObject.BuildEntity(new Vector3(0, y, 117), "gare", modelEffect.Clone());
+            GameObject.BuildEntity(new Vector3(0, y, 220), "quai", modelEffect.Clone());
+            GameObject.BuildEntity(new Vector3(460, y, 153), "garde_passage_a_niveau", modelEffect.Clone());
+            GameObject.BuildEntity(new Vector3(435, y, 192), "barriere_train_droite", modelEffect.Clone());
+            GameObject.BuildEntity(new Vector3(435, y, 222), "barriere_train_gauche", modelEffect.Clone());
+            GameObject.BuildEntity(new Vector3(300, y, 300), "immeuble2", modelEffect.Clone());
 
             EntityManager.Initialize();
             CollisionManager.Initialize();

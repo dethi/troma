@@ -42,32 +42,35 @@ namespace Troma
             {
                 Matrix meshTransform = transforms[mesh.ParentBone.Index];
 
-                Vector3 min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-                Vector3 max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+                Vector3 meshMin = new Vector3(float.MaxValue);
+                Vector3 meshMax = new Vector3(float.MinValue);
 
                 foreach (ModelMeshPart meshPart in mesh.MeshParts)
                 {
-                    int vertexStride = meshPart.VertexBuffer.VertexDeclaration.VertexStride;
-                    int vertexBufferSize = meshPart.NumVertices * vertexStride;
+                    int stride = meshPart.VertexBuffer.VertexDeclaration.VertexStride;
 
-                    float[] vertexData = new float[vertexBufferSize / sizeof(float)];
-                    meshPart.VertexBuffer.GetData<float>(vertexData);
+                    VertexPositionNormalTexture[] vertexData =
+                        new VertexPositionNormalTexture[meshPart.NumVertices];
 
-                    for (int i = 0; i < vertexBufferSize / sizeof(float); i += vertexStride / sizeof(float))
+                    meshPart.VertexBuffer.GetData(
+                        meshPart.VertexOffset * stride, vertexData, 0,
+                        meshPart.NumVertices, stride);
+
+                    Vector3 vertPosition = new Vector3();
+
+                    for (int i = 0; i < vertexData.Length; i++)
                     {
-                        Vector3 transformedPosition = Vector3.Transform(
-                            new Vector3(vertexData[i], vertexData[i + 1], vertexData[i + 2]), 
-                            meshTransform);
+                        vertPosition = vertexData[i].Position;
 
-                        min = Vector3.Min(min, transformedPosition);
-                        max = Vector3.Max(max, transformedPosition);
+                        meshMin = Vector3.Min(meshMin, vertPosition);
+                        meshMax = Vector3.Max(meshMax, vertPosition);
                     }
                 }
 
                 for (int i = 0; i < length; i++)
                 {
-                    Vector3 _min = Vector3.Transform(min, GetWorld(i));
-                    Vector3 _max = Vector3.Transform(max, GetWorld(i));
+                    Vector3 _min = Vector3.Transform(meshMin, GetWorld(i));
+                    Vector3 _max = Vector3.Transform(meshMax, GetWorld(i));
 
                     BoxList.Add(new BoundingBox(_min, _max));
                 }
