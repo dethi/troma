@@ -67,7 +67,7 @@ namespace Troma
             modelPos.Add(new Vector3(100, 8, 20));
 
             Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
-            VectGameObject.BuildEntity(modelPos.ToArray(), "truck_allemand", modelEffect);
+            GameObject.BuildEntity(modelPos[0], "quai", modelEffect);
 
             EntityManager.Initialize();
             CollisionManager.Initialize();

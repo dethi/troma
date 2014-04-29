@@ -50,15 +50,17 @@ namespace GameEngine
 
             _effect.CurrentTechnique = _effect.Techniques["Technique1"];
 
-            _effect.Parameters["terrainTexture"].SetValue(_terrainInfo.Texture);
             _effect.Parameters["World"].SetValue(Matrix.Identity);
+            _effect.Parameters["ColorMap"].SetValue(_terrainInfo.Texture);
 
-            _effect.Parameters["lightDirection"].SetValue(LightInfo.LightDirection);
-            _effect.Parameters["lightColor"].SetValue(LightInfo.DiffuseColor);
-            _effect.Parameters["lightBrightness"].SetValue(LightInfo.DiffuseIntensity);
+            _effect.Parameters["AmbientColor"].SetValue(LightInfo.AmbientColor);
+            _effect.Parameters["AmbientIntensity"].SetValue(LightInfo.AmbientIntensity);
 
-            _effect.Parameters["ambientLightLevel"].SetValue(LightInfo.AmbientIntensity);
-            _effect.Parameters["ambientLightColor"].SetValue(LightInfo.AmbientColor);
+            _effect.Parameters["LightDirection"].SetValue(LightInfo.LightDirection);
+            _effect.Parameters["DiffuseColor"].SetValue(LightInfo.DiffuseColor);
+            _effect.Parameters["DiffuseIntensity"].SetValue(LightInfo.DiffuseIntensity);
+
+            _effect.Parameters["SpecularColor"].SetValue(LightInfo.DiffuseColor);
 
             #endregion
         }

@@ -28,12 +28,12 @@ namespace GameEngine
 
         public static void Initialize()
         {
-            LightDirection = new Vector3(0, 1, -1);
+            LightDirection = new Vector3(2, 1, -2);
             DiffuseColor = Color.White.ToVector4();
-            DiffuseIntensity = 1;
+            DiffuseIntensity = 0.18f;
 
             AmbientColor = Color.LightYellow.ToVector4();
-            AmbientIntensity = 0.18f;
+            AmbientIntensity = 1f;
         }
     }
 }

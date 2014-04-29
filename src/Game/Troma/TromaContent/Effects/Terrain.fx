@@ -1,64 +1,80 @@
+// Matrix
 float4x4 World;
 float4x4 View;
 float4x4 Projection;
-texture terrainTexture;
+ 
+// Light related
+float4 AmbientColor;
+float AmbientIntensity;
+ 
+float3 LightDirection;
+float4 DiffuseColor;
+float DiffuseIntensity;
+ 
+float4 SpecularColor;
+float3 EyePosition;
 
-sampler2D textureSampler = sampler_state {
-	Texture = (terrainTexture);
-	MagFilter = Linear;
-	MinFilter = Linear;
+texture2D ColorMap;
+sampler2D ColorMapSampler = sampler_state
+{
+    Texture = <ColorMap>;
+    MinFilter = linear;
+    MagFilter = linear;
+    MipFilter = linear;
 	AddressU = Wrap;
 	AddressV = Wrap;
 };
-
-float3 lightDirection;
-float4 lightColor;
-float lightBrightness;
-
-float4 ambientLightColor;
-float ambientLightLevel;
-
+ 
+// The input for the VertexShader
 struct VertexShaderInput
 {
     float4 Position : POSITION0;
-	float2 TextureCoordinate : TEXCOORD0;
+	float2 TexCoord : TEXCOORD0;
 	float3 Normal : NORMAL0;
 };
-
+ 
+// The output from the vertex shader, used for later processing
 struct VertexShaderOutput
 {
     float4 Position : POSITION0;
-	float2 TextureCoordinate : TEXCOORD0;
-	float4 LightingColor : COLOR0;
+	float2 TexCoord : TEXCOORD0;
+    float3 Normal : TEXCOORD1;
+    float3 View : TEXCOORD2;
 };
-
-VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
+ 
+// The VertexShader.
+VertexShaderOutput VertexShaderFunction(VertexShaderInput input,float3 Normal : NORMAL)
 {
     VertexShaderOutput output;
-
+ 
     float4 worldPosition = mul(input.Position, World);
     float4 viewPosition = mul(worldPosition, View);
     output.Position = mul(viewPosition, Projection);
+	output.TexCoord = input.TexCoord;
 
-    output.TextureCoordinate = input.TextureCoordinate;
-
-	float4 normal = normalize(mul(input.Normal, World));
-	float lightLevel = dot(normal, lightDirection);
-	output.LightingColor = saturate(lightColor * lightBrightness * lightLevel);
-
+    float3 normal = normalize(mul(input.Normal, World));
+    output.Normal = normal;
+    output.View = normalize(float4(EyePosition, 1.0) - worldPosition);
+ 
     return output;
 }
-
+ 
+// The Pixel Shader
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
-    float4 pixelColor = tex2D(textureSampler, input.TextureCoordinate);
-	pixelColor *= input.LightingColor;
-	pixelColor += ambientLightColor * ambientLightLevel;
-	pixelColor.a = 1.0;
-	
-	return pixelColor;
-}
+	float4 color = tex2D(ColorMapSampler, input.TexCoord);
 
+    float4 normal = float4(input.Normal, 1.0);
+    float4 diffuse = saturate(dot(-LightDirection, normal));
+    float4 reflect = normalize(2 * diffuse * normal - float4(LightDirection, 1.0));
+    float4 specular = pow(saturate(dot(reflect, input.View)), 15);
+ 
+    return color * AmbientColor * AmbientIntensity + 
+           color * DiffuseIntensity * DiffuseColor * diffuse + 
+           color * SpecularColor * specular;
+}
+ 
+// Our Techinique
 technique Technique1
 {
     pass Pass1
