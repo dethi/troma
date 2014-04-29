@@ -17,7 +17,7 @@ namespace Arrow
 
             // Hook up menu event handlers.
             playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
-            //optionsMenuEntry.Selected += OptionsMenuEntrySelected;
+            optionsMenuEntry.Selected += OptionsMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
@@ -32,10 +32,10 @@ namespace Arrow
                                new GameplayScreen(game));
         }
 
-        /*void OptionsMenuEntrySelected(object sender, PlayerIndexEventArgs e)
+        void OptionsMenuEntrySelected(object sender, EventArgs e)
         {
-            ScreenManager.AddScreen(new OptionsMenuScreen(), e.PlayerIndex);
-        }*/
+            ScreenManager.AddScreen(new OptionsMenuScreen(game));
+        }
 
         protected override void OnCancel()
         {

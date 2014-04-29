@@ -214,5 +214,9 @@ namespace Arrow
 
             spriteBatch.End();
         }
+        protected void OnCancel(object sender, EventArgs e)
+        {
+            OnCancel();
+        }
     }
 }
