@@ -53,7 +53,7 @@ namespace Troma
             terrain = new HeightMap(game, terrainEffect, terrainInfo);
             player.Initialize(terrain);
 
-            Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
+            Effect modelEffect = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
             GameObject.BuildEntity(new Vector3(100, 8, 100), "truck_allemand", modelEffect);
 
             EntityManager.Initialize();
