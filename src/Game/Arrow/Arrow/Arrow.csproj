@@ -157,7 +157,7 @@
     <Compile Include="Input\InputState.cs" />
     <Compile Include="Player\PlayerConstants.cs" />
     <Compile Include="ScreenManager\ScreenManager.cs" />
-    <Compile Include="Deprecated\MenuSong.cs" />
+    <Compile Include="Sound\MenuSong.cs" />
     <Compile Include="Deprecated\MenuPause.cs" />
     <Compile Include="Deprecated\Button.cs" />
     <Compile Include="GraphicsMode.cs" />

@@ -73,12 +73,14 @@ namespace Arrow
 
             private void DisplayMenuEntrySelected(object sender, EventArgs e)
             {
+                if (displayMenuEntry.Text == "Pleine ecran: " + "off")
+                    game.ActivateFullScreen();
+                else
+                    game.DesactivateFullScreen();
+
                 display = !display;
 
-                SetMenuEntryText();
-
-                /*if(displayMenuEntry.Text == "Pleine ecran: " + "on")
-                    Activate*/
+                SetMenuEntryText();                
             }
 
             private void VolumeMenuEntrySelected(object sender, EventArgs e)

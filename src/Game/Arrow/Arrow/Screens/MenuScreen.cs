@@ -19,6 +19,7 @@ namespace Arrow
         int x3 = 0;
         string background;
 
+        MenuSong audio;
         private ContentManager content;
         private SpriteFont font;
         public SpriteFont Font
@@ -35,7 +36,6 @@ namespace Arrow
             : base(game)
         {
             this.menuTitle = menuTitle;
-
             TransitionOnTime = TimeSpan.FromSeconds(1);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
             this.background = background;
@@ -48,6 +48,9 @@ namespace Arrow
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             font = content.Load<SpriteFont>("Fonts/Texture");
+            audio = new MenuSong(game);
+            audio.LoadContent();
+            audio.SongPlayed = true;
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)

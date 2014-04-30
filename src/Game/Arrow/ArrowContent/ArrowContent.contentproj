@@ -221,11 +221,6 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Sounds\MenuSong.wav">
-      <Name>MenuSong</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
     <Compile Include="Sounds\Run.wav">
       <Name>Run</Name>
       <Importer>WavImporter</Importer>
@@ -664,6 +659,13 @@
       <Name>background</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sounds\MenuSong.mp3">
+      <Name>MenuSong</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

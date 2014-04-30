@@ -9,6 +9,9 @@ namespace Arrow
 {
     public partial class Game
     {
+        private int width;
+        private int height;
+
         /// <summary>
         /// Get the screen size of primary screen
         /// </summary>
@@ -21,13 +24,25 @@ namespace Arrow
         /// <summary>
         /// Activate full screen using the better resolution
         /// </summary>
-        private void ActivateFullScreen()
+        public void ActivateFullScreen()
         {
             Vector2 primaryScreen = GetScreenSize();
 
+            width = graphics.PreferredBackBufferWidth;
+            height = graphics.PreferredBackBufferHeight;
+
             graphics.PreferredBackBufferWidth = (int)primaryScreen.X;
             graphics.PreferredBackBufferHeight = (int)primaryScreen.Y;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;           
+
+            graphics.ApplyChanges();
+        }
+
+        public void DesactivateFullScreen()        
+        {
+            graphics.PreferredBackBufferWidth = width;
+            graphics.PreferredBackBufferHeight = height;
+            graphics.IsFullScreen = false;
 
             graphics.ApplyChanges();
         }
