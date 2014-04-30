@@ -29,7 +29,7 @@ namespace Arrow
         #region Initialization
 
             public OptionsMenuScreen(Game game)
-            : base("Options", game)
+            : base("Options", game, "America")
         {
             // Create our menu entries.
             keyboardMenuEntry = new MenuEntry(string.Empty);

@@ -8,7 +8,7 @@ namespace Arrow
     class MainMenuScreen : MenuScreen
     {
         public MainMenuScreen(Game game)
-            : base("Troma", game)
+            : base("Troma", game, "America")
         {
             // Create our menu entries.
             MenuEntry playGameMenuEntry = new MenuEntry("Jouer");

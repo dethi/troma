@@ -17,6 +17,7 @@ namespace Arrow
         int x1 = 0;
         int x2 = 0;
         int x3 = 0;
+        string background;
 
         private ContentManager content;
         private SpriteFont font;
@@ -30,13 +31,15 @@ namespace Arrow
             get { return menuEntries; }
         }
 
-        public MenuScreen(string menuTitle, Game game)
+        public MenuScreen(string menuTitle, Game game, string background)
             : base(game)
         {
             this.menuTitle = menuTitle;
 
             TransitionOnTime = TimeSpan.FromSeconds(1);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            this.background = background;
+    
         }
 
         public override void LoadContent()
@@ -140,7 +143,7 @@ namespace Arrow
             spriteBatch.Begin();
 
             // fond d ecran
-            Texture2D fond = game.Content.Load<Texture2D>("Textures/America");
+            Texture2D fond = game.Content.Load<Texture2D>("Textures/" + background);
             Texture2D fond2 = game.Content.Load<Texture2D>("Textures/balle3");
             Texture2D fond3 = game.Content.Load<Texture2D>("Textures/balle4");
             Texture2D fond4 = game.Content.Load<Texture2D>("Textures/eie");

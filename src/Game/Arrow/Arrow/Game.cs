@@ -44,6 +44,7 @@ namespace Arrow
 
             //screenManager.AddScreen(new GameplayScreen(this))
             screenManager.AddScreen(new MainMenuScreen(this));
+            //screenManager.AddScreen(new BackgroundScreen(this));
 
             #if !BUILD
 

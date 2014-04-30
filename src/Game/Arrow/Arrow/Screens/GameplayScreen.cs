@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Arrow
 {
@@ -282,6 +283,11 @@ namespace Arrow
         public override void HandleInput(GameTime gameTime, InputState input)
         {
             player.HandleInput(gameTime, input, maps);
+
+            if (input.IsPressed(Keys.P))
+            {
+                ScreenManager.AddScreen(new PauseMenuScreen(game));
+            }
         }
 
         public override void Draw(GameTime gameTime)

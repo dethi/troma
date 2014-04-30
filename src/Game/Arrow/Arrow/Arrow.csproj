@@ -143,6 +143,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Screens\BackgroundScreen.cs" />
     <Compile Include="Screens\LoadingScreen.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
     <Compile Include="Screens\MenuEntry.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="Player\Player.cs" />
     <Compile Include="Screens\MenuScreen.cs" />
     <Compile Include="Screens\OptionsMenuScreen.cs" />
+    <Compile Include="Screens\PauseMenuScreen.cs" />
     <Compile Include="Screens\TestScreen.cs" />
     <Compile Include="Sound\SFXManager.cs" />
     <Compile Include="Deprecated\Menu.cs" />
