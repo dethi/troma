@@ -47,6 +47,8 @@ namespace Troma
         private BoundingSphere _sphere;
         private Vector3[] _ptConstSphere;
 
+        private bool collisionDetected;
+
         private bool isCrouched;
         private bool touchGround;
 
@@ -142,8 +144,9 @@ namespace Troma
             Move(dt, input);
 
             // Apply movement
-            MoveTo(PreviewMove(move, rotate.Y), rotate);
+            _position = PreviewMove(move, rotate.Y);
             ApplyCollision();
+            MoveTo(_position, rotate);
         }
 
         public void Draw(GameTime gameTime, ICamera camera)
@@ -156,8 +159,8 @@ namespace Troma
         public string Debug(GameTime gameTime)
         {
             return String.Format(new System.Globalization.CultureInfo("en-GB"),
-                "Pos: ({0:F1}; {1:F1}; {2:F1})",
-                _position.X, _position.Y, _position.Z);
+                "Pos: ({0:F1}; {1:F1}; {2:F1})\nCollision: {3}",
+                _position.X, _position.Y, _position.Z, collisionDetected);
         }
 
         private void Move(float dt, InputState input)
@@ -207,7 +210,7 @@ namespace Troma
 
         private void Jump(float dt, InputState input)
         {
-            if (!touchGround)
+            if (!touchGround && !collisionDetected)
                 acceleration.Y = Physics.Gravity;
             else
             {
@@ -215,7 +218,7 @@ namespace Troma
                 velocity.Y = 0;
             }
 
-            if (touchGround && input.PlayerJump())
+            if ((touchGround || collisionDetected) && input.PlayerJump())
             {
                 velocity.Y = JUMP_SPEED;
                 touchGround = false;
@@ -251,9 +254,12 @@ namespace Troma
             _sphere = BoundingSphere.CreateFromPoints(_ptConstSphere);
 
             if (CollisionManager.IsCollision(_sphere))
-                GameServices.Game.Window.Title = "Collision!";
+            {
+                _position = _prevPosition;
+                collisionDetected = true;
+            }
             else
-                GameServices.Game.Window.Title = "";
+                collisionDetected = false;
         }
 
         /// <summary>
@@ -261,10 +267,10 @@ namespace Troma
         /// </summary>
         public void MoveTo(Vector3 pos, Vector3 rot)
         {
-            if (pos != _position)
-                _prevPosition = _position;
-            if (rot != _rotation)
-                _prevRotation = _rotation;
+            if (pos != _prevPosition)
+                _prevPosition = pos;
+            if (rot != _prevPosition)
+                _prevRotation = rot;
 
             Position = pos;
             Rotation = rot;

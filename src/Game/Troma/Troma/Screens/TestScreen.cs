@@ -41,7 +41,7 @@ namespace Troma
             CollisionManager.Clear();
 
             camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
-            player = new Player(new Vector3(5, 15, 5), Vector3.Zero, camera);
+            player = new Player(new Vector3(10, 15, 10), Vector3.Zero, camera);
 
             Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
             Texture2D terrainTexture = FileManager.Load<Texture2D>("Terrains/texture");
@@ -81,7 +81,7 @@ namespace Troma
             GameObject.BuildEntity(new Vector3(460, y, 153), "garde_passage_a_niveau", modelEffect.Clone());
             GameObject.BuildEntity(new Vector3(435, y, 192), "barriere_train_droite", modelEffect.Clone());
             GameObject.BuildEntity(new Vector3(435, y, 222), "barriere_train_gauche", modelEffect.Clone());
-            GameObject.BuildEntity(new Vector3(300, y, 300), "immeuble2", modelEffect.Clone());
+            GameObject.BuildEntity(new Vector3(300, y, 300), "eglise", modelEffect.Clone());
 
             EntityManager.Initialize();
             CollisionManager.Initialize();
