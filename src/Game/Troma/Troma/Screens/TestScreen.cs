@@ -34,6 +34,7 @@ namespace Troma
 #if DEBUG
             XConsole.Initialize();
             DrawingAxes.Initialize();
+            BoundingSphereRenderer.Initialize(30);
 #endif
 
             EntityManager.Clear();
@@ -112,6 +113,7 @@ namespace Troma
             GameServices.ResetGraphicsDeviceFor3D();
             terrain.Draw(camera);
             EntityManager.Draw(gameTime, camera);
+            player.Draw(gameTime, camera);
 
 #if DEBUG
             CollisionManager.Draw(gameTime, camera);

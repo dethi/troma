@@ -30,9 +30,12 @@ namespace Troma
         private Vector3 _initRotation;
 
         private ICamera _view;
+        private float _height;
         private Vector3 _position;
         private Vector3 _rotation;
-        private float _height;
+
+        private Vector3 _prevPosition;
+        private Vector3 _prevRotation;
 
         private Vector3 move;
         private Vector3 rotate;
@@ -40,6 +43,9 @@ namespace Troma
 
         private Vector3 velocity;
         private Vector3 acceleration;
+
+        private BoundingSphere _sphere;
+        private Vector3[] _ptConstSphere;
 
         private bool isCrouched;
         private bool touchGround;
@@ -110,6 +116,8 @@ namespace Troma
 
             this.terrain = terrain;
 
+            _ptConstSphere = new Vector3[2];
+
             MoveTo(_position, _rotation);
 
 #if DEBUG
@@ -133,20 +141,16 @@ namespace Troma
             Jump(dt, input);
             Move(dt, input);
 
-            // Debug
-            /*
-            if (input.IsPressed(Keys.Z))
-                _position.Y += 5;
-            else if (input.IsPressed(Keys.X))
-                _position.Y -= 5;
-             */
-
             // Apply movement
             MoveTo(PreviewMove(move, rotate.Y), rotate);
+            ApplyCollision();
         }
 
-        public void Draw()
+        public void Draw(GameTime gameTime, ICamera camera)
         {
+#if DEBUG
+            BoundingSphereRenderer.Render(_sphere, camera, Color.Fuchsia);
+#endif
         }
 
         public string Debug(GameTime gameTime)
@@ -237,11 +241,31 @@ namespace Troma
                 touchGround = false;
         }
 
+        private void ApplyCollision()
+        {
+            _ptConstSphere[0] = _position;
+            _ptConstSphere[1].X = _position.X;
+            _ptConstSphere[1].Y = viewPosY + 0.2f;
+            _ptConstSphere[1].Z = _position.Z;
+
+            _sphere = BoundingSphere.CreateFromPoints(_ptConstSphere);
+
+            if (CollisionManager.IsCollision(_sphere))
+                GameServices.Game.Window.Title = "Collision!";
+            else
+                GameServices.Game.Window.Title = "";
+        }
+
         /// <summary>
         /// Change position and rotation
         /// </summary>
         public void MoveTo(Vector3 pos, Vector3 rot)
         {
+            if (pos != _position)
+                _prevPosition = _position;
+            if (rot != _rotation)
+                _prevRotation = _rotation;
+
             Position = pos;
             Rotation = rot;
         }

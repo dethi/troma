@@ -13,7 +13,6 @@ namespace GameEngine
     public static class BoundingSphereRenderer
     {
         private static VertexBuffer _vertBuffer;
-        private static VertexDeclaration _vertDecl;
         private static BasicEffect _effect;
         private static int _sphereResolution;
 

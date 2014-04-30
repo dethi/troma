@@ -99,8 +99,19 @@ namespace GameEngine
             return ("N_Box: " + Count);
         }
 
-        public static void DrawHUD(GameTime gameTime)
+        #endregion
+
+        #region Collision Detection
+
+        public static bool IsCollision(BoundingSphere sphere)
         {
+            foreach (BoundingBox box in _currentList)
+            {
+                if (box.Intersects(sphere))
+                    return true;
+            }
+
+            return false;        
         }
 
         #endregion
