@@ -59,60 +59,42 @@ namespace Arrow
 
             private void KeyboardMenuEntrySelected(object sender, EventArgs e)
             {
-            }
-
-            private void LanguageMenuEntrySelected(object sender, EventArgs e)
-            {
-            }
-
-            private void DisplayMenuEntrySelected(object sender, EventArgs e)
-            {
-            }
-
-            private void VolumeMenuEntrySelected(object sender, EventArgs e)
-            {
-            }
-                     
-            void SetMenuEntryText()
-            {
-                keyboardMenuEntry.Text = "Clavier: " + keyboard[currentKeyboard];
-                languageMenuEntry.Text = "Language: " + languages[currentLanguage];
-                displayMenuEntry.Text = "Pleine ecran: " + (display ? "on" : "off");
-                volumeMenuEntry.Text = "Volume: " + volume;
-            }
-        #endregion
-
-        #region Handle Input
-
-            void KeyboardMenuEntrySelected(object sender)
-            {
                 currentKeyboard = (currentKeyboard + 1) % keyboard.Length;
 
                 SetMenuEntryText();
             }
 
-            void LanguageMenuEntrySelected(object sender)
+            private void LanguageMenuEntrySelected(object sender, EventArgs e)
             {
                 currentLanguage = (currentLanguage + 1) % languages.Length;
 
                 SetMenuEntryText();
             }
 
-            void DisplayMenuEntrySelected(object sender)
+            private void DisplayMenuEntrySelected(object sender, EventArgs e)
             {
                 display = !display;
 
                 SetMenuEntryText();
+
+                /*if(displayMenuEntry.Text == "Pleine ecran: " + "on")
+                    Activate*/
             }
 
-            void VolumeMenuEntrySelected(object sender)
+            private void VolumeMenuEntrySelected(object sender, EventArgs e)
             {
                 volume++;
 
                 SetMenuEntryText();
             }
-
-
-        #endregion
+                     
+            void SetMenuEntryText()
+            {
+                keyboardMenuEntry.Text = "Clavier: " + keyboard[currentKeyboard];
+                languageMenuEntry.Text = "Language: " + languages[currentLanguage];
+                displayMenuEntry.Text = "Pleine ecran: " + (display ? "off" : "on");
+                volumeMenuEntry.Text = "Volume: " + volume;
+            }
+        #endregion   
     }
 }
