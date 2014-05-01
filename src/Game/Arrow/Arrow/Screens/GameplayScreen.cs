@@ -42,7 +42,7 @@ namespace Arrow
 
             camera = Camera.Instance;
             player = new Player(game, new Vector3(800, 10, 600));
-            carte = "Town";
+            carte = "Farm";
         }
 
         public override void LoadContent()
@@ -81,8 +81,8 @@ namespace Arrow
 
                 #region Wood barrier
 
-                Model woodBarrierX = content.Load<Model>("Models/Farm/wood_barrier_x");
-                Model woodBarrierZ = content.Load<Model>("Models/Farm/wood_barrier_z");
+                Model woodBarrierX = content.Load<Model>("Models/Farm/wood_barrier");
+                Model woodBarrierZ = content.Load<Model>("Models/Farm/wood_barrier");
 
                 entities.AddEntity(woodBarrierZ, new Vector2(119, 101));
                 entities.AddEntity(woodBarrierZ, new Vector2(119, 91));
@@ -112,8 +112,8 @@ namespace Arrow
 
                 #region Barbed barrier
 
-                Model barbedBarrierZ = content.Load<Model>("Models/Farm/barbed_barrier_z");
-                Model postBarrier = content.Load<Model>("Models/Farm/post_barrier");
+                Model barbedBarrierZ = content.Load<Model>("Models/Farm/barbed_barrier");
+                Model postBarrier = content.Load<Model>("Models/Farm/post");
 
                 entities.AddEntity(barbedBarrierZ, new Vector2(160, 0));
                 entities.AddEntity(barbedBarrierZ, new Vector2(160, 9));
