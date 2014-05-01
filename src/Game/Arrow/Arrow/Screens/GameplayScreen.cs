@@ -42,7 +42,7 @@ namespace Arrow
 
             camera = Camera.Instance;
             player = new Player(game, new Vector3(800, 10, 600));
-            carte = "Farm";
+            carte = "Town";
         }
 
         public override void LoadContent()
@@ -192,30 +192,29 @@ namespace Arrow
             else
             {
                 player.Position = new Vector3(800, 0, 600);
-                entities.AddEntity("Town/gare", new Vector2(768, 685));
-                entities.AddEntity("Town/quai", new Vector2(968, 813));
-                entities.AddEntity("Town/eglise", new Vector2(1008, 525));
-                entities.AddEntity("Town/mairie", new Vector2(1008, 565));
-                entities.AddEntity("Town/poste", new Vector2(728, 525));
-                entities.AddEntity("Town/immeuble", new Vector2(768, 405));
-                entities.AddEntity("Town/hotel", new Vector2(728, 645));
-                entities.AddEntity("Town/fontaine", new Vector2(848, 565));
-                entities.AddEntity("Town/barriere_train_gauche", new Vector2(1120, 760));
+                entities.AddEntity("Town/gare", new Vector2(768, 693));
+                entities.AddEntity("Town/quai", new Vector2(768, 793));
+                entities.AddEntity("Town/eglise", new Vector2(1008, 453));
+                entities.AddEntity("Town/mairie", new Vector2(1008, 573));
+                entities.AddEntity("Town/poste", new Vector2(648, 453));
+                entities.AddEntity("Town/hotel", new Vector2(648, 573));
+                entities.AddEntity("Town/maison2", new Vector2(528, 453));
+                entities.AddEntity("Town/maison2", new Vector2(528, 573));
+                entities.AddEntity("Town/immeuble", new Vector2(768, 293));
+                entities.AddEntity("Town/fontaine", new Vector2(848, 533));
+                entities.AddEntity("Town/barriere_train_gauche", new Vector2(1120, 765));
                 entities.AddEntity("Town/barriere_train_droite", new Vector2(1140, 800));
-                entities.AddEntity("Town/garde_passage_a_niveau", new Vector2(1165, 840));
-                entities.AddEntity("Town/immeuble2", new Vector2(728, 405));
-                entities.AddEntity("Town/immeuble2", new Vector2(608, 405));
-                entities.AddEntity("Town/immeuble3", new Vector2(848, 1000));
-                entities.AddEntity("Town/immeuble3", new Vector2(968, 1000));
-                entities.AddEntity("Town/maison", new Vector2(1160, 325));
-                entities.AddEntity("Town/maison", new Vector2(1160, 445));
-                entities.AddEntity("Town/maison", new Vector2(1160, 565));
+                entities.AddEntity("Town/garde_passage_a_niveau", new Vector2(1170, 810));
+                entities.AddEntity("Town/immeuble2", new Vector2(648, 293));
+                entities.AddEntity("Town/immeuble2", new Vector2(528, 293));
+                entities.AddEntity("Town/immeuble3", new Vector2(768, 1000));
+                entities.AddEntity("Town/immeuble3", new Vector2(928, 1000));
+                entities.AddEntity("Town/maison", new Vector2(1160, 333));
+                entities.AddEntity("Town/maison", new Vector2(1160, 453));
+                entities.AddEntity("Town/maison", new Vector2(1160, 573));
                 entities.AddEntity("Town/cimetiere", new Vector2(1100, 1100));
-                entities.AddEntity("Town/maison2", new Vector2(528, 525));
-                entities.AddEntity("Town/maison2", new Vector2(528, 645));
-
-                
-                entities.AddEntity("Town/immeuble4", new Vector2(1008, 405));
+                                
+                entities.AddEntity("Town/immeuble4", new Vector2(1008, 293));
 
                 #region tombe
                 entities.AddEntity("Town/tombe", new Vector2(1110, 1110));
@@ -239,21 +238,21 @@ namespace Arrow
                 entities.AddEntity(railX, new Vector2(1560, 775));
                 entities.AddEntity(railX, new Vector2(1680, 775));
 
-                entities.AddEntity(railX, new Vector2(0, 790));
-                entities.AddEntity(railX, new Vector2(120, 790));
-                entities.AddEntity(railX, new Vector2(240, 790));
-                entities.AddEntity(railX, new Vector2(360, 790));
-                entities.AddEntity(railX, new Vector2(480, 790));
-                entities.AddEntity(railX, new Vector2(600, 790));
-                entities.AddEntity(railX, new Vector2(720, 790));
-                entities.AddEntity(railX, new Vector2(840, 790));
-                entities.AddEntity(railX, new Vector2(960, 790));
-                entities.AddEntity(railX, new Vector2(1080, 790));
-                entities.AddEntity(railX, new Vector2(1200, 790));
-                entities.AddEntity(railX, new Vector2(1320, 790));
-                entities.AddEntity(railX, new Vector2(1440, 790));
-                entities.AddEntity(railX, new Vector2(1560, 790));
-                entities.AddEntity(railX, new Vector2(1680, 790));
+                entities.AddEntity(railX, new Vector2(0, 785));
+                entities.AddEntity(railX, new Vector2(120, 785));
+                entities.AddEntity(railX, new Vector2(240, 785));
+                entities.AddEntity(railX, new Vector2(360, 785));
+                entities.AddEntity(railX, new Vector2(480, 785));
+                entities.AddEntity(railX, new Vector2(600, 785));
+                entities.AddEntity(railX, new Vector2(720, 785));
+                entities.AddEntity(railX, new Vector2(840, 785));
+                entities.AddEntity(railX, new Vector2(960, 785));
+                entities.AddEntity(railX, new Vector2(1080, 785));
+                entities.AddEntity(railX, new Vector2(1200, 785));
+                entities.AddEntity(railX, new Vector2(1320, 785));
+                entities.AddEntity(railX, new Vector2(1440, 785));
+                entities.AddEntity(railX, new Vector2(1560, 785));
+                entities.AddEntity(railX, new Vector2(1680, 785));
 
                 #endregion
             }
