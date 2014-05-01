@@ -51,6 +51,7 @@ namespace Troma
         private float? dstCollisionDown;
 
         private bool collisionDetected;
+        private bool collisionDetectedDown;
         private CollisionType collisionResult;
 
         private bool _isCrouched;
@@ -213,7 +214,7 @@ namespace Troma
 
         private void Jump(float dt, InputState input)
         {
-            if (!_touchGround && !collisionDetected)
+            if (!_touchGround && !collisionDetectedDown)
                 acceleration.Y = Physics.Gravity;
             else
             {
@@ -221,7 +222,7 @@ namespace Troma
                 velocity.Y = 0;
             }
 
-            if ((_touchGround || collisionDetected) && input.PlayerJump())
+            if ((_touchGround || collisionDetectedDown) && input.PlayerJump())
             {
                 velocity.Y = JUMP_SPEED;
                 _touchGround = false;
@@ -259,24 +260,49 @@ namespace Troma
 
                 if (collisionDetected)
                 {
-                    //move.Normalize();
+                    if (move.X != 0)
+                    {
+                        float dirX = (newPos.X - _position.X > 0) ? 1 : -1;
 
-                    //Ray dirRay = new Ray(sphere.Center, move);
-                    //float? dstCollisionMove = dirRay.Intersects(collisionResult.CollisionWith);
+                        Ray dirRayX = new Ray(sphere.Center, Vector3.Right * dirX);
+                        float? dstCollisionMoveX = dirRayX.Intersects(collisionResult.CollisionWith);
 
-                    /*
-     if (dstCollisionMove.HasValue)
-         newPos = PreviewMove(move * (dstCollisionMove.Value - sphere.Radius), rotate.Y);
-     else
-         newPos = _position;
-      * */
+                        if (dstCollisionMoveX.HasValue)
+                            newPos.X -= dirX * (sphere.Radius - dstCollisionMoveX.Value);
+                    }
 
+                    if (move.Z != 0)
+                    {
+                        float dirZ = (newPos.Z - _position.Z > 0) ? 1 : -1;
+
+                        Ray dirRayZ = new Ray(sphere.Center, Vector3.Backward * dirZ);
+                        float? dstCollisionMoveZ = dirRayZ.Intersects(collisionResult.CollisionWith);
+                        
+                        if (dstCollisionMoveZ.HasValue)
+                            newPos.Z -= dirZ * (sphere.Radius - dstCollisionMoveZ.Value);
+                    }
+                }
+
+                ptConstSphere[1].X = newPos.X;
+                ptConstSphere[1].Z = newPos.Z;
+
+                sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
+                collisionResult = CollisionManager.IsCollision(sphere);
+                collisionDetected = collisionResult.IsCollide;
+
+                if (collisionDetected)
+                {
                     rayDown = new Ray(sphere.Center, Vector3.Down);
                     dstCollisionDown = rayDown.Intersects(collisionResult.CollisionWith);
 
                     if (dstCollisionDown.HasValue)
+                    {
                         newPos.Y += sphere.Radius - dstCollisionDown.Value;
+                        collisionDetectedDown = true;
+                    }
                 }
+                else
+                    collisionDetectedDown = false;
             }
         }
 
