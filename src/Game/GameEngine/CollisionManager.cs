@@ -7,6 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
 {
+    public struct CollisionType
+    {
+        public bool IsCollide;
+        public BoundingBox CollisionWith;
+    }
+
     /// <summary>
     /// Manage all the BoundingBox in the game
     /// </summary>
@@ -103,15 +109,15 @@ namespace GameEngine
 
         #region Collision Detection
 
-        public static bool IsCollision(BoundingSphere sphere)
+        public static CollisionType IsCollision(BoundingSphere sphere)
         {
             foreach (BoundingBox box in _currentList)
             {
                 if (box.Intersects(sphere))
-                    return true;
+                    return new CollisionType { IsCollide = true, CollisionWith = box };
             }
 
-            return false;        
+            return new CollisionType { IsCollide = false };        
         }
 
         #endregion

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using GameEngine;
 
 namespace Troma
@@ -106,6 +107,9 @@ namespace Troma
         public override void HandleInput(GameTime gameTime, InputState input)
         {
             player.HandleInput(gameTime, input);
+
+            if (input.IsPressed(Keys.D1) || input.IsPressed(Buttons.Start))
+                player.Reset();
         }
 
         public override void Draw(GameTime gameTime)

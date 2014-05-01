@@ -34,8 +34,8 @@ namespace Troma
         private Vector3 _position;
         private Vector3 _rotation;
 
+        private Vector3 newPos;
         private Vector3 _prevPosition;
-        private Vector3 _prevRotation;
 
         private Vector3 move;
         private Vector3 rotate;
@@ -44,13 +44,17 @@ namespace Troma
         private Vector3 velocity;
         private Vector3 acceleration;
 
-        private BoundingSphere _sphere;
-        private Vector3[] _ptConstSphere;
+        private BoundingSphere sphere;
+        private Vector3[] ptConstSphere;
+
+        private Ray rayDown;
+        private float? dstCollisionDown;
 
         private bool collisionDetected;
+        private CollisionType collisionResult;
 
-        private bool isCrouched;
-        private bool touchGround;
+        private bool _isCrouched;
+        private bool _touchGround;
 
         private ITerrain terrain;
 
@@ -107,18 +111,14 @@ namespace Troma
             _position = _initPosition;
             _rotation = _initRotation;
 
-            move = Vector3.Zero;
-            rotate = Vector3.Zero;
+            newPos = _position;
             rotationBuffer = Vector3.Zero;
-            velocity = Vector3.Zero;
-            acceleration = Vector3.Zero;
+            ptConstSphere = new Vector3[2];
 
-            isCrouched = false;
-            touchGround = false;
+            _isCrouched = false;
+            _touchGround = false;
 
             this.terrain = terrain;
-
-            _ptConstSphere = new Vector3[2];
 
             MoveTo(_position, _rotation);
 
@@ -139,20 +139,23 @@ namespace Troma
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            Move(dt, input);
             Crouch(dt, input);
             Jump(dt, input);
-            Move(dt, input);
 
             // Apply movement
-            _position = PreviewMove(move, rotate.Y);
+            velocity += acceleration * dt * dt;
+            move += velocity * dt;
+            newPos = PreviewMove(move, rotate.Y);
+
             ApplyCollision();
-            MoveTo(_position, rotate);
+            MoveTo(newPos, rotate);
         }
 
         public void Draw(GameTime gameTime, ICamera camera)
         {
 #if DEBUG
-            BoundingSphereRenderer.Render(_sphere, camera, Color.Fuchsia);
+            BoundingSphereRenderer.Render(sphere, camera, Color.Fuchsia);
 #endif
         }
 
@@ -170,7 +173,7 @@ namespace Troma
             {
                 move *= dt * WALK_SPEED;
 
-                if (!isCrouched && input.PlayerRun())
+                if (!_isCrouched && input.PlayerRun())
                 {
                     if (move.Z > 0)
                         move.Z *= COEF_RUN_SPEED;
@@ -194,23 +197,23 @@ namespace Troma
 
         private void Crouch(float dt, InputState input)
         {
-            if ((!isCrouched && _height < HEIGHT) ||
-                (isCrouched && _height > CROUCH_HEIGHT))
+            if ((!_isCrouched && _height < HEIGHT) ||
+                (_isCrouched && _height > CROUCH_HEIGHT))
             {
                 float moveAxisY = CROUCH_SPEED * dt;
 
-                if (isCrouched)
+                if (_isCrouched)
                     _height = Math.Max(CROUCH_HEIGHT, _height - moveAxisY);
                 else
                     _height = Math.Min(HEIGHT, _height + moveAxisY);
             }
             else if (input.PlayerCrouch())
-                isCrouched = !isCrouched;
+                _isCrouched = !_isCrouched;
         }
 
         private void Jump(float dt, InputState input)
         {
-            if (!touchGround && !collisionDetected)
+            if (!_touchGround && !collisionDetected)
                 acceleration.Y = Physics.Gravity;
             else
             {
@@ -218,15 +221,12 @@ namespace Troma
                 velocity.Y = 0;
             }
 
-            if ((touchGround || collisionDetected) && input.PlayerJump())
+            if ((_touchGround || collisionDetected) && input.PlayerJump())
             {
                 velocity.Y = JUMP_SPEED;
-                touchGround = false;
-                isCrouched = false;
+                _touchGround = false;
+                _isCrouched = false;
             }
-
-            velocity += acceleration * dt * dt;
-            _position += velocity * dt;
         }
 
         private void GroundCollision()
@@ -235,31 +235,49 @@ namespace Troma
             {
                 float y = terrain.GetY(_position);
 
-                if (touchGround)
+                if (_touchGround)
                     _position.Y = y;
                 else
-                    touchGround = (y - 2 <= _position.Y) && (_position.Y <= y + 0.1f);
+                    _touchGround = (y - 2 <= _position.Y) && (_position.Y <= y + 0.1f);
             }
             else
-                touchGround = false;
+                _touchGround = false;
         }
 
         private void ApplyCollision()
         {
-            _ptConstSphere[0] = _position;
-            _ptConstSphere[1].X = _position.X;
-            _ptConstSphere[1].Y = viewPosY + 0.2f;
-            _ptConstSphere[1].Z = _position.Z;
-
-            _sphere = BoundingSphere.CreateFromPoints(_ptConstSphere);
-
-            if (CollisionManager.IsCollision(_sphere))
+            if (move != Vector3.Zero)
             {
-                _position = _prevPosition;
-                collisionDetected = true;
+                ptConstSphere[0] = newPos;
+                ptConstSphere[1].X = newPos.X;
+                ptConstSphere[1].Y = newPos.Y + _height + 0.2f;
+                ptConstSphere[1].Z = newPos.Z;
+
+                sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
+                collisionResult = CollisionManager.IsCollision(sphere);
+                collisionDetected = collisionResult.IsCollide;
+
+                if (collisionDetected)
+                {
+                    //move.Normalize();
+
+                    //Ray dirRay = new Ray(sphere.Center, move);
+                    //float? dstCollisionMove = dirRay.Intersects(collisionResult.CollisionWith);
+
+                    /*
+     if (dstCollisionMove.HasValue)
+         newPos = PreviewMove(move * (dstCollisionMove.Value - sphere.Radius), rotate.Y);
+     else
+         newPos = _position;
+      * */
+
+                    rayDown = new Ray(sphere.Center, Vector3.Down);
+                    dstCollisionDown = rayDown.Intersects(collisionResult.CollisionWith);
+
+                    if (dstCollisionDown.HasValue)
+                        newPos.Y += sphere.Radius - dstCollisionDown.Value;
+                }
             }
-            else
-                collisionDetected = false;
         }
 
         /// <summary>
@@ -267,10 +285,8 @@ namespace Troma
         /// </summary>
         public void MoveTo(Vector3 pos, Vector3 rot)
         {
-            if (pos != _prevPosition)
-                _prevPosition = pos;
-            if (rot != _prevPosition)
-                _prevRotation = rot;
+            if (pos != _position)
+                _prevPosition = _position;
 
             Position = pos;
             Rotation = rot;
@@ -288,6 +304,19 @@ namespace Troma
                 Matrix.CreateRotationY(angleAxisY));
 
             return _position + movement;
+        }
+
+        public void Reset()
+        {
+            _height = HEIGHT;
+            _position = _initPosition;
+            _rotation = _initRotation;
+
+            newPos = _position;
+            _isCrouched = false;
+            _touchGround = false;
+
+            MoveTo(_position, _rotation);
         }
     }
 }
