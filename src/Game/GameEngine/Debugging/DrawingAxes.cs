@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
 {
+#if DEBUG
     public static class DrawingAxes
     {
         private static VertexPositionColor[] lines = new VertexPositionColor[6]
@@ -57,4 +58,5 @@ namespace GameEngine
             }
         }
     }
+#endif
 }

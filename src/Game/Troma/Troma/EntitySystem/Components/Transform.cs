@@ -39,6 +39,10 @@ namespace Troma
             : this(aParent, pos, Vector3.Zero, 1)
         { }
 
+        public Transform(Entity aParent, Vector3 pos, Vector3 rot)
+            : this(aParent, pos, rot, 1)
+        { }
+
         public Transform(Entity aParent, Vector3 pos, Vector3 rot, float scale)
             : base(aParent)
         {

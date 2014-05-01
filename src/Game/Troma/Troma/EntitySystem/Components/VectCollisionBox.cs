@@ -15,7 +15,7 @@ namespace Troma
         public VectCollisionBox(Entity aParent)
             : base(aParent)
         {
-            Name = "VectCollisionBox";
+            Name = "CollisionBox";
             _requiredComponents.Add("Model3D");
             _requiredComponents.Add("VectTransform");
 

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameEngine
 {
+#if DEBUG
     public static class NbVects
     {
         private static int Count;
@@ -25,4 +26,5 @@ namespace GameEngine
             Count = 0;
         }
     }
+#endif
 }

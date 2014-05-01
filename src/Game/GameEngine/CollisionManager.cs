@@ -23,6 +23,7 @@ namespace GameEngine
         private static List<BoundingBox> _masterList = new List<BoundingBox>();
         private static List<BoundingBox> _currentList = new List<BoundingBox>();
 
+#if DEBUG
         private static BasicEffect _effect;
 
         private static short[] bBoxIndices = 
@@ -31,6 +32,7 @@ namespace GameEngine
             4, 5, 5, 6, 6, 7, 7, 4,
             0, 4, 1, 5, 2, 6, 3, 7
         };
+#endif
 
         public static List<BoundingBox> MasterList
         {
@@ -51,11 +53,11 @@ namespace GameEngine
         /// </summary>
         public static void Initialize()
         {
+#if DEBUG
             _effect = new BasicEffect(GameServices.GraphicsDevice);
             _effect.World = Matrix.Identity;
             _effect.VertexColorEnabled = true;
 
-#if DEBUG
             XConsole.AddDebug(Debug);
 #endif
         }
@@ -70,35 +72,40 @@ namespace GameEngine
             _currentList.AddRange(_masterList);
         }
 
+#if DEBUG
         /// <summary>
         /// Draws all BoundingBox in the manager
         /// </summary>
         public static void Draw(GameTime gameTime, ICamera camera)
         {
-            _effect.View = camera.View;
-            _effect.Projection = camera.Projection;
-
-            foreach (BoundingBox box in _currentList)
+            if (DebugConfig.DisplayBox)
             {
-                Vector3[] corners = box.GetCorners();
-                VertexPositionColor[] primitiveList = new VertexPositionColor[corners.Length];
+                _effect.View = camera.View;
+                _effect.Projection = camera.Projection;
 
-                // Assign the 8 box vertices
-                for (int i = 0; i < corners.Length; i++)
+                foreach (BoundingBox box in _currentList)
                 {
-                    primitiveList[i] = new VertexPositionColor(corners[i], Color.Red);
-                }
+                    Vector3[] corners = box.GetCorners();
+                    VertexPositionColor[] primitiveList = new VertexPositionColor[corners.Length];
 
-                // Draw the box with a LineList
-                foreach (EffectPass pass in _effect.CurrentTechnique.Passes)
-                {
-                    pass.Apply();
-                    GameServices.GraphicsDevice.DrawUserIndexedPrimitives(
-                        PrimitiveType.LineList, primitiveList, 0, 8,
-                        bBoxIndices, 0, 12);
+                    // Assign the 8 box vertices
+                    for (int i = 0; i < corners.Length; i++)
+                    {
+                        primitiveList[i] = new VertexPositionColor(corners[i], Color.Red);
+                    }
+
+                    // Draw the box with a LineList
+                    foreach (EffectPass pass in _effect.CurrentTechnique.Passes)
+                    {
+                        pass.Apply();
+                        GameServices.GraphicsDevice.DrawUserIndexedPrimitives(
+                            PrimitiveType.LineList, primitiveList, 0, 8,
+                            bBoxIndices, 0, 12);
+                    }
                 }
             }
         }
+#endif
 
         public static string Debug(GameTime gameTime)
         {

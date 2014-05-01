@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
 {
+#if DEBUG
     public static class XConsole
     {
         #region Fields
@@ -113,4 +114,5 @@ namespace GameEngine
 
         #endregion
     }
+#endif
 }

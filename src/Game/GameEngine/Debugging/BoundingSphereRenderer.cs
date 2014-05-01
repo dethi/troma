@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
 {
+#if DEBUG
     /// <summary>
     /// Provides a set of methods for rendering BoundingSpheres.
     /// </summary>
@@ -72,39 +73,42 @@ namespace GameEngine
         public static void Render(BoundingSphere sphere, ICamera camera,
             Color xyColor, Color xzColor, Color yzColor)
         {
-            if (_vertBuffer == null)
-                Initialize(30);
-
-            GameServices.GraphicsDevice.SetVertexBuffer(_vertBuffer);
-
-            _effect.World =
-                Matrix.CreateScale(sphere.Radius) *
-                Matrix.CreateTranslation(sphere.Center);
-            _effect.View = camera.View;
-            _effect.Projection = camera.Projection;
-
-            foreach (EffectPass pass in _effect.CurrentTechnique.Passes)
+            if (DebugConfig.DisplayBox)
             {
-                _effect.DiffuseColor = xyColor.ToVector3();
-                pass.Apply();
-                GameServices.GraphicsDevice.DrawPrimitives(
-                      PrimitiveType.LineStrip,
-                      0,
-                      _sphereResolution);
+                if (_vertBuffer == null)
+                    Initialize(30);
 
-                _effect.DiffuseColor = xzColor.ToVector3();
-                pass.Apply();
-                GameServices.GraphicsDevice.DrawPrimitives(
-                      PrimitiveType.LineStrip,
-                      _sphereResolution + 1,
-                      _sphereResolution);
+                GameServices.GraphicsDevice.SetVertexBuffer(_vertBuffer);
 
-                _effect.DiffuseColor = yzColor.ToVector3();
-                pass.Apply();
-                GameServices.GraphicsDevice.DrawPrimitives(
-                      PrimitiveType.LineStrip,
-                      (_sphereResolution + 1) * 2,
-                      _sphereResolution);
+                _effect.World =
+                    Matrix.CreateScale(sphere.Radius) *
+                    Matrix.CreateTranslation(sphere.Center);
+                _effect.View = camera.View;
+                _effect.Projection = camera.Projection;
+
+                foreach (EffectPass pass in _effect.CurrentTechnique.Passes)
+                {
+                    _effect.DiffuseColor = xyColor.ToVector3();
+                    pass.Apply();
+                    GameServices.GraphicsDevice.DrawPrimitives(
+                          PrimitiveType.LineStrip,
+                          0,
+                          _sphereResolution);
+
+                    _effect.DiffuseColor = xzColor.ToVector3();
+                    pass.Apply();
+                    GameServices.GraphicsDevice.DrawPrimitives(
+                          PrimitiveType.LineStrip,
+                          _sphereResolution + 1,
+                          _sphereResolution);
+
+                    _effect.DiffuseColor = yzColor.ToVector3();
+                    pass.Apply();
+                    GameServices.GraphicsDevice.DrawPrimitives(
+                          PrimitiveType.LineStrip,
+                          (_sphereResolution + 1) * 2,
+                          _sphereResolution);
+                }
             }
         }
 
@@ -122,36 +126,39 @@ namespace GameEngine
         /// <param name="color">The color to use for rendering the circles.</param>
         public static void Render(BoundingSphere sphere, ICamera camera, Color color)
         {
-            if (_vertBuffer == null)
-                Initialize(30);
-
-            GameServices.GraphicsDevice.SetVertexBuffer(_vertBuffer);
-
-            _effect.World =
-                  Matrix.CreateScale(sphere.Radius) *
-                  Matrix.CreateTranslation(sphere.Center);
-            _effect.View = camera.View;
-            _effect.Projection = camera.Projection;
-            _effect.DiffuseColor = color.ToVector3();
-
-            foreach (EffectPass pass in _effect.CurrentTechnique.Passes)
+            if (DebugConfig.DisplayBox)
             {
-                pass.Apply();
+                if (_vertBuffer == null)
+                    Initialize(30);
 
-                GameServices.GraphicsDevice.DrawPrimitives(
-                      PrimitiveType.LineStrip,
-                      0,
-                      _sphereResolution);
+                GameServices.GraphicsDevice.SetVertexBuffer(_vertBuffer);
 
-                GameServices.GraphicsDevice.DrawPrimitives(
-                      PrimitiveType.LineStrip,
-                      _sphereResolution + 1,
-                      _sphereResolution);
+                _effect.World =
+                      Matrix.CreateScale(sphere.Radius) *
+                      Matrix.CreateTranslation(sphere.Center);
+                _effect.View = camera.View;
+                _effect.Projection = camera.Projection;
+                _effect.DiffuseColor = color.ToVector3();
 
-                GameServices.GraphicsDevice.DrawPrimitives(
-                      PrimitiveType.LineStrip,
-                      (_sphereResolution + 1) * 2,
-                      _sphereResolution);
+                foreach (EffectPass pass in _effect.CurrentTechnique.Passes)
+                {
+                    pass.Apply();
+
+                    GameServices.GraphicsDevice.DrawPrimitives(
+                          PrimitiveType.LineStrip,
+                          0,
+                          _sphereResolution);
+
+                    GameServices.GraphicsDevice.DrawPrimitives(
+                          PrimitiveType.LineStrip,
+                          _sphereResolution + 1,
+                          _sphereResolution);
+
+                    GameServices.GraphicsDevice.DrawPrimitives(
+                          PrimitiveType.LineStrip,
+                          (_sphereResolution + 1) * 2,
+                          _sphereResolution);
+                }
             }
         }
 
@@ -161,4 +168,5 @@ namespace GameEngine
                 Render(sphere, camera, color);
         }
     }
+#endif
 }

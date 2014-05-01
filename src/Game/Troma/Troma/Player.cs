@@ -118,6 +118,8 @@ namespace Troma
 
             _isCrouched = false;
             _touchGround = false;
+            collisionDetected = false;
+            collisionDetectedDown = false;
 
             this.terrain = terrain;
 
@@ -351,6 +353,8 @@ namespace Troma
             newPos = _position;
             _isCrouched = false;
             _touchGround = false;
+            collisionDetected = false;
+            collisionDetectedDown = false;
 
             MoveTo(_position, _rotation);
         }

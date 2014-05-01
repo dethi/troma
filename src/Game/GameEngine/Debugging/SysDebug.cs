@@ -9,6 +9,7 @@ using GameEngine;
 
 namespace GameEngine
 {
+#if DEBUG
     public static class SysDebug
     {
         public static string Debug(GameTime gameTime)
@@ -18,4 +19,5 @@ namespace GameEngine
                 GC.GetTotalMemory(false) / 1048576f);
         }
     }
+#endif
 }

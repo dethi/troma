@@ -218,6 +218,11 @@ namespace GameEngine
             return this.Components.ContainsKey(aComponent);
         }
 
+        public bool HasComponent<T>() where T : EntityComponent
+        {
+            return this.Components.ContainsKey(typeof(T).ToString());
+        }
+
         /// <summary>
         /// Gets a component inside the entity based on that component's name property.
         /// </summary>
@@ -248,7 +253,8 @@ namespace GameEngine
             RemoveAllComponents();
         }
 
-        public void ReplaceComponent(EntityComponent aComponentToAdd, EntityComponent aComponentToRemove)
+        public void ReplaceComponent(EntityComponent aComponentToAdd, 
+            EntityComponent aComponentToRemove)
         {
             RemoveComponent(aComponentToRemove);
             AddComponent(aComponentToAdd);

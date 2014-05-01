@@ -139,6 +139,19 @@ namespace GameEngine
             return _masterList.Contains(aEntity);
         }
 
+        public static IEnumerable<Entity> EntitiesWith<T>() where T : EntityComponent
+        {
+            List<Entity> entityWith = new List<Entity>();
+
+            foreach (Entity entity in _masterList)
+            {
+                if (entity.HasComponent<T>())
+                    entityWith.Add(entity);
+            }
+
+            return entityWith;
+        }
+
         public static void Remove(Entity aEntity)
         {
             _masterList.Remove(aEntity);
