@@ -51,7 +51,6 @@ namespace Arrow
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             camera.New(game, Vector3.Zero, Vector3.Zero);
-            player.Position = new Vector3(800, 10, 600);
 
             cross = content.Load<Texture2D>("Cross");
 
@@ -70,7 +69,8 @@ namespace Arrow
 
             if (carte == "Farm")
             {
-                
+                player.Position = new Vector3(20, 0, 490);
+
                 skydome = new Entity(game, "skydome", new Vector3(
                     256,
                     maps.GetHeight(256, 256).Value,
@@ -81,8 +81,8 @@ namespace Arrow
 
                 #region Wood barrier
 
-                Model woodBarrierX = content.Load<Model>("Models/Farm/wood_barrier");
-                Model woodBarrierZ = content.Load<Model>("Models/Farm/wood_barrier");
+                Model woodBarrierX = content.Load<Model>("Models/Farm/wood_barrierX");
+                Model woodBarrierZ = content.Load<Model>("Models/Farm/wood_barrierZ");
 
                 entities.AddEntity(woodBarrierZ, new Vector2(119, 101));
                 entities.AddEntity(woodBarrierZ, new Vector2(119, 91));
@@ -190,6 +190,7 @@ namespace Arrow
             }
             else
             {
+                player.Position = new Vector3(800, 0, 600);
                 entities.AddEntity("Town/gare", new Vector2(768, 685));
                 entities.AddEntity("Town/quai", new Vector2(968, 813));
                 entities.AddEntity("Town/eglise", new Vector2(1008, 525));

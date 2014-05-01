@@ -567,8 +567,17 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\Farm\wood_barrier.x">
-      <Name>wood_barrier</Name>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Farm\wood_barrierZ.x">
+      <Name>wood_barrierZ</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Farm\wood_barrierX.x">
+      <Name>wood_barrierX</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
