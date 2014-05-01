@@ -64,6 +64,10 @@ namespace Troma
             terrain = new HeightMap(game, terrainEffect, terrainInfo);
             player.Initialize(terrain);
 
+            Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
+
+            #region Rails
+
             List<Vector3> modelPos = new List<Vector3>();
             modelPos.Add(new Vector3(0, y, 200));
             modelPos.Add(new Vector3(120, y, 200));
@@ -76,17 +80,31 @@ namespace Troma
             modelPos.Add(new Vector3(360, y, 210));
             modelPos.Add(new Vector3(480, y, 210));
 
-            Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
             VectGameObject.BuildEntity(modelPos.ToArray(), "Town/rail", modelEffect);
-            GameObject.BuildEntity(new Vector3(0, y, 117), "Town/gare", modelEffect.Clone());
-            GameObject.BuildEntity(new Vector3(0, y, 220), "Town/quai", modelEffect.Clone());
-            GameObject.BuildEntity(new Vector3(460, y, 153), "Town/garde_passage_a_niveau", modelEffect.Clone());
-            GameObject.BuildEntity(new Vector3(435, y, 192), "Town/barriere_train_droite", modelEffect.Clone());
-            GameObject.BuildEntity(new Vector3(435, y, 222), "Town/barriere_train_gauche", modelEffect.Clone());
-            GameObject.BuildEntity(new Vector3(300, y, 300), "Town/eglise", modelEffect.Clone());
+
+            #endregion
+
+            #region Wood barrier
+
+            List<Vector3> barrierPos = new List<Vector3>();
+
+            for (int i = 202; i < 430; i += 10)
+            {
+                barrierPos.Add(new Vector3(i, y, 192));
+                barrierPos.Add(new Vector3(i, y, 222));
+            }
+
+            for (int j = 460; j < 512; j += 10)
+                barrierPos.Add(new Vector3(j, y, 222));
+
+            VectGameObject.BuildEntity(barrierPos.ToArray(), "Town/wood_barrier", modelEffect);
+
+            #endregion
+
+            #region Target
 
             List<Tuple<Vector3, float>> ciblePos = new List<Tuple<Vector3, float>>();
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(200, y, 300), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(200, y, 300), 90));
             ciblePos.Add(new Tuple<Vector3, float>(new Vector3(125, y, 260), 60));
             ciblePos.Add(new Tuple<Vector3, float>(new Vector3(190, y + 4, 234), 60));
             ciblePos.Add(new Tuple<Vector3, float>(new Vector3(440, y, 185), 90));
@@ -97,9 +115,24 @@ namespace Troma
             ciblePos.Add(new Tuple<Vector3, float>(new Vector3(334, y, 284), 60));
             ciblePos.Add(new Tuple<Vector3, float>(new Vector3(139, y + 4, 185), 90));
             ciblePos.Add(new Tuple<Vector3, float>(new Vector3(73, y + 4, 232), 50));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(217, y, 378), 50));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(91, y, 360), -30));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(152, 0, 451), 0));
 
             foreach (Tuple<Vector3, float> data in ciblePos)
-                TargetObject.BuildEntity(data.Item1, data.Item2, modelEffect.Clone());
+                TargetObject.BuildEntity(data.Item1, data.Item2, modelEffect);
+
+            #endregion
+
+            GameObject.BuildEntity(new Vector3(0, y, 117), "Town/gare", modelEffect);
+            GameObject.BuildEntity(new Vector3(0, y, 220), "Town/quai", modelEffect);
+            GameObject.BuildEntity(new Vector3(460, y, 153), "Town/garde_passage_a_niveau", modelEffect);
+            GameObject.BuildEntity(new Vector3(435, y, 192), "Town/barriere_train_droite", modelEffect);
+            GameObject.BuildEntity(new Vector3(435, y, 222), "Town/barriere_train_gauche", modelEffect);
+            GameObject.BuildEntity(new Vector3(300, y, 300), "Town/eglise", modelEffect);
+            GameObject.BuildEntity(new Vector3(50, y, 290), "Town/cimetiere", modelEffect);
+            GameObject.BuildEntity(new Vector3(380, y, 30), "Town/mairie", modelEffect);
+            GameObject.BuildEntity(new Vector3(290, y, 55), "Town/fontaine", modelEffect);
 
             EntityManager.Initialize();
             CollisionManager.Initialize();

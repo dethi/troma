@@ -18,7 +18,7 @@ namespace Troma
                 new Vector3(0, MathHelper.ToRadians(rotY), 0)));
 
             entity.AddComponent(new Model3D(entity, "cible"));
-            entity.AddComponent(new DrawModel3D(entity, effect));
+            entity.AddComponent(new DrawModel3D(entity, effect.Clone()));
             entity.AddComponent(new CollisionBox(entity));
             entity.AddComponent(new Target(entity));
         }
