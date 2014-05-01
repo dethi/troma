@@ -249,6 +249,8 @@ namespace Troma
         {
             if (move != Vector3.Zero)
             {
+                #region X,Z collisions
+
                 ptConstSphere[0] = newPos;
                 ptConstSphere[1].X = newPos.X;
                 ptConstSphere[1].Y = newPos.Y + _height + 0.2f;
@@ -258,6 +260,7 @@ namespace Troma
                 collisionResult = CollisionManager.IsCollision(sphere);
                 collisionDetected = collisionResult.IsCollide;
 
+                // Response to the collision : go to the exact collision point
                 if (collisionDetected)
                 {
                     if (move.X != 0)
@@ -283,13 +286,18 @@ namespace Troma
                     }
                 }
 
+                #endregion
+
+                #region Y collision
+
                 ptConstSphere[1].X = newPos.X;
                 ptConstSphere[1].Z = newPos.Z;
 
                 sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
                 collisionResult = CollisionManager.IsCollision(sphere);
                 collisionDetected = collisionResult.IsCollide;
-
+                
+                // Response to the collision : go to the exact collision point
                 if (collisionDetected)
                 {
                     rayDown = new Ray(sphere.Center, Vector3.Down);
@@ -303,6 +311,8 @@ namespace Troma
                 }
                 else
                     collisionDetectedDown = false;
+
+                #endregion
             }
         }
 
