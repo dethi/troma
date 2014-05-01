@@ -81,9 +81,11 @@ namespace Arrow
 
                 #region Wood barrier
 
+                Model postBarrier = content.Load<Model>("Models/Farm/post");
                 Model woodBarrierX = content.Load<Model>("Models/Farm/wood_barrierX");
                 Model woodBarrierZ = content.Load<Model>("Models/Farm/wood_barrierZ");
 
+                entities.AddEntity(postBarrier, new Vector2(119, 111));
                 entities.AddEntity(woodBarrierZ, new Vector2(119, 101));
                 entities.AddEntity(woodBarrierZ, new Vector2(119, 91));
                 entities.AddEntity(woodBarrierZ, new Vector2(119, 81));
@@ -113,7 +115,6 @@ namespace Arrow
                 #region Barbed barrier
 
                 Model barbedBarrierZ = content.Load<Model>("Models/Farm/barbed_barrier");
-                Model postBarrier = content.Load<Model>("Models/Farm/post");
 
                 entities.AddEntity(barbedBarrierZ, new Vector2(160, 0));
                 entities.AddEntity(barbedBarrierZ, new Vector2(160, 9));
@@ -175,14 +176,14 @@ namespace Arrow
 
                 #endregion
 
-                entities.AddEntity("Farm/house", new Vector2(0, 511));
-                entities.AddEntity("Farm/barn", new Vector2(60, 511));
+                entities.AddEntity("Farm/house", new Vector2(0, 411));
+                entities.AddEntity("Farm/barn", new Vector2(60, 411));
                 entities.AddEntity("Farm/bandbags", new Vector2(150, 150));
                 entities.AddEntity("Farm/table", new Vector2(58, 400));
                 entities.AddEntity("Farm/barrel", new Vector2(58, 405));
                 entities.AddEntity("Farm/truck_allemand", new Vector2(122, 206));
-                entities.AddEntity("Farm/farm", new Vector2(0, 262));
-                entities.AddEntity("Farm/shelter", new Vector2(0, 411));
+                entities.AddEntity("Farm/farm", new Vector2(0, 112));
+                entities.AddEntity("Farm/shelter", new Vector2(0, 261));
 
                 #endregion
 
