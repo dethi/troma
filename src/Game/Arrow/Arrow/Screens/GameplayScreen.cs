@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SkinnedModel;
 
 namespace Arrow
 {
@@ -22,6 +23,7 @@ namespace Arrow
         private Effect mapEffect;
 
         private Entity skydome;
+        private Entity dude;
 
         private EntityManager entities;
         private Texture2D cross;
@@ -42,7 +44,7 @@ namespace Arrow
 
             camera = Camera.Instance;
             player = new Player(game, new Vector3(800, 10, 600));
-            carte = "Town";
+            carte = "Farm";
         }
 
         public override void LoadContent()
@@ -69,13 +71,17 @@ namespace Arrow
 
             if (carte == "Farm")
             {
-                player.Position = new Vector3(20, 0, 490);
+                player.Position = new Vector3(250, 0, 260);
 
                 skydome = new Entity(game, "skydome", new Vector3(
                     256,
                     maps.GetHeight(256, 256).Value,
                     256));
                 skydome.lightingEnabled = false;
+
+                dude = new Entity(game, "Farm/cible_homme", new Vector3(256, maps.GetHeight(256,256).Value, 256), "Global");
+                game.animationPlayer = new AnimationPlayer(dude.skinningData);
+                game.animationPlayer.StartClip(dude.clip);
 
                 #region Models
 
@@ -278,7 +284,10 @@ namespace Arrow
                 pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
 
             if (IsActive)
+            {
                 player.Update(gameTime, maps);
+                game.animationPlayer.Update(gameTime.ElapsedGameTime, true, Matrix.Identity);
+            }
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
@@ -295,6 +304,7 @@ namespace Arrow
         {
             maps.Draw(mapEffect);
             //skydome.Draw();
+            dude.DrawAnimation();
             entities.Draw();
             player.Draw();
 

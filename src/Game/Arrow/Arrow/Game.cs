@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using SkinnedModel;
 
 
 namespace Arrow
@@ -18,6 +19,7 @@ namespace Arrow
 
         internal GraphicsDeviceManager graphics { get; private set; }
         ScreenManager screenManager;
+        public AnimationPlayer animationPlayer;
 
         // Prelaod any assets using by UI rendering
         static readonly string[] preloadAssets =
