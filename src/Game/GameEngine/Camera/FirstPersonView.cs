@@ -73,7 +73,7 @@ namespace GameEngine
         public FirstPersonView(float aspectRatio, Vector3 position, Vector3 rotation)
         {
             Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
-                aspectRatio, 0.05f, 1000.0f);
+                aspectRatio, 0.05f, 5000.0f);
 
             // Initialise la position et la rotation de la camera
             MoveTo(position, rotation);

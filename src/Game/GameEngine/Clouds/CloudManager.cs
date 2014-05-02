@@ -27,6 +27,8 @@ namespace GameEngine
 
         private int[] _cloudSprites;
 
+        private List<distData> bbDists;
+
         #endregion
 
         #region Initialization
@@ -46,6 +48,8 @@ namespace GameEngine
                 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 
             };
 
+            bbDists = new List<distData>();
+
             Initialize(skyType, terrainInfo);
         }
 
@@ -57,33 +61,41 @@ namespace GameEngine
             switch (skyType)
             {
                 case SkyType.CloudSplatter:
-                    float boxSize = 250;
+                    float boxSize = terrainInfo.Size.Width;
                     Vector3 flatBase = new Vector3(10, 1, 5);
 
-                    for (int c = 0; c < 100; c++)
+                    for (int c = 0; c < 170; c++)
                     {
-                        d = 1;
-                        x = MathHelper.Lerp(-boxSize, boxSize, (float)_rand.NextDouble());
-                        y = MathHelper.Lerp(-boxSize / 2, boxSize, (float)_rand.NextDouble());
-                        z = MathHelper.Lerp(-boxSize, boxSize, (float)_rand.NextDouble());
+                        d = 0.90f;
 
-                        if (y < 200)
-                            d = .75f;
-                        if (y < 0)
-                            d = .5f;
+                        x = MathHelper.Lerp(-boxSize, 2 * boxSize, (float)_rand.NextDouble());
+                        y = MathHelper.Lerp(terrainInfo.Depth + 75, terrainInfo.Depth + 300, 
+                            (float)_rand.NextDouble());
+                        z = MathHelper.Lerp(-boxSize, 2 * boxSize, (float)_rand.NextDouble());
 
-                        AddCloud(25, new Vector3(x, y, z), 40, flatBase, flatBase * 5, d, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+                        if (y < terrainInfo.Depth + 100)
+                            d = .85f;
+
+                        AddCloud(25, new Vector3(x, y, z), 40, flatBase, flatBase * 5, d, 
+                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
                     }
 
                     break;
 
                 case SkyType.CloudField:
-                    Vector3 cloudDim1 = new Vector3(500, 20, 500);
+                    Vector3 cloudDim1 = new Vector3(
+                        terrainInfo.Size.Width + 200, 
+                        20, 
+                        terrainInfo.Size.Height + 200);
 
-                    AddCloud(2000, Vector3.Zero, 60, cloudDim1, cloudDim1, .25f, 0, 1, 2, 3, 4);
-                    AddCloud(2000, new Vector3(0, 30, 0), 60, cloudDim1, cloudDim1, .5f, 3, 4, 5, 6, 7, 8);
-                    AddCloud(2000, new Vector3(0, 60, 0), 60, cloudDim1, cloudDim1, .75f, 7, 8, 9, 10, 11);
-                    AddCloud(2000, new Vector3(0, 90, 0), 60, cloudDim1, cloudDim1, 1f, 0, 1, 2, 3, 4, 12, 13, 14, 15);
+                    AddCloud(2000, new Vector3(-100, terrainInfo.Depth + 90, -100), 
+                        60, cloudDim1, cloudDim1, .25f, 0, 1, 2, 3, 4);
+                    AddCloud(2000, new Vector3(-100, terrainInfo.Depth + 120, -100), 
+                        60, cloudDim1, cloudDim1, .5f, 3, 4, 5, 6, 7, 8);
+                    AddCloud(2000, new Vector3(-100, terrainInfo.Depth + 150, -100), 
+                        60, cloudDim1, cloudDim1, .75f, 7, 8, 9, 10, 11);
+                    AddCloud(2000, new Vector3(-100, terrainInfo.Depth + 180, -100), 
+                        60, cloudDim1, cloudDim1, 1f, 0, 1, 2, 3, 4, 12, 13, 14, 15);
 
                     break;
 
@@ -91,7 +103,8 @@ namespace GameEngine
                     Vector3 episode1PlayArea = new Vector3(1000, 1000, 1000);
 
                     // Outer large clouds                    
-                    AddCloud(50, Vector3.Zero, 2500, new Vector3(4000, 4000, 4000), new Vector3(2000, 2000, 2000), .75f, _cloudSprites);
+                    AddCloud(50, Vector3.Zero, 2500, new Vector3(4000, 4000, 4000), 
+                        new Vector3(2000, 2000, 2000), .75f, _cloudSprites);
 
                     // clouds inplay
                     flatBase = new Vector3(50, 5, 25);
@@ -100,9 +113,12 @@ namespace GameEngine
                     {
                         d = 1;
 
-                        x = MathHelper.Lerp(-episode1PlayArea.X, episode1PlayArea.X, (float)_rand.NextDouble());
-                        y = MathHelper.Lerp(-episode1PlayArea.Y, episode1PlayArea.Y, (float)_rand.NextDouble());
-                        z = MathHelper.Lerp(-episode1PlayArea.Z, episode1PlayArea.Z, (float)_rand.NextDouble());
+                        x = MathHelper.Lerp(-episode1PlayArea.X, episode1PlayArea.X, 
+                            (float)_rand.NextDouble());
+                        y = MathHelper.Lerp(-episode1PlayArea.Y, episode1PlayArea.Y, 
+                            (float)_rand.NextDouble());
+                        z = MathHelper.Lerp(-episode1PlayArea.Z, episode1PlayArea.Z, 
+                            (float)_rand.NextDouble());
 
                         if (y < 200)
                             d = .8f;
@@ -111,7 +127,8 @@ namespace GameEngine
                         if (y < -500)
                             d = .5f;
 
-                        AddCloud(25, new Vector3(x, y, z), 300, flatBase, flatBase * 5, d, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+                        AddCloud(25, new Vector3(x, y, z), 300, flatBase, flatBase * 5, d, 
+                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
                     }
 
@@ -130,7 +147,8 @@ namespace GameEngine
                         y = MathHelper.Lerp(0, boxSize / 1, (float)_rand.NextDouble());
                         z = MathHelper.Lerp(-boxSize, boxSize, (float)_rand.NextDouble());
 
-                        AddCloud(25, new Vector3(x, y, z), 64, flatBase, flatBase * 5, .75f, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+                        AddCloud(25, new Vector3(x, y, z), 64, flatBase, flatBase * 5, .75f, 
+                            0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
                     }
 
                     break;
@@ -144,7 +162,7 @@ namespace GameEngine
         public void Update(GameTime gameTime)
         {
             SortClouds();
-            Rotate(Vector3.Up, .00005f);
+            Rotate(Vector3.Up, .00015f);
         }
 
         public void Draw(GameTime gameTime, ICamera camera)
@@ -156,12 +174,12 @@ namespace GameEngine
 
         private void SortClouds()
         {
-            List<distData> bbDists = new List<distData>();
+            bbDists.Clear();
 
             for (int p = 0; p < _whisps.Count; p++)
             {
                 float dist = (new distData()).Distance(
-                    _clouds.InstancesTransformMatrices[_whisps[p]].Translation, 
+                    _clouds.InstancesTransformMatrices[_whisps[p]].Translation,
                     _camera.Position);
                 bbDists.Add(new distData(_whisps[p], dist));
             }

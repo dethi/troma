@@ -62,7 +62,7 @@ namespace Troma
 
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.SkyBlue);
+            graphics.GraphicsDevice.Clear(SceneRenderer.BackgroundColor);
             base.Draw(gameTime);
         }
 

@@ -74,6 +74,9 @@ namespace GameEngine
         private void Initialize()
         {
             _effect.CurrentTechnique = _effect.Techniques["BasicTextureH"];
+            _effect.Parameters["lightColor"].SetValue(_color.ToVector4());
+            _effect.Parameters["partTexture"].SetValue(_texture);
+
 
             VertexPositionTexture[] vertices = new VertexPositionTexture[4]
             {
@@ -112,11 +115,9 @@ namespace GameEngine
                 CalcVertexBuffer();
             }
 
-            _effect.Parameters["lightColor"].SetValue(_color.ToVector4());
-            _effect.Parameters["partTexture"].SetValue(_texture);
+            _effect.Parameters["World"].SetValue(World);
             _effect.Parameters["EyePosition"].SetValue(camera.Position);
             _effect.Parameters["vp"].SetValue(camera.ViewProjection);
-            _effect.Parameters["World"].SetValue(World);
 
             GameServices.GraphicsDevice.SetVertexBuffers(
                         new VertexBufferBinding(_vertexBuffer, 0, 0),

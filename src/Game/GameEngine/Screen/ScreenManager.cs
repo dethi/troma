@@ -50,7 +50,6 @@ namespace GameEngine
             content = Game.Content;
 
             GameServices.Initialize(Game, GraphicsDevice);
-            LightInfo.Initialize();
 
             foreach (GameScreen s in screens)
                 s.LoadContent();
