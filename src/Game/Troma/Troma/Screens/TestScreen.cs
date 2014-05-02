@@ -16,6 +16,7 @@ namespace Troma
         private FirstPersonView camera;
         private Player player;
         private ITerrain terrain;
+        private CloudManager cloudManager;
 
         private Texture2D cross;
 
@@ -64,6 +65,7 @@ namespace Troma
             float y = 0;
 
             terrain = new HeightMap(game, terrainEffect, terrainInfo);
+            cloudManager = new CloudManager(SkyType.SpotClouds, terrainInfo, camera);
             player.Initialize(terrain);
 
             Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
@@ -153,6 +155,7 @@ namespace Troma
             player.Update(gameTime);
             EntityManager.Update(gameTime);
             CollisionManager.Update(gameTime);
+            cloudManager.Update(gameTime);
 
 #if DEBUG
             XConsole.Update(gameTime);
@@ -174,6 +177,7 @@ namespace Troma
         public override void Draw(GameTime gameTime)
         {
             GameServices.ResetGraphicsDeviceFor3D();
+            cloudManager.Draw(gameTime, camera);
             terrain.Draw(camera);
             EntityManager.Draw(gameTime, camera);
             player.Draw(gameTime, camera);

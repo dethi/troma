@@ -34,5 +34,15 @@ namespace GameEngine
         {
             get;
         }
+
+        Matrix ViewProjection
+        {
+            get;
+        }
+
+        BoundingFrustum Frustum
+        {
+            get;
+        }
     }
 }

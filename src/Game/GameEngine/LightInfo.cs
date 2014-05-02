@@ -8,6 +8,7 @@ namespace GameEngine
 {
     public static class LightInfo
     {
+        public static Vector3 LightPosition;
         private static Vector3 _lightDirection;
 
         public static Vector3 LightDirection
@@ -20,6 +21,28 @@ namespace GameEngine
             }
         }
 
+        public static Matrix LightViewMatrix
+        {
+            get 
+            { 
+                return Matrix.CreateLookAt(LightPosition, 
+                    LightPosition * LightDirection, Vector3.Up); 
+            }
+        }
+
+        public static Matrix LightProjectionMatrix
+        {
+            get
+            {
+                return Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver2, 1f, 5f, 100f);
+            }
+        }
+
+        public static Matrix LightViewProjectionMatrix
+        {
+            get { return LightViewMatrix * LightProjectionMatrix; }
+        }
+
         public static Vector4 DiffuseColor;
         public static float DiffuseIntensity;
 
@@ -28,6 +51,7 @@ namespace GameEngine
 
         public static void Initialize()
         {
+            LightPosition = new Vector3(250, 50, 250);
             LightDirection = new Vector3(2, 1, -2);
             DiffuseColor = Color.White.ToVector4();
             DiffuseIntensity = 0.18f;

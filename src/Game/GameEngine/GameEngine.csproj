@@ -94,6 +94,9 @@
   <ItemGroup>
     <Compile Include="Camera\FirstPersonView.cs" />
     <Compile Include="Camera\ICamera.cs" />
+    <Compile Include="Clouds\CloudManager.cs" />
+    <Compile Include="Clouds\ParticleInstance.cs" />
+    <Compile Include="Clouds\ParticleInstancer.cs" />
     <Compile Include="CollisionManager.cs" />
     <Compile Include="Debugging\BoundingSphereRenderer.cs" />
     <Compile Include="Debugging\DebugConfig.cs" />

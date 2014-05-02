@@ -8,7 +8,7 @@ using GameEngine;
 
 namespace Troma
 {
-    public class CollisionBox : EntityComponent
+    public class CollisionBox : EntityComponent, ICollisionBox
     {
         public List<BoundingBox> BoxList { get; private set; }
 

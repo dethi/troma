@@ -117,6 +117,7 @@
     <Compile Include="EntitySystem\Components\VectCollisionBox.cs" />
     <Compile Include="EntitySystem\Components\VectDrawModel3D.cs" />
     <Compile Include="EntitySystem\Components\VectTransform.cs" />
+    <Compile Include="EntitySystem\ICollisionBox.cs" />
     <Compile Include="EntitySystem\Template\TargetObject.cs" />
     <Compile Include="EntitySystem\Template\VectGameObject.cs" />
     <Compile Include="GraphicsMode.cs" />

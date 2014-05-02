@@ -49,6 +49,22 @@ namespace GameEngine
             }
         }
 
+        public Matrix ViewProjection
+        {
+            get
+            {
+                return Matrix.Multiply(View, Projection);
+            }
+        }
+
+        public BoundingFrustum Frustum
+        {
+            get
+            {
+                return new BoundingFrustum(ViewProjection);
+            }
+        }
+
         #endregion
 
         public FirstPersonView(float aspectRatio)

@@ -46,7 +46,7 @@ namespace GameEngine
 
         #endregion
 
-        #region Initialize
+        #region Initialization
 
         /// <summary>
         /// Initializes the manager
