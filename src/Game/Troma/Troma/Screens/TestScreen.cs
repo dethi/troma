@@ -17,6 +17,8 @@ namespace Troma
         private Player player;
         private ITerrain terrain;
 
+        private Texture2D cross;
+
         #endregion
 
         #region Initialization
@@ -138,6 +140,8 @@ namespace Troma
             CollisionManager.Initialize();
             TargetManager.Initialize();
 
+            cross = FileManager.Load<Texture2D>("cross");
+
             game.ResetElapsedTime();
         }
 
@@ -179,6 +183,18 @@ namespace Troma
             DrawingAxes.Draw(gameTime, camera);
             XConsole.DrawHUD(gameTime);
 #endif
+
+            #region Cross
+
+            GameServices.SpriteBatch.Begin();
+            GameServices.SpriteBatch.Draw(
+                cross,
+                new Vector2((GameServices.GraphicsDevice.Viewport.Width / 2) - 8,
+                    (GameServices.GraphicsDevice.Viewport.Height / 2) - 8),
+                Color.White);
+            GameServices.SpriteBatch.End();
+
+            #endregion
 
             EntityManager.DrawHUD(gameTime);
         }

@@ -99,6 +99,7 @@
     <Compile Include="Debugging\DebugConfig.cs" />
     <Compile Include="Debugging\NbVects.cs" />
     <Compile Include="Debugging\SysDebug.cs" />
+    <Compile Include="Debugging\TimeDebug.cs" />
     <Compile Include="Debugging\XConsole.cs" />
     <Compile Include="Debugging\DrawingAxes.cs" />
     <Compile Include="EntitySystem\EntityManager.cs" />

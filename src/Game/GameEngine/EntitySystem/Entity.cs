@@ -220,7 +220,7 @@ namespace GameEngine
 
         public bool HasComponent<T>() where T : EntityComponent
         {
-            return this.Components.ContainsKey(typeof(T).ToString());
+            return this.Components.ContainsKey(typeof(T).Name);
         }
 
         /// <summary>

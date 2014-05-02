@@ -26,8 +26,9 @@ namespace Troma
 
         #region Fields
 
-        private Vector3 _initPosition;
-        private Vector3 _initRotation;
+        private readonly Vector3 _initPosition;
+        private readonly Vector3 _initRotation;
+        private ITerrain terrain;
 
         private ICamera _view;
         private float _height;
@@ -44,20 +45,28 @@ namespace Troma
         private Vector3 velocity;
         private Vector3 acceleration;
 
+        private bool _isCrouched;
+        private bool _touchGround;
+
+        #region Fields for collision
+
         private BoundingSphere sphere;
         private Vector3[] ptConstSphere;
 
         private Ray rayDown;
         private float? dstCollisionDown;
+        private Ray dirRayX;
+        private float dirX;
+        private float? dstCollisionMoveX;
+        private Ray dirRayZ;
+        private float dirZ;
+        private float? dstCollisionMoveZ;
 
-        private bool collisionDetected;
-        private bool collisionDetectedDown;
+        private bool _collisionDetected;
+        private bool _collisionDetectedDown;
         private CollisionType collisionResult;
 
-        private bool _isCrouched;
-        private bool _touchGround;
-
-        private ITerrain terrain;
+        #endregion
 
         public Vector3 Position
         {
@@ -118,8 +127,8 @@ namespace Troma
 
             _isCrouched = false;
             _touchGround = false;
-            collisionDetected = false;
-            collisionDetectedDown = false;
+            _collisionDetected = false;
+            _collisionDetectedDown = false;
 
             this.terrain = terrain;
 
@@ -132,19 +141,21 @@ namespace Troma
 
         #endregion
 
+        #region Update and Draw
+
         public void Update(GameTime gameTime)
         {
             GroundCollision();
         }
 
-
         public void HandleInput(GameTime gameTime, InputState input)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            Shoot(input);
             Move(dt, input);
             Crouch(dt, input);
-            Jump(dt, input);
+            Jump(input);
 
             // Apply movement
             velocity += acceleration * dt * dt;
@@ -166,8 +177,10 @@ namespace Troma
         {
             return String.Format(new System.Globalization.CultureInfo("en-GB"),
                 "Pos: ({0:F1}; {1:F1}; {2:F1})\nCollision: {3}",
-                _position.X, _position.Y, _position.Z, collisionDetected);
+                _position.X, _position.Y, _position.Z, _collisionDetected);
         }
+
+        #endregion
 
         private void Move(float dt, InputState input)
         {
@@ -214,9 +227,9 @@ namespace Troma
                 _isCrouched = !_isCrouched;
         }
 
-        private void Jump(float dt, InputState input)
+        private void Jump(InputState input)
         {
-            if (!_touchGround && !collisionDetectedDown)
+            if (!_touchGround && !_collisionDetectedDown)
                 acceleration.Y = Physics.Gravity;
             else
             {
@@ -224,7 +237,7 @@ namespace Troma
                 velocity.Y = 0;
             }
 
-            if ((_touchGround || collisionDetectedDown) && input.PlayerJump())
+            if ((_touchGround || _collisionDetectedDown) && input.PlayerJump())
             {
                 velocity.Y = JUMP_SPEED;
                 _touchGround = false;
@@ -260,17 +273,17 @@ namespace Troma
 
                 sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
                 collisionResult = CollisionManager.IsCollision(sphere);
-                collisionDetected = collisionResult.IsCollide;
+                _collisionDetected = collisionResult.IsCollide;
 
                 // Response to the collision : go to the exact collision point
-                if (collisionDetected)
+                if (_collisionDetected)
                 {
                     if (move.X != 0)
                     {
-                        float dirX = (newPos.X - _position.X > 0) ? 1 : -1;
+                        dirX = (newPos.X - _position.X > 0) ? 1 : -1;
 
-                        Ray dirRayX = new Ray(sphere.Center, Vector3.Right * dirX);
-                        float? dstCollisionMoveX = dirRayX.Intersects(collisionResult.CollisionWith);
+                        dirRayX = new Ray(sphere.Center, Vector3.Right * dirX);
+                        dstCollisionMoveX = dirRayX.Intersects(collisionResult.CollisionWith);
 
                         if (dstCollisionMoveX.HasValue)
                             newPos.X -= dirX * (sphere.Radius - dstCollisionMoveX.Value);
@@ -278,10 +291,10 @@ namespace Troma
 
                     if (move.Z != 0)
                     {
-                        float dirZ = (newPos.Z - _position.Z > 0) ? 1 : -1;
+                        dirZ = (newPos.Z - _position.Z > 0) ? 1 : -1;
 
-                        Ray dirRayZ = new Ray(sphere.Center, Vector3.Backward * dirZ);
-                        float? dstCollisionMoveZ = dirRayZ.Intersects(collisionResult.CollisionWith);
+                        dirRayZ = new Ray(sphere.Center, Vector3.Backward * dirZ);
+                        dstCollisionMoveZ = dirRayZ.Intersects(collisionResult.CollisionWith);
                         
                         if (dstCollisionMoveZ.HasValue)
                             newPos.Z -= dirZ * (sphere.Radius - dstCollisionMoveZ.Value);
@@ -297,10 +310,10 @@ namespace Troma
 
                 sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
                 collisionResult = CollisionManager.IsCollision(sphere);
-                collisionDetected = collisionResult.IsCollide;
+                _collisionDetected = collisionResult.IsCollide;
                 
                 // Response to the collision : go to the exact collision point
-                if (collisionDetected)
+                if (_collisionDetected)
                 {
                     rayDown = new Ray(sphere.Center, Vector3.Down);
                     dstCollisionDown = rayDown.Intersects(collisionResult.CollisionWith);
@@ -308,20 +321,42 @@ namespace Troma
                     if (dstCollisionDown.HasValue)
                     {
                         newPos.Y += sphere.Radius - dstCollisionDown.Value;
-                        collisionDetectedDown = true;
+                        _collisionDetectedDown = true;
                     }
                 }
                 else
-                    collisionDetectedDown = false;
+                    _collisionDetectedDown = false;
 
                 #endregion
+            }
+        }
+
+        private void Shoot(InputState input)
+        {
+            if (input.IsDown(Buttons.RightTrigger))
+            {
+                Vector3 nearPoint = GameServices.GraphicsDevice.Viewport.Unproject(
+                    new Vector3(input.MouseOrigin.X, input.MouseOrigin.Y, 0), _view.Projection,
+                    _view.View, Matrix.Identity);
+                Vector3 farPoint = GameServices.GraphicsDevice.Viewport.Unproject(
+                    new Vector3(input.MouseOrigin.X, input.MouseOrigin.Y, 1), _view.Projection,
+                    _view.View, Matrix.Identity);
+
+                Vector3 direction = farPoint - nearPoint;
+                direction.Normalize();
+
+                Ray fire = new Ray(_view.Position, direction);
+                CollisionType result = CollisionManager.IsCollision(fire);
+
+                if (result.IsCollide)
+                    TargetManager.IsTargetAchieved(result.CollisionWith);
             }
         }
 
         /// <summary>
         /// Change position and rotation
         /// </summary>
-        public void MoveTo(Vector3 pos, Vector3 rot)
+        private void MoveTo(Vector3 pos, Vector3 rot)
         {
             if (pos != _position)
                 _prevPosition = _position;
@@ -344,6 +379,8 @@ namespace Troma
             return _position + movement;
         }
 
+        #region Public Methods
+
         public void Reset()
         {
             _height = HEIGHT;
@@ -353,10 +390,12 @@ namespace Troma
             newPos = _position;
             _isCrouched = false;
             _touchGround = false;
-            collisionDetected = false;
-            collisionDetectedDown = false;
+            _collisionDetected = false;
+            _collisionDetectedDown = false;
 
             MoveTo(_position, _rotation);
         }
+
+        #endregion
     }
 }

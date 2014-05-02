@@ -127,6 +127,17 @@ namespace GameEngine
             return new CollisionType { IsCollide = false };        
         }
 
+        public static CollisionType IsCollision(Ray ray)
+        {
+            foreach (BoundingBox box in _currentList)
+            {
+                if (box.Intersects(ray).HasValue)
+                    return new CollisionType { IsCollide = true, CollisionWith = box };
+            }
+
+            return new CollisionType { IsCollide = false };
+        }
+
         #endregion
 
         #region Public Methods
@@ -153,6 +164,12 @@ namespace GameEngine
         {
             _masterList.Remove(box);
             _currentList.Remove(box);
+        }
+
+        public static void Remove(IEnumerable<BoundingBox> box)
+        {
+            foreach (BoundingBox item in box)
+                Remove(item);
         }
 
         /// <summary>

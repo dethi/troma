@@ -34,6 +34,7 @@ namespace GameEngine
             NbVects.Reset();
 
             AddDebug(SysDebug.Debug);
+            AddDebug(TimeDebug.Debug);
             AddDebug(NbVects.Debug);
         }
 

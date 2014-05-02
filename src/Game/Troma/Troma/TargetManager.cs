@@ -50,6 +50,7 @@ namespace Troma
             if (result.State)
             {
                 EntityManager.Remove(result.Entity);
+                CollisionManager.Remove(result.Entity.GetComponent<CollisionBox>().BoxList);
                 _masterList.Remove(result.Entity);
             }
 
