@@ -55,8 +55,8 @@ namespace Troma
                 player = new Player(new Vector3(80, 20, 460), Vector3.Zero, camera);
 
                 Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
-                Texture2D terrainTexture = FileManager.Load<Texture2D>("Terrains/texture");
-                Texture2D terrainHeighmap = FileManager.Load<Texture2D>("Terrains/heightmap");
+                Texture2D terrainTexture = FileManager.Load<Texture2D>("Terrains/Farm/texture");
+                Texture2D terrainHeighmap = FileManager.Load<Texture2D>("Terrains/Farm/heightmap");
 
                 TerrainInfo terrainInfo = new TerrainInfo()
                 {
@@ -69,9 +69,21 @@ namespace Troma
                 };
 
                 terrain = new HeightMap(game, terrainEffect, terrainInfo);
-                player.Initialize(terrain);
 
                 Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
+
+                WeaponInfo garandM1 = new WeaponInfo()
+                {
+                    MunitionPerLoader = 8,
+                    Loader = 10,
+
+                    Automatic = false,
+                    ROF = 0.5f,
+
+                    Model = "GarandM1"
+                };
+
+                player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelEffect));
 
                 #region Models
 
@@ -205,9 +217,20 @@ namespace Troma
                 cloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
                 terrain = new HeightMap(game, terrainEffect, terrainInfo);
 
-                player.Initialize(terrain);
-
                 Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
+
+                WeaponInfo garandM1 = new WeaponInfo()
+                {
+                    MunitionPerLoader = 8,
+                    Loader = 10,
+
+                    Automatic = false,
+                    ROF = 0.5f,
+
+                    Model = "GarandM1"
+                };
+
+                player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelEffect));
 
                 #region Rails
 

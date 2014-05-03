@@ -284,6 +284,24 @@ namespace GameEngine
             return IsDown(KeyActions.Jump) || IsDown(Buttons.A);
         }
 
+        public bool PlayerShoot(bool automaticWeapon)
+        {
+            if (automaticWeapon)
+                return IsDown(MouseButtons.Left) || IsDown(Buttons.RightTrigger);
+            else
+                return IsPressed(MouseButtons.Left) || IsPressed(Buttons.RightTrigger);
+        }
+
+        public bool PlayerReload()
+        {
+            return IsPressed(KeyActions.Reload) || IsPressed(Buttons.X);
+        }
+
+        public bool PlayerSight()
+        {
+            return IsPressed(MouseButtons.Right) || IsPressed(Buttons.RightStick);
+        }
+
         #endregion
 
         #endregion

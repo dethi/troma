@@ -61,6 +61,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
@@ -111,15 +114,18 @@
   <ItemGroup>
     <Compile Include="EntitySystem\Components\CollisionBox.cs" />
     <Compile Include="EntitySystem\Components\DrawModel3D.cs" />
+    <Compile Include="EntitySystem\Components\DrawWeapon.cs" />
     <Compile Include="EntitySystem\Components\Model3D.cs" />
     <Compile Include="EntitySystem\Components\Target.cs" />
     <Compile Include="EntitySystem\Components\Transform.cs" />
     <Compile Include="EntitySystem\Components\VectCollisionBox.cs" />
     <Compile Include="EntitySystem\Components\VectDrawModel3D.cs" />
     <Compile Include="EntitySystem\Components\VectTransform.cs" />
+    <Compile Include="EntitySystem\Components\Weapon.cs" />
     <Compile Include="EntitySystem\ICollisionBox.cs" />
     <Compile Include="EntitySystem\Template\TargetObject.cs" />
     <Compile Include="EntitySystem\Template\VectGameObject.cs" />
+    <Compile Include="EntitySystem\Template\WeaponObject.cs" />
     <Compile Include="GraphicsMode.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
     <Compile Include="Screens\MenuScreen.cs" />
@@ -133,6 +139,7 @@
     <Compile Include="Troma.cs" />
     <Compile Include="Screens\MenuEntry.cs" />
     <Compile Include="Screens\TestScreen.cs" />
+    <Compile Include="WeaponInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\GameEngine\GameEngine.csproj">

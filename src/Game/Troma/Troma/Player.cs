@@ -28,7 +28,7 @@ namespace Troma
 
         private readonly Vector3 _initPosition;
         private readonly Vector3 _initRotation;
-        private ITerrain terrain;
+        private ITerrain _terrain;
 
         private ICamera _view;
         private float _height;
@@ -65,6 +65,17 @@ namespace Troma
         private bool _collisionDetected;
         private bool _collisionDetectedDown;
         private CollisionType collisionResult;
+
+        #endregion
+
+        #region Fields for Weapon
+
+        private Entity _weapon;
+        private Vector3 nearPoint;
+        private Vector3 farPoint;
+        private Vector3 bulletDir;
+        private Ray bulletRay;
+        private CollisionType bulletResult;
 
         #endregion
 
@@ -115,7 +126,7 @@ namespace Troma
             _view = view;
         }
 
-        public void Initialize(ITerrain terrain)
+        public void Initialize(ITerrain terrain, Entity weapon)
         {
             _height = HEIGHT;
             _position = _initPosition;
@@ -130,7 +141,11 @@ namespace Troma
             _collisionDetected = false;
             _collisionDetectedDown = false;
 
-            this.terrain = terrain;
+            _terrain = terrain;
+            _weapon = weapon;
+
+            if (_weapon != null)
+                _weapon.Initialize();
 
             MoveTo(_position, _rotation);
 
@@ -152,7 +167,9 @@ namespace Troma
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Shoot(input);
+            if (_weapon != null)
+                WeaponAction(gameTime, input);
+
             Move(dt, input);
             Crouch(dt, input);
             Jump(input);
@@ -171,6 +188,19 @@ namespace Troma
 #if DEBUG
             BoundingSphereRenderer.Render(sphere, camera, Color.Fuchsia);
 #endif
+
+            if (_weapon != null)
+            {
+                _weapon.GetComponent<Transform>().Position = _view.Position;
+                _weapon.GetComponent<Transform>().Rotation = _view.Rotation;
+                _weapon.Draw(gameTime, camera);
+            }
+        }
+
+        public void DrawHUD(GameTime gameTime)
+        {
+            if (_weapon != null)
+                _weapon.DrawHUD(gameTime);
         }
 
         public string Debug(GameTime gameTime)
@@ -247,9 +277,9 @@ namespace Troma
 
         private void GroundCollision()
         {
-            if (terrain.IsOnTerrain(_position))
+            if (_terrain.IsOnTerrain(_position))
             {
-                float y = terrain.GetY(_position);
+                float y = _terrain.GetY(_position);
 
                 if (_touchGround)
                     _position.Y = y;
@@ -295,7 +325,7 @@ namespace Troma
 
                         dirRayZ = new Ray(sphere.Center, Vector3.Backward * dirZ);
                         dstCollisionMoveZ = dirRayZ.Intersects(collisionResult.CollisionWith);
-                        
+
                         if (dstCollisionMoveZ.HasValue)
                             newPos.Z -= dirZ * (sphere.Radius - dstCollisionMoveZ.Value);
                     }
@@ -311,7 +341,7 @@ namespace Troma
                 sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
                 collisionResult = CollisionManager.IsCollision(sphere);
                 _collisionDetected = collisionResult.IsCollide;
-                
+
                 // Response to the collision : go to the exact collision point
                 if (_collisionDetected)
                 {
@@ -331,25 +361,34 @@ namespace Troma
             }
         }
 
-        private void Shoot(InputState input)
+        private void WeaponAction(GameTime gameTime, InputState input)
         {
-            if (input.IsDown(Buttons.RightTrigger))
+            if (input.PlayerReload())
+                _weapon.GetComponent<Weapon>().Reload();
+
+            if (input.PlayerSight())
+                _weapon.GetComponent<Weapon>().ChangeSight();
+
+            if (input.PlayerShoot(_weapon.GetComponent<Weapon>().Info.Automatic))
             {
-                Vector3 nearPoint = GameServices.GraphicsDevice.Viewport.Unproject(
-                    new Vector3(input.MouseOrigin.X, input.MouseOrigin.Y, 0), _view.Projection,
-                    _view.View, Matrix.Identity);
-                Vector3 farPoint = GameServices.GraphicsDevice.Viewport.Unproject(
-                    new Vector3(input.MouseOrigin.X, input.MouseOrigin.Y, 1), _view.Projection,
-                    _view.View, Matrix.Identity);
+                if (_weapon.GetComponent<Weapon>().Shoot(gameTime.TotalGameTime.TotalSeconds))
+                {
+                    nearPoint = GameServices.GraphicsDevice.Viewport.Unproject(
+                        new Vector3(input.MouseOrigin.X, input.MouseOrigin.Y, 0), _view.Projection,
+                        _view.View, Matrix.Identity);
+                    farPoint = GameServices.GraphicsDevice.Viewport.Unproject(
+                        new Vector3(input.MouseOrigin.X, input.MouseOrigin.Y, 1), _view.Projection,
+                        _view.View, Matrix.Identity);
 
-                Vector3 direction = farPoint - nearPoint;
-                direction.Normalize();
+                    bulletDir = farPoint - nearPoint;
+                    bulletDir.Normalize();
 
-                Ray fire = new Ray(_view.Position, direction);
-                CollisionType result = CollisionManager.IsCollision(fire);
+                    bulletRay = new Ray(_view.Position, bulletDir);
+                    bulletResult = CollisionManager.IsCollision(bulletRay);
 
-                if (result.IsCollide)
-                    TargetManager.IsTargetAchieved(result.CollisionWith);
+                    if (bulletResult.IsCollide)
+                        TargetManager.IsTargetAchieved(bulletResult.CollisionWith);
+                }
             }
         }
 

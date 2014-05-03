@@ -29,7 +29,7 @@ namespace Troma
         public Troma()
         {
             graphics = new GraphicsDeviceManager(this);
-            ActivateFullScreen();
+            //ActivateFullScreen();
             //DisableVsync();
 
             Content.RootDirectory = "Content";

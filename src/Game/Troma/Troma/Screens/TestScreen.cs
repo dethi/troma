@@ -18,8 +18,6 @@ namespace Troma
         private ITerrain terrain;
         private CloudManager cloudManager;
 
-        private Texture2D cross;
-
         #endregion
 
         #region Initialization
@@ -67,9 +65,25 @@ namespace Troma
             cloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
             terrain = new HeightMap(game, terrainEffect, terrainInfo);
 
-            player.Initialize(terrain);
-
             Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
+            Effect modelWithNormal = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
+
+            WeaponInfo garandM1 = new WeaponInfo()
+            {
+                MunitionPerLoader = 8,
+                Loader = 10,
+
+                Automatic = false,
+                ROF = 0.5f,
+
+                Model = "Weapon/M1Garand",
+                Position = new Vector3(-0.5f, -1.5f, 0.5f),
+                Rotation = new Vector3(0, MathHelper.ToRadians(3), 0),
+                PositionSight = new Vector3(0, 0, -1.3f),
+                RotationSight = Vector3.Zero
+            };
+
+            player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelEffect));
 
             #region Rails
 
@@ -143,8 +157,6 @@ namespace Troma
             CollisionManager.Initialize();
             TargetManager.Initialize();
 
-            cross = FileManager.Load<Texture2D>("cross");
-
             game.ResetElapsedTime();
         }
 
@@ -190,24 +202,8 @@ namespace Troma
             XConsole.DrawHUD(gameTime);
 #endif
 
-            #region Cross
-
-            int width = GameServices.GraphicsDevice.Viewport.Width;
-            int height = GameServices.GraphicsDevice.Viewport.Height;
-            int size = (64 * width) / 1920;
-
-            Rectangle rect = new Rectangle(
-                (width - size) / 2,
-                (height - size) / 2,
-                size, size);
-
-            GameServices.SpriteBatch.Begin();
-            GameServices.SpriteBatch.Draw(cross, rect, Color.White);
-            GameServices.SpriteBatch.End();
-
-            #endregion
-
             EntityManager.DrawHUD(gameTime);
+            player.DrawHUD(gameTime);
         }
     }
 }

@@ -44,7 +44,6 @@ namespace GameEngine
         /// <summary>
         /// Constructor for entity
         /// </summary>
-        /// <param name="aLayer">Which layer this entity belongs to.</param>
         public Entity()
         {
             _components.Clear();
@@ -52,6 +51,16 @@ namespace GameEngine
             _drawableComponents.Clear();
 
             EntityManager.AddEntity(this);
+        }
+
+        public Entity(bool dontAddToEntityManager)
+        {
+            _components.Clear();
+            _updateableComponents.Clear();
+            _drawableComponents.Clear();
+
+            if (!dontAddToEntityManager)
+                EntityManager.AddEntity(this);
         }
 
         /// <summary>
