@@ -188,6 +188,10 @@
       <Project>{9EAE13BE-F7ED-4D2B-A3C4-A1BA9C6D144A}</Project>
       <Name>EquinoxEngine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SkinnedModel\SkinnedModelWindows.csproj">
+      <Project>{0D41E29B-829F-4255-BCA5-64DC2677DA6D}</Project>
+      <Name>SkinnedModelWindows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ArrowContent\ArrowContent.contentproj">
       <Name>ArrowContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
