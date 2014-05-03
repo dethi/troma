@@ -77,8 +77,8 @@ namespace Troma
                 ROF = 0.5f,
 
                 Model = "Weapon/M1Garand",
-                Position = new Vector3(-0.5f, -1.5f, 0.5f),
-                Rotation = new Vector3(0, MathHelper.ToRadians(3), 0),
+                Position = new Vector3(-0.7f, -0.3f, 0),
+                Rotation = new Vector3(0, 0, 0),
                 PositionSight = new Vector3(0, 0, -1.3f),
                 RotationSight = Vector3.Zero
             };
