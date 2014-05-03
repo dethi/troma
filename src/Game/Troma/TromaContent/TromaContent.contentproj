@@ -338,13 +338,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cross.png">
-      <Name>cross</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Effects\Clouds.fx">
       <Name>Clouds</Name>
       <Importer>EffectImporter</Importer>
@@ -366,6 +359,13 @@
     </Compile>
     <Compile Include="Terrains\texture.jpg">
       <Name>texture</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cross.png">
+      <Name>cross</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

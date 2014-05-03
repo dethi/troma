@@ -192,12 +192,17 @@ namespace Troma
 
             #region Cross
 
+            int width = GameServices.GraphicsDevice.Viewport.Width;
+            int height = GameServices.GraphicsDevice.Viewport.Height;
+            int size = (64 * width) / 1920;
+
+            Rectangle rect = new Rectangle(
+                (width - size) / 2,
+                (height - size) / 2,
+                size, size);
+
             GameServices.SpriteBatch.Begin();
-            GameServices.SpriteBatch.Draw(
-                cross,
-                new Vector2((GameServices.GraphicsDevice.Viewport.Width / 2) - 8,
-                    (GameServices.GraphicsDevice.Viewport.Height / 2) - 8),
-                Color.White);
+            GameServices.SpriteBatch.Draw(cross, rect, Color.White);
             GameServices.SpriteBatch.End();
 
             #endregion
