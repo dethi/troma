@@ -58,14 +58,14 @@ namespace Troma
                 Size = new Size(513, 513),
                 Depth = 0,
                 Texture = terrainTexture,
-                TextureScale = 512,
+                TextureScale = 32,
                 Heighmap = terrainHeighmap
             };
 
             float y = 0;
 
-            terrain = new HeightMap(game, terrainEffect, terrainInfo);
             cloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
+            terrain = new HeightMap(game, terrainEffect, terrainInfo);
 
             player.Initialize(terrain);
 

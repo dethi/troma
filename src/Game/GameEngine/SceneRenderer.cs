@@ -19,6 +19,7 @@ namespace GameEngine
             {
                 case SkyType.CloudField:
                     LightInfo.AmbientIntensity = 0.4f;
+                    LightInfo.DiffuseColor = Color.Black.ToVector4();
                     BackgroundColor = Color.DarkGray;
                     break;
                 default:
