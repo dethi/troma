@@ -118,7 +118,7 @@ namespace Troma
 
         private void PlayGameMenuEntrySelected(object sender, EventArgs e)
         {
-            //LoadingScreen.Load(game, this.ScreenManager, true, new TestScreen(game));
+            LoadingScreen.Load(game, this.ScreenManager, true, new SoloScreen(game, ""));
         }
 
         private void OptionsMenuEntrySelected(object sender, EventArgs e)

@@ -25,6 +25,8 @@ namespace Troma
 
             TransitionOnTime = TimeSpan.FromSeconds(1);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
+
+            SceneRenderer.InitializeMenu();
         }
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,

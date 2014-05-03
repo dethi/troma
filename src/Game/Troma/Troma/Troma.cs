@@ -37,8 +37,8 @@ namespace Troma
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
 
-            screenManager.AddScreen(new TestScreen(this));
-            //screenManager.AddScreen(new MainMenuScreen(this));
+            //screenManager.AddScreen(new TestScreen(this));
+            screenManager.AddScreen(new MainMenuScreen(this));
         }
 
         protected override void Initialize()

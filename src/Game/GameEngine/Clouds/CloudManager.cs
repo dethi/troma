@@ -51,6 +51,10 @@ namespace GameEngine
             bbDists = new List<distData>();
 
             Initialize(skyType, terrainInfo);
+
+#if DEBUG
+            XConsole.AddDebug(Debug);
+#endif
         }
 
         private void Initialize(SkyType skyType, TerrainInfo terrainInfo)
@@ -88,13 +92,13 @@ namespace GameEngine
                         20, 
                         terrainInfo.Size.Height + 200);
 
-                    AddCloud(2000, new Vector3(-100, terrainInfo.Depth + 90, -100), 
+                    AddCloud(2000, new Vector3(100, terrainInfo.Depth + 90, 100), 
                         60, cloudDim1, cloudDim1, .25f, 0, 1, 2, 3, 4);
-                    AddCloud(2000, new Vector3(-100, terrainInfo.Depth + 120, -100), 
+                    AddCloud(2000, new Vector3(100, terrainInfo.Depth + 120, 100), 
                         60, cloudDim1, cloudDim1, .5f, 3, 4, 5, 6, 7, 8);
-                    AddCloud(2000, new Vector3(-100, terrainInfo.Depth + 150, -100), 
+                    AddCloud(2000, new Vector3(100, terrainInfo.Depth + 150, 100), 
                         60, cloudDim1, cloudDim1, .75f, 7, 8, 9, 10, 11);
-                    AddCloud(2000, new Vector3(-100, terrainInfo.Depth + 180, -100), 
+                    AddCloud(2000, new Vector3(100, terrainInfo.Depth + 180, 100), 
                         60, cloudDim1, cloudDim1, 1f, 0, 1, 2, 3, 4, 12, 13, 14, 15);
 
                     break;
@@ -168,6 +172,11 @@ namespace GameEngine
         public void Draw(GameTime gameTime, ICamera camera)
         {
             _clouds.Draw(gameTime, camera);
+        }
+
+        public string Debug(GameTime gameTime)
+        {
+            return ("Particles: " + _whisps.Count);
         }
 
         #endregion

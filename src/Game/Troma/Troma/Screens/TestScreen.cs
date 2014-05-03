@@ -41,7 +41,6 @@ namespace Troma
             BoundingSphereRenderer.Initialize(30);
 #endif
 
-            LightInfo.Initialize();
             EntityManager.Clear();
             CollisionManager.Clear();
             TargetManager.Clear();
