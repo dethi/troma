@@ -218,6 +218,7 @@ namespace Troma
                 terrain = new HeightMap(game, terrainEffect, terrainInfo);
 
                 Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
+                Effect modelWithNormal = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
 
                 WeaponInfo garandM1 = new WeaponInfo()
                 {
@@ -227,7 +228,11 @@ namespace Troma
                     Automatic = false,
                     ROF = 0.5f,
 
-                    Model = "GarandM1"
+                    Model = "Weapon/M1Garand",
+                    Position = new Vector3(-0.7f, -0.3f, 0),
+                    Rotation = new Vector3(0, 0, 0),
+                    PositionSight = new Vector3(0, 0, -1.3f),
+                    RotationSight = Vector3.Zero
                 };
 
                 player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelEffect));
@@ -351,6 +356,7 @@ namespace Troma
 #endif
 
             EntityManager.DrawHUD(gameTime);
+            player.DrawHUD(gameTime);
         }
     }
 }
