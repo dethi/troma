@@ -578,12 +578,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\Downloads\SkinningSample_4_0\SkinnedModelPipeline\SkinnedModelPipeline.csproj">
-      <Project>{4636C7E1-B845-4B83-B96D-64A11B8A4515}</Project>
-      <Name>SkinnedModelPipeline</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\Farm\cible_homme.x">
       <Name>cible_homme</Name>
       <Importer>XImporter</Importer>
