@@ -190,6 +190,7 @@ namespace Arrow
                 entities.AddEntity("Farm/truck_allemand", new Vector2(122, 206));
                 entities.AddEntity("Farm/farm", new Vector2(0, 112));
                 entities.AddEntity("Farm/shelter", new Vector2(0, 261));
+                entities.AddEntity("M1garand", new Vector3(256, 27, 256));
 
                 #endregion
 
