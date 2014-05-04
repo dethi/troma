@@ -135,6 +135,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="EntitySystem\Template\GameObject.cs" />
     <Compile Include="Screens\SoloScreen.cs" />
+    <Compile Include="Screens\StartScreen.cs" />
     <Compile Include="TargetManager.cs" />
     <Compile Include="Troma.cs" />
     <Compile Include="Screens\MenuEntry.cs" />
