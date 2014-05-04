@@ -230,7 +230,7 @@ namespace Troma
 
                 float y = 0;
 
-                cloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
+                cloudManager = SceneRenderer.InitializeSky(SkyType.CloudSplatter, terrainInfo, camera);
                 terrain = new HeightMap(game, terrainEffect, terrainInfo);
 
                 Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
