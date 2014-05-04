@@ -29,6 +29,12 @@ namespace Troma
             SceneRenderer.InitializeMenu();
         }
 
+        public override void LoadContent()
+        {
+            base.LoadContent();
+            Font = FileManager.Load<SpriteFont>("Fonts/Menu");
+        }
+
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
             bool coveredByOtherScreen)
         {
@@ -49,6 +55,7 @@ namespace Troma
             // Move to the previous menu entry?
             if (input.IsPressed(Keys.Down) || (input.IsPressed(Buttons.DPadDown)))
             {
+                SFXManager.Play("Button_selected");
                 selectedEntry++;
 
                 if (selectedEntry >= MenuEntries.Count)
@@ -58,6 +65,7 @@ namespace Troma
             // Move to the next menu entry?
             if (input.IsPressed(Keys.Up) || (input.IsPressed(Buttons.DPadUp)))
             {
+                SFXManager.Play("Button_selected");
                 selectedEntry--;
 
                 if (selectedEntry < 0)
@@ -67,6 +75,7 @@ namespace Troma
             // Select ?
             if (input.IsPressed(Keys.Enter) || (input.IsPressed(Buttons.A)))
             {
+                SFXManager.Play("Button_entry");
                 OnSelectEntry(selectedEntry);
             }
 
@@ -78,8 +87,9 @@ namespace Troma
             // power curve to make things look more interesting (this makes
             // the movement slow down as it nears the end).
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
+            int width = game.GraphicsDevice.Viewport.Width;
 
-            Vector2 position = new Vector2(0f, (400f * game.GraphicsDevice.Viewport.Width) / 1920);
+            Vector2 position = new Vector2(0f, (400f * width) / 1920);
 
             // update each menu entry's location in turn
             for (int i = 0; i < MenuEntries.Count; i++)
@@ -92,7 +102,7 @@ namespace Troma
                     position.X += transitionOffset * 512;
 
                 MenuEntries[i].Position = position;
-                position.Y += (MenuEntries[i].GetHeight(this) + (200 * game.GraphicsDevice.Viewport.Width)) / 1920;
+                position.Y += (MenuEntries[i].GetHeight(this) + (200 * width)) / 1920;
             }
         }
 

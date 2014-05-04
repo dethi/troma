@@ -14,19 +14,19 @@ namespace GameEngine
 
         private static Game _game;
         private static GraphicsDevice _graphicsDevice;
+        private static GraphicsDeviceManager _graphicsDeviceManager;
         private static SpriteBatch _spriteBatch;
 
-        /// <summary>
-        /// The SpriteBatch used in drawing operations
-        /// </summary>
         public static SpriteBatch SpriteBatch
         {
             get { return _spriteBatch; }
         }
 
-        /// <summary>
-        /// The Graphics device used  in the game
-        /// </summary>
+        public static GraphicsDeviceManager GraphicsDeviceManager
+        {
+            get { return _graphicsDeviceManager; }
+        }
+
         public static GraphicsDevice GraphicsDevice
         {
             get { return _graphicsDevice; }
@@ -41,10 +41,12 @@ namespace GameEngine
 
         #region Initialization
 
-        public static void Initialize(Game game, GraphicsDevice graphicsDevice)
+        public static void Initialize(Game game, GraphicsDevice graphicsDevice, 
+             GraphicsDeviceManager graphicsDeviceManager)
         {
             _game = game;
             _graphicsDevice = graphicsDevice;
+            _graphicsDeviceManager = graphicsDeviceManager;
             _spriteBatch = new SpriteBatch(_graphicsDevice);
         }
 
@@ -79,6 +81,55 @@ namespace GameEngine
         {
             _graphicsDevice.BlendState = BlendState.Opaque;
             _graphicsDevice.DepthStencilState = DepthStencilState.Default;
+        }
+
+        /// <summary>
+        /// Get the screen size of primary screen
+        /// </summary>
+        private static Vector2 GetScreenSize()
+        {
+            return new Vector2(
+                GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+                GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+        }
+
+        /// <summary>
+        /// Activate full screen using the better resolution
+        /// </summary>
+        public static void ActivateFullScreen()
+        {
+            Vector2 primaryScreen = GetScreenSize();
+
+            _graphicsDeviceManager.PreferredBackBufferWidth = (int)primaryScreen.X;
+            _graphicsDeviceManager.PreferredBackBufferHeight = (int)primaryScreen.Y;
+            _graphicsDeviceManager.IsFullScreen = true;
+
+            _graphicsDeviceManager.ApplyChanges();
+        }
+
+        /// <summary>
+        /// Deactivate full screen
+        /// </summary>
+        public static void DeactivateFullScreen()
+        {
+            Vector2 primaryScreen = GetScreenSize();
+
+            _graphicsDeviceManager.PreferredBackBufferWidth = 800;
+            _graphicsDeviceManager.PreferredBackBufferHeight = 480;
+            _graphicsDeviceManager.IsFullScreen = false;
+
+            _graphicsDeviceManager.ApplyChanges();
+        }
+
+        /// <summary>
+        /// Disable V-Sync, allow more than 60 FPS
+        /// </summary>
+        public static void DisableVsync()
+        {
+            _game.IsFixedTimeStep = false;
+            _graphicsDeviceManager.SynchronizeWithVerticalRetrace = false;
+
+            _graphicsDeviceManager.ApplyChanges();
         }
 
         #endregion

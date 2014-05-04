@@ -55,7 +55,9 @@ namespace Troma
                     RotationSight.Z);
             }
         }
-        
-        // add sound
+
+        public string SFXEmpty;
+        public string SFXReload;
+        public string SFXShoot;
     }
 }

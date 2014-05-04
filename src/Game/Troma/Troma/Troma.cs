@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using GameEngine;
 
 namespace Troma
@@ -29,23 +30,24 @@ namespace Troma
         public Troma()
         {
             graphics = new GraphicsDeviceManager(this);
-            //ActivateFullScreen();
-            //DisableVsync();
-
             Content.RootDirectory = "Content";
 
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
-
-            //screenManager.AddScreen(new TestScreen(this));
-            //screenManager.AddScreen(new MainMenuScreen(this));
-            screenManager.AddScreen(new StartScreen(this));
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-            screenManager.Initialize();
+
+            GameServices.Initialize(this, GraphicsDevice, graphics);
+            SoundManager.Initialize();
+            Settings.Initialize();
+            SoundManager.SetVolume(Settings.MusicVolume);
+
+            //screenManager.AddScreen(new TestScreen(this));
+            //screenManager.AddScreen(new MainMenuScreen(this));
+            screenManager.AddScreen(new StartScreen(this));
         }
 
         /// <summary>
@@ -55,6 +57,12 @@ namespace Troma
         {
             foreach (string asset in preloadAssets)
                 Content.Load<object>(asset);
+
+            SFXManager.Add("Button_entry", Content.Load<SoundEffect>("Sounds/Button_entry"));
+            SFXManager.Add("Button_selected", Content.Load<SoundEffect>("Sounds/Button_selected"));
+            SFXManager.Add("GarandM1_empty", Content.Load<SoundEffect>("Sounds/GarandM1_empty"));
+            SFXManager.Add("GarandM1_reload", Content.Load<SoundEffect>("Sounds/GarandM1_reload"));
+            SFXManager.Add("GarandM1_shoot", Content.Load<SoundEffect>("Sounds/GarandM1_shoot"));
         }
 
         #endregion

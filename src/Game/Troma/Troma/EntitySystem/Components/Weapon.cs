@@ -40,12 +40,10 @@ namespace Troma
         public bool Shoot(double elapsedTime)
         {
             if (LoaderIsEmpty)
-            {
-                // play sound
-            }
+                SFXManager.Play(Info.SFXEmpty);
             else if (IsRespectROF(elapsedTime))
             {
-                // play sound
+                SFXManager.Play(Info.SFXShoot);
 
                 dt_lastShoot = elapsedTime;
                 _info.Munition--;
@@ -59,7 +57,7 @@ namespace Troma
         {
             if (_info.Loader > 0)
             {
-                // play sound
+                SFXManager.Play(Info.SFXReload);
                 _info.Loader--;
                 _info.Munition = _info.MunitionPerLoader;
             }

@@ -12,6 +12,7 @@ namespace Troma
     {
         public string Text;
         public Vector2 Position;
+        public float FontSize;
 
         private float selectionFade;
         private readonly Color notSelectedColor;
@@ -19,8 +20,13 @@ namespace Troma
         public event EventHandler Selected;
 
         public MenuEntry(string text)
+            : this(text, 0.75f)
+        { }
+
+        public MenuEntry(string text, float fontSize)
         {
             this.Text = text;
+            FontSize = fontSize;
             notSelectedColor = new Color(150, 145, 140);
         }
 
@@ -42,7 +48,7 @@ namespace Troma
             Color color = (isSelected) ? selectedColor : notSelectedColor;
             color *= screen.TransitionAlpha;
 
-            float scale = ((0.75f + selectionFade * 0.5f + 
+            float scale = ((FontSize + selectionFade * 0.5f + 
                 selectionFade * pulsate * 0.1f) * 
                 GameServices.GraphicsDevice.Viewport.Width) / 1980;
             Vector2 origin = new Vector2(0, screen.Font.LineSpacing / 2);

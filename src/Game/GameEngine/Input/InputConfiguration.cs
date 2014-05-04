@@ -8,7 +8,35 @@ namespace GameEngine
 {
     public class InputConfiguration
     {
-        Dictionary<KeyActions, Keys> mapping;
+        #region Constants
+
+        private static readonly Dictionary<KeyActions, Keys> QWERTY = new Dictionary<KeyActions, Keys>()
+        {
+            { KeyActions.Up,        Keys.W },
+            { KeyActions.Bottom,    Keys.S },
+            { KeyActions.Left,      Keys.A },
+            { KeyActions.Right,     Keys.D },
+            { KeyActions.Crouch,    Keys.C },
+            { KeyActions.Run,       Keys.LeftShift },
+            { KeyActions.Jump,      Keys.Space },
+            { KeyActions.Reload,    Keys.R },
+        };
+
+        private static readonly Dictionary<KeyActions, Keys> AZERTY = new Dictionary<KeyActions, Keys>()
+        {
+            { KeyActions.Up,        Keys.Z },
+            { KeyActions.Bottom,    Keys.S },
+            { KeyActions.Left,      Keys.Q },
+            { KeyActions.Right,     Keys.D },
+            { KeyActions.Crouch,    Keys.C },
+            { KeyActions.Run,       Keys.LeftShift },
+            { KeyActions.Jump,      Keys.Space },
+            { KeyActions.Reload,    Keys.R },
+        };
+
+        #endregion
+
+        private static Dictionary<KeyActions, Keys> mapping;
 
         public InputConfiguration()
         {
@@ -36,6 +64,14 @@ namespace GameEngine
                 return key;
             else
                 throw new KeyNotFoundException();
+        }
+
+        public static void ChangeKeyboard(string keyboard)
+        {
+            if (keyboard == "QWERTY")
+                mapping = QWERTY;
+            else
+                mapping = AZERTY;
         }
     }
 }

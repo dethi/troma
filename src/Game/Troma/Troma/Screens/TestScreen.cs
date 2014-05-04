@@ -80,7 +80,11 @@ namespace Troma
                 Position = new Vector3(-0.7f, -0.3f, 0),
                 Rotation = new Vector3(0, 0, 0),
                 PositionSight = new Vector3(0, 0, -1.3f),
-                RotationSight = Vector3.Zero
+                RotationSight = Vector3.Zero,
+
+                SFXEmpty = "GarandM1_empty",
+                SFXReload = "GarandM1_reload",
+                SFXShoot = "GarandM1_shoot"
             };
 
             player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelEffect));

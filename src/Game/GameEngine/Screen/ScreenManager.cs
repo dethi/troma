@@ -49,8 +49,6 @@ namespace GameEngine
         {
             content = Game.Content;
 
-            GameServices.Initialize(Game, GraphicsDevice);
-
             foreach (GameScreen s in screens)
                 s.LoadContent();
 

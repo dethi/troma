@@ -23,17 +23,20 @@ namespace Troma
             : base(game, "Troma")
         {
             // Create menu entries.
-            MenuEntry playGameMenuEntry = new MenuEntry("Jouer");
+            MenuEntry soloMenuEntry = new MenuEntry("Solo");
+            MenuEntry multiMenuEntry = new MenuEntry("Multijoueur");
             MenuEntry optionsMenuEntry = new MenuEntry("Options");
             MenuEntry exitMenuEntry = new MenuEntry("Quitter");
 
             // Hook up menu event handlers.
-            playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
+            soloMenuEntry.Selected += SoloMenuEntrySelected;
+            multiMenuEntry.Selected += MultiMenuEntrySelected;
             optionsMenuEntry.Selected += OptionsMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
-            MenuEntries.Add(playGameMenuEntry);
+            MenuEntries.Add(soloMenuEntry);
+            MenuEntries.Add(multiMenuEntry);
             MenuEntries.Add(optionsMenuEntry);
             MenuEntries.Add(exitMenuEntry);
         }
@@ -47,11 +50,12 @@ namespace Troma
             x2 = 0;
             x3 = 0;
 
-            Font = FileManager.Load<SpriteFont>("Fonts/Menu");
             background = FileManager.Load<Texture2D>("Menus/Fond");
             balle_gauche = FileManager.Load<Texture2D>("Menus/balle-droite");
             balle_droite = FileManager.Load<Texture2D>("Menus/balle-gauche");
             logo = FileManager.Load<Texture2D>("Menus/eie");
+
+            SoundManager.Play("Menu");
         }
 
         public override void Draw(GameTime gameTime)
@@ -116,14 +120,20 @@ namespace Troma
             GameServices.SpriteBatch.End();
         }
 
-        private void PlayGameMenuEntrySelected(object sender, EventArgs e)
+        private void SoloMenuEntrySelected(object sender, EventArgs e)
         {
+            SoundManager.Stop();
             LoadingScreen.Load(game, this.ScreenManager, true, new SoloScreen(game, ""));
+        }
+
+        private void MultiMenuEntrySelected(object sender, EventArgs e)
+        {
+            //SoundManager.Stop();
         }
 
         private void OptionsMenuEntrySelected(object sender, EventArgs e)
         {
-            //ScreenManager.AddScreen(new OptionsMenuScreen(), e.PlayerIndex);
+            ScreenManager.AddScreen(new OptionsMenuScreen(game));
         }
 
         protected override void OnCancel()
@@ -131,8 +141,9 @@ namespace Troma
             game.Exit();
         }
 
-        protected void OnCancel(object sender, EventArgs e)
+        private void OnCancel(object sender, EventArgs e)
         {
+            SoundManager.Stop();
             OnCancel();
         }
     }

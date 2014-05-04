@@ -1,0 +1,184 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using GameEngine;
+
+namespace Troma
+{
+    class OptionsMenuScreen : MenuScreen
+    {
+        #region Fields
+
+        private MenuEntry volumeMenuEntry;
+        private MenuEntry languageMenuEntry;
+        private MenuEntry displayMenuEntry;
+        private MenuEntry keyboardMenuEntry;
+
+        private int x1;
+        private int x2;
+        private int x3;
+
+        private Texture2D background;
+        private Texture2D balle_gauche;
+        private Texture2D balle_droite;
+        private Texture2D logo;
+
+        #endregion
+
+        #region Initialization
+
+        public OptionsMenuScreen(Game game)
+            : base(game, "Options")
+        {
+            keyboardMenuEntry = new MenuEntry(string.Empty);
+            languageMenuEntry = new MenuEntry(string.Empty);
+            displayMenuEntry = new MenuEntry(string.Empty);
+            volumeMenuEntry = new MenuEntry(string.Empty);
+            MenuEntry back = new MenuEntry("Retour");
+
+            SetMenuEntryText();
+
+            keyboardMenuEntry.Selected += KeyboardMenuEntrySelected;
+            languageMenuEntry.Selected += LanguageMenuEntrySelected;
+            displayMenuEntry.Selected += DisplayMenuEntrySelected;
+            volumeMenuEntry.Selected += VolumeMenuEntrySelected;
+            back.Selected += OnCancel;
+
+            MenuEntries.Add(keyboardMenuEntry);
+            MenuEntries.Add(languageMenuEntry);
+            MenuEntries.Add(displayMenuEntry);
+            MenuEntries.Add(volumeMenuEntry);
+            MenuEntries.Add(back);
+        }
+
+        public override void LoadContent()
+        {
+            base.LoadContent();
+
+            selectedEntry = 0;
+            x1 = 0;
+            x2 = 0;
+            x3 = 0;
+
+            background = FileManager.Load<Texture2D>("Menus/Fond");
+            balle_gauche = FileManager.Load<Texture2D>("Menus/balle-droite");
+            balle_droite = FileManager.Load<Texture2D>("Menus/balle-gauche");
+            logo = FileManager.Load<Texture2D>("Menus/eie");
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            int width = game.GraphicsDevice.Viewport.Width;
+            int height = game.GraphicsDevice.Viewport.Height;
+
+            Color c = new Color(120, 110, 100) * TransitionAlpha;
+            Rectangle posBackground = new Rectangle(0, 0, width, height);
+            Rectangle posLogo = new Rectangle(width - 100, height - 100, 100, 100);
+
+            x1 = (x1 < 2100) ? (x1 + 12) : 0;
+            x2 = (x2 > 0) ? (x2 - 15) : 3500;
+            x3 = (x3 > 0) ? (x3 - 22) : 2800;
+
+            Rectangle rect1 = new Rectangle(
+                x1 * width / 1920,
+                height - (60 * width / 1920),
+                60 * width / 1920,
+                60 * width / 1920);
+            Rectangle rect2 = new Rectangle(
+                x2 * width / 1920,
+                height - (80 * width / 1920),
+                50 * width / 1920,
+                50 * width / 1920);
+            Rectangle rect3 = new Rectangle(
+                x3 * width / 1920,
+                height - (30 * width / 1920),
+                40 * width / 1920,
+                40 * width / 1920);
+
+            // Make the menu slide into place during transitions, using a
+            // power curve to make things look more interesting (this makes
+            // the movement slow down as it nears the end).
+            float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
+
+            Vector2 titlePosition = new Vector2(
+                0.5f * width,
+                0.0625f * width - 100 * transitionOffset);
+            Vector2 titleOrigin = Font.MeasureString(menuTitle) / 2;
+            Color titleColor = new Color(0, 0, 0) * TransitionAlpha;
+            float titleScale = 0.00078125f * width;
+
+            GameServices.SpriteBatch.Begin();
+
+            GameServices.SpriteBatch.Draw(background, posBackground, Color.White * TransitionAlpha);
+            GameServices.SpriteBatch.Draw(logo, posLogo, Color.White * TransitionAlpha * 0.4f);
+            GameServices.SpriteBatch.Draw(balle_gauche, rect1, c);
+            GameServices.SpriteBatch.Draw(balle_droite, rect2, c);
+            GameServices.SpriteBatch.Draw(balle_droite, rect3, c);
+
+            GameServices.SpriteBatch.DrawString(Font, menuTitle, titlePosition, titleColor, 0,
+                titleOrigin, titleScale, SpriteEffects.None, 0);
+
+            // Draw each menu entry in turn.
+            for (int i = 0; i < MenuEntries.Count; i++)
+            {
+                bool isSelected = IsActive && (i == selectedEntry);
+                MenuEntries[i].Draw(gameTime, this, isSelected);
+            }
+
+            GameServices.SpriteBatch.End();
+        }
+
+        private void KeyboardMenuEntrySelected(object sender, EventArgs e)
+        {
+            if (Settings.Keyboard == "AZERTY")
+                Settings.Keyboard = "QWERTY";
+            else
+                Settings.Keyboard = "AZERTY";
+
+            SetMenuEntryText();
+        }
+
+        private void LanguageMenuEntrySelected(object sender, EventArgs e)
+        {
+            if (Settings.Language == "Francais")
+                Settings.Language = "English";
+            else
+                Settings.Language = "Francais";
+
+            SetMenuEntryText();
+        }
+
+        private void DisplayMenuEntrySelected(object sender, EventArgs e)
+        {
+            Settings.FullScreen = !Settings.FullScreen;
+            SetMenuEntryText();
+        }
+
+        private void VolumeMenuEntrySelected(object sender, EventArgs e)
+        {
+            if (Settings.MusicVolume + 0.1f > 2.01f) // float hack
+                Settings.MusicVolume = 0;
+            else
+                Settings.MusicVolume += 0.1f;
+            
+            SetMenuEntryText();
+        }
+
+        private void OnCancel(object sender, EventArgs e)
+        {
+            OnCancel();
+        }
+
+        private void SetMenuEntryText()
+        {
+            keyboardMenuEntry.Text = "Clavier: " + Settings.Keyboard;
+            languageMenuEntry.Text = "Langage: " + Settings.Language;
+            displayMenuEntry.Text = "Pleine ecran: " + (Settings.FullScreen ? "Oui" : "Non");
+            volumeMenuEntry.Text = "Volume: " + (int)(Settings.MusicVolume * 100);
+        }
+        #endregion
+    }
+}
