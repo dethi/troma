@@ -63,7 +63,7 @@ namespace Troma
             _musicVolume = 0.8f;
             Keyboard = "AZERTY";
             Language = "Francais";
-            FullScreen = false;
+            FullScreen = true;
         }
     }
 }

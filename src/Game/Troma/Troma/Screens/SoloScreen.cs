@@ -20,6 +20,11 @@ namespace Troma
 
         private string _mapName;
 
+        private TimeSpan time;
+
+        private float pauseAlpha;
+        private bool scoreScreenLaunched;
+
         #endregion
 
         #region Initialization
@@ -31,6 +36,7 @@ namespace Troma
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
             _mapName = mapName;
+            scoreScreenLaunched = false;
         }
 
         public override void LoadContent()
@@ -68,9 +74,11 @@ namespace Troma
                     Heighmap = terrainHeighmap
                 };
 
+                cloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
                 terrain = new HeightMap(game, terrainEffect, terrainInfo);
 
                 Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
+                Effect modelWithNormal = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
 
                 WeaponInfo garandM1 = new WeaponInfo()
                 {
@@ -80,13 +88,21 @@ namespace Troma
                     Automatic = false,
                     ROF = 0.5f,
 
-                    Model = "GarandM1"
+                    Model = "Weapon/M1Garand",
+                    Position = new Vector3(-0.7f, -0.3f, 0),
+                    Rotation = new Vector3(0, 0, 0),
+                    PositionSight = new Vector3(0, 0, -1.3f),
+                    RotationSight = Vector3.Zero,
+
+                    SFXEmpty = "GarandM1_empty",
+                    SFXReload = "GarandM1_reload",
+                    SFXShoot = "GarandM1_shoot"
                 };
 
                 player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelEffect));
 
                 #region Models
-
+                /*
                 #region Wood barrier
                 /*
             Model woodBarrierX = content.Load<Model>("Models/Farm/wood_barrier_x");
@@ -180,7 +196,7 @@ namespace Troma
             entities.AddEntity(barbedBarrierZ, new Vector2(160, 493));
             entities.AddEntity(barbedBarrierZ, new Vector2(160, 502));
             entities.AddEntity(postBarrier, new Vector2(160, 511));
-            */
+            
             #endregion
 
                 GameObject.BuildEntity(new Vector3(0, y, 511), "Farm/house", modelEffect);
@@ -191,7 +207,7 @@ namespace Troma
                 GameObject.BuildEntity(new Vector3(122, y, 206), "Farm/truck_allemand", modelEffect);
                 GameObject.BuildEntity(new Vector3(0, y, 262), "Farm/farm", modelEffect);
                 GameObject.BuildEntity(new Vector3(0, y, 411), "Farm/shelter", modelEffect);
-
+                */
                 #endregion
             }
             else
@@ -314,6 +330,7 @@ namespace Troma
             CollisionManager.Initialize();
             TargetManager.Initialize();
 
+            time = new TimeSpan();
             game.ResetElapsedTime();
         }
 
@@ -322,26 +339,46 @@ namespace Troma
         public override void Update(GameTime gameTime, bool hasFocus, bool isVisible)
         {
             base.Update(gameTime, hasFocus, isVisible);
-            player.Update(gameTime);
-            EntityManager.Update(gameTime);
-            CollisionManager.Update(gameTime);
-            cloudManager.Update(gameTime);
+
+            if (!hasFocus)
+                pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
+            else
+                pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
+
+            if (TargetManager.Count == 0 && !scoreScreenLaunched)
+            {
+                ScreenManager.AddScreen(new ScoreScreen(game, time));
+                scoreScreenLaunched = true;
+            }
+            else
+            {
+                player.Update(gameTime);
+                EntityManager.Update(gameTime);
+                CollisionManager.Update(gameTime);
+                cloudManager.Update(gameTime);
 
 #if DEBUG
-            XConsole.Update(gameTime);
+                XConsole.Update(gameTime);
 #endif
+            }
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
         {
-            player.HandleInput(gameTime, input);
+            if (input.IsPressed(Keys.P) || input.IsPressed(Buttons.Start))
+                ScreenManager.AddScreen(new InGameMenuScreen(game));
+            else
+            {
+                time += gameTime.ElapsedGameTime;
+                player.HandleInput(gameTime, input);
 
 #if DEBUG
-            if (input.IsPressed(Keys.D1) || input.IsPressed(Buttons.Start))
-                player.Reset();
+                if (input.IsPressed(Keys.D1) || input.IsPressed(Buttons.B))
+                    player.Reset();
 
-            DebugConfig.HandleInput(gameTime, input);
+                DebugConfig.HandleInput(gameTime, input);
 #endif
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -361,6 +398,13 @@ namespace Troma
 
             EntityManager.DrawHUD(gameTime);
             player.DrawHUD(gameTime);
+
+            // If the game is transitioning on or off, fade it out to black.
+            if (TransitionPosition > 0 || pauseAlpha > 0)
+            {
+                float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
+                ScreenManager.FadeBackBufferToBlack(alpha);
+            }
         }
     }
 }

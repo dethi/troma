@@ -113,8 +113,10 @@ namespace GameEngine
             if (time == TimeSpan.Zero)
                 transitionDelta = 1;
             else
+            {
                 transitionDelta = (float)(gameTime.ElapsedGameTime.TotalMilliseconds /
                     time.TotalMilliseconds);
+            }
 
             TransitionPosition += transitionDelta * direction;
 

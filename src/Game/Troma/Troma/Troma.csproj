@@ -126,6 +126,7 @@
     <Compile Include="EntitySystem\Template\TargetObject.cs" />
     <Compile Include="EntitySystem\Template\VectGameObject.cs" />
     <Compile Include="EntitySystem\Template\WeaponObject.cs" />
+    <Compile Include="Screens\InGameMenuScreen.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
     <Compile Include="Screens\MenuScreen.cs" />
     <Compile Include="Screens\LoadingScreen.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="EntitySystem\Template\GameObject.cs" />
     <Compile Include="Screens\OptionsMenuScreen.cs" />
+    <Compile Include="Screens\ScoreScreen.cs" />
     <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Screens\StartScreen.cs" />
     <Compile Include="Settings.cs" />

@@ -39,13 +39,14 @@ namespace Troma
             MenuEntries.Add(multiMenuEntry);
             MenuEntries.Add(optionsMenuEntry);
             MenuEntries.Add(exitMenuEntry);
+
+            SceneRenderer.InitializeMenu();
         }
 
         public override void LoadContent()
         {
             base.LoadContent();
 
-            selectedEntry = 0;
             x1 = 0;
             x2 = 0;
             x3 = 0;

@@ -24,6 +24,11 @@ namespace GameEngine
             soundBank = new SoundBank(audioEngine, root + "/Sounds/Sound Bank.xsb");
         }
 
+        public static void Update()
+        {
+            audioEngine.Update();
+        }
+
         public static void SetVolume(float musicVolume)
         {
             audioEngine.GetCategory("Music").SetVolume(musicVolume);

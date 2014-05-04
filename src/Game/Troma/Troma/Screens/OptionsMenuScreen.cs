@@ -58,7 +58,6 @@ namespace Troma
         {
             base.LoadContent();
 
-            selectedEntry = 0;
             x1 = 0;
             x2 = 0;
             x3 = 0;

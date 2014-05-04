@@ -26,7 +26,7 @@ namespace Troma
             TransitionOnTime = TimeSpan.FromSeconds(1);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
-            SceneRenderer.InitializeMenu();
+            selectedEntry = 0;
         }
 
         public override void LoadContent()
@@ -44,7 +44,7 @@ namespace Troma
             for (int i = 0; i < MenuEntries.Count; i++)
             {
                 bool isSelected = IsActive && (i == selectedEntry);
-                MenuEntries[i].Update(gameTime,this, isSelected);
+                MenuEntries[i].Update(gameTime, this, isSelected);
             }
 
             UpdateMenuEntryLocations();
@@ -81,7 +81,7 @@ namespace Troma
 
         }
 
-        protected void UpdateMenuEntryLocations()
+        protected virtual void UpdateMenuEntryLocations()
         {
             // Make the menu slide into place during transitions, using a
             // power curve to make things look more interesting (this makes
@@ -91,7 +91,7 @@ namespace Troma
             float height = game.GraphicsDevice.Viewport.Height;
 
             Vector2 position = new Vector2(
-                (100 * width) / 1920, 
+                (100 * width) / 1920,
                 (350 * height) / 1080);
 
             float totalTextSize = MenuEntries[0].FontSize * MenuEntries.Count;

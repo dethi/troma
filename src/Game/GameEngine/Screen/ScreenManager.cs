@@ -17,6 +17,7 @@ namespace GameEngine
         private List<GameScreen> screensToUpdate;
         private InputState input;
         private ContentManager content;
+        private Texture2D blankTexture;
 
         private bool isInitialized;
 
@@ -48,6 +49,7 @@ namespace GameEngine
         protected override void LoadContent()
         {
             content = Game.Content;
+            blankTexture = content.Load<Texture2D>("blank");
 
             foreach (GameScreen s in screens)
                 s.LoadContent();
@@ -98,7 +100,7 @@ namespace GameEngine
                 if (s.ScreenState == ScreenState.TransitionOn ||
                     s.ScreenState == ScreenState.Active)
                 {
-                    if (hasFocus && !s.IsHUD)
+                    if (hasFocus)
                     {
                         s.HandleInput(gameTime, input);
                         hasFocus = false;
@@ -143,6 +145,17 @@ namespace GameEngine
         public GameScreen[] GetScreens()
         {
             return screens.ToArray();
+        }
+
+        public void FadeBackBufferToBlack(float alpha)
+        {
+            Viewport viewport = GraphicsDevice.Viewport;
+
+            GameServices.SpriteBatch.Begin();
+            GameServices.SpriteBatch.Draw(blankTexture,
+                             new Rectangle(0, 0, viewport.Width, viewport.Height),
+                             Color.Black * alpha);
+            GameServices.SpriteBatch.End();
         }
     }
 }

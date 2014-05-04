@@ -45,8 +45,10 @@ namespace Troma
             Settings.Initialize();
             SoundManager.SetVolume(Settings.MusicVolume);
 
+            //screenManager.AddScreen(new SoloScreen(this, "Farm"));
             //screenManager.AddScreen(new TestScreen(this));
             //screenManager.AddScreen(new MainMenuScreen(this));
+            //screenManager.AddScreen(new ScoreScreen(this, null));
             screenManager.AddScreen(new StartScreen(this));
         }
 
@@ -67,7 +69,13 @@ namespace Troma
 
         #endregion
 
-        #region Draw
+        #region Update and Draw
+
+        protected override void Update(GameTime gameTime)
+        {
+            SoundManager.Update();
+            base.Update(gameTime);
+        }
 
         protected override void Draw(GameTime gameTime)
         {
