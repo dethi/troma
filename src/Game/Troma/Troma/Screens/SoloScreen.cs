@@ -292,16 +292,6 @@ namespace Troma
 
                 #endregion
 
-                GameObject.BuildEntity(new Vector3(0, y, 117), "Town/gare", modelEffect);
-                GameObject.BuildEntity(new Vector3(0, y, 220), "Town/quai", modelEffect);
-                GameObject.BuildEntity(new Vector3(460, y, 153), "Town/garde_passage_a_niveau", modelEffect);
-                GameObject.BuildEntity(new Vector3(435, y, 192), "Town/barriere_train_droite", modelEffect);
-                GameObject.BuildEntity(new Vector3(435, y, 222), "Town/barriere_train_gauche", modelEffect);
-                GameObject.BuildEntity(new Vector3(300, y, 300), "Town/eglise", modelEffect);
-                GameObject.BuildEntity(new Vector3(50, y, 290), "Town/cimetiere", modelEffect);
-                GameObject.BuildEntity(new Vector3(380, y, 30), "Town/mairie", modelEffect);
-                GameObject.BuildEntity(new Vector3(290, y, 55), "Town/fontaine", modelEffect);
-
                 #region Target
 
                 List<Tuple<Vector3, float>> ciblePos = new List<Tuple<Vector3, float>>();
@@ -324,6 +314,16 @@ namespace Troma
                     TargetObject.BuildEntity(data.Item1, data.Item2, modelEffect);
 
                 #endregion
+
+                GameObject.BuildEntity(new Vector3(0, y, 117), "Town/gare", modelEffect);
+                GameObject.BuildEntity(new Vector3(0, y, 220), "Town/quai", modelEffect);
+                GameObject.BuildEntity(new Vector3(460, y, 153), "Town/garde_passage_a_niveau", modelEffect);
+                GameObject.BuildEntity(new Vector3(435, y, 192), "Town/barriere_train_droite", modelEffect);
+                GameObject.BuildEntity(new Vector3(435, y, 222), "Town/barriere_train_gauche", modelEffect);
+                GameObject.BuildEntity(new Vector3(300, y, 300), "Town/eglise", modelEffect);
+                GameObject.BuildEntity(new Vector3(50, y, 290), "Town/cimetiere", modelEffect);
+                GameObject.BuildEntity(new Vector3(380, y, 30), "Town/mairie", modelEffect);
+                GameObject.BuildEntity(new Vector3(290, y, 55), "Town/fontaine", modelEffect);
             }
 
             EntityManager.Initialize();
