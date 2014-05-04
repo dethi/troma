@@ -105,6 +105,10 @@ namespace GameEngine
             _graphicsDeviceManager.IsFullScreen = true;
 
             _graphicsDeviceManager.ApplyChanges();
+
+            InputState.MouseOrigin = new Vector2(
+                _graphicsDevice.Viewport.Width / 2,
+                _graphicsDevice.Viewport.Height / 2);
         }
 
         /// <summary>
@@ -119,6 +123,10 @@ namespace GameEngine
             _graphicsDeviceManager.IsFullScreen = false;
 
             _graphicsDeviceManager.ApplyChanges();
+
+            InputState.MouseOrigin = new Vector2(
+                _graphicsDevice.Viewport.Width / 2,
+                _graphicsDevice.Viewport.Height / 2);
         }
 
         /// <summary>

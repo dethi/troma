@@ -42,9 +42,9 @@ namespace GameEngine
         public MouseState LastMouseState { get; private set; }
 
         bool isGamePadConnected;
-        Vector2 mouseOrigin;
+        static Vector2 mouseOrigin;
 
-        public Vector2 MouseOrigin
+        public static Vector2 MouseOrigin
         {
             get { return mouseOrigin; }
             set
@@ -64,7 +64,6 @@ namespace GameEngine
             isGamePadConnected = false;
             CurrentKeyboardState = new KeyboardState();
             CurrentMouseState = new MouseState();
-            mouseOrigin = Vector2.Zero;
         }
 
         public void Update()
@@ -186,7 +185,7 @@ namespace GameEngine
             return currentState == ButtonState.Released;
         }
 
-        public void MouseResetPos()
+        public static void MouseResetPos()
         {
             Mouse.SetPosition((int)mouseOrigin.X, (int)mouseOrigin.Y);
         }

@@ -374,10 +374,10 @@ namespace Troma
                 if (_weapon.GetComponent<Weapon>().Shoot(gameTime.TotalGameTime.TotalSeconds))
                 {
                     nearPoint = GameServices.GraphicsDevice.Viewport.Unproject(
-                        new Vector3(input.MouseOrigin.X, input.MouseOrigin.Y, 0), _view.Projection,
+                        new Vector3(InputState.MouseOrigin.X, InputState.MouseOrigin.Y, 0), _view.Projection,
                         _view.View, Matrix.Identity);
                     farPoint = GameServices.GraphicsDevice.Viewport.Unproject(
-                        new Vector3(input.MouseOrigin.X, input.MouseOrigin.Y, 1), _view.Projection,
+                        new Vector3(InputState.MouseOrigin.X, InputState.MouseOrigin.Y, 1), _view.Projection,
                         _view.View, Matrix.Identity);
 
                     bulletDir = farPoint - nearPoint;
