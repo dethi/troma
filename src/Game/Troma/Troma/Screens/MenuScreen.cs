@@ -88,21 +88,26 @@ namespace Troma
             // the movement slow down as it nears the end).
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
             int width = game.GraphicsDevice.Viewport.Width;
+            float height = game.GraphicsDevice.Viewport.Height;
 
-            Vector2 position = new Vector2(0f, (400f * width) / 1920);
+            Vector2 position = new Vector2(
+                (100 * width) / 1920, 
+                (350 * height) / 1080);
+
+            float totalTextSize = MenuEntries[0].FontSize * MenuEntries.Count;
+            height -= (1.4f * position.Y) - totalTextSize;
+            float spacing = height / MenuEntries.Count;
 
             // update each menu entry's location in turn
             for (int i = 0; i < MenuEntries.Count; i++)
             {
-                position.X = 50;
-
                 if (ScreenState == ScreenState.TransitionOn)
                     position.X -= transitionOffset * 256;
                 else
                     position.X += transitionOffset * 512;
 
                 MenuEntries[i].Position = position;
-                position.Y += (MenuEntries[i].GetHeight(this) + (200 * width)) / 1920;
+                position.Y += spacing;
             }
         }
 

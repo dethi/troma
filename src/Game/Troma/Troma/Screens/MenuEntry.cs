@@ -14,20 +14,30 @@ namespace Troma
         public Vector2 Position;
         public float FontSize;
 
+        private float _rotation;
+        private bool _isPulsate;
+
         private float selectionFade;
         private readonly Color notSelectedColor;
+        private readonly Color selectedColor;
+
+        private float pulsate;
 
         public event EventHandler Selected;
 
         public MenuEntry(string text)
-            : this(text, 0.75f)
+            : this(text, 0.75f, -0.35f, true)
         { }
 
-        public MenuEntry(string text, float fontSize)
+        public MenuEntry(string text, float fontSize, float rot, bool isPulsate)
         {
             this.Text = text;
+            _rotation = rot;
+            _isPulsate = isPulsate;
             FontSize = fontSize;
+
             notSelectedColor = new Color(150, 145, 140);
+            selectedColor = Color.Black;
         }
 
         public virtual void Update(GameTime gameTime, MenuScreen screen, bool isSelected)
@@ -37,13 +47,11 @@ namespace Troma
 
         public virtual void Draw(GameTime gameTime, MenuScreen screen, bool isSelected)
         {
-            // Pulsate the size of the selected menu entry.            
-            float pulsate = (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * 6) + 1;
-
-            Color selectedColor = new Color(
-                64 * pulsate / 700, 
-                56 * pulsate / 700, 
-                48 * pulsate / 700);
+            // Pulsate the size of the selected menu entry.
+            if (_isPulsate)
+                pulsate = (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * 6) + 1;
+            else
+                pulsate = 0;
 
             Color color = (isSelected) ? selectedColor : notSelectedColor;
             color *= screen.TransitionAlpha;
@@ -53,8 +61,8 @@ namespace Troma
                 GameServices.GraphicsDevice.Viewport.Width) / 1980;
             Vector2 origin = new Vector2(0, screen.Font.LineSpacing / 2);
 
-            GameServices.SpriteBatch.DrawString(screen.Font, Text, Position, 
-                color, -0.35f, origin, scale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(screen.Font, Text, Position, color, _rotation, 
+                origin, scale, SpriteEffects.None, 0);
         }
 
         protected internal void OnSelectEntry()

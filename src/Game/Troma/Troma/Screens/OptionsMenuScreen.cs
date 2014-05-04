@@ -33,11 +33,11 @@ namespace Troma
         public OptionsMenuScreen(Game game)
             : base(game, "Options")
         {
-            keyboardMenuEntry = new MenuEntry(string.Empty);
-            languageMenuEntry = new MenuEntry(string.Empty);
-            displayMenuEntry = new MenuEntry(string.Empty);
-            volumeMenuEntry = new MenuEntry(string.Empty);
-            MenuEntry back = new MenuEntry("Retour");
+            keyboardMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
+            languageMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
+            displayMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
+            volumeMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
+            MenuEntry back = new MenuEntry("Retour", 0.75f, 0, false);
 
             SetMenuEntryText();
 
@@ -174,10 +174,10 @@ namespace Troma
 
         private void SetMenuEntryText()
         {
-            keyboardMenuEntry.Text = "Clavier: " + Settings.Keyboard;
-            languageMenuEntry.Text = "Langage: " + Settings.Language;
-            displayMenuEntry.Text = "Pleine ecran: " + (Settings.FullScreen ? "Oui" : "Non");
-            volumeMenuEntry.Text = "Volume: " + (int)(Settings.MusicVolume * 100);
+            keyboardMenuEntry.Text = "Clavier   " + Settings.Keyboard;
+            languageMenuEntry.Text = "Langage   " + Settings.Language;
+            displayMenuEntry.Text = "Pleine ecran   " + (Settings.FullScreen ? "Oui" : "Non");
+            volumeMenuEntry.Text = "Volume  " + (int)(Settings.MusicVolume * 100);
         }
         #endregion
     }
