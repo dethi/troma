@@ -1,1 +1,0 @@
-charger modele a partir du content manager, copier manuellement les textures correspondantes dans le dossier models!
