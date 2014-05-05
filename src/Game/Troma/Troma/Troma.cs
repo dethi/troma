@@ -44,8 +44,9 @@ namespace Troma
             SoundManager.Initialize();
             Settings.Initialize();
             SoundManager.SetVolume(Settings.MusicVolume);
+            SFXManager.SetVolume(Settings.MusicVolume);
 
-            //screenManager.AddScreen(new SoloScreen(this, "Farm"));
+            //screenManager.AddScreen(new SoloScreen(this, ""));
             //screenManager.AddScreen(new TestScreen(this));
             //screenManager.AddScreen(new MainMenuScreen(this));
             //screenManager.AddScreen(new ScoreScreen(this, null));
@@ -65,6 +66,7 @@ namespace Troma
             SFXManager.Add("GarandM1_empty", Content.Load<SoundEffect>("Sounds/GarandM1_empty"));
             SFXManager.Add("GarandM1_reload", Content.Load<SoundEffect>("Sounds/GarandM1_reload"));
             SFXManager.Add("GarandM1_shoot", Content.Load<SoundEffect>("Sounds/GarandM1_shoot"));
+            SFXManager.Add("Move", Content.Load<SoundEffect>("Sounds/Move"));
         }
 
         #endregion
