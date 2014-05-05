@@ -22,6 +22,9 @@ namespace Troma
 
         private const float JUMP_SPEED = 60;
 
+        private const float DT_SOUND_MOVE = 0.45f;
+        private const float DT_SOUND_RUN = 0.3f;
+
         #endregion
 
         #region Fields
@@ -47,6 +50,8 @@ namespace Troma
 
         private bool _isCrouched;
         private bool _touchGround;
+        private bool _isRun;
+        private bool _isMove;
 
         #region Fields for collision
 
@@ -76,6 +81,13 @@ namespace Troma
         private Vector3 bulletDir;
         private Ray bulletRay;
         private CollisionType bulletResult;
+
+        #endregion
+
+        #region Fields for move sound
+
+        private float dt_elapsedTime = 0.5f;
+        private float pan = 0.7f;
 
         #endregion
 
@@ -181,6 +193,8 @@ namespace Troma
 
             ApplyCollision();
             MoveTo(newPos, rotate);
+
+            PlaySoundEffect(dt);
         }
 
         public void Draw(GameTime gameTime, ICamera camera)
@@ -214,12 +228,15 @@ namespace Troma
 
         private void Move(float dt, InputState input)
         {
+            _isMove = input.PlayerMove(out move);
+            _isRun = (_isMove && !_isCrouched && input.PlayerRun());
+
             // Walk/Run
-            if (input.PlayerMove(out move))
+            if (_isMove)
             {
                 move *= dt * WALK_SPEED;
 
-                if (!_isCrouched && input.PlayerRun())
+                if (_isRun)
                 {
                     if (move.Z > 0)
                         move.Z *= COEF_RUN_SPEED;
@@ -389,6 +406,20 @@ namespace Troma
                     if (bulletResult.IsCollide)
                         TargetManager.IsTargetAchieved(bulletResult.CollisionWith);
                 }
+            }
+        }
+
+        private void PlaySoundEffect(float dt)
+        {
+            dt_elapsedTime += dt;
+            pan *= -1;
+
+            if ((_touchGround || _collisionDetectedDown) && 
+                ((_isRun && dt_elapsedTime >= DT_SOUND_RUN) ||
+                (_isMove && dt_elapsedTime >= DT_SOUND_MOVE)))
+            {
+                SFXManager.Play("Move", 0.5f, pan);
+                dt_elapsedTime = 0;
             }
         }
 

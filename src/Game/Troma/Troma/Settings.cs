@@ -22,6 +22,7 @@ namespace Troma
                 _musicVolume = value;
                 _musicVolume = MathHelper.Clamp(_musicVolume, 0, 2f);
                 SoundManager.SetVolume(_musicVolume);
+                SFXManager.SetVolume(_musicVolume);
             }
         }
 
