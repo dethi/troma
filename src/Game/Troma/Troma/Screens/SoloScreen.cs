@@ -244,7 +244,7 @@ namespace Troma
                     Automatic = false,
                     ROF = 0.5f,
 
-                    Model = "Weapon/M1Garand",
+                    Model = "Weapon/M1",
                     Position = new Vector3(-0.7f, -0.3f, 0),
                     Rotation = new Vector3(0, 0, 0),
                     PositionSight = new Vector3(0, 0, -1.3f),
@@ -255,7 +255,7 @@ namespace Troma
                     SFXShoot = "GarandM1_shoot"
                 };
 
-                player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelEffect));
+                player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelWithNormal));
 
                 #region Rails
 
