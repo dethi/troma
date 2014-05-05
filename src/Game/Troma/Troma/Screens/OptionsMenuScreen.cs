@@ -175,7 +175,7 @@ namespace Troma
         {
             keyboardMenuEntry.Text = "Clavier   " + Settings.Keyboard;
             languageMenuEntry.Text = "Langage   " + Settings.Language;
-            displayMenuEntry.Text = "Pleine ecran   " + (Settings.FullScreen ? "Oui" : "Non");
+            displayMenuEntry.Text = "Plein ecran   " + (Settings.FullScreen ? "Oui" : "Non");
             volumeMenuEntry.Text = "Volume  " + (int)(Settings.MusicVolume * 100);
         }
         #endregion
