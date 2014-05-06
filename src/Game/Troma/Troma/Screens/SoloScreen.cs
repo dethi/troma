@@ -99,7 +99,7 @@ namespace Troma
                     SFXShoot = "GarandM1_shoot"
                 };
 
-                player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelEffect));
+                player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelWithNormal));
 
                 #region Models
                 /*

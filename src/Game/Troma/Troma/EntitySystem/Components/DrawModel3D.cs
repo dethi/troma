@@ -62,7 +62,7 @@ namespace Troma
             _effect.Parameters["Projection"].SetValue(camera.Projection);
 
             if (hasNormalMap)
-                _effect.Parameters["EyePosition"].SetValue(camera.Position);
+                _effect.Parameters["EyePosition"].SetValue(camera.LookAt);
 
             foreach (ModelMesh mesh in model.Meshes)
             {
