@@ -16,7 +16,11 @@ namespace Troma
             entity.AddComponent(new Transform(entity));
             entity.AddComponent(new Weapon(entity, weaponInfo));
             entity.AddComponent(new Model3D(entity, weaponInfo.Model));
-            entity.AddComponent(new DrawWeapon(entity, effect.Clone()));
+
+            Effect _effect = effect.Clone();
+            _effect.Name = effect.Name;
+
+            entity.AddComponent(new DrawWeapon(entity, _effect));
 
             return entity;
         }
