@@ -67,6 +67,7 @@ namespace Troma
 
             Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
             Effect modelWithNormal = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
+            modelWithNormal.Name = "GameObjectWithNormal";
 
             WeaponInfo garandM1 = new WeaponInfo()
             {
