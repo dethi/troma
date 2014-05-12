@@ -77,7 +77,6 @@ namespace GameEngine
         public override void Update(GameTime gameTime)
         {
             input.Update();
-            CheatKey.Update(input);
 
             // Allows the game to exit
             if (input.IsDown(Buttons.Back) || input.IsDown(Keys.Escape))
