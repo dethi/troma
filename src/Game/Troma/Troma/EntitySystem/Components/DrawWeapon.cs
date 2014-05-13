@@ -15,6 +15,9 @@ namespace Troma
         private Texture2D _normalMap;
         private bool hasNormalMap;
 
+        private Texture2D chargeur;
+        private SpriteFont Font;
+
         private Texture2D _cross;
 
         public DrawWeapon(Entity aParent, Effect effect)
@@ -101,25 +104,42 @@ namespace Troma
 
         public override void DrawHUD(GameTime gameTime)
         {
+            int width = GameServices.GraphicsDevice.Viewport.Width;
+            int height = GameServices.GraphicsDevice.Viewport.Height;
+            int size = (64 * width) / 1920;
+
+            chargeur = FileManager.Load<Texture2D>("Models/Weapon/Chargeur");
+            WeaponInfo weaponInfo = Entity.GetComponent<Weapon>().Info;
+            Font = FileManager.Load<SpriteFont>("Fonts/Menu");
+
+            string Text1 = "" + weaponInfo.Munition + " / " + (weaponInfo.MunitionPerLoader * weaponInfo.Loader);
+            float textScale1 = 0.00035f * width;
+            Rectangle chargeurImage = new Rectangle(1850 * width / 1920, height - (120 * width / 1920), 20, 50);
+
+            Vector2 titleOrigin = new Vector2(0, 0);
+            Color c = new Color(170, 170, 170);
+            Vector2 Position1 = new Vector2(
+            1650 * width / 1920,
+            height - (120 * width / 1920));
+
+            GameServices.SpriteBatch.Begin();
+            GameServices.SpriteBatch.DrawString(Font, Text1, Position1, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.Draw(chargeur, chargeurImage, Color.White);
+            
             if (!Entity.GetComponent<Weapon>().SightPosition)
             {
                 #region Cross
-
-                int width = GameServices.GraphicsDevice.Viewport.Width;
-                int height = GameServices.GraphicsDevice.Viewport.Height;
-                int size = (64 * width) / 1920;
 
                 Rectangle rect = new Rectangle(
                     (width - size) / 2,
                     (height - size) / 2,
                     size, size);
-
-                GameServices.SpriteBatch.Begin();
+                
                 GameServices.SpriteBatch.Draw(_cross, rect, Color.White);
-                GameServices.SpriteBatch.End();
-
+                
                 #endregion
             }
+            GameServices.SpriteBatch.End();
         }
     }
 }

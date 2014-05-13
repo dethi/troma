@@ -134,7 +134,7 @@ namespace Troma
             GameServices.SpriteBatch.Begin();
 
             GameServices.SpriteBatch.Draw(background, posBackground, Color.White * TransitionAlpha);
-            GameServices.SpriteBatch.Draw(logo, posLogo, Color.White * TransitionAlpha * 0.6f);
+            
             //GameServices.SpriteBatch.Draw(balle_gauche, rect1, c);
             //GameServices.SpriteBatch.Draw(balle_droite, rect2, c);
             //GameServices.SpriteBatch.Draw(balle_droite, rect3, c);
@@ -146,6 +146,8 @@ namespace Troma
             GameServices.SpriteBatch.DrawString(Font, Text2, Position2, c, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text3, Position3, c, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text4, Position4, c, 0, titleOrigin, textScale3, SpriteEffects.None, 0);
+
+            GameServices.SpriteBatch.Draw(logo, posLogo, Color.White * TransitionAlpha * 0.6f);
 
             // Draw each menu entry in turn.
             for (int i = 0; i < MenuEntries.Count; i++)
