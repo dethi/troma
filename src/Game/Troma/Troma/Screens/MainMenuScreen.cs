@@ -13,11 +13,18 @@ namespace Troma
         private int x1;
         private int x2;
         private int x3;
+        private int x4;
 
         private Texture2D background;
         private Texture2D balle_gauche;
         private Texture2D balle_droite;
         private Texture2D logo;
+
+        private string Text1 = "Suivez-nous sur les reseaux sociaux !";
+        private string Text2 = "twitter.com/Emagine_Studio";
+        private string Text3 = "facebook.com/EmagineStudio2018";
+        private string Text4 = "Troma.eu";
+
 
         public MainMenuScreen(Game game)
             : base(game, "Troma")
@@ -50,6 +57,7 @@ namespace Troma
             x1 = 0;
             x2 = 0;
             x3 = 0;
+            x4 = 0;
 
             background = FileManager.Load<Texture2D>("Menus/Fond");
             balle_gauche = FileManager.Load<Texture2D>("Menus/balle-droite");
@@ -68,10 +76,12 @@ namespace Troma
             Rectangle posBackground = new Rectangle(0, 0, width, height);
             Rectangle posLogo = new Rectangle(width - 100, height - 100, 100, 100);
 
-            x1 = (x1 < 2100) ? (x1 + 12) : 0;
-            x2 = (x2 > 0) ? (x2 - 15) : 3500;
-            x3 = (x3 > 0) ? (x3 - 22) : 2800;
+            x1 = (x1 < 2100) ? (x1 + 1) : -500;
+            x2 = (x2 > 0) ? (x2 - 2) : 3900;
+            x3 = (x3 > 0) ? (x3 - 2) : 2900;
+            x4 = (x4 < 2300) ? (x4 + 2) : -700;
 
+            /*
             Rectangle rect1 = new Rectangle(
                 x1 * width / 1920,
                 height - (60 * width / 1920),
@@ -87,6 +97,7 @@ namespace Troma
                 height - (30 * width / 1920),
                 40 * width / 1920,
                 40 * width / 1920);
+             */
 
             // Make the menu slide into place during transitions, using a
             // power curve to make things look more interesting (this makes
@@ -99,17 +110,42 @@ namespace Troma
             Vector2 titleOrigin = Font.MeasureString(menuTitle) / 2;
             Color titleColor = new Color(0, 0, 0) * TransitionAlpha;
             float titleScale = 0.00078125f * width;
+            float textScale1 = 0.00015f * width;
+            float textScale2 = 0.00013f * width;
+            float textScale3 = 0.00011f * width;
+
+            Vector2 Position1 = new Vector2(
+                x1 * width / 1920,
+                height - (57 * width / 1920));
+            
+            Vector2 Position2 = new Vector2(
+                x2 * width / 1920,
+                height - (75 * width / 1920));
+
+            Vector2 Position3 = new Vector2(
+                x3 * width / 1920,
+                height - (20 * width / 1920));
+
+            Vector2 Position4 = new Vector2(
+                x4 * width / 1920,
+                height - (38 * width / 1920));
+
 
             GameServices.SpriteBatch.Begin();
 
             GameServices.SpriteBatch.Draw(background, posBackground, Color.White * TransitionAlpha);
-            GameServices.SpriteBatch.Draw(logo, posLogo, Color.White * TransitionAlpha * 0.4f);
-            GameServices.SpriteBatch.Draw(balle_gauche, rect1, c);
-            GameServices.SpriteBatch.Draw(balle_droite, rect2, c);
-            GameServices.SpriteBatch.Draw(balle_droite, rect3, c);
+            GameServices.SpriteBatch.Draw(logo, posLogo, Color.White * TransitionAlpha * 0.6f);
+            //GameServices.SpriteBatch.Draw(balle_gauche, rect1, c);
+            //GameServices.SpriteBatch.Draw(balle_droite, rect2, c);
+            //GameServices.SpriteBatch.Draw(balle_droite, rect3, c);
 
             GameServices.SpriteBatch.DrawString(Font, menuTitle, titlePosition, titleColor, 0,
                 titleOrigin, titleScale, SpriteEffects.None, 0);
+
+            GameServices.SpriteBatch.DrawString(Font, Text1, Position1, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text2, Position2, c, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text3, Position3, c, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text4, Position4, c, 0, titleOrigin, textScale3, SpriteEffects.None, 0);
 
             // Draw each menu entry in turn.
             for (int i = 0; i < MenuEntries.Count; i++)
