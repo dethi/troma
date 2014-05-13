@@ -57,6 +57,13 @@ namespace Troma
                     _isRespectROF = false;
                 }
 
+                TimerManager.Add(30, GunAnimationOn);
+                TimerManager.Add(40, GunAnimationOn);
+                TimerManager.Add(50, GunAnimationOn);
+                TimerManager.Add(60, GunAnimationOff);
+                TimerManager.Add(70, GunAnimationOff);
+                TimerManager.Add(80, GunAnimationOff);
+
                 return true;
             }
 
@@ -95,6 +102,16 @@ namespace Troma
         public void LoadingTimerEnded(object o, EventArgs e)
         {
             _isLoading = false;
+        }
+
+        public void GunAnimationOn(object o, EventArgs e)
+        {
+            _info.PositionSight.Z -= 0.1f;
+        }
+
+        public void GunAnimationOff(object o, EventArgs e)
+        {
+            _info.PositionSight.Z += 0.1f;
         }
 
         #endregion
