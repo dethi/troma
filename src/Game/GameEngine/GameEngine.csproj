@@ -120,8 +120,8 @@
     <Compile Include="LightInfo.cs" />
     <Compile Include="SceneRenderer.cs" />
     <Compile Include="Screen\GameScreen.cs" />
-    <Compile Include="Input\InputConfiguration.cs" />
-    <Compile Include="Input\InputState.cs" />
+    <Compile Include="IO\InputConfiguration.cs" />
+    <Compile Include="IO\InputState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screen\ScreenManager.cs" />
     <Compile Include="Size.cs" />
@@ -130,6 +130,7 @@
     <Compile Include="Terrain\HeightMap.cs" />
     <Compile Include="Terrain\ITerrain.cs" />
     <Compile Include="Terrain\TerrainInfo.cs" />
+    <Compile Include="TimerManager.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="EntitySystem\Components\CollisionBox.cs" />
     <Compile Include="EntitySystem\Components\DrawModel3D.cs" />
     <Compile Include="EntitySystem\Components\DrawWeapon.cs" />

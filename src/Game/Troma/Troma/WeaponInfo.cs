@@ -14,7 +14,7 @@ namespace Troma
         public int Loader;
 
         public bool Automatic;
-        public float ROF;
+        public uint ROF; // en ms
 
         public string Model;
 

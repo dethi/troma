@@ -10,7 +10,8 @@ namespace Troma
     public class Weapon : EntityComponent
     {
         private WeaponInfo _info;
-        private double dt_lastShoot;
+        private bool _isRespectROF;
+        private bool _isLoading;
 
         public bool SightPosition;
 
@@ -31,22 +32,31 @@ namespace Troma
 
             _info = weaponInfo;
 
-            dt_lastShoot = 0;
             SightPosition = false;
             _info.Munition = _info.MunitionPerLoader;
             _info.Loader--;
+
+            _isRespectROF = true;
+            _isLoading = false;
         }
 
-        public bool Shoot(double elapsedTime)
+        public bool Shoot()
         {
             if (LoaderIsEmpty)
+            {
                 SFXManager.Play(Info.SFXEmpty);
-            else if (IsRespectROF(elapsedTime))
+            }
+            else if (_isRespectROF && !_isLoading)
             {
                 SFXManager.Play(Info.SFXShoot);
-
-                dt_lastShoot = elapsedTime;
                 _info.Munition--;
+
+                if (!_info.Automatic)
+                {
+                    TimerManager.Add(_info.ROF, ROFTimerEnded);
+                    _isRespectROF = false;
+                }
+
                 return true;
             }
 
@@ -55,9 +65,11 @@ namespace Troma
 
         public void Reload()
         {
-            if (_info.Loader > 0)
+            if (_info.Loader > 0 && !_isLoading)
             {
-                SFXManager.Play(Info.SFXReload);
+                TimerManager.Add(500, PlaySoundLoading);
+                TimerManager.Add(1200, LoadingTimerEnded);
+                _isLoading = true;
                 _info.Loader--;
                 _info.Munition = _info.MunitionPerLoader;
             }
@@ -68,10 +80,23 @@ namespace Troma
             SightPosition = !SightPosition;
         }
 
-        private bool IsRespectROF(double dt_current)
+        #region Event
+
+        public void ROFTimerEnded(object o, EventArgs e)
         {
-            return _info.Automatic || 
-                (Math.Abs(dt_current - dt_lastShoot) >= _info.ROF);
+            _isRespectROF = true;
         }
+
+        public void PlaySoundLoading(object o, EventArgs e)
+        {
+            SFXManager.Play(Info.SFXReload);
+        }
+
+        public void LoadingTimerEnded(object o, EventArgs e)
+        {
+            _isLoading = false;
+        }
+
+        #endregion
     }
 }

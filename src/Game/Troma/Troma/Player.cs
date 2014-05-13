@@ -388,7 +388,7 @@ namespace Troma
 
             if (input.PlayerShoot(_weapon.GetComponent<Weapon>().Info.Automatic))
             {
-                if (_weapon.GetComponent<Weapon>().Shoot(gameTime.TotalGameTime.TotalSeconds))
+                if (_weapon.GetComponent<Weapon>().Shoot())
                 {
                     nearPoint = GameServices.GraphicsDevice.Viewport.Unproject(
                         new Vector3(InputState.MouseOrigin.X, InputState.MouseOrigin.Y, 0), _view.Projection,

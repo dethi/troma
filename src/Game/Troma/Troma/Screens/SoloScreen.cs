@@ -79,26 +79,7 @@ namespace Troma
             Effect modelWithNormal = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
             modelWithNormal.Name = "GameObjectWithNormal";
 
-            WeaponInfo garandM1 = new WeaponInfo()
-            {
-                MunitionPerLoader = 8,
-                Loader = 10,
-
-                Automatic = false,
-                ROF = 0.5f,
-
-                Model = "Weapon/M1",
-                Position = new Vector3(-0.7f, -0.3f, 0),
-                Rotation = new Vector3(0, 0, 0),
-                PositionSight = new Vector3(0, 0, -1.3f),
-                RotationSight = Vector3.Zero,
-
-                SFXEmpty = "GarandM1_empty",
-                SFXReload = "GarandM1_reload",
-                SFXShoot = "GarandM1_shoot"
-            };
-
-            player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelWithNormal));
+            player.Initialize(terrain, WeaponObject.BuildEntity(Constants.GarandM1, modelWithNormal));
 
             #region Rails
 
