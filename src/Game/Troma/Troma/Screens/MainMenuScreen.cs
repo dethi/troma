@@ -24,6 +24,7 @@ namespace Troma
         private Texture2D balle_gauche;
         private Texture2D balle_droite;
         private Texture2D logo;
+        private Texture2D blanc;
 
         private string Text1 = "Suivez-nous sur les reseaux sociaux !";
         private string Text2 = "twitter.com/Emagine_Studio";
@@ -69,6 +70,7 @@ namespace Troma
             background = FileManager.Load<Texture2D>("Menus/Fond");
             balle_gauche = FileManager.Load<Texture2D>("Menus/balle-droite");
             balle_droite = FileManager.Load<Texture2D>("Menus/balle-gauche");
+            blanc = FileManager.Load<Texture2D>("Menus/blanc");
             logo = FileManager.Load<Texture2D>("Menus/eie");
 
             SoundManager.Play("Menu");
@@ -112,6 +114,12 @@ namespace Troma
                 40 * width / 1920);
              */
 
+            Rectangle rect1 = new Rectangle(
+                120 * width / 1920,
+                500 * width / 1920,
+                500 * width / 1920,
+                100 * width / 1920);
+
             // Make the menu slide into place during transitions, using a
             // power curve to make things look more interesting (this makes
             // the movement slow down as it nears the end).
@@ -148,7 +156,7 @@ namespace Troma
 
             GameServices.SpriteBatch.Draw(background, posBackground, Color.White * TransitionAlpha);
             
-            //GameServices.SpriteBatch.Draw(balle_gauche, rect1, c);
+            //GameServices.SpriteBatch.Draw(blanc, rect1, Color.Gray);
             //GameServices.SpriteBatch.Draw(balle_droite, rect2, c);
             //GameServices.SpriteBatch.Draw(balle_droite, rect3, c);
 

@@ -36,11 +36,11 @@ namespace Troma
         public OptionsMenuScreen(Game game)
             : base(game, "Options")
         {
-            keyboardMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
-            languageMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
-            displayMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
-            volumeMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
-            backMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
+            keyboardMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+            languageMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+            displayMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+            volumeMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+            backMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
 
             SetMenuEntryText();
 
