@@ -15,6 +15,11 @@ namespace Troma
         private int x3;
         private int x4;
 
+        private MenuEntry soloMenuEntry;
+        private MenuEntry multiMenuEntry;
+        private MenuEntry optionsMenuEntry;
+        private MenuEntry exitMenuEntry;
+
         private Texture2D background;
         private Texture2D balle_gauche;
         private Texture2D balle_droite;
@@ -30,10 +35,10 @@ namespace Troma
             : base(game, "Troma")
         {
             // Create menu entries.
-            MenuEntry soloMenuEntry = new MenuEntry("Solo");
-            MenuEntry multiMenuEntry = new MenuEntry("Multijoueur");
-            MenuEntry optionsMenuEntry = new MenuEntry("Options");
-            MenuEntry exitMenuEntry = new MenuEntry("Quitter");
+            soloMenuEntry = new MenuEntry(string.Empty);
+            multiMenuEntry = new MenuEntry(string.Empty);
+            optionsMenuEntry = new MenuEntry(string.Empty);
+            exitMenuEntry = new MenuEntry(string.Empty);
 
             // Hook up menu event handlers.
             soloMenuEntry.Selected += SoloMenuEntrySelected;
@@ -46,6 +51,8 @@ namespace Troma
             MenuEntries.Add(multiMenuEntry);
             MenuEntries.Add(optionsMenuEntry);
             MenuEntries.Add(exitMenuEntry);
+
+            SetMenuEntryText();
 
             SceneRenderer.InitializeMenu();
         }
@@ -65,6 +72,12 @@ namespace Troma
             logo = FileManager.Load<Texture2D>("Menus/eie");
 
             SoundManager.Play("Menu");
+        }
+
+        public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
+        {
+            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
+            SetMenuEntryText();
         }
 
         public override void Draw(GameTime gameTime)
@@ -184,6 +197,14 @@ namespace Troma
         {
             SoundManager.Stop();
             OnCancel();
+        }
+
+        private void SetMenuEntryText()
+        {
+            soloMenuEntry.Text = "Solo";
+            multiMenuEntry.Text = Resource.Multiplayer;
+            optionsMenuEntry.Text = "Options";
+            exitMenuEntry.Text = Resource.Exit;
         }
     }
 }

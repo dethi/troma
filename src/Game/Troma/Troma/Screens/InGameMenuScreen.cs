@@ -13,8 +13,8 @@ namespace Troma
         public InGameMenuScreen(Game game)
             : base(game, "Pause")
         {
-            MenuEntry resumeMenuEntry = new MenuEntry("Reprendre");
-            MenuEntry backMenuEntry = new MenuEntry("Quitter");
+            MenuEntry resumeMenuEntry = new MenuEntry(Resource.Resume);
+            MenuEntry backMenuEntry = new MenuEntry(Resource.Exit);
 
             resumeMenuEntry.Selected += ResumeMenuEntrySelected;
             backMenuEntry.Selected += OnCancel;

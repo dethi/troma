@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using System.Globalization;
+using System.Threading;
 
 namespace Troma
 {
@@ -16,6 +18,7 @@ namespace Troma
         private MenuEntry languageMenuEntry;
         private MenuEntry displayMenuEntry;
         private MenuEntry keyboardMenuEntry;
+        private MenuEntry backMenuEntry;
 
         private int x1;
         private int x2;
@@ -37,7 +40,7 @@ namespace Troma
             languageMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
             displayMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
             volumeMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
-            MenuEntry back = new MenuEntry("Retour", 0.75f, 0, false);
+            backMenuEntry = new MenuEntry(string.Empty, 0.75f, 0, false);
 
             SetMenuEntryText();
 
@@ -45,13 +48,13 @@ namespace Troma
             languageMenuEntry.Selected += LanguageMenuEntrySelected;
             displayMenuEntry.Selected += DisplayMenuEntrySelected;
             volumeMenuEntry.Selected += VolumeMenuEntrySelected;
-            back.Selected += OnCancel;
+            backMenuEntry.Selected += OnCancel;
 
             MenuEntries.Add(keyboardMenuEntry);
             MenuEntries.Add(languageMenuEntry);
             MenuEntries.Add(displayMenuEntry);
             MenuEntries.Add(volumeMenuEntry);
-            MenuEntries.Add(back);
+            MenuEntries.Add(backMenuEntry);
         }
 
         public override void LoadContent()
@@ -143,9 +146,16 @@ namespace Troma
         private void LanguageMenuEntrySelected(object sender, EventArgs e)
         {
             if (Settings.Language == "Francais")
+            {
                 Settings.Language = "English";
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en-US");
+            }
+
             else
+            {
                 Settings.Language = "Francais";
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr-FR");
+            }
 
             SetMenuEntryText();
         }
@@ -162,7 +172,7 @@ namespace Troma
                 Settings.MusicVolume = 0;
             else
                 Settings.MusicVolume += 0.1f;
-            
+
             SetMenuEntryText();
         }
 
@@ -173,10 +183,11 @@ namespace Troma
 
         private void SetMenuEntryText()
         {
-            keyboardMenuEntry.Text = "Clavier   " + Settings.Keyboard;
-            languageMenuEntry.Text = "Langage   " + Settings.Language;
-            displayMenuEntry.Text = "Plein ecran   " + (Settings.FullScreen ? "Oui" : "Non");
+            keyboardMenuEntry.Text = Resource.Keyboard + Settings.Keyboard;
+            languageMenuEntry.Text = Resource.Language + Settings.Language;
+            displayMenuEntry.Text = Resource.Full_Screen + (Settings.FullScreen ? Resource.Yes : Resource.No);
             volumeMenuEntry.Text = "Volume  " + (int)(Settings.MusicVolume * 100);
+            backMenuEntry.Text = Resource.Back;
         }
         #endregion
     }
