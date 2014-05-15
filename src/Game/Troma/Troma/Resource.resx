@@ -123,6 +123,9 @@
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="FollowUs" xml:space="preserve">
+    <value>Follow us on social networks !</value>
+  </data>
   <data name="Full_Screen" xml:space="preserve">
     <value>Full Screen   </value>
   </data>

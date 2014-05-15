@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using GameEngine;
+using System.Globalization;
+using System.Threading;
 
 namespace Troma
 {
@@ -42,6 +44,12 @@ namespace Troma
             set
             {
                 _language = value;
+
+                if (_language == "Francais")
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr-FR");
+                else
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en-US");
+
             }
         }
 

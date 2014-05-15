@@ -26,7 +26,7 @@ namespace Troma
         private Texture2D logo;
         private Texture2D blanc;
 
-        private string Text1 = "Suivez-nous sur les reseaux sociaux !";
+        
         private string Text2 = "twitter.com/Emagine_Studio";
         private string Text3 = "facebook.com/EmagineStudio2018";
         private string Text4 = "Troma.eu";
@@ -86,6 +86,8 @@ namespace Troma
         {
             int width = game.GraphicsDevice.Viewport.Width;
             int height = game.GraphicsDevice.Viewport.Height;
+
+            string Text1 = Resource.FollowUs;
 
             Color c = new Color(120, 110, 100) * TransitionAlpha;
             Rectangle posBackground = new Rectangle(0, 0, width, height);

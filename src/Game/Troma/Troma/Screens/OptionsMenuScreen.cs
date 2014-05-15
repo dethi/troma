@@ -5,8 +5,6 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
-using System.Globalization;
-using System.Threading;
 
 namespace Troma
 {
@@ -70,6 +68,8 @@ namespace Troma
             balle_droite = FileManager.Load<Texture2D>("Menus/balle-gauche");
             logo = FileManager.Load<Texture2D>("Menus/eie");
         }
+
+        #endregion
 
         public override void Draw(GameTime gameTime)
         {
@@ -146,16 +146,9 @@ namespace Troma
         private void LanguageMenuEntrySelected(object sender, EventArgs e)
         {
             if (Settings.Language == "Francais")
-            {
                 Settings.Language = "English";
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en-US");
-            }
-
             else
-            {
                 Settings.Language = "Francais";
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr-FR");
-            }
 
             SetMenuEntryText();
         }
@@ -189,6 +182,5 @@ namespace Troma
             volumeMenuEntry.Text = "Volume  " + (int)(Settings.MusicVolume * 100);
             backMenuEntry.Text = Resource.Back;
         }
-        #endregion
     }
 }
