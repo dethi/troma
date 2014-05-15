@@ -14,12 +14,15 @@ namespace Troma
             : base(game, "Pause")
         {
             MenuEntry resumeMenuEntry = new MenuEntry(Resource.Resume);
+            MenuEntry optionMenu = new MenuEntry("Options");
             MenuEntry backMenuEntry = new MenuEntry(Resource.Exit);
 
             resumeMenuEntry.Selected += ResumeMenuEntrySelected;
+            optionMenu.Selected += OptionsMenuEntrySelected;
             backMenuEntry.Selected += OnCancel;
 
             MenuEntries.Add(resumeMenuEntry);
+            MenuEntries.Add(optionMenu);
             MenuEntries.Add(backMenuEntry);
 
             IsHUD = true;
@@ -56,6 +59,11 @@ namespace Troma
         private void ResumeMenuEntrySelected(object sender, EventArgs e)
         {
             ExitScreen();
+        }
+
+        private void OptionsMenuEntrySelected(object sender, EventArgs e)
+        {
+            ScreenManager.AddScreen(new OptionsMenuScreen(game));
         }
 
         private void OnCancel(object sender, EventArgs e)
