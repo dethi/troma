@@ -182,7 +182,7 @@ namespace Troma
             1710 * width / 1920,
             height - (150 * width / 1920));
 
-
+            //affichage HUD arme + ombre
             GameServices.SpriteBatch.Begin();
             GameServices.SpriteBatch.DrawString(Font, Text1, Position3, Color.Black * 0.3f, 0, titleOrigin, textScale3, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text2, Position5, Color.Black * 0.2f, 0, titleOrigin, textScale4, SpriteEffects.None, 0);
@@ -194,6 +194,7 @@ namespace Troma
             GameServices.SpriteBatch.DrawString(Font, Text4, Position7, c, 0, titleOrigin, textScale5, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text5, Position8, c, 0, titleOrigin, textScale5, SpriteEffects.None, 0);
 
+            //affichage chargeur
             if (weaponInfo.Loader > 0) GameServices.SpriteBatch.Draw(chargeur, chargeurImage1, Color.White * 0.8f);
             if (weaponInfo.Loader > 1) GameServices.SpriteBatch.Draw(chargeur, chargeurImage2, Color.White * 0.8f);
             if (weaponInfo.Loader > 2) GameServices.SpriteBatch.Draw(chargeur, chargeurImage3, Color.White * 0.8f);

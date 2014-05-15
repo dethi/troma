@@ -98,24 +98,6 @@ namespace Troma
             x3 = (x3 > 0) ? (x3 - 2) : 2900;
             x4 = (x4 < 2300) ? (x4 + 2) : -700;
 
-            /*
-            Rectangle rect1 = new Rectangle(
-                x1 * width / 1920,
-                height - (60 * width / 1920),
-                60 * width / 1920,
-                60 * width / 1920);
-            Rectangle rect2 = new Rectangle(
-                x2 * width / 1920,
-                height - (80 * width / 1920),
-                50 * width / 1920,
-                50 * width / 1920);
-            Rectangle rect3 = new Rectangle(
-                x3 * width / 1920,
-                height - (30 * width / 1920),
-                40 * width / 1920,
-                40 * width / 1920);
-             */
-
             Rectangle rect1 = new Rectangle(
                 120 * width / 1920,
                 500 * width / 1920,
