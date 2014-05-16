@@ -23,6 +23,7 @@ namespace Troma
         private Texture2D balle_gauche;
         private Texture2D balle_droite;
         private Texture2D logo;
+        private SpriteFont font2;
 
         #endregion
 
@@ -51,6 +52,7 @@ namespace Troma
             balle_gauche = FileManager.Load<Texture2D>("Menus/balle-droite");
             balle_droite = FileManager.Load<Texture2D>("Menus/balle-gauche");
             logo = FileManager.Load<Texture2D>("Menus/eie");
+            font2 = FileManager.Load<SpriteFont>("Fonts/Square");
         }
 
         #endregion
@@ -114,16 +116,7 @@ namespace Troma
                 MenuEntries[i].Draw(gameTime, this, isSelected);
             }
 
-            GameServices.SpriteBatch.End();
-        }
-
-        public override void DrawKeyboard(GameTime gameTime)
-        {
-
-            int width = GameServices.GraphicsDevice.Viewport.Width;
-            int height = GameServices.GraphicsDevice.Viewport.Height;
-
-            string Text1 = Resource.Up;
+            string Text1 = "yolo";//Resource.Up;
             string Text2 = Resource.Bottom;
             string Text3 = Resource.Left;
             string Text4 = Resource.Right;
@@ -134,13 +127,17 @@ namespace Troma
             string Text9 = Resource.Crouch;
             string Text10 = Resource.Menu_Paused;
 
-            float textScale = 0.70f * width;
+            float textScale = 0.0007f * width;
 
-            Vector2 titleOrigin = new Vector2(0, 0);
+            titleOrigin = new Vector2(0, 0);
 
             Vector2 Position1 = new Vector2(
-            1680 * width / 1920,
-            height - (120 * width / 1920));
+            900 * width / 1920,
+            height - (600 * width / 1920));
+            
+            
+            
+            
             Vector2 Position3 = new Vector2(
             1678 * width / 1920,
             height - (125 * width / 1920));
@@ -175,9 +172,9 @@ namespace Troma
             1710 * width / 1920,
             height - (150 * width / 1920));
 
-            GameServices.SpriteBatch.Begin();
-            GameServices.SpriteBatch.DrawString(Font, Text1, Position1, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text2, Position2, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            
+            GameServices.SpriteBatch.DrawString(Font, Text1, Position1, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            /*GameServices.SpriteBatch.DrawString(Font, Text2, Position2, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text3, Position3, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text4, Position4, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text5, Position5, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
@@ -185,7 +182,7 @@ namespace Troma
             GameServices.SpriteBatch.DrawString(Font, Text7, Position7, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text8, Position8, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text9, Position9, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text10, Position10, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text10, Position10, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);*/
             GameServices.SpriteBatch.End();
         }
 
