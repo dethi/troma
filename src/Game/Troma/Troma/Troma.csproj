@@ -167,6 +167,7 @@
       <DependentUpon>Resource.fr-FR.resx</DependentUpon>
     </Compile>
     <Compile Include="Screens\InGameMenuScreen.cs" />
+    <Compile Include="Screens\Key_Assignment.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
     <Compile Include="Screens\MenuScreen.cs" />
     <Compile Include="Screens\LoadingScreen.cs" />

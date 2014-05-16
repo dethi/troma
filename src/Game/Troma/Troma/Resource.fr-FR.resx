@@ -147,6 +147,9 @@
   <data name="Resume" xml:space="preserve">
     <value>Reprendre</value>
   </data>
+  <data name="SummonsKeyboard" xml:space="preserve">
+    <value>Assignation des touches</value>
+  </data>
   <data name="Victory" xml:space="preserve">
     <value>Victoire</value>
   </data>

@@ -8,17 +8,13 @@ using GameEngine;
 
 namespace Troma
 {
-    class OptionsMenuScreen : MenuScreen
+    class Key_Assignment : MenuScreen
     {
         #region Fields
 
-        private MenuEntry volumeMenuEntry;
-        private MenuEntry languageMenuEntry;
-        private MenuEntry displayMenuEntry;
-        private MenuEntry keyboardMenuEntry;
-        private MenuEntry summonsKeyboardMenuEntry;
         private MenuEntry backMenuEntry;
 
+        
         private int x1;
         private int x2;
         private int x3;
@@ -32,30 +28,14 @@ namespace Troma
 
         #region Initialization
 
-        public OptionsMenuScreen(Game game)
-            : base(game, "Options")
+        public Key_Assignment(Game game)
+            : base(game, "Key Assignment")
         {
-            keyboardMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            languageMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            displayMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            volumeMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            summonsKeyboardMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
             backMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
 
             SetMenuEntryText();
-
-            keyboardMenuEntry.Selected += KeyboardMenuEntrySelected;
-            languageMenuEntry.Selected += LanguageMenuEntrySelected;
-            displayMenuEntry.Selected += DisplayMenuEntrySelected;
-            volumeMenuEntry.Selected += VolumeMenuEntrySelected;
-            summonsKeyboardMenuEntry.Selected += SummonsKeyboardMenuEntrySelected;
-            backMenuEntry.Selected += OnCancel;
-
-            MenuEntries.Add(keyboardMenuEntry);
-            MenuEntries.Add(languageMenuEntry);
-            MenuEntries.Add(displayMenuEntry);
-            MenuEntries.Add(volumeMenuEntry);
-            MenuEntries.Add(summonsKeyboardMenuEntry);
+           
+            backMenuEntry.Selected += OnCancel;      
             MenuEntries.Add(backMenuEntry);
         }
 
@@ -137,48 +117,7 @@ namespace Troma
             GameServices.SpriteBatch.End();
         }
 
-        private void KeyboardMenuEntrySelected(object sender, EventArgs e)
-        {
-            if (Settings.Keyboard == "AZERTY")
-                Settings.Keyboard = "QWERTY";
-            else
-                Settings.Keyboard = "AZERTY";
-
-            SetMenuEntryText();
-        }
-
-        private void LanguageMenuEntrySelected(object sender, EventArgs e)
-        {
-            if (Settings.Language == "Francais")
-                Settings.Language = "English";
-            else
-                Settings.Language = "Francais";
-
-            SetMenuEntryText();
-        }
-
-        private void DisplayMenuEntrySelected(object sender, EventArgs e)
-        {
-            Settings.FullScreen = !Settings.FullScreen;
-            SetMenuEntryText();
-        }
-
-        private void VolumeMenuEntrySelected(object sender, EventArgs e)
-        {
-            if (Settings.MusicVolume + 0.1f > 2.01f) // float hack
-                Settings.MusicVolume = 0;
-            else
-                Settings.MusicVolume += 0.1f;
-
-            SetMenuEntryText();
-        }
-
-        private void SummonsKeyboardMenuEntrySelected(object sender, EventArgs e)
-        {
-            ScreenManager.AddScreen(new Key_Assignment(game));
-            SetMenuEntryText();
-        }
-
+        
         private void OnCancel(object sender, EventArgs e)
         {
             OnCancel();
@@ -186,11 +125,6 @@ namespace Troma
 
         private void SetMenuEntryText()
         {
-            keyboardMenuEntry.Text = Resource.Keyboard + Settings.Keyboard;
-            languageMenuEntry.Text = Resource.Language + Settings.Language;
-            displayMenuEntry.Text = Resource.Full_Screen + (Settings.FullScreen ? Resource.Yes : Resource.No);
-            volumeMenuEntry.Text = "Volume  " + (int)(Settings.MusicVolume * 100);
-            summonsKeyboardMenuEntry.Text = Resource.SummonsKeyboard;
             backMenuEntry.Text = Resource.Back;
         }
     }
