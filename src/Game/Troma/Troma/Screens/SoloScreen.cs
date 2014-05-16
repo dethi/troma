@@ -25,6 +25,12 @@ namespace Troma
         private float pauseAlpha;
         private bool scoreScreenLaunched;
 
+        private Texture2D target;
+        private Texture2D clock;
+        private SpriteFont Font;
+        private Vector2 titleOrigin = new Vector2(0, 0);
+        private Color c = new Color(170, 170, 170);
+
         #endregion
 
         #region Initialization
@@ -59,6 +65,10 @@ namespace Troma
             Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
             Texture2D terrainTexture = FileManager.Load<Texture2D>("Terrains/texture");
             Texture2D terrainHeighmap = FileManager.Load<Texture2D>("Terrains/heightmap");
+
+            target = FileManager.Load<Texture2D>("Menus/target");
+            clock = FileManager.Load<Texture2D>("Menus/Clock");
+            Font = FileManager.Load<SpriteFont>("Fonts/Square");
 
             TerrainInfo terrainInfo = new TerrainInfo()
             {
@@ -228,6 +238,45 @@ namespace Troma
                 float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
                 ScreenManager.FadeBackBufferToBlack(alpha);
             }
+           
+            int width = GameServices.GraphicsDevice.Viewport.Width;
+            int height = GameServices.GraphicsDevice.Viewport.Height;
+
+            string timeMinutes = "" + time.Minutes;
+            string timeTotal = timeMinutes + ": " + time.Seconds;
+            int nbreTarget2 = TargetManager.Count;
+            string nbreTarget = "" + nbreTarget2;
+
+            float textScale1 = 0.00080f * width;
+            float textScale2 = 0.00086f * width;
+
+            Vector2 Position1 = new Vector2(
+            1700 * width / 1920,
+            height - (1020 * width / 1920));
+            Vector2 Position2 = new Vector2(
+            1698 * width / 1920,
+            height - (1022 * width / 1920));
+
+            Vector2 Position3 = new Vector2(
+            170 * width / 1920,
+            height - (1020 * width / 1920));
+
+            Rectangle targetImage = new Rectangle(1770 * width / 1920, height - (1020 * width / 1920), 65 * width / 1920, 78 * width / 1920);
+            Rectangle clockImage = new Rectangle(70 * width / 1920, height - (1020 * width / 1920), 80 * width / 1920, 80 * width / 1920);
+
+            GameServices.SpriteBatch.Begin();
+
+            if (TargetManager.Count > 0)
+            {
+                GameServices.SpriteBatch.DrawString(Font, nbreTarget, Position2, Color.Black * 0.3f, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
+                GameServices.SpriteBatch.DrawString(Font, nbreTarget, Position1, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+                GameServices.SpriteBatch.Draw(target, targetImage, Color.White * 0.8f);
+
+                GameServices.SpriteBatch.DrawString(Font, timeTotal, Position3, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+                GameServices.SpriteBatch.Draw(clock, clockImage, Color.White * 0.8f);
+            }
+
+            GameServices.SpriteBatch.End();
         }
     }
 }

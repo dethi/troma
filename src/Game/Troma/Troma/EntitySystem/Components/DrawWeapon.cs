@@ -20,6 +20,15 @@ namespace Troma
 
         private Texture2D _cross;
 
+        Vector2 titleOrigin = new Vector2(0, 0);
+        Color c = new Color(170, 170, 170);
+        Color orange = new Color(215, 145, 96);
+        Color red = new Color(207, 46, 49);
+        Color color;
+
+        string Text4 = "M1";
+        string Text5 = "Garand";
+
         public DrawWeapon(Entity aParent, Effect effect)
             : base(aParent)
         {
@@ -38,6 +47,8 @@ namespace Troma
             string model = Entity.GetComponent<Model3D>().ModelName;
             _texture = FileManager.Load<Texture2D>("Models/" + model + "_Texture");
             _cross = FileManager.Load<Texture2D>("cross");
+            Font = FileManager.Load<SpriteFont>("Fonts/Square");
+            chargeur = FileManager.Load<Texture2D>("Models/Weapon/Chargeur2");
 
             if (hasNormalMap)
                 _normalMap = FileManager.Load<Texture2D>("Models/" + model + "_Normal");
@@ -108,16 +119,11 @@ namespace Troma
             int height = GameServices.GraphicsDevice.Viewport.Height;
             int size = (64 * width) / 1920;
 
-            chargeur = FileManager.Load<Texture2D>("Models/Weapon/Chargeur2");
             WeaponInfo weaponInfo = Entity.GetComponent<Weapon>().Info;
-            Font = FileManager.Load<SpriteFont>("Fonts/Square");
 
             string Text1 = "" + weaponInfo.Munition;
             string Text2 = " / ";
             string Text3 = "" + (weaponInfo.MunitionPerLoader * weaponInfo.Loader);
-
-            string Text4 = "M1";
-            string Text5 = "Garand";
 
             float textScale1 = 0.00070f * width;
             float textScale2 = 0.00050f * width;
@@ -136,12 +142,6 @@ namespace Troma
             Rectangle chargeurImage7 = new Rectangle(1850 * width / 1920, height - (70 * width / 1920), 20 * width / 1920, 20 * width / 1920);
             Rectangle chargeurImage8 = new Rectangle(1860 * width / 1920, height - (70 * width / 1920), 20 * width / 1920, 20 * width / 1920);
             Rectangle chargeurImage9 = new Rectangle(1870 * width / 1920, height - (70 * width / 1920), 20 * width / 1920, 20 * width / 1920);
-
-            Vector2 titleOrigin = new Vector2(0, 0);
-            Color c = new Color(170, 170, 170);
-            Color orange = new Color(215, 145, 96);
-            Color red = new Color(207, 46, 49);
-            Color color;
 
             if (weaponInfo.Munition == 0)
             {
