@@ -29,7 +29,7 @@ namespace Troma
         #region Initialization
 
         public Key_Assignment(Game game)
-            : base(game, "Key Assignment")
+            : base(game, Resource.SummonsKeyboard)
         {
             backMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
 
