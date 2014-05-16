@@ -14,7 +14,7 @@ namespace Troma
 
         private MenuEntry backMenuEntry;
 
-        
+
         private int x1;
         private int x2;
         private int x3;
@@ -34,8 +34,8 @@ namespace Troma
             backMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
 
             SetMenuEntryText();
-           
-            backMenuEntry.Selected += OnCancel;      
+
+            backMenuEntry.Selected += OnCancel;
             MenuEntries.Add(backMenuEntry);
         }
 
@@ -117,7 +117,78 @@ namespace Troma
             GameServices.SpriteBatch.End();
         }
 
-        
+        public override void DrawKeyboard(GameTime gameTime)
+        {
+
+            int width = GameServices.GraphicsDevice.Viewport.Width;
+            int height = GameServices.GraphicsDevice.Viewport.Height;
+
+            string Text1 = Resource.Up;
+            string Text2 = Resource.Bottom;
+            string Text3 = Resource.Left;
+            string Text4 = Resource.Right;
+            string Text5 = Resource.Run;
+            string Text6 = Resource.Aimfor;
+            string Text7 = Resource.Reload;
+            string Text8 = Resource.Jump;
+            string Text9 = Resource.Crouch;
+            string Text10 = Resource.Menu_Paused;
+
+            float textScale = 0.70f * width;
+
+            Vector2 titleOrigin = new Vector2(0, 0);
+
+            Vector2 Position1 = new Vector2(
+            1680 * width / 1920,
+            height - (120 * width / 1920));
+            Vector2 Position3 = new Vector2(
+            1678 * width / 1920,
+            height - (125 * width / 1920));
+
+            Vector2 Position2 = new Vector2(
+            1730 * width / 1920,
+            height - (105 * width / 1920));
+            Vector2 Position5 = new Vector2(
+            1728 * width / 1920,
+            height - (108 * width / 1920));
+
+            Vector2 Position4 = new Vector2(
+            1770 * width / 1920,
+            height - (105 * width / 1920));
+            Vector2 Position6 = new Vector2(
+            1768 * width / 1920,
+            height - (108 * width / 1920));
+
+            Vector2 Position7 = new Vector2(
+            1680 * width / 1920,
+            height - (150 * width / 1920));
+
+            Vector2 Position8 = new Vector2(
+            1710 * width / 1920,
+            height - (150 * width / 1920));
+
+            Vector2 Position9 = new Vector2(
+            1710 * width / 1920,
+            height - (150 * width / 1920));
+
+            Vector2 Position10 = new Vector2(
+            1710 * width / 1920,
+            height - (150 * width / 1920));
+
+            GameServices.SpriteBatch.Begin();
+            GameServices.SpriteBatch.DrawString(Font, Text1, Position1, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text2, Position2, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text3, Position3, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text4, Position4, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text5, Position5, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text6, Position6, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text7, Position7, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text8, Position8, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text9, Position9, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text10, Position10, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.End();
+        }
+
         private void OnCancel(object sender, EventArgs e)
         {
             OnCancel();
