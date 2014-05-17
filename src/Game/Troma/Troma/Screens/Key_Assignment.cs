@@ -62,7 +62,7 @@ namespace Troma
             int width = game.GraphicsDevice.Viewport.Width;
             int height = game.GraphicsDevice.Viewport.Height;
 
-            Color c = new Color(120, 110, 100) * TransitionAlpha;
+            Color c = new Color(0, 0, 0) * TransitionAlpha;
             Rectangle posBackground = new Rectangle(0, 0, width, height);
             Rectangle posLogo = new Rectangle(width - 100, height - 100, 100, 100);
 
@@ -116,7 +116,7 @@ namespace Troma
                 MenuEntries[i].Draw(gameTime, this, isSelected);
             }
 
-            string Text1 = "yolo";//Resource.Up;
+            string Text1 = Resource.Up;//Resource.Up;
             string Text2 = Resource.Bottom;
             string Text3 = Resource.Left;
             string Text4 = Resource.Right;
@@ -127,62 +127,61 @@ namespace Troma
             string Text9 = Resource.Crouch;
             string Text10 = Resource.Menu_Paused;
 
-            float textScale = 0.0007f * width;
+            float textScale = 0.0002f * width;
 
             titleOrigin = new Vector2(0, 0);
 
             Vector2 Position1 = new Vector2(
-            900 * width / 1920,
-            height - (600 * width / 1920));
-            
-            
-            
-            
-            Vector2 Position3 = new Vector2(
-            1678 * width / 1920,
-            height - (125 * width / 1920));
-
+            100 * width / 1920,
+            height - (850 * width / 1920));        
+                      
             Vector2 Position2 = new Vector2(
-            1730 * width / 1920,
-            height - (105 * width / 1920));
+            100 * width / 1920,
+            height - (800 * width / 1920));
+
+            Vector2 Position3 = new Vector2(
+            100 * width / 1920,
+            height - (750 * width / 1920));
+
             Vector2 Position5 = new Vector2(
-            1728 * width / 1920,
-            height - (108 * width / 1920));
+            100 * width / 1920,
+            height - (700 * width / 1920));
 
             Vector2 Position4 = new Vector2(
-            1770 * width / 1920,
-            height - (105 * width / 1920));
+            100 * width / 1920,
+            height - (650 * width / 1920));
+
             Vector2 Position6 = new Vector2(
-            1768 * width / 1920,
-            height - (108 * width / 1920));
+            100 * width / 1920,
+            height - (600 * width / 1920));
 
             Vector2 Position7 = new Vector2(
-            1680 * width / 1920,
-            height - (150 * width / 1920));
+            100 * width / 1920,
+            height - (550 * width / 1920));
 
             Vector2 Position8 = new Vector2(
-            1710 * width / 1920,
-            height - (150 * width / 1920));
+            100 * width / 1920,
+            height - (500 * width / 1920));
 
             Vector2 Position9 = new Vector2(
-            1710 * width / 1920,
-            height - (150 * width / 1920));
+            100 * width / 1920,
+            height - (450 * width / 1920));
 
             Vector2 Position10 = new Vector2(
-            1710 * width / 1920,
-            height - (150 * width / 1920));
+            100 * width / 1920,
+            height - (400 * width / 1920));
 
             
             GameServices.SpriteBatch.DrawString(Font, Text1, Position1, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            /*GameServices.SpriteBatch.DrawString(Font, Text2, Position2, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text3, Position3, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text4, Position4, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text5, Position5, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text6, Position6, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text7, Position7, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text8, Position8, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text9, Position9, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text10, Position10, Color.Black * 0.3f, 0, titleOrigin, textScale, SpriteEffects.None, 0);*/
+            GameServices.SpriteBatch.DrawString(Font, Text2, Position2, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text3, Position3, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text4, Position4, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text5, Position5, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text6, Position6, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text7, Position7, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text8, Position8, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text9, Position9, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text10, Position10, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
             GameServices.SpriteBatch.End();
         }
 

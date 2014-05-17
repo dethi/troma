@@ -61,7 +61,7 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Aim for     Left Mouse Button.
+        ///   Recherche une chaîne localisée semblable à Aim for     Right Mouse Button.
         /// </summary>
         internal static string Aimfor {
             get {
@@ -79,7 +79,7 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Bottom     S.
+        ///   Recherche une chaîne localisée semblable à Bottom    S.
         /// </summary>
         internal static string Bottom {
             get {
@@ -151,7 +151,7 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Left     Q.
+        ///   Recherche une chaîne localisée semblable à Left    Q.
         /// </summary>
         internal static string Left {
             get {
@@ -169,7 +169,7 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Paused     P.
+        ///   Recherche une chaîne localisée semblable à Pause     P.
         /// </summary>
         internal static string Menu_Paused {
             get {
@@ -241,7 +241,7 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Up     Z.
+        ///   Recherche une chaîne localisée semblable à Up    Z.
         /// </summary>
         internal static string Up {
             get {
