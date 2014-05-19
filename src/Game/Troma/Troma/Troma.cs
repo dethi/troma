@@ -47,8 +47,6 @@ namespace Troma
             SoundManager.SetVolume(Settings.MusicVolume);
             SFXManager.SetVolume(Settings.MusicVolume);
 
-            //GameServices.DisableVsync();
-
             //screenManager.AddScreen(new SoloScreen(this, ""));
             //screenManager.AddScreen(new TestScreen(this));
             //screenManager.AddScreen(new MainMenuScreen(this));

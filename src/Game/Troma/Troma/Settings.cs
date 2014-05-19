@@ -15,6 +15,8 @@ namespace Troma
         private static string _keyboard;
         private static string _language;
         private static bool _fullScreen;
+        private static bool _vsync;
+        private static bool _multisampling;
 
         public static float MusicVolume
         {
@@ -59,11 +61,27 @@ namespace Troma
             set
             {
                 _fullScreen = value;
+                GameServices.FullScreen(_fullScreen);
+            }
+        }
 
-                if (_fullScreen)
-                    GameServices.ActivateFullScreen();
-                else
-                    GameServices.DeactivateFullScreen();
+        public static bool Vsync
+        {
+            get { return _vsync; }
+            set
+            {
+                _vsync = value;
+                GameServices.Vsync(_vsync);
+            }
+        }
+
+        public static bool Multisampling
+        {
+            get { return _multisampling; }
+            set
+            {
+                _multisampling = value;
+                GameServices.Multisampling(_multisampling);
             }
         }
 
@@ -72,7 +90,10 @@ namespace Troma
             _musicVolume = 0.8f;
             Keyboard = "AZERTY";
             Language = "Francais";
+
             FullScreen = true;
+            Vsync = true;
+            Multisampling = false;
         }
     }
 }
