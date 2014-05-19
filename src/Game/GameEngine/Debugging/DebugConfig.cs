@@ -13,7 +13,7 @@ namespace GameEngine
 
         public static void HandleInput(GameTime gameTime, InputState input)
         {
-            if (input.IsPressed(Keys.D2) || input.IsPressed(Buttons.Y))
+            if (input.IsPressed(Keys.D2))
                 DisplayBox = !DisplayBox;
         }
     }

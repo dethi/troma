@@ -20,6 +20,11 @@ namespace GameEngine
 
         private float[,] depths;
 
+        public TerrainInfo Info
+        {
+            get { return _terrainInfo; }
+        }
+
         #endregion
 
         #region Initialization
