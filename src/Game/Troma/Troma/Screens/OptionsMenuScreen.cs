@@ -181,6 +181,7 @@ namespace Troma
 
         private void OnCancel(object sender, EventArgs e)
         {
+            Settings.Save();
             OnCancel();
         }
 
