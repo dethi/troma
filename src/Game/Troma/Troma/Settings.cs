@@ -87,13 +87,26 @@ namespace Troma
 
         public static void Initialize()
         {
-            _musicVolume = 0.8f;
-            Keyboard = "AZERTY";
-            Language = "Francais";
+            MusicVolume = App.Default.MusicVolume;
+            Keyboard = App.Default.Keyboard;
+            Language = App.Default.Language;
 
-            FullScreen = true;
-            Vsync = true;
-            Multisampling = false;
+            FullScreen = App.Default.FullScreen;
+            Vsync = App.Default.Vsync;
+            Multisampling = App.Default.Multisampling;
+        }
+
+        public static void Save()
+        {
+            App.Default.MusicVolume = _musicVolume;
+            App.Default.Keyboard = _keyboard;
+            App.Default.Language = _language;
+
+            App.Default.FullScreen = _fullScreen;
+            App.Default.Vsync = _vsync;
+            App.Default.Multisampling = _multisampling;
+
+            App.Default.Save();
         }
     }
 }
