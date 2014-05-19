@@ -50,6 +50,7 @@ namespace Troma
             base.LoadContent();
 
 #if DEBUG
+            XConsole.Reset();
             XConsole.Initialize();
             DrawingAxes.Initialize();
             BoundingSphereRenderer.Initialize(30);
