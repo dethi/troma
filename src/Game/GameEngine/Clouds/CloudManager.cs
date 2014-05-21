@@ -157,6 +157,8 @@ namespace GameEngine
 
                     break;
             }
+
+            Update(null); // force first update
         }
 
         #endregion

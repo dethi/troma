@@ -85,6 +85,8 @@ namespace Troma
             }
         }
 
+        public static bool DynamicClouds { get; set; }
+
         public static void Initialize()
         {
             MusicVolume = App.Default.MusicVolume;
@@ -94,6 +96,7 @@ namespace Troma
             FullScreen = App.Default.FullScreen;
             Vsync = App.Default.Vsync;
             Multisampling = App.Default.Multisampling;
+            DynamicClouds = App.Default.DynamicClouds;
         }
 
         public static void Save()
@@ -105,6 +108,7 @@ namespace Troma
             App.Default.FullScreen = _fullScreen;
             App.Default.Vsync = _vsync;
             App.Default.Multisampling = _multisampling;
+            App.Default.DynamicClouds = DynamicClouds;
 
             App.Default.Save();
         }
