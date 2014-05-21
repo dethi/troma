@@ -17,6 +17,7 @@ namespace Troma
 
         private MenuEntry soloMenuEntry;
         private MenuEntry multiMenuEntry;
+        private MenuEntry scoreMenuEntry;
         private MenuEntry optionsMenuEntry;
         private MenuEntry exitMenuEntry;
 
@@ -38,18 +39,21 @@ namespace Troma
             // Create menu entries.
             soloMenuEntry = new MenuEntry(string.Empty);
             multiMenuEntry = new MenuEntry(string.Empty);
+            scoreMenuEntry = new MenuEntry(string.Empty);
             optionsMenuEntry = new MenuEntry(string.Empty);
             exitMenuEntry = new MenuEntry(string.Empty);
 
             // Hook up menu event handlers.
             soloMenuEntry.Selected += SoloMenuEntrySelected;
             multiMenuEntry.Selected += MultiMenuEntrySelected;
+            scoreMenuEntry.Selected += ScoreMenuEntrySelected;
             optionsMenuEntry.Selected += OptionsMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
             MenuEntries.Add(soloMenuEntry);
             MenuEntries.Add(multiMenuEntry);
+            MenuEntries.Add(scoreMenuEntry);
             MenuEntries.Add(optionsMenuEntry);
             MenuEntries.Add(exitMenuEntry);
 
@@ -169,12 +173,17 @@ namespace Troma
             SoundManager.Stop();
             LoadingScreen.Load(game, this.ScreenManager, true, new SoloScreen(game, ""));
         }
-
+       
         private void MultiMenuEntrySelected(object sender, EventArgs e)
         {
             //SoundManager.Stop();
         }
 
+        private void ScoreMenuEntrySelected(object sender, EventArgs e)
+        {
+            ScreenManager.AddScreen(new ScoreGameMenuScreen(game));
+        }
+        
         private void OptionsMenuEntrySelected(object sender, EventArgs e)
         {
             ScreenManager.AddScreen(new OptionsMenuScreen(game));
@@ -195,6 +204,7 @@ namespace Troma
         {
             soloMenuEntry.Text = "Solo";
             multiMenuEntry.Text = Resource.Multiplayer;
+            scoreMenuEntry.Text = "Score";
             optionsMenuEntry.Text = "Options";
             exitMenuEntry.Text = Resource.Exit;
         }

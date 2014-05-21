@@ -88,6 +88,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Dynamic clouds   .
+        /// </summary>
+        internal static string Cloud {
+            get {
+                return ResourceManager.GetString("Cloud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Crouch     C.
         /// </summary>
         internal static string Crouch {
@@ -120,6 +129,15 @@ namespace Troma {
         internal static string Full_Screen {
             get {
                 return ResourceManager.GetString("Full_Screen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Graphics.
+        /// </summary>
+        internal static string Graphics {
+            get {
+                return ResourceManager.GetString("Graphics", resourceCulture);
             }
         }
         
@@ -183,6 +201,15 @@ namespace Troma {
         internal static string Multiplayer {
             get {
                 return ResourceManager.GetString("Multiplayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Multisampling   .
+        /// </summary>
+        internal static string Multisampling {
+            get {
+                return ResourceManager.GetString("Multisampling", resourceCulture);
             }
         }
         
@@ -255,6 +282,15 @@ namespace Troma {
         internal static string Victory {
             get {
                 return ResourceManager.GetString("Victory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à V-Sync   .
+        /// </summary>
+        internal static string Vsync {
+            get {
+                return ResourceManager.GetString("Vsync", resourceCulture);
             }
         }
         

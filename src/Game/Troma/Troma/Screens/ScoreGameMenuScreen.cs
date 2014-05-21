@@ -8,15 +8,10 @@ using GameEngine;
 
 namespace Troma
 {
-    class OptionsMenuScreen : MenuScreen
+    class ScoreGameMenuScreen : MenuScreen
     {
         #region Fields
 
-        private MenuEntry volumeMenuEntry;
-        private MenuEntry languageMenuEntry;
-        private MenuEntry graphicsMenuEntry;
-        private MenuEntry keyboardMenuEntry;
-        private MenuEntry summonsKeyboardMenuEntry;
         private MenuEntry backMenuEntry;
 
         private int x1;
@@ -32,30 +27,15 @@ namespace Troma
 
         #region Initialization
 
-        public OptionsMenuScreen(Game game)
-            : base(game, "Options")
+        public ScoreGameMenuScreen(Game game)
+            : base(game, "Score")
         {
-            keyboardMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            languageMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            graphicsMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            volumeMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            summonsKeyboardMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
             backMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
 
             SetMenuEntryText();
 
-            keyboardMenuEntry.Selected += KeyboardMenuEntrySelected;
-            languageMenuEntry.Selected += LanguageMenuEntrySelected;
-            graphicsMenuEntry.Selected += GraphicsMenuEntrySelected;
-            volumeMenuEntry.Selected += VolumeMenuEntrySelected;
-            summonsKeyboardMenuEntry.Selected += SummonsKeyboardMenuEntrySelected;
             backMenuEntry.Selected += OnCancel;
 
-            MenuEntries.Add(keyboardMenuEntry);
-            MenuEntries.Add(languageMenuEntry);
-            MenuEntries.Add(graphicsMenuEntry);
-            MenuEntries.Add(volumeMenuEntry);
-            MenuEntries.Add(summonsKeyboardMenuEntry);
             MenuEntries.Add(backMenuEntry);
         }
 
@@ -137,48 +117,6 @@ namespace Troma
             GameServices.SpriteBatch.End();
         }
 
-        private void KeyboardMenuEntrySelected(object sender, EventArgs e)
-        {
-            if (Settings.Keyboard == "AZERTY")
-                Settings.Keyboard = "QWERTY";
-            else
-                Settings.Keyboard = "AZERTY";
-
-            SetMenuEntryText();
-        }
-
-        private void LanguageMenuEntrySelected(object sender, EventArgs e)
-        {
-            if (Settings.Language == "Francais")
-                Settings.Language = "English";
-            else
-                Settings.Language = "Francais";
-
-            SetMenuEntryText();
-        }
-
-        private void GraphicsMenuEntrySelected(object sender, EventArgs e)
-        {
-            ScreenManager.AddScreen(new GraphicsMenuScreen(game));
-            SetMenuEntryText();
-        }
-
-        private void VolumeMenuEntrySelected(object sender, EventArgs e)
-        {
-            if (Settings.MusicVolume + 0.1f > 2.01f) // float hack
-                Settings.MusicVolume = 0;
-            else
-                Settings.MusicVolume += 0.1f;
-
-            SetMenuEntryText();
-        }
-
-        private void SummonsKeyboardMenuEntrySelected(object sender, EventArgs e)
-        {
-            ScreenManager.AddScreen(new Key_Assignment(game));
-            SetMenuEntryText();
-        }
-
         private void OnCancel(object sender, EventArgs e)
         {
             Settings.Save();
@@ -187,11 +125,6 @@ namespace Troma
 
         private void SetMenuEntryText()
         {
-            keyboardMenuEntry.Text = Resource.Keyboard + Settings.Keyboard;
-            languageMenuEntry.Text = Resource.Language + Settings.Language;
-            graphicsMenuEntry.Text = Resource.Graphics;
-            volumeMenuEntry.Text = "Volume  " + (int)(Settings.MusicVolume * 100);
-            summonsKeyboardMenuEntry.Text = Resource.SummonsKeyboard;
             backMenuEntry.Text = Resource.Back;
         }
     }

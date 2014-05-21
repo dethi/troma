@@ -126,6 +126,9 @@
   <data name="Bottom" xml:space="preserve">
     <value>Reculer    S</value>
   </data>
+  <data name="Cloud" xml:space="preserve">
+    <value>Nuages dynamiques   </value>
+  </data>
   <data name="Crouch" xml:space="preserve">
     <value>S'accroupir     C</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="Full_Screen" xml:space="preserve">
     <value>Plein Ecran   </value>
+  </data>
+  <data name="Graphics" xml:space="preserve">
+    <value>Graphisme</value>
   </data>
   <data name="Jump" xml:space="preserve">
     <value>Sauter     Espace</value>
@@ -158,6 +164,9 @@
   </data>
   <data name="Multiplayer" xml:space="preserve">
     <value>Multijoueur</value>
+  </data>
+  <data name="Multisampling" xml:space="preserve">
+    <value>Anticrenelage   </value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Non</value>
@@ -182,6 +191,9 @@
   </data>
   <data name="Victory" xml:space="preserve">
     <value>Victoire</value>
+  </data>
+  <data name="Vsync" xml:space="preserve">
+    <value>V-Sync   </value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Oui</value>

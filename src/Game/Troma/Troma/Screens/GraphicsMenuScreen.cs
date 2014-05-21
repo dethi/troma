@@ -6,17 +6,17 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
 
+
 namespace Troma
 {
-    class OptionsMenuScreen : MenuScreen
+    class GraphicsMenuScreen : MenuScreen
     {
         #region Fields
-
-        private MenuEntry volumeMenuEntry;
-        private MenuEntry languageMenuEntry;
-        private MenuEntry graphicsMenuEntry;
-        private MenuEntry keyboardMenuEntry;
-        private MenuEntry summonsKeyboardMenuEntry;
+        
+        private MenuEntry cloudMenuEntry;
+        private MenuEntry displayMenuEntry;
+        private MenuEntry vsyncMenuEntry;
+        private MenuEntry multisamplingMenuEntry;
         private MenuEntry backMenuEntry;
 
         private int x1;
@@ -32,30 +32,27 @@ namespace Troma
 
         #region Initialization
 
-        public OptionsMenuScreen(Game game)
-            : base(game, "Options")
+        public GraphicsMenuScreen(Game game)
+            : base(game, Resource.Graphics)
         {
-            keyboardMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            languageMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            graphicsMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            volumeMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
-            summonsKeyboardMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+            cloudMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+            displayMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+            vsyncMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+            multisamplingMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
             backMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
 
             SetMenuEntryText();
 
-            keyboardMenuEntry.Selected += KeyboardMenuEntrySelected;
-            languageMenuEntry.Selected += LanguageMenuEntrySelected;
-            graphicsMenuEntry.Selected += GraphicsMenuEntrySelected;
-            volumeMenuEntry.Selected += VolumeMenuEntrySelected;
-            summonsKeyboardMenuEntry.Selected += SummonsKeyboardMenuEntrySelected;
+            cloudMenuEntry.Selected += CloudMenuEntrySelected;
+            displayMenuEntry.Selected += DisplayMenuEntrySelected;
+            vsyncMenuEntry.Selected += VsyncMenuEntrySelected;
+            multisamplingMenuEntry.Selected += MultisamplingMenuEntrySelected;
             backMenuEntry.Selected += OnCancel;
 
-            MenuEntries.Add(keyboardMenuEntry);
-            MenuEntries.Add(languageMenuEntry);
-            MenuEntries.Add(graphicsMenuEntry);
-            MenuEntries.Add(volumeMenuEntry);
-            MenuEntries.Add(summonsKeyboardMenuEntry);
+            MenuEntries.Add(cloudMenuEntry);
+            MenuEntries.Add(displayMenuEntry);
+            MenuEntries.Add(vsyncMenuEntry);
+            MenuEntries.Add(multisamplingMenuEntry);
             MenuEntries.Add(backMenuEntry);
         }
 
@@ -137,45 +134,27 @@ namespace Troma
             GameServices.SpriteBatch.End();
         }
 
-        private void KeyboardMenuEntrySelected(object sender, EventArgs e)
+        private void CloudMenuEntrySelected(object sender, EventArgs e)
         {
-            if (Settings.Keyboard == "AZERTY")
-                Settings.Keyboard = "QWERTY";
-            else
-                Settings.Keyboard = "AZERTY";
-
+            Settings.DynamicClouds = !Settings.DynamicClouds;
             SetMenuEntryText();
         }
 
-        private void LanguageMenuEntrySelected(object sender, EventArgs e)
+        private void DisplayMenuEntrySelected(object sender, EventArgs e)
         {
-            if (Settings.Language == "Francais")
-                Settings.Language = "English";
-            else
-                Settings.Language = "Francais";
-
+            Settings.FullScreen = !Settings.FullScreen;
             SetMenuEntryText();
         }
 
-        private void GraphicsMenuEntrySelected(object sender, EventArgs e)
+        private void VsyncMenuEntrySelected(object sender, EventArgs e)
         {
-            ScreenManager.AddScreen(new GraphicsMenuScreen(game));
+            Settings.Vsync = !Settings.Vsync;
             SetMenuEntryText();
         }
 
-        private void VolumeMenuEntrySelected(object sender, EventArgs e)
+        private void MultisamplingMenuEntrySelected(object sender, EventArgs e)
         {
-            if (Settings.MusicVolume + 0.1f > 2.01f) // float hack
-                Settings.MusicVolume = 0;
-            else
-                Settings.MusicVolume += 0.1f;
-
-            SetMenuEntryText();
-        }
-
-        private void SummonsKeyboardMenuEntrySelected(object sender, EventArgs e)
-        {
-            ScreenManager.AddScreen(new Key_Assignment(game));
+            Settings.Multisampling = !Settings.Multisampling;
             SetMenuEntryText();
         }
 
@@ -187,11 +166,10 @@ namespace Troma
 
         private void SetMenuEntryText()
         {
-            keyboardMenuEntry.Text = Resource.Keyboard + Settings.Keyboard;
-            languageMenuEntry.Text = Resource.Language + Settings.Language;
-            graphicsMenuEntry.Text = Resource.Graphics;
-            volumeMenuEntry.Text = "Volume  " + (int)(Settings.MusicVolume * 100);
-            summonsKeyboardMenuEntry.Text = Resource.SummonsKeyboard;
+            cloudMenuEntry.Text = Resource.Cloud + (Settings.DynamicClouds ? Resource.Yes : Resource.No);
+            displayMenuEntry.Text = Resource.Full_Screen + (Settings.FullScreen ? Resource.Yes : Resource.No);
+            vsyncMenuEntry.Text = Resource.Vsync + (Settings.Vsync ? Resource.Yes : Resource.No);
+            multisamplingMenuEntry.Text = Resource.Multisampling + (Settings.Multisampling ? Resource.Yes : Resource.No);
             backMenuEntry.Text = Resource.Back;
         }
     }

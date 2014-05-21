@@ -171,6 +171,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.fr-FR.resx</DependentUpon>
     </Compile>
+    <Compile Include="Screens\GraphicsMenuScreen.cs" />
     <Compile Include="Screens\InGameMenuScreen.cs" />
     <Compile Include="Screens\Key_Assignment.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="EntitySystem\Template\GameObject.cs" />
     <Compile Include="Screens\OptionsMenuScreen.cs" />
+    <Compile Include="Screens\ScoreGameMenuScreen.cs" />
     <Compile Include="Screens\ScoreScreen.cs" />
     <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Screens\StartScreen.cs" />

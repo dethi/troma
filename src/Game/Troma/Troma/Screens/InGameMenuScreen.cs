@@ -10,22 +10,34 @@ namespace Troma
 {
     public class InGameMenuScreen : MenuScreen
     {
+        private MenuEntry resumeMenuEntry;
+        private MenuEntry optionMenuEntry;
+        private MenuEntry backMenuEntry;
+
         public InGameMenuScreen(Game game)
             : base(game, "Pause")
         {
-            MenuEntry resumeMenuEntry = new MenuEntry(Resource.Resume);
-            MenuEntry optionMenu = new MenuEntry("Options");
-            MenuEntry backMenuEntry = new MenuEntry(Resource.Exit);
+            resumeMenuEntry = new MenuEntry(string.Empty,0.60f,0,false);
+            optionMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+            backMenuEntry = new MenuEntry(string.Empty, 0.60f, 0, false);
+
+            SetMenuEntryText();
 
             resumeMenuEntry.Selected += ResumeMenuEntrySelected;
-            optionMenu.Selected += OptionsMenuEntrySelected;
+            optionMenuEntry.Selected += OptionsMenuEntrySelected;
             backMenuEntry.Selected += OnCancel;
 
             MenuEntries.Add(resumeMenuEntry);
-            MenuEntries.Add(optionMenu);
+            MenuEntries.Add(optionMenuEntry);
             MenuEntries.Add(backMenuEntry);
 
             IsHUD = true;
+        }
+
+        public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
+        {
+            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
+            SetMenuEntryText();
         }
 
         public override void Draw(GameTime gameTime)
@@ -59,16 +71,25 @@ namespace Troma
         private void ResumeMenuEntrySelected(object sender, EventArgs e)
         {
             ExitScreen();
+            SetMenuEntryText();
         }
 
         private void OptionsMenuEntrySelected(object sender, EventArgs e)
         {
             ScreenManager.AddScreen(new OptionsMenuScreen(game));
+            SetMenuEntryText();
         }
 
         private void OnCancel(object sender, EventArgs e)
         {
             LoadingScreen.Load(game, ScreenManager, false, new MainMenuScreen(game));
+            SetMenuEntryText();
+        }
+        private void SetMenuEntryText()
+        {
+            resumeMenuEntry.Text = Resource.Resume;
+            optionMenuEntry.Text = "Options";
+            backMenuEntry.Text = Resource.Back;
         }
     }
 }
