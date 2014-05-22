@@ -183,6 +183,9 @@
   <data name="Run" xml:space="preserve">
     <value>Courir     Shift gauche</value>
   </data>
+  <data name="Shoot" xml:space="preserve">
+    <value>Tirer     Bouton gauche souris</value>
+  </data>
   <data name="SummonsKeyboard" xml:space="preserve">
     <value>Assignation des touches</value>
   </data>

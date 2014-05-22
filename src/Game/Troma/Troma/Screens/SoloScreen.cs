@@ -257,17 +257,17 @@ namespace Troma
 
                 Vector2 Position1 = new Vector2(
                 1700 * width / 1920,
-                height - (1020 * width / 1920));
+                height - (1060 * width / 1920));
                 Vector2 Position2 = new Vector2(
                 1698 * width / 1920,
-                height - (1022 * width / 1920));
+                height - (1062 * width / 1920));
 
                 Vector2 Position3 = new Vector2(
                 170 * width / 1920,
-                height - (1020 * width / 1920));
+                height - (1060 * width / 1920));
 
-                Rectangle targetImage = new Rectangle(1770 * width / 1920, height - (1020 * width / 1920), 65 * width / 1920, 78 * width / 1920);
-                Rectangle clockImage = new Rectangle(70 * width / 1920, height - (1020 * width / 1920), 80 * width / 1920, 80 * width / 1920);
+                Rectangle targetImage = new Rectangle(1770 * width / 1920, height - (1060 * width / 1920), 65 * width / 1920, 78 * width / 1920);
+                Rectangle clockImage = new Rectangle(70 * width / 1920, height - (1060 * width / 1920), 80 * width / 1920, 80 * width / 1920);
 
                 GameServices.SpriteBatch.Begin();
 
