@@ -126,50 +126,55 @@ namespace Troma
             string Text8 = Resource.Jump;
             string Text9 = Resource.Crouch;
             string Text10 = Resource.Menu_Paused;
+            string Text11 = Resource.Shoot;
 
             float textScale = 0.0002f * width;
 
             titleOrigin = new Vector2(0, 0);
 
             Vector2 Position1 = new Vector2(
-            100 * width / 1920,
+            650 * width / 1920,
             height - (850 * width / 1920));        
                       
             Vector2 Position2 = new Vector2(
-            100 * width / 1920,
+            650 * width / 1920,
             height - (800 * width / 1920));
 
             Vector2 Position3 = new Vector2(
-            100 * width / 1920,
+            650 * width / 1920,
             height - (750 * width / 1920));
 
-            Vector2 Position5 = new Vector2(
-            100 * width / 1920,
+            Vector2 Position4 = new Vector2(
+            650 * width / 1920,
             height - (700 * width / 1920));
 
-            Vector2 Position4 = new Vector2(
-            100 * width / 1920,
+            Vector2 Position5 = new Vector2(
+            650 * width / 1920,
             height - (650 * width / 1920));
 
             Vector2 Position6 = new Vector2(
-            100 * width / 1920,
+            650 * width / 1920,
             height - (600 * width / 1920));
 
             Vector2 Position7 = new Vector2(
-            100 * width / 1920,
+            650 * width / 1920,
             height - (550 * width / 1920));
 
             Vector2 Position8 = new Vector2(
-            100 * width / 1920,
+            650 * width / 1920,
             height - (500 * width / 1920));
 
             Vector2 Position9 = new Vector2(
-            100 * width / 1920,
+            650 * width / 1920,
             height - (450 * width / 1920));
 
             Vector2 Position10 = new Vector2(
-            100 * width / 1920,
+            650 * width / 1920,
             height - (400 * width / 1920));
+            
+            Vector2 Position11 = new Vector2(
+            650 * width / 1920,
+            height - (350 * width / 1920));
 
             
             GameServices.SpriteBatch.DrawString(Font, Text1, Position1, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
@@ -177,11 +182,13 @@ namespace Troma
             GameServices.SpriteBatch.DrawString(Font, Text3, Position3, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text4, Position4, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text5, Position5, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text6, Position6, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text7, Position7, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text8, Position8, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text9, Position9, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text10, Position10, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text11, Position6, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text6, Position7, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text7, Position8, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text8, Position9, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text9, Position10, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Text10, Position11, c, 0, titleOrigin, textScale, SpriteEffects.None, 0);
+            
             GameServices.SpriteBatch.End();
         }
 
