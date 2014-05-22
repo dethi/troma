@@ -10,7 +10,7 @@ namespace GameEngine
     public struct CollisionType
     {
         public bool IsCollide;
-        public BoundingBox CollisionWith;
+        public List<BoundingBox> CollisionWith;
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ namespace GameEngine
         #endregion
 
         #region Update and Draw
-        
+
         public static void Update(GameTime gameTime)
         {
             _currentList.Clear();
@@ -118,24 +118,30 @@ namespace GameEngine
 
         public static CollisionType IsCollision(BoundingSphere sphere)
         {
+            CollisionType c = new CollisionType { CollisionWith = new List<BoundingBox>() };
+
             foreach (BoundingBox box in _currentList)
             {
                 if (box.Intersects(sphere))
-                    return new CollisionType { IsCollide = true, CollisionWith = box };
+                    c.CollisionWith.Add(box);
             }
 
-            return new CollisionType { IsCollide = false };        
+            c.IsCollide = (c.CollisionWith.Count > 0 );
+            return c;
         }
 
         public static CollisionType IsCollision(Ray ray)
         {
+            CollisionType c = new CollisionType { CollisionWith = new List<BoundingBox>() };
+
             foreach (BoundingBox box in _currentList)
             {
                 if (box.Intersects(ray).HasValue)
-                    return new CollisionType { IsCollide = true, CollisionWith = box };
+                    c.CollisionWith.Add(box);
             }
 
-            return new CollisionType { IsCollide = false };
+            c.IsCollide = (c.CollisionWith.Count > 0);
+            return c;
         }
 
         #endregion
@@ -147,7 +153,7 @@ namespace GameEngine
         /// </summary>
         public static void AddBox(BoundingBox box)
         {
-           _masterList.Add(box);
+            _masterList.Add(box);
         }
 
         public static void AddBox(IEnumerable<BoundingBox> box)

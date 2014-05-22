@@ -330,10 +330,14 @@ namespace Troma
                         dirX = (newPos.X - _position.X > 0) ? 1 : -1;
 
                         dirRayX = new Ray(sphere.Center, Vector3.Right * dirX);
-                        dstCollisionMoveX = dirRayX.Intersects(collisionResult.CollisionWith);
 
-                        if (dstCollisionMoveX.HasValue)
-                            newPos.X -= dirX * (sphere.Radius - dstCollisionMoveX.Value);
+                        foreach (BoundingBox box in collisionResult.CollisionWith)
+                        {
+                            dstCollisionMoveX = dirRayX.Intersects(box);
+
+                            if (dstCollisionMoveX.HasValue)
+                                newPos.X -= dirX * (sphere.Radius - dstCollisionMoveX.Value);
+                        }
                     }
 
                     if (move.Z != 0)
@@ -341,10 +345,14 @@ namespace Troma
                         dirZ = (newPos.Z - _position.Z > 0) ? 1 : -1;
 
                         dirRayZ = new Ray(sphere.Center, Vector3.Backward * dirZ);
-                        dstCollisionMoveZ = dirRayZ.Intersects(collisionResult.CollisionWith);
 
-                        if (dstCollisionMoveZ.HasValue)
-                            newPos.Z -= dirZ * (sphere.Radius - dstCollisionMoveZ.Value);
+                        foreach (BoundingBox box in collisionResult.CollisionWith)
+                        {
+                            dstCollisionMoveZ = dirRayZ.Intersects(box);
+
+                            if (dstCollisionMoveZ.HasValue)
+                                newPos.Z -= dirZ * (sphere.Radius - dstCollisionMoveZ.Value);
+                        }
                     }
                 }
 
@@ -363,12 +371,16 @@ namespace Troma
                 if (_collisionDetected)
                 {
                     rayDown = new Ray(sphere.Center, Vector3.Down);
-                    dstCollisionDown = rayDown.Intersects(collisionResult.CollisionWith);
 
-                    if (dstCollisionDown.HasValue)
+                    foreach (BoundingBox box in collisionResult.CollisionWith)
                     {
-                        newPos.Y += sphere.Radius - dstCollisionDown.Value;
-                        _collisionDetectedDown = true;
+                        dstCollisionDown = rayDown.Intersects(box);
+
+                        if (dstCollisionDown.HasValue)
+                        {
+                            newPos.Y += sphere.Radius - dstCollisionDown.Value;
+                            _collisionDetectedDown = true;
+                        }
                     }
                 }
                 else
@@ -404,7 +416,7 @@ namespace Troma
                     bulletResult = CollisionManager.IsCollision(bulletRay);
 
                     if (bulletResult.IsCollide)
-                        TargetManager.IsTargetAchieved(bulletResult.CollisionWith);
+                        TargetManager.IsTargetAchieved(bulletResult.CollisionWith[0]);
                 }
             }
         }

@@ -92,6 +92,29 @@ namespace Troma
 
             player.Initialize(terrain, WeaponObject.BuildEntity(Constants.GarandM1, modelWithNormal));
 
+            #region Target
+
+            List<Tuple<Vector3, float>> ciblePos = new List<Tuple<Vector3, float>>();
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(200, y, 300), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(125, y, 260), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(190, y + 4, 234), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(440, y, 185), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(437, y, 294), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(309, y, 398), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(453, y + 1, 212), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(370, y + 1, 203), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(334, y, 284), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(139, y + 4, 185), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(73, y + 4, 232), 50));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(217, y, 378), 50));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(91, y, 360), -30));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(152, 0, 451), 0));
+
+            foreach (Tuple<Vector3, float> data in ciblePos)
+                TargetObject.BuildEntity(data.Item1, data.Item2, modelEffect);
+
+            #endregion
+
             #region Rails
 
             List<Vector3> modelPos = new List<Vector3>();
@@ -124,29 +147,6 @@ namespace Troma
                 barrierPos.Add(new Vector3(j, y, 222));
 
             VectGameObject.BuildEntity(barrierPos.ToArray(), "Town/wood_barrier", modelEffect);
-
-            #endregion
-
-            #region Target
-
-            List<Tuple<Vector3, float>> ciblePos = new List<Tuple<Vector3, float>>();
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(200, y, 300), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(125, y, 260), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(190, y + 4, 234), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(440, y, 185), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(437, y, 294), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(309, y, 398), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(453, y + 1, 212), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(370, y + 1, 203), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(334, y, 284), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(139, y + 4, 185), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(73, y + 4, 232), 50));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(217, y, 378), 50));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(91, y, 360), -30));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(152, 0, 451), 0));
-
-            foreach (Tuple<Vector3, float> data in ciblePos)
-                TargetObject.BuildEntity(data.Item1, data.Item2, modelEffect);
 
             #endregion
 
