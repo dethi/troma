@@ -35,7 +35,7 @@ namespace GameEngine
 
         public static void Update(GameTime gameTime)
         {
-            elapsedTime = (uint)gameTime.ElapsedGameTime.Milliseconds;
+            elapsedTime = (uint)gameTime.ElapsedGameTime.TotalMilliseconds;
             totalTime += elapsedTime;
 
             currentTimerBuffer.Clear();
