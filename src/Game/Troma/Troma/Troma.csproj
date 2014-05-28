@@ -198,6 +198,14 @@
       <Project>{121AB8A9-2001-4CBE-80B3-A6E2E95B2E56}</Project>
       <Name>GameEngine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Lidgren.Network\Lidgren.Network.csproj">
+      <Project>{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}</Project>
+      <Name>Lidgren.Network</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SkinnedModelPipeline\SkinnedModelPipeline.csproj">
+      <Project>{4636C7E1-B845-4B83-B96D-64A11B8A4515}</Project>
+      <Name>SkinnedModelPipeline</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TromaContent\TromaContent.contentproj">
       <Name>TromaContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
