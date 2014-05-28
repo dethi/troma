@@ -56,7 +56,6 @@ namespace Troma
         #region Fields for collision
 
         private BoundingSphere sphere;
-        private Vector3[] ptConstSphere;
 
         private Ray rayDown;
         private float? dstCollisionDown;
@@ -76,8 +75,6 @@ namespace Troma
         #region Fields for Weapon
 
         private Entity _weapon;
-        private Vector3 nearPoint;
-        private Vector3 farPoint;
         private Vector3 bulletDir;
         private Ray bulletRay;
         private CollisionType bulletResult;
@@ -146,7 +143,6 @@ namespace Troma
 
             newPos = _position;
             rotationBuffer = Vector3.Zero;
-            ptConstSphere = new Vector3[2];
 
             _isCrouched = false;
             _touchGround = false;
@@ -313,12 +309,9 @@ namespace Troma
             {
                 #region X,Z collisions
 
-                ptConstSphere[0] = newPos;
-                ptConstSphere[1].X = newPos.X;
-                ptConstSphere[1].Y = newPos.Y + _height + 0.2f;
-                ptConstSphere[1].Z = newPos.Z;
+                sphere.Radius = (_height + 0.2f) / 2;
+                sphere.Center = new Vector3(newPos.X, newPos.Y + sphere.Radius, newPos.Z);
 
-                sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
                 collisionResult = CollisionManager.IsCollision(sphere);
                 _collisionDetected = collisionResult.IsCollide;
 
@@ -360,10 +353,8 @@ namespace Troma
 
                 #region Y collision
 
-                ptConstSphere[1].X = newPos.X;
-                ptConstSphere[1].Z = newPos.Z;
+                sphere.Center = new Vector3(newPos.X, newPos.Y + sphere.Radius, newPos.Z);
 
-                sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
                 collisionResult = CollisionManager.IsCollision(sphere);
                 _collisionDetected = collisionResult.IsCollide;
 
@@ -402,14 +393,7 @@ namespace Troma
             {
                 if (_weapon.GetComponent<Weapon>().Shoot())
                 {
-                    nearPoint = GameServices.GraphicsDevice.Viewport.Unproject(
-                        new Vector3(InputState.MouseOrigin.X, InputState.MouseOrigin.Y, 0), _view.Projection,
-                        _view.View, Matrix.Identity);
-                    farPoint = GameServices.GraphicsDevice.Viewport.Unproject(
-                        new Vector3(InputState.MouseOrigin.X, InputState.MouseOrigin.Y, 1), _view.Projection,
-                        _view.View, Matrix.Identity);
-
-                    bulletDir = farPoint - nearPoint;
+                    bulletDir = _view.LookAt - _view.Position;
                     bulletDir.Normalize();
 
                     bulletRay = new Ray(_view.Position, bulletDir);

@@ -114,7 +114,7 @@ namespace GameEngine
 
         #endregion
 
-        #region Collision Detection
+        #region Collision Methods
 
         public static CollisionType IsCollision(BoundingSphere sphere)
         {
