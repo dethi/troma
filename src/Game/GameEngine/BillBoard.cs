@@ -42,12 +42,12 @@ namespace GameEngine
         public VertexBuffer vertexBuffer;
         private IndexBuffer indexBuffer;
 
-        public Billboard(GraphicsDevice graphicsDevice, Vector3 position, float width, float height)
+        public Billboard(Vector3 position, float width, float height)
         {
-            Create(graphicsDevice, position, width, height);
+            Create(position, width, height);
         }
 
-        public void Create(GraphicsDevice graphicsDevice, Vector3 position, float width, float height)
+        public void Create(Vector3 position, float width, float height)
         {
             BillboardVertex[] vertices = new BillboardVertex[4];
 
@@ -64,7 +64,8 @@ namespace GameEngine
             vertices[3].TexCoord = new Vector4(1.0f, 1.0f, 1.0f, -1.0f);
 
 
-            vertexBuffer = new VertexBuffer(graphicsDevice, typeof(BillboardVertex), vertices.Length, BufferUsage.WriteOnly);
+            vertexBuffer = new VertexBuffer(GameServices.GraphicsDevice,
+                typeof(BillboardVertex), vertices.Length, BufferUsage.WriteOnly);
             vertexBuffer.SetData(vertices);
 
             short[] indices =
@@ -73,26 +74,25 @@ namespace GameEngine
                     (short)2, (short)1, (short)3
                 };
 
-            indexBuffer = new IndexBuffer(graphicsDevice, IndexElementSize.SixteenBits, indices.Length, BufferUsage.WriteOnly);
+            indexBuffer = new IndexBuffer(GameServices.GraphicsDevice,
+                IndexElementSize.SixteenBits, indices.Length, BufferUsage.WriteOnly);
             indexBuffer.SetData(indices);
         }
 
-        public void Draw(GraphicsDevice graphicsDevice, Effect effect)
+        public void Draw(Effect effect)
         {
-            if (graphicsDevice != null && effect != null)
+            GameServices.GraphicsDevice.SetVertexBuffer(vertexBuffer);
+            GameServices.GraphicsDevice.Indices = indexBuffer;
+
+            foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {
-                graphicsDevice.SetVertexBuffer(vertexBuffer);
-                graphicsDevice.Indices = indexBuffer;
-
-                foreach (EffectPass pass in effect.CurrentTechnique.Passes)
-                {
-                    pass.Apply();
-                    graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, vertexBuffer.VertexCount, 0, 2);
-                }
-
-                graphicsDevice.Indices = null;
-                graphicsDevice.SetVertexBuffer(null);
+                pass.Apply();
+                GameServices.GraphicsDevice.DrawIndexedPrimitives(
+                    PrimitiveType.TriangleList, 0, 0, vertexBuffer.VertexCount, 0, 2);
             }
+
+            GameServices.GraphicsDevice.Indices = null;
+            GameServices.GraphicsDevice.SetVertexBuffer(null);
         }
     }
 }
