@@ -51,7 +51,7 @@ namespace Troma
             //screenManager.AddScreen(new TestScreen(this));
             //screenManager.AddScreen(new MainMenuScreen(this));
             //screenManager.AddScreen(new ScoreScreen(this, null));
-            screenManager.AddScreen(new StartScreen(this));
+            screenManager.AddScreen(new PegiScreen(this));
         }
 
         /// <summary>
