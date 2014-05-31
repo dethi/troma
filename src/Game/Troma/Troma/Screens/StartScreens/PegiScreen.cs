@@ -27,7 +27,11 @@ namespace Troma
         {
             base.LoadContent();
 
-            _video = FileManager.Load<Video>("Videos/Pegi_18");
+            if (Settings.Language == "Francais")
+                _video = FileManager.Load<Video>("Videos/Pegi_18.fr-FR");
+            else
+                _video = FileManager.Load<Video>("Videos/Pegi_18");
+
             _player = new VideoPlayer();
 
             int width = GameServices.GraphicsDevice.Viewport.Width;

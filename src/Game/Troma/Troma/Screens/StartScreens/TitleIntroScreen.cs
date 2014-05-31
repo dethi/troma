@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Input;
 using GameEngine;
 
 namespace Troma
@@ -54,6 +55,12 @@ namespace Troma
 
                 ScreenManager.AddScreen(new MainMenuScreen(game));
             }
+        }
+
+        public override void HandleInput(GameTime gameTime, InputState input)
+        {
+            if (input.IsPressed(Keys.Enter) || input.IsPressed(Buttons.A))
+                _player.Stop();
         }
 
         public override void Draw(GameTime gameTime)

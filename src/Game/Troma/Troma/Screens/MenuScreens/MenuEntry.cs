@@ -40,7 +40,7 @@ namespace Troma
             selectedColor = Color.Black;
         }
 
-        public virtual void Update(GameTime gameTime, MenuScreen screen, bool isSelected)
+        public void Update(GameTime gameTime, MenuScreen screen, bool isSelected)
         {
             selectionFade = (isSelected) ? 1 : 0;
         }

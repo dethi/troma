@@ -399,8 +399,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Videos\Pegi_18.wmv">
-      <Name>Pegi_18</Name>
+    <Compile Include="Videos\Pegi_18.fr-FR.wmv">
+      <Name>Pegi_18.fr-FR</Name>
       <Importer>WmvImporter</Importer>
       <Processor>VideoProcessor</Processor>
     </Compile>
@@ -527,6 +527,13 @@
   <ItemGroup>
     <Compile Include="Videos\Title_Intro.wmv">
       <Name>Title_Intro</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Videos\Pegi_18.wmv">
+      <Name>Pegi_18</Name>
       <Importer>WmvImporter</Importer>
       <Processor>VideoProcessor</Processor>
     </Compile>
