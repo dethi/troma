@@ -7,10 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
 {
-    public struct CollisionType
+    public struct SphereCollision
     {
         public bool IsCollide;
         public List<BoundingBox> CollisionWith;
+    }
+
+    public struct RayCollision
+    {
+        public bool IsCollide;
+        public BoundingBox CollisionWith;
     }
 
     /// <summary>
@@ -116,9 +122,9 @@ namespace GameEngine
 
         #region Collision Methods
 
-        public static CollisionType IsCollision(BoundingSphere sphere)
+        public static SphereCollision IsCollision(BoundingSphere sphere)
         {
-            CollisionType c = new CollisionType { CollisionWith = new List<BoundingBox>() };
+            SphereCollision c = new SphereCollision { CollisionWith = new List<BoundingBox>() };
 
             foreach (BoundingBox box in _currentList)
             {
@@ -126,21 +132,28 @@ namespace GameEngine
                     c.CollisionWith.Add(box);
             }
 
-            c.IsCollide = (c.CollisionWith.Count > 0 );
+            c.IsCollide = (c.CollisionWith.Count > 0);
             return c;
         }
 
-        public static CollisionType IsCollision(Ray ray)
+        public static RayCollision IsCollision(Ray ray)
         {
-            CollisionType c = new CollisionType { CollisionWith = new List<BoundingBox>() };
+            RayCollision c = new RayCollision();
+            float dst = float.MaxValue;
+            float? tmp;
 
             foreach (BoundingBox box in _currentList)
             {
-                if (box.Intersects(ray).HasValue)
-                    c.CollisionWith.Add(box);
+                tmp = box.Intersects(ray);
+
+                if (tmp.HasValue && tmp.Value < dst)
+                {
+                    dst = tmp.Value;
+                    c.CollisionWith = box;
+                }
             }
 
-            c.IsCollide = (c.CollisionWith.Count > 0);
+            c.IsCollide = (c.CollisionWith != null);
             return c;
         }
 

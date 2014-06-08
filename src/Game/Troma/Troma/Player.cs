@@ -68,7 +68,7 @@ namespace Troma
 
         private bool _collisionDetected;
         private bool _collisionDetectedDown;
-        private CollisionType collisionResult;
+        private SphereCollision collisionResult;
 
         #endregion
 
@@ -77,7 +77,7 @@ namespace Troma
         private Entity _weapon;
         private Vector3 bulletDir;
         private Ray bulletRay;
-        private CollisionType bulletResult;
+        private RayCollision bulletResult;
 
         #endregion
 
@@ -400,7 +400,7 @@ namespace Troma
                     bulletResult = CollisionManager.IsCollision(bulletRay);
 
                     if (bulletResult.IsCollide)
-                        TargetManager.IsTargetAchieved(bulletResult.CollisionWith[0]);
+                        TargetManager.IsTargetAchieved(bulletResult.CollisionWith);
                 }
             }
         }
