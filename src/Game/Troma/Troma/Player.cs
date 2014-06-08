@@ -56,7 +56,6 @@ namespace Troma
         #region Fields for collision
 
         private BoundingSphere sphere;
-        private Vector3[] ptConstSphere;
 
         private Ray rayDown;
         private float? dstCollisionDown;
@@ -69,18 +68,16 @@ namespace Troma
 
         private bool _collisionDetected;
         private bool _collisionDetectedDown;
-        private CollisionType collisionResult;
+        private SphereCollision collisionResult;
 
         #endregion
 
         #region Fields for Weapon
 
         private Entity _weapon;
-        private Vector3 nearPoint;
-        private Vector3 farPoint;
         private Vector3 bulletDir;
         private Ray bulletRay;
-        private CollisionType bulletResult;
+        private RayCollision bulletResult;
 
         #endregion
 
@@ -146,7 +143,6 @@ namespace Troma
 
             newPos = _position;
             rotationBuffer = Vector3.Zero;
-            ptConstSphere = new Vector3[2];
 
             _isCrouched = false;
             _touchGround = false;
@@ -313,12 +309,9 @@ namespace Troma
             {
                 #region X,Z collisions
 
-                ptConstSphere[0] = newPos;
-                ptConstSphere[1].X = newPos.X;
-                ptConstSphere[1].Y = newPos.Y + _height + 0.2f;
-                ptConstSphere[1].Z = newPos.Z;
+                sphere.Radius = (_height + 0.2f) / 2;
+                sphere.Center = new Vector3(newPos.X, newPos.Y + sphere.Radius, newPos.Z);
 
-                sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
                 collisionResult = CollisionManager.IsCollision(sphere);
                 _collisionDetected = collisionResult.IsCollide;
 
@@ -330,10 +323,14 @@ namespace Troma
                         dirX = (newPos.X - _position.X > 0) ? 1 : -1;
 
                         dirRayX = new Ray(sphere.Center, Vector3.Right * dirX);
-                        dstCollisionMoveX = dirRayX.Intersects(collisionResult.CollisionWith);
 
-                        if (dstCollisionMoveX.HasValue)
-                            newPos.X -= dirX * (sphere.Radius - dstCollisionMoveX.Value);
+                        foreach (BoundingBox box in collisionResult.CollisionWith)
+                        {
+                            dstCollisionMoveX = dirRayX.Intersects(box);
+
+                            if (dstCollisionMoveX.HasValue)
+                                newPos.X -= dirX * (sphere.Radius - dstCollisionMoveX.Value);
+                        }
                     }
 
                     if (move.Z != 0)
@@ -341,10 +338,14 @@ namespace Troma
                         dirZ = (newPos.Z - _position.Z > 0) ? 1 : -1;
 
                         dirRayZ = new Ray(sphere.Center, Vector3.Backward * dirZ);
-                        dstCollisionMoveZ = dirRayZ.Intersects(collisionResult.CollisionWith);
 
-                        if (dstCollisionMoveZ.HasValue)
-                            newPos.Z -= dirZ * (sphere.Radius - dstCollisionMoveZ.Value);
+                        foreach (BoundingBox box in collisionResult.CollisionWith)
+                        {
+                            dstCollisionMoveZ = dirRayZ.Intersects(box);
+
+                            if (dstCollisionMoveZ.HasValue)
+                                newPos.Z -= dirZ * (sphere.Radius - dstCollisionMoveZ.Value);
+                        }
                     }
                 }
 
@@ -352,10 +353,8 @@ namespace Troma
 
                 #region Y collision
 
-                ptConstSphere[1].X = newPos.X;
-                ptConstSphere[1].Z = newPos.Z;
+                sphere.Center = new Vector3(newPos.X, newPos.Y + sphere.Radius, newPos.Z);
 
-                sphere = BoundingSphere.CreateFromPoints(ptConstSphere);
                 collisionResult = CollisionManager.IsCollision(sphere);
                 _collisionDetected = collisionResult.IsCollide;
 
@@ -363,12 +362,16 @@ namespace Troma
                 if (_collisionDetected)
                 {
                     rayDown = new Ray(sphere.Center, Vector3.Down);
-                    dstCollisionDown = rayDown.Intersects(collisionResult.CollisionWith);
 
-                    if (dstCollisionDown.HasValue)
+                    foreach (BoundingBox box in collisionResult.CollisionWith)
                     {
-                        newPos.Y += sphere.Radius - dstCollisionDown.Value;
-                        _collisionDetectedDown = true;
+                        dstCollisionDown = rayDown.Intersects(box);
+
+                        if (dstCollisionDown.HasValue)
+                        {
+                            newPos.Y += sphere.Radius - dstCollisionDown.Value;
+                            _collisionDetectedDown = true;
+                        }
                     }
                 }
                 else
@@ -388,16 +391,9 @@ namespace Troma
 
             if (input.PlayerShoot(_weapon.GetComponent<Weapon>().Info.Automatic))
             {
-                if (_weapon.GetComponent<Weapon>().Shoot(gameTime.TotalGameTime.TotalSeconds))
+                if (_weapon.GetComponent<Weapon>().Shoot())
                 {
-                    nearPoint = GameServices.GraphicsDevice.Viewport.Unproject(
-                        new Vector3(InputState.MouseOrigin.X, InputState.MouseOrigin.Y, 0), _view.Projection,
-                        _view.View, Matrix.Identity);
-                    farPoint = GameServices.GraphicsDevice.Viewport.Unproject(
-                        new Vector3(InputState.MouseOrigin.X, InputState.MouseOrigin.Y, 1), _view.Projection,
-                        _view.View, Matrix.Identity);
-
-                    bulletDir = farPoint - nearPoint;
+                    bulletDir = _view.LookAt - _view.Position;
                     bulletDir.Normalize();
 
                     bulletRay = new Ray(_view.Position, bulletDir);

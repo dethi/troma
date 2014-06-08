@@ -8,6 +8,8 @@ namespace GameEngine
 {
     public interface ITerrain
     {
+        TerrainInfo Info { get; }
+
         void Draw(ICamera camera);
         bool IsOnTerrain(Vector3 pos);
         float GetY(Vector3 pos);

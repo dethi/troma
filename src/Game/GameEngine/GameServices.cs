@@ -41,7 +41,7 @@ namespace GameEngine
 
         #region Initialization
 
-        public static void Initialize(Game game, GraphicsDevice graphicsDevice, 
+        public static void Initialize(Game game, GraphicsDevice graphicsDevice,
              GraphicsDeviceManager graphicsDeviceManager)
         {
             _game = game;
@@ -94,15 +94,16 @@ namespace GameEngine
         }
 
         /// <summary>
-        /// Activate full screen using the better resolution
+        /// Enable/Disable full screen
         /// </summary>
-        public static void ActivateFullScreen()
+        public static void FullScreen(bool enable)
         {
             Vector2 primaryScreen = GetScreenSize();
+            int div = (enable) ? 1 : 2;
 
-            _graphicsDeviceManager.PreferredBackBufferWidth = (int)primaryScreen.X;
-            _graphicsDeviceManager.PreferredBackBufferHeight = (int)primaryScreen.Y;
-            _graphicsDeviceManager.IsFullScreen = true;
+            _graphicsDeviceManager.PreferredBackBufferWidth = (int)(primaryScreen.X / div);
+            _graphicsDeviceManager.PreferredBackBufferHeight = (int)(primaryScreen.Y / div);
+            _graphicsDeviceManager.IsFullScreen = enable;
 
             _graphicsDeviceManager.ApplyChanges();
 
@@ -112,31 +113,22 @@ namespace GameEngine
         }
 
         /// <summary>
-        /// Deactivate full screen
+        /// Enable/Disable V-Sync
         /// </summary>
-        public static void DeactivateFullScreen()
+        public static void Vsync(bool enable)
         {
-            Vector2 primaryScreen = GetScreenSize();
-
-            _graphicsDeviceManager.PreferredBackBufferWidth = 800;
-            _graphicsDeviceManager.PreferredBackBufferHeight = 480;
-            _graphicsDeviceManager.IsFullScreen = false;
+            _game.IsFixedTimeStep = enable;
+            _graphicsDeviceManager.SynchronizeWithVerticalRetrace = enable;
 
             _graphicsDeviceManager.ApplyChanges();
-
-            InputState.MouseOrigin = new Vector2(
-                _graphicsDevice.Viewport.Width / 2,
-                _graphicsDevice.Viewport.Height / 2);
         }
 
         /// <summary>
-        /// Disable V-Sync, allow more than 60 FPS
+        /// Enable/Disable Multisampling
         /// </summary>
-        public static void DisableVsync()
+        public static void Multisampling(bool enable)
         {
-            _game.IsFixedTimeStep = false;
-            _graphicsDeviceManager.SynchronizeWithVerticalRetrace = false;
-
+            _graphicsDeviceManager.PreferMultiSampling = enable;
             _graphicsDeviceManager.ApplyChanges();
         }
 

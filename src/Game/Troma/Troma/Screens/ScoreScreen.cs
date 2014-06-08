@@ -13,9 +13,9 @@ namespace Troma
         private string _score;
 
         public ScoreScreen(Game game, TimeSpan time)
-            : base(game, "Victoire")
+            : base(game, Resource.Victory)
         {
-            MenuEntry backMenuEntry = new MenuEntry("Retour", 0.75f, 0, false);
+            MenuEntry backMenuEntry = new MenuEntry(Resource.Back, 0.75f, 0, false);
             backMenuEntry.Selected += OnCancel;
             MenuEntries.Add(backMenuEntry);
 

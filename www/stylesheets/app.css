@@ -5460,7 +5460,7 @@ meta.foundation-mq-topbar {
 }
 /* line 92, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
 .contain-to-grid .top-bar {
-  margin-bottom: 45px;
+  margin-bottom: 0;
 }
 
 /* line 96, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
@@ -5497,7 +5497,7 @@ meta.foundation-mq-topbar {
   line-height: 45px;
   position: relative;
   background: #333333;
-  margin-bottom: 45px;
+  margin-bottom: 0;
 }
 /* line 131, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */
 .top-bar ul {
@@ -5835,7 +5835,7 @@ meta.foundation-mq-topbar {
   .contain-to-grid .top-bar {
     max-width: 62.5rem;
     margin: 0 auto;
-    margin-bottom: 45px;
+    margin-bottom: 0;
   }
 
   /* line 448, ../bower_components/foundation/scss/foundation/components/_top-bar.scss */

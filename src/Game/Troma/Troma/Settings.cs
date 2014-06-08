@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using GameEngine;
+using System.Globalization;
+using System.Threading;
 
 namespace Troma
 {
@@ -13,6 +15,8 @@ namespace Troma
         private static string _keyboard;
         private static string _language;
         private static bool _fullScreen;
+        private static bool _vsync;
+        private static bool _multisampling;
 
         public static float MusicVolume
         {
@@ -42,6 +46,12 @@ namespace Troma
             set
             {
                 _language = value;
+
+                if (_language == "Francais")
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr-FR");
+                else
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en-US");
+
             }
         }
 
@@ -51,20 +61,56 @@ namespace Troma
             set
             {
                 _fullScreen = value;
-
-                if (_fullScreen)
-                    GameServices.ActivateFullScreen();
-                else
-                    GameServices.DeactivateFullScreen();
+                GameServices.FullScreen(_fullScreen);
             }
         }
 
+        public static bool Vsync
+        {
+            get { return _vsync; }
+            set
+            {
+                _vsync = value;
+                GameServices.Vsync(_vsync);
+            }
+        }
+
+        public static bool Multisampling
+        {
+            get { return _multisampling; }
+            set
+            {
+                _multisampling = value;
+                GameServices.Multisampling(_multisampling);
+            }
+        }
+
+        public static bool DynamicClouds { get; set; }
+
         public static void Initialize()
         {
-            _musicVolume = 0.8f;
-            Keyboard = "AZERTY";
-            Language = "Francais";
-            FullScreen = true;
+            MusicVolume = App.Default.MusicVolume;
+            Keyboard = App.Default.Keyboard;
+            Language = App.Default.Language;
+
+            FullScreen = App.Default.FullScreen;
+            Vsync = App.Default.Vsync;
+            Multisampling = App.Default.Multisampling;
+            DynamicClouds = App.Default.DynamicClouds;
+        }
+
+        public static void Save()
+        {
+            App.Default.MusicVolume = _musicVolume;
+            App.Default.Keyboard = _keyboard;
+            App.Default.Language = _language;
+
+            App.Default.FullScreen = _fullScreen;
+            App.Default.Vsync = _vsync;
+            App.Default.Multisampling = _multisampling;
+            App.Default.DynamicClouds = DynamicClouds;
+
+            App.Default.Save();
         }
     }
 }

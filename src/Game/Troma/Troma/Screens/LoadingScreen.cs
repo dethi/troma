@@ -74,7 +74,7 @@ namespace Troma
         {
             if (loadingIsSlow)
             {
-                const string message = "Chargement";
+                string message = Resource.Loading;
                 float scale = 1.1f * GameServices.GraphicsDevice.Viewport.Width / 1920;
                 Color color = Color.White * TransitionAlpha;
 

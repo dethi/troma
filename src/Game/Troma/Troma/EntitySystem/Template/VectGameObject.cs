@@ -16,7 +16,11 @@ namespace Troma
             entity.AddComponent(new Transform(entity)); // Little hack
             entity.AddComponent(new VectTransform(entity, pos));
             entity.AddComponent(new Model3D(entity, model));
-            entity.AddComponent(new VectDrawModel3D(entity, effect.Clone()));
+
+            Effect _effect = effect.Clone();
+            _effect.Name = effect.Name;
+
+            entity.AddComponent(new VectDrawModel3D(entity, _effect));
             entity.AddComponent(new VectCollisionBox(entity));
         }
     }

@@ -7,7 +7,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine
 {
-    public struct CollisionType
+    public struct SphereCollision
+    {
+        public bool IsCollide;
+        public List<BoundingBox> CollisionWith;
+    }
+
+    public struct RayCollision
     {
         public bool IsCollide;
         public BoundingBox CollisionWith;
@@ -65,7 +71,7 @@ namespace GameEngine
         #endregion
 
         #region Update and Draw
-        
+
         public static void Update(GameTime gameTime)
         {
             _currentList.Clear();
@@ -114,28 +120,41 @@ namespace GameEngine
 
         #endregion
 
-        #region Collision Detection
+        #region Collision Methods
 
-        public static CollisionType IsCollision(BoundingSphere sphere)
+        public static SphereCollision IsCollision(BoundingSphere sphere)
         {
+            SphereCollision c = new SphereCollision { CollisionWith = new List<BoundingBox>() };
+
             foreach (BoundingBox box in _currentList)
             {
                 if (box.Intersects(sphere))
-                    return new CollisionType { IsCollide = true, CollisionWith = box };
+                    c.CollisionWith.Add(box);
             }
 
-            return new CollisionType { IsCollide = false };        
+            c.IsCollide = (c.CollisionWith.Count > 0);
+            return c;
         }
 
-        public static CollisionType IsCollision(Ray ray)
+        public static RayCollision IsCollision(Ray ray)
         {
+            RayCollision c = new RayCollision();
+            float dst = float.MaxValue;
+            float? tmp;
+
             foreach (BoundingBox box in _currentList)
             {
-                if (box.Intersects(ray).HasValue)
-                    return new CollisionType { IsCollide = true, CollisionWith = box };
+                tmp = box.Intersects(ray);
+
+                if (tmp.HasValue && tmp.Value < dst)
+                {
+                    dst = tmp.Value;
+                    c.CollisionWith = box;
+                }
             }
 
-            return new CollisionType { IsCollide = false };
+            c.IsCollide = (c.CollisionWith != null);
+            return c;
         }
 
         #endregion
@@ -147,7 +166,7 @@ namespace GameEngine
         /// </summary>
         public static void AddBox(BoundingBox box)
         {
-           _masterList.Add(box);
+            _masterList.Add(box);
         }
 
         public static void AddBox(IEnumerable<BoundingBox> box)

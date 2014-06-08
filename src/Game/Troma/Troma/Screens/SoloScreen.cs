@@ -25,6 +25,12 @@ namespace Troma
         private float pauseAlpha;
         private bool scoreScreenLaunched;
 
+        private Texture2D target;
+        private Texture2D clock;
+        private SpriteFont Font;
+        private Vector2 titleOrigin = new Vector2(0, 0);
+        private Color c = new Color(170, 170, 170);
+
         #endregion
 
         #region Initialization
@@ -44,6 +50,7 @@ namespace Troma
             base.LoadContent();
 
 #if DEBUG
+            XConsole.Reset();
             XConsole.Initialize();
             DrawingAxes.Initialize();
             BoundingSphereRenderer.Initialize(30);
@@ -60,6 +67,10 @@ namespace Troma
             Texture2D terrainTexture = FileManager.Load<Texture2D>("Terrains/texture");
             Texture2D terrainHeighmap = FileManager.Load<Texture2D>("Terrains/heightmap");
 
+            target = FileManager.Load<Texture2D>("Menus/target");
+            clock = FileManager.Load<Texture2D>("Menus/Clock");
+            Font = FileManager.Load<SpriteFont>("Fonts/Square");
+
             TerrainInfo terrainInfo = new TerrainInfo()
             {
                 Position = Vector3.Zero,
@@ -72,32 +83,37 @@ namespace Troma
 
             float y = 0;
 
-            cloudManager = SceneRenderer.InitializeSky(CheatKey.skyType, terrainInfo, camera);
+            cloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
             terrain = new HeightMap(game, terrainEffect, terrainInfo);
 
             Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
             Effect modelWithNormal = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
+            modelWithNormal.Name = "GameObjectWithNormal";
 
-            WeaponInfo garandM1 = new WeaponInfo()
-            {
-                MunitionPerLoader = 8,
-                Loader = 10,
+            player.Initialize(terrain, WeaponObject.BuildEntity(Constants.GarandM1, modelWithNormal));
 
-                Automatic = false,
-                ROF = 0.5f,
+            #region Target
 
-                Model = "Weapon/M1",
-                Position = new Vector3(-0.7f, -0.3f, 0),
-                Rotation = new Vector3(0, 0, 0),
-                PositionSight = new Vector3(0, 0, -1.3f),
-                RotationSight = Vector3.Zero,
+            List<Tuple<Vector3, float>> ciblePos = new List<Tuple<Vector3, float>>();
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(200, y, 300), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(125, y, 260), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(190, y + 4, 234), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(440, y, 185), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(437, y, 294), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(309, y, 398), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(453, y + 1, 212), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(370, y + 1, 203), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(334, y, 284), 60));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(139, y + 4, 185), 90));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(73, y + 4, 232), 50));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(217, y, 378), 50));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(91, y, 360), -30));
+            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(152, 0, 451), 0));
 
-                SFXEmpty = "GarandM1_empty",
-                SFXReload = "GarandM1_reload",
-                SFXShoot = "GarandM1_shoot"
-            };
+            foreach (Tuple<Vector3, float> data in ciblePos)
+                TargetObject.BuildEntity(data.Item1, data.Item2, modelEffect);
 
-            player.Initialize(terrain, WeaponObject.BuildEntity(garandM1, modelWithNormal));
+            #endregion
 
             #region Rails
 
@@ -131,29 +147,6 @@ namespace Troma
                 barrierPos.Add(new Vector3(j, y, 222));
 
             VectGameObject.BuildEntity(barrierPos.ToArray(), "Town/wood_barrier", modelEffect);
-
-            #endregion
-
-            #region Target
-
-            List<Tuple<Vector3, float>> ciblePos = new List<Tuple<Vector3, float>>();
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(200, y, 300), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(125, y, 260), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(190, y + 4, 234), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(440, y, 185), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(437, y, 294), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(309, y, 398), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(453, y + 1, 212), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(370, y + 1, 203), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(334, y, 284), 60));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(139, y + 4, 185), 90));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(73, y + 4, 232), 50));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(217, y, 378), 50));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(91, y, 360), -30));
-            ciblePos.Add(new Tuple<Vector3, float>(new Vector3(152, 0, 451), 0));
-
-            foreach (Tuple<Vector3, float> data in ciblePos)
-                TargetObject.BuildEntity(data.Item1, data.Item2, modelEffect);
 
             #endregion
 
@@ -196,7 +189,9 @@ namespace Troma
                 player.Update(gameTime);
                 EntityManager.Update(gameTime);
                 CollisionManager.Update(gameTime);
-                cloudManager.Update(gameTime);
+
+                if (Settings.DynamicClouds)
+                    cloudManager.Update(gameTime);
 
 #if DEBUG
                 XConsole.Update(gameTime);
@@ -245,6 +240,45 @@ namespace Troma
             {
                 float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
                 ScreenManager.FadeBackBufferToBlack(alpha);
+            }
+
+            if (TargetManager.Count > 0)
+            {
+                int width = GameServices.GraphicsDevice.Viewport.Width;
+                int height = GameServices.GraphicsDevice.Viewport.Height;
+
+                string timeMinutes = "" + time.Minutes;
+                string timeTotal = timeMinutes + ": " + time.Seconds;
+                int nbreTarget2 = TargetManager.Count;
+                string nbreTarget = "" + nbreTarget2;
+
+                float textScale1 = 0.00080f * width;
+                float textScale2 = 0.00086f * width;
+
+                Vector2 Position1 = new Vector2(
+                1700 * width / 1920,
+                height - (1060 * width / 1920));
+                Vector2 Position2 = new Vector2(
+                1698 * width / 1920,
+                height - (1062 * width / 1920));
+
+                Vector2 Position3 = new Vector2(
+                170 * width / 1920,
+                height - (1060 * width / 1920));
+
+                Rectangle targetImage = new Rectangle(1770 * width / 1920, height - (1060 * width / 1920), 65 * width / 1920, 78 * width / 1920);
+                Rectangle clockImage = new Rectangle(70 * width / 1920, height - (1060 * width / 1920), 80 * width / 1920, 80 * width / 1920);
+
+                GameServices.SpriteBatch.Begin();
+
+                GameServices.SpriteBatch.DrawString(Font, nbreTarget, Position2, Color.Black * 0.3f, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
+                GameServices.SpriteBatch.DrawString(Font, nbreTarget, Position1, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+                GameServices.SpriteBatch.Draw(target, targetImage, Color.White * 0.8f);
+
+                GameServices.SpriteBatch.DrawString(Font, timeTotal, Position3, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+                GameServices.SpriteBatch.Draw(clock, clockImage, Color.White * 0.8f);
+
+                GameServices.SpriteBatch.End();
             }
         }
     }

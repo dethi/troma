@@ -41,6 +41,7 @@ namespace Troma
             base.Initialize();
 
             GameServices.Initialize(this, GraphicsDevice, graphics);
+            TimerManager.Initialize();
             SoundManager.Initialize();
             Settings.Initialize();
             SoundManager.SetVolume(Settings.MusicVolume);
@@ -50,7 +51,7 @@ namespace Troma
             //screenManager.AddScreen(new TestScreen(this));
             //screenManager.AddScreen(new MainMenuScreen(this));
             //screenManager.AddScreen(new ScoreScreen(this, null));
-            screenManager.AddScreen(new StartScreen(this));
+            screenManager.AddScreen(new PegiScreen(this));
         }
 
         /// <summary>
@@ -75,6 +76,7 @@ namespace Troma
 
         protected override void Update(GameTime gameTime)
         {
+            TimerManager.Update(gameTime);
             SoundManager.Update();
             base.Update(gameTime);
         }
