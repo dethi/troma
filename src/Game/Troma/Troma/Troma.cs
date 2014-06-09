@@ -47,12 +47,13 @@ namespace Troma
             SoundManager.SetVolume(Settings.MusicVolume);
             SFXManager.SetVolume(Settings.MusicVolume);
 
-            //screenManager.AddScreen(new SoloScreen(this, ""));
+            screenManager.AddScreen(new SoloScreen(this, ""));
             //screenManager.AddScreen(new TestScreen(this));
             //screenManager.AddScreen(new MainMenu(this));
             //screenManager.AddScreen(new ScoreScreen(this, null));
-            screenManager.AddScreen(new PegiScreen(this));
+            //screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new HelpMenu(this));
+            screenManager.AddScreen(new InGameMenu(this));
         }
 
         /// <summary>

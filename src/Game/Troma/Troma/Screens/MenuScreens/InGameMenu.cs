@@ -8,17 +8,11 @@ using GameEngine;
 
 namespace Troma
 {
-    public class MainMenu : MenuScreen
+    class InGameMenu : MenuScreen
     {
-        private Entry soloMenuEntry;
-        private Entry multiMenuEntry;
-        private Entry scoreMenuEntry;
-        private Entry optionsMenuEntry;
-        private Entry exitMenuEntry;
-
-        private SpriteFont tromaFont;
-        private Vector2 tromaPos;
-        private Color tromaColor;
+        private Entry resumeMenuEntry;
+        private Entry optionMenuEntry;
+        private Entry backMenuEntry;
 
         private Texture2D bg;
         private Texture2D bgTrans;
@@ -28,56 +22,43 @@ namespace Troma
         private Rectangle bgTransRect;
         private Rectangle arrowRect;
 
-        public MainMenu(Game game)
+        public InGameMenu(Game game)
             : base(game)
         {
             Vector2 entryPos = new Vector2(143, 435);
-            float space = 110;
+            float space = 220;
 
             // Create menu entries.
-            soloMenuEntry = new Entry(string.Empty, 1, entryPos);
+            resumeMenuEntry = new Entry(String.Empty, 1, entryPos);
             entryPos.Y += space;
-            multiMenuEntry = new Entry(string.Empty, 1, entryPos);
+            optionMenuEntry = new Entry(String.Empty, 1, entryPos);
             entryPos.Y += space;
-            scoreMenuEntry = new Entry(string.Empty, 1, entryPos);
-            entryPos.Y += space;
-            optionsMenuEntry = new Entry(string.Empty, 1, entryPos);
-            entryPos.Y += space;
-            exitMenuEntry = new Entry(string.Empty, 1, entryPos);
+            backMenuEntry = new Entry(String.Empty, 1, entryPos);
 
             // Hook up menu event handlers.
-            soloMenuEntry.Selected += SoloMenuEntrySelected;
-            multiMenuEntry.Selected += MultiMenuEntrySelected;
-            scoreMenuEntry.Selected += ScoreMenuEntrySelected;
-            optionsMenuEntry.Selected += OptionsMenuEntrySelected;
-            exitMenuEntry.Selected += OnCancel;
+            resumeMenuEntry.Selected += ResumeMenuEntrySelected;
+            optionMenuEntry.Selected += OptionsMenuEntrySelected;
+            backMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
-            MenuEntries.Add(soloMenuEntry);
-            MenuEntries.Add(multiMenuEntry);
-            MenuEntries.Add(scoreMenuEntry);
-            MenuEntries.Add(optionsMenuEntry);
-            MenuEntries.Add(exitMenuEntry);
+            MenuEntries.Add(resumeMenuEntry);
+            MenuEntries.Add(optionMenuEntry);
+            MenuEntries.Add(backMenuEntry);
 
-            SceneRenderer.InitializeMenu();
+            IsHUD = true;
         }
 
         public override void LoadContent()
         {
             base.LoadContent();
 
-            tromaFont = FileManager.Load<SpriteFont>("Fonts/LuckyTypewriter");
-            tromaColor = new Color(112, 97, 63);
-
-            bg = FileManager.Load<Texture2D>("Menus/background");
+            bg = FileManager.Load<Texture2D>("Menus/background-blur");
             bgTrans = FileManager.Load<Texture2D>("Menus/translucide");
             arrow = FileManager.Load<Texture2D>("Menus/arrow");
 
             bgRect = new Rectangle(0, 0, 1920, 1080);
             bgTransRect = new Rectangle(0, 0, 550, 1080);
             arrowRect = new Rectangle(0, 0, 64, 64);
-
-            SoundManager.Play("Menu");
         }
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
@@ -101,16 +82,10 @@ namespace Troma
             bgTransRect.Height = height;
             bgTransRect.Width = (int)(500 * widthScale);
 
-            tromaPos = new Vector2(
-                1380 * widthScale,
-                50 * heightScale);
-
             GameServices.SpriteBatch.Begin();
 
-            GameServices.SpriteBatch.Draw(bg, bgRect, Color.White * TransitionAlpha);
+            //GameServices.SpriteBatch.Draw(bg, bgRect, Color.White * TransitionAlpha);
             GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.15f);
-            GameServices.SpriteBatch.DrawString(tromaFont, "troma", tromaPos, tromaColor * TransitionAlpha, 0,
-                Vector2.Zero, (widthScale + heightScale) / 2, SpriteEffects.None, 0);
 
             // Draw each menu entry in turn.
             for (int i = 0; i < MenuEntries.Count; i++)
@@ -131,20 +106,9 @@ namespace Troma
             GameServices.SpriteBatch.End();
         }
 
-        private void SoloMenuEntrySelected(object sender, EventArgs e)
+        private void ResumeMenuEntrySelected(object sender, EventArgs e)
         {
-            SoundManager.Stop();
-            LoadingScreen.Load(game, this.ScreenManager, true, new SoloScreen(game, ""));
-        }
-
-        private void MultiMenuEntrySelected(object sender, EventArgs e)
-        {
-            //SoundManager.Stop();
-        }
-
-        private void ScoreMenuEntrySelected(object sender, EventArgs e)
-        {
-            ScreenManager.AddScreen(new ScoreMenu(game));
+            ExitScreen();
         }
 
         private void OptionsMenuEntrySelected(object sender, EventArgs e)
@@ -152,24 +116,16 @@ namespace Troma
             ScreenManager.AddScreen(new OptionsMenuScreen(game));
         }
 
-        protected override void OnCancel()
-        {
-            game.Exit();
-        }
-
         private void OnCancel(object sender, EventArgs e)
         {
-            SoundManager.Stop();
-            OnCancel();
+            LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game));
         }
 
         private void SetMenuEntryText()
         {
-            soloMenuEntry.Text = "Solo";
-            multiMenuEntry.Text = Resource.Multiplayer;
-            scoreMenuEntry.Text = "Score";
-            optionsMenuEntry.Text = "Options";
-            exitMenuEntry.Text = Resource.Exit;
+            resumeMenuEntry.Text = Resource.Resume;
+            optionMenuEntry.Text = "Options";
+            backMenuEntry.Text = Resource.Exit;
         }
     }
 }

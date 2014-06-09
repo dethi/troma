@@ -176,7 +176,7 @@
     </Compile>
     <Compile Include="Screens\MenuScreens\HelpMenu.cs" />
     <Compile Include="Screens\MenuScreens\NeedToDo\GraphicsMenuScreen.cs" />
-    <Compile Include="Screens\MenuScreens\NeedToDo\InGameMenuScreen.cs" />
+    <Compile Include="Screens\MenuScreens\InGameMenu.cs" />
     <Compile Include="Screens\MenuScreens\NeedToDo\MenuScreenOld.cs" />
     <Compile Include="Screens\LoadingScreen.cs" />
     <Compile Include="Player.cs" />
