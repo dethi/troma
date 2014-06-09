@@ -175,7 +175,7 @@ namespace Troma
 
         private void SummonsKeyboardMenuEntrySelected(object sender, EventArgs e)
         {
-            ScreenManager.AddScreen(new Key_Assignment(game));
+            ScreenManager.AddScreen(new HelpMenu(game));
             SetMenuEntryText();
         }
 

@@ -146,7 +146,7 @@ namespace Troma
 
         private void ScoreMenuEntrySelected(object sender, EventArgs e)
         {
-            ScreenManager.AddScreen(new ScoreGameMenuScreen(game));
+            ScreenManager.AddScreen(new ScoreMenu(game));
         }
 
         private void OptionsMenuEntrySelected(object sender, EventArgs e)
