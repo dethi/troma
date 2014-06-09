@@ -18,7 +18,6 @@ namespace Troma
         private Texture2D bgTrans;
         private Texture2D arrow;
 
-        private Rectangle bgRect;
         private Rectangle bgTransRect;
         private Rectangle arrowRect;
 
@@ -56,7 +55,6 @@ namespace Troma
             bgTrans = FileManager.Load<Texture2D>("Menus/translucide");
             arrow = FileManager.Load<Texture2D>("Menus/arrow");
 
-            bgRect = new Rectangle(0, 0, 1920, 1080);
             bgTransRect = new Rectangle(0, 0, 550, 1080);
             arrowRect = new Rectangle(0, 0, 64, 64);
         }
@@ -75,16 +73,10 @@ namespace Troma
             float widthScale = (float)width / 1920;
             float heightScale = (float)height / 1080;
 
-            bgRect.Height = height;
-            bgRect.Width = (int)(height * 1.778f);
-            bgRect.X = -(bgRect.Width - width) / 2;
-
             bgTransRect.Height = height;
             bgTransRect.Width = (int)(500 * widthScale);
 
             GameServices.SpriteBatch.Begin();
-
-            //GameServices.SpriteBatch.Draw(bg, bgRect, Color.White * TransitionAlpha);
             GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.15f);
 
             // Draw each menu entry in turn.
