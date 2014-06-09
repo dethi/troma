@@ -166,10 +166,10 @@ namespace Troma
 
         private void SetMenuEntryText()
         {
-            cloudMenuEntry.Text = Resource.Cloud + (Settings.DynamicClouds ? Resource.Yes : Resource.No);
-            displayMenuEntry.Text = Resource.Full_Screen + (Settings.FullScreen ? Resource.Yes : Resource.No);
-            vsyncMenuEntry.Text = Resource.Vsync + (Settings.Vsync ? Resource.Yes : Resource.No);
-            multisamplingMenuEntry.Text = Resource.Multisampling + (Settings.Multisampling ? Resource.Yes : Resource.No);
+            cloudMenuEntry.Text = Resource.labelCloud + (Settings.DynamicClouds ? Resource.Yes : Resource.No);
+            displayMenuEntry.Text = Resource.labelFullScreen + (Settings.FullScreen ? Resource.Yes : Resource.No);
+            vsyncMenuEntry.Text = Resource.labelVsync + (Settings.Vsync ? Resource.Yes : Resource.No);
+            multisamplingMenuEntry.Text = Resource.labelMultisampling + (Settings.Multisampling ? Resource.Yes : Resource.No);
             backMenuEntry.Text = Resource.Back;
         }
     }

@@ -61,47 +61,11 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Aim for.
-        /// </summary>
-        internal static string Aimfor {
-            get {
-                return ResourceManager.GetString("Aimfor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Back.
         /// </summary>
         internal static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Bottom.
-        /// </summary>
-        internal static string Bottom {
-            get {
-                return ResourceManager.GetString("Bottom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Dynamic clouds   .
-        /// </summary>
-        internal static string Cloud {
-            get {
-                return ResourceManager.GetString("Cloud", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Crouch.
-        /// </summary>
-        internal static string Crouch {
-            get {
-                return ResourceManager.GetString("Crouch", resourceCulture);
             }
         }
         
@@ -124,15 +88,6 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Full Screen   .
-        /// </summary>
-        internal static string Full_Screen {
-            get {
-                return ResourceManager.GetString("Full_Screen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Graphics.
         /// </summary>
         internal static string Graphics {
@@ -142,38 +97,155 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Aim for.
+        /// </summary>
+        internal static string labelAimfor {
+            get {
+                return ResourceManager.GetString("labelAimfor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Bottom.
+        /// </summary>
+        internal static string labelBottom {
+            get {
+                return ResourceManager.GetString("labelBottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Dynamic clouds   .
+        /// </summary>
+        internal static string labelCloud {
+            get {
+                return ResourceManager.GetString("labelCloud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Crouch.
+        /// </summary>
+        internal static string labelCrouch {
+            get {
+                return ResourceManager.GetString("labelCrouch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Full Screen   .
+        /// </summary>
+        internal static string labelFullScreen {
+            get {
+                return ResourceManager.GetString("labelFullScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Jump.
         /// </summary>
-        internal static string Jump {
+        internal static string labelJump {
             get {
-                return ResourceManager.GetString("Jump", resourceCulture);
+                return ResourceManager.GetString("labelJump", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Keyboard   .
         /// </summary>
-        internal static string Keyboard {
+        internal static string labelKeyboard {
             get {
-                return ResourceManager.GetString("Keyboard", resourceCulture);
+                return ResourceManager.GetString("labelKeyboard", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Language   .
         /// </summary>
-        internal static string Language {
+        internal static string labelLanguage {
             get {
-                return ResourceManager.GetString("Language", resourceCulture);
+                return ResourceManager.GetString("labelLanguage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Left.
         /// </summary>
-        internal static string Left {
+        internal static string labelLeft {
             get {
-                return ResourceManager.GetString("Left", resourceCulture);
+                return ResourceManager.GetString("labelLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Multisampling   .
+        /// </summary>
+        internal static string labelMultisampling {
+            get {
+                return ResourceManager.GetString("labelMultisampling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pause.
+        /// </summary>
+        internal static string labelPause {
+            get {
+                return ResourceManager.GetString("labelPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reload.
+        /// </summary>
+        internal static string labelReload {
+            get {
+                return ResourceManager.GetString("labelReload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Right.
+        /// </summary>
+        internal static string labelRight {
+            get {
+                return ResourceManager.GetString("labelRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Run.
+        /// </summary>
+        internal static string labelRun {
+            get {
+                return ResourceManager.GetString("labelRun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Shoot.
+        /// </summary>
+        internal static string labelShoot {
+            get {
+                return ResourceManager.GetString("labelShoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Up.
+        /// </summary>
+        internal static string labelUp {
+            get {
+                return ResourceManager.GetString("labelUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à V-Sync   .
+        /// </summary>
+        internal static string labelVsync {
+            get {
+                return ResourceManager.GetString("labelVsync", resourceCulture);
             }
         }
         
@@ -196,29 +268,11 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Pause.
-        /// </summary>
-        internal static string MenuPaused {
-            get {
-                return ResourceManager.GetString("MenuPaused", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Multiplayer.
         /// </summary>
         internal static string Multiplayer {
             get {
                 return ResourceManager.GetString("Multiplayer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Multisampling   .
-        /// </summary>
-        internal static string Multisampling {
-            get {
-                return ResourceManager.GetString("Multisampling", resourceCulture);
             }
         }
         
@@ -232,29 +286,11 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Reload.
-        /// </summary>
-        internal static string Reload {
-            get {
-                return ResourceManager.GetString("Reload", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Resume.
         /// </summary>
         internal static string Resume {
             get {
                 return ResourceManager.GetString("Resume", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Right.
-        /// </summary>
-        internal static string Right {
-            get {
-                return ResourceManager.GetString("Right", resourceCulture);
             }
         }
         
@@ -268,24 +304,6 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Run.
-        /// </summary>
-        internal static string Run {
-            get {
-                return ResourceManager.GetString("Run", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Shoot.
-        /// </summary>
-        internal static string Shoot {
-            get {
-                return ResourceManager.GetString("Shoot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key assignments.
         /// </summary>
         internal static string SummonsKeyboard {
@@ -295,29 +313,11 @@ namespace Troma {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Up.
-        /// </summary>
-        internal static string Up {
-            get {
-                return ResourceManager.GetString("Up", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Victory.
         /// </summary>
         internal static string Victory {
             get {
                 return ResourceManager.GetString("Victory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à V-Sync   .
-        /// </summary>
-        internal static string Vsync {
-            get {
-                return ResourceManager.GetString("Vsync", resourceCulture);
             }
         }
         

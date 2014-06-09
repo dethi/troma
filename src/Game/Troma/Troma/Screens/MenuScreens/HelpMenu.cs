@@ -58,17 +58,17 @@ namespace Troma
             Dictionary<KeyActions, Keys> kb = InputConfiguration.GetKeybord();
 
             StringBuilder tmp = new StringBuilder();
-            tmp.AppendLine(Resource.Up);
-            tmp.AppendLine(Resource.Bottom);
-            tmp.AppendLine(Resource.Left);
-            tmp.AppendLine(Resource.Right);
-            tmp.AppendLine(Resource.Run);
-            tmp.AppendLine(Resource.Jump);
-            tmp.AppendLine(Resource.Crouch);
-            tmp.AppendLine(Resource.Reload);
-            tmp.AppendLine(Resource.Shoot);
-            tmp.AppendLine(Resource.Aimfor);
-            tmp.AppendLine(Resource.MenuPaused);
+            tmp.AppendLine(Resource.labelUp);
+            tmp.AppendLine(Resource.labelBottom);
+            tmp.AppendLine(Resource.labelLeft);
+            tmp.AppendLine(Resource.labelRight);
+            tmp.AppendLine(Resource.labelRun);
+            tmp.AppendLine(Resource.labelJump);
+            tmp.AppendLine(Resource.labelCrouch);
+            tmp.AppendLine(Resource.labelReload);
+            tmp.AppendLine(Resource.labelShoot);
+            tmp.AppendLine(Resource.labelAimfor);
+            tmp.AppendLine(Resource.labelPause);
             keyLabel = tmp.ToString();
 
             tmp.Clear();
@@ -101,18 +101,18 @@ namespace Troma
 
             keyLabelPos = new Vector2(
                 143 * widthScale,
-                120 * heightScale);
+                143 * heightScale);
 
             keyPos = new Vector2(
                 keyLabelPos.X + SpriteFont.MeasureString(keyLabel).X * scale + 200 * widthScale,
-                120 * heightScale);
+                143 * heightScale);
 
             float lineSpacing = SpriteFont.LineSpacing * ((widthScale + heightScale) / 2);
             int nbLine = keyLabel.Split('\n').Length - 1;
 
             bgTransRect.X = (int)(133 * widthScale);
             bgTransRect.Height = (int)(lineSpacing);
-            bgTransRect.Width = (int)(keyPos.X + (SpriteFont.MeasureString(key).X + 40) * scale);
+            bgTransRect.Width = (int)(keyPos.X - keyLabelPos.X + (SpriteFont.MeasureString(key).X + 40) * scale);
 
             GameServices.SpriteBatch.Begin();
 
@@ -120,13 +120,13 @@ namespace Troma
 
             for (float i = 0; i < nbLine; i += 2)
             {
-                bgTransRect.Y = (int)(keyLabelPos.Y + i * lineSpacing);
+                bgTransRect.Y = (int)(keyLabelPos.Y - 2 + i * lineSpacing);
                 GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.15f);
             }
 
             GameServices.SpriteBatch.DrawString(SpriteFont, keyLabel, keyLabelPos, Color.Black * TransitionAlpha, 0,
                 Vector2.Zero, scale, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(SpriteFont, key, keyPos, Color.Black * TransitionAlpha, 0,
+            GameServices.SpriteBatch.DrawString(SpriteFont, key, keyPos, Color.Ivory * TransitionAlpha, 0,
                 Vector2.Zero, scale, SpriteEffects.None, 0);
 
             // Draw each menu entry in turn.

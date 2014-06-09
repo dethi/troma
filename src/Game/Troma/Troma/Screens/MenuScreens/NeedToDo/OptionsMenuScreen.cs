@@ -187,8 +187,8 @@ namespace Troma
 
         private void SetMenuEntryText()
         {
-            keyboardMenuEntry.Text = Resource.Keyboard + Settings.Keyboard;
-            languageMenuEntry.Text = Resource.Language + Settings.Language;
+            keyboardMenuEntry.Text = Resource.labelKeyboard + Settings.Keyboard;
+            languageMenuEntry.Text = Resource.labelLanguage + Settings.Language;
             graphicsMenuEntry.Text = Resource.Graphics;
             volumeMenuEntry.Text = "Volume  " + (int)(Settings.MusicVolume * 100);
             summonsKeyboardMenuEntry.Text = Resource.SummonsKeyboard;

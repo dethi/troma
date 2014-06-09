@@ -38,7 +38,8 @@ namespace Troma
             float widthScale = (float)GameServices.GraphicsDevice.Viewport.Width / 1920;
             float heightScale = (float)GameServices.GraphicsDevice.Viewport.Height / 1080;
 
-            Position = originPos * heightScale * Scale;
+            Position.X = originPos.X * widthScale;
+            Position.Y = originPos.Y * heightScale;
 
             GameServices.SpriteBatch.DrawString(screen.SpriteFont, Text, Position, c, 0,
                 Vector2.Zero, Scale * (widthScale + heightScale) / 2, SpriteEffects.None, 0);

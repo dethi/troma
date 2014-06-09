@@ -101,7 +101,7 @@ namespace Troma
             bgRect.X = -(bgRect.Width - width) / 2;
 
             bgTransRect.Height = height;
-            bgTransRect.Width = (int)(550 * widthScale);
+            bgTransRect.Width = (int)(500 * widthScale);
 
             tromaPos = new Vector2(
                 1380 * widthScale,
