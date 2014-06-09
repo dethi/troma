@@ -49,10 +49,10 @@ namespace Troma
 
             //screenManager.AddScreen(new SoloScreen(this, ""));
             //screenManager.AddScreen(new TestScreen(this));
-            screenManager.AddScreen(new MainMenu(this));
+            //screenManager.AddScreen(new MainMenu(this));
             //screenManager.AddScreen(new ScoreScreen(this, null));
-            //screenManager.AddScreen(new PegiScreen(this));
-            screenManager.AddScreen(new HelpMenu(this));
+            screenManager.AddScreen(new PegiScreen(this));
+            //screenManager.AddScreen(new HelpMenu(this));
         }
 
         /// <summary>
