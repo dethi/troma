@@ -8,7 +8,7 @@ using GameEngine;
 
 namespace Troma
 {
-    public class ScoreScreen : MenuScreen
+    public class ScoreScreen : MenuScreenOld
     {
         private string _score;
 
@@ -76,7 +76,7 @@ namespace Troma
 
         private void OnCancel(object sender, EventArgs e)
         {
-            LoadingScreen.Load(game, ScreenManager, false, new MainMenuScreen(game));
+            LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game));
         }
     }
 }

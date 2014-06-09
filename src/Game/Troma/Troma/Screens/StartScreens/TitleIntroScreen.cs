@@ -53,7 +53,7 @@ namespace Troma
                 foreach (GameScreen screen in ScreenManager.GetScreens())
                     screen.ExitScreen();
 
-                ScreenManager.AddScreen(new MainMenuScreen(game));
+                ScreenManager.AddScreen(new MainMenu(game));
             }
         }
 

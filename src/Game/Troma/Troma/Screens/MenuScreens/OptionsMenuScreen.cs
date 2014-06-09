@@ -8,7 +8,7 @@ using GameEngine;
 
 namespace Troma
 {
-    class OptionsMenuScreen : MenuScreen
+    class OptionsMenuScreen : MenuScreenOld
     {
         #region Fields
 

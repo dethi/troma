@@ -9,7 +9,7 @@ using GameEngine;
 
 namespace Troma
 {
-    class GraphicsMenuScreen : MenuScreen
+    class GraphicsMenuScreen : MenuScreenOld
     {
         #region Fields
         

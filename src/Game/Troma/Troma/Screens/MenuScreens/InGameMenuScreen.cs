@@ -8,7 +8,7 @@ using GameEngine;
 
 namespace Troma
 {
-    public class InGameMenuScreen : MenuScreen
+    public class InGameMenuScreen : MenuScreenOld
     {
         private MenuEntry resumeMenuEntry;
         private MenuEntry optionMenuEntry;
@@ -82,7 +82,7 @@ namespace Troma
 
         private void OnCancel(object sender, EventArgs e)
         {
-            LoadingScreen.Load(game, ScreenManager, false, new MainMenuScreen(game));
+            LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game));
             SetMenuEntryText();
         }
         private void SetMenuEntryText()

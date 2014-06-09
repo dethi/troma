@@ -8,7 +8,7 @@ using GameEngine;
 
 namespace Troma
 {
-    class Key_Assignment : MenuScreen
+    class Key_Assignment : MenuScreenOld
     {
         #region Fields
 

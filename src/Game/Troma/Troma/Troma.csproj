@@ -177,8 +177,7 @@
     <Compile Include="Screens\MenuScreens\GraphicsMenuScreen.cs" />
     <Compile Include="Screens\MenuScreens\InGameMenuScreen.cs" />
     <Compile Include="Screens\MenuScreens\Key_Assignment.cs" />
-    <Compile Include="Screens\MenuScreens\MainMenuScreen.cs" />
-    <Compile Include="Screens\MenuScreens\MenuScreen.cs" />
+    <Compile Include="Screens\MenuScreens\MenuScreenOld.cs" />
     <Compile Include="Screens\LoadingScreen.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,6 +185,9 @@
     <Compile Include="EntitySystem\Template\GameObject.cs" />
     <Compile Include="Screens\MenuScreens\OptionsMenuScreen.cs" />
     <Compile Include="Screens\MenuScreens\ScoreMenuScreen.cs" />
+    <Compile Include="Screens\MenuScreens\MainMenu.cs" />
+    <Compile Include="Screens\MenuScreens\Entry.cs" />
+    <Compile Include="Screens\MenuScreens\MenuScreen.cs" />
     <Compile Include="Screens\ScoreScreen.cs" />
     <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Screens\StartScreens\PegiScreen.cs" />
@@ -261,6 +263,7 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
