@@ -11,17 +11,15 @@ namespace Troma
 {
     public abstract class MenuScreen : GameScreen
     {
-        public List<MenuEntry> MenuEntries { get; protected set; }
-        public SpriteFont Font { get; protected set; }
+        public List<IEntry> MenuEntries { get; protected set; }
+        public SpriteFont SpriteFont { get; protected set; }
 
-        protected readonly string menuTitle;
         protected int selectedEntry;
 
-        public MenuScreen(Game game, string menuTitle)
+        public MenuScreen(Game game)
             : base(game)
         {
-            MenuEntries = new List<MenuEntry>();
-            this.menuTitle = menuTitle;
+            MenuEntries = new List<IEntry>();
 
             TransitionOnTime = TimeSpan.FromSeconds(1);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
@@ -32,22 +30,7 @@ namespace Troma
         public override void LoadContent()
         {
             base.LoadContent();
-            Font = FileManager.Load<SpriteFont>("Fonts/Menu");
-        }
-
-        public override void Update(GameTime gameTime, bool otherScreenHasFocus,
-            bool coveredByOtherScreen)
-        {
-            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
-
-            // Update each nested MenuEntry object.
-            for (int i = 0; i < MenuEntries.Count; i++)
-            {
-                bool isSelected = IsActive && (i == selectedEntry);
-                MenuEntries[i].Update(gameTime, this, isSelected);
-            }
-
-            UpdateMenuEntryLocations();
+            SpriteFont = GameServices.Game.Content.Load<SpriteFont>("Fonts/28DaysLater");
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
@@ -79,41 +62,36 @@ namespace Troma
                 OnSelectEntry(selectedEntry);
             }
 
-        }
-
-        protected virtual void UpdateMenuEntryLocations()
-        {
-            // Make the menu slide into place during transitions, using a
-            // power curve to make things look more interesting (this makes
-            // the movement slow down as it nears the end).
-            float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
-            int width = game.GraphicsDevice.Viewport.Width;
-            float height = game.GraphicsDevice.Viewport.Height;
-
-            Vector2 position = new Vector2(
-                (100 * width) / 1920,
-                (350 * height) / 1080);
-
-            float totalTextSize = MenuEntries[0].FontSize * MenuEntries.Count;
-            height -= (1.4f * position.Y) - totalTextSize;
-            float spacing = height / MenuEntries.Count;
-
-            // update each menu entry's location in turn
-            for (int i = 0; i < MenuEntries.Count; i++)
+            if (input.IsPressed(Keys.Left) || (input.IsPressed(Buttons.DPadLeft)))
             {
-                if (ScreenState == ScreenState.TransitionOn)
-                    position.X -= transitionOffset * 256;
-                else
-                    position.X += transitionOffset * 512;
+                SFXManager.Play("Button_entry");
+                OnChangeChoice(selectedEntry, -1);
+            }
 
-                MenuEntries[i].Position = position;
-                position.Y += spacing;
+            if (input.IsPressed(Keys.Right) || (input.IsPressed(Buttons.DPadRight)))
+            {
+                SFXManager.Play("Button_entry");
+                OnChangeChoice(selectedEntry, 1);
             }
         }
 
         protected void OnSelectEntry(int entryIndex)
         {
-            MenuEntries[entryIndex].OnSelectEntry();
+            if (MenuEntries[entryIndex].Type == EntryType.Button)
+                ((Button)MenuEntries[entryIndex]).OnSelectEntry();
+        }
+
+        protected void OnChangeChoice(int entryIndex, int choice)
+        {
+            if (choice != 0)
+            {
+                if (MenuEntries[entryIndex].Type == EntryType.Stepper)
+                    ((Stepper)MenuEntries[entryIndex]).OnChangeValue(choice);
+                else if (MenuEntries[entryIndex].Type == EntryType.Switch)
+                    ((Switch)MenuEntries[entryIndex]).OnChangeValue((choice < 0));
+                else if (MenuEntries[entryIndex].Type == EntryType.Numerous)
+                    ((Numerous)MenuEntries[entryIndex]).OnChangeValue(choice);
+            }
         }
 
         protected virtual void OnCancel()

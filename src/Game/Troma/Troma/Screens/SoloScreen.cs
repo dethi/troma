@@ -23,7 +23,6 @@ namespace Troma
         private TimeSpan time;
 
         private float pauseAlpha;
-        private bool scoreScreenLaunched;
 
         private Texture2D target;
         private Texture2D clock;
@@ -42,7 +41,6 @@ namespace Troma
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
             _mapName = mapName;
-            scoreScreenLaunched = false;
         }
 
         public override void LoadContent()
@@ -174,35 +172,34 @@ namespace Troma
         {
             base.Update(gameTime, hasFocus, isVisible);
 
-            if (!hasFocus)
+            if (Settings.DynamicClouds)
+                cloudManager.Update(gameTime);
+
+            if (!IsActive)
                 pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
             else
+            {
                 pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
 
-            if (TargetManager.Count == 0 && !scoreScreenLaunched)
-            {
-                ScreenManager.AddScreen(new ScoreScreen(game, time));
-                scoreScreenLaunched = true;
-            }
-            else
-            {
-                player.Update(gameTime);
-                EntityManager.Update(gameTime);
-                CollisionManager.Update(gameTime);
-
-                if (Settings.DynamicClouds)
-                    cloudManager.Update(gameTime);
+                if (TargetManager.Count == 0)
+                    ScreenManager.AddScreen(new ScoreScreen(game, time));
+                else
+                {
+                    player.Update(gameTime);
+                    EntityManager.Update(gameTime);
+                    CollisionManager.Update(gameTime);
 
 #if DEBUG
-                XConsole.Update(gameTime);
+                    XConsole.Update(gameTime);
 #endif
+                }
             }
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
         {
             if (input.IsPressed(Keys.P) || input.IsPressed(Buttons.Start))
-                ScreenManager.AddScreen(new InGameMenuScreen(game));
+                ScreenManager.AddScreen(new InGameMenu(game));
             else
             {
                 time += gameTime.ElapsedGameTime;
@@ -231,54 +228,56 @@ namespace Troma
             DrawingAxes.Draw(gameTime, camera);
             XConsole.DrawHUD(gameTime);
 #endif
+            if (IsActive)
+            {
+                EntityManager.DrawHUD(gameTime);
+                player.DrawHUD(gameTime);
 
-            EntityManager.DrawHUD(gameTime);
-            player.DrawHUD(gameTime);
+                if (TargetManager.Count > 0)
+                {
+                    int width = GameServices.GraphicsDevice.Viewport.Width;
+                    int height = GameServices.GraphicsDevice.Viewport.Height;
+
+                    string timeMinutes = "" + time.Minutes;
+                    string timeTotal = timeMinutes + ": " + time.Seconds;
+                    int nbreTarget2 = TargetManager.Count;
+                    string nbreTarget = "" + nbreTarget2;
+
+                    float textScale1 = 0.00080f * width;
+                    float textScale2 = 0.00086f * width;
+
+                    Vector2 Position1 = new Vector2(
+                    1700 * width / 1920,
+                    height - (1060 * width / 1920));
+                    Vector2 Position2 = new Vector2(
+                    1698 * width / 1920,
+                    height - (1062 * width / 1920));
+
+                    Vector2 Position3 = new Vector2(
+                    170 * width / 1920,
+                    height - (1060 * width / 1920));
+
+                    Rectangle targetImage = new Rectangle(1770 * width / 1920, height - (1060 * width / 1920), 65 * width / 1920, 78 * width / 1920);
+                    Rectangle clockImage = new Rectangle(70 * width / 1920, height - (1060 * width / 1920), 80 * width / 1920, 80 * width / 1920);
+
+                    GameServices.SpriteBatch.Begin();
+
+                    GameServices.SpriteBatch.DrawString(Font, nbreTarget, Position2, Color.Black * 0.3f, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
+                    GameServices.SpriteBatch.DrawString(Font, nbreTarget, Position1, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+                    GameServices.SpriteBatch.Draw(target, targetImage, Color.White * 0.8f);
+
+                    GameServices.SpriteBatch.DrawString(Font, timeTotal, Position3, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+                    GameServices.SpriteBatch.Draw(clock, clockImage, Color.White * 0.8f);
+
+                    GameServices.SpriteBatch.End();
+                }
+            }
 
             // If the game is transitioning on or off, fade it out to black.
             if (TransitionPosition > 0 || pauseAlpha > 0)
             {
                 float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
                 ScreenManager.FadeBackBufferToBlack(alpha);
-            }
-
-            if (TargetManager.Count > 0)
-            {
-                int width = GameServices.GraphicsDevice.Viewport.Width;
-                int height = GameServices.GraphicsDevice.Viewport.Height;
-
-                string timeMinutes = "" + time.Minutes;
-                string timeTotal = timeMinutes + ": " + time.Seconds;
-                int nbreTarget2 = TargetManager.Count;
-                string nbreTarget = "" + nbreTarget2;
-
-                float textScale1 = 0.00080f * width;
-                float textScale2 = 0.00086f * width;
-
-                Vector2 Position1 = new Vector2(
-                1700 * width / 1920,
-                height - (1060 * width / 1920));
-                Vector2 Position2 = new Vector2(
-                1698 * width / 1920,
-                height - (1062 * width / 1920));
-
-                Vector2 Position3 = new Vector2(
-                170 * width / 1920,
-                height - (1060 * width / 1920));
-
-                Rectangle targetImage = new Rectangle(1770 * width / 1920, height - (1060 * width / 1920), 65 * width / 1920, 78 * width / 1920);
-                Rectangle clockImage = new Rectangle(70 * width / 1920, height - (1060 * width / 1920), 80 * width / 1920, 80 * width / 1920);
-
-                GameServices.SpriteBatch.Begin();
-
-                GameServices.SpriteBatch.DrawString(Font, nbreTarget, Position2, Color.Black * 0.3f, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
-                GameServices.SpriteBatch.DrawString(Font, nbreTarget, Position1, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
-                GameServices.SpriteBatch.Draw(target, targetImage, Color.White * 0.8f);
-
-                GameServices.SpriteBatch.DrawString(Font, timeTotal, Position3, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
-                GameServices.SpriteBatch.Draw(clock, clockImage, Color.White * 0.8f);
-
-                GameServices.SpriteBatch.End();
             }
         }
     }

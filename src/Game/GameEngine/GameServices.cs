@@ -105,6 +105,14 @@ namespace GameEngine
             _graphicsDeviceManager.PreferredBackBufferHeight = (int)(primaryScreen.Y / div);
             _graphicsDeviceManager.IsFullScreen = enable;
 
+#if DEBUG
+            if (!enable) // Force 4/3 ratio
+            {
+                 _graphicsDeviceManager.PreferredBackBufferWidth = 1024;
+                _graphicsDeviceManager.PreferredBackBufferHeight = 728;
+            }
+#endif
+
             _graphicsDeviceManager.ApplyChanges();
 
             InputState.MouseOrigin = new Vector2(

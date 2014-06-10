@@ -117,20 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Aimfor" xml:space="preserve">
-    <value>Aim for     Right Mouse Button</value>
-  </data>
   <data name="Back" xml:space="preserve">
     <value>Back</value>
-  </data>
-  <data name="Bottom" xml:space="preserve">
-    <value>Bottom    S</value>
-  </data>
-  <data name="Cloud" xml:space="preserve">
-    <value>Dynamic clouds   </value>
-  </data>
-  <data name="Crouch" xml:space="preserve">
-    <value>Crouch     C</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
@@ -138,65 +126,83 @@
   <data name="FollowUs" xml:space="preserve">
     <value>Follow us on social networks !</value>
   </data>
-  <data name="Full_Screen" xml:space="preserve">
-    <value>Full Screen   </value>
-  </data>
   <data name="Graphics" xml:space="preserve">
     <value>Graphics</value>
   </data>
-  <data name="Jump" xml:space="preserve">
-    <value>Jump     Space</value>
-  </data>
-  <data name="Keyboard" xml:space="preserve">
+  <data name="labelKeyboard" xml:space="preserve">
     <value>Keyboard   </value>
   </data>
-  <data name="Language" xml:space="preserve">
+  <data name="labelAimfor" xml:space="preserve">
+    <value>Aim for</value>
+  </data>
+  <data name="labelBottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="labelCloud" xml:space="preserve">
+    <value>Dynamic clouds   </value>
+  </data>
+  <data name="labelCrouch" xml:space="preserve">
+    <value>Crouch</value>
+  </data>
+  <data name="labelFullScreen" xml:space="preserve">
+    <value>Full Screen   </value>
+  </data>
+  <data name="labelJump" xml:space="preserve">
+    <value>Jump</value>
+  </data>
+  <data name="labelLanguage" xml:space="preserve">
     <value>Language   </value>
   </data>
-  <data name="Left" xml:space="preserve">
-    <value>Left    Q</value>
+  <data name="labelLeft" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="labelMultisampling" xml:space="preserve">
+    <value>Multisampling   </value>
+  </data>
+  <data name="labelPause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="labelReload" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="labelRight" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="labelRun" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="labelShoot" xml:space="preserve">
+    <value>Shoot</value>
+  </data>
+  <data name="labelUp" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="labelVsync" xml:space="preserve">
+    <value>V-Sync   </value>
+  </data>
+  <data name="LeftMouse" xml:space="preserve">
+    <value>Left Mouse</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Loading</value>
   </data>
-  <data name="Menu_Paused" xml:space="preserve">
-    <value>Pause     P</value>
-  </data>
   <data name="Multiplayer" xml:space="preserve">
     <value>Multiplayer</value>
-  </data>
-  <data name="Multisampling" xml:space="preserve">
-    <value>Multisampling   </value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="Reload" xml:space="preserve">
-    <value>Reload     R</value>
-  </data>
   <data name="Resume" xml:space="preserve">
     <value>Resume</value>
   </data>
-  <data name="Right" xml:space="preserve">
-    <value>Right     D</value>
-  </data>
-  <data name="Run" xml:space="preserve">
-    <value>Run     Left Shift</value>
-  </data>
-  <data name="Shoot" xml:space="preserve">
-    <value>Shoot     Left Mouse Button</value>
+  <data name="RightMouse" xml:space="preserve">
+    <value>Right Mouse</value>
   </data>
   <data name="SummonsKeyboard" xml:space="preserve">
-    <value>key assignments</value>
-  </data>
-  <data name="Up" xml:space="preserve">
-    <value>Up    Z</value>
+    <value>Key assignments</value>
   </data>
   <data name="Victory" xml:space="preserve">
     <value>Victory</value>
-  </data>
-  <data name="Vsync" xml:space="preserve">
-    <value>V-Sync   </value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

@@ -73,5 +73,10 @@ namespace GameEngine
             else
                 mapping = AZERTY;
         }
+
+        public static Dictionary<KeyActions, Keys> GetKeybord()
+        {
+            return mapping;
+        }
     }
 }

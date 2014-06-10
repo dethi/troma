@@ -122,6 +122,7 @@
     <Compile Include="GameServices.cs" />
     <Compile Include="Physics.cs" />
     <Compile Include="LightInfo.cs" />
+    <Compile Include="RenderTargetManager.cs" />
     <Compile Include="SceneRenderer.cs" />
     <Compile Include="Screen\GameScreen.cs" />
     <Compile Include="IO\InputConfiguration.cs" />

@@ -40,12 +40,12 @@ namespace Troma
             selectedColor = Color.Black;
         }
 
-        public void Update(GameTime gameTime, MenuScreen screen, bool isSelected)
+        public void Update(GameTime gameTime, MenuScreenOld screen, bool isSelected)
         {
             selectionFade = (isSelected) ? 1 : 0;
         }
 
-        public virtual void Draw(GameTime gameTime, MenuScreen screen, bool isSelected)
+        public virtual void Draw(GameTime gameTime, MenuScreenOld screen, bool isSelected)
         {
             // Pulsate the size of the selected menu entry.
             if (_isPulsate)
@@ -72,12 +72,12 @@ namespace Troma
                 Selected(this, new EventArgs());
         }
 
-        public int GetHeight(MenuScreen screen)
+        public int GetHeight(MenuScreenOld screen)
         {
             return screen.Font.LineSpacing;
         }
 
-        public int GetWidth(MenuScreen screen)
+        public int GetWidth(MenuScreenOld screen)
         {
             return (int)screen.Font.MeasureString(Text).X;
         }
