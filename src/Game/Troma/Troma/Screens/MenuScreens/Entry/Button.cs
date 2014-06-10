@@ -8,11 +8,9 @@ using GameEngine;
 
 namespace Troma
 {
-    public class Entry
+    public class Button : IEntry
     {
-        public string Text;
-        public Vector2 Position;
-        public float Scale;
+        private Vector2 _position;
 
         private readonly Vector2 originPos;
         private readonly Color color;
@@ -20,8 +18,21 @@ namespace Troma
 
         public event EventHandler Selected;
 
-        public Entry(string text, float scale, Vector2 pos)
+        public string Text { get; set; }
+        public float Scale { get; set; }
+        public Vector2 ColumnsPos { get; set; }
+        public EntryType Type { get; private set; }
+
+        public Vector2 Position
         {
+            get { return _position; }
+            set { _position = value; }
+        }
+
+        public Button(string text, float scale, Vector2 pos)
+        {
+            Type = EntryType.Button;
+
             Text = text;
             Scale = scale;
             originPos = pos;
@@ -30,7 +41,7 @@ namespace Troma
             selectedColor = Color.White;
         }
 
-        public virtual void Draw(GameTime gameTime, MenuScreen screen, bool isSelected)
+        public void Draw(GameTime gameTime, MenuScreen screen, bool isSelected)
         {
             Color c = (isSelected) ? selectedColor : color;
             c *= screen.TransitionAlpha;
@@ -38,27 +49,17 @@ namespace Troma
             float widthScale = (float)GameServices.GraphicsDevice.Viewport.Width / 1920;
             float heightScale = (float)GameServices.GraphicsDevice.Viewport.Height / 1080;
 
-            Position.X = originPos.X * widthScale;
-            Position.Y = originPos.Y * heightScale;
+            _position.X = originPos.X * widthScale;
+            _position.Y = originPos.Y * heightScale;
 
             GameServices.SpriteBatch.DrawString(screen.SpriteFont, Text, Position, c, 0,
                 Vector2.Zero, Scale * (widthScale + heightScale) / 2, SpriteEffects.None, 0);
         }
 
-        protected internal void OnSelectEntry()
+        public void OnSelectEntry()
         {
             if (Selected != null)
                 Selected(this, new EventArgs());
-        }
-
-        public int GetHeight(MenuScreen screen)
-        {
-            return screen.SpriteFont.LineSpacing;
-        }
-
-        public int GetWidth(MenuScreen screen)
-        {
-            return (int)screen.SpriteFont.MeasureString(Text).X;
         }
     }
 }

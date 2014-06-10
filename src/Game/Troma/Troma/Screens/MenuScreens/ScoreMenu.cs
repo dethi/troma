@@ -10,7 +10,7 @@ namespace Troma
 {
     class ScoreMenu : MenuScreen
     {
-        private Entry backMenuEntry;
+        private Button backMenuEntry;
 
         private Texture2D bg;
         private Texture2D arrow;
@@ -24,7 +24,7 @@ namespace Troma
             Vector2 entryPos = new Vector2(143, 875);
 
             // Create menu entries.
-            backMenuEntry = new Entry(Resource.Back, 1, entryPos);
+            backMenuEntry = new Button(Resource.Back, 1, entryPos);
 
             // Hook up menu event handlers.
             backMenuEntry.Selected += OnCancel;
@@ -39,8 +39,8 @@ namespace Troma
         {
             base.LoadContent();
 
-            bg = FileManager.Load<Texture2D>("Menus/background-blur");
-            arrow = FileManager.Load<Texture2D>("Menus/arrow");
+            bg = GameServices.Game.Content.Load<Texture2D>("Menus/background-blur");
+            arrow = GameServices.Game.Content.Load<Texture2D>("Menus/arrow");
 
             bgRect = new Rectangle(0, 0, 1920, 1080);
             arrowRect = new Rectangle(0, 0, 64, 64);

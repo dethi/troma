@@ -159,7 +159,7 @@ namespace Troma
 
         private void GraphicsMenuEntrySelected(object sender, EventArgs e)
         {
-            ScreenManager.AddScreen(new GraphicsMenuScreen(game));
+            ScreenManager.AddScreen(new GraphicsMenu(game));
             SetMenuEntryText();
         }
 

@@ -10,11 +10,11 @@ namespace Troma
 {
     public class MainMenu : MenuScreen
     {
-        private Entry soloMenuEntry;
-        private Entry multiMenuEntry;
-        private Entry scoreMenuEntry;
-        private Entry optionsMenuEntry;
-        private Entry exitMenuEntry;
+        private Button soloMenuEntry;
+        private Button multiMenuEntry;
+        private Button scoreMenuEntry;
+        private Button optionsMenuEntry;
+        private Button exitMenuEntry;
 
         private SpriteFont tromaFont;
         private Vector2 tromaPos;
@@ -35,15 +35,15 @@ namespace Troma
             float space = 110;
 
             // Create menu entries.
-            soloMenuEntry = new Entry(string.Empty, 1, entryPos);
+            soloMenuEntry = new Button(string.Empty, 1, entryPos);
             entryPos.Y += space;
-            multiMenuEntry = new Entry(string.Empty, 1, entryPos);
+            multiMenuEntry = new Button(string.Empty, 1, entryPos);
             entryPos.Y += space;
-            scoreMenuEntry = new Entry(string.Empty, 1, entryPos);
+            scoreMenuEntry = new Button(string.Empty, 1, entryPos);
             entryPos.Y += space;
-            optionsMenuEntry = new Entry(string.Empty, 1, entryPos);
+            optionsMenuEntry = new Button(string.Empty, 1, entryPos);
             entryPos.Y += space;
-            exitMenuEntry = new Entry(string.Empty, 1, entryPos);
+            exitMenuEntry = new Button(string.Empty, 1, entryPos);
 
             // Hook up menu event handlers.
             soloMenuEntry.Selected += SoloMenuEntrySelected;
@@ -66,12 +66,12 @@ namespace Troma
         {
             base.LoadContent();
 
-            tromaFont = FileManager.Load<SpriteFont>("Fonts/LuckyTypewriter");
+            tromaFont = GameServices.Game.Content.Load<SpriteFont>("Fonts/LuckyTypewriter");
             tromaColor = new Color(112, 97, 63);
 
-            bg = FileManager.Load<Texture2D>("Menus/background");
-            bgTrans = FileManager.Load<Texture2D>("Menus/translucide");
-            arrow = FileManager.Load<Texture2D>("Menus/arrow");
+            bg = GameServices.Game.Content.Load<Texture2D>("Menus/background");
+            bgTrans = GameServices.Game.Content.Load<Texture2D>("Menus/translucide");
+            arrow = GameServices.Game.Content.Load<Texture2D>("Menus/arrow");
 
             bgRect = new Rectangle(0, 0, 1920, 1080);
             bgTransRect = new Rectangle(0, 0, 550, 1080);

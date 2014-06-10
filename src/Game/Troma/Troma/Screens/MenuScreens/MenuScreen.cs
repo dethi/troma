@@ -11,7 +11,7 @@ namespace Troma
 {
     public abstract class MenuScreen : GameScreen
     {
-        public List<Entry> MenuEntries { get; protected set; }
+        public List<IEntry> MenuEntries { get; protected set; }
         public SpriteFont SpriteFont { get; protected set; }
 
         protected int selectedEntry;
@@ -19,7 +19,7 @@ namespace Troma
         public MenuScreen(Game game)
             : base(game)
         {
-            MenuEntries = new List<Entry>();
+            MenuEntries = new List<IEntry>();
 
             TransitionOnTime = TimeSpan.FromSeconds(1);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
@@ -30,7 +30,7 @@ namespace Troma
         public override void LoadContent()
         {
             base.LoadContent();
-            SpriteFont = FileManager.Load<SpriteFont>("Fonts/28DaysLater");
+            SpriteFont = GameServices.Game.Content.Load<SpriteFont>("Fonts/28DaysLater");
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
@@ -62,11 +62,34 @@ namespace Troma
                 OnSelectEntry(selectedEntry);
             }
 
+            if (input.IsPressed(Keys.Left) || (input.IsPressed(Buttons.DPadLeft)))
+            {
+                SFXManager.Play("Button_selected");
+                OnChangeChoice(selectedEntry, -1);
+            }
+
+            if (input.IsPressed(Keys.Right) || (input.IsPressed(Buttons.DPadRight)))
+            {
+                SFXManager.Play("Button_selected");
+                OnChangeChoice(selectedEntry, 1);
+            }
         }
 
         protected void OnSelectEntry(int entryIndex)
         {
-            MenuEntries[entryIndex].OnSelectEntry();
+            if (MenuEntries[entryIndex].Type == EntryType.Button)
+                ((Button)MenuEntries[entryIndex]).OnSelectEntry();
+        }
+
+        protected void OnChangeChoice(int entryIndex, int choice)
+        {
+            if (choice != 0)
+            {
+                if (MenuEntries[entryIndex].Type == EntryType.Stepper)
+                    ((Stepper)MenuEntries[entryIndex]).OnChangeValue(choice);
+                else if (MenuEntries[entryIndex].Type == EntryType.Switch)
+                    ((Switch)MenuEntries[entryIndex]).OnChangeValue((choice < 0));
+            }
         }
 
         protected virtual void OnCancel()

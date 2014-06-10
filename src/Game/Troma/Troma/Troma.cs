@@ -18,6 +18,12 @@ namespace Troma
         // Prelaod any assets using by UI rendering
         static readonly string[] preloadAssets =
         {
+            "Menus/arrow",
+            "Menus/background",
+            "Menus/background-blur",
+            "Menus/translucide",
+            "Fonts/28DaysLater",
+            "Fonts/LuckyTypewriter"
         };
 
         #endregion
@@ -48,12 +54,8 @@ namespace Troma
             SFXManager.SetVolume(Settings.MusicVolume);
 
             //screenManager.AddScreen(new SoloScreen(this, ""));
-            //screenManager.AddScreen(new TestScreen(this));
-            //screenManager.AddScreen(new MainMenu(this));
-            //screenManager.AddScreen(new ScoreScreen(this, null));
             screenManager.AddScreen(new PegiScreen(this));
-            //screenManager.AddScreen(new HelpMenu(this));
-            //screenManager.AddScreen(new InGameMenu(this));
+            //screenManager.AddScreen(new GraphicsMenu(this));
         }
 
         /// <summary>

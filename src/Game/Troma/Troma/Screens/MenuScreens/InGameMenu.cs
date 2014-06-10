@@ -10,9 +10,9 @@ namespace Troma
 {
     class InGameMenu : MenuScreen
     {
-        private Entry resumeMenuEntry;
-        private Entry optionMenuEntry;
-        private Entry backMenuEntry;
+        private Button resumeMenuEntry;
+        private Button optionMenuEntry;
+        private Button backMenuEntry;
 
         private Texture2D bg;
         private Texture2D bgTrans;
@@ -28,11 +28,11 @@ namespace Troma
             float space = 220;
 
             // Create menu entries.
-            resumeMenuEntry = new Entry(String.Empty, 1, entryPos);
+            resumeMenuEntry = new Button(String.Empty, 1, entryPos);
             entryPos.Y += space;
-            optionMenuEntry = new Entry(String.Empty, 1, entryPos);
+            optionMenuEntry = new Button(String.Empty, 1, entryPos);
             entryPos.Y += space;
-            backMenuEntry = new Entry(String.Empty, 1, entryPos);
+            backMenuEntry = new Button(String.Empty, 1, entryPos);
 
             // Hook up menu event handlers.
             resumeMenuEntry.Selected += ResumeMenuEntrySelected;
@@ -51,9 +51,9 @@ namespace Troma
         {
             base.LoadContent();
 
-            bg = FileManager.Load<Texture2D>("Menus/background-blur");
-            bgTrans = FileManager.Load<Texture2D>("Menus/translucide");
-            arrow = FileManager.Load<Texture2D>("Menus/arrow");
+            bg = GameServices.Game.Content.Load<Texture2D>("Menus/background-blur");
+            bgTrans = GameServices.Game.Content.Load<Texture2D>("Menus/translucide");
+            arrow = GameServices.Game.Content.Load<Texture2D>("Menus/arrow");
 
             bgTransRect = new Rectangle(0, 0, 550, 1080);
             arrowRect = new Rectangle(0, 0, 64, 64);
