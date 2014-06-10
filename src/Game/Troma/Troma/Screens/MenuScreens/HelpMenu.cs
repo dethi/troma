@@ -114,7 +114,7 @@ namespace Troma
 
             GameServices.SpriteBatch.Begin();
 
-            GameServices.SpriteBatch.Draw(bg, bgRect, Color.White * TransitionAlpha);
+            GameServices.SpriteBatch.Draw(bg, bgRect, Color.White);
 
             for (float i = 0; i < nbLine; i += 2)
             {

@@ -9,12 +9,13 @@ using GameEngine;
 
 namespace Troma
 {
-    class GraphicsMenu : MenuScreen
+    class OptionsMenu : MenuScreen
     {
-        private Switch cloudMenuEntry;
-        private Switch displayMenuEntry;
-        private Switch vsyncMenuEntry;
-        private Switch multisamplingMenuEntry;
+        private Stepper keyboardMenuEntry;
+        private Stepper languageMenuEntry;
+        private Numerous volumeMenuEntry;
+        private Button graphicsMenuEntry;
+        private Button keysMenuEntry;
         private Button backMenuEntry;
 
         private Texture2D bg;
@@ -25,36 +26,44 @@ namespace Troma
         private Rectangle bgTransRect;
         private Rectangle arrowRect;
 
-        public GraphicsMenu(Game game)
+        public OptionsMenu(Game game)
             : base(game)
         {
             Vector2 entryPos = new Vector2(143, 143);
             float space = 100;
 
             // Create menu entries.
-            cloudMenuEntry = new Switch(Resource.labelCloud, 1, entryPos, Settings.DynamicClouds);
+            keyboardMenuEntry = new Stepper(String.Empty, 1, entryPos, 2, 
+                ((Settings.Keyboard == "AZERTY") ? 0 : 1));
             entryPos.Y += space;
-            displayMenuEntry = new Switch(Resource.labelFullScreen, 1, entryPos, Settings.FullScreen);
+            languageMenuEntry = new Stepper(String.Empty, 1, entryPos, 2,
+                ((Settings.Language == "Francais") ? 0 : 1));
             entryPos.Y += space;
-            vsyncMenuEntry = new Switch(Resource.labelVsync, 1, entryPos, Settings.Vsync);
+            volumeMenuEntry = new Numerous(String.Empty, 1, entryPos, 0, 200, 10, (int)(Settings.MusicVolume * 100f));
             entryPos.Y += space;
-            multisamplingMenuEntry = new Switch(Resource.labelMultisampling, 1, entryPos, Settings.Multisampling);
+            graphicsMenuEntry = new Button(String.Empty, 1, entryPos);
+            entryPos.Y += space;
+            keysMenuEntry = new Button(String.Empty, 1, entryPos);
             entryPos.Y = 875;
             backMenuEntry = new Button(Resource.Back, 1, entryPos);
 
             // Hook up menu event handlers.
-            cloudMenuEntry.ChangedValue += CloudChangedValue;
-            displayMenuEntry.ChangedValue += DisplayChangedValue;
-            vsyncMenuEntry.ChangedValue += VsyncChangedValue;
-            multisamplingMenuEntry.ChangedValue += MultisamplingChangedValue;
+            keyboardMenuEntry.ChangedValue += KeyboardChangedValue;
+            languageMenuEntry.ChangedValue += LanguageChangedValue;
+            volumeMenuEntry.ChangedValue += VolumeChangedValue;
+            graphicsMenuEntry.Selected += GraphicsEntrySelected;
+            keysMenuEntry.Selected += KeysEntrySelected;
             backMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
-            MenuEntries.Add(cloudMenuEntry);
-            MenuEntries.Add(displayMenuEntry);
-            MenuEntries.Add(vsyncMenuEntry);
-            MenuEntries.Add(multisamplingMenuEntry);
+            MenuEntries.Add(keyboardMenuEntry);
+            MenuEntries.Add(languageMenuEntry);
+            MenuEntries.Add(volumeMenuEntry);
+            MenuEntries.Add(graphicsMenuEntry);
+            MenuEntries.Add(keysMenuEntry);
             MenuEntries.Add(backMenuEntry);
+
+            SetMenuEntryText();
         }
 
         public override void LoadContent()
@@ -87,12 +96,12 @@ namespace Troma
 
             bgTransRect.X = (int)(123 * widthScale);
             bgTransRect.Y = (int)(123 * heightScale);
-            bgTransRect.Width = (int)(columnsPos.X + 90 * scale);
-            bgTransRect.Height = (int)((3 * 100) * heightScale + (SpriteFont.LineSpacing + 40) * scale);
+            bgTransRect.Width = (int)(columnsPos.X + 270 * scale);
+            bgTransRect.Height = (int)((4 * 100) * heightScale + (SpriteFont.LineSpacing + 40) * scale);
 
             GameServices.SpriteBatch.Begin();
 
-            GameServices.SpriteBatch.Draw(bg, bgRect, Color.White);
+            GameServices.SpriteBatch.Draw(bg, bgRect, Color.White * ((IsExiting) ? TransitionAlpha : 1));
             GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.15f);
 
             // Draw each menu entry in turn.
@@ -115,30 +124,52 @@ namespace Troma
             GameServices.SpriteBatch.End();
         }
 
-        private void CloudChangedValue(object sender, EventArgs e)
+        private void KeyboardChangedValue(object sender, EventArgs e)
         {
-            Settings.DynamicClouds = cloudMenuEntry.Activated;
+            Settings.Keyboard = keyboardMenuEntry.Choices[keyboardMenuEntry.SelectedChoice];
         }
 
-        private void DisplayChangedValue(object sender, EventArgs e)
+        private void LanguageChangedValue(object sender, EventArgs e)
         {
-            Settings.FullScreen = displayMenuEntry.Activated;
+            Settings.Language = languageMenuEntry.Choices[languageMenuEntry.SelectedChoice];
+            SetMenuEntryText();
         }
 
-        private void VsyncChangedValue(object sender, EventArgs e)
+        private void VolumeChangedValue(object sender, EventArgs e)
         {
-            Settings.Vsync = vsyncMenuEntry.Activated;
+            Settings.MusicVolume = (float)volumeMenuEntry.Value / 100f;
         }
 
-        private void MultisamplingChangedValue(object sender, EventArgs e)
+        private void GraphicsEntrySelected(object sender, EventArgs e)
         {
-            Settings.Multisampling = multisamplingMenuEntry.Activated;
+            ScreenManager.AddScreen(new GraphicsMenu(game));
+        }
+
+        private void KeysEntrySelected(object sender, EventArgs e)
+        {
+            ScreenManager.AddScreen(new HelpMenu(game));
         }
 
         private void OnCancel(object sender, EventArgs e)
         {
             Settings.Save();
             OnCancel();
+        }
+
+        private void SetMenuEntryText()
+        {
+            keyboardMenuEntry.Text = Resource.labelKeyboard;
+            keyboardMenuEntry.Choices[0] = "AZERTY";
+            keyboardMenuEntry.Choices[1] = "QWERTY";
+
+            languageMenuEntry.Text = Resource.labelLanguage;
+            languageMenuEntry.Choices[0] = "Francais";
+            languageMenuEntry.Choices[1] = "English";
+
+            volumeMenuEntry.Text = "Volume";
+            graphicsMenuEntry.Text = Resource.Graphics;
+            keysMenuEntry.Text = Resource.SummonsKeyboard;
+            backMenuEntry.Text = Resource.Back;
         }
     }
 }

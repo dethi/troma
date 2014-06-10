@@ -64,13 +64,13 @@ namespace Troma
 
             if (input.IsPressed(Keys.Left) || (input.IsPressed(Buttons.DPadLeft)))
             {
-                SFXManager.Play("Button_selected");
+                SFXManager.Play("Button_entry");
                 OnChangeChoice(selectedEntry, -1);
             }
 
             if (input.IsPressed(Keys.Right) || (input.IsPressed(Buttons.DPadRight)))
             {
-                SFXManager.Play("Button_selected");
+                SFXManager.Play("Button_entry");
                 OnChangeChoice(selectedEntry, 1);
             }
         }
@@ -89,6 +89,8 @@ namespace Troma
                     ((Stepper)MenuEntries[entryIndex]).OnChangeValue(choice);
                 else if (MenuEntries[entryIndex].Type == EntryType.Switch)
                     ((Switch)MenuEntries[entryIndex]).OnChangeValue((choice < 0));
+                else if (MenuEntries[entryIndex].Type == EntryType.Numerous)
+                    ((Numerous)MenuEntries[entryIndex]).OnChangeValue(choice);
             }
         }
 

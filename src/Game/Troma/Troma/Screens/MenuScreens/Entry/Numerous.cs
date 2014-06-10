@@ -8,20 +8,22 @@ using GameEngine;
 
 namespace Troma
 {
-    public class Stepper : IEntry
+    public class Numerous : IEntry
     {
-        public string[] Choices;
-        public int SelectedChoice;
-
         private Vector2 _position;
         private Vector2 _colmunsPos;
 
         private readonly Vector2 originPos;
         private readonly Color color;
         private readonly Color selectedColor;
-        private Texture2D goLeft;
-        private Texture2D goRight;
+        private Texture2D plus;
+        private Texture2D minus;
         private Rectangle rect;
+
+        private readonly int _min;
+        private readonly int _max;
+        private readonly int _step;
+        public int Value;
 
         public event EventHandler ChangedValue;
 
@@ -41,22 +43,25 @@ namespace Troma
             set { _colmunsPos = value; }
         }
 
-        public Stepper(string text, float scale, Vector2 pos, int nbChoice, int selected)
+        public Numerous(string text, float scale, Vector2 pos, int min, int max, 
+            int step, int value)
         {
-            Type = EntryType.Stepper;
+            Type = EntryType.Numerous;
 
             Text = text;
             Scale = scale;
             originPos = pos;
 
-            color = new Color(112, 97, 63);
+            color = color = new Color(112, 97, 63);
             selectedColor = Color.White;
-            goLeft = GameServices.Game.Content.Load<Texture2D>("Menus/go-left");
-            goRight = GameServices.Game.Content.Load<Texture2D>("Menus/go-right");
+            plus = GameServices.Game.Content.Load<Texture2D>("Menus/plus");
+            minus = GameServices.Game.Content.Load<Texture2D>("Menus/minus");
             rect = new Rectangle(0, 0, 60, 60);
 
-            Choices = new String[nbChoice];
-            SelectedChoice = selected;
+            _min = min;
+            _max = max;
+            _step = step;
+            Value = value;
         }
 
         public void Draw(GameTime gameTime, MenuScreen screen, bool isSelected)
@@ -77,34 +82,30 @@ namespace Troma
             rect.X = (int)_colmunsPos.X;
             rect.Y = (int)_position.Y;
 
-            StringBuilder tmp = new StringBuilder();
-            foreach (string s in Choices)
-                tmp.AppendLine(s);
-            float space = screen.SpriteFont.MeasureString(tmp.ToString()).X * midScale * Scale;
+            string value = (Value < 100) ? " " + Value.ToString() : Value.ToString();
 
-            GameServices.SpriteBatch.DrawString(screen.SpriteFont, Text, Position, Color.Black * screen.TransitionAlpha,
+            GameServices.SpriteBatch.DrawString(screen.SpriteFont, Text, Position, Color.Black * screen.TransitionAlpha, 
                 0, Vector2.Zero, Scale * (widthScale + heightScale) / 2, SpriteEffects.None, 0);
 
-            if (SelectedChoice > 0)
-                GameServices.SpriteBatch.Draw(goLeft, rect, Color.White * screen.TransitionAlpha);
+            if (Value > _min)
+                GameServices.SpriteBatch.Draw(minus, rect, Color.White * screen.TransitionAlpha);
 
             rect.X += (int)(90 * midScale);
 
-            GameServices.SpriteBatch.DrawString(screen.SpriteFont, Choices[SelectedChoice],
-                new Vector2(rect.X, rect.Y), c, 0, Vector2.Zero, Scale * midScale,
-                SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(screen.SpriteFont, value, new Vector2(rect.X, rect.Y), c, 
+                0, Vector2.Zero, Scale * midScale, SpriteEffects.None, 0);
 
-            rect.X += (int)(10 + space);
+            rect.X += (int)(90 * midScale);
 
-            if (SelectedChoice < Choices.Length - 1)
-                GameServices.SpriteBatch.Draw(goRight, rect, Color.White * screen.TransitionAlpha);
+            if (Value < _max)
+                GameServices.SpriteBatch.Draw(plus, rect, Color.White * screen.TransitionAlpha);
         }
 
         public void OnChangeValue(int choice)
         {
-            SelectedChoice += choice;
-            SelectedChoice = Math.Max(SelectedChoice, 0);
-            SelectedChoice = Math.Min(SelectedChoice, Choices.Length - 1);
+            Value += choice * _step;
+            Value = Math.Max(Value, _min);
+            Value = Math.Min(Value, _max);
 
             if (ChangedValue != null)
                 ChangedValue(this, new EventArgs());

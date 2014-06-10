@@ -22,6 +22,10 @@ namespace Troma
             "Menus/background",
             "Menus/background-blur",
             "Menus/translucide",
+            "Menus/plus",
+            "Menus/minus",
+            "Menus/go-left",
+            "Menus/go-right",
             "Fonts/28DaysLater",
             "Fonts/LuckyTypewriter"
         };
@@ -55,7 +59,7 @@ namespace Troma
 
             //screenManager.AddScreen(new SoloScreen(this, ""));
             screenManager.AddScreen(new PegiScreen(this));
-            //screenManager.AddScreen(new GraphicsMenu(this));
+            //screenManager.AddScreen(new OptionsMenu(this));
         }
 
         /// <summary>

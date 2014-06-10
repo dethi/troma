@@ -106,7 +106,7 @@ namespace Troma
 
         private void OptionsMenuEntrySelected(object sender, EventArgs e)
         {
-            ScreenManager.AddScreen(new OptionsMenuScreen(game));
+            ScreenManager.AddScreen(new OptionsMenu(game));
         }
 
         private void OnCancel(object sender, EventArgs e)

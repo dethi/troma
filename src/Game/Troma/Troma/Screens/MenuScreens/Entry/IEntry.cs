@@ -10,7 +10,8 @@ namespace Troma
     {
         Button,
         Stepper,
-        Switch
+        Switch,
+        Numerous
     }
 
     public interface IEntry
