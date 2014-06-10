@@ -100,6 +100,7 @@ namespace Troma
 
         private void ResumeMenuEntrySelected(object sender, EventArgs e)
         {
+            InputState.MouseResetPos();
             ExitScreen();
         }
 

@@ -172,13 +172,11 @@ namespace Troma
         {
             base.Update(gameTime, hasFocus, isVisible);
 
-            if (!IsActive)
-            {
-                pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
+            if (Settings.DynamicClouds)
+                cloudManager.Update(gameTime);
 
-                if (Settings.DynamicClouds)
-                    cloudManager.Update(gameTime);
-            }
+            if (!IsActive)
+                pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
             else
             {
                 pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
