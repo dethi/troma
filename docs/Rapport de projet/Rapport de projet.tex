@@ -118,9 +118,45 @@ Ce document est le rapport de la soutenance finale. Il a pour but de présenter 
 
 Le projet consiste en la réalisation d'un logiciel de notre choix, en C\# ou en CAML. Le développement s'est déroulé sur une période d'environ 6 mois, découpée en 4 étapes : la remise d'un cahier des charges, une soutenance de présentation, une soutenance intermédiaire de démonstration des avancées et une soutenance finale pour présenter le projet achevé. Il a pour but l'apprentissage du développement, du travail de groupe, et de la réponse à une demande précise en un temps donné. L'objectif est d'offrir aux étudiants l'occasion de réaliser un projet dans des conditions similaires à celles qui régissent le monde professionnel.
 
-Nous avons choisi de réaliser un jeu vidéo car c'est un domaine que nous apprécions et que nous pensions que cela faciliterait la réalisation par le côté ludique. Nous avons opté pour l’utilisation du C\# car il s’agit d’un langage particulièrement adapté à ce type de projet. 
+Nous avons choisi de réaliser un jeu vidéo car c'est un domaine que nous apprécions et que nous pensions que cela faciliterait la réalisation par le côté ludique du projet. Nous avons opté pour l’utilisation du C\# car il s’agit d’un langage particulièrement adapté à ce type de projet. 
 
-Nous nous sommes orientés sur un jeu en 3D car cela représentait un véritable défi pour l'ensemble du groupe. Le style de jeu retenu est un jeu de tir en vue subjective\footnote{FPS : First Person Shooter} car c'est un type de jeu que nous apprécions mais aussi car la demande dans l'industrie du jeu vidéo ne cesse de croître. La thématique de notre jeu est la seconde Guerre Mondiale par soucis d'originalité, en effet l'offre s'oriente aujourd'hui principalement vers des univers futuristes, mais aussi afin d'être en accord avec le soixante dixième anniversaire du débarquement de Normandie.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{troma.png}
+\caption{Logo de notre jeu}
+\end{figure}
+
+Nous nous sommes orientés sur un jeu en 3D car cela représentait un véritable défi pour l'ensemble du groupe. Le style de jeu retenu est un jeu de tir en vue subjective\footnote{FPS : First Person Shooter} car c'est un type de jeu que nous apprécions mais aussi car la demande dans l'industrie du jeu vidéo ne cesse de croître. La thématique de notre jeu est la seconde Guerre Mondiale par soucis d'originalité, en effet l'offre s'oriente aujourd'hui principalement vers des univers futuristes, mais aussi afin d'être en accord avec le soixante dixième anniversaire du débarquement de Normandie. Notre jeu se découpe principalement en deux parties : un mode d'entrainement en solo et un mode multijoueur.
+
+Une fois le style de notre jeu défini, il nous fallait un nom pour le projet. C'est en réfléchissant longuement sur la seconde Guerre Mondiale que nous avons pensé au mot ``traumatisme''. Ce mot représente l'effet de la guerre sur une génération entière. Cependant ce mot était un peu trop long. Nous avons donc poussé notre réflexion plus loin et sommes tombés sur le mot ``trauma''.
+
+\begin{quote}
+``Un trauma est une blessure physique ou psychique infligée à l'organisme, ou la lésion locale qui en résulte. Le traumatisme renvoie quant à lui aux conséquences locales ou générales du trauma.'', \emph{Wikipédia}
+\end{quote}
+
+Comme le montre cette définition, les deux mots sont intimement liés. Mais nous sommes allés encore un peu plus loin. Nous avons décidé de surpasser l'orthographe du mot. Ainsi notre jeu s'appelle Troma. Court, évoquant, surprenant ! On ne pouvait pas trouver mieux. A partir de là, le projet pouvait commencer. 
+
+La répartition des tâches est présentée dans le tableau en figure~\ref{tab}.
+
+\colorlet{darkgreen}{green!60!black}
+
+\begin{figure}[htbp]
+\centering
+\begin{tabular}{ | c || c | c | c | c | }
+\hline Tâches & Thibault & Rémy & Marc & Anthony \\
+\hline Modélisation & & & \textcolor{darkgreen}{X} & \\
+\hline Moteur graphique & \textcolor{darkgreen}{X} & & \textcolor{darkgreen}{X} & \\
+\hline Moteur physique & & \textcolor{darkgreen}{X} & & \textcolor{darkgreen}{X} \\
+\hline Menu & & \textcolor{darkgreen}{X} & & \textcolor{darkgreen}{X} \\
+\hline Réseau & \textcolor{darkgreen}{X} & & \textcolor{darkgreen}{X} & \textcolor{darkgreen}{X} \\
+\hline Gameplay & \textcolor{darkgreen}{X} & \textcolor{darkgreen}{X} & & \\
+\hline Audio & & \textcolor{darkgreen}{X} & & \textcolor{darkgreen}{X} \\
+\hline Site web & \textcolor{darkgreen}{X} & \textcolor{darkgreen}{X} & & \\
+\hline
+\end{tabular}
+\caption{Répartition des tâches sur l'ensemble de la durée du projet}
+\label{tab}
+\end{figure}
 
 Vous trouverez dans la suite de ce rapport une présentation détaillée sur les différentes dimensions du développement ainsi qu'une synthèse personnelle de cette expérience.
 
@@ -617,6 +653,37 @@ Ainsi le joueur devrait être toujours un peu plus immergé dans le jeu.
 
 \chapter{Gameplay}
 
+Le gameplay regroupe un ensemble de fonctionnalité qui forme le jeu finale, telles que les actions possibles du joueur et les modes de jeu.
+
+\section{Les actions possibles}
+
+Le personnage peut se déplacer à partir des touches Z, Q, D, S qui représentent respectivement avancer, gauche, droite et reculer (sur un clavier AZERTY). Les touches marchent par paire : Z et S, Q et D. C'est-à-dire que si vous appuyez sur les deux touches d'une paire en même temps le mouvement s'annule. En effet il est difficile d'aller à droite tout en allant à gauche. Il est également intéressant de noter que nous gérons les mouvements en diagonales. De plus lors d'un mouvement, le maintien de la touche Z (avancer) et de la touche SHIFT gauche permet de courir.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{viser.png}
+\caption{Capture d'écran du mode visé}
+\end{figure}
+
+Le joueur peut également déplacer la souris afin de changer l'angle de la caméra. Pour se faire, nous calculons à chaque fois la différence entre la position d'origine et la nouvelle position du curseur de la souris sur l'écran. Nous appliquons alors un coefficient à cette différence afin d'amplifier le mouvement.
+
+Deux autres mouvements sont possibles : s'accroupir et sauter. Ils sont respectivement représentés sur le clavier par les touches C et ESPACE.
+
+A ces mouvements s'ajoutent des actions indispensables dans un FPS : tirer, viser et recharger. Elles sont respectivement déclenchées par un clique gauche, un clique droit et l'appuie de la touche R.
+
+Nous avons fait le choix de rendre le jeu jouable à la manette. L'ensemble de ces actions sont donc accessible par des touches de la manette d'Xbox 360.
+
+\section{Modes de jeu}
+
+Notre jeu se compose de deux modes de jeu : le mode solo et le mode multijoueur. Le mode solo est un mode d'entrainement afin d'améliorer les réflexes du joueur pour ses futurs parties multijoueurs. Il consiste à détruire l'ensemble des cibles sur le terrain le plus rapidement possible. Une fois que toutes les cibles sont détruites, la partie s'arrête et affiche le temps mis par le joueur.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{score.png}
+\caption{Capture d'écran d'une fin de partie en mode solo}
+\end{figure}
+
+Le mode multijoueur est un chacun pour soi. Les parties durent dix minutes. Pendant ce laps de temps, chaque joueur s'affronte afin d'arriver premier dans le classement. Pour ce mode, nous avons tenté de concevoir un terrain qui favorise les affrontements au maximum.
 
 
 \chapter{Réseau}
