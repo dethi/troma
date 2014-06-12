@@ -114,63 +114,57 @@
 
 \chapter*{Introduction}
 
-Ce document est le rapport de la soutenance finale. Il a pour but de présenter une synthèse sur le travail fournit par l'équipe en charge du projet. Cette équipe est formée de quatre étudiants en première année du cycle préparatoire de l'EPITA : Anthony BELTIER (beltie\_a), Remy BERNIER (bernie\_r), Thibault DEUTSCH (deutsc\_t) et Marc FRESNE (fresne\_m).
+Ce document est le rapport de la soutenance finale. Il a pour but de présenter une synthèse sur le travail fournit par l'équipe en charge du projet. Cette équipe est formée de quatre étudiants en première année du cycle préparatoire de l'EPITA : Anthony BELTIER (beltie\_a), Rémy BERNIER (bernie\_r), Thibault DEUTSCH (deutsc\_t) et Marc FRESNE (fresne\_m).
 
-Le projet consiste en la programmation d'un logiciel au choix en C\# ou en CAML. Le développement s'est déroulé sur une période d'environ 6 mois, découpée en 4 étapes : la remise d'un cahier des charges, d'une soutenance de présentation, d'une soutenance intermédiaire de démonstration des avancées et d'une soutenance finale pour présenter le projet achevé. Il a pour but l'apprentissage du développement, du travail de groupe, de la réponse à une demande précise dans un temps donné. L'objectif est d'offrir aux étudiants l'occasion de réaliser un projet dans des conditions similaires à celles qui régissent le monde professionnel.
+Le projet consiste en la réalisation d'un logiciel de notre choix, en C\# ou en CAML. Le développement s'est déroulé sur une période d'environ 6 mois, découpée en 4 étapes : la remise d'un cahier des charges, une soutenance de présentation, une soutenance intermédiaire de démonstration des avancées et une soutenance finale pour présenter le projet achevé. Il a pour but l'apprentissage du développement, du travail de groupe, et de la réponse à une demande précise en un temps donné. L'objectif est d'offrir aux étudiants l'occasion de réaliser un projet dans des conditions similaires à celles qui régissent le monde professionnel.
 
-Nous avons choisis de réalisé un jeu vidéo car c'est un domaine que nous apprécions et que nous pensions que cela faciliterait la réalisation par le côté ludique. Nous avons opté pour l’utilisation du C\# car il s’agit d’un langage particulièrement adapté à ce type de projet. 
+Nous avons choisi de réaliser un jeu vidéo car c'est un domaine que nous apprécions et que nous pensions que cela faciliterait la réalisation par le côté ludique. Nous avons opté pour l’utilisation du C\# car il s’agit d’un langage particulièrement adapté à ce type de projet. 
 
-Nous nous sommes orientés sur un jeu en 3D car cela représentait un véritable défi au vue de l'expérience du groupe. Nous avons retenus le style de jeu FPS (First Person Shooter) car nous apprécions ce type de jeu mais aussi 'car la demande dans l'industrie du jeu vidéo ne cesse de croitre. La thématique de notre jeu est celle de la seconde Guerre Mondiale par soucis d'originalité, en effet l'offre s’oriente aujourd'hui principalement vers des univers futuristes, mais aussi afin d'être en accord avec le 70\ieme anniversaire du débarquement.
+Nous nous sommes orientés sur un jeu en 3D car cela représentait un véritable défi pour l'ensemble du groupe. Le style de jeu retenu est un jeu de tir en vue subjective\footnote{FPS : First Person Shooter} car c'est un type de jeu que nous apprécions mais aussi car la demande dans l'industrie du jeu vidéo ne cesse de croître. La thématique de notre jeu est la seconde Guerre Mondiale par soucis d'originalité, en effet l'offre s'oriente aujourd'hui principalement vers des univers futuristes, mais aussi afin d'être en accord avec le soixante dixième anniversaire du débarquement de Normandie.
 
-Vous trouverez dans la suite de ce rapport une présentation générale du projet, une présentation détaillée sur les différentes dimensions du développement ainsi qu'une synthèse personnelle sur cette expérience.
+Vous trouverez dans la suite de ce rapport une présentation détaillée sur les différentes dimensions du développement ainsi qu'une synthèse personnelle de cette expérience.
 
 \chapter{Modélisation}
 
 Un jeu en 3D tel qu'un FPS se base sur un univers complet plus ou moins réaliste. Afin d'offrir un tel univers il est important de poser des bases indispensables à la conception et à la création de celui-ci. Dans un premier temps il faut choisir l’environnement ainsi que le contexte dans lequel se déroulera le jeu.
 
-Nous avons choisis un thème historique : la seconde Guerre Mondiale. Cela implique donc de respecter un minimum le contexte ainsi que les décors pour rendre le jeu crédible et agréable à jouer. Par ailleurs notre jeu disposant de deux modes, un solo et un multijoueur, avec des objectifs relativement différents, nous avions un minimum de deux cartes à modéliser.  Toutes les modélisations ont été réalisées à l’aide du logiciel Blender et les textures à l’aide de Gimp.  Ces deux logiciels sont libres et gratuits.
+Nous avons choisi un thème historique : la seconde Guerre Mondiale. Cela implique donc de respecter un minimum le contexte ainsi que les décors pour rendre le jeu crédible et agréable à jouer. Par ailleurs notre jeu disposant de deux modes, un solo et un multijoueur, avec des objectifs relativement différents, nous avions un minimum de deux cartes à modéliser.  Toutes les modélisations ont été réalisées à l’aide du logiciel Blender et les textures à l’aide de Gimp.  Ces deux logiciels sont libres et gratuits.
 
 \section{La conception}
 
-La conception est l’étape de création d’une liste des objets à modéliser ainsi que d’élaboration des plans pour les différentes cartes et bâtiments. Comme indiqué dans l’introduction nous avions besoin de deux cartes, l’une destinée au mode solo, l’autre au mode multi-joueurs. La première sera évidemment plus petite que la deuxième mais aussi différentes d’un point de vue décors.
+La conception est l’étape de création d’une liste des objets à modéliser ainsi que d’élaboration des plans pour les différentes cartes et bâtiments. Comme indiqué dans l’introduction nous avions besoin de deux cartes, l’une destinée au mode solo, l’autre au mode multi-joueurs. La première sera évidemment plus petite que la deuxième mais aussi différente d’un point de vue décors.
 
-La carte solo prend place aux Etats-Unis dans un milieu rural. 
+La carte solo prend place aux Etats-Unis dans un milieu rural.
 
-TODO: photo plan
-
-La carte multi-joueurs prend place en Europe dans un milieu urbain. Elle est inspirée d’une partie de Cracovie, Pologne. Cependant pour des raisons de jouabilité nous avons modifié quelque peu sa structure. Voici un plan des bâtiments principaux répartis sur la carte.
-
-TODO: photo plan2
-
-La réalisation de plan tels que ceux-ci permet d’obtenir une liste précise des bâtiments a modélisé avec leur forme mais aussi leur dimension. 
-
-TODO: partie sur l'heightmap
+La carte multijoueur prend place en Europe dans un milieu urbain. Elle est inspirée d’une partie de Cracovie, Pologne. Cependant pour des raisons de jouabilité nous avons modifié quelque peu sa structure.
 
 \section{Les techniques de modélisation}
 
-Une fois la conception terminée, la modélisation peut commencer. Afin de ne pas trop alourdir le jeu et ainsi conserver de bonne performance, chaque objet soit être simplifié au maximum. En effet les objets sont formés à partir de sommets\footnote{Vertices} plus leur nombre et grand plus le fichier est gros et plus les procédures de traitement de ce fichier sont longues.
+Une fois la conception terminée, la modélisation peut commencer. Afin de ne pas trop alourdir le jeu et ainsi conserver de bonne performance, chaque objet doit être simplifié au maximum. En effet les objets sont formés à partir de sommets\footnote{Vertices}, plus leur nombre est grand plus le fichier est gros et plus les procédures de traitement de ce fichier sont longues.
 
 \subsection{Les bâtiments}
 
 Pour ce faire, chaque bâtiment a été réduit en deux parallélépipèdes, un carré ou rectangle pour les murs, et un trapézoïdal pour le toit. Ensuite il a suffi de modéliser différents modèles de porte ou de fenêtre et de les associer à ces bâtiments.
 
-TODO: Figure mur + toit + fenêtre = bâtiment
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{batiment.png}
+\caption{Modélisation d'un bâtiment}
+\end{figure}
 
 Par ailleurs il est important que le maillage\footnote{Mesh} soit découpé en plusieurs objets si la partie au sol n'est pas strictement rectangulaire. En effet cela facilite énormément la gestion des collisions. Des explications plus détaillées seront fournies à la section correspondante.
 
-TODO: Figure gare-quai
+\subsection{Le personnage et les armes}
 
-\subsection{Le personnages et les armes}
-
-Pour des modèles aussi complexes il est encore plus important de maintenir le nombre de sommets aussi bas que possible. Une technique de modélisation pour y arriver et d’utiliser des formes rectangulaire afin d’obtenir une silhouette grossière de l’objet considérée puis d’utilisé des ``modifiers'' pour déformer le maillage et le rapprocher de la forme souhaitée. La réalisation de la silhouette est possible sans être un as du dessin en s’appuyant sur une image qu’il est possible d’avoir en arrière-plan. Cette technique s’appelle ``blueprint'' (en référence au plan de couleur bleu).
+Pour des modèles aussi complexes il est encore plus important de maintenir le nombre de sommets aussi bas que possible. Une technique de modélisation pour y arriver est d’utiliser des formes rectangulaire afin d’obtenir une silhouette grossière de l’objet considéré puis d’utiliser des ``modifiers'' pour déformer le maillage et le rapprocher de la forme souhaitée. La réalisation de la silhouette est possible sans être un as du dessin en s’appuyant sur une image qu’il est possible d’avoir en arrière-plan. Cette technique s’appelle ``blueprint'' (en référence au plan de couleur bleu).
 
 \section{Les textures}
 
-Les textures sont de simples images utilisées pour habiller les modèles. Afin de pouvoir se servir de ses images sur un volume il est nécessaire d’avoir une sorte de patron. Cette étape a pour nom l’UV mapping et se décompose en 3 actes : l’édition des lignes de découpe, le dépliage et enfin la création de la texture en fonction du plan obtenu.
+Les textures sont de simples images utilisées pour habiller les modèles. Afin de pouvoir se servir de ces images sur un volume il est nécessaire d’avoir une sorte de patron. Cette étape a pour nom l’UV mapping et se décompose en 3 actes : l’édition des lignes de découpe, le dépliage et enfin la création de la texture en fonction du plan obtenu.
 
 \subsection{Le découpage}
 
-Cette étape n’est pas toujours indispensable, surtout pour des modèles très simples. Cependant elle permet de délimité avec certitude les différentes surfaces qui apparaitront sur la carte UV. Les lignes de découpe sont appelées ``seems'', pour les créer il faut simplement sélectionner les arrêtes  concernées. 
+Cette étape n’est pas toujours indispensable, surtout pour des modèles très simples. Cependant elle permet de délimiter avec certitude les différentes surfaces qui apparaitront sur la carte UV. Les lignes de découpe sont appelées ``seems'', pour les créer il faut simplement sélectionner les arêtes concernées. 
 
 \begin{figure}[htbp]
 \centering
@@ -182,7 +176,7 @@ Cette étape n’est pas toujours indispensable, surtout pour des modèles très
 
 Il s’agit de la mise à plat des surfaces du volume selon des lignes de découpe, créées manuellement ou par l’ordinateur. Cette carte fait correspondre ses coordonnées U et V aux coordonnées dans l’espace X, Y et Z de chaque point. Il existe plusieurs options de dépliage qui ne seront pas abordées dans le rapport. En effet avec un découpage adéquat un dépliage classique offre de bon résultat. 
 
-Une fois effectué on obtient donc le patron du modèle. Celui-ci est éditable depuis blender, c’est-à-dire que l’on peut modifier si besoin la position des différentes faces. Cela permet d’ajuster la position des différentes faces selon le résultat souhaité. Par ailleurs il est aussi possible de voir à quel point ont été déformées les faces lors du dépliage. Cette option permet de corriger des déformations trop importantes responsables de décalage ou d’artefact sur le modèle texturé.
+Une fois celui-ci effectué on obtient le patron du modèle. Il est éditable depuis blender, c’est-à-dire que l’on peut modifier si besoin la position des différentes faces. Cela permet d’ajuster la position des différentes faces selon le résultat souhaité. Par ailleurs il est aussi possible de voir à quel point ont été déformé les faces lors du dépliage. Cette option permet de corriger des déformations trop importantes responsables de décalage ou d’artefact sur le modèle texturé.
 
 \begin{figure}[htbp]
 \centering
@@ -192,16 +186,15 @@ Une fois effectué on obtient donc le patron du modèle. Celui-ci est éditable 
 
 \subsection{Export et édition}
 
-Lorsque la carte parait convenable, il convient de l’exporter pour pouvoir l’utiliser dans un logiciel de retouche d’image. Elle permet de construire une texture qui s’ajustera parfaitement sur le modèle.  Cependant, si la texture s’affiche en respectant le découpage, elle n’est pas toujours du bon côté. Chaque surface est définie par les points la constituant mais aussi par un vecteur normal et l’image sera affichée selon son sens. Ainsi il arrive que lors de la création du modèle certains de ces vecteurs soient dirigés dans la mauvaise direction.
-
-TODO: Figure exemple
+Lorsque la carte parait convenable, il convient de l’exporter pour pouvoir l’utiliser dans un logiciel de retouche d’image. Elle permet de construire une texture qui s’ajustera parfaitement sur le modèle.  Cependant, si la texture s’affiche en respectant le découpage, elle n’est pas toujours du bon côté. Chaque surface est définie par les points qui la constituent mais aussi par un vecteur normal et l’image sera affichée selon le sens de celui-ci. Ainsi il arrive que lors de la création du modèle certains de ces vecteurs soient dirigés dans la mauvaise direction.
 
 Heureusement blender permet d’afficher ces vecteurs et de les inverser facilement. Si tous les vecteurs sont dans le bon sens le modèle est prêt.
 
 \section{Les animations}
 
-Les bâtiments et divers éléments du décor sont statiques et n’ont pas besoin d’être animé. Mais ce n’est pas le cas des armes ou bien des personnages. Pour obtenir les animations, deux techniques sont possibles. Soit réaliser le modèle et programmer manuellement les mouvements des différents meshes depuis Visual Studio.
-Soit réaliser les animations depuis blender et les exportés pour les lire ensuite. Par commodité Marc a choisi d’utilisé la seconde méthode. La création d’une animation en utilisant des os\footnote{Bones} s’effectue en trois étapes : le ``rigging'', le ``skinning'', et enfin l’enregistrement de l’animation. Utiliser une armature composée d'os permet d'animer des modèles complexes, le personnage par exemple, en modifiant le maillage en fonction du mouvement.
+Les bâtiments et les divers éléments du décor sont statiques et de ce fait n’ont pas besoin d’être animé. Mais ce n’est pas le cas des armes ou bien des personnages. Pour obtenir les animations, deux techniques sont possibles. Soit réaliser le modèle et programmer manuellement les mouvements des différents meshes depuis Visual Studio.
+
+Soit réaliser les animations depuis blender et les exporter pour les lire ensuite. Par commodité Marc a choisi d’utiliser la seconde méthode. La création d’une animation en utilisant des os\footnote{Bones} s’effectue en trois étapes : le ``rigging'', le ``skinning'', et enfin l’enregistrement de l’animation. Utiliser une armature composée d'os permet d'animer des modèles complexes, par exemple le personnage, en modifiant le maillage en fonction du mouvement.
 
 \subsection{Première étape : le ``rigging''}
 
@@ -223,7 +216,7 @@ Le skinning consiste à affecter à chaque os les points du maillage sur lesquel
 Blender offre plusieurs possibilités sur ce point :
 
 \begin{itemize}
-\item Soit affecter automatiquement les points du maillage aux os en  fonction de leur envelope, c’est à dire leur rayon d’action.
+\item Soit affecter automatiquement les points du maillage aux os en  fonction de leur enveloppe, c’est à dire leur rayon d’action.
 \item Soit affecter automatiquement les points du maillage aux os en  fonction de leur position par rapport aux os.
 \item Soit manuellement. Là encore deux solutions sont possibles :
 \begin{itemize}
@@ -238,17 +231,17 @@ Blender offre plusieurs possibilités sur ce point :
 \caption{Skinning selection maillage à gauche, Weight Painting à droite}
 \end{figure}
 
-Les deux premières méthodes de skinning ne sont à utiliser que pour des modeles très simple. Marc n’a donc pas pu les utiliser.
+Les deux premières méthodes de skinning ne sont à utiliser que pour des modèles très simple. Marc n’a donc pas pu les utiliser.
 
-\noindent\textbf{N.B.} Il est très important que tous les points dépendent d’au moins un os. Une solution pour vérifier que tous les points ont un poids et de parcourir les ``vertex groups'' en mode Weight Painting et de chercher une région resté bleue tout le long du parcours.
+\noindent\textbf{N.B.} Il est très important que tous les points dépendent d’au moins un os. Une solution pour vérifier que tous les points ont un poids est de parcourir les ``vertex groups'' en mode Weight Painting et de chercher une région restée bleue tout le long du parcours.
 
 \subsection{Troisième étape : la création de l’animation}
 
 Une fois le squelette construit et les dépendances avec le maillage assignées, il faut maintenant définir les mouvements qui composeront l’animation.
 
-Pour modifier le positionnement des os et que cela ait une influence sur le maillage il faut se placer en ``pose mode''.  Blender permet de diviser l’écran en plusieurs zones pour pouvoir travailler sur différents aspects en même temps. Par défaut sous la vue 3D il y a un zone où le mode ``TimeLine'' est activé. Il s’agit d’un axe représentant le temps sur lequel on peut se déplacer, et servant à indiquer les différents paramètres du modèle en fonction du temps.
+Pour modifier le positionnement des os et que cela ait une influence sur le maillage il faut se placer en ``pose mode''.  Blender permet de diviser l’écran en plusieurs zones pour pouvoir travailler sur différents aspects en même temps. Par défaut sous la vue 3D il y a une zone où le mode ``TimeLine'' est activé. Il s’agit d’un axe représentant le temps sur lequel on peut se déplacer, et servant à indiquer les différents paramètres du modèle en fonction du temps.
 
-C’est grâce a cette ``TimeLine'' que l’on réalise une animation. Il suffit de se placer a un instant t et d’enregistrer les informations voulues pour les liées. Ces instants sont appelées KeyFrames. Ainsi pour l’animation de la cible, à l’instant t1 la cible est relevée, à l’instant t2 la cible est baissée.
+C’est grâce a cette ``TimeLine'' que l’on réalise une animation. Il suffit de se placer a un instant t et d’enregistrer les informations voulues pour les lier. Ces instants sont appelés KeyFrames. Ainsi pour l’animation de la cible, à l’instant t1 la cible est relevée, à l’instant t2 la cible est baissée.
 
 Grace à Blender ces deux instants suffisent pour que la cible se baisse et passe de la position-rotation de l’instant t1 a celle de l’instant t2 de manière progressive durant le temps qui sépare ces deux instants. En effet celui-ci va calculer les différents paramètres  à appliquer au modèle à chaque instant pour que l’animation soit fluide.
 
@@ -256,28 +249,32 @@ Une fois l’action créée, il n’y a plus qu’à exporter le modèle.
 
 \subsection{Exploitation des animations dans XNA}
 
-Une fois le modèle et l’animation créés et exportés, il va falloir récupérer ces informations pour être capable de lancer l’animation dans XNA. Toutes les informations concernant le modèle sont conservées sous forme de matrice (ex position des points) ou de tableau (ex poids des points, os). 
-Par default le ModelProcessor d’XNA pour les fichiers .X ne récupère pas d’information concernant les animations. Il a donc fallu utilisé un autre ContentProcessor pour récupérer les informations de skinning, les  keyframes ainsi que la relation entre les bones.
+Une fois le modèle et l’animation créés et exportés, il va falloir récupérer ces informations pour être capable de lancer l’animation dans XNA. Toutes les informations concernant le modèle sont conservées sous forme de matrice (par exemple la position des points) ou de tableau (par exemple le poids des points, os). 
+Par défaut le ModelProcessor d’XNA pour les fichiers .X ne récupère pas d’information concernant les animations. Il a donc fallu utiliser un autre ContentProcessor pour récupérer les informations de skinning, les  KeyFrames ainsi que la relation entre les os.
 
-Pour ce faire nous avons récupérer l'exemple nommé ``Skinned Model'' mis à disposition par Microsoft\footnote{\url{http://xbox.create.msdn.com/en-US/education/catalog/sample/skinned_model}}.
+Pour ce faire nous avons récupéré l'exemple nommé ``Skinned Model'' mis à disposition par Microsoft\footnote{\url{http://xbox.create.msdn.com/en-US/education/catalog/sample/skinned_model}}.
 
-Une fois l’extension du Model Processor intégrés à notre code, nous étions en mesure de lancer des animations et de les afficher. Cependant nous nous heurtons à quelques problèmes au niveau de la gestion du temps des animations.
+Une fois l’extension du Model Processor intégrée à notre code, nous étions en mesure de lancer des animations et de les afficher. Cependant nous nous heurtons à quelques problèmes lié à la gestion du temps des animations.
 
 \section{Les finitions}
 
-Une fois les modèles et leur texture crées on dispose déjà d’un univers pour notre jeu, néanmoins celui-ci manque de réalisme. Pour améliorer le rendu sans peser sur les performances une solution existe, l’utilisation de ``shader''.
+Une fois les modèles et leur texture créés on dispose déjà d’un univers pour notre jeu, néanmoins celui-ci manque de réalisme. Pour améliorer le rendu sans peser sur les performances une solution existe, l’utilisation de ``shader''.
 
 \begin{quote}
 ``Un shader (le mot est issu du verbe anglais to shade pris dans le sens de « nuancer ») est un programme informatique, utilisé en image de synthèse, pour paramétrer une partie du processus de rendu réalisé par une carte graphique ou un moteur de rendu logiciel.'', \emph{Wikipédia}
 \end{quote}
 
-Plusieurs effets sont réalisables à l’aide de shaders, mais nous nous sommes particulièrement intéressés à la simulation de relief. Pour simuler un relief plusieurs techniques existent tel que le bump mapping ou le normal mapping. Ces techniques se basent sur une image qui doit correspondre au découpage UV afin d’être utilisé correctement. Les propriétés de chaque pixel de l’image seront utilisées en tant que paramètres lors du rendu afin de feindre le relief en modifiant la réflexion de la lumière sans modifier la géométrie de l’objet sur lequel on les utilise. Il existe d’autres techniques qui associent plusieurs images afin de parfaire le rendu, c’est le cas du parallax mapping. Celui-ci en plus de modifier la réflexion de la lumière déforme la géométrie de l’objet.
+Plusieurs effets sont réalisables à l’aide de shaders, mais nous nous sommes particulièrement intéressés à la simulation de relief. Pour simuler un relief plusieurs techniques existent telles que le bump mapping ou le normal mapping. Ces techniques se basent sur une image qui doit correspondre au découpage UV afin d’être utilisé correctement. Les propriétés de chaque pixel de l’image seront utilisées en tant que paramètres lors du rendu afin de feindre le relief en modifiant la réflexion de la lumière sans modifier la géométrie de l’objet sur lequel on les utilise. Il existe d’autres techniques qui associent plusieurs images afin de parfaire le rendu, c’est le cas du parallax mapping. Celui-ci en plus de modifier la réflexion de la lumière déforme la géométrie de l’objet.
 
 \subsection{Bump mapping}
 
-Le bump mapping se base sur une image en noir et blanc. Un pixel blanc (R : 255, G : 255, B : 255) correspondra à un point d’altitude maximum, un pixel noir (R : 0, G : 0, B : 0) à un point d’altitude minimum. L’intensité de la lumière réfléchie par la surface sera modifiée en fonction du niveau de gris du pixel créant ainsi l’impression de relief.
+Le bump mapping se base sur une image en noir et blanc. Un pixel blanc (R : 255, G : 255, B : 255) correspondra à un point d'altitude maximum, un pixel noir (R : 0, G : 0, B : 0) à un point d’altitude minimum. L'intensité de la lumière réfléchie par la surface sera modifiée en fonction du niveau de gris du pixel créant ainsi l'impression de relief.
 
-TODO: Figure Bump
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=5cm]{bump.png}
+\caption{Image utilisée par le bump mapping}
+\end{figure}
 
 \subsection{Normal mapping}
 
@@ -291,13 +288,17 @@ Le nomal mapping se base sur une image en couleur. Chaque canal R, G et B corres
 
 \subsection{Parallax mapping}
 
-Le parallax mapping se base quant à lui sur deux images, une en noir et blanc et une en couleur. Le modèle est déformé en fonction de l’image en noir et blanc (à l’instar de l’heightmap) et la direction de la lumière réfléchie modifié en fonction de l’image en couleur mais aussi en fonction de la position de l’observateur.
+Le parallax mapping se base quant à lui sur deux images, une en noir et blanc et une en couleur. Le modèle est déformé en fonction de l’image en noir et blanc (à l'instar de l’heightmap) et la direction de la lumière réfléchie modifiée en fonction de l’image en couleur mais aussi en fonction de la position de l’observateur.
 
-TODO: figure parallax
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{parallax.png}
+\caption{Images utilisées par le parallax mapping}
+\end{figure}
 
-L’utilisation de shader permet d’améliorer le rendu sans ralentir le jeu. C’est un outil très utilisé dans l’industrie du jeu vidéo. Apres plusieurs essaies nous avons choisi de conserver le shader de parallax.
+L’utilisation de shader permet d’améliorer le rendu sans ralentir le jeu. C’est un outil très utilisé dans l’industrie du jeu vidéo. Après plusieurs essais nous avons choisi de conserver le shader de parallax.
 
-Pour obtenir les images nécessaires il existe deux techniques. La technique utilisé habituellement consiste a réalisé deux modèles. Un dit low poly (composé de peu de polygones) et un dit high poly (composé de beaucoup de polygones).
+Pour obtenir les images nécessaires il existe deux techniques. La technique utilisée habituellement consiste à réaliser deux modèles. Un dit low poly (composé de peu de polygones) et un dit high poly (composé de beaucoup de polygones).
 
 \begin{figure}[htbp]
 \centering
@@ -315,11 +316,11 @@ Après que les textures aient été créées et le shader programmé l’univers
 
 \section{Conclusion}
 
-La conception générale des éléments nécessaires au jeu a eu lieu au tout début du développement afin de pouvoir travailler en parallèle sur d’autres taches que la modélisation. Les modélisations ont été réalisées sur plusieurs périodes afin d’apporter du contenu au fur et à mesure du développement. Composantes principales de la partie graphique, elles représentent un travail relativement fastidieux mais indispensable au jeu. 
+La conception générale des éléments nécessaires au jeu a eu lieu au tout début du développement afin de pouvoir travailler en parallèle sur d’autres tâches que la modélisation. Les modélisations ont été réalisé sur plusieurs périodes afin d’apporter du contenu au fur et à mesure du développement. Composantes principales de la partie graphique, elles représentent un travail relativement fastidieux mais indispensable au jeu. 
 
 \chapter{Moteur graphique}
 
-Le moteur graphique est sûrement la partie la plus importante de notre jeu. C'est celui-ci qui gère le rendu finale du jeu. Il est constitué d'une multitude de fonction que nous avons fait évolué au fur et à mesure de l'évolution du projet. De plus, il s'agit de la partie la plus technique de la conception d'un jeu. En effet, celui-ci requiert des connaissances mathématiques ainsi qu'une rigueur importante pour l'optimisation de l'ensemble des fonctionnalités.
+Le moteur graphique est sûrement la partie la plus importante de notre jeu. C'est celui-ci qui gère le rendu final du jeu. Il est constitué d'une multitude de fonction que nous avons fait évoluer au fur et à mesure de l'évolution du projet. De plus, il s'agit de la partie la plus technique de la conception d'un jeu. En effet, celui-ci requiert des connaissances mathématiques ainsi qu'une rigueur importante pour l'optimisation de l'ensemble des fonctionnalités.
 
 \section{Les différentes fonctionnalités}
 
@@ -373,7 +374,7 @@ Où : \( R=2\times \left(N\cdot L\right)\times N-l \)
 
 \subsection{L'affichage d'un ciel réaliste}
 
-Nous souhaitions rendre le ciel plus agréable à regarder que la couleur bleue par défaut d'XNA. Notre première idée a été d’utiliser un skydome. Il s’agit d’un modèle 3D prenant la forme d’une demi-sphère sur laquelle est apposé, sur la partie intérieure, une image de ciel.
+Nous souhaitions rendre le ciel plus agréable à regarder que la couleur bleue par défaut d'XNA. Notre première idée a été d’utiliser un skydome. Il s’agit d’un modèle 3D prenant la forme d’une demi-sphère sur laquelle est apposée, sur la partie intérieure, une image de ciel.
 
 \begin{figure}[htbp]
 \centering
@@ -383,11 +384,11 @@ Nous souhaitions rendre le ciel plus agréable à regarder que la couleur bleue 
 
 Après quelques tests, bien que le rendu soit meilleur qu’un fond bleu uni, nous avons décidé de laisser cette idée de côté. D’une part parce que la délimitation entre le skydome et le sol posait problème. Et d’autre part car nous trouvions que le ciel restait trop plat !
 
-Nous avons donc fait machine arrière et retiré le skydome. A la place, nous avons implémenter une gestion de nuage dynamique.
+Nous avons donc fait machine arrière et retiré le skydome. A la place, nous avons implémenté une gestion de nuage dynamique.
 
-Pour ce faire, nous avons utilisé le ``Volumetric Clouds''. Il s'agit d'une technique qui utilise des particules pour donner un effet réaliste de ciel nuageux. Les particules sont regroupés par groupe, chaque groupe possède un certain volume de l'espace 3D. Ainsi chaque particules prends une positions aléatoire dans ce volume ce qui permet de rendre différentes géométries de nuages.
+Pour ce faire, nous avons utilisé le ``Volumetric Clouds''. Il s'agit d'une technique qui utilise des particules pour donner un effet réaliste de ciel nuageux. Les particules sont regroupées par groupe, chaque groupe possède un certain volume de l'espace 3D. Ainsi chaque particule prend une position aléatoire dans ce volume ce qui permet de rendre différentes géométries de nuages.
 
-Une particule est rendu dans l'espace 3D par la technique du billboard. Un billboard est une surface 2D simulant un objet 3D. Le principe du billboard est de toujours faire face à la camera. Ainsi quelques soit l'endroit d'où on regarde, il donnera toujours l'illusion d'être en 3D. L'avantage de cette technique est de réduire la compléxité d'un objet. Ainsi toutes nos particules ne sont qu'un simple triangle.
+Une particule est rendue dans l'espace 3D par la technique du billboard. Un billboard est une surface 2D simulant un objet 3D. Le principe du billboard est de toujours faire face à la caméra. Ainsi quelque soit l'endroit d'où l'on regarde, il donnera toujours l'illusion d'être en 3D. L'avantage de cette technique est de réduire la complexité d'un objet. Ainsi toutes nos particules ne sont qu'un simple triangle.
 
 \begin{figure}[htbp]
 \centering
@@ -396,7 +397,7 @@ Une particule est rendu dans l'espace 3D par la technique du billboard. Un billb
 \label{ciel-tempete}
 \end{figure}
 
-Mais cela ne suffit pas à avoir des performances correctes. C'est pourquoi nous avons combiner cette technique de rendu avec une autre technique : l'Hardware Instancing, abrégé HI. Il s'agit simplement de rendre plusieurs instances d'un même objet dans une scène en une seule fois. Vue qu'ici nous devons rendre des particules qui sont toutes identiques, cette technique permet de grandement accélérer le rendu.
+Mais cela ne suffit pas à avoir des performances correctes. C'est pourquoi nous avons combiné cette technique de rendu avec une autre technique : l'Hardware Instancing, abrégé HI. Il s'agit simplement de rendre plusieurs instances d'un même objet dans une scène en une seule fois. Vu qu'ici nous devons rendre des particules qui sont toutes identiques, cette technique permet de grandement accélérer le rendu.
 
 \begin{figure}[htbp]
 \centering
@@ -405,27 +406,27 @@ Mais cela ne suffit pas à avoir des performances correctes. C'est pourquoi nous
 \label{ciel-bleu}
 \end{figure}
 
-Comme vous pouvez le constatez sur la figure~\ref{ciel-tempete} et \ref{ciel-bleu}, le rendu est très réaliste. On peut voir plus particulièrement sur la figure~\ref{ciel-tempete} les différentes couches de nuages dans le ciel.
+Comme vous pouvez le constater sur la figure~\ref{ciel-tempete} et \ref{ciel-bleu}, le rendu est très réaliste. On peut voir plus particulièrement sur la figure~\ref{ciel-tempete} les différentes couches de nuages dans le ciel.
 
-Niveau performance, nos optimisations permettent de ne pas faire ralentir le jeu. De plus, pour les ordinateurs les moins performant, nous avons implémenté une option permettant à l'utilisateur de désactiver le mouvement des nuages. Celle-ci permet de réduire de 25 à 30\% l'utilisation du processeur par le jeu.
+Niveau performance, nos optimisations permettent de ne pas faire ralentir le jeu. De plus, pour les ordinateurs les moins performants, nous avons implémenté une option permettant à l'utilisateur de désactiver le mouvement des nuages. Celle-ci permet de réduire de 25 à 30\% l'utilisation du processeur par le jeu.
 
 \section{Les optimisations}
 
 \subsection{Des shaders}
 
-Afin d’optimiser notre moteur de jeu, nous avons écris nos shaders de tel manière qu’ils soient au maximum compatible avec les preshaders. Les preshaders sont une optimisation du compilateur HLSL qui pré-calcule les constantes des shaders sur le processeur. Ainsi les calculs utilisant les même valeurs pour l’ensemble des shaders ne sont calculés qu’une seule fois par cycle d'affichage.
+Afin d’optimiser notre moteur de jeu, nous avons écris nos shaders de tel manière qu’ils soient au maximum compatibles avec les preshaders. Les preshaders sont une optimisation du compilateur HLSL qui pré-calcule les constantes des shaders sur le processeur. Ainsi les calculs utilisant les mêmes valeurs pour l’ensemble des shaders ne sont calculées qu’une seule fois par cycle d'affichage.
 
-Une autre optimisations des shaders a été réalisé au niveau du passage des variables. En effet, le passage de variables au shader implique un transfère des données de la mémoire vive vers la carte graphique. Ce processus fait ralentir les calculs qui doivent attendre le transferts des données. Ce processus est d’autant plus long quand il s’agit de faire passer des textures. Pour contrer ce problème, nous avons décidés de n’actualiser que les données qui varient. Ainsi les textures ne sont transférer au shader que lors de l’initialisation. Nous utilisons donc plus de mémoire graphique mais nos rendus sont grandement accélérés.
+Une autre optimisation des shaders a été réalisé au niveau du passage des variables. En effet, le passage de variables aux shaders implique un transfert des données de la mémoire vive vers la carte graphique. Ce processus fait ralentir les calculs qui doivent attendre le transfert des données. Ce processus est d’autant plus long quand il s’agit de faire passer des textures. Pour contrer ce problème, nous avons décidé de n’actualiser que les données qui varient. Ainsi les textures ne sont transférées aux shaders que lors de l’initialisation. Nous utilisons donc plus de mémoire graphique mais nos rendus sont grandement accélérés.
 
 \subsection{De l'affichage du terrain}
 
 Afin de pouvoir afficher de grandes cartes rapidement, nous avons conçu un système utilisant un QuadTree, du Level of Detail, abrégé LOD, ainsi que du Cull Mode.
 
-Le QuadTree est un arbre dont chaque noeud à quatres fils. Il permet de partionner un espace bidimensionnel en le subdivisant récursivement en quatre noeuds. Ici il s'agit de subdiviser le plan \((x,z)\). Ainsi en utilisant un algorithme de Level of Detail, nous sommes capable de changer le niveau de détail de notre map en fonction de la distance qui nous sépare. Enfin, le Cull Mode permet de ``découper'' nos triangles qui compose notre terrain, pour n'afficher que ceux qui sont visibles. Une fois de plus, cet algorithme tire partie du QuadTree pour optimiser les nombreux tests qu'il génère.
+Le QuadTree est un arbre dont chaque noeud à quatre fils. Il permet de partitionner un espace bidimensionnel en le subdivisant récursivement en quatre noeuds. Ici il s'agit de subdiviser le plan \((x,z)\). Ainsi en utilisant un algorithme de Level of Detail, nous sommes capable de changer le niveau de détail de notre terrain en fonction de la distance qui nous sépare. Enfin, le Cull Mode permet de ``découper'' nos triangles qui composent notre terrain, pour n'afficher que ceux qui sont visibles. Une fois de plus, cet algorithme tire partie du QuadTree pour optimiser les nombreux tests qu'il génère.
 
-Le but de cette implémentation était de gagner en images affichés par seconde, FPS\footnote{Frame Per Second}. Cependant, dans un jeu à la première personne comme le notre, on est très souvent amené à avoir une vision sur la totalité du terrain quelque soit notre position. Ainsi le LOD, qui modifiant à la voler le terrain sous nos yeux, rendait le jeu injouable. L'option la plus intéressante de cette implémentation restait donc le Cull Mode. Mais il se trouve, qu'après de nombreux tests, notre terrain sans CullMode activé était plus performant. En effet, le Cull Mode était à l'origine d'une perte de l'ordre de 20 FPS.
+Le but de cette implémentation était de gagner en images affichées par seconde, FPS\footnote{Frame Per Second}. Cependant, dans un jeu à la première personne comme le nôtre, on est très souvent amené à avoir une vision sur la totalité du terrain quelque soit notre position. Ainsi le LOD, qui modifie à la volée le terrain sous nos yeux, rendait le jeu injouable. L'option la plus intéressante de cette implémentation restait donc le Cull Mode. Mais il se trouve, qu'après de nombreux tests, notre terrain sans CullMode était plus performant. En effet, le Cull Mode était à l'origine d'une perte de l'ordre de 20 FPS.
 
-C'est pourquoi nous avons préféré optimiser d'autre partie du code (comme l'optimisation des shaders présentés ci-dessus) et revenir sur notre implémentation de base. Nous pouvons aujourd'hui affirmer que c'était la bonne décision étant donné que notre jeu actuelle est moins gourmand au niveau mémoire et processeur, alors bien que nous avons un meilleur rendu et des modèles plus lourds que lors des toutes premières versions.
+C'est pourquoi nous avons préféré optimiser d'autre partie du code (comme l'optimisation des shaders présentée ci-dessus) et revenir sur notre implémentation de base. Nous pouvons aujourd'hui affirmer que c'était la bonne décision étant donné que notre jeu actuel est moins gourmand au niveau mémoire et processeur, alors que nous avons un meilleur rendu et des modèles plus lourds que lors des toutes premières versions.
 
 \section{Les problèmes rencontrés}
 
@@ -441,7 +442,7 @@ Une fois les modèles réalisés nous avons été confronté à plusieurs probl�
 
 Les problèmes ont été résolus assez rapidement après quelques recherches. La mauvaise orientation des modèles était due à l'utilisation de repère différent par XNA et Blender. En effet XNA utilise un repère dit main droite alors que Blender utilise le même repère mais en inversent l'axe Y et Z.
 
-Concernant l’échelle des objets, une unité Blender correspond exactement à une unité XNA. Il nous a donc fallu redimensionner tous les modèles pour qu'ils respectent tous une certaines échelles.
+Concernant l’échelle des objets, une unité Blender correspond exactement à une unité XNA. Il nous a donc fallu redimensionner tous les modèles pour qu'ils respectent tous la même échelle.
 
 \begin{figure}[htbp]
 \centering
@@ -449,21 +450,21 @@ Concernant l’échelle des objets, une unité Blender correspond exactement à 
 \caption{Exemple d'un problème d'affichage de certaines faces}
 \end{figure}
 
-Enfin, les faces cachées étaient dues à une mauvaise modélisation. En effet, chaque objet 3D est composé uniquement de triangle. Chaque triangle est caractérisé par les trois vertex le composant ainsi que le sens de construction du triangle. Afin d'optimiser le rendu 3D, les moteurs graphiques n'affichent par défaut que les faces respectant un même sens de construction. Ce principe permet de ne pas afficher les faces qui sont cachées par une autre face. Lors de la création de modèle 3D, la suppression et l'ajout de vertex peuvent provoquer un changement de sens de construction de certain triangle. Heureusement, il est assez facile de corriger ce problème avec Blender.
+Enfin, les faces cachées étaient dues à une mauvaise modélisation. En effet, chaque objet 3D est composé uniquement de triangle. Chaque triangle est caractérisé par les trois vertex le composant ainsi que le sens de construction du triangle. Afin d'optimiser le rendu 3D, les moteurs graphiques n'affichent par défaut que les faces respectant un même sens de construction. Ce principe permet de ne pas afficher les faces qui sont cachées par une autre face. Lors de la création de modèle 3D, la suppression et l'ajout de vertex peuvent provoquer un changement de sens de construction de certains triangles. Heureusement, il est assez facile de corriger ce problème avec Blender comme cela a été expliqué dans la partie ``Export et édition'' du chapitre I : Modélisation.
 
 \subsection{Dans l'implémentation des ombres}
 
-Nous avions initialement prévu d'utiliser notre avance sur le planning d'origine pour rajouter des fonctionnalité au moteur graphique, dont les ombres, qui n'étaient prévu par le cahier des charges.
+Nous avions initialement prévu d'utiliser notre avance sur le planning d'origine pour rajouter des fonctionnalité au moteur graphique, dont les ombres, qui n'étaient pas prévues par le cahier des charges.
 
-L'implémentation des ombres nous a occupé pendant deux à trois semaines. La technique que nous avons essayé d'implémenter est le Shadow Mapping. Le principe est de rendre la scène du point de vue de la lumière et de l'enregistrer dans une image. Puis ensuite quand on va rendre la scène du point de vue du joueur, cette texture nous permettra de connaître les zones d'ombre grâce au distances qu'elle permet de calculer.
+L'implémentation des ombres nous a occupé pendant deux à trois semaines. La technique que nous avons essayé d'implémenter est le Shadow Mapping. Le principe est de rendre la scène du point de vue de la lumière et de l'enregistrer dans une image. Puis ensuite quand on va rendre la scène du point de vue du joueur, cette image nous permettra de connaître les zones d'ombre grâce aux distances qu'elle permet de calculer.
 
-Cependant nous avons fait face à des problèmes d'affichages rendant le jeu injouable. Le temps continuant d'avancer, nous avons dû abandonner cette fonctionnalité pour pouvoir se concentrer sur le mode multijoueur.
+Cependant nous avons fait face à des problèmes d'affichage rendant le jeu injouable. Le temps continuant de s'écouler, nous avons dû abandonner cette fonctionnalité pour pouvoir se concentrer sur le mode multijoueur.
 
 \chapter{Moteur physique}
 
 Nous avons logiquement décidé d’implémenter un système de collision entre le joueur et les objets de la carte afin de mettre en place un mode solo et multijoueur réaliste.
 
-Cette étape n'a pas été s'en difficulté. Nous nous sommes en effet confronté à divers problème. Tous d'abord la génération des bounding box qui ne fonctionnait pas correctement et puis ensuite la réponse aux collisions qui n'a pas été facile à implémenter. C'est pourquoi nous avons dès le début construit un système de débogage nous permettant d'afficher les bounding box et d'obtenir des informations sur celles-ci.
+Cette étape n'a pas été sans difficulté. Nous nous sommes en effet confronté à divers problèmes. Tout d'abord la génération des bounding box qui ne fonctionnait pas correctement et puis ensuite la réponse aux collisions qui n'a pas été facile à implémenter. C'est pourquoi nous avons dès le début construit un système de débogage nous permettant d'afficher les bounding box et d'obtenir des informations sur celles-ci.
 
 \begin{figure}[htbp]
 \centering
@@ -473,7 +474,7 @@ Cette étape n'a pas été s'en difficulté. Nous nous sommes en effet confront�
 
 \section{Génération des bounding box}
 
-Afin d'avoir des collisions plus précise, nous avons décidé de générer une bouding box\footnote{Bounding box : le plus petit cube englobant un objet, quelque soit sa géométrie} par maillage de chaque objet. Ainsi pour chaque maillage, notre algorithme parcours son vertex buffer afin d'obtenir les positions de chaque sommets, pour pouvoir trouver le vecteur min et max qui permette de construire la bounding box englobant au plus proche la forme du maillage. L'ensemble de ces bounding box est stocké dans une liste qui nous servira plus tard pour vérifier la présence de collision.
+Afin d'avoir des collisions plus précises, nous avons décidé de générer une bouding box\footnote{Bounding box : le plus petit cube englobant un objet, quelque soit sa géométrie} par maillage de chaque objet. Ainsi pour chaque maillage, notre algorithme parcourt son vertex buffer afin d'obtenir les positions de chaque sommets, pour pouvoir trouver le vecteur min et max qui permette de construire la bounding box englobant au plus proche la forme du maillage. L'ensemble de ces bounding box est stocké dans une liste qui nous servira plus tard pour vérifier la présence de collision.
 
 \begin{figure}[htbp]
 \centering
@@ -483,7 +484,7 @@ Afin d'avoir des collisions plus précise, nous avons décidé de générer une 
 
 La génération des bounding box n'est réalisée qu'au chargement d'une partie. En effet l'ensemble de nos modèles sont statiques, excepté le joueur qui se déplace.
 
-Pour le joueur, nous avons décidé d'utiliser une bounding sphère\footnote{Bounding sphère : la plus petite sphère englobant un objet, quelque soit sa géométrie}, étant donner que la précision est moins importante.
+Pour le joueur, nous avons décidé d'utiliser une bounding sphère\footnote{Bounding sphère : la plus petite sphère englobant un objet, quelque soit sa géométrie}, étant donné que la précision est moins importante.
 
 \section{Tests des collisions et réponses}
 
@@ -492,20 +493,20 @@ Maintenant que nous avons nos bounding box, nous pouvons à chaque tour de la bo
 \begin{itemize}
 \item Stocker la nouvelle position du joueur dans une autre variable. Il faut garder en mémoire la dernière position du joueur !
 \item Générer une nouvelle bounding sphère à la position du joueur calculée précédemment
-\item Vérifier si cette bounding sphere rentre en collision avec une des bounding box de la liste
+\item Vérifier si cette bounding sphère rentre en collision avec une des bounding box de la liste
 \begin{itemize}
-\item Si c'est le cas, il nous faut trouver le point de collision entre la bounding sphère et la bounding box en question. Pour cela, on revient à notre ancienne position et on parcours le vecteur qui relie l'ancienne position avec celle qui à générer la collision (la droite de direction). Une fois ce point obtenu, on peut définir notre position actuelle comme étant le point de collision moins le rayon de la bounding sphère (sur la droite de direction défini plus haut).
-\item Si il n'y a pas collision, on peut valider le mouvement et enregistrer la nouvelle position.
+\item Si c'est le cas, il nous faut trouver le point de collision entre la bounding sphère et la bounding box en question. Pour cela, on revient à notre ancienne position et on parcourt le vecteur qui relie l'ancienne position avec celle qui a généré la collision (la droite de direction). Une fois ce point obtenu, on peut définir notre position actuelle comme étant le point de collision moins le rayon de la bounding sphère (sur la droite de direction définie plus haut).
+\item S'il n'y a pas collision, on peut valider le mouvement et enregistrer la nouvelle position.
 \end{itemize}
 \end{itemize}
 
-\section{Amélioration}
+\section{Améliorations}
 
-Bien que les premiers résultats soient satisfaisant, nous ne nous sommes pas contenté de cette algorithme. Ainsi entre la deuxième et troisième soutenance, de nombreuses amélioration ont été apporté. 
+Bien que les premiers résultats soient satisfaisant, nous ne nous sommes pas contenté de cet algorithme. Ainsi entre la deuxième et troisième soutenance, de nombreuses améliorations ont été apporté. 
 
-Par exemple, notre algorithme est maintenant capable de gérer les cas de collisions multiples. Ce scénario apparaît à plusieurs endroit de la carte, notamment à la limite entre deux objets. Grâce à cette amélioration, il n'est plus possible de passer entre deux barrières. Nous pouvons donc maintenant délimité des zones pour rendre le jeu plus difficile.
+Par exemple, notre algorithme est maintenant capable de gérer les cas de collisions multiples. Ce scénario apparaît à plusieurs endroits de la carte, notamment à la limite entre deux objets. Grâce à cette amélioration, il n'est plus possible de passer entre deux barrières. Nous pouvons donc maintenant délimiter des zones pour rendre le jeu plus difficile.
 
-En parallèle à cette amélioration, nous avons optimisé au maximum l'algorithme afin de limité le nombre de test.
+En parallèle à cette amélioration, nous avons optimisé au maximum l'algorithme afin de limiter le nombre de test.
 
 \chapter{Interface utilisateur}
 
@@ -519,17 +520,17 @@ Le menu est la première chose auquel l'utilisateur est confronté et avec leque
 \caption{Capture d'écran du tout premier menu}
 \end{figure}
 
-Cependant, notre tout premier menu a été l'exception à cette règle. Celui-ci avait surtout une fonction pratique. Il nous a permit, dès le tout début de notre développement, de mettre notre jeu en pause et de le quitter. Bien que celui-ci soit totalement provisoire, il nous a servit à réaliser la partie technique qui gère l'ensemble de l'interface. C'est cette dernière que nous utilisons encore aujourd'hui pour notre dernière soutenance.
+Cependant, notre tout premier menu a été l'exception à cette règle. Celui-ci avait surtout une fonction pratique. Il nous a permis, dès le tout début de notre développement, de mettre notre jeu en pause et de le quitter. Bien que celui-ci soit totalement provisoire, il nous a servi à réaliser la partie technique qui gère l'ensemble de l'interface. C'est cette dernière que nous utilisons encore aujourd'hui pour notre dernière soutenance.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=11cm]{main-menu-1et2.png}
-\caption{Capture d'écrans du menu principale, à la soutenance 1 et 2}
+\caption{Captures d'écran du menu principal, à la soutenance 1 et 2}
 \end{figure}
 
 Bien entendu, pour la première soutenance nous avions revu le design du menu. Celui-ci est devenu bien plus esthétique tout en restant encore très simple.
 
-Pour la deuxième soutenance, nous nous étions fixé l'objectif d'avoir un menu fini à 80\%. C'est-à-dire avoir l'ensemble de l'interface prête sans forcément être fonctionnel. C'est donc en respectant cet objectif qu'est apparut le menu options. Ce dernier permet à l'utilisateur d'adapter le jeu à son environnement : clavier, langage, etc.
+Pour la deuxième soutenance, nous nous étions fixé comme objectif d'avoir un menu fini à 80\%. C'est-à-dire avoir l'ensemble de l'interface prête sans forcément être fonctionnelle. C'est donc en respectant cet objectif qu'est apparu le menu option. Ce dernier permet à l'utilisateur d'adapter le jeu à son environnement : clavier, langage, etc.
 
 \begin{figure}[htbp]
 \centering
@@ -537,7 +538,7 @@ Pour la deuxième soutenance, nous nous étions fixé l'objectif d'avoir un menu
 \caption{Captures d'écran du menu pause, à la soutenance 1 et 2}
 \end{figure}
 
-Un autre point de développement des menus a été de les rendre navigables à les manettes de jeux. Pour cela il a fallu repensé la navigation entre les éléments d'interfaces.
+Un autre point de développement des menus a été de les rendre navigables avec les manettes de jeux. Pour cela il a fallu repenser la navigation entre les éléments d'interfaces.
 
 \begin{figure}[htbp]
 \centering
@@ -545,9 +546,9 @@ Un autre point de développement des menus a été de les rendre navigables à l
 \caption{Capture d'écran du menu option, à la soutenance 2}
 \end{figure}
 
-A ce moment là, nous étions vraiment content du résultat. Mais un problème se posa. L'interface était trop sombre. Ils nous étaient impossible de concevoir un menu multijoeur avec le design actuel. Bien sûr, pour la cohérence de l'interface, nous étions obligé de repensé l'ensemble des menus actuelles.
+A ce moment là, nous étions vraiment content du résultat. Mais un problème se posa. L'interface était trop sombre. Ils nous étaient impossible de concevoir un menu multijoueur avec le design actuel. Bien sûr, pour la cohérence de l'interface, nous étions obligés de repenser l'ensemble des menus actuels.
 
-Ce dernier design à longuement été réfléchi. Nous n'avions plus le temps pour recommencer une quatrième fois. L'interface devait être pensé entièrement et couvrir toute les possibilités. Nous sommes donc passé par une grande période de croquis papier.
+Ce dernier design à longuement été réfléchi. Nous n'avions plus le temps pour recommencer une quatrième fois. L'interface devait être pensée entièrement et couvrir toutes les possibilités. Nous sommes donc passés par une grande période de croquis papier.
 
 \begin{figure}[htbp]
 \centering
@@ -555,7 +556,7 @@ Ce dernier design à longuement été réfléchi. Nous n'avions plus le temps po
 \caption{Captures d'écran de plusieurs menus à la fin du projet}
 \end{figure}
 
-Le design retenu suit la tendance actuelle dans le monde du jeu vidéo. C'est à dire un menu épurer, très sobre et s'accordant parfaitement avec notre jeu. L'idée principale repose sur un fond d'écran mettant en scène notre personnage 3D ainsi que son arme, des bandes blanches semi-transparentes ainsi l'application de flou gaussien.
+Le design retenu suit la tendance actuelle dans le monde du jeu vidéo. C'est-à-dire un menu épuré, très sobre et s'accordant parfaitement avec notre jeu. L'idée principale repose sur un fond d'écran mettant en scène notre personnage 3D ainsi que son arme, des bandes blanches semi-transparentes ainsi que l'application de flou gaussien.
 
 Pour compléter cette interface, nous avons rajouté un écran de chargement qui évite à l'utilisateur d'avoir des ralentissements au lancement du jeu.
 
@@ -569,9 +570,9 @@ Notre projet étant un jeu de guerre, nous voulions pouvoir informer les utilisa
 \caption{Capture d'écran du PEGI 18}
 \end{figure}
 
-Pour compléter le démarrage de notre jeu, nous avons mis à profit nos différents talents artistiques pour réaliser, avec blender, une vidéo d'introduction de notre studio. Cette vidéo devait être courte et marqué les esprits.
+Pour compléter le démarrage de notre jeu, nous avons mis à profit nos différents talents artistiques pour réaliser, avec blender, une vidéo d'introduction de notre studio. Cette vidéo devait être courte et marquer les esprits.
 
-Le fil conducteur de cette introduction est une grenade qui explose au ralenti. La caméra change régulièrement d'angle de vue jusqu'à revenir à sa position initiale. A ce moment là, l'explosion reprends à sa vitesse normale et on voit apparaître le texte ``Emagine Studio''.
+Le fil conducteur de cette introduction est une grenade qui explose au ralenti. La caméra change régulièrement d'angle de vue jusqu'à revenir à sa position initiale. A ce moment là, l'explosion reprend à sa vitesse normale et on voit apparaître le texte ``Emagine Studio''.
 
 \begin{figure}[htbp]
 \centering
@@ -585,46 +586,64 @@ Grâce à ces petits ajouts au lancement du jeu, nous sommes passés d’un jeu 
 
 Jusqu'à la soutenance 2, notre jeu était complètement dépourvu d'affichage tête haute\footnote{HUD : Head up display}. En effet notre vision du jeu était tournée vers le rapprochement au maximum de la réalité. Un HUD aurai donc rajouté des informations qu'un soldat pendant la seconde guerre mondiale n'aurait pas forcément eu.
 
-Cependant, nos premiers joueurs nous ont très rapidement remonté un désaccord avec notre vision du jeu. Il nous a donc fallu nous adapté et pensé à une interface simple mais comportant les informations demandé par les utilisateurs.
+Cependant, nos premiers joueurs nous ont très rapidement remonté un désaccord avec notre vision du jeu. Il nous a donc fallu nous adapter et penser à une interface simple mais comportant les informations demandées par les utilisateurs.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{hud.png}
-\caption{Captures d'écran du HUD en mode solo}
+\caption{Capture d'écran du HUD en mode solo}
 \label{hud}
 \end{figure}
 
-Notre jeu possède deux affichages tête hautes, une pour le mode solo et une pour le mode multijour. Ceux-ci sont presque identiques à une ou deux informations différentes. Comme on peut le voir sur la figure~\ref{hud}, l'interface se divise en trois parties. En haut à gauche on retrouve le temps écoulé depuis le début de la partie. En haut à droite on retrouve, ici en mode solo, le nombre de cibles restantes sur la cartes. Et enfin, en bas à droite, on retrouve le nom de l'arme ainsi que le nombre de munitions et de chargeurs disponibles.
+Notre jeu possède deux affichages tête haute, une pour le mode solo et une pour le mode multijoueur. Ceux-ci sont presque identiques à une ou deux informations près. Comme on peut le voir sur la figure~\ref{hud}, l'interface se divise en trois parties. En haut à gauche on retrouve le temps écoulé depuis le début de la partie. En haut à droite on retrouve, ici en mode solo, le nombre de cibles restantes sur la carte. Et enfin, en bas à droite, on retrouve le nom de l'arme ainsi que le nombre de munitions et de chargeurs disponibles.
 
 \chapter{Audio}
 
+Dans un jeu vidéo, les effets sonores sont aussi importants que le rendu visuel. En effet pour pouvoir s'immerger dans le contexte audio, notre cerveau a besoin d'un retour auditif de ces actions.
+
+Le travail mené sur cette partie à principalement été réalisé en deux parties : l'implémentation d'un gestionnaire des effets sonores et des musiques, et la recherche de bandes sonores appropriées. Pour cette deuxième partie, nous avons passé la plupart de notre temps à faire des recherches sur YouTube et FreeSound\footnote{\url{http://www.freesound.org/}}, un catalogue en ligne de sons libres et gratuits.
+
+\section{La musique de fond}
+
+La musique de fond est activé lors de la navigation dans les différents menus. Celle-ci permet de donner vie à l'interface épurée. Nous avons pris soin de choisir une musique sur le thème de la guerre pour toujours coller à l'histoire du jeu.
+
+\section{Les effets sonores}
+
+Plusieurs effets sonores sont disponibles dans le jeu. On en retrouve dans les menus, lors de la navigation entre les différents boutons ou encore lors de la validation d'une action. Par exemple lorsqu'on appuie sur un bouton ou que l'on change un réglage, on a un retour sonore de l'action.
+
+On retrouve également des effets sonores dans le jeu en lui même. Tout d'abord lors des mouvements du personnage. Nous avons essayé de reproduire un son réaliste des mouvements, lorsque la personne marche ou coure. Mais également dans les actions que le joueur exécute : tirer, recharger, etc.
+
+Ainsi le joueur devrait être toujours un peu plus immergé dans le jeu.
+
 \chapter{Gameplay}
+
+
 
 \chapter{Réseau}
 
-L'implémentation du réseau dans notre jeu à commencé après la soutenance 1. Le réseau est à l'origine de nombreuses modifications du fonctionnement de notre moteur de jeu. Mais avant de pouvoir commencé l'implémentation, il nous a fallu concevoir une architecture réseau et définir les différentes communications qui seront nécessaires.
+L'implémentation du réseau dans notre jeu à commencé après la soutenance 1. Le réseau est à l'origine de nombreuses modifications du fonctionnement de notre moteur de jeu. Mais avant de pouvoir commencer l'implémentation, il nous a fallu concevoir une architecture réseau et définir les différentes communications qui seront nécessaires.
 
 \section{La structure}
 
 \subsection{La connexion}
 
-Ce que nous appelons ici connexion, c'est lorsque le joueur lance le mode multijoueur dans le jeu. Le jeu cherche alors à établir une connexion entre le client et un serveur principale que nous hébergeons chez OVH\footnote{OVH est un hébergeur français, \url{http://www.ovh.com/fr/index.xml}}. Ce serveur principale maintient une liste des joueurs connectés et leur attributs un ID unique. De plus, celui-ci fait la même chose avec les parties lancés.
+Ce que nous appelons ici connexion, c'est lorsque le joueur lance le mode multijoueur dans le jeu. Le jeu cherche alors à établir une connexion entre le client et un serveur principal que nous hébergeons chez OVH\footnote{OVH est un hébergeur français, \url{http://www.ovh.com/fr/index.xml}}. Ce serveur principal maintient une liste des joueurs connectés et leur attribut un ID unique. De plus, celui-ci fait la même chose avec les parties lancées.
 
 Une fois que la connexion est établie et que le joueur possède un identifiant, le serveur lui envoie la liste des parties disponibles. Le joueur peut alors rejoindre une partie ou en créer une nouvelle.
 
 Si le client décide de rejoindre une partie, il va tenter d'établir une connexion avec le serveur qui l'héberge. On appelle ce dernier hôte. En effet il s'agit d'un ordinateur sur lequel tourne la partie client et serveur du jeu. Cette technique nous permet d'éviter la surcharge de notre serveur central.
 
-Si le client décide de créer une nouvelle partie, il devient automatiquement hôte. C'est-à-dire que la partie serveur du jeu démarrera sur son ordinateur. L'hôte est le seul ordinateur en partie qui maintient une connexion avec le serveur centrale afin de faire remonter régulièrement des informations sur la partie en cours, telle que le nombre de joueur dans la partie. La communication entre les clients et l'hôte est expliqué dans le paragraphe suivant.
+Si le client décide de créer une nouvelle partie, il devient automatiquement hôte. C'est-à-dire que la partie serveur du jeu démarrera sur son ordinateur. L'hôte est le seul ordinateur en partie qui maintient une connexion avec le serveur central afin de faire remonter régulièrement des informations sur la partie en cours, telle que le nombre de joueur dans la partie. La communication entre les clients et l'hôte est expliquée dans le paragraphe suivant.
 
-Cette connexion entre le serveur centrale et les clients/hôtes est réalisé à partir du protocole TCP\footnote{Transmission Control Protocol}. En effet, nous avons besoin ici d'une confirmation que l'ensemble des informations soient correctement transmisses.
+Cette connexion entre le serveur central et les clients/hôtes est réalisée à partir du protocole TCP\footnote{Transmission Control Protocol}. En effet, nous avons besoin ici d'une confirmation que l'ensemble des informations soient correctement transmisses.
 
 \subsection{Les communications durant une partie}
 
-Nous avons choisi d'implémenter une architecture client-serveur. Le serveur, qui est donc ici l'hôte et non pas le serveur central, est chargé de recevoir l'ensemble des entrées de tout les joueurs et faire le calcul de la physique ainsi que de la logique du jeu. Une fois les calculs effectués, le serveur renvoie l'ensemble des résultats à l'ensemble des joueurs.
+Nous avons choisi d'implémenter une architecture client-serveur. Le serveur, qui est donc ici l'hôte et non pas le serveur central, est chargé de recevoir l'ensemble des entrées de tous les joueurs et faire le calcul de la physique ainsi que de la logique du jeu. Une fois les calculs effectués, le serveur renvoie l'ensemble des résultats à l'ensemble des joueurs.
 
-De leur côté, les clients s'occupe d'envoyer l'ensemble des entrées au serveur ainsi que de faire des calculs de physique approximative. Ainsi le joueur ne devrait pas être gêner par le temps de latence entre lui et le serveur. Les résultat des calculs effectués par le serveur permette au client de corriger les approximation afin de rester un maximum synchronisé avec le serveur. C'est ce qu'on appelle la technique du ``client side prediction''. Si le client se retrouve totalement désynchroniser par rapport au serveur, par exemple après une perte de paquet trop importante, le serveur utilise sa temporisation des calculs pour envoyer une commande au joueur avec la position à laquelle il doit se positionner pour être de nouveau synchronisé.
+De leur côté, les clients s'occupent d'envoyer l'ensemble des entrées au serveur ainsi que de faire des calculs de physique approximative. Ainsi le joueur ne devrait pas être gêné par le temps de latence entre lui et le serveur. Les résultats des calculs effectués par le serveur permettent aux clients de corriger les approximations afin de rester un maximum synchronisé avec le serveur. C'est ce qu'on appelle la technique du ``client side prediction''. Si le client se retrouve totalement désynchronisé par rapport au serveur, par exemple après une perte de paquets trop importante, le serveur utilise sa temporisation des calculs pour envoyer une commande au joueur avec la position à laquelle il doit se repositionner pour être synchronisé.
 
-Pour mieux comprendre le fonctionnement, vous pouvez vous référer à la figure~\ref{reseau}. Au centre de celle-ci repose sur un socle bleu l'hôte de la partie. Les autres ordinateurs portables représentes les différents clients. En haut à droite, on y trouve un regroupement de serveur (en couleur gris). Ceux-ci représente notre serveur central. Les différentes connexions et communications sont matérialisées par un trait bleu. 
+Pour mieux comprendre le fonctionnement, vous pouvez vous référer à la figure~\ref{reseau}. Au centre de celle-ci repose sur un socle bleu l'hôte de la partie. Les autres ordinateurs portables représentent les différents clients. En haut à droite, on y trouve un regroupement de serveurs (en couleur gris). Celui-ci représente notre serveur central. Les différentes connexions et communications sont matérialisées par un trait bleu.
 
 \begin{figure}[htbp]
 \centering
@@ -633,15 +652,15 @@ Pour mieux comprendre le fonctionnement, vous pouvez vous référer à la figure
 \label{reseau}
 \end{figure}
 
-Bien entendu pour réaliser l'ensemble de ces concepts, nous nous sommes basés sur le protocole UDP\footnote{User Datagram Protocol}. Il s'agit d'un protocole de transport de la pile de protocole TCP/IP qui fonctionne sans connexion préalable, par rapport au TCP. Ainsi le protocole UDP ne garantie pas la bonne transmission des données, ni l'ordre d'arrivée. Cependant ce protocole à l'avantage d'être le plus rapide. En effet si un paquet est perdu, le client n'est pas obligé d'attendre que le serveur le renvoi, il recevra directement les paquets suivants. Ainsi il n'y pas de blocage du flux de données par rapport au TCP qui maintient un flux de donnée ordonné dans l'ordre de transmission.
+Bien entendu pour réaliser l'ensemble de ces concepts, nous nous sommes basés sur le protocole UDP\footnote{User Datagram Protocol}. Il s'agit d'un protocole de transport de la pile de protocole TCP/IP qui fonctionne sans connexion préalable, par rapport au TCP. Ainsi le protocole UDP ne garantit pas la bonne transmission des données, ni l'ordre d'arrivée. Cependant ce protocole à l'avantage d'être le plus rapide. En effet si un paquet est perdu, le client n'est pas obligé d'attendre que le serveur le renvoi, il recevra directement les paquets suivants. Ainsi il n'y pas de blocage du flux de données par rapport au TCP qui maintient un flux de données ordonnées dans l'ordre de transmission.
 
 \section{Implémentation et problème}
 
 Au niveau de l'implémentation, nous avons choisi d'utiliser la bibliothèque Lidgren\footnote{\url{https://code.google.com/p/lidgren-network-gen3/}}. Il s'agit d'une bibliothèque réseau réputée et conçu en C\#.
 
-Bien que cette bibliothèque soit robuste et possède des outils de debogage, le développement du mode multijoueur a été plus difficile que ce à quoi nous nous attendions. Nombreux sont les problèmes que nous avons rencontré et que nous avions du mal à identifier. En effet il est très difficile de comprendre l'origine des différents bugs. Pour cela, nous avons dû développer des outils pour garde une trace compréhensible des connexions établies et des différentes communications.
+Bien que cette bibliothèque soit robuste et possède des outils de debogage, le développement du mode multijoueur a été plus difficile que ce à quoi nous nous attendions. Nombreux sont les problèmes que nous avons rencontrés et que nous avions du mal à identifier. En effet il est très difficile de comprendre l'origine des différents bugs. Pour cela, nous avons dû développer des outils pour garder une trace compréhensible des connexions établies et des différentes communications.
 
-Malgré ces outils, le fonctionnement de notre mode multijoueur est encore assez aléatoire. Il peut fonctionner correctement ou cesser de fonctionner en plein milieux d'une partie. Nous nous efforçons encore aujourd'hui à le rendre le plus stable possible pour notre soutenance finale.
+Malgré ces outils, le fonctionnement de notre mode multijoueur est encore assez aléatoire. Il peut fonctionner correctement ou cesser de fonctionner en plein milieu d'une partie. Nous nous efforçons encore aujourd'hui de le rendre le plus stable possible pour notre soutenance finale.
 
 \chapter{Site web}
 
@@ -649,11 +668,11 @@ Malgré ces outils, le fonctionnement de notre mode multijoueur est encore assez
 
 Pour la conception du site web, un petit challenge entre Thibault et Rémy a été organisé. Ils devaient concevoir de leur côté un design complet du site. Le gagnant sera alors celui dont le design plaira le plus au reste de l'équipe et à un petit groupe d'amis.
 
-Ils ont alors chacun conçu des design sur papier puis réalisé une première ébauche du site. Une seule limitation leur était imposée : le site devait être ``responsive desgin''. C'est à dire qu'il doit s'adapter à toutes les tailles d'écrans : ordinateur de bureau, ordinateur portable, tablette et smartphone.
+Ils ont alors chacun conçu des designs sur papier puis réalisé une première ébauche du site. Une seule limitation leur était imposée : le site devait être ``responsive desgin''. C'est à dire qu'il doit s'adapter à toutes les tailles d'écrans : ordinateur de bureau, ordinateur portable, tablette et smartphone.
 
-Il n'y a eu finalement aucun gagnant. Thibault et Rémy ont préféré fusionner leur deux visions différentes pour créer le design actuel de notre site web. Ceci est encore une démonstration de notre capacité à fonctionné en équipe
+Il n'y a eu finalement aucun gagnant. Thibault et Rémy ont préféré fusionner leur deux visions différentes pour créer le design actuel de notre site web. Ceci est encore une démonstration de notre capacité à fonctionner en équipe.
 
-Le site a été conçu avec Foundation, un framework HTML/CSS/Javascript qui permet de concevoir très rapidement des sites internet avec de nombreuses fonctionnalités. Mais le grand intérêt de ce type de framework est qu'ils sont pensés pour être ``responsive design'' et qu'ils s'affichent à l'identique sur l'ensemble des navigateurs internet. Un avantage de Foundation par rapport à ces concurrents est une plus grande facilité de personnalisation du design de base. Tout est pensé pour obliger le développeur à y intégrer sa propre vision.
+Le site a été conçu avec Foundation, un framework HTML/CSS/Javascript qui permet de concevoir très rapidement des sites internet avec de nombreuses fonctionnalités. Mais le grand intérêt de ce type de framework c'est qu'ils sont pensés pour être ``responsive design'' et qu'ils s'affichent à l'identique sur l'ensemble des navigateurs internet. Un avantage de Foundation par rapport à ces concurrents est une plus grande facilité de personnalisation du design de base. Tout est pensé pour obliger le développeur à y intégrer sa propre vision.
 
 \section{Contenu et accès au site internet}
 
@@ -662,7 +681,7 @@ Le site web comporte différentes parties, dont :
 \begin{itemize}
   \item l’histoire du personnage principal dans le jeu, afin de donner envie au visiteur de télécharger et de jouer à notre jeu.
   \item une rubrique actualité pour pouvoir être informé des différentes évolutions du projet
-  \item un ensemble de capture d'écran régulièrement actualisé
+  \item un ensemble de captures d'écran régulièrement actualisées
   \item la présentation de notre équipe, avec des photos et de petites descriptions.
   \item la progression actuelle de la conception de notre jeu
   \item une partie téléchargement permettant d'obtenir les rapports des soutenances, le jeu et des fonds d'écran
@@ -673,9 +692,9 @@ Notre site internet est accessible à l'adresse \url{http://www.troma.eu/}. A pa
 
 \section{Bref résumé des actualisations}
 
-Le site a été actualisé à de nombreuses reprises, mais certaines actualisation sont plus importantes que d'autre. Par exemple, après la soutenant 1, nous avons introduit une nouvelle rubrique actualité permettant aux visiteurs d'être informer de l'évolution du projet.
+Le site a été actualisé à de nombreuses reprises, mais certaines actualisations sont plus importantes que d'autres. Par exemple, après la soutenance 1, nous avons introduit une nouvelle rubrique actualité permettant aux visiteurs d'être informées de l'évolution du projet.
 
-Après la soutenance 2, l'équipe a réactualiser l'ensemble du contenu du site (captures d'écran, textes, etc) et mis en ligne la nouvelle version du jeu. Peu de temps après, nous avons réalisé des fonds d'écran mettant en scène le personnage de notre jeu. Ceux-ci sont disponibles dans la partie téléchargement et ont une résolution maximale de 8K ! Pour la petite anecdote, ce rendu 3D a été réaliser sur une ferme de serveur, spécialisé dans le calcul numérique, en 4h. Sur l'ordinateur d'un particulier, celui-ci aurai mis entre 24 à 48h.
+Après la soutenance 2, l'équipe a réactualisé l'ensemble du contenu du site (captures d'écran, textes, etc) et mis en ligne la nouvelle version du jeu. Peu de temps après, nous avons réalisé des fonds d'écran mettant en scène le personnage de notre jeu. Ceux-ci sont disponibles dans la partie téléchargement et ont une résolution maximale de 8K ! Pour la petite anecdote, ce rendu 3D a été réalisé sur une ferme de serveur, spécialisée dans le calcul numérique, en 4h. Sur l'ordinateur d'un particulier, celui-ci aurai mis entre 24 à 48h.
 
 Après la soutenance finale, nous actualiserons notre site internet afin de mettre en ligne la version finale du jeu.
 
@@ -688,6 +707,20 @@ Après la soutenance finale, nous actualiserons notre site internet afin de mett
 \chapter{Synthèses personnelles}
 
 \section{Thibault}
+
+Je suis passionné d’informatique depuis la cinquième. Cette passion m’a permis de développer très rapidement de nombreuses connaissances, notamment en m’impliquant dans des projets libres mais également par le biais de ma première et terminal S SI où j’ai été amené à diriger deux projets conséquents. De mes expériences antérieures, j’ai appris que chaque projet était un apport de connaissance très important, mais aussi qu’il doit être dirigé pour ne pas divaguer. C’est pourquoi je me suis rapidement proposé comme chef de projet. Je pensais avoir la capacité et l’expérience nécessaire pour mener à bien le groupe.
+
+Le développement 3D est un sujet complexe et très vaste. Il est impossible de le parcourir dans son intégralité en seulement six mois. Il fallait donc posé dès le départ des limites, afin de ne pas perdre de temps à faire des recherches qui n’aboutiraient à rien. Notre première organisation a donc été de fixer les lignes de notre projet, mais également les différents bonus possibles. Ensuite nous avons pris soin de partager les tâches entre chacun des membres. J’ai fait en sorte de respecter les préférences de chacun mais également d’attribuer à chaque fois deux personnes sur chaque tâches. Ainsi, si quelqu’un a un problème ou perds en motivation, son binôme peut prendre le relais, l’aider et le remotiver.
+
+La motivation est un facteur clé dans un projet de cette durée. En effet, sans motivation un groupe n’avance pas et se retrouve rapidement en retard sur son planning. Or notre but était de ne surtout pas devoir travailler d’arrache-pied la veille d’une soutenance. Nous avons donc essayé de rester motiver au maximum. Pour ceci j’ai utilisé une petite astuce tirée de la méthode de développement agile SCRUM. Celle-ci consiste à alterner le type de tâches réalisées. Il y en a principalement deux : celles dites d’arrière-plans, c’est-à-dire nécessaires mais qui n’apportent aucun résultat visible pour l’utilisateur, et celles dites de premier-plans qui apportent un résultat concret à l’utilisateur. Or durant le développement d’un projet, le développeur est l’utilisateur numéro un du celui-ci. Ainsi dans notre planning, j’ai en permanence alterné ces deux types de tâches pour motiver au maximum l’équipe. Et si le projet n’avançait pas, je réalisais l’une des tâches de premier-plan afin de redonner envie au membre de mon équipe de travailler sur le projet.
+
+Le planning, la répartition des tâches et la motivation nous ont permis d’avancer rapidement et de prendre de l’avance pour résoudre nos problèmes. Notre fonctionnement peut s’apparenter un peu à celui d’une jeune start-up. Nous expérimentons, nous nous améliorons et nous tentons d’être le plus productif et le plus professionnel possible. Et je pense que nous avons plutôt bien réussi à mener notre projet à terme.
+
+De manière plus personnelle, je suis d’abord très fier en tant que chef de projet du résultat obtenu et de l’équipe que j’ai eu à mener. Bien que ce poste m’ait apporté une charge de travail supplémentaire, j’ai apprécié les responsabilités qui m’ont été confié, telles que la gestion du planning, la résolution des conflits, l’aide de l’ensemble des membres du groupe, etc. Je pense que cette expérience me sera très utile dans ma futur vie professionnelle où je serai probablement amené à diriger une équipe ou/et un projet.
+
+Je suis également satisfait des nombreuses connaissances que j’ai pu apprendre, notamment dans le domaine du réseau et de la 3D. Et même si celles-ci ne me seront pas forcément utiles dans ma carrière, je suis persuadé qu’elles me permettront de m’adapter plus facilement.
+
+Pour conclure, je dirai que ce projet de six mois aura été éprouvant par le rythme qu’il impose, mais qu’en contrepartie il constitue une expérience très riche qui me servira tout au long de mes études et de ma carrière professionnelle.
 
 \section{Rémy}
 
@@ -733,15 +766,19 @@ Enfin, plus personnellement ce projet m'a apporté des nombreuses connaissances 
 
 \chapter*{Conclusion}
 
-Le projet Troma a débuté en Janvier 2014, nous avions l'objectif de réaliser un jeu de guerre sous le thème de la Seconde Guerre Mondiale. Le groupe a été formé à partir de quatre étudiants en première année sans connaissance préalables particulières en langage C\#. Cependant nous avons décidé dès le début de donner notre maximum en choisissant un jeu en 3D muni d'un mode de jeu en ligne ! 
+Le projet Troma a débuté en janvier 2014, nous avions l'objectif de réaliser un jeu de guerre sous le thème de la Seconde Guerre Mondiale. Le groupe est formé de quatre étudiants en première année sans connaissance préalable particulière en langage C\#. Cependant nous avons décidé dès le début de donner notre maximum en choisissant un jeu en 3D muni d'un mode de jeu en ligne ! 
 
-Durant toute la phase de développement nous avons essayé de garder cet état d'esprit qui est de toujours donner le maximum. Les notes que nous avons reçu aux deux premières soutenances nous ont encore plus motive à toujours continuer dans cette voie. Nous avons donc implémenter toutes les fonctionnalités du jeu une par une avec plus ou moins de difficulté mais sans jamais abandonner même quand cela s’avérait beaucoup plus difficile que prévu. L'aspect technique n'a pas été la seule difficulté, le cote organisationnel des soutenances et du planning à respecter pour l'équipe en a aussi été une! Notre point fort à été de ne jamais attendre le dernier moment et d'essayer de prendre le maximum d'avance possible sur note avancée lorsque cela était possible!
+Durant toute la phase de développement nous avons essayé de garder cet état d'esprit qui est de toujours donner le maximum. Les notes que nous avons obtenues aux deux premières soutenances nous ont encourager à continuer dans cette voie. Nous avons donc implémenter toutes les fonctionnalités du jeu une par une avec plus ou moins de difficulté mais sans jamais abandonner même quand cela s'avérait beaucoup plus difficile que prévu. L'aspect technique n'a pas été la seule difficulté, le côté organisationnel des soutenances et du planning à respecter pour l'équipe en a aussi été une! Notre point fort a été de ne jamais attendre le dernier moment et d'essayer de prendre le maximum d'avance possible sur notre planning prévisionnel lorsque cela était possible.
 
-Aujourd'hui nous sommes fier d'avoir réussi à mener à bien notre projet de bout en bout. Nous espérons que nous pourrons appliquer ce que nous avons appris durant cette période dans le futur!
+Aujourd'hui nous sommes fiers d'avoir réussi à mener à bien notre projet de bout en bout. Cette expérience a été très enrichissante pour chacun d'entre nous. Nous pensons que ce travail de groupe nous permettra d'aborder avec plus de facilité nos futurs projets à l'EPITA et/ou en entreprise.
 
 \newpage
 \pagenumbering{Roman}
 \part*{Annexes}
+
+\bibliographystyle{plain}
+\nocite{*}
+\bibliography{bibliographie}
 
 \newpage
 \listoffigures
