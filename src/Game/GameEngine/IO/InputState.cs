@@ -30,6 +30,8 @@ namespace GameEngine
     {
         #region Fields
 
+        public static bool IsGamePadConnected { get; private set; }
+
         public InputConfiguration mapping { get; private set; }
 
         public GamePadState CurrentGamePadState { get; private set; }
@@ -41,7 +43,6 @@ namespace GameEngine
         public MouseState CurrentMouseState { get; private set; }
         public MouseState LastMouseState { get; private set; }
 
-        bool isGamePadConnected;
         static Vector2 mouseOrigin;
 
         public static Vector2 MouseOrigin
@@ -61,7 +62,6 @@ namespace GameEngine
             mapping = new InputConfiguration();
 
             CurrentGamePadState = new GamePadState();
-            isGamePadConnected = false;
             CurrentKeyboardState = new KeyboardState();
             CurrentMouseState = new MouseState();
         }
@@ -70,7 +70,7 @@ namespace GameEngine
         {
             LastGameState = CurrentGamePadState;
             CurrentGamePadState = GamePad.GetState(PlayerIndex.One);
-            isGamePadConnected = CurrentGamePadState.IsConnected;
+            IsGamePadConnected = CurrentGamePadState.IsConnected;
 
             LastKeyboardState = CurrentKeyboardState;
             CurrentKeyboardState = Keyboard.GetState();
@@ -83,20 +83,20 @@ namespace GameEngine
 
         public bool IsPressed(Buttons button)
         {
-            return isGamePadConnected &&
+            return IsGamePadConnected &&
                 CurrentGamePadState.IsButtonDown(button) &&
                 LastGameState.IsButtonUp(button);
         }
 
         public bool IsDown(Buttons button)
         {
-            return isGamePadConnected &&
+            return IsGamePadConnected &&
                 CurrentGamePadState.IsButtonDown(button);
         }
 
         public bool IsUp(Buttons button)
         {
-            return isGamePadConnected &&
+            return IsGamePadConnected &&
                 CurrentGamePadState.IsButtonUp(button);
         }
 
@@ -203,7 +203,7 @@ namespace GameEngine
         /// <returns>True if there is a rotation</returns>
         public bool PlayerRotate(ref Vector3 rotationBuffer, float dt)
         {
-            if (isGamePadConnected && (CurrentGamePadState.ThumbSticks.Right.X != 0 ||
+            if (IsGamePadConnected && (CurrentGamePadState.ThumbSticks.Right.X != 0 ||
                 CurrentGamePadState.ThumbSticks.Right.Y != 0))
             {
                 rotationBuffer.X -= 1.5f * CurrentGamePadState.ThumbSticks.Right.X * dt;
@@ -231,7 +231,7 @@ namespace GameEngine
         {
             moveVector = Vector3.Zero;
 
-            if (isGamePadConnected)
+            if (IsGamePadConnected)
             {
                 if (CurrentGamePadState.ThumbSticks.Left.X != 0)
                     moveVector.X -= CurrentGamePadState.ThumbSticks.Left.X;
@@ -298,7 +298,7 @@ namespace GameEngine
 
         public bool PlayerSight()
         {
-            return IsPressed(MouseButtons.Right) || IsPressed(Buttons.RightStick);
+            return IsPressed(MouseButtons.Right) || IsPressed(Buttons.LeftTrigger);
         }
 
         #endregion

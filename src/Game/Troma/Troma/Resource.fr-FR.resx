@@ -163,7 +163,7 @@
     <value>Pause</value>
   </data>
   <data name="labelReload" xml:space="preserve">
-    <value>Charger</value>
+    <value>Recharger</value>
   </data>
   <data name="labelRight" xml:space="preserve">
     <value>Droite</value>
@@ -206,5 +206,26 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Oui</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Recommencer</value>
+  </data>
+  <data name="ElapsedTime" xml:space="preserve">
+    <value>Temps ecoule</value>
+  </data>
+  <data name="LeftShift" xml:space="preserve">
+    <value>Shift gauche</value>
+  </data>
+  <data name="Space" xml:space="preserve">
+    <value>Espace</value>
+  </data>
+  <data name="AveragePrecision" xml:space="preserve">
+    <value>Precision moyenne</value>
+  </data>
+  <data name="HighScore" xml:space="preserve">
+    <value>Meilleurs scores</value>
+  </data>
+  <data name="TotalGameTime" xml:space="preserve">
+    <value>Temps de jeu total</value>
   </data>
 </root>

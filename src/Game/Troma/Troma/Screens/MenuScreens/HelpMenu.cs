@@ -70,12 +70,13 @@ namespace Troma
             keyLabel = tmp.ToString();
 
             tmp.Clear();
+
             tmp.AppendLine(kb[KeyActions.Up].ToString());
             tmp.AppendLine(kb[KeyActions.Bottom].ToString());
             tmp.AppendLine(kb[KeyActions.Left].ToString());
             tmp.AppendLine(kb[KeyActions.Right].ToString());
-            tmp.AppendLine(kb[KeyActions.Run].ToString());
-            tmp.AppendLine(kb[KeyActions.Jump].ToString());
+            tmp.AppendLine(Resource.LeftShift);
+            tmp.AppendLine(Resource.Space);
             tmp.AppendLine(kb[KeyActions.Crouch].ToString());
             tmp.AppendLine(kb[KeyActions.Reload].ToString());
             tmp.AppendLine(Resource.LeftMouse);
@@ -105,7 +106,7 @@ namespace Troma
                 keyLabelPos.X + SpriteFont.MeasureString(keyLabel).X * scale + 200 * widthScale,
                 143 * heightScale);
 
-            float lineSpacing = SpriteFont.LineSpacing * ((widthScale + heightScale) / 2);
+            float lineSpacing = SpriteFont.LineSpacing * scale;
             int nbLine = keyLabel.Split('\n').Length - 1;
 
             bgTransRect.X = (int)(133 * widthScale);

@@ -47,8 +47,8 @@ namespace Troma
             string model = Entity.GetComponent<Model3D>().ModelName;
             _texture = FileManager.Load<Texture2D>("Models/" + model + "_Texture");
             _cross = FileManager.Load<Texture2D>("cross");
-            Font = FileManager.Load<SpriteFont>("Fonts/Square");
-            chargeur = FileManager.Load<Texture2D>("Models/Weapon/Chargeur2");
+            Font = FileManager.Load<SpriteFont>("Fonts/HUD");
+            chargeur = FileManager.Load<Texture2D>("Menus/Chargeur");
 
             if (hasNormalMap)
                 _normalMap = FileManager.Load<Texture2D>("Models/" + model + "_Normal");

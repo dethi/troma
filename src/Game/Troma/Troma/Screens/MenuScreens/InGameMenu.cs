@@ -14,7 +14,6 @@ namespace Troma
         private Button optionMenuEntry;
         private Button backMenuEntry;
 
-        private Texture2D bg;
         private Texture2D bgTrans;
         private Texture2D arrow;
 
@@ -51,7 +50,6 @@ namespace Troma
         {
             base.LoadContent();
 
-            bg = GameServices.Game.Content.Load<Texture2D>("Menus/background-blur");
             bgTrans = GameServices.Game.Content.Load<Texture2D>("Menus/translucide");
             arrow = GameServices.Game.Content.Load<Texture2D>("Menus/arrow");
 

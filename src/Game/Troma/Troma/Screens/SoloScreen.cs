@@ -21,6 +21,7 @@ namespace Troma
         private string _mapName;
 
         private TimeSpan time;
+        private int _initialNbTarget;
 
         private float pauseAlpha;
 
@@ -59,7 +60,7 @@ namespace Troma
             TargetManager.Clear();
 
             camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
-            player = new Player(new Vector3(10, 15, 10), Vector3.Zero, camera);
+            player = new Player(new Vector3(10, 0, 10), Vector3.Zero, camera);
 
             Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
             Texture2D terrainTexture = FileManager.Load<Texture2D>("Terrains/texture");
@@ -67,7 +68,7 @@ namespace Troma
 
             target = FileManager.Load<Texture2D>("Menus/target");
             clock = FileManager.Load<Texture2D>("Menus/Clock");
-            Font = FileManager.Load<SpriteFont>("Fonts/Square");
+            Font = FileManager.Load<SpriteFont>("Fonts/HUD");
 
             TerrainInfo terrainInfo = new TerrainInfo()
             {
@@ -162,6 +163,8 @@ namespace Troma
             CollisionManager.Initialize();
             TargetManager.Initialize();
 
+            _initialNbTarget = TargetManager.Count;
+
             time = new TimeSpan();
             game.ResetElapsedTime();
         }
@@ -172,7 +175,7 @@ namespace Troma
         {
             base.Update(gameTime, hasFocus, isVisible);
 
-            if (Settings.DynamicClouds)
+            if (Settings.DynamicClouds || ScreenState == ScreenState.TransitionOn)
                 cloudManager.Update(gameTime);
 
             if (!IsActive)
@@ -182,7 +185,7 @@ namespace Troma
                 pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
 
                 if (TargetManager.Count == 0)
-                    ScreenManager.AddScreen(new ScoreScreen(game, time));
+                    ScreenManager.AddScreen(new EndGameScreen(game, time, _initialNbTarget, player.MunitionUsed()));
                 else
                 {
                     player.Update(gameTime);
@@ -238,27 +241,35 @@ namespace Troma
                     int width = GameServices.GraphicsDevice.Viewport.Width;
                     int height = GameServices.GraphicsDevice.Viewport.Height;
 
-                    string timeMinutes = "" + time.Minutes;
-                    string timeTotal = timeMinutes + ": " + time.Seconds;
-                    int nbreTarget2 = TargetManager.Count;
-                    string nbreTarget = "" + nbreTarget2;
+                    string timeTotal = String.Format("{0:D2}:{1:D2}", time.Minutes, time.Seconds);
+                    string nbreTarget = TargetManager.Count.ToString();
 
                     float textScale1 = 0.00080f * width;
                     float textScale2 = 0.00086f * width;
 
                     Vector2 Position1 = new Vector2(
                     1700 * width / 1920,
-                    height - (1060 * width / 1920));
+                    20 * height / 1080);
+
                     Vector2 Position2 = new Vector2(
                     1698 * width / 1920,
-                    height - (1062 * width / 1920));
+                    18 * height / 1080);
 
                     Vector2 Position3 = new Vector2(
                     170 * width / 1920,
-                    height - (1060 * width / 1920));
+                    20 * height / 1080);
 
-                    Rectangle targetImage = new Rectangle(1770 * width / 1920, height - (1060 * width / 1920), 65 * width / 1920, 78 * width / 1920);
-                    Rectangle clockImage = new Rectangle(70 * width / 1920, height - (1060 * width / 1920), 80 * width / 1920, 80 * width / 1920);
+                    Rectangle targetImage = new Rectangle(
+                        1770 * width / 1920,
+                        20 * height / 1080,
+                        65 * width / 1920,
+                        78 * width / 1920);
+
+                    Rectangle clockImage = new Rectangle(
+                        70 * width / 1920,
+                        20 * height / 1080,
+                        80 * width / 1920,
+                        80 * width / 1920);
 
                     GameServices.SpriteBatch.Begin();
 

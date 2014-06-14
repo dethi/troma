@@ -12,12 +12,18 @@ namespace Troma
         private WeaponInfo _info;
         private bool _isRespectROF;
         private bool _isLoading;
+        private int _munitionUsed;
 
         public bool SightPosition;
 
         public WeaponInfo Info
         {
             get { return _info; }
+        }
+
+        public int MunitionUsed
+        {
+            get { return _munitionUsed; }
         }
 
         private bool LoaderIsEmpty
@@ -38,18 +44,19 @@ namespace Troma
 
             _isRespectROF = true;
             _isLoading = false;
+
+            _munitionUsed = 0;
         }
 
         public bool Shoot()
         {
             if (LoaderIsEmpty)
-            {
                 SFXManager.Play(Info.SFXEmpty);
-            }
             else if (_isRespectROF && !_isLoading)
             {
                 SFXManager.Play(Info.SFXShoot);
                 _info.Munition--;
+                _munitionUsed++;
 
                 if (!_info.Automatic)
                 {

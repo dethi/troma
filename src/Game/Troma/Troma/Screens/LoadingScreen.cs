@@ -15,6 +15,9 @@ namespace Troma
         GameScreen[] screensToLoad;
         SpriteFont spriteFont;
 
+        private Texture2D bg;
+        private Rectangle bgRect;
+
         private LoadingScreen(Game game, ScreenManager screenManager, bool loadingIsSlow,
             GameScreen[] screensToLoad)
             : base(game)
@@ -42,7 +45,12 @@ namespace Troma
         public override void LoadContent()
         {
             base.LoadContent();
-            spriteFont = FileManager.Load<SpriteFont>("Fonts/Menu");
+            spriteFont = FileManager.Load<SpriteFont>("Fonts/Loading");
+            bg = GameServices.Game.Content.Load<Texture2D>("blank");
+
+            bgRect = new Rectangle(0, 0,
+                GameServices.GraphicsDevice.Viewport.Width,
+                GameServices.GraphicsDevice.Viewport.Height);
         }
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
@@ -50,7 +58,7 @@ namespace Troma
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
 
-            if ((ScreenState == ScreenState.Active) && 
+            if ((ScreenState == ScreenState.Active) &&
                 (ScreenManager.GetScreens().Length == 1))
             {
                 otherScreensAreGone = true;
@@ -85,8 +93,8 @@ namespace Troma
                 Vector2 textSize = spriteFont.MeasureString(message) * scale;
                 Vector2 textPosition = (viewportSize - textSize) / 2;
 
-                // Draw the text
                 GameServices.SpriteBatch.Begin();
+                GameServices.SpriteBatch.Draw(bg, bgRect, Color.Black);
                 GameServices.SpriteBatch.DrawString(spriteFont, message, textPosition,
                     color, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
                 GameServices.SpriteBatch.End();

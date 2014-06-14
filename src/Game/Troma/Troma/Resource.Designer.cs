@@ -61,11 +61,29 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Average precision.
+        /// </summary>
+        internal static string AveragePrecision {
+            get {
+                return ResourceManager.GetString("AveragePrecision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Back.
         /// </summary>
         internal static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Elapsed time.
+        /// </summary>
+        internal static string ElapsedTime {
+            get {
+                return ResourceManager.GetString("ElapsedTime", resourceCulture);
             }
         }
         
@@ -93,6 +111,15 @@ namespace Troma {
         internal static string Graphics {
             get {
                 return ResourceManager.GetString("Graphics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à High score.
+        /// </summary>
+        internal static string HighScore {
+            get {
+                return ResourceManager.GetString("HighScore", resourceCulture);
             }
         }
         
@@ -259,6 +286,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Left shift.
+        /// </summary>
+        internal static string LeftShift {
+            get {
+                return ResourceManager.GetString("LeftShift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Loading.
         /// </summary>
         internal static string Loading {
@@ -286,6 +322,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Restart.
+        /// </summary>
+        internal static string Restart {
+            get {
+                return ResourceManager.GetString("Restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Resume.
         /// </summary>
         internal static string Resume {
@@ -304,11 +349,29 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Space.
+        /// </summary>
+        internal static string Space {
+            get {
+                return ResourceManager.GetString("Space", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key assignments.
         /// </summary>
         internal static string SummonsKeyboard {
             get {
                 return ResourceManager.GetString("SummonsKeyboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Total game time.
+        /// </summary>
+        internal static string TotalGameTime {
+            get {
+                return ResourceManager.GetString("TotalGameTime", resourceCulture);
             }
         }
         
