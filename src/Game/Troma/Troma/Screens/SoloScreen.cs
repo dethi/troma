@@ -241,9 +241,8 @@ namespace Troma
                     int width = GameServices.GraphicsDevice.Viewport.Width;
                     int height = GameServices.GraphicsDevice.Viewport.Height;
 
-                    string timeMinutes = "" + time.Minutes;
-                    string timeTotal = timeMinutes + ": " + time.Seconds;
-                    string nbreTarget = "" + TargetManager.Count;
+                    string timeTotal = String.Format("{0:D2}:{1:D2}", time.Minutes, time.Seconds);
+                    string nbreTarget = TargetManager.Count.ToString();
 
                     float textScale1 = 0.00080f * width;
                     float textScale2 = 0.00086f * width;

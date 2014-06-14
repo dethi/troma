@@ -219,4 +219,13 @@
   <data name="Space" xml:space="preserve">
     <value>Space</value>
   </data>
+  <data name="AveragePrecision" xml:space="preserve">
+    <value>Average precision</value>
+  </data>
+  <data name="HighScore" xml:space="preserve">
+    <value>High score</value>
+  </data>
+  <data name="TotalGameTime" xml:space="preserve">
+    <value>Total game time</value>
+  </data>
 </root>

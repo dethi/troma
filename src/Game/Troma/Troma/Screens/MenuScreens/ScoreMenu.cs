@@ -52,7 +52,7 @@ namespace Troma
             arrow = GameServices.Game.Content.Load<Texture2D>("Menus/arrow");
 
             digitalFont = GameServices.Game.Content.Load<SpriteFont>("Fonts/Digital");
-            digitalFont.Spacing += 10f;
+            digitalFont.Spacing = 10f;
 
             bgRect = new Rectangle(0, 0, 1920, 1080);
             bgTransRect = new Rectangle(0, 0, 0, 0);
@@ -61,10 +61,10 @@ namespace Troma
             Score score = ScoreManager.Load();
 
             StringBuilder tmp = new StringBuilder();
-            tmp.AppendLine("High Score");
+            tmp.AppendLine(Resource.HighScore);
             tmp.Append("\n\n\n\n\n\n");
-            tmp.AppendLine("Average precision");
-            tmp.AppendLine("Total game time");
+            tmp.AppendLine(Resource.AveragePrecision);
+            tmp.AppendLine(Resource.TotalGameTime);
             label = tmp.ToString();
 
             tmp.Clear();

@@ -49,7 +49,7 @@ namespace Troma
             ScoreManager.Save(score);
 
             precision = "Precision :   " + (100 * nbTarget / nbMunition) + " %";
-            time = Resource.ElapsedTime + " :   " + elapsedTime.Minutes + ":" + elapsedTime.Seconds;
+            time = Resource.ElapsedTime + " :   " + String.Format("{0:D2}:{1:D2}", elapsedTime.Minutes, elapsedTime.Seconds);
 
             IsHUD = true;
         }
@@ -62,7 +62,7 @@ namespace Troma
             arrow = GameServices.Game.Content.Load<Texture2D>("Menus/arrow");
 
             digitalFont = GameServices.Game.Content.Load<SpriteFont>("Fonts/Digital");
-            digitalFont.Spacing += 10f;
+            digitalFont.Spacing = 10f;
 
             bgTransRect = new Rectangle(0, 0, 550, 1080);
             arrowRect = new Rectangle(0, 0, 64, 64);
