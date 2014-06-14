@@ -207,4 +207,10 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="ElapsedTime" xml:space="preserve">
+    <value>Elapsed time</value>
+  </data>
 </root>

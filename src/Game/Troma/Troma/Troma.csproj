@@ -191,9 +191,7 @@
     <Compile Include="Screens\MenuScreens\MenuScreen.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Stepper.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Switch.cs" />
-    <Compile Include="Screens\NeedToDo\MenuEntry.cs" />
-    <Compile Include="Screens\NeedToDo\MenuScreenOld.cs" />
-    <Compile Include="Screens\NeedToDo\ScoreScreen.cs" />
+    <Compile Include="Screens\ScoreScreen.cs" />
     <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Screens\StartScreens\PegiScreen.cs" />
     <Compile Include="Screens\StartScreens\TitleIntroScreen.cs" />

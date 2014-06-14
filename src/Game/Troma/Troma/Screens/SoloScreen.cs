@@ -21,6 +21,7 @@ namespace Troma
         private string _mapName;
 
         private TimeSpan time;
+        private int _initialNbTarget;
 
         private float pauseAlpha;
 
@@ -59,7 +60,7 @@ namespace Troma
             TargetManager.Clear();
 
             camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
-            player = new Player(new Vector3(10, 15, 10), Vector3.Zero, camera);
+            player = new Player(new Vector3(10, 0, 10), Vector3.Zero, camera);
 
             Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
             Texture2D terrainTexture = FileManager.Load<Texture2D>("Terrains/texture");
@@ -67,7 +68,7 @@ namespace Troma
 
             target = FileManager.Load<Texture2D>("Menus/target");
             clock = FileManager.Load<Texture2D>("Menus/Clock");
-            Font = FileManager.Load<SpriteFont>("Fonts/Square");
+            Font = FileManager.Load<SpriteFont>("Fonts/HUD");
 
             TerrainInfo terrainInfo = new TerrainInfo()
             {
@@ -162,6 +163,8 @@ namespace Troma
             CollisionManager.Initialize();
             TargetManager.Initialize();
 
+            _initialNbTarget = TargetManager.Count;
+
             time = new TimeSpan();
             game.ResetElapsedTime();
         }
@@ -172,7 +175,7 @@ namespace Troma
         {
             base.Update(gameTime, hasFocus, isVisible);
 
-            if (Settings.DynamicClouds)
+            if (Settings.DynamicClouds || ScreenState == ScreenState.TransitionOn)
                 cloudManager.Update(gameTime);
 
             if (!IsActive)
@@ -182,7 +185,7 @@ namespace Troma
                 pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
 
                 if (TargetManager.Count == 0)
-                    ScreenManager.AddScreen(new ScoreScreen(game, time));
+                    ScreenManager.AddScreen(new ScoreScreen(game, time, _initialNbTarget, player.MunitionUsed()));
                 else
                 {
                     player.Update(gameTime);
@@ -240,8 +243,7 @@ namespace Troma
 
                     string timeMinutes = "" + time.Minutes;
                     string timeTotal = timeMinutes + ": " + time.Seconds;
-                    int nbreTarget2 = TargetManager.Count;
-                    string nbreTarget = "" + nbreTarget2;
+                    string nbreTarget = "" + TargetManager.Count;
 
                     float textScale1 = 0.00080f * width;
                     float textScale2 = 0.00086f * width;

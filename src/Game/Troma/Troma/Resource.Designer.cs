@@ -70,6 +70,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Elapsed time.
+        /// </summary>
+        internal static string ElapsedTime {
+            get {
+                return ResourceManager.GetString("ElapsedTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Exit.
         /// </summary>
         internal static string Exit {
@@ -282,6 +291,15 @@ namespace Troma {
         internal static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Restart.
+        /// </summary>
+        internal static string Restart {
+            get {
+                return ResourceManager.GetString("Restart", resourceCulture);
             }
         }
         

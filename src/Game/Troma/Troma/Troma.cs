@@ -18,6 +18,7 @@ namespace Troma
         // Prelaod any assets using by UI rendering
         static readonly string[] preloadAssets =
         {
+            "blank",
             "Menus/arrow",
             "Menus/background",
             "Menus/background-blur",
@@ -27,7 +28,8 @@ namespace Troma
             "Menus/go-left",
             "Menus/go-right",
             "Fonts/28DaysLater",
-            "Fonts/LuckyTypewriter"
+            "Fonts/LuckyTypewriter",
+            "Fonts/Digital"
         };
 
         #endregion
@@ -59,7 +61,7 @@ namespace Troma
 
             //screenManager.AddScreen(new SoloScreen(this, ""));
             screenManager.AddScreen(new PegiScreen(this));
-            //screenManager.AddScreen(new OptionsMenu(this));
+            //screenManager.AddScreen(new ScoreScreen(this, TimeSpan.FromSeconds(43.7), 14, 20));
         }
 
         /// <summary>

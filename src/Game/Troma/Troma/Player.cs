@@ -20,7 +20,7 @@ namespace Troma
         private const float COEF_RUN_SPEED = 1.7f;
         private const float RUN_SPEED = WALK_SPEED * COEF_RUN_SPEED;
 
-        private const float JUMP_SPEED = 60;
+        private const float JUMP_SPEED = 40;
 
         private const float DT_SOUND_MOVE = 0.45f;
         private const float DT_SOUND_RUN = 0.3f;
@@ -460,6 +460,14 @@ namespace Troma
             _collisionDetectedDown = false;
 
             MoveTo(_position, _rotation);
+        }
+
+        public int MunitionUsed()
+        {
+            if (_weapon == null)
+                return 0;
+            else
+                return _weapon.GetComponent<Weapon>().MunitionUsed;
         }
 
         #endregion

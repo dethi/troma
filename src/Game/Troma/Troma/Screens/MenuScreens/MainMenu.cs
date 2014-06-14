@@ -134,7 +134,7 @@ namespace Troma
         private void SoloMenuEntrySelected(object sender, EventArgs e)
         {
             SoundManager.Stop();
-            LoadingScreen.Load(game, this.ScreenManager, true, new SoloScreen(game, ""));
+            LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, ""));
         }
 
         private void MultiMenuEntrySelected(object sender, EventArgs e)

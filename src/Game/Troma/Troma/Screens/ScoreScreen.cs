@@ -8,10 +8,9 @@ using GameEngine;
 
 namespace Troma
 {
-    class InGameMenu : MenuScreen
+    class ScoreScreen : MenuScreen
     {
-        private Button resumeMenuEntry;
-        private Button optionMenuEntry;
+        private Button restartMenuEntry;
         private Button backMenuEntry;
 
         private Texture2D bgTrans;
@@ -20,28 +19,34 @@ namespace Troma
         private Rectangle bgTransRect;
         private Rectangle arrowRect;
 
-        public InGameMenu(Game game)
+        private SpriteFont digitalFont;
+
+        private int score;
+        private string precision;
+        private string time;
+
+        public ScoreScreen(Game game, TimeSpan elapsedTime, int nbTarget, int nbMunition)
             : base(game)
         {
             Vector2 entryPos = new Vector2(143, 435);
             float space = 220;
 
             // Create menu entries.
-            resumeMenuEntry = new Button(String.Empty, 1, entryPos);
+            restartMenuEntry = new Button(Resource.Restart, 1, entryPos);
             entryPos.Y += space;
-            optionMenuEntry = new Button(String.Empty, 1, entryPos);
-            entryPos.Y += space;
-            backMenuEntry = new Button(String.Empty, 1, entryPos);
+            backMenuEntry = new Button(Resource.Exit, 1, entryPos);
 
             // Hook up menu event handlers.
-            resumeMenuEntry.Selected += ResumeMenuEntrySelected;
-            optionMenuEntry.Selected += OptionsMenuEntrySelected;
+            restartMenuEntry.Selected += RestartMenuEntrySelected;
             backMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
-            MenuEntries.Add(resumeMenuEntry);
-            MenuEntries.Add(optionMenuEntry);
+            MenuEntries.Add(restartMenuEntry);
             MenuEntries.Add(backMenuEntry);
+
+            score = ComputeScore(elapsedTime, nbTarget, nbMunition);
+            precision = "Precision :   " + (100 * nbTarget / nbMunition) + " %";
+            time = Resource.ElapsedTime + " :   " + elapsedTime.Minutes + ":" + elapsedTime.Seconds;
 
             IsHUD = true;
         }
@@ -53,14 +58,11 @@ namespace Troma
             bgTrans = GameServices.Game.Content.Load<Texture2D>("Menus/translucide");
             arrow = GameServices.Game.Content.Load<Texture2D>("Menus/arrow");
 
+            digitalFont = GameServices.Game.Content.Load<SpriteFont>("Fonts/Digital");
+            digitalFont.Spacing += 10f;
+
             bgTransRect = new Rectangle(0, 0, 550, 1080);
             arrowRect = new Rectangle(0, 0, 64, 64);
-        }
-
-        public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
-        {
-            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
-            SetMenuEntryText();
         }
 
         public override void Draw(GameTime gameTime)
@@ -70,12 +72,31 @@ namespace Troma
 
             float widthScale = (float)width / 1920;
             float heightScale = (float)height / 1080;
+            float scale = (widthScale + heightScale) / 2;
 
             bgTransRect.Height = height;
             bgTransRect.Width = (int)(500 * widthScale);
 
+            Vector2 pos = new Vector2(
+                bgTransRect.Width + 150 * widthScale,
+                300 * heightScale);
+
             GameServices.SpriteBatch.Begin();
             GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.15f);
+
+            GameServices.SpriteBatch.DrawString(digitalFont, score.ToString(), pos, Color.Ivory * TransitionAlpha, 0,
+                Vector2.Zero, scale, SpriteEffects.None, 0);
+
+            pos.Y += 310 * heightScale;
+
+            GameServices.SpriteBatch.DrawString(digitalFont, time, pos, Color.Ivory * TransitionAlpha, 0,
+                Vector2.Zero, scale * 0.2f, SpriteEffects.None, 0);
+
+            pos.Y += 55 * heightScale;
+
+            GameServices.SpriteBatch.DrawString(digitalFont, precision, pos, Color.Ivory * TransitionAlpha, 0,
+                Vector2.Zero, scale * 0.2f, SpriteEffects.None, 0);
+            
 
             // Draw each menu entry in turn.
             for (int i = 0; i < MenuEntries.Count; i++)
@@ -96,15 +117,9 @@ namespace Troma
             GameServices.SpriteBatch.End();
         }
 
-        private void ResumeMenuEntrySelected(object sender, EventArgs e)
+        private void RestartMenuEntrySelected(object sender, EventArgs e)
         {
-            InputState.MouseResetPos();
-            ExitScreen();
-        }
-
-        private void OptionsMenuEntrySelected(object sender, EventArgs e)
-        {
-            ScreenManager.AddScreen(new OptionsMenu(game));
+            LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, ""));
         }
 
         private void OnCancel(object sender, EventArgs e)
@@ -112,11 +127,11 @@ namespace Troma
             LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game));
         }
 
-        private void SetMenuEntryText()
+        private int ComputeScore(TimeSpan elapsedTime, int nbTarget, int nbMunition)
         {
-            resumeMenuEntry.Text = Resource.Resume;
-            optionMenuEntry.Text = "Options";
-            backMenuEntry.Text = Resource.Exit;
+            double t = elapsedTime.TotalSeconds;
+
+            return (int)(37 * (100 * nbTarget + (1 / t) * 1000) / (nbMunition + 1));
         }
     }
 }
