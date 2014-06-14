@@ -70,6 +70,7 @@ namespace Troma
             keyLabel = tmp.ToString();
 
             tmp.Clear();
+
             tmp.AppendLine(kb[KeyActions.Up].ToString());
             tmp.AppendLine(kb[KeyActions.Bottom].ToString());
             tmp.AppendLine(kb[KeyActions.Left].ToString());
@@ -81,6 +82,7 @@ namespace Troma
             tmp.AppendLine(Resource.LeftMouse);
             tmp.AppendLine(Resource.RightMouse);
             tmp.AppendLine(Keys.P.ToString());
+
             key = tmp.ToString();
         }
 
