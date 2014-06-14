@@ -213,4 +213,10 @@
   <data name="ElapsedTime" xml:space="preserve">
     <value>Elapsed time</value>
   </data>
+  <data name="LeftShift" xml:space="preserve">
+    <value>Left shift</value>
+  </data>
+  <data name="Space" xml:space="preserve">
+    <value>Space</value>
+  </data>
 </root>

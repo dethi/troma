@@ -268,6 +268,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Left shift.
+        /// </summary>
+        internal static string LeftShift {
+            get {
+                return ResourceManager.GetString("LeftShift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Loading.
         /// </summary>
         internal static string Loading {
@@ -318,6 +327,15 @@ namespace Troma {
         internal static string RightMouse {
             get {
                 return ResourceManager.GetString("RightMouse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Space.
+        /// </summary>
+        internal static string Space {
+            get {
+                return ResourceManager.GetString("Space", resourceCulture);
             }
         }
         

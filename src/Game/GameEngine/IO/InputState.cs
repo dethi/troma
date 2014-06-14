@@ -298,7 +298,7 @@ namespace GameEngine
 
         public bool PlayerSight()
         {
-            return IsPressed(MouseButtons.Right) || IsPressed(Buttons.RightStick);
+            return IsPressed(MouseButtons.Right) || IsPressed(Buttons.LeftTrigger);
         }
 
         #endregion

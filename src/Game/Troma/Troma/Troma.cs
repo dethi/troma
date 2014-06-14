@@ -61,7 +61,7 @@ namespace Troma
 
             //screenManager.AddScreen(new SoloScreen(this, ""));
             screenManager.AddScreen(new PegiScreen(this));
-            //screenManager.AddScreen(new ScoreScreen(this, TimeSpan.FromSeconds(43.7), 14, 20));
+            //screenManager.AddScreen(new ScoreMenu(this));
         }
 
         /// <summary>

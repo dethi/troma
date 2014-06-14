@@ -185,7 +185,7 @@ namespace Troma
                 pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
 
                 if (TargetManager.Count == 0)
-                    ScreenManager.AddScreen(new ScoreScreen(game, time, _initialNbTarget, player.MunitionUsed()));
+                    ScreenManager.AddScreen(new EndGameScreen(game, time, _initialNbTarget, player.MunitionUsed()));
                 else
                 {
                     player.Update(gameTime);

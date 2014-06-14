@@ -8,7 +8,7 @@ using GameEngine;
 
 namespace Troma
 {
-    class ScoreScreen : MenuScreen
+    class EndGameScreen : MenuScreen
     {
         private Button restartMenuEntry;
         private Button backMenuEntry;
@@ -21,11 +21,11 @@ namespace Troma
 
         private SpriteFont digitalFont;
 
-        private int score;
+        private int currentScore;
         private string precision;
         private string time;
 
-        public ScoreScreen(Game game, TimeSpan elapsedTime, int nbTarget, int nbMunition)
+        public EndGameScreen(Game game, TimeSpan elapsedTime, int nbTarget, int nbMunition)
             : base(game)
         {
             Vector2 entryPos = new Vector2(143, 435);
@@ -44,7 +44,10 @@ namespace Troma
             MenuEntries.Add(restartMenuEntry);
             MenuEntries.Add(backMenuEntry);
 
-            score = ComputeScore(elapsedTime, nbTarget, nbMunition);
+            Score score = ScoreManager.Load();
+            currentScore = score.ComputeScore(elapsedTime, nbTarget, nbMunition);
+            ScoreManager.Save(score);
+
             precision = "Precision :   " + (100 * nbTarget / nbMunition) + " %";
             time = Resource.ElapsedTime + " :   " + elapsedTime.Minutes + ":" + elapsedTime.Seconds;
 
@@ -84,7 +87,7 @@ namespace Troma
             GameServices.SpriteBatch.Begin();
             GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.15f);
 
-            GameServices.SpriteBatch.DrawString(digitalFont, score.ToString(), pos, Color.Ivory * TransitionAlpha, 0,
+            GameServices.SpriteBatch.DrawString(digitalFont, currentScore.ToString(), pos, Color.Ivory * TransitionAlpha, 0,
                 Vector2.Zero, scale, SpriteEffects.None, 0);
 
             pos.Y += 310 * heightScale;
