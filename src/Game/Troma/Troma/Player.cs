@@ -400,10 +400,7 @@ namespace Troma
                     bulletResult = CollisionManager.IsCollision(bulletRay);
 
                     if (bulletResult.IsCollide)
-                    {
-                        if (TargetManager.IsTargetAchieved(bulletResult.CollisionWith))
-                            TimerManager.Add(45, EventPlayImpactSound);
-                    }
+                        TargetManager.IsTargetAchieved(bulletResult.CollisionWith);
                 }
             }
         }
@@ -413,7 +410,7 @@ namespace Troma
             dt_elapsedTime += dt;
             pan *= -1;
 
-            if ((_touchGround || _collisionDetectedDown) && 
+            if ((_touchGround || _collisionDetectedDown) &&
                 ((_isRun && dt_elapsedTime >= DT_SOUND_RUN) ||
                 (_isMove && dt_elapsedTime >= DT_SOUND_MOVE)))
             {
@@ -471,11 +468,6 @@ namespace Troma
                 return 0;
             else
                 return _weapon.GetComponent<Weapon>().MunitionUsed;
-        }
-
-        public void EventPlayImpactSound(object o, EventArgs e)
-        {
-            SFXManager.Play("TargetImpact", 0.25f, 0);
         }
 
         #endregion

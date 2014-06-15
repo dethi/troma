@@ -54,6 +54,9 @@ namespace Troma
                 _masterList.Remove(result.Entity);
             }
 
+            if (result.State)
+                TimerManager.Add(45, PlayImpactSound);
+
             return result.State;
         }
 
@@ -74,6 +77,11 @@ namespace Troma
         public static void Clear()
         {
             _masterList.Clear();
+        }
+
+        public static void PlayImpactSound(object o, EventArgs e)
+        {
+            SFXManager.Play("TargetImpact", 0.25f, 0);
         }
     }
 }
