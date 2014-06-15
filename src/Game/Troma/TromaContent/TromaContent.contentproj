@@ -417,6 +417,34 @@
       <Processor>ModelProcessor</Processor>
       <ProcessorParameters_GenerateTangentFrames>True</ProcessorParameters_GenerateTangentFrames>
     </Compile>
+    <Compile Include="Models\arms_M1.x">
+      <Name>arms_M1</Name>
+      <Importer>XImporter</Importer>
+      <Processor>SkinnedModelProcessor</Processor>
+      <ProcessorParameters_SwapWindingOrder>True</ProcessorParameters_SwapWindingOrder>
+      <ProcessorParameters_RotationX>90</ProcessorParameters_RotationX>
+    </Compile>
+    <Compile Include="Models\arms_M1911.x">
+      <Name>arms_M1911</Name>
+      <Importer>XImporter</Importer>
+      <Processor>SkinnedModelProcessor</Processor>
+      <ProcessorParameters_SwapWindingOrder>True</ProcessorParameters_SwapWindingOrder>
+      <ProcessorParameters_RotationX>90</ProcessorParameters_RotationX>
+    </Compile>
+    <Compile Include="Models\M1.x">
+      <Name>M1</Name>
+      <Importer>XImporter</Importer>
+      <Processor>SkinnedModelProcessor</Processor>
+      <ProcessorParameters_RotationX>90</ProcessorParameters_RotationX>
+      <ProcessorParameters_SwapWindingOrder>True</ProcessorParameters_SwapWindingOrder>
+    </Compile>
+    <Compile Include="Models\M1911.x">
+      <Name>M1911</Name>
+      <Importer>XImporter</Importer>
+      <Processor>SkinnedModelProcessor</Processor>
+      <ProcessorParameters_SwapWindingOrder>True</ProcessorParameters_SwapWindingOrder>
+      <ProcessorParameters_RotationX>90</ProcessorParameters_RotationX>
+    </Compile>
     <None Include="Sounds\Audio.xgs">
       <Name>Audio</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

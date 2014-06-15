@@ -10,11 +10,6 @@ namespace Troma
 {
     public class DrawWeapon : DrawableEntityComponent
     {
-        private Effect _effect;
-        private Texture2D _texture;
-        private Texture2D _normalMap;
-        private bool hasNormalMap;
-
         private Texture2D chargeur;
         private SpriteFont Font;
 
@@ -29,88 +24,26 @@ namespace Troma
         string Text4 = "M1";
         string Text5 = "Garand";
 
-        public DrawWeapon(Entity aParent, Effect effect)
+        public DrawWeapon(Entity aParent)
             : base(aParent)
         {
             Name = "DrawWeapon";
-            _requiredComponents.Add("Model3D");
+            _requiredComponents.Add("AnimatedModel3D");
             _requiredComponents.Add("Weapon");
-
-            _effect = effect;
-            hasNormalMap = (effect.Name == "GameObjectWithNormal");
         }
 
         public override void Start()
         {
             base.Start();
 
-            string model = Entity.GetComponent<Model3D>().ModelName;
-            _texture = FileManager.Load<Texture2D>("Models/" + model + "_Texture");
             _cross = FileManager.Load<Texture2D>("cross");
             Font = FileManager.Load<SpriteFont>("Fonts/HUD");
             chargeur = FileManager.Load<Texture2D>("Menus/Chargeur");
-
-            if (hasNormalMap)
-                _normalMap = FileManager.Load<Texture2D>("Models/" + model + "_Normal");
-
-            _effect.CurrentTechnique = _effect.Techniques["Technique1"];
-
-            _effect.Parameters["ColorMap"].SetValue(_texture);
-
-            if (hasNormalMap)
-                _effect.Parameters["NormalMap"].SetValue(_normalMap);
-
-            _effect.Parameters["AmbientColor"].SetValue(LightInfo.AmbientColor);
-            _effect.Parameters["AmbientIntensity"].SetValue(LightInfo.AmbientIntensity);
-
-            _effect.Parameters["LightDirection"].SetValue(LightInfo.LightDirection);
-            _effect.Parameters["DiffuseColor"].SetValue(LightInfo.DiffuseColor);
-            _effect.Parameters["DiffuseIntensity"].SetValue(LightInfo.DiffuseIntensity);
-
-            _effect.Parameters["SpecularColor"].SetValue(LightInfo.DiffuseColor);
         }
 
         public override void Draw(GameTime gameTime, ICamera camera)
         {
-            Matrix world = Entity.GetComponent<Transform>().World;
-            Model model = Entity.GetComponent<Model3D>().Model;
-            WeaponInfo weaponInfo = Entity.GetComponent<Weapon>().Info;
-
-            if (Entity.GetComponent<Weapon>().SightPosition)
-            {
-                _effect.Parameters["World"].SetValue(weaponInfo.MatrixRotationSight *
-                    weaponInfo.MatrixPositionSight * world);
-            }
-            else
-            {
-                _effect.Parameters["World"].SetValue(weaponInfo.MatrixRotation *
-                    weaponInfo.MatrixPosition * world);
-            }
-
-            _effect.Parameters["View"].SetValue(camera.View);
-            _effect.Parameters["Projection"].SetValue(camera.Projection);
-
-            if (hasNormalMap)
-                _effect.Parameters["EyePosition"].SetValue(camera.Position);
-
-            foreach (ModelMesh mesh in model.Meshes)
-            {
-                if (mesh.Name != "muzzle_flash")
-                {
-                    ModelMeshPart meshPart = mesh.MeshParts[0];
-
-                    foreach (EffectPass pass in _effect.CurrentTechnique.Passes)
-                    {
-                        pass.Apply();
-
-                        GameServices.GraphicsDevice.SetVertexBuffer(meshPart.VertexBuffer, meshPart.VertexOffset);
-                        GameServices.GraphicsDevice.Indices = meshPart.IndexBuffer;
-                        GameServices.GraphicsDevice.DrawIndexedPrimitives(
-                            PrimitiveType.TriangleList, 0, 0, meshPart.NumVertices,
-                            meshPart.StartIndex, meshPart.PrimitiveCount);
-                    }
-                }
-            }
+            Entity.GetComponent<Weapon>().Arms.Draw(gameTime, camera);
         }
 
         public override void DrawHUD(GameTime gameTime)
@@ -130,7 +63,7 @@ namespace Troma
             float textScale3 = 0.00080f * width;
             float textScale4 = 0.00055f * width;
             float textScale5 = 0.00030f * width;
-            
+
             Rectangle chargeurImage1 = new Rectangle(1850 * width / 1920, height - (110 * width / 1920), 20 * width / 1920, 20 * width / 1920);
             Rectangle chargeurImage2 = new Rectangle(1860 * width / 1920, height - (110 * width / 1920), 20 * width / 1920, 20 * width / 1920);
             Rectangle chargeurImage3 = new Rectangle(1870 * width / 1920, height - (110 * width / 1920), 20 * width / 1920, 20 * width / 1920);
@@ -221,6 +154,7 @@ namespace Troma
 
                 #endregion
             }
+
             GameServices.SpriteBatch.End();
         }
     }

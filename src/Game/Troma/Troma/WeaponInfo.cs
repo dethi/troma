@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameEngine;
 
 namespace Troma
 {
@@ -20,6 +21,18 @@ namespace Troma
 
         public Vector3 Position;
         public Vector3 Rotation;
+
+        public AnimInfo ChangeUp;
+        public AnimInfo ChangeDown;
+        public AnimInfo Shoot;
+        public AnimInfo AimShoot;
+        public AnimInfo AimUp;
+        public AnimInfo AimDown;
+        public AnimInfo Reload;
+
+        public uint TimeToReload;
+        public int Weapon_nb_bone;
+        public int Arms_nb_bone;
 
         public Matrix MatrixPosition
         {

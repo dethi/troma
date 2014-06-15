@@ -74,7 +74,12 @@ namespace Troma
 
         #region Fields for Weapon
 
-        private Entity _weapon;
+        public Entity _weaponActive;
+        public WeaponInfo _weaponInfoActive;
+
+        public Entity _weaponMain;
+        public Entity _weaponSecond;
+
         private Vector3 bulletDir;
         private Ray bulletRay;
         private RayCollision bulletResult;
@@ -150,10 +155,50 @@ namespace Troma
             _collisionDetectedDown = false;
 
             _terrain = terrain;
-            _weapon = weapon;
+            _weaponActive = weapon;
 
-            if (_weapon != null)
-                _weapon.Initialize();
+            if (_weaponActive != null)
+                _weaponActive.Initialize();
+
+            MoveTo(_position, _rotation);
+
+#if DEBUG
+            XConsole.AddDebug(Debug);
+#endif
+        }
+
+        public void Initialize(ITerrain terrain, Entity weaponMain, Entity weaponSecond)
+        {
+            _height = HEIGHT;
+            _position = _initPosition;
+            _rotation = _initRotation;
+
+            newPos = _position;
+            rotationBuffer = Vector3.Zero;
+
+            _isCrouched = false;
+            _touchGround = false;
+            _collisionDetected = false;
+            _collisionDetectedDown = false;
+
+            _terrain = terrain;
+
+            _weaponMain = weaponMain;
+            _weaponSecond = weaponSecond;
+
+            if (_weaponMain != null)
+            {
+                _weaponMain.Initialize();
+                _weaponMain.GetComponent<Weapon>().Arms.Initialize();
+            }
+            if (_weaponSecond != null)
+            {
+                _weaponSecond.Initialize();
+                _weaponSecond.GetComponent<Weapon>().Arms.Initialize();
+            }
+
+            _weaponActive = _weaponMain;
+            _weaponInfoActive = _weaponActive.GetComponent<Weapon>().Info;
 
             MoveTo(_position, _rotation);
 
@@ -175,7 +220,7 @@ namespace Troma
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (_weapon != null)
+            if (_weaponActive != null)
                 WeaponAction(gameTime, input);
 
             Move(dt, input);
@@ -199,18 +244,21 @@ namespace Troma
             BoundingSphereRenderer.Render(sphere, camera, Color.Fuchsia);
 #endif
 
-            if (_weapon != null)
+            if (_weaponActive != null)
             {
-                _weapon.GetComponent<Transform>().Position = _view.Position;
-                _weapon.GetComponent<Transform>().Rotation = _view.Rotation;
-                _weapon.Draw(gameTime, camera);
+                _weaponActive.GetComponent<Transform>().Position = _view.Position;
+                _weaponActive.GetComponent<Transform>().Rotation = new Vector3(1.57f - _view.Rotation.X, 3.14f + _view.Rotation.Y, _view.Rotation.Z);
+
+                _weaponActive.Update(gameTime);
+                _weaponActive.GetComponent<Weapon>().Arms.Update(gameTime);
+                _weaponActive.Draw(gameTime, camera);
             }
         }
 
         public void DrawHUD(GameTime gameTime)
         {
-            if (_weapon != null)
-                _weapon.DrawHUD(gameTime);
+            if (_weaponActive != null)
+                _weaponActive.DrawHUD(gameTime);
         }
 
         public string Debug(GameTime gameTime)
@@ -383,15 +431,18 @@ namespace Troma
 
         private void WeaponAction(GameTime gameTime, InputState input)
         {
+            if (input.PlayerChangeWeapon())
+                ChangeWeapon();
+
             if (input.PlayerReload())
-                _weapon.GetComponent<Weapon>().Reload();
+                _weaponActive.GetComponent<Weapon>().Reload();
 
             if (input.PlayerSight())
-                _weapon.GetComponent<Weapon>().ChangeSight();
+                _weaponActive.GetComponent<Weapon>().ChangeSight();
 
-            if (input.PlayerShoot(_weapon.GetComponent<Weapon>().Info.Automatic))
+            if (input.PlayerShoot(_weaponActive.GetComponent<Weapon>().Info.Automatic))
             {
-                if (_weapon.GetComponent<Weapon>().Shoot())
+                if (_weaponActive.GetComponent<Weapon>().Shoot())
                 {
                     bulletDir = _view.LookAt - _view.Position;
                     bulletDir.Normalize();
@@ -403,6 +454,25 @@ namespace Troma
                         TargetManager.IsTargetAchieved(bulletResult.CollisionWith);
                 }
             }
+        }
+
+        /// <summary>
+        /// Change active weapon
+        /// </summary>
+        private void ChangeWeapon()
+        {
+            _weaponActive.GetComponent<Weapon>().ChangeDown();
+            if (_weaponActive == _weaponMain)
+            {
+                _weaponActive = _weaponSecond;
+                _weaponInfoActive = _weaponSecond.GetComponent<Weapon>().Info;
+            }
+            else
+            {
+                _weaponActive = _weaponMain;
+                _weaponInfoActive = _weaponMain.GetComponent<Weapon>().Info;
+            }
+            _weaponActive.GetComponent<Weapon>().ChangeUp();
         }
 
         private void PlaySoundEffect(float dt)
@@ -464,10 +534,10 @@ namespace Troma
 
         public int MunitionUsed()
         {
-            if (_weapon == null)
+            if (_weaponActive == null)
                 return 0;
             else
-                return _weapon.GetComponent<Weapon>().MunitionUsed;
+                return _weaponActive.GetComponent<Weapon>().MunitionUsed;
         }
 
         #endregion

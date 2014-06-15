@@ -10,17 +10,26 @@ namespace Troma
 {
     public class WeaponObject
     {
-        public static Entity BuildEntity(WeaponInfo weaponInfo, Effect effect)
+        public static Entity BuildEntity(WeaponInfo weaponInfo)
         {
             Entity entity = new Entity(true);
-            entity.AddComponent(new Transform(entity));
-            entity.AddComponent(new Weapon(entity, weaponInfo));
-            entity.AddComponent(new Model3D(entity, weaponInfo.Model));
+            Transform transform = new Transform(entity);
 
-            Effect _effect = effect.Clone();
-            _effect.Name = effect.Name;
+            Entity arms = new Entity(true);
+            arms.AddComponent(transform);
+            arms.AddComponent(new AnimatedModel3D(arms, "arms_" + weaponInfo.Model));
+            arms.AddComponent(new DrawAnimatedModel3D(arms));
+            arms.AddComponent(new UpdateAnimation(arms));
 
-            entity.AddComponent(new DrawWeapon(entity, _effect));
+
+            entity.AddComponent(transform);
+            entity.AddComponent(new Weapon(entity, arms, weaponInfo));
+            entity.AddComponent(new AnimatedModel3D(entity, weaponInfo.Model));
+
+            entity.AddComponent(new DrawAnimatedModel3D(entity));
+            entity.AddComponent(new UpdateAnimation(entity));
+
+            entity.AddComponent(new DrawWeapon(entity));
 
             return entity;
         }
