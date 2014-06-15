@@ -400,7 +400,10 @@ namespace Troma
                     bulletResult = CollisionManager.IsCollision(bulletRay);
 
                     if (bulletResult.IsCollide)
-                        TargetManager.IsTargetAchieved(bulletResult.CollisionWith);
+                    {
+                        if (TargetManager.IsTargetAchieved(bulletResult.CollisionWith))
+                            TimerManager.Add(45, EventPlayImpactSound);
+                    }
                 }
             }
         }
@@ -468,6 +471,11 @@ namespace Troma
                 return 0;
             else
                 return _weapon.GetComponent<Weapon>().MunitionUsed;
+        }
+
+        public void EventPlayImpactSound(object o, EventArgs e)
+        {
+            SFXManager.Play("TargetImpact", 0.25f, 0);
         }
 
         #endregion

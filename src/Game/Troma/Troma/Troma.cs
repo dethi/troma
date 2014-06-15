@@ -78,6 +78,7 @@ namespace Troma
             SFXManager.Add("GarandM1_reload", Content.Load<SoundEffect>("Sounds/GarandM1_reload"));
             SFXManager.Add("GarandM1_shoot", Content.Load<SoundEffect>("Sounds/GarandM1_shoot"));
             SFXManager.Add("Move", Content.Load<SoundEffect>("Sounds/Move"));
+            SFXManager.Add("TargetImpact", Content.Load<SoundEffect>("Sounds/TargetImpact"));
         }
 
         #endregion

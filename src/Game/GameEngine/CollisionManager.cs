@@ -16,6 +16,7 @@ namespace GameEngine
     public struct RayCollision
     {
         public bool IsCollide;
+        public float Distance;
         public BoundingBox CollisionWith;
     }
 
@@ -139,16 +140,16 @@ namespace GameEngine
         public static RayCollision IsCollision(Ray ray)
         {
             RayCollision c = new RayCollision();
-            float dst = float.MaxValue;
+            c.Distance = float.MaxValue;
             float? tmp;
 
             foreach (BoundingBox box in _currentList)
             {
                 tmp = box.Intersects(ray);
 
-                if (tmp.HasValue && tmp.Value < dst)
+                if (tmp.HasValue && tmp.Value < c.Distance)
                 {
-                    dst = tmp.Value;
+                    c.Distance = tmp.Value;
                     c.CollisionWith = box;
                 }
             }
