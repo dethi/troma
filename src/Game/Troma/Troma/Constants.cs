@@ -11,6 +11,8 @@ namespace Troma
     {
         public static WeaponInfo GarandM1 = new WeaponInfo()
         {
+            Name = "M1 Garand",
+
             MunitionPerLoader = 8,
             Loader = 10,
 
@@ -20,8 +22,6 @@ namespace Troma
             Model = "M1",
             Position = Vector3.Zero,
             Rotation = Vector3.Zero,
-            PositionSight = Vector3.Zero,
-            RotationSight = Vector3.Zero,
 
             ChangeUp = new AnimInfo(0, 24),
             Shoot = new AnimInfo(24, 48),
@@ -31,10 +31,11 @@ namespace Troma
             Reload = new AnimInfo(96, 228),
             ChangeDown = new AnimInfo(228, 251),
 
-            TimeToReload = 5,
+            TimeToReload = 1700,
+            StartReloadSFX = 1200,
+
             Weapon_nb_bone = 7,
             Arms_nb_bone = 45,
-
 
             SFXEmpty = "GarandM1_empty",
             SFXReload = "GarandM1_reload",
@@ -43,17 +44,17 @@ namespace Troma
 
         public static WeaponInfo ColtM1911 = new WeaponInfo()
         {
-            MunitionPerLoader = 8,
+            Name = "Colt M1911",
+
+            MunitionPerLoader = 9,
             Loader = 10,
 
             Automatic = false,
-            ROF = 500,
+            ROF = 300,
 
             Model = "M1911",
             Position = Vector3.Zero,
             Rotation = Vector3.Zero,
-            PositionSight = Vector3.Zero,
-            RotationSight = Vector3.Zero,
 
             ChangeUp = new AnimInfo(0, 24),
             Shoot = new AnimInfo(24, 48),
@@ -63,13 +64,15 @@ namespace Troma
             Reload = new AnimInfo(96, 135),
             ChangeDown = new AnimInfo(135, 158),
 
-            TimeToReload = 2,
+            TimeToReload = 800,
+            StartReloadSFX = 300,
+
             Weapon_nb_bone = 7,
             Arms_nb_bone = 45,
 
-            SFXEmpty = "GarandM1_empty",
-            SFXReload = "GarandM1_reload",
-            SFXShoot = "GarandM1_shoot"
+            SFXEmpty = "M1911_empty",
+            SFXReload = "M1911_reload",
+            SFXShoot = "M1911_shoot"
         };
     }
 }

@@ -24,6 +24,7 @@ namespace Troma
             Model = FileManager.Load<Model>("Models/" + model);
             ModelName = model;
             skinningData = Model.Tag as SkinningData;
+
             if (skinningData == null)
                 throw new InvalidOperationException ("This model does not contain a SkinningData tag.");
             

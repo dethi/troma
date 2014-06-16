@@ -36,6 +36,7 @@ namespace Troma
             : base(aParent)
         {
             Name = "Weapon";
+            _requiredComponents.Add("AnimatedModel3D");
 
             Arms = arms;
             _info = weaponInfo;
@@ -48,6 +49,14 @@ namespace Troma
             _isLoading = false;
 
             _munitionUsed = 0;
+        }
+
+        public override void Start()
+        {
+            base.Start();
+
+            Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Weapon_nb_bone);
+            Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Arms_nb_bone);
         }
 
         public bool Shoot()
@@ -92,7 +101,7 @@ namespace Troma
                 _info.Loader--;
                 _info.Munition = _info.MunitionPerLoader;
 
-                TimerManager.Add(500, PlaySoundLoading);
+                TimerManager.Add(_info.StartReloadSFX, PlaySoundLoading);
                 TimerManager.Add(_info.TimeToReload, LoadingTimerEnded);
 
                 Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.Reload, _info.Weapon_nb_bone);

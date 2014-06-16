@@ -21,9 +21,6 @@ namespace Troma
         Color red = new Color(207, 46, 49);
         Color color;
 
-        string Text4 = "M1";
-        string Text5 = "Garand";
-
         public DrawWeapon(Entity aParent)
             : base(aParent)
         {
@@ -39,6 +36,8 @@ namespace Troma
             _cross = FileManager.Load<Texture2D>("cross");
             Font = FileManager.Load<SpriteFont>("Fonts/HUD");
             chargeur = FileManager.Load<Texture2D>("Menus/Chargeur");
+
+            Font.Spacing = 4f;
         }
 
         public override void Draw(GameTime gameTime, ICamera camera)
@@ -54,9 +53,9 @@ namespace Troma
 
             WeaponInfo weaponInfo = Entity.GetComponent<Weapon>().Info;
 
-            string Text1 = "" + weaponInfo.Munition;
+            string Text1 = weaponInfo.Munition.ToString();
             string Text2 = " / ";
-            string Text3 = "" + (weaponInfo.MunitionPerLoader * weaponInfo.Loader);
+            string Text3 = (weaponInfo.MunitionPerLoader * weaponInfo.Loader).ToString();
 
             float textScale1 = 0.00070f * width;
             float textScale2 = 0.00050f * width;
@@ -89,30 +88,29 @@ namespace Troma
             Vector2 Position1 = new Vector2(
             1680 * width / 1920,
             height - (120 * width / 1920));
+
             Vector2 Position3 = new Vector2(
             1678 * width / 1920,
             height - (125 * width / 1920));
 
             Vector2 Position2 = new Vector2(
-            1730 * width / 1920,
+            1722 * width / 1920,
             height - (105 * width / 1920));
+
             Vector2 Position5 = new Vector2(
-            1728 * width / 1920,
+            1720 * width / 1920,
             height - (108 * width / 1920));
 
             Vector2 Position4 = new Vector2(
             1770 * width / 1920,
             height - (105 * width / 1920));
+
             Vector2 Position6 = new Vector2(
             1768 * width / 1920,
             height - (108 * width / 1920));
 
             Vector2 Position7 = new Vector2(
             1680 * width / 1920,
-            height - (150 * width / 1920));
-
-            Vector2 Position8 = new Vector2(
-            1710 * width / 1920,
             height - (150 * width / 1920));
 
             //affichage HUD arme + ombre
@@ -124,8 +122,7 @@ namespace Troma
             GameServices.SpriteBatch.DrawString(Font, Text2, Position2, c, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
             GameServices.SpriteBatch.DrawString(Font, Text3, Position4, c, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
 
-            GameServices.SpriteBatch.DrawString(Font, Text4, Position7, c, 0, titleOrigin, textScale5, SpriteEffects.None, 0);
-            GameServices.SpriteBatch.DrawString(Font, Text5, Position8, c, 0, titleOrigin, textScale5, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.DrawString(Font, Entity.GetComponent<Weapon>().Info.Name, Position7, c, 0, titleOrigin, textScale5, SpriteEffects.None, 0);
 
             //affichage chargeur
             if (weaponInfo.Loader > 0) GameServices.SpriteBatch.Draw(chargeur, chargeurImage1, Color.White * 0.8f);

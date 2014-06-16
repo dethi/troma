@@ -183,6 +183,8 @@ namespace Troma
 
             _terrain = terrain;
 
+            MoveTo(_position, _rotation);
+
             _weaponMain = weaponMain;
             _weaponSecond = weaponSecond;
 
@@ -199,8 +201,6 @@ namespace Troma
 
             _weaponActive = _weaponMain;
             _weaponInfoActive = _weaponActive.GetComponent<Weapon>().Info;
-
-            MoveTo(_position, _rotation);
 
 #if DEBUG
             XConsole.AddDebug(Debug);
@@ -461,7 +461,11 @@ namespace Troma
         /// </summary>
         private void ChangeWeapon()
         {
+            if (_weaponSecond == null)
+                return;
+
             _weaponActive.GetComponent<Weapon>().ChangeDown();
+
             if (_weaponActive == _weaponMain)
             {
                 _weaponActive = _weaponSecond;
@@ -472,6 +476,7 @@ namespace Troma
                 _weaponActive = _weaponMain;
                 _weaponInfoActive = _weaponMain.GetComponent<Weapon>().Info;
             }
+
             _weaponActive.GetComponent<Weapon>().ChangeUp();
         }
 
@@ -534,10 +539,8 @@ namespace Troma
 
         public int MunitionUsed()
         {
-            if (_weaponActive == null)
-                return 0;
-            else
-                return _weaponActive.GetComponent<Weapon>().MunitionUsed;
+            return ((_weaponMain == null) ? 0 : _weaponMain.GetComponent<Weapon>().MunitionUsed) +
+                ((_weaponSecond == null) ? 0 : _weaponSecond.GetComponent<Weapon>().MunitionUsed);
         }
 
         #endregion

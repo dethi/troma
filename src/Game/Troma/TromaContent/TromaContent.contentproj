@@ -349,20 +349,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Weapon\M1Garand_Texture.png">
-      <Name>M1Garand_Texture</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Weapon\M1Garand.x">
-      <Name>M1Garand</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Effects\Billboard.fx">
       <Name>Billboard</Name>
       <Importer>EffectImporter</Importer>
@@ -411,12 +397,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Weapon\M1.x">
-      <Name>M1</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <ProcessorParameters_GenerateTangentFrames>True</ProcessorParameters_GenerateTangentFrames>
-    </Compile>
     <Compile Include="Models\arms_M1.x">
       <Name>arms_M1</Name>
       <Importer>XImporter</Importer>
@@ -461,18 +441,6 @@
   <ItemGroup>
     <Compile Include="blank.png">
       <Name>blank</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Weapon\M1_Normal.png">
-      <Name>M1_Normal</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\Weapon\M1_Texture.png">
-      <Name>M1_Texture</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -602,6 +570,25 @@
   <ItemGroup>
     <Compile Include="Sounds\TargetImpact.wav">
       <Name>TargetImpact</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sounds\M1911_empty.wav">
+      <Name>M1911_empty</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sounds\M1911_shoot.wav">
+      <Name>M1911_shoot</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sounds\M1911_reload.wav">
+      <Name>M1911_reload</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>

@@ -20,8 +20,6 @@ namespace Troma
         public override void Start()
         {
             base.Start();
-
-            string model = Entity.GetComponent<AnimatedModel3D>().ModelName;
         }
 
         public override void Draw(GameTime gameTime, ICamera camera)
