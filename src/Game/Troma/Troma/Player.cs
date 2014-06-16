@@ -222,7 +222,10 @@ namespace Troma
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (_weaponActive != null)
+            {
+                _weaponActive.GetComponent<Weapon>().UpdateRecoil(gameTime);
                 WeaponAction(gameTime, input);
+            }
 
             Move(dt, input);
             Crouch(dt, input);
@@ -232,8 +235,11 @@ namespace Troma
             velocity += acceleration * dt * dt;
             move += velocity * dt;
             newPos = PreviewMove(move, rotate.Y);
-
             ApplyCollision();
+
+            rotate.X -= _weaponActive.GetComponent<Weapon>().CameraYRecoil;
+            rotate.Y += _weaponActive.GetComponent<Weapon>().CameraXRecoil;
+
             MoveTo(newPos, rotate);
 
             #region Weapon Update
@@ -261,8 +267,9 @@ namespace Troma
             xT = cosDisp / 2;
             zT = cosDisp / 3;
 
-            _weaponActive.GetComponent<Transform>().Position = _view.Position + 
-                new Vector3(xT, yT, zT);
+            _weaponActive.GetComponent<Transform>().Position = _view.Position +
+                Vector3.Transform(new Vector3(xT, yT, zT), Matrix.CreateRotationY(rotate.Y)) +
+                Vector3.Transform(_weaponActive.GetComponent<Weapon>().RecoilTranslation, Matrix.CreateRotationY(rotate.Y));
 
             _weaponActive.GetComponent<Transform>().Rotation = new Vector3(
                 1.57f - _view.Rotation.X,
@@ -284,9 +291,7 @@ namespace Troma
 #endif
 
             if (_weaponActive != null)
-            {
                 _weaponActive.Draw(gameTime, camera);
-            }
         }
 
         public void DrawHUD(GameTime gameTime)

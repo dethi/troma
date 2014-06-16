@@ -20,6 +20,12 @@ namespace Troma
 
         public bool SightPosition;
 
+        private Random random;
+
+        public float CameraXRecoil { get; private set; }
+        public float CameraYRecoil { get; private set; }
+        public float ZRecoil { get; private set; }
+
         public WeaponInfo Info
         {
             get { return _info; }
@@ -28,6 +34,11 @@ namespace Troma
         public int MunitionUsed
         {
             get { return _munitionUsed; }
+        }
+
+        public Vector3 RecoilTranslation
+        {
+            get { return new Vector3(0, 0, ZRecoil); }
         }
 
         private bool LoaderIsEmpty
@@ -52,6 +63,7 @@ namespace Troma
             _isLoading = false;
 
             _munitionUsed = 0;
+            random = new Random();
         }
 
         public override void Start()
@@ -67,6 +79,20 @@ namespace Troma
 
             Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Weapon_nb_bone);
             Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Arms_nb_bone);
+        }
+
+        public void UpdateRecoil(GameTime gameTime)
+        {
+            float amplitudeZ = 6f;
+            float amount = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000.0f;
+
+            if (ZRecoil < 0) 
+                ZRecoil += amplitudeZ * amount * Math.Abs(ZRecoil);
+            if (ZRecoil > 0) 
+                ZRecoil = 0;
+
+            CameraXRecoil = 0;
+            CameraYRecoil = 0;
         }
 
         public bool Shoot()
@@ -97,6 +123,7 @@ namespace Troma
                 }
 
                 Muzzle.Activate();
+                AddRecoil();
 
                 return true;
             }
@@ -123,6 +150,9 @@ namespace Troma
 
         public void ChangeSight()
         {
+            if (_isLoading)
+                return;
+
             SightPosition = !SightPosition;
 
             if (SightPosition)
@@ -147,6 +177,14 @@ namespace Troma
         {
             Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeDown, _info.Weapon_nb_bone);
             Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeDown, _info.Arms_nb_bone);
+        }
+
+        private void AddRecoil()
+        {
+            CameraXRecoil = 0.00003f * (random.Next(100) - random.Next(100));
+            CameraYRecoil = 0.00007f * random.Next(100);
+
+            ZRecoil -= 0.4f;
         }
 
         #region Event
