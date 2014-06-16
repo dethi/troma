@@ -313,7 +313,8 @@ namespace GameEngine
 
         public bool PlayerChangeWeapon()
         {
-            return LastMouseState.ScrollWheelValue - CurrentMouseState.ScrollWheelValue != 0;
+            return (LastMouseState.ScrollWheelValue - CurrentMouseState.ScrollWheelValue != 0) ||
+                IsPressed(Buttons.Y);
         }
 
         #endregion
