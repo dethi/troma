@@ -11,6 +11,7 @@ namespace Troma
     class InGameMenu : MenuScreen
     {
         private Button resumeMenuEntry;
+        private Button restartMenyEntry;
         private Button optionMenuEntry;
         private Button backMenuEntry;
 
@@ -24,10 +25,12 @@ namespace Troma
             : base(game)
         {
             Vector2 entryPos = new Vector2(143, 435);
-            float space = 220;
+            float space = 146;
 
             // Create menu entries.
             resumeMenuEntry = new Button(String.Empty, 1, entryPos);
+            entryPos.Y += space;
+            restartMenyEntry = new Button(String.Empty, 1, entryPos);
             entryPos.Y += space;
             optionMenuEntry = new Button(String.Empty, 1, entryPos);
             entryPos.Y += space;
@@ -35,11 +38,13 @@ namespace Troma
 
             // Hook up menu event handlers.
             resumeMenuEntry.Selected += ResumeMenuEntrySelected;
+            restartMenyEntry.Selected += RestartMenuEntrySelected;
             optionMenuEntry.Selected += OptionsMenuEntrySelected;
             backMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
             MenuEntries.Add(resumeMenuEntry);
+            MenuEntries.Add(restartMenyEntry);
             MenuEntries.Add(optionMenuEntry);
             MenuEntries.Add(backMenuEntry);
 
@@ -102,6 +107,11 @@ namespace Troma
             ExitScreen();
         }
 
+        private void RestartMenuEntrySelected(object sender, EventArgs e)
+        {
+            LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, ""));
+        }
+
         private void OptionsMenuEntrySelected(object sender, EventArgs e)
         {
             ScreenManager.AddScreen(new OptionsMenu(game));
@@ -115,6 +125,7 @@ namespace Troma
         private void SetMenuEntryText()
         {
             resumeMenuEntry.Text = Resource.Resume;
+            restartMenyEntry.Text = Resource.Restart;
             optionMenuEntry.Text = "Options";
             backMenuEntry.Text = Resource.Exit;
         }
