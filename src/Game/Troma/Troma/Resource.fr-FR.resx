@@ -228,4 +228,7 @@
   <data name="TotalGameTime" xml:space="preserve">
     <value>Temps de jeu total</value>
   </data>
+  <data name="NewHighScore" xml:space="preserve">
+    <value>Nouveau record</value>
+  </data>
 </root>

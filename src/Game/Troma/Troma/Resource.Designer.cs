@@ -313,6 +313,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à New high score.
+        /// </summary>
+        internal static string NewHighScore {
+            get {
+                return ResourceManager.GetString("NewHighScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à No.
         /// </summary>
         internal static string No {

@@ -10,6 +10,8 @@ namespace Troma
 {
     class EndGameScreen : MenuScreen
     {
+        private  Color orange = new Color(215, 145, 96);
+
         private Button restartMenuEntry;
         private Button backMenuEntry;
 
@@ -21,6 +23,7 @@ namespace Troma
 
         private SpriteFont digitalFont;
 
+        private bool newHightScore;
         private int currentScore;
         private string precision;
         private string time;
@@ -45,8 +48,11 @@ namespace Troma
             MenuEntries.Add(backMenuEntry);
 
             Score score = ScoreManager.Load();
+            int currentHighScore = score.HighScore[0];
             currentScore = score.ComputeScore(elapsedTime, nbTarget, nbMunition);
             ScoreManager.Save(score);
+
+            newHightScore = (currentScore > currentHighScore);
 
             precision = "Precision :   " + (100 * nbTarget / nbMunition) + " %";
             time = Resource.ElapsedTime + " :   " + String.Format("{0:D2}:{1:D2}", elapsedTime.Minutes, elapsedTime.Seconds);
@@ -82,10 +88,18 @@ namespace Troma
 
             Vector2 pos = new Vector2(
                 bgTransRect.Width + 150 * widthScale,
-                300 * heightScale);
+                280 * heightScale);
 
             GameServices.SpriteBatch.Begin();
             GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.15f);
+
+            if (newHightScore)
+            {
+                GameServices.SpriteBatch.DrawString(digitalFont, Resource.NewHighScore, pos, orange * TransitionAlpha, 0,
+                    Vector2.Zero, scale * 0.15f, SpriteEffects.None, 0);
+            }
+
+            pos.Y += 20 * heightScale;
 
             GameServices.SpriteBatch.DrawString(digitalFont, currentScore.ToString(), pos, Color.Ivory * TransitionAlpha, 0,
                 Vector2.Zero, scale, SpriteEffects.None, 0);
@@ -99,7 +113,7 @@ namespace Troma
 
             GameServices.SpriteBatch.DrawString(digitalFont, precision, pos, Color.Ivory * TransitionAlpha, 0,
                 Vector2.Zero, scale * 0.2f, SpriteEffects.None, 0);
-            
+
 
             // Draw each menu entry in turn.
             for (int i = 0; i < MenuEntries.Count; i++)
