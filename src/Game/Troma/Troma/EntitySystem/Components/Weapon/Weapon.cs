@@ -181,8 +181,8 @@ namespace Troma
 
         private void AddRecoil()
         {
-            CameraXRecoil = 0.00003f * (random.Next(100) - random.Next(100));
-            CameraYRecoil = 0.00007f * random.Next(100);
+            CameraXRecoil = 0.0001f * (random.Next(100) - random.Next(100));
+            CameraYRecoil = 0.0003f * random.Next(100);
 
             ZRecoil -= 0.4f;
         }
