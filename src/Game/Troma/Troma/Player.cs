@@ -236,6 +236,44 @@ namespace Troma
             ApplyCollision();
             MoveTo(newPos, rotate);
 
+            #region Weapon Update
+
+            float time = (float)((gameTime.TotalGameTime.TotalMilliseconds / 2000) % 2 * Math.PI);
+            int amplitude;
+            float cosDisp, sinDisp;
+            float xT, yT, zT;
+
+            if (move != Vector3.Zero && !_weaponActive.GetComponent<Weapon>().SightPosition)
+            {
+                amplitude = 5;
+                cosDisp = amplitude * (float)Math.Cos(time * amplitude) / 60;//cossinus displacement
+                sinDisp = amplitude * (float)Math.Sin(time * amplitude) / 60;//sinus displacement
+                yT = Math.Abs(sinDisp);
+            }
+            else
+            {
+                amplitude = 2;
+                cosDisp = 0.0f;
+                sinDisp = amplitude * (float)Math.Sin(time * amplitude) / 100;//sinus displacement
+                yT = sinDisp * 0.2f;
+            }
+
+            xT = cosDisp / 2;
+            zT = cosDisp / 3;
+
+            _weaponActive.GetComponent<Transform>().Position = _view.Position + 
+                new Vector3(xT, yT, zT);
+
+            _weaponActive.GetComponent<Transform>().Rotation = new Vector3(
+                1.57f - _view.Rotation.X,
+                3.14f + _view.Rotation.Y,
+                _view.Rotation.Z);
+
+            _weaponActive.Update(gameTime);
+            _weaponActive.GetComponent<Weapon>().Arms.Update(gameTime);
+
+            #endregion
+
             PlaySoundEffect(dt);
         }
 
@@ -247,11 +285,6 @@ namespace Troma
 
             if (_weaponActive != null)
             {
-                _weaponActive.GetComponent<Transform>().Position = _view.Position;
-                _weaponActive.GetComponent<Transform>().Rotation = new Vector3(1.57f - _view.Rotation.X, 3.14f + _view.Rotation.Y, _view.Rotation.Z);
-
-                _weaponActive.Update(gameTime);
-                _weaponActive.GetComponent<Weapon>().Arms.Update(gameTime);
                 _weaponActive.Draw(gameTime, camera);
             }
         }
