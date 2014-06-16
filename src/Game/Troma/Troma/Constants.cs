@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using GameEngine;
 
 namespace Troma
 {
@@ -10,21 +11,68 @@ namespace Troma
     {
         public static WeaponInfo GarandM1 = new WeaponInfo()
         {
+            Name = "M1 Garand",
+
             MunitionPerLoader = 8,
             Loader = 10,
 
             Automatic = false,
             ROF = 500,
 
-            Model = "Weapon/M1",
-            Position = new Vector3(-0.7f, -0.3f, 0),
-            Rotation = new Vector3(0, 0, 0),
-            PositionSight = new Vector3(0, 0, -1.3f),
-            RotationSight = Vector3.Zero,
+            Model = "M1",
+            Position = Vector3.Zero,
+            Rotation = Vector3.Zero,
+
+            ChangeUp = new AnimInfo(0, 24),
+            Shoot = new AnimInfo(24, 48),
+            AimUp = new AnimInfo(48, 60),
+            AimShoot = new AnimInfo(60, 84),
+            AimDown = new AnimInfo(84, 96),
+            Reload = new AnimInfo(96, 228),
+            ChangeDown = new AnimInfo(228, 251),
+
+            TimeToReload = 1700,
+            StartReloadSFX = 1200,
+
+            Weapon_nb_bone = 7,
+            Arms_nb_bone = 45,
 
             SFXEmpty = "GarandM1_empty",
             SFXReload = "GarandM1_reload",
             SFXShoot = "GarandM1_shoot"
+        };
+
+        public static WeaponInfo ColtM1911 = new WeaponInfo()
+        {
+            Name = "Colt M1911",
+
+            MunitionPerLoader = 9,
+            Loader = 10,
+
+            Automatic = false,
+            ROF = 300,
+
+            Model = "M1911",
+            Position = Vector3.Zero,
+            Rotation = Vector3.Zero,
+
+            ChangeUp = new AnimInfo(0, 24),
+            Shoot = new AnimInfo(24, 48),
+            AimUp = new AnimInfo(48, 60),
+            AimShoot = new AnimInfo(60, 84),
+            AimDown = new AnimInfo(84, 96),
+            Reload = new AnimInfo(96, 135),
+            ChangeDown = new AnimInfo(135, 158),
+
+            TimeToReload = 800,
+            StartReloadSFX = 300,
+
+            Weapon_nb_bone = 7,
+            Arms_nb_bone = 45,
+
+            SFXEmpty = "M1911_empty",
+            SFXReload = "M1911_reload",
+            SFXShoot = "M1911_shoot"
         };
     }
 }

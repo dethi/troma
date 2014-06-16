@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using GameEngine;
 
 namespace Troma
 {
     public struct WeaponInfo
     {
+        public string Name;
+
         public int Munition;
         public int MunitionPerLoader;
         public int Loader;
@@ -20,6 +23,20 @@ namespace Troma
 
         public Vector3 Position;
         public Vector3 Rotation;
+
+        public AnimInfo ChangeUp;
+        public AnimInfo ChangeDown;
+        public AnimInfo Shoot;
+        public AnimInfo AimShoot;
+        public AnimInfo AimUp;
+        public AnimInfo AimDown;
+        public AnimInfo Reload;
+
+        public uint TimeToReload;
+        public uint StartReloadSFX;
+
+        public int Weapon_nb_bone;
+        public int Arms_nb_bone;
 
         public Matrix MatrixPosition
         {
@@ -34,25 +51,6 @@ namespace Troma
                     Rotation.Y,
                     Rotation.X,
                     Rotation.Z);
-            }
-        }
-
-        public Vector3 PositionSight;
-        public Vector3 RotationSight;
-
-        public Matrix MatrixPositionSight
-        {
-            get { return Matrix.CreateTranslation(PositionSight); }
-        }
-
-        public Matrix MatrixRotationSight
-        {
-            get
-            {
-                return Matrix.CreateFromYawPitchRoll(
-                    RotationSight.Y,
-                    RotationSight.X,
-                    RotationSight.Z);
             }
         }
 

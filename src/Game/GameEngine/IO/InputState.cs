@@ -301,6 +301,21 @@ namespace GameEngine
             return IsPressed(MouseButtons.Right) || IsPressed(Buttons.LeftTrigger);
         }
 
+        public bool PlayerChangeWeaponUp()
+        {
+            return LastMouseState.ScrollWheelValue - CurrentMouseState.ScrollWheelValue > 0;
+        }
+
+        public bool PlayerChangeWeaponDown()
+        {
+            return LastMouseState.ScrollWheelValue - CurrentMouseState.ScrollWheelValue < 0;
+        }
+
+        public bool PlayerChangeWeapon()
+        {
+            return LastMouseState.ScrollWheelValue - CurrentMouseState.ScrollWheelValue != 0;
+        }
+
         #endregion
 
         #endregion

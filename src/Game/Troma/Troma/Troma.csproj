@@ -38,7 +38,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -153,6 +153,9 @@
       <DependentUpon>App.settings</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="EntitySystem\Components\Animated\AnimatedModel3D.cs" />
+    <Compile Include="EntitySystem\Components\Animated\DrawAnimatedModel3D.cs" />
+    <Compile Include="EntitySystem\Components\Animated\UpdateAnimation.cs" />
     <Compile Include="EntitySystem\Components\CollisionBox.cs" />
     <Compile Include="EntitySystem\Components\DrawModel3D.cs" />
     <Compile Include="EntitySystem\Components\Weapon\DrawWeapon.cs" />
@@ -164,6 +167,7 @@
     <Compile Include="EntitySystem\Components\Vect\VectTransform.cs" />
     <Compile Include="EntitySystem\Components\Weapon\Weapon.cs" />
     <Compile Include="EntitySystem\ICollisionBox.cs" />
+    <Compile Include="EntitySystem\Template\AnimatedGameObject.cs" />
     <Compile Include="EntitySystem\Template\TargetObject.cs" />
     <Compile Include="EntitySystem\Template\VectGameObject.cs" />
     <Compile Include="EntitySystem\Template\WeaponObject.cs" />
@@ -202,7 +206,6 @@
     <Compile Include="Settings.cs" />
     <Compile Include="TargetManager.cs" />
     <Compile Include="Troma.cs" />
-    <Compile Include="Screens\TestScreen.cs" />
     <Compile Include="WeaponInfo.cs" />
   </ItemGroup>
   <ItemGroup>

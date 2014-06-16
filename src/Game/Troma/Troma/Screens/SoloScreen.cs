@@ -89,7 +89,7 @@ namespace Troma
             Effect modelWithNormal = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
             modelWithNormal.Name = "GameObjectWithNormal";
 
-            player.Initialize(terrain, WeaponObject.BuildEntity(Constants.GarandM1, modelWithNormal));
+            player.Initialize(terrain, WeaponObject.BuildEntity(Constants.GarandM1), WeaponObject.BuildEntity(Constants.ColtM1911));
 
             #region Target
 

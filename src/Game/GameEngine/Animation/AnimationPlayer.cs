@@ -15,6 +15,18 @@ using Microsoft.Xna.Framework;
 
 namespace GameEngine
 {
+    public struct AnimInfo
+    {
+        public int Start;
+        public int End;
+
+        public AnimInfo(int start, int end)
+        {
+            Start = start;
+            End = end;
+        }
+    }
+
     /// <summary>
     /// The animation player is in charge of decoding bone position
     /// matrices from an animation clip.
@@ -27,7 +39,11 @@ namespace GameEngine
         // Information about the currently playing animation clip.
         AnimationClip currentClipValue;
         TimeSpan currentTimeValue;
+        private TimeSpan startTime;
+        private TimeSpan endTime;
         int currentKeyframe;
+        int startKeyframe;
+        int endKeyframe;
 
 
         // Current animation transform matrices.
@@ -38,7 +54,6 @@ namespace GameEngine
 
         // Backlink to the bind pose and skeleton hierarchy data.
         SkinningData skinningDataValue;
-
 
         #endregion
 
@@ -62,30 +77,24 @@ namespace GameEngine
         /// <summary>
         /// Starts decoding the specified animation clip.
         /// </summary>
-        public void StartClip(AnimationClip clip)
+        public void StartClip(AnimationClip clip, AnimInfo animInfo, int nb_bone)
         {
             if (clip == null)
                 throw new ArgumentNullException("clip");
 
             currentClipValue = clip;
-            currentTimeValue = TimeSpan.Zero;
-            currentKeyframe = 0;
+
+            startKeyframe = animInfo.Start * nb_bone;
+            endKeyframe = animInfo.End * nb_bone;
+
+            startTime = GetKeyframeTime(clip, startKeyframe);
+            endTime = GetKeyframeTime(clip, endKeyframe);
+
+            currentKeyframe = startKeyframe;
+            currentTimeValue = startTime;
 
             // Initialize bone transforms to the bind pose.
             skinningDataValue.BindPose.CopyTo(boneTransforms, 0);
-        }
-
-        public void PlayClip(AnimationClip clip, int startFrame, int endFram)
-        {
-            if (clip == null)
-                throw new ArgumentNullException("clip");
-
-            currentClipValue = clip;
-            currentTimeValue = TimeSpan.Zero;
-            currentKeyframe = startFrame;
-            skinningDataValue.BindPose.CopyTo(boneTransforms, 0);
-
-
         }
 
         /// <summary>
@@ -115,26 +124,19 @@ namespace GameEngine
                 time += currentTimeValue;
 
                 // If we reached the end, loop back to the start.
-                while (time >= currentClipValue.Duration)
-                    time -= currentClipValue.Duration;
+                while (time >= endTime)
+                    time -= endTime;
             }
 
             if ((time < TimeSpan.Zero) || (time >= currentClipValue.Duration))
                 throw new ArgumentOutOfRangeException("time");
-
-            // If the position moved backwards, reset the keyframe index.
-            if (time < currentTimeValue)
-            {
-                currentKeyframe = 0;
-                skinningDataValue.BindPose.CopyTo(boneTransforms, 0);
-            }
 
             currentTimeValue = time;
 
             // Read keyframe matrices.
             IList<Keyframe> keyframes = currentClipValue.Keyframes;
 
-            while (currentKeyframe < keyframes.Count)
+            while (currentKeyframe < endKeyframe)
             {
                 Keyframe keyframe = keyframes[currentKeyframe];
 
@@ -144,7 +146,6 @@ namespace GameEngine
 
                 // Use this keyframe.
                 boneTransforms[keyframe.Bone] = keyframe.Transform;
-
                 currentKeyframe++;
             }
         }
@@ -181,6 +182,11 @@ namespace GameEngine
             }
         }
 
+
+        public TimeSpan GetKeyframeTime(AnimationClip clip, int keyFrame)
+        {
+            return clip.Keyframes[keyFrame].Time;
+        }
 
         /// <summary>
         /// Gets the current bone transform matrices, relative to their parent bones.

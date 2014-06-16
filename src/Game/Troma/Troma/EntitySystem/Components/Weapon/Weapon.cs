@@ -9,6 +9,7 @@ namespace Troma
 {
     public class Weapon : EntityComponent
     {
+        public Entity Arms;
         private WeaponInfo _info;
         private bool _isRespectROF;
         private bool _isLoading;
@@ -31,11 +32,13 @@ namespace Troma
             get { return (_info.Munition == 0); }
         }
 
-        public Weapon(Entity aParent, WeaponInfo weaponInfo)
+        public Weapon(Entity aParent, Entity arms, WeaponInfo weaponInfo)
             : base(aParent)
         {
             Name = "Weapon";
+            _requiredComponents.Add("AnimatedModel3D");
 
+            Arms = arms;
             _info = weaponInfo;
 
             SightPosition = false;
@@ -46,6 +49,14 @@ namespace Troma
             _isLoading = false;
 
             _munitionUsed = 0;
+        }
+
+        public override void Start()
+        {
+            base.Start();
+
+            Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Weapon_nb_bone);
+            Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Arms_nb_bone);
         }
 
         public bool Shoot()
@@ -64,12 +75,16 @@ namespace Troma
                     _isRespectROF = false;
                 }
 
-                TimerManager.Add(30, GunAnimationOn);
-                TimerManager.Add(40, GunAnimationOn);
-                TimerManager.Add(50, GunAnimationOn);
-                TimerManager.Add(60, GunAnimationOff);
-                TimerManager.Add(70, GunAnimationOff);
-                TimerManager.Add(80, GunAnimationOff);
+                if (SightPosition)
+                {
+                    Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.AimShoot, _info.Weapon_nb_bone);
+                    Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.AimShoot, _info.Arms_nb_bone);
+                }
+                else
+                {
+                    Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.Shoot, _info.Weapon_nb_bone);
+                    Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.Shoot, _info.Arms_nb_bone);
+                }
 
                 return true;
             }
@@ -81,17 +96,45 @@ namespace Troma
         {
             if (_info.Loader > 0 && !_isLoading)
             {
-                TimerManager.Add(500, PlaySoundLoading);
-                TimerManager.Add(1200, LoadingTimerEnded);
+                SightPosition = false;
                 _isLoading = true;
                 _info.Loader--;
                 _info.Munition = _info.MunitionPerLoader;
+
+                TimerManager.Add(_info.StartReloadSFX, PlaySoundLoading);
+                TimerManager.Add(_info.TimeToReload, LoadingTimerEnded);
+
+                Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.Reload, _info.Weapon_nb_bone);
+                Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.Reload, _info.Arms_nb_bone);
             }
         }
 
         public void ChangeSight()
         {
             SightPosition = !SightPosition;
+
+            if (SightPosition)
+            {
+                Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.AimUp, _info.Weapon_nb_bone);
+                Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.AimUp, _info.Arms_nb_bone);
+            }
+            else
+            {
+                Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.AimDown, _info.Weapon_nb_bone);
+                Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.AimDown, _info.Arms_nb_bone);
+            }
+        }
+
+        public void ChangeUp()
+        {
+            Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Weapon_nb_bone);
+            Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Arms_nb_bone);
+        }
+
+        public void ChangeDown()
+        {
+            Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeDown, _info.Weapon_nb_bone);
+            Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeDown, _info.Arms_nb_bone);
         }
 
         #region Event
@@ -109,16 +152,6 @@ namespace Troma
         public void LoadingTimerEnded(object o, EventArgs e)
         {
             _isLoading = false;
-        }
-
-        public void GunAnimationOn(object o, EventArgs e)
-        {
-            _info.PositionSight.Z -= 0.1f;
-        }
-
-        public void GunAnimationOff(object o, EventArgs e)
-        {
-            _info.PositionSight.Z += 0.1f;
         }
 
         #endregion
