@@ -504,19 +504,7 @@ namespace Troma
                 return;
 
             _weaponActive.GetComponent<Weapon>().ChangeDown();
-
-            if (_weaponActive == _weaponMain)
-            {
-                _weaponActive = _weaponSecond;
-                _weaponInfoActive = _weaponSecond.GetComponent<Weapon>().Info;
-            }
-            else
-            {
-                _weaponActive = _weaponMain;
-                _weaponInfoActive = _weaponMain.GetComponent<Weapon>().Info;
-            }
-
-            _weaponActive.GetComponent<Weapon>().ChangeUp();
+            TimerManager.Add(300, EventChangeWeapon);
         }
 
         private void PlaySoundEffect(float dt)
@@ -580,6 +568,22 @@ namespace Troma
         {
             return ((_weaponMain == null) ? 0 : _weaponMain.GetComponent<Weapon>().MunitionUsed) +
                 ((_weaponSecond == null) ? 0 : _weaponSecond.GetComponent<Weapon>().MunitionUsed);
+        }
+
+        public void EventChangeWeapon(object o, EventArgs e)
+        {
+            if (_weaponActive == _weaponMain)
+            {
+                _weaponActive = _weaponSecond;
+                _weaponInfoActive = _weaponSecond.GetComponent<Weapon>().Info;
+            }
+            else
+            {
+                _weaponActive = _weaponMain;
+                _weaponInfoActive = _weaponMain.GetComponent<Weapon>().Info;
+            }
+
+            _weaponActive.GetComponent<Weapon>().ChangeUp();
         }
 
         #endregion

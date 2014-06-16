@@ -11,9 +11,23 @@ namespace Troma
     [Serializable()]
     public class Score : ISerializable
     {
+        private List<int> Precision;
+
         public int[] HighScore { get; private set; }
-        public int AveragePrecision { get; private set; }
         public double TotalElapsedTime { get; private set; }
+
+        public int AveragePrecision
+        {
+            get 
+            {
+                if (Precision.Count == 0)
+                    return 0;
+                else if (Precision.Count == 1)
+                    return Precision[0];
+                else
+                    return (int)Precision.Average(); 
+            }
+        }
 
         public Score()
         {
@@ -22,21 +36,21 @@ namespace Troma
                 0, 0, 0, 0, 0
             };
 
-            AveragePrecision = 0;
+            Precision = new List<int>();
             TotalElapsedTime = 0;
         }
 
         public Score(SerializationInfo info, StreamingContext ctxt)
         {
             HighScore = (int[])info.GetValue("HighScore", typeof(int[]));
-            AveragePrecision = (int)info.GetValue("AveragePrecision", typeof(int));
+            Precision = new List<int>((int[])info.GetValue("Precision", typeof(int[])));
             TotalElapsedTime = (int)info.GetValue("TotalElapsedTime", typeof(int));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
         {
             info.AddValue("HighScore", HighScore);
-            info.AddValue("AveragePrecision", AveragePrecision);
+            info.AddValue("Precision", Precision.ToArray());
             info.AddValue("TotalElapsedTime", TotalElapsedTime);
         }
 
@@ -46,12 +60,7 @@ namespace Troma
             int score = (int)(37 * (100 * nbTarget + (1 / t) * 1000) / (nbMunition + 1));
 
             AddScore(score);
-
-            if (AveragePrecision != 0)
-                AveragePrecision = (AveragePrecision + (100 * nbTarget / nbMunition)) / 2;
-            else
-                AveragePrecision += (100 * nbTarget / nbMunition);
-
+            Precision.Add(100 * nbTarget / nbMunition);
             TotalElapsedTime += elapsedTime.TotalSeconds;
 
             return score;
