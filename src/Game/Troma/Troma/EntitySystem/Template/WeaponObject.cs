@@ -24,12 +24,11 @@ namespace Troma
 
             entity.AddComponent(transform);
             entity.AddComponent(new Weapon(entity, arms, weaponInfo));
-            entity.AddComponent(new AnimatedModel3D(entity, weaponInfo.Model));
+            entity.AddComponent(new DrawWeapon(entity));
 
+            entity.AddComponent(new AnimatedModel3D(entity, weaponInfo.Model));
             entity.AddComponent(new DrawAnimatedModel3D(entity));
             entity.AddComponent(new UpdateAnimation(entity));
-
-            entity.AddComponent(new DrawWeapon(entity));
 
             return entity;
         }

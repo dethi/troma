@@ -39,7 +39,9 @@ namespace Troma
 
             SFXEmpty = "GarandM1_empty",
             SFXReload = "GarandM1_reload",
-            SFXShoot = "GarandM1_shoot"
+            SFXShoot = "GarandM1_shoot",
+
+            MuzzleOffset = new Vector2(75, 50)
         };
 
         public static WeaponInfo ColtM1911 = new WeaponInfo()
@@ -72,7 +74,9 @@ namespace Troma
 
             SFXEmpty = "M1911_empty",
             SFXReload = "M1911_reload",
-            SFXShoot = "M1911_shoot"
+            SFXShoot = "M1911_shoot",
+
+            MuzzleOffset = new Vector2(275, 100)
         };
     }
 }

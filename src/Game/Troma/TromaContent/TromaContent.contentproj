@@ -349,13 +349,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Effects\Billboard.fx">
-      <Name>Billboard</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="mazzle_effect.jpg">
       <Name>mazzle_effect</Name>
       <Importer>TextureImporter</Importer>
@@ -591,6 +584,129 @@
       <Name>M1911_reload</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="MuzzleFlash\Muzzle_00000.png">
+      <Name>Muzzle_00000</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00001.png">
+      <Name>Muzzle_00001</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00002.png">
+      <Name>Muzzle_00002</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00003.png">
+      <Name>Muzzle_00003</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00004.png">
+      <Name>Muzzle_00004</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00005.png">
+      <Name>Muzzle_00005</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00006.png">
+      <Name>Muzzle_00006</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00007.png">
+      <Name>Muzzle_00007</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00008.png">
+      <Name>Muzzle_00008</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00009.png">
+      <Name>Muzzle_00009</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00010.png">
+      <Name>Muzzle_00010</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00011.png">
+      <Name>Muzzle_00011</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00012.png">
+      <Name>Muzzle_00012</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00013.png">
+      <Name>Muzzle_00013</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00014.png">
+      <Name>Muzzle_00014</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00015.png">
+      <Name>Muzzle_00015</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00016.png">
+      <Name>Muzzle_00016</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00017.png">
+      <Name>Muzzle_00017</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00018.png">
+      <Name>Muzzle_00018</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00019.png">
+      <Name>Muzzle_00019</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00020.png">
+      <Name>Muzzle_00020</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00021.png">
+      <Name>Muzzle_00021</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00022.png">
+      <Name>Muzzle_00022</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="MuzzleFlash\Muzzle_00023.png">
+      <Name>Muzzle_00023</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

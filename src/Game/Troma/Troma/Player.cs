@@ -214,6 +214,7 @@ namespace Troma
         public void Update(GameTime gameTime)
         {
             GroundCollision();
+            _weaponActive.GetComponent<Weapon>().Muzzle.Update();
         }
 
         public void HandleInput(GameTime gameTime, InputState input)

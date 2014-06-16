@@ -96,7 +96,6 @@
     <Compile Include="Animation\AnimationPlayer.cs" />
     <Compile Include="Animation\Keyframe.cs" />
     <Compile Include="Animation\SkinningData.cs" />
-    <Compile Include="BillBoard.cs" />
     <Compile Include="Camera\FirstPersonView.cs" />
     <Compile Include="Camera\ICamera.cs" />
     <Compile Include="Clouds\CloudManager.cs" />
@@ -120,6 +119,7 @@
     <Compile Include="EntitySystem\IEntityUpdateable.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GameServices.cs" />
+    <Compile Include="MuzzleFlash.cs" />
     <Compile Include="Physics.cs" />
     <Compile Include="LightInfo.cs" />
     <Compile Include="RenderTargetManager.cs" />

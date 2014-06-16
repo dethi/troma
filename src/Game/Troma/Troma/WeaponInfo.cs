@@ -57,5 +57,7 @@ namespace Troma
         public string SFXEmpty;
         public string SFXReload;
         public string SFXShoot;
+
+        public Vector2 MuzzleOffset;
     }
 }

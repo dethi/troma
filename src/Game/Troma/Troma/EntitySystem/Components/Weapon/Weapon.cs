@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
 
 namespace Troma
@@ -10,6 +11,8 @@ namespace Troma
     public class Weapon : EntityComponent
     {
         public Entity Arms;
+        public MuzzleFlash Muzzle;
+
         private WeaponInfo _info;
         private bool _isRespectROF;
         private bool _isLoading;
@@ -55,6 +58,13 @@ namespace Troma
         {
             base.Start();
 
+            Texture2D[] f = new Texture2D[24];
+
+            for (int i = 0; i < f.Length; i++)
+                f[i] = FileManager.Load<Texture2D>(String.Format("MuzzleFlash/Muzzle_{0:D5}", i));
+
+            Muzzle = new MuzzleFlash(f, _info.MuzzleOffset);
+
             Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Weapon_nb_bone);
             Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Arms_nb_bone);
         }
@@ -85,6 +95,8 @@ namespace Troma
                     Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.Shoot, _info.Weapon_nb_bone);
                     Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.Shoot, _info.Arms_nb_bone);
                 }
+
+                Muzzle.Activate();
 
                 return true;
             }
