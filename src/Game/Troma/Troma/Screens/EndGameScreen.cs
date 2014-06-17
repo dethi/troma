@@ -136,7 +136,7 @@ namespace Troma
 
         private void RestartMenuEntrySelected(object sender, EventArgs e)
         {
-            LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, ""));
+            LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, Map.Town));
         }
 
         protected override void OnCancel(object sender, EventArgs e)

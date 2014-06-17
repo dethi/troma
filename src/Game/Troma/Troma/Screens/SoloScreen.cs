@@ -18,7 +18,7 @@ namespace Troma
         private ITerrain terrain;
         private CloudManager cloudManager;
 
-        private string _mapName;
+        private Map _map;
 
         private TimeSpan time;
         private int _initialNbTarget;
@@ -35,18 +35,26 @@ namespace Troma
 
         #region Initialization
 
-        public SoloScreen(Game game, string mapName)
+        public SoloScreen(Game game, Map map)
             : base(game)
         {
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
-            _mapName = mapName;
+            _map = map;
         }
 
         public override void LoadContent()
         {
             base.LoadContent();
+
+            #region HUD
+
+            target = FileManager.Load<Texture2D>("Menus/target");
+            clock = FileManager.Load<Texture2D>("Menus/Clock");
+            Font = FileManager.Load<SpriteFont>("Fonts/HUD");
+
+            #endregion
 
 #if DEBUG
             XConsole.Reset();
@@ -55,43 +63,22 @@ namespace Troma
             BoundingSphereRenderer.Initialize(30);
 #endif
 
-            EntityManager.Clear();
-            CollisionManager.Clear();
-            TargetManager.Clear();
-
             camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
             player = new Player(new Vector3(10, 0, 10), Vector3.Zero, camera);
 
-            Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
-            Texture2D terrainTexture = FileManager.Load<Texture2D>("Terrains/texture");
-            Texture2D terrainHeighmap = FileManager.Load<Texture2D>("Terrains/heightmap");
+            Scene.Initialize(_map, camera);
 
-            target = FileManager.Load<Texture2D>("Menus/target");
-            clock = FileManager.Load<Texture2D>("Menus/Clock");
-            Font = FileManager.Load<SpriteFont>("Fonts/HUD");
+            player.Initialize(Scene.Terrain, 
+                WeaponObject.BuildEntity(Constants.GarandM1), 
+                WeaponObject.BuildEntity(Constants.ColtM1911));
 
-            TerrainInfo terrainInfo = new TerrainInfo()
-            {
-                Position = Vector3.Zero,
-                Size = new Size(513, 513),
-                Depth = 0,
-                Texture = terrainTexture,
-                TextureScale = 32,
-                Heighmap = terrainHeighmap
-            };
+            
+            #region Target
 
-            float y = 0;
-
-            cloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
-            terrain = new HeightMap(game, terrainEffect, terrainInfo);
+            TargetManager.Clear();
 
             Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
-            Effect modelWithNormal = FileManager.Load<Effect>("Effects/GameObjectWithNormal");
-            modelWithNormal.Name = "GameObjectWithNormal";
-
-            player.Initialize(terrain, WeaponObject.BuildEntity(Constants.GarandM1), WeaponObject.BuildEntity(Constants.ColtM1911));
-
-            #region Target
+            float y = Scene.Terrain.Info.Depth;
 
             List<Tuple<Vector3, float>> ciblePos = new List<Tuple<Vector3, float>>();
             ciblePos.Add(new Tuple<Vector3, float>(new Vector3(200, y, 300), 90));
@@ -114,55 +101,7 @@ namespace Troma
 
             #endregion
 
-            #region Rails
-
-            List<Vector3> modelPos = new List<Vector3>();
-            modelPos.Add(new Vector3(0, y, 200));
-            modelPos.Add(new Vector3(120, y, 200));
-            modelPos.Add(new Vector3(240, y, 200));
-            modelPos.Add(new Vector3(360, y, 200));
-            modelPos.Add(new Vector3(480, y, 200));
-            modelPos.Add(new Vector3(0, y, 210));
-            modelPos.Add(new Vector3(120, y, 210));
-            modelPos.Add(new Vector3(240, y, 210));
-            modelPos.Add(new Vector3(360, y, 210));
-            modelPos.Add(new Vector3(480, y, 210));
-
-            VectGameObject.BuildEntity(modelPos.ToArray(), "Town/rail", modelEffect);
-
-            #endregion
-
-            #region Wood barrier
-
-            List<Vector3> barrierPos = new List<Vector3>();
-
-            for (int i = 202; i < 430; i += 10)
-            {
-                barrierPos.Add(new Vector3(i, y, 192));
-                barrierPos.Add(new Vector3(i, y, 222));
-            }
-
-            for (int j = 460; j < 512; j += 10)
-                barrierPos.Add(new Vector3(j, y, 222));
-
-            VectGameObject.BuildEntity(barrierPos.ToArray(), "Town/wood_barrier", modelEffect);
-
-            #endregion
-
-            GameObject.BuildEntity(new Vector3(0, y, 117), "Town/gare", modelEffect);
-            GameObject.BuildEntity(new Vector3(0, y, 220), "Town/quai", modelEffect);
-            GameObject.BuildEntity(new Vector3(460, y, 153), "Town/garde_passage_a_niveau", modelEffect);
-            GameObject.BuildEntity(new Vector3(435, y, 192), "Town/barriere_train_droite", modelEffect);
-            GameObject.BuildEntity(new Vector3(435, y, 222), "Town/barriere_train_gauche", modelEffect);
-            GameObject.BuildEntity(new Vector3(300, y, 300), "Town/eglise", modelEffect);
-            GameObject.BuildEntity(new Vector3(50, y, 290), "Town/cimetiere", modelEffect);
-            GameObject.BuildEntity(new Vector3(380, y, 30), "Town/mairie", modelEffect);
-            GameObject.BuildEntity(new Vector3(290, y, 55), "Town/fontaine", modelEffect);
-
-            EntityManager.Initialize();
-            CollisionManager.Initialize();
             TargetManager.Initialize();
-
             _initialNbTarget = TargetManager.Count;
 
             time = new TimeSpan();
@@ -175,8 +114,9 @@ namespace Troma
         {
             base.Update(gameTime, hasFocus, isVisible);
 
-            if (Settings.DynamicClouds || ScreenState == ScreenState.TransitionOn)
-                cloudManager.Update(gameTime);
+            Scene.Update(gameTime,
+                (Settings.DynamicClouds || ScreenState == ScreenState.TransitionOn),
+                IsActive);
 
             if (!IsActive)
                 pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
@@ -189,8 +129,6 @@ namespace Troma
                 else
                 {
                     player.Update(gameTime);
-                    EntityManager.Update(gameTime);
-                    CollisionManager.Update(gameTime);
 
 #if DEBUG
                     XConsole.Update(gameTime);
@@ -212,9 +150,6 @@ namespace Troma
                 player.HandleInput(gameTime, input);
 
 #if DEBUG
-                if (input.IsPressed(Keys.D1) || input.IsPressed(Buttons.B))
-                    player.Reset();
-
                 DebugConfig.HandleInput(gameTime, input);
 #endif
             }
@@ -223,10 +158,7 @@ namespace Troma
         public override void Draw(GameTime gameTime)
         {
             GameServices.ResetGraphicsDeviceFor3D();
-
-            cloudManager.Draw(gameTime, camera);
-            terrain.Draw(camera);
-            EntityManager.Draw(gameTime, camera);
+            Scene.Draw(gameTime, camera);
             player.Draw(gameTime, camera);
 
 #if DEBUG
@@ -234,9 +166,11 @@ namespace Troma
             DrawingAxes.Draw(gameTime, camera);
             XConsole.DrawHUD(gameTime);
 #endif
+
+            #region HUD
+
             if (IsActive)
             {
-                EntityManager.DrawHUD(gameTime);
                 player.DrawHUD(gameTime);
 
                 if (TargetManager.Count > 0)
@@ -286,6 +220,8 @@ namespace Troma
                     GameServices.SpriteBatch.End();
                 }
             }
+
+            #endregion
 
             // If the game is transitioning on or off, fade it out to black.
             if (TransitionPosition > 0 || pauseAlpha > 0)

@@ -118,7 +118,7 @@ namespace Troma
 
         private void RestartMenuEntrySelected(object sender, EventArgs e)
         {
-            LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, ""));
+            LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, Map.Town));
         }
 
         private void OptionsMenuEntrySelected(object sender, EventArgs e)

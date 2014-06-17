@@ -169,6 +169,7 @@
     <Compile Include="EntitySystem\Template\TargetObject.cs" />
     <Compile Include="EntitySystem\Template\VectGameObject.cs" />
     <Compile Include="EntitySystem\Template\WeaponObject.cs" />
+    <Compile Include="Scene.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -198,6 +199,7 @@
     <Compile Include="Screens\MenuScreens\Entry\Stepper.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Switch.cs" />
     <Compile Include="Screens\EndGameScreen.cs" />
+    <Compile Include="Screens\MultiplayerScreen.cs" />
     <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Screens\StartScreens\PegiScreen.cs" />
     <Compile Include="Screens\StartScreens\TitleIntroScreen.cs" />
