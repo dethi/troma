@@ -30,6 +30,7 @@ namespace Troma
             "Menus/go-right",
             "Fonts/28DaysLater",
             "Fonts/LuckyTypewriter",
+            "Fonts/History",
             "Fonts/Digital"
         };
 
@@ -64,8 +65,9 @@ namespace Troma
             SFXManager.SetVolume(Settings.MusicVolume);
 
             //screenManager.AddScreen(new SoloScreen(this, ""));
-            screenManager.AddScreen(new PegiScreen(this));
+            //screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new ScoreMenu(this));
+            screenManager.AddScreen(new HistoryScreen(this));
         }
 
         /// <summary>
@@ -86,6 +88,7 @@ namespace Troma
             SFXManager.Add("M1911_shoot", Content.Load<SoundEffect>("Sounds/M1911_shoot"));
             SFXManager.Add("Move", Content.Load<SoundEffect>("Sounds/Move"));
             SFXManager.Add("TargetImpact", Content.Load<SoundEffect>("Sounds/TargetImpact"));
+            SFXManager.Add("Typewriter", Content.Load<SoundEffect>("Sounds/Typewriter"));
         }
 
         #endregion

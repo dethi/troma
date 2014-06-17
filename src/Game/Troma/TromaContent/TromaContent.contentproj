@@ -418,6 +418,11 @@
       <ProcessorParameters_SwapWindingOrder>True</ProcessorParameters_SwapWindingOrder>
       <ProcessorParameters_RotationX>90</ProcessorParameters_RotationX>
     </Compile>
+    <Compile Include="Fonts\History.spritefont">
+      <Name>History</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Sounds\Audio.xgs">
       <Name>Audio</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -586,7 +591,6 @@
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Compile Include="MuzzleFlash\Muzzle_00000.png">
       <Name>Muzzle_00000</Name>
@@ -707,6 +711,13 @@
       <Name>Muzzle_00023</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sounds\Typewriter.wav">
+      <Name>Typewriter</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

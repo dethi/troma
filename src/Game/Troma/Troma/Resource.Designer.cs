@@ -124,6 +124,27 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à The March 12, 1944 at the military base Fort Ort, California. 
+        ///
+        ///Bryan soldier! You left your family the day of your 21 years old to join Easy Company. 
+        ///
+        ///But it will not be easy, trust me! You will follow an intensive training here and your 
+        ///
+        ///mother will not come tuck you in the evening. We rebuilt a French city to put you in 
+        ///
+        ///bath, it may help you on the day you would against these bosch! 
+        ///
+        ///Good talking about your mission in the training camp. 
+        ///
+        ///You will be dropped from a B17 over the city take [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        internal static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Aim for.
         /// </summary>
         internal static string labelAimfor {
