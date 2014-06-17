@@ -4,76 +4,119 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using GameEngine;
 
 namespace Troma
 {
     public class HistoryScreen : GameScreen
     {
-        SpriteFont tromaFont;
-        StringBuilder display;
+        private SpriteFont font;
 
-        string message;
+        private Texture2D bg;
         private Rectangle bgRect;
-        int i;
-        double time2;
+
+        private StringBuilder msg;
+        private string completeMsg;
+
+        private int i;
+        private double dt;
+        private bool write;
 
         public HistoryScreen(Game game)
             : base(game)
         {
-            TransitionOnTime = TimeSpan.FromSeconds(0.5);
-        }
-
-        public static void Load(Game game)
-        {
+            TransitionOnTime = TimeSpan.FromSeconds(1.5);
+            TransitionOffTime = TimeSpan.FromSeconds(0.5);
         }
 
         public override void LoadContent()
         {
             base.LoadContent();
-            tromaFont = GameServices.Game.Content.Load<SpriteFont>("Fonts/history");
 
-            bgRect = new Rectangle(0, 0,
-                GameServices.GraphicsDevice.Viewport.Width,
-                GameServices.GraphicsDevice.Viewport.Height);
+            font = GameServices.Game.Content.Load<SpriteFont>("Fonts/history");
+            bg = GameServices.Game.Content.Load<Texture2D>("Menus/BgHistory");
+            bgRect = new Rectangle(0, 0, 1920, 1080);
 
-            display = new StringBuilder();
-            message = Resource.History;
+            msg = new StringBuilder();
+            completeMsg = Resource.History;
+
             i = 0;
-            time2 = 0;
+            dt = 0;
+            write = true;
         }
 
         public override void Update(GameTime gameTime, bool hasFocus, bool isVisible)
         {
             base.Update(gameTime, hasFocus, isVisible);
-            double time = gameTime.TotalGameTime.TotalMilliseconds;
-            if (i < message.Length & (time - time2) >= 50)
+
+            dt += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (write && i < completeMsg.Length && dt >= 50)
             {
-                display.Append(message[i]);
+                if (completeMsg[i] != ' ' && i % 3 == 0)
+                    SFXManager.Play("Typewriter");
+                else if (completeMsg[i] == '\n')
+                {
+                    SFXManager.Play("TypewriterPullback");
+                    TimerManager.Add(1000, EventPullbackEnded);
+                    write = false;
+                }
+
+                msg.Append(completeMsg[i]);
                 i++;
-                time2 = time;
-                SFXManager.Play("Typewriter");
+                dt = 0;
             }
-     
-                
+            else if (i == completeMsg.Length)
+            {
+                i++;
+                TimerManager.Add(1500, OnCancel);
+            }
+        }
+
+        public override void HandleInput(GameTime gameTime, InputState input)
+        {
+            base.HandleInput(gameTime, input);
+
+            // Allows the screen to exit
+            if (input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
+                OnCancel(null, null);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            float scale = 0.5f * GameServices.GraphicsDevice.Viewport.Width / 1920;
-            Color color = Color.White * TransitionAlpha;
+            int width = GameServices.GraphicsDevice.Viewport.Width;
+            int height = GameServices.GraphicsDevice.Viewport.Height;
+
+            bgRect.Height = height;
+            bgRect.Width = (int)(height * 1.778f);
+            bgRect.X = -(bgRect.Width - width) / 2;
+
+            float scale = 0.8f * width / 1920;
 
             // Center the text in the viewport.
             Vector2 viewportSize = new Vector2(
-                GameServices.GraphicsDevice.Viewport.Width,
-                GameServices.GraphicsDevice.Viewport.Height);
-            Vector2 textSize = tromaFont.MeasureString(message) * scale;
+                width,
+                height);
+
+            Vector2 textSize = font.MeasureString(completeMsg) * scale;
             Vector2 textPosition = (viewportSize - textSize) / 2;
 
             GameServices.SpriteBatch.Begin();
-            GameServices.SpriteBatch.DrawString(tromaFont, display.ToString(), textPosition,
-                color, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+            GameServices.SpriteBatch.Draw(bg, bgRect, Color.White * TransitionAlpha);
+            GameServices.SpriteBatch.DrawString(font, msg.ToString(), textPosition,
+                Color.Black * TransitionAlpha, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
             GameServices.SpriteBatch.End();
+        }
+
+        public void EventPullbackEnded(object o, EventArgs e)
+        {
+            write = true;
+        }
+
+        public void OnCancel(object o, EventArgs e)
+        {
+            ExitScreen();
         }
     }
 }

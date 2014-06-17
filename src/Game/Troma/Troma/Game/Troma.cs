@@ -24,6 +24,7 @@ namespace Troma
             "Menus/background",
             "Menus/background-blur",
             "Menus/translucide",
+            "Menus/BgHistory",
             "Menus/plus",
             "Menus/minus",
             "Menus/go-left",
@@ -65,9 +66,9 @@ namespace Troma
             SFXManager.SetVolume(Settings.MusicVolume);
 
             //screenManager.AddScreen(new SoloScreen(this, ""));
-            //screenManager.AddScreen(new PegiScreen(this));
+            screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new ScoreMenu(this));
-            screenManager.AddScreen(new HistoryScreen(this));
+            //screenManager.AddScreen(new HistoryScreen(this));
         }
 
         /// <summary>
@@ -89,6 +90,7 @@ namespace Troma
             SFXManager.Add("Move", Content.Load<SoundEffect>("Sounds/Move"));
             SFXManager.Add("TargetImpact", Content.Load<SoundEffect>("Sounds/TargetImpact"));
             SFXManager.Add("Typewriter", Content.Load<SoundEffect>("Sounds/Typewriter"));
+            SFXManager.Add("TypewriterPullback", Content.Load<SoundEffect>("Sounds/TypewriterPullback"));
         }
 
         #endregion
