@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Troma", "Troma\Troma\Troma.csproj", "{50F04771-D42A-4E5A-B86B-1FD697C2E0F3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4636C7E1-B845-4B83-B96D-64A11B8A4515} = {4636C7E1-B845-4B83-B96D-64A11B8A4515}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TromaContent", "Troma\TromaContent\TromaContent.contentproj", "{B40BE34A-CBD5-4E60-8AB8-1C8DB76EFDD3}"
 EndProject
@@ -10,6 +13,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lidgren.Network", "Lidgren.Network\Lidgren.Network.csproj", "{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedModelPipeline", "SkinnedModelPipeline\SkinnedModelPipeline.csproj", "{4636C7E1-B845-4B83-B96D-64A11B8A4515}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer", "GameServer\GameServer.csproj", "{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}"
+	ProjectSection(ProjectDependencies) = postProject
+		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8} = {49BA1C69-6104-41AC-A5D8-B54FA9F696E8}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +45,7 @@ Global
 		{B40BE34A-CBD5-4E60-8AB8-1C8DB76EFDD3}.Release|Any CPU.ActiveCfg = Release|x86
 		{B40BE34A-CBD5-4E60-8AB8-1C8DB76EFDD3}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{B40BE34A-CBD5-4E60-8AB8-1C8DB76EFDD3}.Release|x86.ActiveCfg = Release|x86
+		{B40BE34A-CBD5-4E60-8AB8-1C8DB76EFDD3}.Release|x86.Build.0 = Release|x86
 		{121AB8A9-2001-4CBE-80B3-A6E2E95B2E56}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{121AB8A9-2001-4CBE-80B3-A6E2E95B2E56}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{121AB8A9-2001-4CBE-80B3-A6E2E95B2E56}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -52,11 +61,13 @@ Global
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Debug|x86.Build.0 = Debug|Any CPU
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Release|x86.ActiveCfg = Release|Any CPU
+		{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}.Release|x86.Build.0 = Release|Any CPU
 		{4636C7E1-B845-4B83-B96D-64A11B8A4515}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{4636C7E1-B845-4B83-B96D-64A11B8A4515}.Debug|Any CPU.Build.0 = Debug|x86
 		{4636C7E1-B845-4B83-B96D-64A11B8A4515}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
@@ -69,6 +80,16 @@ Global
 		{4636C7E1-B845-4B83-B96D-64A11B8A4515}.Release|Mixed Platforms.Build.0 = Debug|x86
 		{4636C7E1-B845-4B83-B96D-64A11B8A4515}.Release|x86.ActiveCfg = Debug|x86
 		{4636C7E1-B845-4B83-B96D-64A11B8A4515}.Release|x86.Build.0 = Debug|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Debug|x86.ActiveCfg = Debug|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Debug|x86.Build.0 = Debug|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Release|Any CPU.ActiveCfg = Release|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Release|Mixed Platforms.Build.0 = Release|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Release|x86.ActiveCfg = Release|x86
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

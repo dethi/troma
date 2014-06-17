@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using GameEngine;
@@ -46,6 +47,9 @@ namespace Troma
 
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
+
+            //Process p = Process.Start("GameServer");
+            //p.Kill();
         }
 
         protected override void Initialize()
