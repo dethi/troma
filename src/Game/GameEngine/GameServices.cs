@@ -112,7 +112,7 @@ namespace GameEngine
                 _graphicsDeviceManager.PreferredBackBufferHeight = 728;
             }
 #endif
-
+           
             _graphicsDeviceManager.ApplyChanges();
 
             InputState.MouseOrigin = new Vector2(
