@@ -13,7 +13,8 @@ namespace GameServer
     {
         LOGIN,
         INPUT,
-        STATUS
+        STATUS,
+        DISCONNECTION
     }
 
     #endregion
@@ -26,6 +27,9 @@ namespace GameServer
         const int PORT = 14242;
         const int MAX_CLIENT = 20;
         const int DT = 30; // ms
+
+        static Vector3 INITIAL_POS = Vector3.One * 15f;
+        static Vector3 INITIAL_ROT = Vector3.Zero;
 
         #endregion
 
@@ -60,6 +64,8 @@ namespace GameServer
             }
         }
 
+        #region Initialization
+
         static void Initialize()
         {
             Clients = new Player[MAX_CLIENT];
@@ -92,6 +98,8 @@ namespace GameServer
 #endif
         }
 
+        #endregion
+
         static void HandleMsg()
         {
             if ((IncMsg = Server.ReadMessage()) != null)
@@ -99,17 +107,24 @@ namespace GameServer
                 switch (IncMsg.MessageType)
                 {
                     case NetIncomingMessageType.ConnectionApproval:
+                        #region New Connection
+
                         if (IncMsg.ReadPacketType() == PacketTypes.LOGIN)
                         {
+#if DEBUG
+                            Console.WriteLine("Incoming connection.");
+#endif
+
                             PlayerConnected(IncMsg);
 
 #if DEBUG
-                            Console.WriteLine("Incoming connection.");
                             Console.WriteLine("Approved new connection and sended initial data.\n");
 #endif
                         }
 
                         break;
+
+                        #endregion
 
                     case NetIncomingMessageType.Data:
                         // process data
@@ -122,6 +137,8 @@ namespace GameServer
                         // NetConnectionStatus.Disconnecting;
                         // NetConnectionStatus.None;
 
+                        #region Status Changed
+
 #if DEBUG
                         Console.WriteLine(IncMsg.SenderConnection.ToString() + " status changed. " +
                             (NetConnectionStatus)IncMsg.SenderConnection.Status + "\n");
@@ -130,6 +147,16 @@ namespace GameServer
                         if (IncMsg.SenderConnection.Status == NetConnectionStatus.Disconnected ||
                             IncMsg.SenderConnection.Status == NetConnectionStatus.Disconnecting)
                         {
+                            for (int i = 0; i < MAX_CLIENT; i++)
+                            {
+                                if (!OpenSlots[i] && 
+                                    Clients[i].Connection == IncMsg.SenderConnection)
+                                {
+                                    PlayerDisconnected(Clients[i]);
+                                    break;
+                                }
+                            }
+
                             // Find disconnected player and remove it
                             foreach (Player player in Clients)
                             {
@@ -140,7 +167,10 @@ namespace GameServer
                                 }
                             }
                         }
+
                         break;
+
+                        #endregion
 
                     default:
                         Console.WriteLine("Receive a message that are not filtering.");
@@ -153,14 +183,67 @@ namespace GameServer
 
         static void PlayerConnected(NetIncomingMessage msg)
         {
-            msg.SenderConnection.Approve();
-            // set initial data and send msg to all
+            int slot = FindOpenSlot(OpenSlots);
+
+            if (slot >= 0)
+            {
+                OpenSlots[slot] = false;
+                msg.SenderConnection.Approve();
+
+                string name = msg.ReadString();
+
+                Player player = new Player(name, slot, msg.SenderConnection);
+                player.Reset(INITIAL_POS, INITIAL_ROT);
+                Clients[slot] = player;
+
+                OutMsg = Server.CreateMessage();
+                OutMsg.Write((byte)PacketTypes.LOGIN);
+                OutMsg.Write(player.Name);
+                OutMsg.Write(player.Slot);
+                OutMsg.WritePlayerState(player.State);
+
+                // Send data to all player
+                Server.SendToAll(OutMsg, NetDeliveryMethod.UnreliableSequenced);
+
+#if DEBUG
+                Console.WriteLine(String.Format("Player {0} connected (slot {1})",
+                    player.Name, player.Slot));
+#endif
+            }
+            else
+                msg.SenderConnection.Deny();
         }
 
         static void PlayerDisconnected(Player player)
         {
             // send message to all and open the slot
+            OpenSlots[player.Slot] = true;
+            Clients[player.Slot] = null;
+            
+            //Server.Connections.Remove(player.Connection);
+
+            OutMsg = Server.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.DISCONNECTION);
+            OutMsg.Write(player.Slot);
+
+            Server.SendToAll(OutMsg, NetDeliveryMethod.UnreliableSequenced);
         }
+
+        #region Help Methods
+
+        static int FindOpenSlot(Boolean[] slots)
+        {
+            int i = 0;
+
+            while (i < slots.Length && slots[i] == false)
+                i++;
+
+            return ((i < slots.Length) ? i : -1);
+        }
+
+        #endregion
+
+        #region Extends Methods
 
         /// <summary>
         /// Extend NetIncomingMessage.
@@ -170,5 +253,24 @@ namespace GameServer
         {
             return (PacketTypes)msg.ReadByte();
         }
+
+        /// <summary>
+        /// Extend NetBuffer.
+        /// Write the Player Status in the buffer
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="state"></param>
+        public static void WritePlayerState(this NetBuffer buffer, STATE state)
+        {
+            buffer.Write(state.Position.X);
+            buffer.Write(state.Position.Y);
+            buffer.Write(state.Position.Z);
+
+            buffer.Write(state.Rotation.X);
+            buffer.Write(state.Rotation.Y);
+            buffer.Write(state.Rotation.Z);
+        }
+
+        #endregion
     }
 }

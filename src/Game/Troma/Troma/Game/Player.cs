@@ -8,7 +8,13 @@ using GameEngine;
 
 namespace Troma
 {
-    public struct PlayerState
+    public struct STATE
+    {
+        public Vector3 Position;
+        public Vector3 Rotation;
+    }
+
+    public struct INPUT
     {
         public bool IsMove;
         public bool IsRun;
@@ -18,9 +24,6 @@ namespace Troma
         public bool IsReload;
         public bool InSightPosition;
         public Weapons Weapon;
-
-        public Vector3 Position;
-        public Vector3 Rotation;
     }
 
     class Player
@@ -611,9 +614,9 @@ namespace Troma
             _weaponActive.GetComponent<Weapon>().ChangeUp();
         }
 
-        public PlayerState GetState()
+        public INPUT GetInput()
         {
-            return new PlayerState()
+            return new INPUT()
             {
                 IsMove = _isMove,
                 IsRun = _isRun,
@@ -623,10 +626,13 @@ namespace Troma
                 IsReload = _isReload,
                 InSightPosition = _inSightPosition,
                 Weapon = _weaponInfoActive.Type,
-
-                Position = Position,
-                Rotation = Rotation
             };
+        }
+
+        public void SetState(STATE state)
+        {
+            Position = state.Position;
+            Rotation = state.Rotation;
         }
 
         #endregion

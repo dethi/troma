@@ -7,24 +7,55 @@ using Lidgren.Network;
 
 namespace GameServer
 {
+    public struct STATE
+    {
+        public Vector3 Position;
+        public Vector3 Rotation;
+    }
+
+    public struct INPUT
+    {
+        public bool IsMove;
+        public bool IsRun;
+        public bool IsCrouch;
+
+        public bool IsShoot;
+        public bool IsReload;
+        public bool InSightPosition;
+        public Weapons Weapon;
+    }
+
+    public enum Weapons
+    {
+        M1,
+        M1911
+    }
+
     class Player
     {
+        public string Name;
         public int Slot;
         public NetConnection Connection;
 
-        public Vector3 Position;
-        public Vector3 Rotation;
+        public STATE State;
+        public INPUT Input;
 
-        public Player(int slot, NetConnection co)
+        public Player(string name, int slot, NetConnection co)
         {
+            Name = name;
             Slot = slot;
             Connection = co;
+
+            State = new STATE();
+            Input = new INPUT();
         }
 
         public void Reset(Vector3 pos, Vector3 rot)
         {
-            Position = pos;
-            Rotation = rot;
+            State.Position = pos;
+            State.Rotation = rot;
+
+            Input = new INPUT();
         }
     }
 }
