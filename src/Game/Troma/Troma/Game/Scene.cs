@@ -165,12 +165,11 @@ namespace Troma
             GameObject.BuildEntity(new Vector3(492, 0, 260), "Town/fontaine", modelEffect);
             GameObject.BuildEntity(new Vector3(412, 0, 580), "Town/Maison2", modelEffect);
             GameObject.BuildEntity(new Vector3(532, 0, 580), "Town/Maison2", modelEffect);
+            GameObject.BuildEntity(new Vector3(652, 0, 580), "Town/cimetiere", modelEffect);
 
             //GameObject.BuildEntity(new Vector3(460, 0, 153), "Town/garde_passage_a_niveau", modelEffect);
             //GameObject.BuildEntity(new Vector3(435, 0, 192), "Town/barriere_train_droite", modelEffect);
             //GameObject.BuildEntity(new Vector3(435, 0, 222), "Town/barriere_train_gauche", modelEffect);
-            //GameObject.BuildEntity(new Vector3(50, 0, 290), "Town/cimetiere", modelEffect);
-
 
              #region Rails
 
