@@ -11,17 +11,19 @@ namespace GameEngine
     {
         #region Fields
         HeightMap[,] heightTab;
+        TerrainInfo terrainInfo;
         int squareOf;
         #endregion Fields
 
         public TerrainInfo Info
         {
-            get { return new TerrainInfo(); }
+            get { return terrainInfo; }
         }
 
         public MultiHeightMap(Game game, Effect effect, TerrainInfo terrainInfo, string mapName, int squareOf)
         {
             this.squareOf = squareOf;
+            this.terrainInfo = terrainInfo;
             heightTab = new HeightMap[squareOf, squareOf];
             for (int x = 0; x < squareOf; x++)
             {
@@ -41,16 +43,16 @@ namespace GameEngine
 
         public float GetY(Vector3 pos)
         {
-            int mapX = (int)pos.X % squareOf;
-            int mapY = (int)pos.Z % squareOf;
+            int mapX = (int)(pos.X / terrainInfo.Size.Width);
+            int mapY = (int)(pos.Z / terrainInfo.Size.Height);
 
             return heightTab[mapX, mapY].GetY(pos);
         }
 
         public bool IsOnTerrain(Vector3 pos)
         {
-            int mapX = (int)pos.X % squareOf;
-            int mapY = (int)pos.Z % squareOf;
+            int mapX = (int)(pos.X / terrainInfo.Size.Width);
+            int mapY = (int)(pos.Z / terrainInfo.Size.Height);
 
             return heightTab[mapX, mapY].IsOnTerrain(pos);
         }
