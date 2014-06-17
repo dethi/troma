@@ -56,7 +56,8 @@ namespace GameEngine
             int mapX = (int)(pos.X / (terrainInfo.Size.Width - 1));
             int mapY = (int)(pos.Z / (terrainInfo.Size.Height - 1));
 
-            return heightTab[mapX, mapY].IsOnTerrain(pos);
+            return ((mapX < squareOf && mapY < squareOf) && 
+                heightTab[mapX, mapY].IsOnTerrain(pos));
         }
 
         public void Draw(ICamera camera)
