@@ -24,15 +24,13 @@ namespace Troma
         #region Constants
 
         const string APP_NAME = "TROMA";
-        const int PORT = 14242;
+        const int PORT = 11420;
         const int MAX_CLIENT = 20;
         const int DT = 30; // ms
 
         #endregion
 
         #region Fields
-
-        static string Host;
 
         static NetClient Client;
         static NetPeerConfiguration Config;
@@ -53,12 +51,10 @@ namespace Troma
 
         public GameClient(string host)
         {
-            Host = host;
-
             Initialize();
             SetupClient();
 
-            Connect();
+            Connect(host);
             WaitStartingData();
         }
 
@@ -83,20 +79,32 @@ namespace Troma
 
             Client = new NetClient(Config);
             Client.Start();
+
+#if DEBUG
+            Console.WriteLine("Client start...");
+#endif
         }
 
-        static void Connect()
+        static void Connect(string host)
         {
             OutMsg = Client.CreateMessage();
             OutMsg.Write((byte)PacketTypes.LOGIN);
             OutMsg.Write(Settings.Login);
 
-            Client.Connect(Host, PORT, OutMsg);
+            Client.Connect(host, PORT, OutMsg);
+
+#if DEBUG
+            Console.WriteLine("Send connection request to server...");
+#endif
         }
 
         static void WaitStartingData()
         {
             bool canStart = false;
+
+#if DEBUG
+            Console.WriteLine("Wait initial data...");
+#endif
 
             while (!canStart)
             {
@@ -107,6 +115,10 @@ namespace Troma
                         case NetIncomingMessageType.Data:
                             #region Connection Approved
 
+#if DEBUG
+                            Console.WriteLine("Data received...");
+#endif
+
                             if (IncMsg.ReadPacketType() == PacketTypes.LOGIN)
                             {
                                 if (IncMsg.ReadString() == Settings.Login)
@@ -116,6 +128,10 @@ namespace Troma
                                     Terrain = (Map)IncMsg.ReadByte();
 
                                     canStart = true;
+
+#if DEBUG
+                                    Console.WriteLine("Confirm initial data!");
+#endif
                                 }
                             }
 
@@ -126,6 +142,8 @@ namespace Troma
                         default:
                             break;
                     }
+
+                    Client.Recycle(IncMsg);
                 }
             }
         }
