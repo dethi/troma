@@ -137,9 +137,9 @@ namespace Troma
             GameServices.SpriteBatch.End();
         }
 
-        private void OnCancel(object sender, EventArgs e)
+        protected override void OnCancel(object sender, EventArgs e)
         {
-            OnCancel();
+            ExitScreen();
         }
     }
 }

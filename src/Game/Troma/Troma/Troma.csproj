@@ -149,7 +149,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>App.settings</DependentUpon>
     </Compile>
-    <Compile Include="Constants.cs" />
+    <Compile Include="Game\Constants.cs" />
     <Compile Include="EntitySystem\Components\Animated\AnimatedModel3D.cs" />
     <Compile Include="EntitySystem\Components\Animated\DrawAnimatedModel3D.cs" />
     <Compile Include="EntitySystem\Components\Animated\UpdateAnimation.cs" />
@@ -178,14 +178,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.fr-FR.resx</DependentUpon>
     </Compile>
-    <Compile Include="Score.cs" />
+    <Compile Include="Game\Score.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Numerous.cs" />
     <Compile Include="Screens\MenuScreens\GraphicsMenu.cs" />
     <Compile Include="Screens\MenuScreens\HelpMenu.cs" />
     <Compile Include="Screens\MenuScreens\Entry\IEntry.cs" />
     <Compile Include="Screens\MenuScreens\InGameMenu.cs" />
     <Compile Include="Screens\LoadingScreen.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Game\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="EntitySystem\Template\GameObject.cs" />
@@ -200,10 +200,10 @@
     <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Screens\StartScreens\PegiScreen.cs" />
     <Compile Include="Screens\StartScreens\TitleIntroScreen.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="TargetManager.cs" />
-    <Compile Include="Troma.cs" />
-    <Compile Include="WeaponInfo.cs" />
+    <Compile Include="Game\Settings.cs" />
+    <Compile Include="Game\TargetManager.cs" />
+    <Compile Include="Game\Troma.cs" />
+    <Compile Include="Game\WeaponInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\GameEngine\GameEngine.csproj">

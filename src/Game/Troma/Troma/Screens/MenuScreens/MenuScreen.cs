@@ -35,6 +35,10 @@ namespace Troma
 
         public override void HandleInput(GameTime gameTime, InputState input)
         {
+            // Allows the screen to exit
+            if (input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
+                OnCancel(null, null);
+
             // Move to the previous menu entry?
             if (input.IsPressed(Keys.Down) || (input.IsPressed(Buttons.DPadDown)))
             {
@@ -94,9 +98,6 @@ namespace Troma
             }
         }
 
-        protected virtual void OnCancel()
-        {
-            ExitScreen();
-        }
+        protected abstract void OnCancel(object sender, EventArgs e);
     }
 }

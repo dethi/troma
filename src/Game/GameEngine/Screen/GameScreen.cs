@@ -62,7 +62,7 @@ namespace GameEngine
             TransitionPosition = 1;
         }
 
-        public virtual void LoadContent() 
+        public virtual void LoadContent()
         {
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
@@ -76,6 +76,7 @@ namespace GameEngine
         }
 
         public virtual void Draw(GameTime gameTime) { }
+
         public virtual void HandleInput(GameTime gameTime, InputState input) { }
 
         public virtual void Update(GameTime gameTime, bool hasFocus,
