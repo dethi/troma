@@ -29,12 +29,14 @@ namespace GameEngine
             {
                 for (int y = 0; y < squareOf; y++)
                 {
-                    TerrainInfo info = new TerrainInfo(new Vector3(x * terrainInfo.Size.Width, 0,
-                                                                   y * terrainInfo.Size.Height),
-                                                                   terrainInfo.Size, terrainInfo.Depth,
-                                                                   FileManager.Load<Texture2D>("Terrains/" + mapName +"_texture" + x + y),
-                                                                   terrainInfo.TextureScale,
-                                                                   FileManager.Load<Texture2D>("Terrains/" + mapName + "_heightmap" + x + y));
+                    TerrainInfo info = new TerrainInfo(
+                        new Vector3(x * (terrainInfo.Size.Width - 1), 0, y * (terrainInfo.Size.Height - 1)),
+                        terrainInfo.Size,
+                        terrainInfo.Depth,
+                        FileManager.Load<Texture2D>("Terrains/" + mapName + "_texture" + x + y),
+                        terrainInfo.TextureScale,
+                        FileManager.Load<Texture2D>("Terrains/" + mapName + "_heightmap" + x + y));
+
                     heightTab[x, y] = new HeightMap(game, effect, info);
                 }
             }
@@ -43,16 +45,16 @@ namespace GameEngine
 
         public float GetY(Vector3 pos)
         {
-            int mapX = (int)(pos.X / terrainInfo.Size.Width);
-            int mapY = (int)(pos.Z / terrainInfo.Size.Height);
+            int mapX = (int)(pos.X / (terrainInfo.Size.Width - 1));
+            int mapY = (int)(pos.Z / (terrainInfo.Size.Height - 1));
 
             return heightTab[mapX, mapY].GetY(pos);
         }
 
         public bool IsOnTerrain(Vector3 pos)
         {
-            int mapX = (int)(pos.X / terrainInfo.Size.Width);
-            int mapY = (int)(pos.Z / terrainInfo.Size.Height);
+            int mapX = (int)(pos.X / (terrainInfo.Size.Width - 1));
+            int mapY = (int)(pos.Z / (terrainInfo.Size.Height - 1));
 
             return heightTab[mapX, mapY].IsOnTerrain(pos);
         }
