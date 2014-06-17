@@ -277,6 +277,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Switch Weapons.
+        /// </summary>
+        internal static string labelWeapon {
+            get {
+                return ResourceManager.GetString("labelWeapon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Left Mouse.
         /// </summary>
         internal static string LeftMouse {
@@ -300,6 +309,15 @@ namespace Troma {
         internal static string Loading {
             get {
                 return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Middle mouse button.
+        /// </summary>
+        internal static string Molette {
+            get {
+                return ResourceManager.GetString("Molette", resourceCulture);
             }
         }
         

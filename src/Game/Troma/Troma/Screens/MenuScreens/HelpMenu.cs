@@ -64,6 +64,7 @@ namespace Troma
             tmp.AppendLine(Resource.labelJump);
             tmp.AppendLine(Resource.labelCrouch);
             tmp.AppendLine(Resource.labelReload);
+            tmp.AppendLine(Resource.labelWeapon);
             tmp.AppendLine(Resource.labelShoot);
             tmp.AppendLine(Resource.labelAimfor);
             tmp.AppendLine(Resource.labelPause);
@@ -79,6 +80,7 @@ namespace Troma
             tmp.AppendLine(Resource.Space);
             tmp.AppendLine(kb[KeyActions.Crouch].ToString());
             tmp.AppendLine(kb[KeyActions.Reload].ToString());
+            tmp.AppendLine(Resource.Molette);
             tmp.AppendLine(Resource.LeftMouse);
             tmp.AppendLine(Resource.RightMouse);
             tmp.AppendLine(Keys.P.ToString());
@@ -92,7 +94,7 @@ namespace Troma
 
             float widthScale = (float)width / 1920;
             float heightScale = (float)height / 1080;
-            float scale = (widthScale + heightScale) / 2;
+            float scale =0.9f* (widthScale + heightScale) / 2;
 
             bgRect.Height = height;
             bgRect.Width = (int)(height * 1.778f);
