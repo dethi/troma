@@ -37,7 +37,7 @@ namespace GameEngine
                         terrainInfo.TextureScale,
                         FileManager.Load<Texture2D>("Terrains/" + mapName + "_heightmap" + x + y));
 
-                    heightTab[x, y] = new HeightMap(game, effect, info);
+                    heightTab[x, y] = new HeightMap(game, effect.Clone(), info);
                 }
             }
         }
