@@ -231,4 +231,10 @@
   <data name="NewHighScore" xml:space="preserve">
     <value>New high score</value>
   </data>
+  <data name="labelWeapon" xml:space="preserve">
+    <value>Switch Weapons</value>
+  </data>
+  <data name="Molette" xml:space="preserve">
+    <value>Middle mouse button</value>
+  </data>
 </root>

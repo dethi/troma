@@ -231,4 +231,10 @@
   <data name="NewHighScore" xml:space="preserve">
     <value>Nouveau record</value>
   </data>
+  <data name="labelWeapon" xml:space="preserve">
+    <value>Changer d'arme</value>
+  </data>
+  <data name="Molette" xml:space="preserve">
+    <value>Molette souris</value>
+  </data>
 </root>
