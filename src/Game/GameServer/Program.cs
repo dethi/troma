@@ -29,7 +29,7 @@ namespace GameServer
         #region Constants
 
         const string APP_NAME = "TROMA";
-        const int PORT = 14242;
+        const int PORT = 11420;
         const int MAX_CLIENT = 20;
         const int DT = 30; // ms
 
@@ -66,7 +66,7 @@ namespace GameServer
             {
                 HandleMsg();
                 Time = DateTime.Now;
-                System.Threading.Thread.Sleep(1); // slow server, less CPU used
+                //System.Threading.Thread.Sleep(1); // slow server, less CPU used
             }
         }
 
@@ -92,8 +92,8 @@ namespace GameServer
             Config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
 
 #if DEBUG
-            Config.SimulatedMinimumLatency = 0.03f; // 30ms
-            Config.SimulatedRandomLatency = 0.1f; // 100ms
+            //Config.SimulatedMinimumLatency = 0.03f; // 30ms
+            //Config.SimulatedRandomLatency = 0.1f; // 100ms
 #endif
 
             Server = new NetServer(Config);
@@ -110,6 +110,10 @@ namespace GameServer
         {
             if ((IncMsg = Server.ReadMessage()) != null)
             {
+#if DEBUG
+                Console.WriteLine("Data received.");
+#endif
+
                 switch (IncMsg.MessageType)
                 {
                     case NetIncomingMessageType.ConnectionApproval:
