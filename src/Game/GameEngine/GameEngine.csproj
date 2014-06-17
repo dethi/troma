@@ -134,6 +134,7 @@
     <Compile Include="Sounds\SoundManager.cs" />
     <Compile Include="Terrain\HeightMap.cs" />
     <Compile Include="Terrain\ITerrain.cs" />
+    <Compile Include="Terrain\MultiHeightMap.cs" />
     <Compile Include="Terrain\TerrainInfo.cs" />
     <Compile Include="TimerManager.cs" />
   </ItemGroup>

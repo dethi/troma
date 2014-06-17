@@ -11,6 +11,7 @@ namespace Troma
     public enum Map
     {
         Town,
+        Cracovie,
     }
 
     public class Scene
@@ -27,6 +28,10 @@ namespace Troma
             {
                 case Map.Town:
                     BuildTown(camera);
+                    break;
+
+                case Map.Cracovie :
+                    BuildCracovie(camera);
                     break;
 
                 default:
@@ -125,6 +130,26 @@ namespace Troma
             GameObject.BuildEntity(new Vector3(50, y, 290), "Town/cimetiere", modelEffect);
             GameObject.BuildEntity(new Vector3(380, y, 30), "Town/mairie", modelEffect);
             GameObject.BuildEntity(new Vector3(290, y, 55), "Town/fontaine", modelEffect);
+        }
+
+        private static void BuildCracovie(ICamera camera)
+        {
+            Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
+            Texture2D terrainTexture = null;
+            Texture2D terrainHeighmap = null;
+
+            TerrainInfo terrainInfo = new TerrainInfo()
+            {
+                Position = Vector3.Zero,
+                Size = new Size(513, 513),
+                Depth = 0,
+                Texture = terrainTexture,
+                TextureScale = 32,
+                Heighmap = terrainHeighmap
+            };
+
+            Terrain = new MultiHeightMap(GameServices.Game, terrainEffect, terrainInfo, "Cracovie", 1);
+            CloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
         }
     }
 }
