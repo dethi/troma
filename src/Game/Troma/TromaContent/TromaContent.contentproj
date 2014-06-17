@@ -418,6 +418,11 @@
       <ProcessorParameters_SwapWindingOrder>True</ProcessorParameters_SwapWindingOrder>
       <ProcessorParameters_RotationX>90</ProcessorParameters_RotationX>
     </Compile>
+    <Compile Include="Fonts\History.spritefont">
+      <Name>History</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Sounds\Audio.xgs">
       <Name>Audio</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -586,7 +591,6 @@
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Compile Include="MuzzleFlash\Muzzle_00000.png">
       <Name>Muzzle_00000</Name>
@@ -705,6 +709,83 @@
     </Compile>
     <Compile Include="MuzzleFlash\Muzzle_00023.png">
       <Name>Muzzle_00023</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sounds\Typewriter.wav">
+      <Name>Typewriter</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sounds\TypewriterPullback.wav">
+      <Name>TypewriterPullback</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Menus\BgHistory.jpg">
+      <Name>BgHistory</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_heightmap00.png">
+      <Name>cracovie_heightmap00</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_heightmap01.png">
+      <Name>cracovie_heightmap01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_heightmap10.png">
+      <Name>cracovie_heightmap10</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_heightmap11.png">
+      <Name>cracovie_heightmap11</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_texture00.jpg">
+      <Name>cracovie_texture00</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_texture10.jpg">
+      <Name>cracovie_texture10</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_texture01.jpg">
+      <Name>cracovie_texture01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_texture11.jpg">
+      <Name>cracovie_texture11</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

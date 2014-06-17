@@ -24,12 +24,14 @@ namespace Troma
             "Menus/background",
             "Menus/background-blur",
             "Menus/translucide",
+            "Menus/BgHistory",
             "Menus/plus",
             "Menus/minus",
             "Menus/go-left",
             "Menus/go-right",
             "Fonts/28DaysLater",
             "Fonts/LuckyTypewriter",
+            "Fonts/History",
             "Fonts/Digital"
         };
 
@@ -63,9 +65,10 @@ namespace Troma
             SoundManager.SetVolume(Settings.MusicVolume);
             SFXManager.SetVolume(Settings.MusicVolume);
 
-            //screenManager.AddScreen(new SoloScreen(this, ""));
-            screenManager.AddScreen(new PegiScreen(this));
+            screenManager.AddScreen(new SoloScreen(this, Map.Cracovie));
+            //screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new ScoreMenu(this));
+            //screenManager.AddScreen(new HistoryScreen(this));
         }
 
         /// <summary>
@@ -86,6 +89,8 @@ namespace Troma
             SFXManager.Add("M1911_shoot", Content.Load<SoundEffect>("Sounds/M1911_shoot"));
             SFXManager.Add("Move", Content.Load<SoundEffect>("Sounds/Move"));
             SFXManager.Add("TargetImpact", Content.Load<SoundEffect>("Sounds/TargetImpact"));
+            SFXManager.Add("Typewriter", Content.Load<SoundEffect>("Sounds/Typewriter"));
+            SFXManager.Add("TypewriterPullback", Content.Load<SoundEffect>("Sounds/TypewriterPullback"));
         }
 
         #endregion
