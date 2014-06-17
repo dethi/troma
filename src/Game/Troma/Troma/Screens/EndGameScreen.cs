@@ -139,7 +139,7 @@ namespace Troma
             LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, ""));
         }
 
-        private void OnCancel(object sender, EventArgs e)
+        protected override void OnCancel(object sender, EventArgs e)
         {
             LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game));
         }

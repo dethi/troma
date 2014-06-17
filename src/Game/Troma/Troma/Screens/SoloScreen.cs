@@ -201,8 +201,11 @@ namespace Troma
 
         public override void HandleInput(GameTime gameTime, InputState input)
         {
-            if (input.IsPressed(Keys.P) || input.IsPressed(Buttons.Start))
+            if (input.IsPressed(Keys.P) || input.IsPressed(Buttons.Start) ||
+                input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
+            {
                 ScreenManager.AddScreen(new InGameMenu(game));
+            }
             else
             {
                 time += gameTime.ElapsedGameTime;

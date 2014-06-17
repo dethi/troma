@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using GameEngine;
 
 namespace Troma
@@ -68,6 +69,14 @@ namespace Troma
             SetMenuEntryText();
         }
 
+        public override void HandleInput(GameTime gameTime, InputState input)
+        {
+            base.HandleInput(gameTime, input);
+
+            if (input.IsPressed(Keys.P) || input.IsPressed(Buttons.Start))
+                ResumeMenuEntrySelected(null, null);
+        }
+
         public override void Draw(GameTime gameTime)
         {
             int width = GameServices.GraphicsDevice.Viewport.Width;
@@ -117,7 +126,7 @@ namespace Troma
             ScreenManager.AddScreen(new OptionsMenu(game));
         }
 
-        private void OnCancel(object sender, EventArgs e)
+        protected override void OnCancel(object sender, EventArgs e)
         {
             LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game));
         }

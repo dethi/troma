@@ -135,10 +135,10 @@ namespace Troma
             Settings.Multisampling = multisamplingMenuEntry.Activated;
         }
 
-        private void OnCancel(object sender, EventArgs e)
+        protected override void OnCancel(object sender, EventArgs e)
         {
             Settings.Save();
-            OnCancel();
+            ExitScreen();
         }
     }
 }

@@ -131,7 +131,7 @@ namespace Troma
             return false;
         }
 
-        public void Reload()
+        public bool Reload()
         {
             if (_info.Loader > 0 && !_isLoading)
             {
@@ -145,13 +145,17 @@ namespace Troma
 
                 Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.Reload, _info.Weapon_nb_bone);
                 Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.Reload, _info.Arms_nb_bone);
+
+                return true;
             }
+
+            return false;
         }
 
-        public void ChangeSight()
+        public bool ChangeSight()
         {
             if (_isLoading)
-                return;
+                return false;
 
             SightPosition = !SightPosition;
 
@@ -165,6 +169,8 @@ namespace Troma
                 Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.AimDown, _info.Weapon_nb_bone);
                 Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.AimDown, _info.Arms_nb_bone);
             }
+
+            return SightPosition;
         }
 
         public void ChangeUp()

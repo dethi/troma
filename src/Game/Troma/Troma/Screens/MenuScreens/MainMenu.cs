@@ -152,15 +152,10 @@ namespace Troma
             ScreenManager.AddScreen(new OptionsMenu(game));
         }
 
-        protected override void OnCancel()
-        {
-            game.Exit();
-        }
-
-        private void OnCancel(object sender, EventArgs e)
+        protected override void OnCancel(object sender, EventArgs e)
         {
             SoundManager.Stop();
-            OnCancel();
+            game.Exit();
         }
 
         private void SetMenuEntryText()

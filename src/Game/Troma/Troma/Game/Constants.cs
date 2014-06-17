@@ -12,6 +12,7 @@ namespace Troma
         public static WeaponInfo GarandM1 = new WeaponInfo()
         {
             Name = "M1 Garand",
+            Type = Weapons.M1,
 
             MunitionPerLoader = 8,
             Loader = 10,
@@ -47,6 +48,7 @@ namespace Troma
         public static WeaponInfo ColtM1911 = new WeaponInfo()
         {
             Name = "Colt M1911",
+            Type = Weapons.M1911,
 
             MunitionPerLoader = 9,
             Loader = 10,
