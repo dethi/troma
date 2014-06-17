@@ -17,6 +17,11 @@ namespace GameServer
         DISCONNECTION
     }
 
+    public enum Map
+    {
+        Town,
+    }
+
     #endregion
 
     public static class Program
@@ -28,6 +33,7 @@ namespace GameServer
         const int MAX_CLIENT = 20;
         const int DT = 30; // ms
 
+        const Map TERRAIN = Map.Town;
         static Vector3 INITIAL_POS = Vector3.One * 15f;
         static Vector3 INITIAL_ROT = Vector3.Zero;
 
@@ -115,7 +121,7 @@ namespace GameServer
                             Console.WriteLine("Incoming connection.");
 #endif
 
-                            PlayerConnected(IncMsg);
+                            PlayerConnected();
 
 #if DEBUG
                             Console.WriteLine("Approved new connection and sended initial data.\n");
@@ -181,18 +187,18 @@ namespace GameServer
             }
         }
 
-        static void PlayerConnected(NetIncomingMessage msg)
+        static void PlayerConnected()
         {
             int slot = FindOpenSlot(OpenSlots);
 
             if (slot >= 0)
             {
                 OpenSlots[slot] = false;
-                msg.SenderConnection.Approve();
+                IncMsg.SenderConnection.Approve();
 
-                string name = msg.ReadString();
+                string name = IncMsg.ReadString();
 
-                Player player = new Player(name, slot, msg.SenderConnection);
+                Player player = new Player(name, slot, IncMsg.SenderConnection);
                 player.Reset(INITIAL_POS, INITIAL_ROT);
                 Clients[slot] = player;
 
@@ -201,6 +207,14 @@ namespace GameServer
                 OutMsg.Write(player.Name);
                 OutMsg.Write(player.Slot);
                 OutMsg.WritePlayerState(player.State);
+                OutMsg.Write((byte)TERRAIN);
+
+                // Message contains
+                // byte = Type
+                // string = Player name
+                // int = Player ID
+                // sizeof(STATE) =  Player State
+                // byte = Map
 
                 // Send data to all player
                 Server.SendToAll(OutMsg, NetDeliveryMethod.UnreliableSequenced);
@@ -211,7 +225,7 @@ namespace GameServer
 #endif
             }
             else
-                msg.SenderConnection.Deny();
+                IncMsg.SenderConnection.Deny();
         }
 
         static void PlayerDisconnected(Player player)
@@ -258,8 +272,6 @@ namespace GameServer
         /// Extend NetBuffer.
         /// Write the Player Status in the buffer
         /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="state"></param>
         public static void WritePlayerState(this NetBuffer buffer, STATE state)
         {
             buffer.Write(state.Position.X);

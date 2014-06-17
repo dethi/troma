@@ -150,6 +150,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>App.settings</DependentUpon>
     </Compile>
+    <Compile Include="Game\GameClient.cs" />
     <Compile Include="Game\Constants.cs" />
     <Compile Include="EntitySystem\Components\Animated\AnimatedModel3D.cs" />
     <Compile Include="EntitySystem\Components\Animated\DrawAnimatedModel3D.cs" />
@@ -169,7 +170,8 @@
     <Compile Include="EntitySystem\Template\TargetObject.cs" />
     <Compile Include="EntitySystem\Template\VectGameObject.cs" />
     <Compile Include="EntitySystem\Template\WeaponObject.cs" />
-    <Compile Include="Scene.cs" />
+    <Compile Include="Game\Scene.cs" />
+    <Compile Include="OtherPlayer.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

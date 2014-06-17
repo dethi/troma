@@ -32,6 +32,8 @@ namespace Troma
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
             _map = map;
+
+            GameClient client = new GameClient("127.0.0.1");
         }
 
         public override void LoadContent()

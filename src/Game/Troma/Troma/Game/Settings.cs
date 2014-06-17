@@ -11,6 +11,8 @@ namespace Troma
 {
     public static class Settings
     {
+        public static string Login;
+
         private static float _musicVolume;
         private static string _keyboard;
         private static string _language;

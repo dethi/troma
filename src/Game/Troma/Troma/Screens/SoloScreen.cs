@@ -15,8 +15,6 @@ namespace Troma
 
         private FirstPersonView camera;
         private Player player;
-        private ITerrain terrain;
-        private CloudManager cloudManager;
 
         private Map _map;
 
