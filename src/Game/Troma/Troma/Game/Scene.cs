@@ -137,6 +137,8 @@ namespace Troma
             Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
             Texture2D terrainTexture = null;
             Texture2D terrainHeighmap = null;
+            Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
+
 
             TerrainInfo terrainInfo = new TerrainInfo()
             {
@@ -150,6 +152,51 @@ namespace Troma
 
             Terrain = new MultiHeightMap(GameServices.Game, terrainEffect, terrainInfo, "cracovie", 2);
             CloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
+
+            GameObject.BuildEntity(new Vector3(412, 0, 420), "Town/gare", modelEffect);
+            GameObject.BuildEntity(new Vector3(412, 0, 522), "Town/quai", modelEffect);
+            GameObject.BuildEntity(new Vector3(652, 0, 180), "Town/eglise", modelEffect);
+            GameObject.BuildEntity(new Vector3(652, 0, 300), "Town/mairie", modelEffect);
+            GameObject.BuildEntity(new Vector3(412, 0, 20), "Town/Immeuble", modelEffect);
+            GameObject.BuildEntity(new Vector3(292, 0, 20), "Town/Immeuble2", modelEffect);
+            GameObject.BuildEntity(new Vector3(652, 0, 20), "Town/Immeuble2", modelEffect);
+            GameObject.BuildEntity(new Vector3(292, 0, 180), "Town/poste", modelEffect);
+            GameObject.BuildEntity(new Vector3(292, 0, 300), "Town/hotel", modelEffect);
+
+
+            //GameObject.BuildEntity(new Vector3(460, 0, 153), "Town/garde_passage_a_niveau", modelEffect);
+            //GameObject.BuildEntity(new Vector3(435, 0, 192), "Town/barriere_train_droite", modelEffect);
+            //GameObject.BuildEntity(new Vector3(435, 0, 222), "Town/barriere_train_gauche", modelEffect);
+            //GameObject.BuildEntity(new Vector3(50, 0, 290), "Town/cimetiere", modelEffect);
+            //GameObject.BuildEntity(new Vector3(380, 0, 30), "Town/mairie", modelEffect);
+            //GameObject.BuildEntity(new Vector3(290, 0, 55), "Town/fontaine", modelEffect);
+
+
+             #region Rails
+
+            List<Vector3> modelPos = new List<Vector3>();
+            modelPos.Add(new Vector3(0, 0, 502));
+            modelPos.Add(new Vector3(120, 0, 502));
+            modelPos.Add(new Vector3(240, 0, 502));
+            modelPos.Add(new Vector3(360, 0, 502));
+            modelPos.Add(new Vector3(480, 0, 502));
+            modelPos.Add(new Vector3(600, 0, 502));
+            modelPos.Add(new Vector3(720, 0, 502));
+            modelPos.Add(new Vector3(840, 0, 502));
+            modelPos.Add(new Vector3(960, 0, 502));
+            modelPos.Add(new Vector3(0, 0, 512));
+            modelPos.Add(new Vector3(120, 0, 512));
+            modelPos.Add(new Vector3(240, 0, 512));
+            modelPos.Add(new Vector3(360, 0, 512));
+            modelPos.Add(new Vector3(480, 0, 512));
+            modelPos.Add(new Vector3(600, 0, 512));
+            modelPos.Add(new Vector3(720, 0, 512));
+            modelPos.Add(new Vector3(840, 0, 512));
+            modelPos.Add(new Vector3(960, 0, 512));
+
+            VectGameObject.BuildEntity(modelPos.ToArray(), "Town/rail", modelEffect);
+
+            #endregion
         }
     }
 }
