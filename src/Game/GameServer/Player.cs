@@ -34,16 +34,16 @@ namespace GameServer
     class Player
     {
         public string Name;
-        public int Slot;
+        public int ID;
         public NetConnection Connection;
 
         public STATE State;
         public INPUT Input;
 
-        public Player(string name, int slot, NetConnection co)
+        public Player(string name, int id, NetConnection co)
         {
             Name = name;
-            Slot = slot;
+            ID = id;
             Connection = co;
 
             State = new STATE();

@@ -14,12 +14,14 @@ namespace GameServer
         LOGIN,
         INPUT,
         STATUS,
-        DISCONNECTION
+        QUIT,
+        NEW
     }
 
     public enum Map
     {
         Town,
+        Cracovie,
     }
 
     #endregion
@@ -46,8 +48,10 @@ namespace GameServer
         static NetIncomingMessage IncMsg;
         static NetOutgoingMessage OutMsg;
 
-        static Player[] Clients;
-        static Boolean[] OpenSlots;
+        static int NextID;
+        static List<Player> Clients;
+        static List<Player> WaitingQueue;
+
         static DateTime Time;
         static TimeSpan TimeToPass;
 
@@ -74,11 +78,12 @@ namespace GameServer
 
         static void Initialize()
         {
-            Clients = new Player[MAX_CLIENT];
-            OpenSlots = new Boolean[MAX_CLIENT];
+            Clients = new List<Player>();
+            Clients.Capacity = MAX_CLIENT;
+            NextID = 0;
 
-            for (int i = 0; i < MAX_CLIENT; i++)
-                OpenSlots[i] = true;
+            WaitingQueue = new List<Player>();
+            WaitingQueue.Capacity = MAX_CLIENT / 4;
 
             Time = DateTime.Now;
             TimeToPass = new TimeSpan(0, 0, 0, 0, DT);
@@ -89,11 +94,18 @@ namespace GameServer
             Config = new NetPeerConfiguration(APP_NAME);
             Config.Port = PORT;
             Config.MaximumConnections = MAX_CLIENT;
+            Config.EnableMessageType(NetIncomingMessageType.Data);
             Config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
 
 #if DEBUG
-            //Config.SimulatedMinimumLatency = 0.03f; // 30ms
-            //Config.SimulatedRandomLatency = 0.1f; // 100ms
+            Config.EnableMessageType(NetIncomingMessageType.WarningMessage);
+            Config.EnableMessageType(NetIncomingMessageType.VerboseDebugMessage);
+            Config.EnableMessageType(NetIncomingMessageType.ErrorMessage);
+            Config.EnableMessageType(NetIncomingMessageType.Error);
+            Config.EnableMessageType(NetIncomingMessageType.DebugMessage);
+
+            Config.SimulatedMinimumLatency = 0.03f; // 30ms
+            Config.SimulatedRandomLatency = 0.1f; // 100ms
 #endif
 
             Server = new NetServer(Config);
@@ -110,10 +122,6 @@ namespace GameServer
         {
             if ((IncMsg = Server.ReadMessage()) != null)
             {
-#if DEBUG
-                Console.WriteLine("Data received.");
-#endif
-
                 switch (IncMsg.MessageType)
                 {
                     case NetIncomingMessageType.ConnectionApproval:
@@ -122,14 +130,11 @@ namespace GameServer
                         if (IncMsg.ReadPacketType() == PacketTypes.LOGIN)
                         {
 #if DEBUG
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Incoming connection.");
 #endif
 
                             PlayerConnected();
-
-#if DEBUG
-                            Console.WriteLine("Approved new connection and sended initial data.\n");
-#endif
                         }
 
                         break;
@@ -150,6 +155,7 @@ namespace GameServer
                         #region Status Changed
 
 #if DEBUG
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine(IncMsg.SenderConnection.ToString() + " status changed. " +
                             (NetConnectionStatus)IncMsg.SenderConnection.Status + "\n");
 #endif
@@ -157,35 +163,51 @@ namespace GameServer
                         if (IncMsg.SenderConnection.Status == NetConnectionStatus.Disconnected ||
                             IncMsg.SenderConnection.Status == NetConnectionStatus.Disconnecting)
                         {
-                            for (int i = 0; i < MAX_CLIENT; i++)
-                            {
-                                if (!OpenSlots[i] && 
-                                    Clients[i].Connection == IncMsg.SenderConnection)
-                                {
-                                    PlayerDisconnected(Clients[i]);
-                                    break;
-                                }
-                            }
-
                             // Find disconnected player and remove it
-                            foreach (Player player in Clients)
-                            {
-                                if (player.Connection == IncMsg.SenderConnection)
-                                {
-                                    PlayerDisconnected(player);
-                                    break;
-                                }
-                            }
+                            Player p = FindPlayer(IncMsg.SenderConnection, Clients);
+
+                            if (p != null)
+                                PlayerDisconnected(p);
+                        }
+                        else if (IncMsg.SenderConnection.Status == NetConnectionStatus.Connected)
+                        {
+                            Player p = FindPlayer(IncMsg.SenderConnection, WaitingQueue);
+
+                            if (p != null)
+                                SendInitialData(p);
                         }
 
                         break;
 
                         #endregion
 
+#if DEBUG
+                    case NetIncomingMessageType.VerboseDebugMessage:
+                        break;
+
+                    case NetIncomingMessageType.DebugMessage:
+                        break;
+
+                    case NetIncomingMessageType.WarningMessage:
+                        break;
+
+                    case NetIncomingMessageType.ErrorMessage:
+                        break;
+
+                    case NetIncomingMessageType.Error:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Corrupted message!!!");
+                        break;
+#endif
+
                     default:
-                        Console.WriteLine("Receive a message that are not filtering.");
+                        //Console.WriteLine("Receive a message that are not filtering.");
                         break;
                 }
+
+#if DEBUG
+                Console.ResetColor();
+#endif
 
                 Server.Recycle(IncMsg); // generate less garbage
             }
@@ -193,70 +215,92 @@ namespace GameServer
 
         static void PlayerConnected()
         {
-            int slot = FindOpenSlot(OpenSlots);
-
-            if (slot >= 0)
+            if (Clients.Count < MAX_CLIENT)
             {
-                OpenSlots[slot] = false;
                 IncMsg.SenderConnection.Approve();
 
                 string name = IncMsg.ReadString();
 
-                Player player = new Player(name, slot, IncMsg.SenderConnection);
+                Player player = new Player(name, NextID, IncMsg.SenderConnection);
                 player.Reset(INITIAL_POS, INITIAL_ROT);
-                Clients[slot] = player;
 
+                WaitingQueue.Add(player);
+                NextID++;
+
+                // Send msg to all except player
                 OutMsg = Server.CreateMessage();
-                OutMsg.Write((byte)PacketTypes.LOGIN);
+                OutMsg.Write((byte)PacketTypes.NEW);
+                OutMsg.Write(player.ID);
                 OutMsg.Write(player.Name);
-                OutMsg.Write(player.Slot);
                 OutMsg.WritePlayerState(player.State);
-                OutMsg.Write((byte)TERRAIN);
 
-                // Message contains
-                // byte = Type
-                // string = Player name
-                // int = Player ID
-                // sizeof(STATE) =  Player State
-                // byte = Map
+                // type = NEW
+                // int = ID
+                // string = Name
+                // State = Player state
 
-                // Send data to all player
-                Server.SendToAll(OutMsg, NetDeliveryMethod.UnreliableSequenced);
+                Server.SendToAll(OutMsg, player.Connection, NetDeliveryMethod.Unreliable, 0);
 
 #if DEBUG
                 Console.WriteLine(String.Format("Player {0} connected (slot {1})",
-                    player.Name, player.Slot));
+                    player.Name, player.ID));
 #endif
             }
             else
                 IncMsg.SenderConnection.Deny();
         }
 
-        static void PlayerDisconnected(Player player)
+        static void SendInitialData(Player player)
         {
-            // send message to all and open the slot
-            OpenSlots[player.Slot] = true;
-            Clients[player.Slot] = null;
-            
-            //Server.Connections.Remove(player.Connection);
+            WaitingQueue.Remove(player);
+            Clients.Add(player);
 
             OutMsg = Server.CreateMessage();
-            OutMsg.Write((byte)PacketTypes.DISCONNECTION);
-            OutMsg.Write(player.Slot);
+            OutMsg.Write((byte)PacketTypes.LOGIN);
+            OutMsg.Write(player.ID);
+            OutMsg.Write(player.Name);
+            OutMsg.WritePlayerState(player.State);
+            OutMsg.Write((byte)TERRAIN);
 
-            Server.SendToAll(OutMsg, NetDeliveryMethod.UnreliableSequenced);
+            // type = LOGIN
+            // int = ID
+            // string = Name
+            // State = Player state
+            // Map = terrain
+
+            Server.SendMessage(OutMsg, player.Connection, NetDeliveryMethod.Unreliable, 0);
+        }
+
+        static void PlayerDisconnected(Player player)
+        {
+            // remove and disconnect
+            Clients.Remove(player);
+            player.Connection.Disconnect("END");
+
+            //Server.Connections.Remove(player.Connection);
+
+            // send msg to all
+            OutMsg = Server.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.QUIT);
+            OutMsg.Write(player.ID);
+
+            // type = QUIT
+            // int = ID
+
+            Server.SendMessage(OutMsg, Server.Connections, NetDeliveryMethod.Unreliable, 0);
         }
 
         #region Help Methods
 
-        static int FindOpenSlot(Boolean[] slots)
+        static Player FindPlayer(NetConnection co, List<Player> list)
         {
-            int i = 0;
+            foreach (Player player in list)
+            {
+                if (player.Connection == co)
+                    return player;
+            }
 
-            while (i < slots.Length && slots[i] == false)
-                i++;
-
-            return ((i < slots.Length) ? i : -1);
+            return null;
         }
 
         #endregion
