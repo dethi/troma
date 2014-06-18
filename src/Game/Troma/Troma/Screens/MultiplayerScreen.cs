@@ -57,6 +57,8 @@ namespace Troma
 
             time = new TimeSpan();
             game.ResetElapsedTime();
+
+            client.Start();
         }
 
         #endregion
@@ -92,6 +94,8 @@ namespace Troma
 
                 if (player.HasShoot)
                     client.SendShoot();
+
+                client.SetData(player.GetState(), player.GetInput());
             }
         }
 

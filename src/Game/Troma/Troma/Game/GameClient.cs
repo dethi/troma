@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Lidgren.Network;
 using ClientServerExtension;
+using System.ComponentModel;
 
 namespace Troma
 {
@@ -28,9 +29,13 @@ namespace Troma
 
         public int ID;
         public STATE State;
+        public INPUT Input;
         public Map Terrain;
 
         public List<OtherPlayer> Players;
+
+        private System.Timers.Timer timerUpdate;
+        private BackgroundWorker backgroundUpdater;
 
         #endregion
 
@@ -49,6 +54,9 @@ namespace Troma
         {
             Players = new List<OtherPlayer>();
             Players.Capacity = MAX_CLIENT;
+
+            timerUpdate = new System.Timers.Timer(35); // 35ms
+            timerUpdate.Elapsed += new System.Timers.ElapsedEventHandler(UpdateElapsed);
         }
 
         private void SetupClient()
@@ -167,6 +175,11 @@ namespace Troma
 
         #endregion
 
+        public void Start()
+        {
+            timerUpdate.Start();
+        }
+
         public void HandleMsg()
         {
             if ((IncMsg = Client.ReadMessage()) != null)
@@ -185,103 +198,58 @@ namespace Troma
             }
         }
 
-        public void SendState()
+        private void UpdateElapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-
+            SendState(State);
+            SendInput(Input);
         }
 
-        public void SendInput()
+        private void SendState(STATE s)
         {
+            OutMsg = Client.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.STATE);
+            OutMsg.Write(ID);
+            OutMsg.WritePlayerState(s);
+
+            Client.SendMessage(OutMsg, NetDeliveryMethod.UnreliableSequenced, 2);
+        }
+
+        private void SendInput(INPUT i)
+        {
+            OutMsg = Client.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.INPUT);
+            OutMsg.Write(ID);
+            OutMsg.WritePlayerInput(i);
+
+            Client.SendMessage(OutMsg, NetDeliveryMethod.UnreliableSequenced, 2);
         }
 
         public void SendShoot()
         {
             OutMsg = Client.CreateMessage();
             OutMsg.Write((byte)PacketTypes.SHOOT);
+            OutMsg.Write(ID);
 
             Client.SendMessage(OutMsg, NetDeliveryMethod.Unreliable, 0);
         }
-    }
 
-    public static class Extends
-    {
-        #region Extends Methods
-
-        /// <summary>
-        /// Extend NetIncomingMessage.
-        /// Return the type value (one byte) of the Incoming Message
-        /// </summary>
-        public static PacketTypes ReadPacketType(this NetIncomingMessage msg)
+        public void SetData(STATE s, INPUT i)
         {
-            return (PacketTypes)msg.ReadByte();
+            State = s;
+            Input = i;
         }
 
-        /// <summary>
-        /// Extend NetIncomingMessage.
-        /// Read a Player State
-        /// </summary>
-        public static STATE ReadPlayerState(this NetIncomingMessage msg)
+        #region Help Methods
+
+        public OtherPlayer FindPlayer(int id, List<OtherPlayer> list)
         {
-            return new STATE()
+            foreach (OtherPlayer player in list)
             {
-                Position = new Vector3(
-                    msg.ReadFloat(),
-                    msg.ReadFloat(),
-                    msg.ReadFloat()),
+                if (player.ID == id)
+                    return player;
+            }
 
-                Rotation = new Vector3(
-                    msg.ReadFloat(),
-                    msg.ReadFloat(),
-                    msg.ReadFloat())
-            };
-        }
-
-        /// <summary>
-        /// Extend NetBuffer.
-        /// Write the Player State in the buffer
-        /// </summary>
-        public static void WritePlayerState(this NetBuffer buffer, STATE state)
-        {
-            buffer.Write(state.Position.X);
-            buffer.Write(state.Position.Y);
-            buffer.Write(state.Position.Z);
-
-            buffer.Write(state.Rotation.X);
-            buffer.Write(state.Rotation.Y);
-            buffer.Write(state.Rotation.Z);
-        }
-
-        /// <summary>
-        /// Extend NetIncomingMessage.
-        /// Read a Player Input
-        /// </summary>
-        public static INPUT ReadPlayerInput(this NetIncomingMessage msg)
-        {
-            return new INPUT()
-            {
-                IsMove = msg.ReadBoolean(),
-                IsRun = msg.ReadBoolean(),
-                IsCrouch = msg.ReadBoolean(),
-
-                IsReload = msg.ReadBoolean(),
-                InSightPosition = msg.ReadBoolean(),
-                Weapon = (Weapons)msg.ReadByte()
-            };
-        }
-
-        /// <summary>
-        /// Extend NetBuffer.
-        /// Write the Player Input in the buffer
-        /// </summary>
-        public static void WritePlayerState(this NetBuffer buffer, INPUT input)
-        {
-            buffer.Write(input.IsMove);
-            buffer.Write(input.IsRun);
-            buffer.Write(input.IsCrouch);
-
-            buffer.Write(input.IsReload);
-            buffer.Write(input.InSightPosition);
-            buffer.Write((byte)input.Weapon);
+            return null;
         }
 
         #endregion

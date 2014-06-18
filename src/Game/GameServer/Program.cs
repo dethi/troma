@@ -43,12 +43,46 @@ namespace GameServer
 
 
     //==============
-    // Spawn (ch. 0)
+    // Spawn (ch. 1)
     //==============
     //
     // type = SPAWN
     // int = client ID
     // State = client state
+
+
+    //=============
+    // Kill (ch. 1)
+    //=============
+    //
+    // type = KILL
+    // int = client ID
+
+
+    //==============
+    // Shoot (ch. 0)
+    //==============
+    //
+    // type = SHOOT
+    // int = client ID
+
+
+    //==============
+    // State (ch. 2)
+    //==============
+    //
+    // type = STATE
+    // int = client ID
+    // State = client state
+
+
+    //==============
+    // Input (ch. 3)
+    //==============
+    //
+    // type = INPUT
+    // int = client ID
+    // Input = client input
 
     #endregion
 
@@ -170,36 +204,78 @@ namespace GameServer
                     case NetIncomingMessageType.Data:
                         #region Process Data
 
-                        Player p = FindPlayer(IncMsg.SenderConnection, Clients);
+                        Player p;
 
                         switch (IncMsg.ReadPacketType())
                         {
                             case PacketTypes.STATE:
+                                p = FindPlayer(IncMsg.ReadInt32(), Clients);
+
+                                if (p == null)
+                                    break;
+
                                 p.State = IncMsg.ReadPlayerState();
 
                                 OutMsg = Server.CreateMessage();
+                                OutMsg.Write((byte)PacketTypes.STATE);
+                                OutMsg.Write(p.ID);
                                 OutMsg.WritePlayerState(p.State);
 
                                 Server.SendToAll(OutMsg, p.Connection,
                                     NetDeliveryMethod.UnreliableSequenced, 1);
 
+#if DEBUG
+                                Console.BackgroundColor = ConsoleColor.White;
+                                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                                Console.WriteLine("Player {0} have send state.", p.ID);
+#endif
+
                                 break;
 
                             case PacketTypes.INPUT:
+                                p = FindPlayer(IncMsg.ReadInt32(), Clients);
+
+                                if (p == null)
+                                    break;
+
                                 p.Input = IncMsg.ReadPlayerInput();
 
                                 OutMsg = Server.CreateMessage();
+                                OutMsg.Write((byte)PacketTypes.INPUT);
+                                OutMsg.Write(p.ID);
                                 OutMsg.WritePlayerInput(p.Input);
 
                                 Server.SendToAll(OutMsg, p.Connection,
                                     NetDeliveryMethod.UnreliableSequenced, 1);
 
+#if DEBUG
+                                Console.BackgroundColor = ConsoleColor.White;
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine("Player {0} have send input.", p.ID);
+#endif
+
                                 break;
 
                             case PacketTypes.SHOOT:
-                                // compute shoot and send Kill if necessaire
+                                p = FindPlayer(IncMsg.ReadInt32(), Clients);
+
+                                // Compute shoot on the server
+
+                                if (p == null)
+                                    break;
+
+                                OutMsg = Server.CreateMessage();
+                                OutMsg.Write((byte)PacketTypes.SHOOT);
+                                OutMsg.Write(p.ID);
+
+                                Server.SendToAll(OutMsg, p.Connection,
+                                    NetDeliveryMethod.Unreliable, 0);
+
+#if DEBUG
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine("Player {0} have shooted.", p.ID);
+#endif
+
                                 break;
 
                             default:
@@ -331,7 +407,7 @@ namespace GameServer
             OutMsg.Write(player.ID);
             OutMsg.WritePlayerState(state);
 
-            Server.SendToAll(OutMsg, null, NetDeliveryMethod.Unreliable, 0);
+            Server.SendToAll(OutMsg, null, NetDeliveryMethod.UnreliableSequenced, 1);
         }
 
         static void PlayerDisconnected(Player player)
@@ -356,6 +432,17 @@ namespace GameServer
             foreach (Player player in list)
             {
                 if (player.Connection == co)
+                    return player;
+            }
+
+            return null;
+        }
+
+        static Player FindPlayer(int id, List<Player> list)
+        {
+            foreach (Player player in list)
+            {
+                if (player.ID == id)
                     return player;
             }
 
