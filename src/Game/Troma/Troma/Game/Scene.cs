@@ -147,7 +147,7 @@ namespace Troma
             TerrainInfo terrainInfo = new TerrainInfo()
             {
                 Position = Vector3.Zero,
-                Size = new Size(513, 513),
+                Size = new Size(256, 256),
                 Depth = 0,
                 Texture = terrainTexture,
                 TextureScale = 32,
@@ -155,37 +155,37 @@ namespace Troma
             };
 
             CloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
-            Terrain = new MultiHeightMap(GameServices.Game, terrainEffect, terrainInfo, "cracovie", 2);
+            Terrain = new MultiHeightMap(GameServices.Game, terrainEffect, terrainInfo, "cracovie", 5);
 
 
-            GameObject.BuildEntity(new Vector3(132, 0, 20), "Town/immeuble4", modelEffect);
-            GameObject.BuildEntity(new Vector3(132, 0, 300), "Town/immeuble4", modelEffect);
-            GameObject.BuildEntity(new Vector3(132, 0, 180), "Town/immeuble3", modelEffect);
+            GameObject.BuildEntity(new Vector3(132, 0, 276), "Town/immeuble4", modelEffect);
+            GameObject.BuildEntity(new Vector3(132, 0, 556), "Town/immeuble4", modelEffect);
+            GameObject.BuildEntity(new Vector3(132, 0, 436), "Town/immeuble3", modelEffect);
 
-            GameObject.BuildEntity(new Vector3(262, 0, 580), "Town/immeuble3", modelEffect);
+            GameObject.BuildEntity(new Vector3(262, 0, 836), "Town/immeuble3", modelEffect);
 
-            GameObject.BuildEntity(new Vector3(292, 0, 20), "Town/immeuble2", modelEffect);
-            GameObject.BuildEntity(new Vector3(292, 0, 180), "Town/poste", modelEffect);
-            GameObject.BuildEntity(new Vector3(292, 0, 300), "Town/hotel", modelEffect);
+            GameObject.BuildEntity(new Vector3(292, 0, 276), "Town/immeuble2", modelEffect);
+            GameObject.BuildEntity(new Vector3(292, 0, 436), "Town/poste", modelEffect);
+            GameObject.BuildEntity(new Vector3(292, 0, 556), "Town/hotel", modelEffect);
 
-            GameObject.BuildEntity(new Vector3(412, 0, 20), "Town/immeuble", modelEffect);
-            GameObject.BuildEntity(new Vector3(412, 0, 420), "Town/gare", modelEffect);
-            GameObject.BuildEntity(new Vector3(412, 0, 522), "Town/quai", modelEffect);
-            GameObject.BuildEntity(new Vector3(412, 0, 580), "Town/maison2", modelEffect);
+            GameObject.BuildEntity(new Vector3(412, 0, 276), "Town/immeuble", modelEffect);
+            GameObject.BuildEntity(new Vector3(412, 0, 676), "Town/gare", modelEffect);
+            GameObject.BuildEntity(new Vector3(412, 0, 778), "Town/quai", modelEffect);
+            GameObject.BuildEntity(new Vector3(412, 0, 836), "Town/maison2", modelEffect);
 
-            GameObject.BuildEntity(new Vector3(492, 0, 260), "Town/fontaine", modelEffect);
+            GameObject.BuildEntity(new Vector3(492, 0, 516), "Town/fontaine", modelEffect);
 
-            GameObject.BuildEntity(new Vector3(532, 0, 580), "Town/maison2", modelEffect);
+            GameObject.BuildEntity(new Vector3(532, 0, 836), "Town/maison2", modelEffect);
 
-            GameObject.BuildEntity(new Vector3(652, 0, 20), "Town/immeuble2", modelEffect);
-            GameObject.BuildEntity(new Vector3(652, 0, 180), "Town/eglise", modelEffect);
-            GameObject.BuildEntity(new Vector3(652, 0, 300), "Town/mairie", modelEffect);
+            GameObject.BuildEntity(new Vector3(652, 0, 276), "Town/immeuble2", modelEffect);
+            GameObject.BuildEntity(new Vector3(652, 0, 436), "Town/eglise", modelEffect);
+            GameObject.BuildEntity(new Vector3(652, 0, 556), "Town/mairie", modelEffect);
             
-            GameObject.BuildEntity(new Vector3(732, 0, 420), "Town/garde_passage_a_niveau", modelEffect);
+            GameObject.BuildEntity(new Vector3(732, 0, 676), "Town/garde_passage_a_niveau", modelEffect);
             
             
-            GameObject.BuildEntity(new Vector3(772, 0, 20), "Town/immeuble4", modelEffect);
-            GameObject.BuildEntity(new Vector3(800, 0, 180), "Town/cimetiere", modelEffect);
+            GameObject.BuildEntity(new Vector3(772, 0, 276), "Town/immeuble4", modelEffect);
+            GameObject.BuildEntity(new Vector3(800, 0, 436), "Town/cimetiere", modelEffect);
 
 
             //GameObject.BuildEntity(new Vector3(460, 0, 153), "Town/garde_passage_a_niveau", modelEffect);
@@ -195,24 +195,24 @@ namespace Troma
              #region Rails
 
             List<Vector3> modelPos = new List<Vector3>();
-            modelPos.Add(new Vector3(0, 0, 502));
-            modelPos.Add(new Vector3(120, 0, 502));
-            modelPos.Add(new Vector3(240, 0, 502));
-            modelPos.Add(new Vector3(360, 0, 502));
-            modelPos.Add(new Vector3(480, 0, 502));
-            modelPos.Add(new Vector3(600, 0, 502));
-            modelPos.Add(new Vector3(720, 0, 502));
-            modelPos.Add(new Vector3(840, 0, 502));
-            modelPos.Add(new Vector3(960, 0, 502));
-            modelPos.Add(new Vector3(0, 0, 512));
-            modelPos.Add(new Vector3(120, 0, 512));
-            modelPos.Add(new Vector3(240, 0, 512));
-            modelPos.Add(new Vector3(360, 0, 512));
-            modelPos.Add(new Vector3(480, 0, 512));
-            modelPos.Add(new Vector3(600, 0, 512));
-            modelPos.Add(new Vector3(720, 0, 512));
-            modelPos.Add(new Vector3(840, 0, 512));
-            modelPos.Add(new Vector3(960, 0, 512));
+            modelPos.Add(new Vector3(0, 0, 758));
+            modelPos.Add(new Vector3(120, 0, 758));
+            modelPos.Add(new Vector3(240, 0, 758));
+            modelPos.Add(new Vector3(360, 0, 758));
+            modelPos.Add(new Vector3(480, 0, 758));
+            modelPos.Add(new Vector3(600, 0, 758));
+            modelPos.Add(new Vector3(720, 0, 758));
+            modelPos.Add(new Vector3(840, 0, 758));
+            modelPos.Add(new Vector3(960, 0, 758));
+            modelPos.Add(new Vector3(0, 0, 768));
+            modelPos.Add(new Vector3(120, 0, 768));
+            modelPos.Add(new Vector3(240, 0, 768));
+            modelPos.Add(new Vector3(360, 0, 768));
+            modelPos.Add(new Vector3(480, 0, 768));
+            modelPos.Add(new Vector3(600, 0, 768));
+            modelPos.Add(new Vector3(720, 0, 768));
+            modelPos.Add(new Vector3(840, 0, 768));
+            modelPos.Add(new Vector3(960, 0, 768));
 
             VectGameObject.BuildEntity(modelPos.ToArray(), "Town/rail", modelEffect);
 
@@ -254,8 +254,8 @@ namespace Troma
 
                 if (m == Map.Town)
                     worldBox.Save("Content/Box/TownBox");
-                else if (m == Map.Cracovie)
-                    worldBox.Save("Content/Box/CracovieBox");
+                //else if (m == Map.Cracovie)
+                    //worldBox.Save("Content/Box/CracovieBox");
             }
 
             CollisionManager.AddBox(worldBox.BoudingBox);
