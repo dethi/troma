@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Troma", "Troma\Troma\Troma.csproj", "{50F04771-D42A-4E5A-B86B-1FD697C2E0F3}"
 	ProjectSection(ProjectDependencies) = postProject
+		{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16} = {F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}
 		{4636C7E1-B845-4B83-B96D-64A11B8A4515} = {4636C7E1-B845-4B83-B96D-64A11B8A4515}
 	EndProjectSection
 EndProject

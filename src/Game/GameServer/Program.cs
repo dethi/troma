@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 using Lidgren.Network;
 using ClientServerExtension;
@@ -93,7 +95,7 @@ namespace GameServer
         const int MAX_CLIENT = 20;
         const int DT = 30; // ms
 
-        const Map TERRAIN = Map.Town;
+        static Map TERRAIN = Map.Town;
         static Vector3 INITIAL_POS = Vector3.One * 30f;
         static Vector3 INITIAL_ROT = Vector3.Zero;
 
@@ -112,6 +114,8 @@ namespace GameServer
 
         static DateTime Time;
         static TimeSpan TimeToPass;
+
+        static Box worldBox;
 
         #endregion
 
@@ -145,6 +149,43 @@ namespace GameServer
 
             Time = DateTime.Now;
             TimeToPass = new TimeSpan(0, 0, 0, 0, DT);
+
+            switch (TERRAIN)
+            {
+                case Map.Town:
+                    try
+                    {
+                        Stream stream = File.Open("Content/Box/TownBox.bin", FileMode.Open);
+                        BinaryFormatter bFormatter = new BinaryFormatter();
+                        worldBox = (Box)bFormatter.Deserialize(stream);
+                        stream.Close();
+                    }
+                    catch
+                    {
+                        worldBox = new Box();
+                    }
+
+                    break;
+
+                case Map.Cracovie:
+                    try
+                    {
+                        Stream stream = File.Open("Content/Box/CracovieBox.bin", FileMode.Open);
+                        BinaryFormatter bFormatter = new BinaryFormatter();
+                        worldBox = (Box)bFormatter.Deserialize(stream);
+                        stream.Close();
+                    }
+                    catch
+                    {
+                        worldBox = new Box();
+                    }
+
+                    break;
+
+                default:
+                    worldBox = new Box();
+                    break;
+            }
         }
 
         static void SetupServer()

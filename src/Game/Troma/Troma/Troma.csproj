@@ -202,7 +202,7 @@
     <Compile Include="Screens\MenuScreens\Entry\Stepper.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Switch.cs" />
     <Compile Include="Screens\EndGameScreen.cs" />
-    <Compile Include="Screens\MultiplayerScreen.cs" />
+    <Compile Include="Screens\Multiplayer\MultiplayerScreen.cs" />
     <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Screens\StartScreens\PegiScreen.cs" />
     <Compile Include="Screens\StartScreens\TitleIntroScreen.cs" />
@@ -219,6 +219,10 @@
     <ProjectReference Include="..\..\GameEngine\GameEngine.csproj">
       <Project>{121AB8A9-2001-4CBE-80B3-A6E2E95B2E56}</Project>
       <Name>GameEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GameServer\GameServer.csproj">
+      <Project>{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}</Project>
+      <Name>GameServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Lidgren.Network\Lidgren.Network.csproj">
       <Project>{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}</Project>

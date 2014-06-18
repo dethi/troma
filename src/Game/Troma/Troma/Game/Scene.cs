@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using ClientServerExtension;
 
 namespace Troma
 {
@@ -40,6 +43,7 @@ namespace Troma
 
             EntityManager.Initialize();
             CollisionManager.Initialize();
+            LoadBox(m);
         }
 
         public static void Update(GameTime gameTime, bool dynamicClouds, bool isActive)
@@ -150,6 +154,48 @@ namespace Troma
 
             Terrain = new MultiHeightMap(GameServices.Game, terrainEffect, terrainInfo, "cracovie", 2);
             CloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
+        }
+
+        private static void LoadBox(Map m)
+        {
+            Box worldBox;
+
+            try
+            {
+                Stream stream;
+                BinaryFormatter bFormatter = new BinaryFormatter();
+
+                if (m == Map.Town)
+                    stream = File.Open("Content/Box/TownBox.bin", FileMode.Open);
+                else if (m == Map.Cracovie)
+                    stream = File.Open("Content/Box/CracovieBox.bin", FileMode.Open);
+                else
+                    throw new FileNotFoundException();
+
+                worldBox = (Box)bFormatter.Deserialize(stream);
+                stream.Close();
+            }
+            catch
+            {
+                worldBox = new Box();
+
+                List<Entity> entitiesWithBox = new List<Entity>();
+                entitiesWithBox.AddRange(EntityManager.EntitiesWith<CollisionBox>());
+
+                foreach (Entity e in entitiesWithBox)
+                {
+                    worldBox.Generate(
+                        e.GetComponent<Model3D>().Model,
+                        e.GetComponent<Transform>().World);
+                }
+
+                if (m == Map.Town)
+                    worldBox.Save("Content/Box/TownBox");
+                else if (m == Map.Cracovie)
+                    worldBox.Save("Content/Box/CracovieBox");
+            }
+
+            CollisionManager.AddBox(worldBox.BoudingBox);
         }
     }
 }

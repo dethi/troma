@@ -55,6 +55,8 @@ namespace Troma
                 WeaponObject.BuildEntity(Constants.GarandM1),
                 WeaponObject.BuildEntity(Constants.ColtM1911));
 
+            System.Threading.Thread.Sleep(2000);
+
             time = new TimeSpan();
             game.ResetElapsedTime();
 

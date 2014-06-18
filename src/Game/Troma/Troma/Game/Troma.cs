@@ -66,10 +66,10 @@ namespace Troma
             SFXManager.SetVolume(Settings.MusicVolume);
 
             //screenManager.AddScreen(new SoloScreen(this, Map.Cracovie));
-            //screenManager.AddScreen(new PegiScreen(this));
+            screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new ScoreMenu(this));
             //screenManager.AddScreen(new HistoryScreen(this));
-            screenManager.AddScreen(new MultiplayerScreen(this, "192.168.1.7"));
+            //screenManager.AddScreen(new MultiplayerScreen(this, "192.168.1.7"));
         }
 
         /// <summary>
