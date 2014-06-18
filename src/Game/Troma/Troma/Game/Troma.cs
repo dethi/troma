@@ -5,7 +5,9 @@ using System.Text;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using ClientServerExtension;
 
 namespace Troma
 {
@@ -92,6 +94,14 @@ namespace Troma
             SFXManager.Add("TargetImpact", Content.Load<SoundEffect>("Sounds/TargetImpact"));
             SFXManager.Add("Typewriter", Content.Load<SoundEffect>("Sounds/Typewriter"));
             SFXManager.Add("TypewriterPullback", Content.Load<SoundEffect>("Sounds/TypewriterPullback"));
+
+            // Generate a box file
+            /*
+            Model generateBox = Content.Load<Model>("Models/cible");
+            Box box = new Box();
+            box.Generate(generateBox);
+            box.Save("PlayerBox");
+            */
         }
 
         #endregion

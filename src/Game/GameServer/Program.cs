@@ -96,7 +96,7 @@ namespace GameServer
         const int DT = 30; // ms
 
         static Map TERRAIN = Map.Town;
-        static Vector3 INITIAL_POS = Vector3.One * 30f;
+        static Vector3 INITIAL_POS = new Vector3(30,0,30);
         static Vector3 INITIAL_ROT = Vector3.Zero;
 
         #endregion
@@ -116,6 +116,12 @@ namespace GameServer
         static TimeSpan TimeToPass;
 
         static Box worldBox;
+        static Box onePlayerBox;
+
+        static List<BoundingBox> _boxList;
+        static Vector3 _bulletDir;
+        static Ray _bulletRay;
+        static RayCollision _bulletResult;
 
         #endregion
 
@@ -186,6 +192,18 @@ namespace GameServer
                     worldBox = new Box();
                     break;
             }
+
+            try
+            {
+                Stream stream = File.Open("Content/Box/PlayerBox.bin", FileMode.Open);
+                BinaryFormatter bFormatter = new BinaryFormatter();
+                onePlayerBox = (Box)bFormatter.Deserialize(stream);
+                stream.Close();
+            }
+            catch
+            {
+                onePlayerBox = new Box();
+            }
         }
 
         static void SetupServer()
@@ -254,6 +272,7 @@ namespace GameServer
                                     break;
 
                                 p.State = IncMsg.ReadPlayerState();
+                                p.State.Alive = p.Alive;
 
                                 OutMsg = Server.CreateMessage();
                                 OutMsg.Write((byte)PacketTypes.STATE);
@@ -418,9 +437,12 @@ namespace GameServer
 
             STATE state = new STATE()
             {
+                Alive = true,
                 Position = INITIAL_POS,
                 Rotation = INITIAL_ROT
             };
+
+            player.Spawn(state);
 
             OutMsg = Server.CreateMessage();
             OutMsg.Write((byte)PacketTypes.SPAWN);
@@ -446,6 +468,57 @@ namespace GameServer
 
         static void ComputeShoot(Player player)
         {
+            _boxList = new List<BoundingBox>();
+
+            _bulletDir = player.LookAt - player.ViewPosition;
+            _bulletDir.Normalize();
+
+            _bulletRay = new Ray(player.ViewPosition, _bulletDir);
+
+            _bulletResult = new RayCollision();
+            _bulletResult.Distance = float.MaxValue;
+            float? tmp;
+
+            foreach (Player p in Clients)
+            {
+                if (p != player)
+                {
+                    _boxList.Clear();
+                    _boxList.AddRange(onePlayerBox.ComputeWorldTranslation(p.World));
+
+                    foreach (BoundingBox box in _boxList)
+                    {
+                        tmp = box.Intersects(_bulletRay);
+
+                        if (tmp.HasValue && tmp.Value < _bulletResult.Distance)
+                        {
+                            _bulletResult.Distance = tmp.Value;
+                            _bulletResult.CollisionWith = p;
+                        }
+                    }
+                }
+            }
+
+            if (_bulletResult.CollisionWith == null)
+                return;
+
+            tmp = IsCollision(_bulletRay, worldBox.BoudingBox);
+
+            if (tmp.HasValue && tmp.Value < _bulletResult.Distance)
+                return;
+
+            _bulletResult.CollisionWith.Killed();
+
+            OutMsg = Server.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.KILL);
+
+            Server.SendMessage(OutMsg, _bulletResult.CollisionWith.Connection,
+                NetDeliveryMethod.ReliableOrdered, 1);
+
+#if DEBUG
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Player {0} have killed {1}", player, _bulletResult.CollisionWith);
+#endif
         }
 
         #region Help Methods
@@ -470,6 +543,25 @@ namespace GameServer
             }
 
             return null;
+        }
+
+        static float? IsCollision(Ray ray, IEnumerable<BoundingBox> list)
+        {
+            float min = float.MaxValue;
+            float? tmp;
+
+            foreach (BoundingBox box in list)
+            {
+                tmp = box.Intersects(ray);
+
+                if (tmp.HasValue && tmp.Value < min)
+                    min = tmp.Value;
+            }
+
+            if (min < float.MaxValue)
+                return min;
+            else
+                return null;
         }
 
         #endregion

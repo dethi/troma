@@ -42,8 +42,8 @@ namespace Troma
             }
 
             EntityManager.Initialize();
-            CollisionManager.Initialize();
             LoadBox(m);
+            CollisionManager.Initialize();
         }
 
         public static void Update(GameTime gameTime, bool dynamicClouds, bool isActive)

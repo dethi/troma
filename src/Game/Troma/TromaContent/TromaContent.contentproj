@@ -427,6 +427,10 @@
       <Name>empty</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Box\PlayerBox.bin">
+      <Name>PlayerBox</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Sounds\Audio.xgs">
       <Name>Audio</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

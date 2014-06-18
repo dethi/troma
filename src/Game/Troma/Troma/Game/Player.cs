@@ -627,7 +627,7 @@ namespace Troma
 
         public void Spawn(STATE state)
         {
-            Alive = true;
+            Alive = state.Alive;
             Position = state.Position;
             Rotation = state.Rotation;
         }

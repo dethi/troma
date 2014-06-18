@@ -80,6 +80,9 @@ namespace Troma
                 pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
                 player.Update(gameTime);
             }
+
+            foreach (OtherPlayer p in client.Players)
+                p.Update(gameTime);
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
@@ -109,15 +112,10 @@ namespace Troma
                 else if (client.Alive)
                     player.Spawn(client.State);
             }
-
-            foreach (OtherPlayer p in client.Players)
-                p.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-
-
             GameServices.ResetGraphicsDeviceFor3D();
             Scene.Draw(gameTime, camera);
             player.Draw(gameTime, camera);
