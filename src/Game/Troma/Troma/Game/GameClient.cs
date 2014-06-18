@@ -14,7 +14,8 @@ namespace Troma
         LOGIN,
         INPUT,
         STATUS,
-        DISCONNECTION
+        QUIT,
+        NEW
     }
 
     #endregion
@@ -37,12 +38,11 @@ namespace Troma
         static NetIncomingMessage IncMsg;
         static NetOutgoingMessage OutMsg;
 
-        static int ID; // my slot
+        static int ID;
         static STATE State;
         static Map Terrain;
 
-        static OtherPlayer[] Players;
-        static Boolean[] OpenSlots;
+        static List<OtherPlayer> Players;
 
         static DateTime Time;
         static TimeSpan TimeToPass;
@@ -55,18 +55,15 @@ namespace Troma
             SetupClient();
 
             Connect(host);
-            WaitStartingData();
+            WaitInitialData();
         }
 
         #region Initialization
 
         static void Initialize()
         {
-            Players = new OtherPlayer[MAX_CLIENT];
-            OpenSlots = new Boolean[MAX_CLIENT];
-
-            for (int i = 0; i < MAX_CLIENT; i++)
-                OpenSlots[i] = true;
+            Players = new List<OtherPlayer>();
+            Players.Capacity = MAX_CLIENT;
 
             Time = DateTime.Now;
             TimeToPass = new TimeSpan(0, 0, 0, 0, DT);
@@ -75,13 +72,22 @@ namespace Troma
         static void SetupClient()
         {
             Config = new NetPeerConfiguration(APP_NAME);
-            Config.Port = PORT;
+            Config.EnableMessageType(NetIncomingMessageType.Data);
+            Config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
+
+#if DEBUG
+            Config.EnableMessageType(NetIncomingMessageType.WarningMessage);
+            Config.EnableMessageType(NetIncomingMessageType.VerboseDebugMessage);
+            Config.EnableMessageType(NetIncomingMessageType.ErrorMessage);
+            Config.EnableMessageType(NetIncomingMessageType.Error);
+            Config.EnableMessageType(NetIncomingMessageType.DebugMessage);
+#endif
 
             Client = new NetClient(Config);
             Client.Start();
 
 #if DEBUG
-            Console.WriteLine("Client start...");
+            Console.WriteLine("Client start.");
 #endif
         }
 
@@ -89,21 +95,21 @@ namespace Troma
         {
             OutMsg = Client.CreateMessage();
             OutMsg.Write((byte)PacketTypes.LOGIN);
-            OutMsg.Write(Settings.Login);
+            OutMsg.Write(Settings.Name);
 
             Client.Connect(host, PORT, OutMsg);
 
 #if DEBUG
-            Console.WriteLine("Send connection request to server...");
+            Console.WriteLine("Send connection request to server.");
 #endif
         }
 
-        static void WaitStartingData()
+        static void WaitInitialData()
         {
             bool canStart = false;
 
 #if DEBUG
-            Console.WriteLine("Wait initial data...");
+            Console.WriteLine("Waiting initial data...");
 #endif
 
             while (!canStart)
@@ -115,36 +121,55 @@ namespace Troma
                         case NetIncomingMessageType.Data:
                             #region Connection Approved
 
-#if DEBUG
-                            Console.WriteLine("Data received...");
-#endif
-
                             if (IncMsg.ReadPacketType() == PacketTypes.LOGIN)
                             {
-                                if (IncMsg.ReadString() == Settings.Login)
-                                {
-                                    ID = IncMsg.ReadInt32();
-                                    State = IncMsg.ReadPlayerState();
-                                    Terrain = (Map)IncMsg.ReadByte();
+                                ID = IncMsg.ReadInt32();
+                                State = IncMsg.ReadPlayerState();
+                                Terrain = (Map)IncMsg.ReadByte();
 
-                                    canStart = true;
+                                canStart = true;
 
 #if DEBUG
-                                    Console.WriteLine("Confirm initial data!");
+                                Console.WriteLine("Confirm initial data!");
 #endif
-                                }
                             }
 
                             break;
 
                             #endregion
 
+#if DEBUG
+                        case NetIncomingMessageType.VerboseDebugMessage:
+                            break;
+
+                        case NetIncomingMessageType.DebugMessage:
+                            break;
+
+                        case NetIncomingMessageType.WarningMessage:
+                            break;
+
+                        case NetIncomingMessageType.ErrorMessage:
+                            break;
+
+                        case NetIncomingMessageType.Error:
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Corrupted message!!!");
+                            break;
+#endif
+
                         default:
+                            //Console.WriteLine("Receive a message that are not filtering.");
                             break;
                     }
 
-                    Client.Recycle(IncMsg);
+#if DEBUG
+                    Console.ResetColor();
+#endif
+
+                    Client.Recycle(IncMsg); // generate less garbage
                 }
+
+                System.Threading.Thread.Sleep(1);
             }
         }
 

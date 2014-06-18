@@ -70,7 +70,7 @@ namespace GameServer
             {
                 HandleMsg();
                 Time = DateTime.Now;
-                //System.Threading.Thread.Sleep(1); // slow server, less CPU used
+                System.Threading.Thread.Sleep(1); // slow server, less CPU used
             }
         }
 
@@ -242,7 +242,7 @@ namespace GameServer
                 Server.SendToAll(OutMsg, player.Connection, NetDeliveryMethod.Unreliable, 0);
 
 #if DEBUG
-                Console.WriteLine(String.Format("Player {0} connected (slot {1})",
+                Console.WriteLine(String.Format("Player {0} connected (id {1})",
                     player.Name, player.ID));
 #endif
             }
@@ -258,13 +258,11 @@ namespace GameServer
             OutMsg = Server.CreateMessage();
             OutMsg.Write((byte)PacketTypes.LOGIN);
             OutMsg.Write(player.ID);
-            OutMsg.Write(player.Name);
             OutMsg.WritePlayerState(player.State);
             OutMsg.Write((byte)TERRAIN);
 
             // type = LOGIN
             // int = ID
-            // string = Name
             // State = Player state
             // Map = terrain
 
@@ -273,11 +271,7 @@ namespace GameServer
 
         static void PlayerDisconnected(Player player)
         {
-            // remove and disconnect
             Clients.Remove(player);
-            player.Connection.Disconnect("END");
-
-            //Server.Connections.Remove(player.Connection);
 
             // send msg to all
             OutMsg = Server.CreateMessage();
@@ -287,7 +281,7 @@ namespace GameServer
             // type = QUIT
             // int = ID
 
-            Server.SendMessage(OutMsg, Server.Connections, NetDeliveryMethod.Unreliable, 0);
+            Server.SendToAll(OutMsg, null, NetDeliveryMethod.Unreliable, 0);
         }
 
         #region Help Methods
