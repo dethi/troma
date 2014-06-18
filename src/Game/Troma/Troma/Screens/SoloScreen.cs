@@ -102,6 +102,8 @@ namespace Troma
             TargetManager.Initialize();
             _initialNbTarget = TargetManager.Count;
 
+            System.Threading.Thread.Sleep(2000);
+
             time = new TimeSpan();
             game.ResetElapsedTime();
         }

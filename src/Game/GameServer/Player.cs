@@ -4,58 +4,44 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Lidgren.Network;
+using ClientServerExtension;
 
 namespace GameServer
 {
-    public struct STATE
-    {
-        public Vector3 Position;
-        public Vector3 Rotation;
-    }
-
-    public struct INPUT
-    {
-        public bool IsMove;
-        public bool IsRun;
-        public bool IsCrouch;
-
-        public bool IsShoot;
-        public bool IsReload;
-        public bool InSightPosition;
-        public Weapons Weapon;
-    }
-
-    public enum Weapons
-    {
-        M1,
-        M1911
-    }
-
-    class Player
+    public class Player
     {
         public string Name;
-        public int Slot;
+        public int ID;
         public NetConnection Connection;
 
         public STATE State;
         public INPUT Input;
 
-        public Player(string name, int slot, NetConnection co)
+        private bool Alive;
+
+        public Player(string name, int id, NetConnection co)
         {
             Name = name;
-            Slot = slot;
+            ID = id;
             Connection = co;
 
             State = new STATE();
             Input = new INPUT();
+
+            Alive = false;
         }
 
-        public void Reset(Vector3 pos, Vector3 rot)
+        public void Spawn(STATE state)
         {
-            State.Position = pos;
-            State.Rotation = rot;
+            Alive = true;
 
+            State = state;
             Input = new INPUT();
+        }
+
+        public void Killed()
+        {
+            Alive = false;
         }
     }
 }

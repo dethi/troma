@@ -5,27 +5,10 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using GameEngine;
+using ClientServerExtension;
 
 namespace Troma
 {
-    public struct STATE
-    {
-        public Vector3 Position;
-        public Vector3 Rotation;
-    }
-
-    public struct INPUT
-    {
-        public bool IsMove;
-        public bool IsRun;
-        public bool IsCrouch;
-
-        public bool IsShoot;
-        public bool IsReload;
-        public bool InSightPosition;
-        public Weapons Weapon;
-    }
-
     class Player
     {
         #region Constants
@@ -46,6 +29,8 @@ namespace Troma
         #endregion
 
         #region Fields
+
+        public bool Alive;
 
         private readonly Vector3 _initPosition;
         private readonly Vector3 _initRotation;
@@ -98,7 +83,7 @@ namespace Troma
         public Entity _weaponMain;
         public Entity _weaponSecond;
 
-        private bool _isShoot;
+        public bool HasShoot;
         private bool _isReload;
         private bool _inSightPosition;
 
@@ -164,6 +149,8 @@ namespace Troma
 
         public void Initialize(ITerrain terrain, Entity weapon)
         {
+            Alive = false;
+
             _height = HEIGHT;
             _position = _initPosition;
             _rotation = _initRotation;
@@ -191,6 +178,8 @@ namespace Troma
 
         public void Initialize(ITerrain terrain, Entity weaponMain, Entity weaponSecond)
         {
+            Alive = false;
+
             _height = HEIGHT;
             _position = _initPosition;
             _rotation = _initRotation;
@@ -503,21 +492,19 @@ namespace Troma
             if (input.PlayerSight())
                 _inSightPosition = _weaponActive.GetComponent<Weapon>().ChangeSight();
 
-            if (input.PlayerShoot(_weaponActive.GetComponent<Weapon>().Info.Automatic))
+            HasShoot = input.PlayerShoot(_weaponActive.GetComponent<Weapon>().Info.Automatic) &&
+                _weaponActive.GetComponent<Weapon>().Shoot();
+
+            if (HasShoot)
             {
-                _isShoot = _weaponActive.GetComponent<Weapon>().Shoot();
+                bulletDir = _view.LookAt - _view.Position;
+                bulletDir.Normalize();
 
-                if (_isShoot)
-                {
-                    bulletDir = _view.LookAt - _view.Position;
-                    bulletDir.Normalize();
+                bulletRay = new Ray(_view.Position, bulletDir);
+                bulletResult = CollisionManager.IsCollision(bulletRay);
 
-                    bulletRay = new Ray(_view.Position, bulletDir);
-                    bulletResult = CollisionManager.IsCollision(bulletRay);
-
-                    if (bulletResult.IsCollide)
-                        TargetManager.IsTargetAchieved(bulletResult.CollisionWith);
-                }
+                if (bulletResult.IsCollide)
+                    TargetManager.IsTargetAchieved(bulletResult.CollisionWith);
             }
         }
 
@@ -622,17 +609,33 @@ namespace Troma
                 IsRun = _isRun,
                 IsCrouch = _isCrouched,
 
-                IsShoot = _isShoot,
                 IsReload = _isReload,
                 InSightPosition = _inSightPosition,
                 Weapon = _weaponInfoActive.Type,
             };
         }
 
-        public void SetState(STATE state)
+        public STATE GetState()
         {
+            return new STATE()
+            {
+                Alive = this.Alive,
+                Position = this.Position,
+                Rotation = this.Rotation
+            };
+        }
+
+        public void Spawn(STATE state)
+        {
+            Alive = true;
             Position = state.Position;
             Rotation = state.Rotation;
+        }
+
+        public void Killed()
+        {
+            Alive = false;
+            // do it
         }
 
         #endregion
