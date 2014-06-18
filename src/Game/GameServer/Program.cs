@@ -4,25 +4,51 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Lidgren.Network;
+using ClientServerExtension;
 
 namespace GameServer
 {
-    #region Enum
+    #region Protocol Documenation
 
-    public enum PacketTypes
-    {
-        LOGIN,
-        INPUT,
-        STATUS,
-        QUIT,
-        NEW
-    }
+    //=================================
+    // Client connect to server (ch. 0)
+    //=================================
 
-    public enum Map
-    {
-        Town,
-        Cracovie,
-    }
+    // type = LOGIN
+    // string = client name
+
+    // 1) Inform all client of the new connection
+    //
+    // type = NEW
+    // int = new client ID
+    // string = new client name
+
+    // 2) Send initial data to the new client
+    //
+    // type = LOGIN
+    // int = new client ID
+    // Map = terrain
+
+    // 3) Send spawn
+
+
+    //==========================
+    // Client disconnect (ch. 0)
+    //==========================
+
+    // 1) Inform all client of the deconnection
+    //
+    // type = QUIT
+    // int = client ID
+
+
+    //==============
+    // Spawn (ch. 0)
+    //==============
+    //
+    // type = SPAWN
+    // int = client ID
+    // State = client state
 
     #endregion
 
@@ -36,7 +62,7 @@ namespace GameServer
         const int DT = 30; // ms
 
         const Map TERRAIN = Map.Town;
-        static Vector3 INITIAL_POS = Vector3.One * 15f;
+        static Vector3 INITIAL_POS = Vector3.One * 30f;
         static Vector3 INITIAL_ROT = Vector3.Zero;
 
         #endregion
@@ -142,8 +168,47 @@ namespace GameServer
                         #endregion
 
                     case NetIncomingMessageType.Data:
-                        // process data
+                        #region Process Data
+
+                        Player p = FindPlayer(IncMsg.SenderConnection, Clients);
+
+                        switch (IncMsg.ReadPacketType())
+                        {
+                            case PacketTypes.STATE:
+                                p.State = IncMsg.ReadPlayerState();
+
+                                OutMsg = Server.CreateMessage();
+                                OutMsg.WritePlayerState(p.State);
+
+                                Server.SendToAll(OutMsg, p.Connection,
+                                    NetDeliveryMethod.UnreliableSequenced, 1);
+
+                                break;
+
+                            case PacketTypes.INPUT:
+                                p.Input = IncMsg.ReadPlayerInput();
+
+                                OutMsg = Server.CreateMessage();
+                                OutMsg.WritePlayerInput(p.Input);
+
+                                Server.SendToAll(OutMsg, p.Connection,
+                                    NetDeliveryMethod.UnreliableSequenced, 1);
+
+                                break;
+
+                            case PacketTypes.SHOOT:
+                                // compute shoot and send Kill if necessaire
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.WriteLine("Player {0} have shooted.", p.ID);
+                                break;
+
+                            default:
+                                break;
+                        }
+
                         break;
+
+                        #endregion
 
                     case NetIncomingMessageType.StatusChanged:
                         // NetConnectionStatus.Connected;
@@ -164,17 +229,17 @@ namespace GameServer
                             IncMsg.SenderConnection.Status == NetConnectionStatus.Disconnecting)
                         {
                             // Find disconnected player and remove it
-                            Player p = FindPlayer(IncMsg.SenderConnection, Clients);
+                            Player pDeco = FindPlayer(IncMsg.SenderConnection, Clients);
 
-                            if (p != null)
-                                PlayerDisconnected(p);
+                            if (pDeco != null)
+                                PlayerDisconnected(pDeco);
                         }
                         else if (IncMsg.SenderConnection.Status == NetConnectionStatus.Connected)
                         {
-                            Player p = FindPlayer(IncMsg.SenderConnection, WaitingQueue);
+                            Player pCo = FindPlayer(IncMsg.SenderConnection, WaitingQueue);
 
-                            if (p != null)
-                                SendInitialData(p);
+                            if (pCo != null)
+                                SendInitialData(pCo);
                         }
 
                         break;
@@ -222,7 +287,6 @@ namespace GameServer
                 string name = IncMsg.ReadString();
 
                 Player player = new Player(name, NextID, IncMsg.SenderConnection);
-                player.Reset(INITIAL_POS, INITIAL_ROT);
 
                 WaitingQueue.Add(player);
                 NextID++;
@@ -232,12 +296,6 @@ namespace GameServer
                 OutMsg.Write((byte)PacketTypes.NEW);
                 OutMsg.Write(player.ID);
                 OutMsg.Write(player.Name);
-                OutMsg.WritePlayerState(player.State);
-
-                // type = NEW
-                // int = ID
-                // string = Name
-                // State = Player state
 
                 Server.SendToAll(OutMsg, player.Connection, NetDeliveryMethod.Unreliable, 0);
 
@@ -258,15 +316,22 @@ namespace GameServer
             OutMsg = Server.CreateMessage();
             OutMsg.Write((byte)PacketTypes.LOGIN);
             OutMsg.Write(player.ID);
-            OutMsg.WritePlayerState(player.State);
             OutMsg.Write((byte)TERRAIN);
 
-            // type = LOGIN
-            // int = ID
-            // State = Player state
-            // Map = terrain
-
             Server.SendMessage(OutMsg, player.Connection, NetDeliveryMethod.Unreliable, 0);
+
+            STATE state = new STATE()
+            {
+                Position = INITIAL_POS,
+                Rotation = INITIAL_ROT
+            };
+
+            OutMsg = Server.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.SPAWN);
+            OutMsg.Write(player.ID);
+            OutMsg.WritePlayerState(state);
+
+            Server.SendToAll(OutMsg, null, NetDeliveryMethod.Unreliable, 0);
         }
 
         static void PlayerDisconnected(Player player)
@@ -295,34 +360,6 @@ namespace GameServer
             }
 
             return null;
-        }
-
-        #endregion
-
-        #region Extends Methods
-
-        /// <summary>
-        /// Extend NetIncomingMessage.
-        /// Return the type value (one byte) of the Incoming Message
-        /// </summary>
-        public static PacketTypes ReadPacketType(this NetIncomingMessage msg)
-        {
-            return (PacketTypes)msg.ReadByte();
-        }
-
-        /// <summary>
-        /// Extend NetBuffer.
-        /// Write the Player Status in the buffer
-        /// </summary>
-        public static void WritePlayerState(this NetBuffer buffer, STATE state)
-        {
-            buffer.Write(state.Position.X);
-            buffer.Write(state.Position.Y);
-            buffer.Write(state.Position.Z);
-
-            buffer.Write(state.Rotation.X);
-            buffer.Write(state.Rotation.Y);
-            buffer.Write(state.Rotation.Z);
         }
 
         #endregion

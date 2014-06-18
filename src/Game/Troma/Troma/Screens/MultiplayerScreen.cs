@@ -13,10 +13,11 @@ namespace Troma
     {
         #region Fields
 
+        private GameClient client;
+
         private FirstPersonView camera;
         private Player player;
 
-        private Map _map;
         private TimeSpan time;
 
         private float pauseAlpha;
@@ -25,15 +26,13 @@ namespace Troma
 
         #region Initialization
 
-        public MultiplayerScreen(Game game, Map map)
+        public MultiplayerScreen(Game game, string host)
             : base(game)
         {
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
-            _map = map;
-
-            GameClient client = new GameClient("127.0.0.1");
+            client = new GameClient(host);
         }
 
         public override void LoadContent()
@@ -47,10 +46,10 @@ namespace Troma
             BoundingSphereRenderer.Initialize(30);
 #endif
 
-            camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
-            player = new Player(new Vector3(10, 0, 10), Vector3.Zero, camera);
+            camera = new FirstPersonView(GameServices.GraphicsDevice.Viewport.AspectRatio);
+            player = new Player(client.State.Position, client.State.Rotation, camera);
 
-            Scene.Initialize(_map, camera);
+            Scene.Initialize(client.Terrain, camera);
 
             player.Initialize(Scene.Terrain,
                 WeaponObject.BuildEntity(Constants.GarandM1),
@@ -76,10 +75,6 @@ namespace Troma
             {
                 pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
                 player.Update(gameTime);
-
-#if DEBUG
-                XConsole.Update(gameTime);
-#endif
             }
         }
 
@@ -95,9 +90,8 @@ namespace Troma
                 time += gameTime.ElapsedGameTime;
                 player.HandleInput(gameTime, input);
 
-#if DEBUG
-                DebugConfig.HandleInput(gameTime, input);
-#endif
+                if (player.HasShoot)
+                    client.SendShoot();
             }
         }
 

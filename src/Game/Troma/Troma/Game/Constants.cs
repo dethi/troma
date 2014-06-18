@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using GameEngine;
+using ClientServerExtension;
 
 namespace Troma
 {

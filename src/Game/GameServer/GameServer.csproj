@@ -52,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClientServerExtension\ClientServerExtension.csproj">
+      <Project>{8CA689E8-AB3A-4314-B017-C2AB2D84475F}</Project>
+      <Name>ClientServerExtension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lidgren.Network\Lidgren.Network.csproj">
       <Project>{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}</Project>
       <Name>Lidgren.Network</Name>

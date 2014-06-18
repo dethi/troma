@@ -4,48 +4,33 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Lidgren.Network;
+using ClientServerExtension;
 
 namespace Troma
 {
-    #region Enum
-
-    public enum PacketTypes
-    {
-        LOGIN,
-        INPUT,
-        STATUS,
-        QUIT,
-        NEW
-    }
-
-    #endregion
-
     public class GameClient
     {
         #region Constants
 
-        const string APP_NAME = "TROMA";
-        const int PORT = 11420;
-        const int MAX_CLIENT = 20;
-        const int DT = 30; // ms
+        private const string APP_NAME = "TROMA";
+        private const int PORT = 11420;
+        private const int MAX_CLIENT = 20;
+        private const int DT = 30; // ms
 
         #endregion
 
         #region Fields
 
-        static NetClient Client;
-        static NetPeerConfiguration Config;
-        static NetIncomingMessage IncMsg;
-        static NetOutgoingMessage OutMsg;
+        private NetClient Client;
+        private NetPeerConfiguration Config;
+        private NetIncomingMessage IncMsg;
+        private NetOutgoingMessage OutMsg;
 
-        static int ID;
-        static STATE State;
-        static Map Terrain;
+        public int ID;
+        public STATE State;
+        public Map Terrain;
 
-        static List<OtherPlayer> Players;
-
-        static DateTime Time;
-        static TimeSpan TimeToPass;
+        public List<OtherPlayer> Players;
 
         #endregion
 
@@ -60,16 +45,13 @@ namespace Troma
 
         #region Initialization
 
-        static void Initialize()
+        private void Initialize()
         {
             Players = new List<OtherPlayer>();
             Players.Capacity = MAX_CLIENT;
-
-            Time = DateTime.Now;
-            TimeToPass = new TimeSpan(0, 0, 0, 0, DT);
         }
 
-        static void SetupClient()
+        private void SetupClient()
         {
             Config = new NetPeerConfiguration(APP_NAME);
             Config.EnableMessageType(NetIncomingMessageType.Data);
@@ -91,7 +73,7 @@ namespace Troma
 #endif
         }
 
-        static void Connect(string host)
+        private void Connect(string host)
         {
             OutMsg = Client.CreateMessage();
             OutMsg.Write((byte)PacketTypes.LOGIN);
@@ -104,7 +86,7 @@ namespace Troma
 #endif
         }
 
-        static void WaitInitialData()
+        private void WaitInitialData()
         {
             bool canStart = false;
 
@@ -121,17 +103,28 @@ namespace Troma
                         case NetIncomingMessageType.Data:
                             #region Connection Approved
 
-                            if (IncMsg.ReadPacketType() == PacketTypes.LOGIN)
+                            switch(IncMsg.ReadPacketType())
                             {
-                                ID = IncMsg.ReadInt32();
-                                State = IncMsg.ReadPlayerState();
-                                Terrain = (Map)IncMsg.ReadByte();
-
-                                canStart = true;
+                                case PacketTypes.LOGIN:
+                                    ID = IncMsg.ReadInt32();
+                                    Terrain = (Map)IncMsg.ReadByte();
+                                    break;
+                                
+                                case PacketTypes.SPAWN:
+                                    if (IncMsg.ReadInt32() == ID)
+                                    {
+                                        State = IncMsg.ReadPlayerState();
+                                        canStart = true;
 
 #if DEBUG
-                                Console.WriteLine("Confirm initial data!");
+                                        Console.WriteLine("Confirm initial data!");
 #endif
+                                    }
+
+                                    break;
+                                
+                                default:
+                                    break;
                             }
 
                             break;
@@ -158,7 +151,6 @@ namespace Troma
 #endif
 
                         default:
-                            //Console.WriteLine("Receive a message that are not filtering.");
                             break;
                     }
 
@@ -174,6 +166,41 @@ namespace Troma
         }
 
         #endregion
+
+        public void HandleMsg()
+        {
+            if ((IncMsg = Client.ReadMessage()) != null)
+            {
+                switch (IncMsg.MessageType)
+                {
+                    case NetIncomingMessageType.Data:
+                        // process data
+                        break;
+
+                    default:
+                        break;
+                }
+
+                Client.Recycle(IncMsg); // generate less garbage
+            }
+        }
+
+        public void SendState()
+        {
+
+        }
+
+        public void SendInput()
+        {
+        }
+
+        public void SendShoot()
+        {
+            OutMsg = Client.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.SHOOT);
+
+            Client.SendMessage(OutMsg, NetDeliveryMethod.Unreliable, 0);
+        }
     }
 
     public static class Extends
@@ -211,7 +238,7 @@ namespace Troma
 
         /// <summary>
         /// Extend NetBuffer.
-        /// Write the Player Status in the buffer
+        /// Write the Player State in the buffer
         /// </summary>
         public static void WritePlayerState(this NetBuffer buffer, STATE state)
         {
@@ -222,6 +249,39 @@ namespace Troma
             buffer.Write(state.Rotation.X);
             buffer.Write(state.Rotation.Y);
             buffer.Write(state.Rotation.Z);
+        }
+
+        /// <summary>
+        /// Extend NetIncomingMessage.
+        /// Read a Player Input
+        /// </summary>
+        public static INPUT ReadPlayerInput(this NetIncomingMessage msg)
+        {
+            return new INPUT()
+            {
+                IsMove = msg.ReadBoolean(),
+                IsRun = msg.ReadBoolean(),
+                IsCrouch = msg.ReadBoolean(),
+
+                IsReload = msg.ReadBoolean(),
+                InSightPosition = msg.ReadBoolean(),
+                Weapon = (Weapons)msg.ReadByte()
+            };
+        }
+
+        /// <summary>
+        /// Extend NetBuffer.
+        /// Write the Player Input in the buffer
+        /// </summary>
+        public static void WritePlayerState(this NetBuffer buffer, INPUT input)
+        {
+            buffer.Write(input.IsMove);
+            buffer.Write(input.IsRun);
+            buffer.Write(input.IsCrouch);
+
+            buffer.Write(input.IsReload);
+            buffer.Write(input.InSightPosition);
+            buffer.Write((byte)input.Weapon);
         }
 
         #endregion

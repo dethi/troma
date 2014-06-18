@@ -166,7 +166,7 @@
     <Compile Include="EntitySystem\Components\Vect\VectTransform.cs" />
     <Compile Include="EntitySystem\Components\Weapon\Weapon.cs" />
     <Compile Include="EntitySystem\ICollisionBox.cs" />
-    <Compile Include="EntitySystem\Template\AnimatedGameObject.cs" />
+    <Compile Include="EntitySystem\Template\OtherPlayerObject.cs" />
     <Compile Include="EntitySystem\Template\TargetObject.cs" />
     <Compile Include="EntitySystem\Template\VectGameObject.cs" />
     <Compile Include="EntitySystem\Template\WeaponObject.cs" />
@@ -212,6 +212,10 @@
     <Compile Include="Game\WeaponInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ClientServerExtension\ClientServerExtension.csproj">
+      <Project>{8CA689E8-AB3A-4314-B017-C2AB2D84475F}</Project>
+      <Name>ClientServerExtension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\GameEngine\GameEngine.csproj">
       <Project>{121AB8A9-2001-4CBE-80B3-A6E2E95B2E56}</Project>
       <Name>GameEngine</Name>
