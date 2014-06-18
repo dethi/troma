@@ -30,6 +30,7 @@ namespace Troma
         public int ID;
         public STATE State;
         public INPUT Input;
+        public bool Alive;
         public Map Terrain;
 
         public List<OtherPlayer> Players;
@@ -57,6 +58,9 @@ namespace Troma
 
             timerUpdate = new System.Timers.Timer(35); // 35ms
             timerUpdate.Elapsed += new System.Timers.ElapsedEventHandler(UpdateElapsed);
+
+            backgroundUpdater = new BackgroundWorker();
+            backgroundUpdater.DoWork += HandleMsg;
         }
 
         private void SetupClient()
@@ -111,26 +115,19 @@ namespace Troma
                         case NetIncomingMessageType.Data:
                             #region Connection Approved
 
-                            switch(IncMsg.ReadPacketType())
+                            switch (IncMsg.ReadPacketType())
                             {
                                 case PacketTypes.LOGIN:
                                     ID = IncMsg.ReadInt32();
                                     Terrain = (Map)IncMsg.ReadByte();
-                                    break;
-                                
-                                case PacketTypes.SPAWN:
-                                    if (IncMsg.ReadInt32() == ID)
-                                    {
-                                        State = IncMsg.ReadPlayerState();
-                                        canStart = true;
+                                    canStart = true;
 
 #if DEBUG
-                                        Console.WriteLine("Confirm initial data!");
+                                    Console.WriteLine("Confirm initial data!");
 #endif
-                                    }
 
                                     break;
-                                
+
                                 default:
                                     break;
                             }
@@ -178,23 +175,127 @@ namespace Troma
         public void Start()
         {
             timerUpdate.Start();
+            backgroundUpdater.RunWorkerAsync();
         }
 
-        public void HandleMsg()
+        private void HandleMsg(object sender, DoWorkEventArgs e)
         {
-            if ((IncMsg = Client.ReadMessage()) != null)
-            {
-                switch (IncMsg.MessageType)
-                {
-                    case NetIncomingMessageType.Data:
-                        // process data
-                        break;
+            OtherPlayer p;
+            int id;
+            string name;
 
-                    default:
-                        break;
+            while (true)
+            {
+                if ((IncMsg = Client.ReadMessage()) != null)
+                {
+                    switch (IncMsg.MessageType)
+                    {
+                        case NetIncomingMessageType.Data:
+                            #region Process Data
+
+                            switch (IncMsg.ReadPacketType())
+                            {
+                                case PacketTypes.QUIT:
+                                    p = FindPlayer(IncMsg.ReadInt32(), Players);
+
+                                    if (p == null)
+                                        break;
+
+                                    p.Killed();
+                                    Players.Remove(p);
+
+                                    break;
+
+                                case PacketTypes.STATE:
+                                    id = IncMsg.ReadInt32();
+                                    name = IncMsg.ReadString();
+
+                                    p = FindPlayer(id, Players);
+
+                                    if (p == null)
+                                    {
+                                        p = new OtherPlayer(name, id);
+                                        Players.Add(p);
+                                    }
+
+                                    p.State = IncMsg.ReadPlayerState();
+
+                                    break;
+
+                                case PacketTypes.INPUT:
+                                    p = FindPlayer(IncMsg.ReadInt32(), Players);
+
+                                    if (p == null)
+                                        break;
+
+                                    p.Input = IncMsg.ReadPlayerInput();
+
+                                    break;
+
+                                case PacketTypes.SPAWN:
+                                    id = IncMsg.ReadInt32();
+                                    name = IncMsg.ReadString();
+
+                                    if (id == ID)
+                                    {
+                                        Alive = true;
+                                        State = IncMsg.ReadPlayerState();
+                                    }
+                                    else
+                                    {
+                                        p = FindPlayer(id, Players);
+
+                                        if (p == null)
+                                        {
+                                            p = new OtherPlayer(name, id);
+                                            Players.Add(p);
+                                        }
+
+                                        p.Spawn(IncMsg.ReadPlayerState());
+                                    }
+
+                                    break;
+
+                                case PacketTypes.KILL:
+                                    id = IncMsg.ReadInt32();
+
+                                    if (id == ID)
+                                        Alive = false;
+                                    else
+                                    {
+                                        p = FindPlayer(id, Players);
+
+                                        if (p == null)
+                                            break;
+
+                                        p.Killed();
+                                    }
+
+                                    break;
+
+                                case PacketTypes.SHOOT:
+                                    p = FindPlayer(IncMsg.ReadInt32(), Players);
+
+                                    if (p == null)
+                                        break;
+
+                                    p.Shoot();
+
+                                    break;
+                            }
+
+                            break;
+
+                            #endregion
+
+                        default:
+                            break;
+                    }
+
+                    Client.Recycle(IncMsg); // generate less garbage
                 }
 
-                Client.Recycle(IncMsg); // generate less garbage
+                System.Threading.Thread.Sleep(1);
             }
         }
 

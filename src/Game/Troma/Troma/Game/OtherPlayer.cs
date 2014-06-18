@@ -27,8 +27,8 @@ namespace Troma
             State = new STATE();
             Input = new INPUT();
 
-            entity = OtherPlayerObject.BuildAndReturnEntity(
-                State.Position, State.Rotation, "Soldier");
+            entity = OtherPlayerObject.BuildEntity(
+                State.Position, State.Rotation, "cible");
 
             Alive = false;
         }
@@ -64,6 +64,12 @@ namespace Troma
         }
 
         #endregion
+
+        public void ActualizeState()
+        {
+            entity.GetComponent<Transform>().Position = State.Position;
+            entity.GetComponent<Transform>().Rotation = State.Rotation;
+        }
 
         public void Spawn(STATE state)
         {

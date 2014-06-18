@@ -171,7 +171,7 @@
     <Compile Include="EntitySystem\Template\VectGameObject.cs" />
     <Compile Include="EntitySystem\Template\WeaponObject.cs" />
     <Compile Include="Game\Scene.cs" />
-    <Compile Include="OtherPlayer.cs" />
+    <Compile Include="Game\OtherPlayer.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

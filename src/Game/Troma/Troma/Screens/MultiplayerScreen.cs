@@ -67,7 +67,7 @@ namespace Troma
         {
             base.Update(gameTime, hasFocus, isVisible);
 
-            Scene.Update(gameTime, 
+            Scene.Update(gameTime,
                 (Settings.DynamicClouds || ScreenState == ScreenState.TransitionOn),
                 IsActive);
 
@@ -92,15 +92,28 @@ namespace Troma
                 time += gameTime.ElapsedGameTime;
                 player.HandleInput(gameTime, input);
 
-                if (player.HasShoot)
-                    client.SendShoot();
+                if (player.Alive)
+                {
+                    if (!client.Alive)
+                        player.Killed();
+                    else
+                    {
+                        if (player.HasShoot)
+                            client.SendShoot();
 
-                client.SetData(player.GetState(), player.GetInput());
+                        client.SetData(player.GetState(), player.GetInput());
+                    }
+                }
+                else if (client.Alive)
+                    player.Spawn(client.State);
             }
         }
 
         public override void Draw(GameTime gameTime)
         {
+            foreach (OtherPlayer p in client.Players)
+                p.ActualizeState();
+
             GameServices.ResetGraphicsDeviceFor3D();
             Scene.Draw(gameTime, camera);
             player.Draw(gameTime, camera);

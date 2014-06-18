@@ -30,6 +30,8 @@ namespace Troma
 
         #region Fields
 
+        public bool Alive;
+
         private readonly Vector3 _initPosition;
         private readonly Vector3 _initRotation;
         private ITerrain _terrain;
@@ -147,6 +149,8 @@ namespace Troma
 
         public void Initialize(ITerrain terrain, Entity weapon)
         {
+            Alive = false;
+
             _height = HEIGHT;
             _position = _initPosition;
             _rotation = _initRotation;
@@ -174,6 +178,8 @@ namespace Troma
 
         public void Initialize(ITerrain terrain, Entity weaponMain, Entity weaponSecond)
         {
+            Alive = false;
+
             _height = HEIGHT;
             _position = _initPosition;
             _rotation = _initRotation;
@@ -620,12 +626,14 @@ namespace Troma
 
         public void Spawn(STATE state)
         {
+            Alive = true;
             Position = state.Position;
             Rotation = state.Rotation;
         }
 
         public void Killed()
         {
+            Alive = false;
             // do it
         }
 

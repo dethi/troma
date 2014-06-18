@@ -10,44 +10,51 @@ namespace GameServer
 {
     #region Protocol Documenation
 
-    //=================================
-    // Client connect to server (ch. 0)
-    //=================================
+    //=========================
+    // Client connect to server
+    //=========================
 
     // type = LOGIN
     // string = client name
 
-    // 1) Inform all client of the new connection
+    // 1) Send initial data to the new client
     //
-    // type = NEW
-    // int = new client ID
-    // string = new client name
-
-    // 2) Send initial data to the new client
-    //
+    // ReliableOrdered (ch. 1)
     // type = LOGIN
     // int = new client ID
     // Map = terrain
 
-    // 3) Send spawn
+    // 2) Send spawn
 
 
     //==========================
     // Client disconnect (ch. 0)
     //==========================
-
-    // 1) Inform all client of the deconnection
     //
+    // Unreliable
     // type = QUIT
     // int = client ID
+
+
+    //==============
+    // State (ch. 2)
+    //==============
+    //
+    // UnreliableSequenced
+    // type = STATE
+    // int = client ID
+    // string = name
+    // State = client state
 
 
     //==============
     // Spawn (ch. 1)
     //==============
     //
+    // ReliableOrdered
     // type = SPAWN
     // int = client ID
+    // string = name
     // State = client state
 
 
@@ -55,6 +62,7 @@ namespace GameServer
     // Kill (ch. 1)
     //=============
     //
+    // ReliableOrdered
     // type = KILL
     // int = client ID
 
@@ -63,23 +71,16 @@ namespace GameServer
     // Shoot (ch. 0)
     //==============
     //
+    // Unreliable
     // type = SHOOT
     // int = client ID
-
-
-    //==============
-    // State (ch. 2)
-    //==============
-    //
-    // type = STATE
-    // int = client ID
-    // State = client state
 
 
     //==============
     // Input (ch. 3)
     //==============
     //
+    // UnreliableSequenced
     // type = INPUT
     // int = client ID
     // Input = client input
@@ -219,16 +220,11 @@ namespace GameServer
                                 OutMsg = Server.CreateMessage();
                                 OutMsg.Write((byte)PacketTypes.STATE);
                                 OutMsg.Write(p.ID);
+                                OutMsg.Write(p.Name);
                                 OutMsg.WritePlayerState(p.State);
 
                                 Server.SendToAll(OutMsg, p.Connection,
-                                    NetDeliveryMethod.UnreliableSequenced, 1);
-
-#if DEBUG
-                                Console.BackgroundColor = ConsoleColor.White;
-                                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                                Console.WriteLine("Player {0} have send state.", p.ID);
-#endif
+                                    NetDeliveryMethod.UnreliableSequenced, 2);
 
                                 break;
 
@@ -246,20 +242,12 @@ namespace GameServer
                                 OutMsg.WritePlayerInput(p.Input);
 
                                 Server.SendToAll(OutMsg, p.Connection,
-                                    NetDeliveryMethod.UnreliableSequenced, 1);
-
-#if DEBUG
-                                Console.BackgroundColor = ConsoleColor.White;
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine("Player {0} have send input.", p.ID);
-#endif
+                                    NetDeliveryMethod.UnreliableSequenced, 3);
 
                                 break;
 
                             case PacketTypes.SHOOT:
                                 p = FindPlayer(IncMsg.ReadInt32(), Clients);
-
-                                // Compute shoot on the server
 
                                 if (p == null)
                                     break;
@@ -275,6 +263,8 @@ namespace GameServer
                                 Console.ForegroundColor = ConsoleColor.Blue;
                                 Console.WriteLine("Player {0} have shooted.", p.ID);
 #endif
+
+                                ComputeShoot(p);
 
                                 break;
 
@@ -367,14 +357,6 @@ namespace GameServer
                 WaitingQueue.Add(player);
                 NextID++;
 
-                // Send msg to all except player
-                OutMsg = Server.CreateMessage();
-                OutMsg.Write((byte)PacketTypes.NEW);
-                OutMsg.Write(player.ID);
-                OutMsg.Write(player.Name);
-
-                Server.SendToAll(OutMsg, player.Connection, NetDeliveryMethod.Unreliable, 0);
-
 #if DEBUG
                 Console.WriteLine(String.Format("Player {0} connected (id {1})",
                     player.Name, player.ID));
@@ -394,7 +376,7 @@ namespace GameServer
             OutMsg.Write(player.ID);
             OutMsg.Write((byte)TERRAIN);
 
-            Server.SendMessage(OutMsg, player.Connection, NetDeliveryMethod.Unreliable, 0);
+            Server.SendMessage(OutMsg, player.Connection, NetDeliveryMethod.ReliableOrdered, 1);
 
             STATE state = new STATE()
             {
@@ -405,9 +387,10 @@ namespace GameServer
             OutMsg = Server.CreateMessage();
             OutMsg.Write((byte)PacketTypes.SPAWN);
             OutMsg.Write(player.ID);
+            OutMsg.Write(player.Name);
             OutMsg.WritePlayerState(state);
 
-            Server.SendToAll(OutMsg, null, NetDeliveryMethod.UnreliableSequenced, 1);
+            Server.SendToAll(OutMsg, null, NetDeliveryMethod.ReliableOrdered, 1);
         }
 
         static void PlayerDisconnected(Player player)
@@ -423,6 +406,10 @@ namespace GameServer
             // int = ID
 
             Server.SendToAll(OutMsg, null, NetDeliveryMethod.Unreliable, 0);
+        }
+
+        static void ComputeShoot(Player player)
+        {
         }
 
         #region Help Methods

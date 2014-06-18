@@ -9,7 +9,6 @@ namespace ClientServerExtension
     public enum PacketTypes
     {
         LOGIN,
-        NEW,
         QUIT,
         STATE,
         INPUT,
