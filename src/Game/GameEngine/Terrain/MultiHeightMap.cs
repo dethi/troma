@@ -25,6 +25,7 @@ namespace GameEngine
             this.squareOf = squareOf;
             this.terrainInfo = terrainInfo;
             heightTab = new HeightMap[squareOf, squareOf];
+
             for (int x = 0; x < squareOf; x++)
             {
                 for (int y = 0; y < squareOf; y++)
@@ -33,9 +34,9 @@ namespace GameEngine
                         new Vector3(x * (terrainInfo.Size.Width - 1), 0, y * (terrainInfo.Size.Height - 1)),
                         terrainInfo.Size,
                         terrainInfo.Depth,
-                        FileManager.Load<Texture2D>("Terrains/" + mapName + "_texture" + x + y),
+                        FileManager.Load<Texture2D>(String.Format("Terrains/{0}_texture{1}{2}", mapName, x, y)),
                         terrainInfo.TextureScale,
-                        FileManager.Load<Texture2D>("Terrains/" + mapName + "_heightmap" + x + y));
+                        FileManager.Load<Texture2D>(String.Format("Terrains/{0}_heightmap{1}{2}", mapName, x, y)));
 
                     heightTab[x, y] = new HeightMap(game, effect.Clone(), info);
                 }
@@ -56,7 +57,7 @@ namespace GameEngine
             int mapX = (int)(pos.X / (terrainInfo.Size.Width - 1));
             int mapY = (int)(pos.Z / (terrainInfo.Size.Height - 1));
 
-            return ((mapX < squareOf && mapY < squareOf) && 
+            return ((mapX < squareOf && mapY < squareOf) &&
                 heightTab[mapX, mapY].IsOnTerrain(pos));
         }
 

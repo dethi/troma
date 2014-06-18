@@ -154,8 +154,8 @@ namespace Troma
                 Heighmap = terrainHeighmap
             };
 
-            Terrain = new MultiHeightMap(GameServices.Game, terrainEffect, terrainInfo, "cracovie", 2);
             CloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
+            Terrain = new MultiHeightMap(GameServices.Game, terrainEffect, terrainInfo, "cracovie", 2);
 
 
             GameObject.BuildEntity(new Vector3(132, 0, 20), "Town/immeuble4", modelEffect);
