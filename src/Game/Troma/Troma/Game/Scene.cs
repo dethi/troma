@@ -180,12 +180,12 @@ namespace Troma
             GameObject.BuildEntity(new Vector3(652, 0, 20), "Town/immeuble2", modelEffect);
             GameObject.BuildEntity(new Vector3(652, 0, 180), "Town/eglise", modelEffect);
             GameObject.BuildEntity(new Vector3(652, 0, 300), "Town/mairie", modelEffect);
-            GameObject.BuildEntity(new Vector3(652, 0, 580), "Town/cimetiere", modelEffect);
-
+            
             GameObject.BuildEntity(new Vector3(732, 0, 420), "Town/garde_passage_a_niveau", modelEffect);
             
             
             GameObject.BuildEntity(new Vector3(772, 0, 20), "Town/immeuble4", modelEffect);
+            GameObject.BuildEntity(new Vector3(800, 0, 180), "Town/cimetiere", modelEffect);
 
 
             //GameObject.BuildEntity(new Vector3(460, 0, 153), "Town/garde_passage_a_niveau", modelEffect);
