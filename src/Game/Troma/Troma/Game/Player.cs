@@ -619,6 +619,7 @@ namespace Troma
         {
             return new STATE()
             {
+                Alive = this.Alive,
                 Position = this.Position,
                 Rotation = this.Rotation
             };

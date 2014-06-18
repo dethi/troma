@@ -19,6 +19,7 @@ namespace ClientServerExtension
 
     public struct STATE
     {
+        public bool Alive;
         public Vector3 Position;
         public Vector3 Rotation;
     }

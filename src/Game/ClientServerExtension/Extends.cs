@@ -26,6 +26,8 @@ namespace ClientServerExtension
         {
             return new STATE()
             {
+                Alive = msg.ReadBoolean(),
+
                 Position = new Vector3(
                     msg.ReadFloat(),
                     msg.ReadFloat(),
@@ -44,6 +46,8 @@ namespace ClientServerExtension
         /// </summary>
         public static void WritePlayerState(this NetBuffer buffer, STATE state)
         {
+            buffer.Write(state.Alive);
+
             buffer.Write(state.Position.X);
             buffer.Write(state.Position.Y);
             buffer.Write(state.Position.Z);

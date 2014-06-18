@@ -107,16 +107,21 @@ namespace Troma
                 else if (client.Alive)
                     player.Spawn(client.State);
             }
+
+            foreach (OtherPlayer p in client.Players)
+                p.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            foreach (OtherPlayer p in client.Players)
-                p.ActualizeState();
+
 
             GameServices.ResetGraphicsDeviceFor3D();
             Scene.Draw(gameTime, camera);
             player.Draw(gameTime, camera);
+
+            foreach (OtherPlayer p in client.Players)
+                p.Draw(gameTime, camera);
 
 #if DEBUG
             CollisionManager.Draw(gameTime, camera);

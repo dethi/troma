@@ -201,7 +201,6 @@ namespace Troma
                                     if (p == null)
                                         break;
 
-                                    p.Killed();
                                     Players.Remove(p);
 
                                     break;
@@ -233,43 +232,13 @@ namespace Troma
                                     break;
 
                                 case PacketTypes.SPAWN:
-                                    id = IncMsg.ReadInt32();
-                                    name = IncMsg.ReadString();
-
-                                    if (id == ID)
-                                    {
-                                        Alive = true;
-                                        State = IncMsg.ReadPlayerState();
-                                    }
-                                    else
-                                    {
-                                        p = FindPlayer(id, Players);
-
-                                        if (p == null)
-                                        {
-                                            p = new OtherPlayer(name, id);
-                                            Players.Add(p);
-                                        }
-
-                                        p.Spawn(IncMsg.ReadPlayerState());
-                                    }
+                                    Alive = true;
+                                    State = IncMsg.ReadPlayerState();
 
                                     break;
 
                                 case PacketTypes.KILL:
-                                    id = IncMsg.ReadInt32();
-
-                                    if (id == ID)
-                                        Alive = false;
-                                    else
-                                    {
-                                        p = FindPlayer(id, Players);
-
-                                        if (p == null)
-                                            break;
-
-                                        p.Killed();
-                                    }
+                                    Alive = false;
 
                                     break;
 
@@ -309,7 +278,6 @@ namespace Troma
         {
             OutMsg = Client.CreateMessage();
             OutMsg.Write((byte)PacketTypes.STATE);
-            OutMsg.Write(ID);
             OutMsg.WritePlayerState(s);
 
             Client.SendMessage(OutMsg, NetDeliveryMethod.UnreliableSequenced, 2);
@@ -319,7 +287,6 @@ namespace Troma
         {
             OutMsg = Client.CreateMessage();
             OutMsg.Write((byte)PacketTypes.INPUT);
-            OutMsg.Write(ID);
             OutMsg.WritePlayerInput(i);
 
             Client.SendMessage(OutMsg, NetDeliveryMethod.UnreliableSequenced, 2);
@@ -329,7 +296,6 @@ namespace Troma
         {
             OutMsg = Client.CreateMessage();
             OutMsg.Write((byte)PacketTypes.SHOOT);
-            OutMsg.Write(ID);
 
             Client.SendMessage(OutMsg, NetDeliveryMethod.Unreliable, 0);
         }

@@ -17,7 +17,6 @@ namespace Troma
         public INPUT Input;
 
         private Entity entity;
-        private bool Alive;
 
         public OtherPlayer(string name, int id)
         {
@@ -29,15 +28,23 @@ namespace Troma
 
             entity = OtherPlayerObject.BuildEntity(
                 State.Position, State.Rotation, "cible");
-
-            Alive = false;
         }
 
         public void Update(GameTime gameTime)
         {
-            if (Alive)
+            if (State.Alive)
             {
+                entity.GetComponent<Transform>().Position = State.Position;
+                entity.GetComponent<Transform>().Rotation = State.Rotation;
+
+                entity.Update(gameTime);
             }
+        }
+
+        public void Draw(GameTime gameTime, ICamera camera)
+        {
+            if (State.Alive)
+                entity.Draw(gameTime, camera);
         }
 
         #region Actions
@@ -65,25 +72,10 @@ namespace Troma
 
         #endregion
 
-        public void ActualizeState()
-        {
-            entity.GetComponent<Transform>().Position = State.Position;
-            entity.GetComponent<Transform>().Rotation = State.Rotation;
-        }
-
         public void Spawn(STATE state)
         {
-            Alive = true;
             State = state;
-            Input = new INPUT();
-
-            EntityManager.AddEntity(entity);            
-        }
-
-        public void Killed()
-        {
-            Alive = false;
-            EntityManager.Remove(entity);
+            Input = new INPUT();       
         }
     }
 }

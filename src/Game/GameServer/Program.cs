@@ -43,7 +43,7 @@ namespace GameServer
     // UnreliableSequenced
     // type = STATE
     // int = client ID
-    // string = name
+    // string = client name
     // State = client state
 
 
@@ -53,8 +53,6 @@ namespace GameServer
     //
     // ReliableOrdered
     // type = SPAWN
-    // int = client ID
-    // string = name
     // State = client state
 
 
@@ -64,7 +62,6 @@ namespace GameServer
     //
     // ReliableOrdered
     // type = KILL
-    // int = client ID
 
 
     //==============
@@ -210,7 +207,7 @@ namespace GameServer
                         switch (IncMsg.ReadPacketType())
                         {
                             case PacketTypes.STATE:
-                                p = FindPlayer(IncMsg.ReadInt32(), Clients);
+                                p = FindPlayer(IncMsg.SenderConnection, Clients);
 
                                 if (p == null)
                                     break;
@@ -229,7 +226,7 @@ namespace GameServer
                                 break;
 
                             case PacketTypes.INPUT:
-                                p = FindPlayer(IncMsg.ReadInt32(), Clients);
+                                p = FindPlayer(IncMsg.SenderConnection, Clients);
 
                                 if (p == null)
                                     break;
@@ -247,7 +244,7 @@ namespace GameServer
                                 break;
 
                             case PacketTypes.SHOOT:
-                                p = FindPlayer(IncMsg.ReadInt32(), Clients);
+                                p = FindPlayer(IncMsg.SenderConnection, Clients);
 
                                 if (p == null)
                                     break;
@@ -386,11 +383,9 @@ namespace GameServer
 
             OutMsg = Server.CreateMessage();
             OutMsg.Write((byte)PacketTypes.SPAWN);
-            OutMsg.Write(player.ID);
-            OutMsg.Write(player.Name);
             OutMsg.WritePlayerState(state);
 
-            Server.SendToAll(OutMsg, null, NetDeliveryMethod.ReliableOrdered, 1);
+            Server.SendMessage(OutMsg, player.Connection, NetDeliveryMethod.ReliableOrdered, 1);
         }
 
         static void PlayerDisconnected(Player player)
