@@ -86,25 +86,25 @@ namespace Troma
         {
             Bone = 51,
 
-            Debout_Arret_Vise_Haut = new AnimInfo(0, 0),
-            Debout_Arret_Vise_Bas = new AnimInfo(0, 0),
-            Debout_Arret_Rechargement = new AnimInfo(0, 0),
-            Debout_Marche = new AnimInfo(0, 0),
-            Debout_Marche_Vise_Haut = new AnimInfo(0, 0),
+            Debout_Arret_Vise_Haut = new AnimInfo(0, 12),
+            Debout_Arret_Vise_Bas = new AnimInfo(12, 24),
+            Debout_Arret_Rechargement = new AnimInfo(24, 72),
+            Debout_Marche = new AnimInfo(72, 96),
+            Debout_Marche_Vise_Haut = new AnimInfo(132, 156),
             Debout_Marche_vise = new AnimInfo(0, 0),
             Debout_Marche_Vise_Bas = new AnimInfo(0, 0),
-            Debout_Marche_Rechargement = new AnimInfo(0, 0),
-            Mise_Accroupi = new AnimInfo(0, 0),
-            Accroupi_Arret_Vise_Haut = new AnimInfo(0, 0),
-            Accroupi_Arret_Vise_Bas = new AnimInfo(0, 0),
-            Accroupi_Arret_Rechargement = new AnimInfo(0, 0),
-            Accroupi_Marche = new AnimInfo(0, 0),
-            Accroupi_Marche_Vise_Haut = new AnimInfo(0, 0),
+            Debout_Marche_Rechargement = new AnimInfo(96, 132),
+            Mise_Accroupi = new AnimInfo(192, 216),
+            Accroupi_Arret_Vise_Haut = new AnimInfo(216, 228),
+            Accroupi_Arret_Vise_Bas = new AnimInfo(228, 240),
+            Accroupi_Arret_Rechargement = new AnimInfo(240, 288),
+            Accroupi_Marche = new AnimInfo(288, 312),
+            Accroupi_Marche_Vise_Haut = new AnimInfo(312, 336),
             Accroupi_Marche_vise = new AnimInfo(0, 0),
-            Accroupi_Marche_Vise_Bas = new AnimInfo(0, 0),
-            Accroupi_Marche_Rechargement = new AnimInfo(0, 0),
-            Mise_debout = new AnimInfo(0, 0),
-            Course = new AnimInfo(0, 0)
+            Accroupi_Marche_Vise_Bas = new AnimInfo(336, 360),
+            Accroupi_Marche_Rechargement = new AnimInfo(360, 396),
+            Mise_debout = new AnimInfo(408, 432),
+            Course = new AnimInfo(432, 444)
         };
 
 
