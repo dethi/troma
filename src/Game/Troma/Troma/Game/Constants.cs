@@ -84,7 +84,53 @@ namespace Troma
 
         public static OtherPlayerAnim M1 = new OtherPlayerAnim()
         {
-            // a completer
+            Bone = 51,
+
+            Debout_Arret_Vise_Haut = new AnimInfo(0, 0),
+            Debout_Arret_Vise_Bas = new AnimInfo(0, 0),
+            Debout_Arret_Rechargement = new AnimInfo(0, 0),
+            Debout_Marche = new AnimInfo(0, 0),
+            Debout_Marche_Vise_Haut = new AnimInfo(0, 0),
+            Debout_Marche_vise = new AnimInfo(0, 0),
+            Debout_Marche_Vise_Bas = new AnimInfo(0, 0),
+            Debout_Marche_Rechargement = new AnimInfo(0, 0),
+            Mise_Accroupi = new AnimInfo(0, 0),
+            Accroupi_Arret_Vise_Haut = new AnimInfo(0, 0),
+            Accroupi_Arret_Vise_Bas = new AnimInfo(0, 0),
+            Accroupi_Arret_Rechargement = new AnimInfo(0, 0),
+            Accroupi_Marche = new AnimInfo(0, 0),
+            Accroupi_Marche_Vise_Haut = new AnimInfo(0, 0),
+            Accroupi_Marche_vise = new AnimInfo(0, 0),
+            Accroupi_Marche_Vise_Bas = new AnimInfo(0, 0),
+            Accroupi_Marche_Rechargement = new AnimInfo(0, 0),
+            Mise_debout = new AnimInfo(0, 0),
+            Course = new AnimInfo(0, 0)
+        };
+
+
+        public static OtherPlayerAnim M1911 = new OtherPlayerAnim()
+        {
+            Bone = 51,
+
+            Debout_Arret_Vise_Haut = new AnimInfo(0, 0),
+            Debout_Arret_Vise_Bas = new AnimInfo(0, 0),
+            Debout_Arret_Rechargement = new AnimInfo(0, 0),
+            Debout_Marche = new AnimInfo(0, 0),
+            Debout_Marche_Vise_Haut = new AnimInfo(0, 0),
+            Debout_Marche_vise = new AnimInfo(0, 0),
+            Debout_Marche_Vise_Bas = new AnimInfo(0, 0),
+            Debout_Marche_Rechargement = new AnimInfo(0, 0),
+            Mise_Accroupi = new AnimInfo(0, 0),
+            Accroupi_Arret_Vise_Haut = new AnimInfo(0, 0),
+            Accroupi_Arret_Vise_Bas = new AnimInfo(0, 0),
+            Accroupi_Arret_Rechargement = new AnimInfo(0, 0),
+            Accroupi_Marche = new AnimInfo(0, 0),
+            Accroupi_Marche_Vise_Haut = new AnimInfo(0, 0),
+            Accroupi_Marche_vise = new AnimInfo(0, 0),
+            Accroupi_Marche_Vise_Bas = new AnimInfo(0, 0),
+            Accroupi_Marche_Rechargement = new AnimInfo(0, 0),
+            Mise_debout = new AnimInfo(0, 0),
+            Course = new AnimInfo(0, 0)
         };
     }
 }
