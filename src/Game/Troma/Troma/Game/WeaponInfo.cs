@@ -5,15 +5,10 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using ClientServerExtension;
 
 namespace Troma
 {
-    public enum Weapons
-    {
-        M1,
-        M1911
-    }
-
     public struct WeaponInfo
     {
         public string Name;

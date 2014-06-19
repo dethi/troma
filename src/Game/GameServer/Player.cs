@@ -4,58 +4,90 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Lidgren.Network;
+using ClientServerExtension;
 
 namespace GameServer
 {
-    public struct STATE
+    public struct RayCollision
     {
-        public Vector3 Position;
-        public Vector3 Rotation;
+        public float Distance;
+        public Player CollisionWith;
     }
 
-    public struct INPUT
-    {
-        public bool IsMove;
-        public bool IsRun;
-        public bool IsCrouch;
-
-        public bool IsShoot;
-        public bool IsReload;
-        public bool InSightPosition;
-        public Weapons Weapon;
-    }
-
-    public enum Weapons
-    {
-        M1,
-        M1911
-    }
-
-    class Player
+    public class Player
     {
         public string Name;
-        public int Slot;
+        public int ID;
         public NetConnection Connection;
 
         public STATE State;
         public INPUT Input;
 
-        public Player(string name, int slot, NetConnection co)
+        public int Score;
+        public bool Alive { get; private set; }
+
+        public float Height
+        {
+            get { return (Input.IsCrouch) ? 4.8f : 7f; }
+        }
+
+        public Vector3 ViewPosition
+        {
+            get
+            {
+                return State.Position + new Vector3(0, Height, 0);
+            }
+        }
+
+        public Vector3 LookAt
+        {
+            get
+            {
+                Matrix rotationMatrix = Matrix.CreateRotationX(State.Rotation.X) *
+                    Matrix.CreateRotationY(State.Rotation.Y);
+                Vector3 lookAtOffset = Vector3.Transform(Vector3.UnitZ, rotationMatrix);
+                return ViewPosition + lookAtOffset;
+            }
+        }
+
+        public Matrix World
+        {
+            get
+            {
+                return Matrix.CreateFromYawPitchRoll(State.Rotation.Y, State.Rotation.X,
+                    State.Rotation.Z) * Matrix.CreateTranslation(State.Position);
+            }
+        }
+
+        public Player(string name, int id, NetConnection co)
         {
             Name = name;
-            Slot = slot;
+            ID = id;
             Connection = co;
 
             State = new STATE();
             Input = new INPUT();
+
+            Score = 0;
+            Alive = false;
         }
 
-        public void Reset(Vector3 pos, Vector3 rot)
+        public void Spawn(STATE state)
         {
-            State.Position = pos;
-            State.Rotation = rot;
+            Alive = true;
 
+            State = state;
             Input = new INPUT();
+        }
+
+        public void Kill()
+        {
+            Alive = false;
+        }
+
+        public void AddScore()
+        {
+            Score += 100;
         }
     }
 }

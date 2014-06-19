@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using ClientServerExtension;
 
 namespace Troma
 {
@@ -39,6 +42,7 @@ namespace Troma
             }
 
             EntityManager.Initialize();
+            LoadBox(m);
             CollisionManager.Initialize();
         }
 
@@ -137,19 +141,124 @@ namespace Troma
             Effect terrainEffect = FileManager.Load<Effect>("Effects/Terrain");
             Texture2D terrainTexture = null;
             Texture2D terrainHeighmap = null;
+            Effect modelEffect = FileManager.Load<Effect>("Effects/GameObject");
+
 
             TerrainInfo terrainInfo = new TerrainInfo()
             {
                 Position = Vector3.Zero,
-                Size = new Size(513, 513),
-                Depth = 0,
+                Size = new Size(5*256, 5*256),
+                Depth = 20,
                 Texture = terrainTexture,
                 TextureScale = 32,
                 Heighmap = terrainHeighmap
             };
 
-            Terrain = new MultiHeightMap(GameServices.Game, terrainEffect, terrainInfo, "Cracovie", 1);
             CloudManager = SceneRenderer.InitializeSky(SkyType.CloudField, terrainInfo, camera);
+            Terrain = new MultiHeightMap(GameServices.Game, terrainEffect, terrainInfo, "cracovie", 5);
+
+
+            GameObject.BuildEntity(new Vector3(132, 0, 276), "Town/immeuble4", modelEffect);
+            GameObject.BuildEntity(new Vector3(132, 0, 556), "Town/immeuble4", modelEffect);
+            GameObject.BuildEntity(new Vector3(132, 0, 436), "Town/immeuble3", modelEffect);
+
+            GameObject.BuildEntity(new Vector3(262, 0, 836), "Town/immeuble3", modelEffect);
+
+            GameObject.BuildEntity(new Vector3(292, 0, 276), "Town/immeuble2", modelEffect);
+            GameObject.BuildEntity(new Vector3(292, 0, 436), "Town/poste", modelEffect);
+            GameObject.BuildEntity(new Vector3(292, 0, 556), "Town/hotel", modelEffect);
+
+            GameObject.BuildEntity(new Vector3(412, 0, 276), "Town/immeuble", modelEffect);
+            GameObject.BuildEntity(new Vector3(412, 0, 676), "Town/gare", modelEffect);
+            GameObject.BuildEntity(new Vector3(412, 0, 778), "Town/quai", modelEffect);
+            GameObject.BuildEntity(new Vector3(412, 0, 836), "Town/maison2", modelEffect);
+
+            GameObject.BuildEntity(new Vector3(492, 0, 516), "Town/fontaine", modelEffect);
+
+            GameObject.BuildEntity(new Vector3(532, 0, 836), "Town/maison2", modelEffect);
+
+            GameObject.BuildEntity(new Vector3(652, 0, 276), "Town/immeuble2", modelEffect);
+            GameObject.BuildEntity(new Vector3(652, 0, 436), "Town/eglise", modelEffect);
+            GameObject.BuildEntity(new Vector3(652, 0, 556), "Town/mairie", modelEffect);
+            
+            GameObject.BuildEntity(new Vector3(732, 0, 676), "Town/garde_passage_a_niveau", modelEffect);
+            
+            
+            GameObject.BuildEntity(new Vector3(772, 0, 276), "Town/immeuble4", modelEffect);
+            GameObject.BuildEntity(new Vector3(800, 0, 436), "Town/cimetiere", modelEffect);
+
+
+            //GameObject.BuildEntity(new Vector3(460, 0, 153), "Town/garde_passage_a_niveau", modelEffect);
+            //GameObject.BuildEntity(new Vector3(435, 0, 192), "Town/barriere_train_droite", modelEffect);
+            //GameObject.BuildEntity(new Vector3(435, 0, 222), "Town/barriere_train_gauche", modelEffect);
+
+             #region Rails
+
+            List<Vector3> modelPos = new List<Vector3>();
+            modelPos.Add(new Vector3(0, 0, 758));
+            modelPos.Add(new Vector3(120, 0, 758));
+            modelPos.Add(new Vector3(240, 0, 758));
+            modelPos.Add(new Vector3(360, 0, 758));
+            modelPos.Add(new Vector3(480, 0, 758));
+            modelPos.Add(new Vector3(600, 0, 758));
+            modelPos.Add(new Vector3(720, 0, 758));
+            modelPos.Add(new Vector3(840, 0, 758));
+            modelPos.Add(new Vector3(960, 0, 758));
+            modelPos.Add(new Vector3(0, 0, 768));
+            modelPos.Add(new Vector3(120, 0, 768));
+            modelPos.Add(new Vector3(240, 0, 768));
+            modelPos.Add(new Vector3(360, 0, 768));
+            modelPos.Add(new Vector3(480, 0, 768));
+            modelPos.Add(new Vector3(600, 0, 768));
+            modelPos.Add(new Vector3(720, 0, 768));
+            modelPos.Add(new Vector3(840, 0, 768));
+            modelPos.Add(new Vector3(960, 0, 768));
+
+            VectGameObject.BuildEntity(modelPos.ToArray(), "Town/rail", modelEffect);
+
+            #endregion
+        }
+
+        private static void LoadBox(Map m)
+        {
+            Box worldBox;
+
+            try
+            {
+                Stream stream;
+                BinaryFormatter bFormatter = new BinaryFormatter();
+
+                if (m == Map.Town)
+                    stream = File.Open("Content/Box/TownBox.bin", FileMode.Open);
+                else if (m == Map.Cracovie)
+                    stream = File.Open("Content/Box/CracovieBox.bin", FileMode.Open);
+                else
+                    throw new FileNotFoundException();
+
+                worldBox = (Box)bFormatter.Deserialize(stream);
+                stream.Close();
+            }
+            catch
+            {
+                worldBox = new Box();
+
+                List<Entity> entitiesWithBox = new List<Entity>();
+                entitiesWithBox.AddRange(EntityManager.EntitiesWith<CollisionBox>());
+
+                foreach (Entity e in entitiesWithBox)
+                {
+                    worldBox.Generate(
+                        e.GetComponent<Model3D>().Model,
+                        e.GetComponent<Transform>().World);
+                }
+
+                if (m == Map.Town)
+                    worldBox.Save("Content/Box/TownBox");
+                //else if (m == Map.Cracovie)
+                    //worldBox.Save("Content/Box/CracovieBox");
+            }
+
+            CollisionManager.AddBox(worldBox.BoudingBox);
         }
     }
 }

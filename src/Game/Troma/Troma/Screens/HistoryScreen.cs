@@ -79,7 +79,8 @@ namespace Troma
             base.HandleInput(gameTime, input);
 
             // Allows the screen to exit
-            if (input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
+            if (input.IsPressed(Keys.Enter) || input.IsPressed(Buttons.A) ||
+                input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
                 OnCancel(null, null);
         }
 

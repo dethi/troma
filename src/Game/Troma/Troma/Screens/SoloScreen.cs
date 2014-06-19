@@ -62,7 +62,7 @@ namespace Troma
 #endif
 
             camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
-            player = new Player(new Vector3(10, 0, 10), Vector3.Zero, camera);
+            player = new Player(new Vector3(450, 0, 260), Vector3.Zero, camera);
 
             Scene.Initialize(_map, camera);
 
@@ -101,6 +101,8 @@ namespace Troma
 
             TargetManager.Initialize();
             _initialNbTarget = TargetManager.Count;
+
+            System.Threading.Thread.Sleep(500);
 
             time = new TimeSpan();
             game.ResetElapsedTime();

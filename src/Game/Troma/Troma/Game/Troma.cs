@@ -5,7 +5,9 @@ using System.Text;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
+using ClientServerExtension;
 
 namespace Troma
 {
@@ -14,7 +16,8 @@ namespace Troma
         #region Fields
 
         internal GraphicsDeviceManager graphics { get; private set; }
-        ScreenManager screenManager;
+        private ScreenManager screenManager;
+        private static Process gameServer;
 
         // Prelaod any assets using by UI rendering
         static readonly string[] preloadAssets =
@@ -49,9 +52,6 @@ namespace Troma
 
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
-
-            //Process p = Process.Start("GameServer");
-            //p.Kill();
         }
 
         protected override void Initialize()
@@ -65,10 +65,11 @@ namespace Troma
             SoundManager.SetVolume(Settings.MusicVolume);
             SFXManager.SetVolume(Settings.MusicVolume);
 
-            screenManager.AddScreen(new SoloScreen(this, Map.Cracovie));
-            //screenManager.AddScreen(new PegiScreen(this));
+            //screenManager.AddScreen(new SoloScreen(this, Map.Cracovie));
+            screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new ScoreMenu(this));
             //screenManager.AddScreen(new HistoryScreen(this));
+            //screenManager.AddScreen(new MultiplayerScreen(this, "192.168.1.7"));
         }
 
         /// <summary>
@@ -91,6 +92,14 @@ namespace Troma
             SFXManager.Add("TargetImpact", Content.Load<SoundEffect>("Sounds/TargetImpact"));
             SFXManager.Add("Typewriter", Content.Load<SoundEffect>("Sounds/Typewriter"));
             SFXManager.Add("TypewriterPullback", Content.Load<SoundEffect>("Sounds/TypewriterPullback"));
+
+            // Generate a box file
+            /*
+            Model generateBox = Content.Load<Model>("Models/cible");
+            Box box = new Box();
+            box.Generate(generateBox);
+            box.Save("PlayerBox");
+            */
         }
 
         #endregion
@@ -111,5 +120,16 @@ namespace Troma
         }
 
         #endregion
+
+        public static void StartServer()
+        {
+            gameServer = Process.Start("GameServer");
+        }
+
+        public static void KillServer()
+        {
+            if (gameServer != null)
+                gameServer.Kill();
+        }
     }
 }

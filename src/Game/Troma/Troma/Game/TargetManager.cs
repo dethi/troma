@@ -39,6 +39,12 @@ namespace Troma
         public static void Initialize()
         {
             _masterList.AddRange(EntityManager.EntitiesWith<Target>());
+
+            foreach (Entity e in _masterList)
+            {
+                e.GetComponent<CollisionBox>().GenerateBoundingBox();
+                CollisionManager.AddBox(e.GetComponent<CollisionBox>().BoxList);
+            }
         }
 
         #endregion
