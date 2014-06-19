@@ -255,4 +255,10 @@ Au cours de cet entrainement, nous testerons votre capacité d'adaptation ainsi 
 compétences physiques et intellectuelles. Vous serez muni d'un M1 Guarand et d'un Colt 1911. 
 La précision est de rigueur.</value>
   </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Rejoindre</value>
+  </data>
+  <data name="Host" xml:space="preserve">
+    <value>Heberger</value>
+  </data>
 </root>

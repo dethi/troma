@@ -16,7 +16,8 @@ namespace Troma
         #region Fields
 
         internal GraphicsDeviceManager graphics { get; private set; }
-        ScreenManager screenManager;
+        private ScreenManager screenManager;
+        private static Process gameServer;
 
         // Prelaod any assets using by UI rendering
         static readonly string[] preloadAssets =
@@ -51,9 +52,6 @@ namespace Troma
 
             screenManager = new ScreenManager(this);
             Components.Add(screenManager);
-
-            //Process p = Process.Start("GameServer");
-            //p.Kill();
         }
 
         protected override void Initialize()
@@ -68,10 +66,10 @@ namespace Troma
             SFXManager.SetVolume(Settings.MusicVolume);
 
             //screenManager.AddScreen(new SoloScreen(this, Map.Cracovie));
-            //screenManager.AddScreen(new PegiScreen(this));
+            screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new ScoreMenu(this));
             //screenManager.AddScreen(new HistoryScreen(this));
-            screenManager.AddScreen(new MultiplayerScreen(this, "192.168.1.7"));
+            //screenManager.AddScreen(new MultiplayerScreen(this, "192.168.1.7"));
         }
 
         /// <summary>
@@ -122,5 +120,16 @@ namespace Troma
         }
 
         #endregion
+
+        public static void StartServer()
+        {
+            gameServer = Process.Start("GameServer");
+        }
+
+        public static void KillServer()
+        {
+            if (gameServer != null)
+                gameServer.Kill();
+        }
     }
 }

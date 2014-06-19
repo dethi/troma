@@ -252,4 +252,10 @@ take back as soon as possible to avoid the enemy reinforcements.
 During this test, we will test your adaptation, your physical and mental skills capacity. 
 You will be provided with an M1 Guarand and a Colt 1911. The precision is required.</value>
   </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="Host" xml:space="preserve">
+    <value>Host</value>
+  </data>
 </root>

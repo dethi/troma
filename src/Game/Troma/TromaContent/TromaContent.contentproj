@@ -431,15 +431,19 @@
       <Name>PlayerBox</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Models\soldier_M1.x">
-      <Name>soldier_M1</Name>
+    <Compile Include="Models\Soldier_M1.x">
+      <Name>Soldier_M1</Name>
       <Importer>XImporter</Importer>
       <Processor>SkinnedModelProcessor</Processor>
+      <ProcessorParameters_SwapWindingOrder>True</ProcessorParameters_SwapWindingOrder>
+      <ProcessorParameters_RotationY>180</ProcessorParameters_RotationY>
     </Compile>
-    <Compile Include="Models\soldier_M1911.x">
-      <Name>soldier_M1911</Name>
+    <Compile Include="Models\Soldier_M1911.x">
+      <Name>Soldier_M1911</Name>
       <Importer>XImporter</Importer>
       <Processor>SkinnedModelProcessor</Processor>
+      <ProcessorParameters_SwapWindingOrder>True</ProcessorParameters_SwapWindingOrder>
+      <ProcessorParameters_RotationY>180</ProcessorParameters_RotationY>
     </Compile>
     <None Include="Sounds\Audio.xgs">
       <Name>Audio</Name>

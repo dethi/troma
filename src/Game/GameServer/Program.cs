@@ -159,7 +159,7 @@ namespace GameServer
 
                 foreach (Player p in Clients)
                 {
-                    if (p.Score == 5000)
+                    if (p.Score >= 2500)
                     {
                         SendEnd();
                         end = true;
@@ -327,13 +327,16 @@ namespace GameServer
 
                                 p.Input = IncMsg.ReadPlayerInput();
 
-                                OutMsg = Server.CreateMessage();
-                                OutMsg.Write((byte)PacketTypes.INPUT);
-                                OutMsg.Write(p.ID);
-                                OutMsg.WritePlayerInput(p.Input);
+                                if (p.Alive)
+                                {
+                                    OutMsg = Server.CreateMessage();
+                                    OutMsg.Write((byte)PacketTypes.INPUT);
+                                    OutMsg.Write(p.ID);
+                                    OutMsg.WritePlayerInput(p.Input);
 
-                                Server.SendToAll(OutMsg, p.Connection,
-                                    NetDeliveryMethod.UnreliableSequenced, 3);
+                                    Server.SendToAll(OutMsg, p.Connection,
+                                        NetDeliveryMethod.UnreliableSequenced, 3);
+                                }
 
                                 break;
 
@@ -343,12 +346,15 @@ namespace GameServer
                                 if (p == null)
                                     break;
 
-                                OutMsg = Server.CreateMessage();
-                                OutMsg.Write((byte)PacketTypes.SHOOT);
-                                OutMsg.Write(p.ID);
+                                if (p.Alive)
+                                {
+                                    OutMsg = Server.CreateMessage();
+                                    OutMsg.Write((byte)PacketTypes.SHOOT);
+                                    OutMsg.Write(p.ID);
 
-                                Server.SendToAll(OutMsg, p.Connection,
-                                    NetDeliveryMethod.Unreliable, 0);
+                                    Server.SendToAll(OutMsg, p.Connection,
+                                        NetDeliveryMethod.Unreliable, 0);
+                                }
 
 #if DEBUG
                                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -533,7 +539,8 @@ namespace GameServer
 
 #if DEBUG
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Player {0} have killed {1}", player, _bulletResult.CollisionWith);
+            Console.WriteLine("Player {0} have killed {1}", player.ID, 
+                _bulletResult.CollisionWith.ID);
 #endif
         }
 

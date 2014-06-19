@@ -143,12 +143,5 @@ namespace Troma
         {
             LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game));
         }
-
-        private int ComputeScore(TimeSpan elapsedTime, int nbTarget, int nbMunition)
-        {
-            double t = elapsedTime.TotalSeconds;
-
-            return (int)(37 * (100 * nbTarget + (1 / t) * 1000) / (nbMunition + 1));
-        }
     }
 }

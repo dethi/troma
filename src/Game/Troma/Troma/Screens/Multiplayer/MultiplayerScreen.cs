@@ -27,6 +27,8 @@ namespace Troma
         private Vector2 titleOrigin = new Vector2(0, 0);
         private Color c = new Color(170, 170, 170);
 
+        private List<OtherPlayer> currentList;
+
         #endregion
 
         #region Initialization
@@ -40,6 +42,8 @@ namespace Troma
             client = new GameClient(host);
             client.ScoreChanged += ScoreChanged;
             client.EndedGame += EndedGame;
+
+            currentList = new List<OtherPlayer>();
         }
 
         public override void LoadContent()
@@ -81,6 +85,8 @@ namespace Troma
         public override void Update(GameTime gameTime, bool hasFocus, bool isVisible)
         {
             base.Update(gameTime, hasFocus, isVisible);
+            currentList.Clear();
+            currentList.AddRange(client.Players);
 
             Scene.Update(gameTime,
                 (Settings.DynamicClouds || ScreenState == ScreenState.TransitionOn),
@@ -94,7 +100,7 @@ namespace Troma
                 player.Update(gameTime);
             }
 
-            foreach (OtherPlayer p in client.Players)
+            foreach (OtherPlayer p in currentList)
                 p.Update(gameTime);
         }
 
@@ -132,7 +138,7 @@ namespace Troma
             Scene.Draw(gameTime, camera);
             player.Draw(gameTime, camera);
 
-            foreach (OtherPlayer p in client.Players)
+            foreach (OtherPlayer p in currentList)
                 p.Draw(gameTime, camera);
 
 #if DEBUG
@@ -174,7 +180,7 @@ namespace Troma
                     78 * width / 1920);
 
                 Vector2 notifPos = new Vector2(
-                    910 * width / 1920,
+                    900 * width / 1920,
                     20 * height / 1080);
 
                 GameServices.SpriteBatch.Begin();
@@ -191,7 +197,7 @@ namespace Troma
                     Position3, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
 
                 GameServices.SpriteBatch.DrawString(Font, notifMsg,
-                    notifPos, Color.Green, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+                    notifPos, Color.LimeGreen, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
 
                 GameServices.SpriteBatch.End();
 

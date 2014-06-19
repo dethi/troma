@@ -16,7 +16,12 @@ namespace Troma
         public STATE State;
         public INPUT Input;
 
-        private Entity entity;
+        private Entity soldierM1;
+        private Entity soldierM1911;
+
+        private Entity current;
+        private AnimatedModel3D currentModel;
+        private OtherPlayerAnim info;
 
         public OtherPlayer(string name, int id)
         {
@@ -26,27 +31,36 @@ namespace Troma
             State = new STATE();
             Input = new INPUT();
 
-            entity = OtherPlayerObject.BuildAnimatedEntity(
-                State.Position, State.Rotation, "soldier_M1");
-            entity.Initialize();
-            entity.GetComponent<AnimatedModel3D>().PlayClip(new AnimInfo(0, 24), 51);
+            soldierM1 = OtherPlayerObject.BuildAnimatedEntity(
+                State.Position, State.Rotation, "Soldier_M1");
+            soldierM1.Initialize();
+
+            soldierM1911 = OtherPlayerObject.BuildAnimatedEntity(
+                State.Position, State.Rotation, "Soldier_M1911");
+            soldierM1911.Initialize();
+
+            current = soldierM1;
+            currentModel = current.GetComponent<AnimatedModel3D>();
+            info = Constants.M1;
+
+            currentModel.PlayClip(info.Accroupi_Marche_Rechargement, info.Bone);
         }
 
         public void Update(GameTime gameTime)
         {
             if (State.Alive)
             {
-                entity.GetComponent<Transform>().Position = State.Position;
-                entity.GetComponent<Transform>().Rotation = State.Rotation;
+                current.GetComponent<Transform>().Position = State.Position;
+                current.GetComponent<Transform>().Rotation = State.Rotation;
 
-                entity.Update(gameTime);
+                current.Update(gameTime);
             }
         }
 
         public void Draw(GameTime gameTime, ICamera camera)
         {
             if (State.Alive)
-                entity.Draw(gameTime, camera);
+                current.Draw(gameTime, camera);
         }
 
         #region Actions
@@ -104,7 +118,5 @@ namespace Troma
         public AnimInfo Accroupi_Marche_Rechargement;
         public AnimInfo Mise_debout;
         public AnimInfo Course;
-
-        //etc je te laisse en faire autant qu'il faut
     }
 }
