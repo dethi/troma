@@ -81,5 +81,10 @@ namespace Troma
 
             MuzzleOffset = new Vector2(275, 100)
         };
+
+        public static OtherPlayerAnim M1 = new OtherPlayerAnim()
+        {
+            // a completer
+        };
     }
 }

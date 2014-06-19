@@ -26,8 +26,10 @@ namespace Troma
             State = new STATE();
             Input = new INPUT();
 
-            entity = OtherPlayerObject.BuildEntity(
-                State.Position, State.Rotation, "cible");
+            entity = OtherPlayerObject.BuildAnimatedEntity(
+                State.Position, State.Rotation, "soldier_M1");
+
+            entity.GetComponent<AnimatedModel3D>().PlayClip(new AnimInfo(0, 24), 51);
         }
 
         public void Update(GameTime gameTime)
@@ -75,7 +77,15 @@ namespace Troma
         public void Spawn(STATE state)
         {
             State = state;
-            Input = new INPUT();       
+            Input = new INPUT();
         }
+    }
+
+    public struct OtherPlayerAnim
+    {
+        public int Bone;
+
+        public AnimInfo Shoot;
+        //etc je te laisse en faire autant qu'il faut
     }
 }
