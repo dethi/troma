@@ -148,7 +148,7 @@ namespace Troma
             {
                 Position = Vector3.Zero,
                 Size = new Size(5*256, 5*256),
-                Depth = 80,
+                Depth = 150,
                 Texture = terrainTexture,
                 TextureScale = 256,
                 Heighmap = terrainHeighmap
