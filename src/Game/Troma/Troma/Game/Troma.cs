@@ -124,6 +124,7 @@ namespace Troma
         public static void StartServer()
         {
             gameServer = Process.Start("GameServer");
+            System.Threading.Thread.Sleep(1000);
         }
 
         public static void KillServer()

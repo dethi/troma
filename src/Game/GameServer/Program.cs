@@ -114,6 +114,7 @@ namespace GameServer
         const int PORT = 11420;
         const int MAX_CLIENT = 10;
         const int DT = 30; // ms
+        const int MAX_SCORE = 2000;
 
         static Map TERRAIN = Map.Town;
         static Vector3 INITIAL_POS = new Vector3(30, 0, 30);
@@ -159,7 +160,7 @@ namespace GameServer
 
                 foreach (Player p in Clients)
                 {
-                    if (p.Score >= 2000)
+                    if (p.Score >= MAX_SCORE)
                     {
                         SendEnd();
                         end = true;
@@ -472,6 +473,7 @@ namespace GameServer
             OutMsg.Write((byte)PacketTypes.LOGIN);
             OutMsg.Write(player.ID);
             OutMsg.Write((byte)TERRAIN);
+            OutMsg.Write(MAX_SCORE);
 
             Server.SendMessage(OutMsg, player.Connection, NetDeliveryMethod.ReliableOrdered, 1);
             SendSpawn(player);

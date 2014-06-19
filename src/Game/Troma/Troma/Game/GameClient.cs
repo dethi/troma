@@ -33,6 +33,7 @@ namespace Troma
         public bool Alive;
         public int Score;
         public Map Terrain;
+        public int MaxScore;
 
         public event EventHandler ScoreChanged;
         public event EventHandler EndedGame;
@@ -135,6 +136,7 @@ namespace Troma
                                 case PacketTypes.LOGIN:
                                     ID = IncMsg.ReadInt32();
                                     Terrain = (Map)IncMsg.ReadByte();
+                                    MaxScore = IncMsg.ReadInt32();
                                     canStart = true;
 
 #if DEBUG

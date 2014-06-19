@@ -94,13 +94,8 @@ namespace Troma
             currentList.Clear();
             currentList.AddRange(client.Players);
 
-            if (!client.Connected && client.Scoring == null)
-            {
-                client.Shutdown();
-                Troma.KillServer();
-                LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
-                    new ConnectOrHost(game, ErrorType.ConnectFailed));
-            }
+            if (!client.Connected && client.Scoring == null && IsActive)
+                QuitGame(ErrorType.ConnectFailed);
             else
             {
                 Scene.Update(gameTime,
@@ -128,7 +123,7 @@ namespace Troma
             if (input.IsPressed(Keys.P) || input.IsPressed(Buttons.Start) ||
                 input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
             {
-                ScreenManager.AddScreen(new InGameMenu(game));
+                ScreenManager.AddScreen(new InGameMenuMulti(game, this));
             }
             else
             {
@@ -215,7 +210,7 @@ namespace Troma
 
                 GameServices.SpriteBatch.Draw(target, targetImage, Color.White * 0.8f);
 
-                GameServices.SpriteBatch.DrawString(Font, client.Score.ToString(),
+                GameServices.SpriteBatch.DrawString(Font, String.Format("{0}/{1}", client.Score, client.MaxScore),
                     Position3, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
 
                 GameServices.SpriteBatch.DrawString(Font, notifMsg,
@@ -253,5 +248,13 @@ namespace Troma
         }
 
         #endregion
+
+        public void QuitGame(ErrorType error)
+        {
+            client.Shutdown();
+            Troma.KillServer();
+            LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
+                new ConnectOrHost(game, error));
+        }
     }
 }
