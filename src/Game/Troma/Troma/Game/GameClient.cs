@@ -73,6 +73,7 @@ namespace Troma
         private void SetupClient()
         {
             Config = new NetPeerConfiguration(APP_NAME);
+            Config.EnableUPnP = true;
             Config.EnableMessageType(NetIncomingMessageType.Data);
             Config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
 
@@ -86,6 +87,7 @@ namespace Troma
 
             Client = new NetClient(Config);
             Client.Start();
+            Client.UPnP.ForwardPort(Client.Port, "Troma client");
 
 #if DEBUG
             Console.WriteLine("Client start.");

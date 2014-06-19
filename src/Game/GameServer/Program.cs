@@ -242,6 +242,7 @@ namespace GameServer
         {
             Config = new NetPeerConfiguration(APP_NAME);
             Config.Port = PORT;
+            Config.EnableUPnP = true;
             Config.MaximumConnections = MAX_CLIENT;
             Config.EnableMessageType(NetIncomingMessageType.Data);
             Config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
@@ -259,6 +260,7 @@ namespace GameServer
 
             Server = new NetServer(Config);
             Server.Start();
+            Server.UPnP.ForwardPort(PORT, "Troma server");
 
 #if DEBUG
             Console.WriteLine("Server started.");
