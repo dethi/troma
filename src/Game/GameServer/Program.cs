@@ -112,7 +112,7 @@ namespace GameServer
 
         const string APP_NAME = "TROMA";
         const int PORT = 11420;
-        const int MAX_CLIENT = 20;
+        const int MAX_CLIENT = 10;
         const int DT = 30; // ms
 
         static Map TERRAIN = Map.Town;
@@ -159,7 +159,7 @@ namespace GameServer
 
                 foreach (Player p in Clients)
                 {
-                    if (p.Score >= 2500)
+                    if (p.Score >= 2000)
                     {
                         SendEnd();
                         end = true;
@@ -299,6 +299,31 @@ namespace GameServer
 
                         switch (IncMsg.ReadPacketType())
                         {
+                            case PacketTypes.SHOOT:
+                                p = FindPlayer(IncMsg.SenderConnection, Clients);
+
+                                if (p == null)
+                                    break;
+
+                                if (p.Alive)
+                                {
+                                    OutMsg = Server.CreateMessage();
+                                    OutMsg.Write((byte)PacketTypes.SHOOT);
+                                    OutMsg.Write(p.ID);
+
+                                    Server.SendToAll(OutMsg, p.Connection,
+                                        NetDeliveryMethod.Unreliable, 0);
+                                }
+
+#if DEBUG
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.WriteLine("Player {0} have shooted.", p.ID);
+#endif
+
+                                ComputeShoot(p);
+
+                                break;
+
                             case PacketTypes.STATE:
                                 p = FindPlayer(IncMsg.SenderConnection, Clients);
 
@@ -337,31 +362,6 @@ namespace GameServer
                                     Server.SendToAll(OutMsg, p.Connection,
                                         NetDeliveryMethod.UnreliableSequenced, 3);
                                 }
-
-                                break;
-
-                            case PacketTypes.SHOOT:
-                                p = FindPlayer(IncMsg.SenderConnection, Clients);
-
-                                if (p == null)
-                                    break;
-
-                                if (p.Alive)
-                                {
-                                    OutMsg = Server.CreateMessage();
-                                    OutMsg.Write((byte)PacketTypes.SHOOT);
-                                    OutMsg.Write(p.ID);
-
-                                    Server.SendToAll(OutMsg, p.Connection,
-                                        NetDeliveryMethod.Unreliable, 0);
-                                }
-
-#if DEBUG
-                                Console.ForegroundColor = ConsoleColor.Blue;
-                                Console.WriteLine("Player {0} have shooted.", p.ID);
-#endif
-
-                                ComputeShoot(p);
 
                                 break;
 

@@ -15,7 +15,7 @@ namespace Troma
 
         private const string APP_NAME = "TROMA";
         private const int PORT = 11420;
-        private const int MAX_CLIENT = 20;
+        private const int MAX_CLIENT = 10;
         private const int DT = 30; // ms
 
         #endregion
@@ -230,37 +230,13 @@ namespace Troma
                                     Players.Remove(p);
                                     break;
 
-                                case PacketTypes.STATE:
-                                    id = IncMsg.ReadInt32();
-                                    name = IncMsg.ReadString();
-
-                                    p = FindPlayer(id, Players);
-
-                                    if (p == null)
-                                    {
-                                        p = new OtherPlayer(name, id);
-                                        Players.Add(p);
-                                    }
-
-                                    p.State = IncMsg.ReadPlayerState();
-                                    break;
-
-                                case PacketTypes.INPUT:
-                                    p = FindPlayer(IncMsg.ReadInt32(), Players);
-
-                                    if (p == null)
-                                        break;
-
-                                    p.Input = IncMsg.ReadPlayerInput();
+                                case PacketTypes.KILL:
+                                    Alive = false;
                                     break;
 
                                 case PacketTypes.SPAWN:
                                     Alive = true;
                                     State = IncMsg.ReadPlayerState();
-                                    break;
-
-                                case PacketTypes.KILL:
-                                    Alive = false;
                                     break;
 
                                 case PacketTypes.SHOOT:
@@ -290,6 +266,33 @@ namespace Troma
                                     }
 
                                     EndedGame(null, null);
+                                    break;
+
+                                case PacketTypes.STATE:
+                                    id = IncMsg.ReadInt32();
+                                    name = IncMsg.ReadString();
+
+                                    p = FindPlayer(id, Players);
+
+                                    if (p == null)
+                                    {
+                                        p = new OtherPlayer(name, id);
+                                        Players.Add(p);
+                                    }
+
+                                    p.State = IncMsg.ReadPlayerState();
+                                    break;
+
+                                case PacketTypes.INPUT:
+                                    p = FindPlayer(IncMsg.ReadInt32(), Players);
+
+                                    if (p == null)
+                                        break;
+
+                                    p.Input = IncMsg.ReadPlayerInput();
+                                    break;
+
+                                default:
                                     break;
                             }
 

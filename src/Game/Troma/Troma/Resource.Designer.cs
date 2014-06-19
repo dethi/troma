@@ -88,6 +88,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Connection failed.
+        /// </summary>
+        internal static string ConnectFail {
+            get {
+                return ResourceManager.GetString("ConnectFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Elapsed time.
         /// </summary>
         internal static string ElapsedTime {

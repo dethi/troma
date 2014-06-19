@@ -140,7 +140,7 @@ namespace Troma
 
         private void MultiMenuEntrySelected(object sender, EventArgs e)
         {
-            ScreenManager.AddScreen(new ConnectOrHost(game));
+            ScreenManager.AddScreen(new ConnectOrHost(game, ErrorType.None));
         }
 
         private void ScoreMenuEntrySelected(object sender, EventArgs e)

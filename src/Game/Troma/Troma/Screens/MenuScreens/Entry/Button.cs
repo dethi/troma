@@ -12,7 +12,7 @@ namespace Troma
     {
         private Vector2 _position;
 
-        private readonly Vector2 originPos;
+        public Vector2 originPos;
         private readonly Color color;
         private readonly Color selectedColor;
 

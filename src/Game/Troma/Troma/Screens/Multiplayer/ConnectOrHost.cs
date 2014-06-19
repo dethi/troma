@@ -9,7 +9,13 @@ using GameEngine;
 
 namespace Troma
 {
-    class ConnectOrHost : MenuScreen
+    public enum ErrorType
+    {
+        ConnectFailed,
+        None
+    }
+
+    public class ConnectOrHost : MenuScreen
     {
         private Button connectMenuEntry;
         private Button hostMenyEntry;
@@ -23,7 +29,9 @@ namespace Troma
         private Rectangle bgTransRect;
         private Rectangle arrowRect;
 
-        public ConnectOrHost(Game game)
+        private ErrorType error;
+
+        public ConnectOrHost(Game game, ErrorType error)
             : base(game)
         {
             Vector2 entryPos = new Vector2(143, 435);
@@ -45,6 +53,8 @@ namespace Troma
             MenuEntries.Add(connectMenuEntry);
             MenuEntries.Add(hostMenyEntry);
             MenuEntries.Add(backMenuEntry);
+
+            this.error = error;
         }
 
         public override void LoadContent()
@@ -58,6 +68,8 @@ namespace Troma
             bgRect = new Rectangle(0, 0, 1920, 1080);
             bgTransRect = new Rectangle(0, 0, 550, 1080);
             arrowRect = new Rectangle(0, 0, 64, 64);
+
+            TimerManager.Add(300, EventLoadPopUp);
         }
 
         public override void Draw(GameTime gameTime)
@@ -101,7 +113,8 @@ namespace Troma
 
         private void ConnectMenuEntrySelected(object sender, EventArgs e)
         {
-            //
+            SoundManager.Stop();
+            LoadingScreen.Load(game, ScreenManager, true, new MultiplayerScreen(game, "192.168.1.7"));
         }
 
         private void HostMenuEntrySelected(object sender, EventArgs e)
@@ -111,10 +124,22 @@ namespace Troma
             LoadingScreen.Load(game, ScreenManager, true, new MultiplayerScreen(game, "localhost"));
         }
 
-
         protected override void OnCancel(object sender, EventArgs e)
         {
             ExitScreen();
+        }
+
+        public void EventLoadPopUp(object o, EventArgs e)
+        {
+            switch (error)
+            {
+                case ErrorType.ConnectFailed:
+                    ScreenManager.AddScreen(new PopUpScreen(game, Resource.ConnectFail));
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

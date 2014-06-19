@@ -14,6 +14,7 @@ namespace Troma
         #region Fields
 
         private GameClient client;
+        private string host;
 
         private FirstPersonView camera;
         private Player player;
@@ -39,54 +40,50 @@ namespace Troma
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
-            client = new GameClient();
-            client.ScoreChanged += ScoreChanged;
-            client.EndedGame += EndedGame;
-            client.Join(host);
-
+            this.host = host;
             currentList = new List<OtherPlayer>();
         }
 
         public override void LoadContent()
         {
-            if (!client.Connected)
-            {
-                client.Shutdown();
-                ExitScreen();
-                LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
-                    new ConnectOrHost(game));
-            }
-
             base.LoadContent();
 
-            #region HUD
+            client = new GameClient();
+            client.ScoreChanged += ScoreChanged;
+            client.EndedGame += EndedGame;
+            client.Join(host);
 
-            target = FileManager.Load<Texture2D>("Menus/target");
-            Font = FileManager.Load<SpriteFont>("Fonts/HUD");
-            notifMsg = "";
+            if (client.Connected)
+            {
+                #region HUD
 
-            #endregion
+                target = FileManager.Load<Texture2D>("Menus/target");
+                Font = FileManager.Load<SpriteFont>("Fonts/HUD");
+                notifMsg = "";
+
+                #endregion
 
 #if DEBUG
-            XConsole.Reset();
-            XConsole.Initialize();
-            DrawingAxes.Initialize();
-            BoundingSphereRenderer.Initialize(30);
+                XConsole.Reset();
+                XConsole.Initialize();
+                DrawingAxes.Initialize();
+                BoundingSphereRenderer.Initialize(30);
 #endif
 
-            camera = new FirstPersonView(GameServices.GraphicsDevice.Viewport.AspectRatio);
-            player = new Player(client.State.Position, client.State.Rotation, camera);
+                camera = new FirstPersonView(GameServices.GraphicsDevice.Viewport.AspectRatio);
+                player = new Player(client.State.Position, client.State.Rotation, camera);
 
-            Scene.Initialize(client.Terrain, camera);
+                Scene.Initialize(client.Terrain, camera);
 
-            player.Initialize(Scene.Terrain,
-                WeaponObject.BuildEntity(Constants.GarandM1),
-                WeaponObject.BuildEntity(Constants.ColtM1911));
+                player.Initialize(Scene.Terrain,
+                    WeaponObject.BuildEntity(Constants.GarandM1),
+                    WeaponObject.BuildEntity(Constants.ColtM1911));
 
-            System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(500);
 
-            game.ResetElapsedTime();
-            client.Start();
+                game.ResetElapsedTime();
+                client.Start();
+            }
         }
 
         #endregion
@@ -101,29 +98,33 @@ namespace Troma
             {
                 client.Shutdown();
                 Troma.KillServer();
-                ExitScreen();
                 LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
-                    new ConnectOrHost(game));
+                    new ConnectOrHost(game, ErrorType.ConnectFailed));
             }
-
-            Scene.Update(gameTime,
-                (Settings.DynamicClouds || ScreenState == ScreenState.TransitionOn),
-                IsActive);
-
-            if (!IsActive)
-                pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
             else
             {
-                pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
-                player.Update(gameTime);
-            }
+                Scene.Update(gameTime,
+                    (Settings.DynamicClouds || ScreenState == ScreenState.TransitionOn),
+                    IsActive);
 
-            foreach (OtherPlayer p in currentList)
-                p.Update(gameTime);
+                if (!IsActive)
+                    pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
+                else
+                {
+                    pauseAlpha = Math.Max(pauseAlpha - 1f / 32, 0);
+                    player.Update(gameTime);
+                }
+
+                foreach (OtherPlayer p in currentList)
+                    p.Update(gameTime);
+            }
         }
 
         public override void HandleInput(GameTime gameTime, InputState input)
         {
+            if (!client.Connected)
+                return;
+
             if (input.IsPressed(Keys.P) || input.IsPressed(Buttons.Start) ||
                 input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
             {
@@ -152,6 +153,9 @@ namespace Troma
 
         public override void Draw(GameTime gameTime)
         {
+            if (!client.Connected)
+                return;
+
             GameServices.ResetGraphicsDeviceFor3D();
             Scene.Draw(gameTime, camera);
             player.Draw(gameTime, camera);

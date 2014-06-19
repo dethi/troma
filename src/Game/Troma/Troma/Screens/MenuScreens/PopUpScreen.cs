@@ -55,21 +55,38 @@ namespace Troma
 
             float widthScale = (float)width / 1920;
             float heightScale = (float)height / 1080;
+            float scale = (widthScale + heightScale) / 2;
+
+            Vector2 textSize = SpriteFont.MeasureString(msg) * scale;
+            msgPos = new Vector2(
+                980 * widthScale - (textSize.X / 2),
+                560 * widthScale - (textSize.Y / 2));
+
+            bgTransRect.X = (int)(940 * widthScale - (textSize.X / 2));
+            bgTransRect.Y = (int)(520 * widthScale - (textSize.Y / 2));
+            bgTransRect.Width = (int)textSize.X + 40;
+            bgTransRect.Height = (int)textSize.Y + 40 + 100;
+
+            OkMenuEntry.originPos = new Vector2(
+                960,
+                (msgPos.Y + textSize.Y) / heightScale + 60);
         }
 
         public override void Draw(GameTime gameTime)
         {
+            ScreenManager.FadeBackBufferToBlack(TransitionAlpha * 0.45f);
+
             int width = GameServices.GraphicsDevice.Viewport.Width;
             int height = GameServices.GraphicsDevice.Viewport.Height;
 
             float widthScale = (float)width / 1920;
             float heightScale = (float)height / 1080;
-
-            bgTransRect.Height = height;
-            bgTransRect.Width = (int)(500 * widthScale);
+            float scale = (widthScale + heightScale) / 2;
 
             GameServices.SpriteBatch.Begin();
-            GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.15f);
+            GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.3f);
+            GameServices.SpriteBatch.DrawString(SpriteFont, msg, msgPos, Color.Black * TransitionAlpha, 0,
+                Vector2.Zero, scale, SpriteEffects.None, 0);
 
             // Draw each menu entry in turn.
             for (int i = 0; i < MenuEntries.Count; i++)

@@ -204,7 +204,7 @@
     <Compile Include="Screens\EndGameScreen.cs" />
     <Compile Include="Screens\Multiplayer\ConnectOrHost.cs" />
     <Compile Include="Screens\Multiplayer\MultiplayerScreen.cs" />
-    <Compile Include="Screens\PopUpScreen.cs" />
+    <Compile Include="Screens\MenuScreens\PopUpScreen.cs" />
     <Compile Include="Screens\SoloScreen.cs" />
     <Compile Include="Screens\StartScreens\PegiScreen.cs" />
     <Compile Include="Screens\StartScreens\TitleIntroScreen.cs" />
