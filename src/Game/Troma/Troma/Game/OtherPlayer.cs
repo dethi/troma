@@ -85,7 +85,26 @@ namespace Troma
     {
         public int Bone;
 
-        public AnimInfo Shoot;
+        public AnimInfo Debout_Arret_Vise_Haut;
+        public AnimInfo Debout_Arret_Vise_Bas;
+        public AnimInfo Debout_Arret_Rechargement;
+        public AnimInfo Debout_Marche;
+        public AnimInfo Debout_Marche_Vise_Haut;
+        public AnimInfo Debout_Marche_vise;
+        public AnimInfo Debout_Marche_Vise_Bas;
+        public AnimInfo Debout_Marche_Rechargement;
+        public AnimInfo Mise_Accroupi;
+        public AnimInfo Accroupi_Arret_Vise_Haut;
+        public AnimInfo Accroupi_Arret_Vise_Bas;
+        public AnimInfo Accroupi_Arret_Rechargement;
+        public AnimInfo Accroupi_Marche;
+        public AnimInfo Accroupi_Marche_Vise_Haut;
+        public AnimInfo Accroupi_Marche_vise;
+        public AnimInfo Accroupi_Marche_Vise_Bas;
+        public AnimInfo Accroupi_Marche_Rechargement;
+        public AnimInfo Mise_debout;
+        public AnimInfo Course;
+
         //etc je te laisse en faire autant qu'il faut
     }
 }
