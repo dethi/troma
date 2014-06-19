@@ -215,6 +215,8 @@ namespace Troma
             modelPos.Add(new Vector3(960, 0, 768));
 
             VectGameObject.BuildEntity(modelPos.ToArray(), "Town/rail", modelEffect);
+            GameObject.BuildEntity(new Vector3(40, 0, 746), "Town/tunnel_2", modelEffect);
+            GameObject.BuildEntity(new Vector3(1000, 0, 746), "Town/tunnel", modelEffect);
 
             #endregion
         }
