@@ -147,7 +147,7 @@ namespace Troma
             TerrainInfo terrainInfo = new TerrainInfo()
             {
                 Position = Vector3.Zero,
-                Size = new Size(256, 256),
+                Size = new Size(5*256, 5*256),
                 Depth = 0,
                 Texture = terrainTexture,
                 TextureScale = 32,

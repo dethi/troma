@@ -13,6 +13,7 @@ namespace GameEngine
         HeightMap[,] heightTab;
         TerrainInfo terrainInfo;
         int squareOf;
+        Size oneMap;
         #endregion Fields
 
         public TerrainInfo Info
@@ -26,13 +27,17 @@ namespace GameEngine
             this.terrainInfo = terrainInfo;
             heightTab = new HeightMap[squareOf, squareOf];
 
+            oneMap = new Size(
+                terrainInfo.Size.Width / squareOf,
+                terrainInfo.Size.Height / squareOf);
+
             for (int x = 0; x < squareOf; x++)
             {
                 for (int y = 0; y < squareOf; y++)
                 {
                     TerrainInfo info = new TerrainInfo(
-                        new Vector3(x * (terrainInfo.Size.Width - 1), 0, y * (terrainInfo.Size.Height - 1)),
-                        terrainInfo.Size,
+                        new Vector3(x * (oneMap.Width - 1), 0, y * (oneMap.Height - 1)),
+                        oneMap,
                         terrainInfo.Depth,
                         FileManager.Load<Texture2D>(String.Format("Terrains/{0}_texture{1}{2}", mapName, x, y)),
                         terrainInfo.TextureScale,
@@ -46,16 +51,16 @@ namespace GameEngine
 
         public float GetY(Vector3 pos)
         {
-            int mapX = (int)(pos.X / (terrainInfo.Size.Width - 1));
-            int mapY = (int)(pos.Z / (terrainInfo.Size.Height - 1));
+            int mapX = (int)(pos.X / (oneMap.Width - 1));
+            int mapY = (int)(pos.Z / (oneMap.Height - 1));
 
             return heightTab[mapX, mapY].GetY(pos);
         }
 
         public bool IsOnTerrain(Vector3 pos)
         {
-            int mapX = (int)(pos.X / (terrainInfo.Size.Width - 1));
-            int mapY = (int)(pos.Z / (terrainInfo.Size.Height - 1));
+            int mapX = (int)(pos.X / (oneMap.Width - 1));
+            int mapY = (int)(pos.Z / (oneMap.Height - 1));
 
             return ((mapX < squareOf && mapY < squareOf) &&
                 heightTab[mapX, mapY].IsOnTerrain(pos));
