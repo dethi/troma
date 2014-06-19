@@ -436,7 +436,7 @@
       <Importer>XImporter</Importer>
       <Processor>SkinnedModelProcessor</Processor>
       <ProcessorParameters_SwapWindingOrder>True</ProcessorParameters_SwapWindingOrder>
-      <ProcessorParameters_RotationY>180</ProcessorParameters_RotationY>
+      <ProcessorParameters_RotationX>90</ProcessorParameters_RotationX>
     </Compile>
     <Compile Include="Models\Soldier_M1911.x">
       <Name>Soldier_M1911</Name>
@@ -771,13 +771,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture00.jpg">
-      <Name>cracovie_texture00</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Terrains\cracovie_texture10.jpg">
       <Name>cracovie_texture10</Name>
       <Importer>TextureImporter</Importer>
@@ -1062,6 +1055,13 @@
   <ItemGroup>
     <Compile Include="Terrains\cracovie_texture30.jpg">
       <Name>cracovie_texture30</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_texture00.png">
+      <Name>cracovie_texture00</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

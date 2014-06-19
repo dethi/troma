@@ -39,15 +39,24 @@ namespace Troma
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
-            client = new GameClient(host);
+            client = new GameClient();
             client.ScoreChanged += ScoreChanged;
             client.EndedGame += EndedGame;
+            client.Join(host);
 
             currentList = new List<OtherPlayer>();
         }
 
         public override void LoadContent()
         {
+            if (!client.Connected)
+            {
+                client.Shutdown();
+                ExitScreen();
+                LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
+                    new ConnectOrHost(game));
+            }
+
             base.LoadContent();
 
             #region HUD
@@ -87,6 +96,15 @@ namespace Troma
             base.Update(gameTime, hasFocus, isVisible);
             currentList.Clear();
             currentList.AddRange(client.Players);
+
+            if (!client.Connected && client.Scoring == null)
+            {
+                client.Shutdown();
+                Troma.KillServer();
+                ExitScreen();
+                LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
+                    new ConnectOrHost(game));
+            }
 
             Scene.Update(gameTime,
                 (Settings.DynamicClouds || ScreenState == ScreenState.TransitionOn),

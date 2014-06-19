@@ -65,8 +65,8 @@ namespace Troma
             SoundManager.SetVolume(Settings.MusicVolume);
             SFXManager.SetVolume(Settings.MusicVolume);
 
-            //screenManager.AddScreen(new SoloScreen(this, Map.Cracovie));
-            screenManager.AddScreen(new PegiScreen(this));
+            screenManager.AddScreen(new SoloScreen(this, Map.Cracovie));
+            //screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new ScoreMenu(this));
             //screenManager.AddScreen(new HistoryScreen(this));
             //screenManager.AddScreen(new MultiplayerScreen(this, "192.168.1.7"));
@@ -129,7 +129,10 @@ namespace Troma
         public static void KillServer()
         {
             if (gameServer != null)
-                gameServer.Kill();
+            {
+                if (!gameServer.HasExited)
+                    gameServer.Kill();
+            }
         }
     }
 }

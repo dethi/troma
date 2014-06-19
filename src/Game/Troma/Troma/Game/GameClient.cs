@@ -43,15 +43,20 @@ namespace Troma
         private System.Timers.Timer timerUpdate;
         private BackgroundWorker backgroundUpdater;
 
+        public bool Connected
+        {
+            get 
+            { 
+                return (Client.ConnectionStatus == NetConnectionStatus.Connected); 
+            }
+        }
+
         #endregion
 
-        public GameClient(string host)
+        public GameClient()
         {
             Initialize();
             SetupClient();
-
-            Connect(host);
-            WaitInitialData();
         }
 
         #region Initialization
@@ -109,13 +114,14 @@ namespace Troma
 
         private void WaitInitialData()
         {
+            DateTime expired = DateTime.Now + new TimeSpan(0, 0, 0, 30, 0);
             bool canStart = false;
 
 #if DEBUG
             Console.WriteLine("Waiting initial data...");
 #endif
 
-            while (!canStart)
+            while (!canStart && expired > DateTime.Now)
             {
                 if ((IncMsg = Client.ReadMessage()) != null)
                 {
@@ -180,6 +186,17 @@ namespace Troma
         }
 
         #endregion
+
+        public void Join(string host)
+        {
+            Connect(host);
+            WaitInitialData();
+        }
+
+        public void Shutdown()
+        {
+            Client.Shutdown("End");
+        }
 
         public void Start()
         {

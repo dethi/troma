@@ -51,7 +51,10 @@ namespace Troma
             if (State.Alive)
             {
                 current.GetComponent<Transform>().Position = State.Position;
-                current.GetComponent<Transform>().Rotation = State.Rotation;
+                current.GetComponent<Transform>().Rotation = new Vector3(
+                    1.57f - State.Rotation.X,
+                    3.14f + State.Rotation.Y,
+                    State.Rotation.Z);
 
                 current.Update(gameTime);
             }
