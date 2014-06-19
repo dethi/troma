@@ -785,13 +785,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture11.jpg">
-      <Name>cracovie_texture11</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Terrains\cracovie_heightmap00.png">
       <Name>cracovie_heightmap00</Name>
       <Importer>TextureImporter</Importer>
@@ -927,27 +920,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture31.jpg">
-      <Name>cracovie_texture31</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture32.jpg">
-      <Name>cracovie_texture32</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture33.jpg">
-      <Name>cracovie_texture33</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Terrains\cracovie_texture40.jpg">
       <Name>cracovie_texture40</Name>
       <Importer>TextureImporter</Importer>
@@ -990,27 +962,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture23.jpg">
-      <Name>cracovie_texture23</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture22.jpg">
-      <Name>cracovie_texture22</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture21.jpg">
-      <Name>cracovie_texture21</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Terrains\cracovie_texture20.jpg">
       <Name>cracovie_texture20</Name>
       <Importer>TextureImporter</Importer>
@@ -1020,20 +971,6 @@
   <ItemGroup>
     <Compile Include="Terrains\cracovie_texture14.jpg">
       <Name>cracovie_texture14</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture13.jpg">
-      <Name>cracovie_texture13</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture12.jpg">
-      <Name>cracovie_texture12</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -1060,7 +997,56 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Terrains\cracovie_texture00.png">
+    <Compile Include="Terrains\cracovie_texture11.png">
+      <Name>cracovie_texture11</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_texture12.png">
+      <Name>cracovie_texture12</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Terrains\cracovie_texture13.png">
+      <Name>cracovie_texture13</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Terrains\cracovie_texture21.png">
+      <Name>cracovie_texture21</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Terrains\cracovie_texture22.png">
+      <Name>cracovie_texture22</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Terrains\cracovie_texture23.png">
+      <Name>cracovie_texture23</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Terrains\cracovie_texture31.png">
+      <Name>cracovie_texture31</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Terrains\cracovie_texture32.png">
+      <Name>cracovie_texture32</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Terrains\cracovie_texture33.png">
+      <Name>cracovie_texture33</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Terrains\cracovie_texture00.jpg">
       <Name>cracovie_texture00</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
