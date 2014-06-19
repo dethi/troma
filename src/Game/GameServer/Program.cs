@@ -39,14 +39,12 @@ namespace GameServer
 
 
     //==============
-    // State (ch. 2)
+    // Shoot (ch. 0)
     //==============
     //
-    // UnreliableSequenced
-    // type = STATE
+    // Unreliable
+    // type = SHOOT
     // int = client ID
-    // string = client name
-    // State = client state
 
 
     //==============
@@ -67,12 +65,23 @@ namespace GameServer
 
 
     //==============
-    // Shoot (ch. 0)
+    // Score (ch. 1)
     //==============
     //
-    // Unreliable
-    // type = SHOOT
+    // ReliableOrdered
+    // type = SCORE
+    // int = client score
+
+
+    //==============
+    // State (ch. 2)
+    //==============
+    //
+    // UnreliableSequenced
+    // type = STATE
     // int = client ID
+    // string = client name
+    // State = client state
 
 
     //==============
@@ -83,6 +92,17 @@ namespace GameServer
     // type = INPUT
     // int = client ID
     // Input = client input
+
+
+    //==============
+    // End (ch. 4)
+    //==============
+    //
+    // ReliableOrdered
+    // type = End
+    // int = nb client
+    // Send score of all player : 
+    // ID, Name, Score
 
     #endregion
 
@@ -96,12 +116,14 @@ namespace GameServer
         const int DT = 30; // ms
 
         static Map TERRAIN = Map.Town;
-        static Vector3 INITIAL_POS = new Vector3(30,0,30);
+        static Vector3 INITIAL_POS = new Vector3(30, 0, 30);
         static Vector3 INITIAL_ROT = Vector3.Zero;
 
         #endregion
 
         #region Fields
+
+        static bool end;
 
         static NetServer Server;
         static NetPeerConfiguration Config;
@@ -111,9 +133,6 @@ namespace GameServer
         static int NextID;
         static List<Player> Clients;
         static List<Player> WaitingQueue;
-
-        static DateTime Time;
-        static TimeSpan TimeToPass;
 
         static Box worldBox;
         static Box onePlayerBox;
@@ -134,27 +153,40 @@ namespace GameServer
             Console.WriteLine("Waiting messages...\n");
 #endif
 
-            while (true)
+            while (!end)
             {
                 HandleMsg();
-                Time = DateTime.Now;
+
+                foreach (Player p in Clients)
+                {
+                    if (p.Score == 5000)
+                    {
+                        SendEnd();
+                        end = true;
+                    }
+                    else if (!p.Alive)
+                        SendSpawn(p);
+                }
+
                 System.Threading.Thread.Sleep(1); // slow server, less CPU used
             }
+
+            System.Threading.Thread.Sleep(5000);
+            Server.Shutdown("END");
         }
 
         #region Initialization
 
         static void Initialize()
         {
+            end = false;
+
             Clients = new List<Player>();
             Clients.Capacity = MAX_CLIENT;
             NextID = 0;
 
             WaitingQueue = new List<Player>();
             WaitingQueue.Capacity = MAX_CLIENT / 4;
-
-            Time = DateTime.Now;
-            TimeToPass = new TimeSpan(0, 0, 0, 0, DT);
 
             switch (TERRAIN)
             {
@@ -434,21 +466,7 @@ namespace GameServer
             OutMsg.Write((byte)TERRAIN);
 
             Server.SendMessage(OutMsg, player.Connection, NetDeliveryMethod.ReliableOrdered, 1);
-
-            STATE state = new STATE()
-            {
-                Alive = true,
-                Position = INITIAL_POS,
-                Rotation = INITIAL_ROT
-            };
-
-            player.Spawn(state);
-
-            OutMsg = Server.CreateMessage();
-            OutMsg.Write((byte)PacketTypes.SPAWN);
-            OutMsg.WritePlayerState(state);
-
-            Server.SendMessage(OutMsg, player.Connection, NetDeliveryMethod.ReliableOrdered, 1);
+            SendSpawn(player);
         }
 
         static void PlayerDisconnected(Player player)
@@ -481,7 +499,7 @@ namespace GameServer
 
             foreach (Player p in Clients)
             {
-                if (p != player)
+                if (p != player && p.Alive)
                 {
                     _boxList.Clear();
                     _boxList.AddRange(onePlayerBox.ComputeWorldTranslation(p.World));
@@ -507,18 +525,70 @@ namespace GameServer
             if (tmp.HasValue && tmp.Value < _bulletResult.Distance)
                 return;
 
-            _bulletResult.CollisionWith.Killed();
-
-            OutMsg = Server.CreateMessage();
-            OutMsg.Write((byte)PacketTypes.KILL);
-
-            Server.SendMessage(OutMsg, _bulletResult.CollisionWith.Connection,
-                NetDeliveryMethod.ReliableOrdered, 1);
+            SendKill(_bulletResult.CollisionWith);
+            player.AddScore();
+            SendScore(player);
 
 #if DEBUG
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Player {0} have killed {1}", player, _bulletResult.CollisionWith);
 #endif
+        }
+
+        static void SendSpawn(Player player)
+        {
+            STATE state = new STATE()
+            {
+                Alive = true,
+                Position = INITIAL_POS,
+                Rotation = INITIAL_ROT
+            };
+
+            player.Spawn(state);
+
+            OutMsg = Server.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.SPAWN);
+            OutMsg.WritePlayerState(state);
+
+            Server.SendMessage(OutMsg, player.Connection, 
+                NetDeliveryMethod.ReliableOrdered, 1);
+        }
+
+        static void SendKill(Player player)
+        {
+            player.Kill();
+
+            OutMsg = Server.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.KILL);
+
+            Server.SendMessage(OutMsg, player.Connection,
+                NetDeliveryMethod.ReliableOrdered, 1);
+        }
+
+        static void SendScore(Player player)
+        {
+            OutMsg = Server.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.SCORE);
+            OutMsg.Write(player.Score);
+
+            Server.SendMessage(OutMsg, player.Connection,
+                NetDeliveryMethod.ReliableOrdered, 1);
+        }
+
+        static void SendEnd()
+        {
+            OutMsg = Server.CreateMessage();
+            OutMsg.Write((byte)PacketTypes.END);
+            OutMsg.Write(Clients.Count);
+
+            foreach (Player p in Clients)
+            {
+                OutMsg.Write(p.ID);
+                OutMsg.Write(p.Name);
+                OutMsg.Write(p.Score);
+            }
+
+            Server.SendToAll(OutMsg, null, NetDeliveryMethod.ReliableOrdered, 4);
         }
 
         #region Help Methods

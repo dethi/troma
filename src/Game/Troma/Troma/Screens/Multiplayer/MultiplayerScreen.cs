@@ -18,9 +18,14 @@ namespace Troma
         private FirstPersonView camera;
         private Player player;
 
-        private TimeSpan time;
-
         private float pauseAlpha;
+
+        private string notifMsg;
+
+        private Texture2D target;
+        private SpriteFont Font;
+        private Vector2 titleOrigin = new Vector2(0, 0);
+        private Color c = new Color(170, 170, 170);
 
         #endregion
 
@@ -33,11 +38,21 @@ namespace Troma
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
             client = new GameClient(host);
+            client.ScoreChanged += ScoreChanged;
+            client.EndedGame += EndedGame;
         }
 
         public override void LoadContent()
         {
             base.LoadContent();
+
+            #region HUD
+
+            target = FileManager.Load<Texture2D>("Menus/target");
+            Font = FileManager.Load<SpriteFont>("Fonts/HUD");
+            notifMsg = "";
+
+            #endregion
 
 #if DEBUG
             XConsole.Reset();
@@ -57,9 +72,7 @@ namespace Troma
 
             System.Threading.Thread.Sleep(500);
 
-            time = new TimeSpan();
             game.ResetElapsedTime();
-
             client.Start();
         }
 
@@ -94,7 +107,6 @@ namespace Troma
             }
             else
             {
-                time += gameTime.ElapsedGameTime;
                 player.HandleInput(gameTime, input);
 
                 if (player.Alive)
@@ -103,10 +115,10 @@ namespace Troma
                         player.Killed();
                     else
                     {
+                        client.SetData(player.GetState(), player.GetInput());
+
                         if (player.HasShoot)
                             client.SendShoot();
-
-                        client.SetData(player.GetState(), player.GetInput());
                     }
                 }
                 else if (client.Alive)
@@ -132,6 +144,58 @@ namespace Troma
             if (IsActive)
             {
                 player.DrawHUD(gameTime);
+
+                #region HUD
+
+                int width = GameServices.GraphicsDevice.Viewport.Width;
+                int height = GameServices.GraphicsDevice.Viewport.Height;
+
+                string nbrClient = (client.Players.Count + 1).ToString();
+
+                float textScale1 = 0.00080f * width;
+                float textScale2 = 0.00086f * width;
+
+                Vector2 Position1 = new Vector2(
+                    1700 * width / 1920,
+                    20 * height / 1080);
+
+                Vector2 Position2 = new Vector2(
+                    1698 * width / 1920,
+                    18 * height / 1080);
+
+                Vector2 Position3 = new Vector2(
+                    70 * width / 1920,
+                    20 * height / 1080);
+
+                Rectangle targetImage = new Rectangle(
+                    1770 * width / 1920,
+                    20 * height / 1080,
+                    65 * width / 1920,
+                    78 * width / 1920);
+
+                Vector2 notifPos = new Vector2(
+                    910 * width / 1920,
+                    20 * height / 1080);
+
+                GameServices.SpriteBatch.Begin();
+
+                GameServices.SpriteBatch.DrawString(Font, nbrClient, Position2,
+                    Color.Black * 0.3f, 0, titleOrigin, textScale2, SpriteEffects.None, 0);
+
+                GameServices.SpriteBatch.DrawString(Font, nbrClient, Position1, c, 0,
+                    titleOrigin, textScale1, SpriteEffects.None, 0);
+
+                GameServices.SpriteBatch.Draw(target, targetImage, Color.White * 0.8f);
+
+                GameServices.SpriteBatch.DrawString(Font, client.Score.ToString(),
+                    Position3, c, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+
+                GameServices.SpriteBatch.DrawString(Font, notifMsg,
+                    notifPos, Color.Green, 0, titleOrigin, textScale1, SpriteEffects.None, 0);
+
+                GameServices.SpriteBatch.End();
+
+                #endregion
             }
 
             // If the game is transitioning on or off, fade it out to black.
@@ -141,5 +205,25 @@ namespace Troma
                 ScreenManager.FadeBackBufferToBlack(alpha);
             }
         }
+
+        #region Event
+
+        public void ScoreChanged(object o, EventArgs e)
+        {
+            notifMsg += "+100\n";
+            TimerManager.Add(1500, CleanMessage);
+        }
+
+        public void CleanMessage(object o, EventArgs e)
+        {
+            notifMsg = "";
+        }
+
+        public void EndedGame(object o, EventArgs e)
+        {
+            //ScreenManager.AddScreen(new EndGameScreen(game, time, _initialNbTarget, player.MunitionUsed()));
+        }
+
+        #endregion
     }
 }

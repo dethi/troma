@@ -31,9 +31,14 @@ namespace Troma
         public STATE State;
         public INPUT Input;
         public bool Alive;
+        public int Score;
         public Map Terrain;
 
+        public event EventHandler ScoreChanged;
+        public event EventHandler EndedGame;
+
         public List<OtherPlayer> Players;
+        public Tuple<int, string, int>[] Scoring;
 
         private System.Timers.Timer timerUpdate;
         private BackgroundWorker backgroundUpdater;
@@ -55,6 +60,8 @@ namespace Troma
         {
             Players = new List<OtherPlayer>();
             Players.Capacity = MAX_CLIENT;
+
+            Score = 0;
 
             timerUpdate = new System.Timers.Timer(35); // 35ms
             timerUpdate.Elapsed += new System.Timers.ElapsedEventHandler(UpdateElapsed);
@@ -202,7 +209,6 @@ namespace Troma
                                         break;
 
                                     Players.Remove(p);
-
                                     break;
 
                                 case PacketTypes.STATE:
@@ -218,7 +224,6 @@ namespace Troma
                                     }
 
                                     p.State = IncMsg.ReadPlayerState();
-
                                     break;
 
                                 case PacketTypes.INPUT:
@@ -228,18 +233,15 @@ namespace Troma
                                         break;
 
                                     p.Input = IncMsg.ReadPlayerInput();
-
                                     break;
 
                                 case PacketTypes.SPAWN:
                                     Alive = true;
                                     State = IncMsg.ReadPlayerState();
-
                                     break;
 
                                 case PacketTypes.KILL:
                                     Alive = false;
-
                                     break;
 
                                 case PacketTypes.SHOOT:
@@ -249,7 +251,26 @@ namespace Troma
                                         break;
 
                                     p.Shoot();
+                                    break;
 
+                                case PacketTypes.SCORE:
+                                    Score = IncMsg.ReadInt32();
+                                    ScoreChanged(null, null);
+                                    break;
+
+                                case PacketTypes.END:
+                                    int size = IncMsg.ReadInt32();
+                                    Scoring = new Tuple<int, string, int>[size];
+
+                                    for (int i = 0; i < size; i++)
+                                    {
+                                        Scoring[i] = new Tuple<int, string, int>(
+                                            IncMsg.ReadInt32(),
+                                            IncMsg.ReadString(),
+                                            IncMsg.ReadInt32());
+                                    }
+
+                                    EndedGame(null, null);
                                     break;
                             }
 

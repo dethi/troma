@@ -14,7 +14,9 @@ namespace ClientServerExtension
         INPUT,
         SHOOT,
         KILL,
-        SPAWN
+        SPAWN,
+        SCORE,
+        END
     }
 
     public struct STATE

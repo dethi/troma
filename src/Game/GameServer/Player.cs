@@ -23,6 +23,7 @@ namespace GameServer
         public STATE State;
         public INPUT Input;
 
+        public int Score;
         public bool Alive { get; private set; }
 
         public float Height
@@ -67,6 +68,7 @@ namespace GameServer
             State = new STATE();
             Input = new INPUT();
 
+            Score = 0;
             Alive = false;
         }
 
@@ -78,9 +80,14 @@ namespace GameServer
             Input = new INPUT();
         }
 
-        public void Killed()
+        public void Kill()
         {
             Alive = false;
+        }
+
+        public void AddScore()
+        {
+            Score += 100;
         }
     }
 }

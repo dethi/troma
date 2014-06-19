@@ -28,7 +28,7 @@ namespace Troma
 
             entity = OtherPlayerObject.BuildAnimatedEntity(
                 State.Position, State.Rotation, "soldier_M1");
-
+            entity.Initialize();
             entity.GetComponent<AnimatedModel3D>().PlayClip(new AnimInfo(0, 24), 51);
         }
 
