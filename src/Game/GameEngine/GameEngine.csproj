@@ -96,9 +96,9 @@
     <Compile Include="Animation\AnimationPlayer.cs" />
     <Compile Include="Animation\Keyframe.cs" />
     <Compile Include="Animation\SkinningData.cs" />
-    <Compile Include="BillBoard.cs" />
     <Compile Include="Camera\FirstPersonView.cs" />
     <Compile Include="Camera\ICamera.cs" />
+    <Compile Include="CharEventArgs.cs" />
     <Compile Include="Clouds\CloudManager.cs" />
     <Compile Include="Clouds\ParticleInstance.cs" />
     <Compile Include="Clouds\ParticleInstancer.cs" />
@@ -120,6 +120,7 @@
     <Compile Include="EntitySystem\IEntityUpdateable.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GameServices.cs" />
+    <Compile Include="MuzzleFlash.cs" />
     <Compile Include="Physics.cs" />
     <Compile Include="LightInfo.cs" />
     <Compile Include="RenderTargetManager.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Sounds\SoundManager.cs" />
     <Compile Include="Terrain\HeightMap.cs" />
     <Compile Include="Terrain\ITerrain.cs" />
+    <Compile Include="Terrain\MultiHeightMap.cs" />
     <Compile Include="Terrain\TerrainInfo.cs" />
     <Compile Include="TimerManager.cs" />
   </ItemGroup>

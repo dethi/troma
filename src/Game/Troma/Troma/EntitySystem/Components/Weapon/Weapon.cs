@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using GameEngine;
 
 namespace Troma
@@ -10,12 +11,20 @@ namespace Troma
     public class Weapon : EntityComponent
     {
         public Entity Arms;
+        public MuzzleFlash Muzzle;
+
         private WeaponInfo _info;
         private bool _isRespectROF;
         private bool _isLoading;
         private int _munitionUsed;
 
         public bool SightPosition;
+
+        private Random random;
+
+        public float CameraXRecoil { get; private set; }
+        public float CameraYRecoil { get; private set; }
+        public float ZRecoil { get; private set; }
 
         public WeaponInfo Info
         {
@@ -25,6 +34,11 @@ namespace Troma
         public int MunitionUsed
         {
             get { return _munitionUsed; }
+        }
+
+        public Vector3 RecoilTranslation
+        {
+            get { return new Vector3(0, 0, ZRecoil); }
         }
 
         private bool LoaderIsEmpty
@@ -49,14 +63,36 @@ namespace Troma
             _isLoading = false;
 
             _munitionUsed = 0;
+            random = new Random();
         }
 
         public override void Start()
         {
             base.Start();
 
+            Texture2D[] f = new Texture2D[24];
+
+            for (int i = 0; i < f.Length; i++)
+                f[i] = FileManager.Load<Texture2D>(String.Format("MuzzleFlash/Muzzle_{0:D5}", i));
+
+            Muzzle = new MuzzleFlash(f, _info.MuzzleOffset);
+
             Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Weapon_nb_bone);
             Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeUp, _info.Arms_nb_bone);
+        }
+
+        public void UpdateRecoil(GameTime gameTime)
+        {
+            float amplitudeZ = 6f;
+            float amount = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000.0f;
+
+            if (ZRecoil < 0) 
+                ZRecoil += amplitudeZ * amount * Math.Abs(ZRecoil);
+            if (ZRecoil > 0) 
+                ZRecoil = 0;
+
+            CameraXRecoil = 0;
+            CameraYRecoil = 0;
         }
 
         public bool Shoot()
@@ -86,13 +122,16 @@ namespace Troma
                     Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.Shoot, _info.Arms_nb_bone);
                 }
 
+                Muzzle.Activate();
+                AddRecoil();
+
                 return true;
             }
 
             return false;
         }
 
-        public void Reload()
+        public bool Reload()
         {
             if (_info.Loader > 0 && !_isLoading)
             {
@@ -106,11 +145,18 @@ namespace Troma
 
                 Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.Reload, _info.Weapon_nb_bone);
                 Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.Reload, _info.Arms_nb_bone);
+
+                return true;
             }
+
+            return false;
         }
 
-        public void ChangeSight()
+        public bool ChangeSight()
         {
+            if (_isLoading)
+                return false;
+
             SightPosition = !SightPosition;
 
             if (SightPosition)
@@ -123,6 +169,8 @@ namespace Troma
                 Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.AimDown, _info.Weapon_nb_bone);
                 Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.AimDown, _info.Arms_nb_bone);
             }
+
+            return SightPosition;
         }
 
         public void ChangeUp()
@@ -135,6 +183,14 @@ namespace Troma
         {
             Entity.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeDown, _info.Weapon_nb_bone);
             Arms.GetComponent<AnimatedModel3D>().PlayClip(_info.ChangeDown, _info.Arms_nb_bone);
+        }
+
+        private void AddRecoil()
+        {
+            CameraXRecoil = 0.0001f * (random.Next(100) - random.Next(100));
+            CameraYRecoil = 0.0003f * random.Next(100);
+
+            ZRecoil -= 0.4f;
         }
 
         #region Event

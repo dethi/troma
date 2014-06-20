@@ -242,14 +242,14 @@ namespace GameEngine
             int zmin = (int)Math.Floor(pos.Z);
             int zmax = zmin + 1;
 
-            Vector3 p1 = new Vector3(xmin, depths[xmin, zmax], zmax);
-            Vector3 p2 = new Vector3(xmax, depths[xmax, zmin], zmin);
+            Vector3 p1 = new Vector3(xmin, depths[xmin % Info.Size.Width, zmax % Info.Size.Height], zmax);
+            Vector3 p2 = new Vector3(xmax, depths[xmax % Info.Size.Width, zmin % Info.Size.Width], zmin);
             Vector3 p3;
 
             if ((pos.X - xmin) + (pos.Z - zmin) <= 1)
-                p3 = new Vector3(xmin, depths[xmin, zmin], zmin);
+                p3 = new Vector3(xmin, depths[xmin % Info.Size.Width, zmin % Info.Size.Width], zmin);
             else
-                p3 = new Vector3(xmax, depths[xmax, zmax], zmax);
+                p3 = new Vector3(xmax, depths[xmax % Info.Size.Width, zmax % Info.Size.Width], zmax);
 
             Plane plane = new Plane(p1, p2, p3);
             Ray ray = new Ray(new Vector3(pos.X, 0, pos.Z), Vector3.Up);

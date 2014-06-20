@@ -78,6 +78,9 @@ namespace Troma
             arrowRect = new Rectangle(0, 0, 64, 64);
 
             SoundManager.Play("Menu");
+
+            if (Settings.Name == "")
+                TimerManager.Add(300, EventLoadPopUp);
         }
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
@@ -134,12 +137,13 @@ namespace Troma
         private void SoloMenuEntrySelected(object sender, EventArgs e)
         {
             SoundManager.Stop();
-            LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, ""));
+            LoadingScreen.Load(game, ScreenManager, true, new SoloScreen(game, Map.Town),
+                new HistoryScreen(game));
         }
 
         private void MultiMenuEntrySelected(object sender, EventArgs e)
         {
-            //SoundManager.Stop();
+            ScreenManager.AddScreen(new ConnectOrHost(game, ErrorType.None));
         }
 
         private void ScoreMenuEntrySelected(object sender, EventArgs e)
@@ -152,15 +156,10 @@ namespace Troma
             ScreenManager.AddScreen(new OptionsMenu(game));
         }
 
-        protected override void OnCancel()
-        {
-            game.Exit();
-        }
-
-        private void OnCancel(object sender, EventArgs e)
+        protected override void OnCancel(object sender, EventArgs e)
         {
             SoundManager.Stop();
-            OnCancel();
+            game.Exit();
         }
 
         private void SetMenuEntryText()
@@ -170,6 +169,11 @@ namespace Troma
             scoreMenuEntry.Text = "Score";
             optionsMenuEntry.Text = "Options";
             exitMenuEntry.Text = Resource.Exit;
+        }
+
+        public void EventLoadPopUp(object o, EventArgs e)
+        {
+            ScreenManager.AddScreen(new NameScreen(game));
         }
     }
 }

@@ -79,6 +79,24 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Join.
+        /// </summary>
+        internal static string Connect {
+            get {
+                return ResourceManager.GetString("Connect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Connection failed.
+        /// </summary>
+        internal static string ConnectFail {
+            get {
+                return ResourceManager.GetString("ConnectFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Elapsed time.
         /// </summary>
         internal static string ElapsedTime {
@@ -120,6 +138,41 @@ namespace Troma {
         internal static string HighScore {
             get {
                 return ResourceManager.GetString("HighScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à March 12, 1944, military base of Fort Ort, California. 
+        ///
+        ///Bryan soldier! You left your family the day of your 21 years to join the Easy Company. 
+        ///But it won&apos;t be easy, trust me! You will follow an intensive training and your mother 
+        ///won&apos;t come tuck you in the evening. We reconstituted a French city to get used terrain, 
+        ///it can help you when you will be against these Boschs! 
+        ///
+        ///Here is your mission order in the training camp. You will be dropped from a B17 over the 
+        ///city taken by the Germans, they will [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        internal static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Host.
+        /// </summary>
+        internal static string Host {
+            get {
+                return ResourceManager.GetString("Host", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Server IP address.
+        /// </summary>
+        internal static string IPAddress {
+            get {
+                return ResourceManager.GetString("IPAddress", resourceCulture);
             }
         }
         
@@ -277,6 +330,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Switch Weapons.
+        /// </summary>
+        internal static string labelWeapon {
+            get {
+                return ResourceManager.GetString("labelWeapon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Left Mouse.
         /// </summary>
         internal static string LeftMouse {
@@ -304,11 +366,29 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Middle mouse button.
+        /// </summary>
+        internal static string Molette {
+            get {
+                return ResourceManager.GetString("Molette", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Multiplayer.
         /// </summary>
         internal static string Multiplayer {
             get {
                 return ResourceManager.GetString("Multiplayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New high score.
+        /// </summary>
+        internal static string NewHighScore {
+            get {
+                return ResourceManager.GetString("NewHighScore", resourceCulture);
             }
         }
         
@@ -376,6 +456,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Validate.
+        /// </summary>
+        internal static string Validate {
+            get {
+                return ResourceManager.GetString("Validate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Victory.
         /// </summary>
         internal static string Victory {
@@ -390,6 +479,15 @@ namespace Troma {
         internal static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter your nick.
+        /// </summary>
+        internal static string YourName {
+            get {
+                return ResourceManager.GetString("YourName", resourceCulture);
             }
         }
     }

@@ -25,7 +25,6 @@ namespace Troma
             : base(aParent)
         {
             Name = "DrawWeapon";
-            _requiredComponents.Add("AnimatedModel3D");
             _requiredComponents.Add("Weapon");
         }
 
@@ -42,6 +41,11 @@ namespace Troma
 
         public override void Draw(GameTime gameTime, ICamera camera)
         {
+            Entity.GetComponent<Weapon>().Muzzle.DrawHUD( 
+                Entity.GetComponent<Weapon>().SightPosition);
+
+            GameServices.ResetGraphicsDeviceFor3D();
+
             Entity.GetComponent<Weapon>().Arms.Draw(gameTime, camera);
         }
 

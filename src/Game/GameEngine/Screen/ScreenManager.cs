@@ -77,11 +77,6 @@ namespace GameEngine
         public override void Update(GameTime gameTime)
         {
             input.Update();
-
-            // Allows the game to exit
-            if (input.IsDown(Buttons.Back) || input.IsDown(Keys.Escape))
-                Game.Exit();
-
             screensToUpdate.Clear();
 
             foreach (GameScreen s in screens)

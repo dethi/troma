@@ -37,7 +37,6 @@ namespace Troma
                     effect.Projection = camera.Projection;
 
                     effect.EnableDefaultLighting();
-
                     effect.SpecularColor = new Vector3(0.25f);
                     effect.SpecularPower = 16;
                 }

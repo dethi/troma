@@ -228,4 +228,46 @@
   <data name="TotalGameTime" xml:space="preserve">
     <value>Total game time</value>
   </data>
+  <data name="NewHighScore" xml:space="preserve">
+    <value>New high score</value>
+  </data>
+  <data name="labelWeapon" xml:space="preserve">
+    <value>Switch Weapons</value>
+  </data>
+  <data name="Molette" xml:space="preserve">
+    <value>Middle mouse button</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>March 12, 1944, military base of Fort Ort, California. 
+
+Bryan soldier! You left your family the day of your 21 years to join the Easy Company. 
+But it won't be easy, trust me! You will follow an intensive training and your mother 
+won't come tuck you in the evening. We reconstituted a French city to get used terrain, 
+it can help you when you will be against these Boschs! 
+
+Here is your mission order in the training camp. You will be dropped from a B17 over the 
+city taken by the Germans, they will be characterized by black target trainings. You must 
+take back as soon as possible to avoid the enemy reinforcements.
+
+During this test, we will test your adaptation, your physical and mental skills capacity. 
+You will be provided with an M1 Guarand and a Colt 1911. The precision is required.</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="Host" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="ConnectFail" xml:space="preserve">
+    <value>Connection failed</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Enter your nick</value>
+  </data>
+  <data name="IPAddress" xml:space="preserve">
+    <value>Server IP address</value>
+  </data>
 </root>

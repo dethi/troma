@@ -18,24 +18,22 @@
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>\\psf\Home\Documents\Git\troma-build\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Thibault\Desktop\TROMA\Installateur\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://build.troma.eu/</InstallUrl>
     <UpdateUrl>http://build.troma.eu/</UpdateUrl>
     <SupportUrl>http://www.troma.eu/</SupportUrl>
     <ProductName>Troma</ProductName>
     <PublisherName>Emagine Studio</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>3</ApplicationRevision>
@@ -59,6 +57,7 @@
     <XnaCompressContent>false</XnaCompressContent>
     <DocumentationFile>
     </DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -94,9 +93,6 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DPSF">
-      <HintPath>.\DPSF.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
     </Reference>
@@ -152,7 +148,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>App.settings</DependentUpon>
     </Compile>
-    <Compile Include="Constants.cs" />
+    <Compile Include="Game\GameClient.cs" />
+    <Compile Include="Game\Constants.cs" />
     <Compile Include="EntitySystem\Components\Animated\AnimatedModel3D.cs" />
     <Compile Include="EntitySystem\Components\Animated\DrawAnimatedModel3D.cs" />
     <Compile Include="EntitySystem\Components\Animated\UpdateAnimation.cs" />
@@ -167,10 +164,12 @@
     <Compile Include="EntitySystem\Components\Vect\VectTransform.cs" />
     <Compile Include="EntitySystem\Components\Weapon\Weapon.cs" />
     <Compile Include="EntitySystem\ICollisionBox.cs" />
-    <Compile Include="EntitySystem\Template\AnimatedGameObject.cs" />
+    <Compile Include="EntitySystem\Template\OtherPlayerObject.cs" />
     <Compile Include="EntitySystem\Template\TargetObject.cs" />
     <Compile Include="EntitySystem\Template\VectGameObject.cs" />
     <Compile Include="EntitySystem\Template\WeaponObject.cs" />
+    <Compile Include="Game\Scene.cs" />
+    <Compile Include="Game\OtherPlayer.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -181,14 +180,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.fr-FR.resx</DependentUpon>
     </Compile>
-    <Compile Include="Score.cs" />
+    <Compile Include="Game\Score.cs" />
+    <Compile Include="Screens\Multiplayer\ConnectPopUp.cs" />
+    <Compile Include="Screens\Solo\HistoryScreen.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Numerous.cs" />
     <Compile Include="Screens\MenuScreens\GraphicsMenu.cs" />
     <Compile Include="Screens\MenuScreens\HelpMenu.cs" />
     <Compile Include="Screens\MenuScreens\Entry\IEntry.cs" />
-    <Compile Include="Screens\MenuScreens\InGameMenu.cs" />
+    <Compile Include="Screens\Solo\InGameMenu.cs" />
     <Compile Include="Screens\LoadingScreen.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Game\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="EntitySystem\Template\GameObject.cs" />
@@ -199,19 +200,33 @@
     <Compile Include="Screens\MenuScreens\MenuScreen.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Stepper.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Switch.cs" />
-    <Compile Include="Screens\EndGameScreen.cs" />
-    <Compile Include="Screens\SoloScreen.cs" />
+    <Compile Include="Screens\Solo\EndGameScreen.cs" />
+    <Compile Include="Screens\Multiplayer\ConnectOrHost.cs" />
+    <Compile Include="Screens\Multiplayer\EndGameMulti.cs" />
+    <Compile Include="Screens\Multiplayer\InGameMenuMulti.cs" />
+    <Compile Include="Screens\Multiplayer\MultiplayerScreen.cs" />
+    <Compile Include="Screens\MenuScreens\PopUpScreen.cs" />
+    <Compile Include="Screens\Solo\SoloScreen.cs" />
+    <Compile Include="Screens\StartScreens\NameScreen.cs" />
     <Compile Include="Screens\StartScreens\PegiScreen.cs" />
     <Compile Include="Screens\StartScreens\TitleIntroScreen.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="TargetManager.cs" />
-    <Compile Include="Troma.cs" />
-    <Compile Include="WeaponInfo.cs" />
+    <Compile Include="Game\Settings.cs" />
+    <Compile Include="Game\TargetManager.cs" />
+    <Compile Include="Game\Troma.cs" />
+    <Compile Include="Game\WeaponInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ClientServerExtension\ClientServerExtension.csproj">
+      <Project>{8CA689E8-AB3A-4314-B017-C2AB2D84475F}</Project>
+      <Name>ClientServerExtension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\GameEngine\GameEngine.csproj">
       <Project>{121AB8A9-2001-4CBE-80B3-A6E2E95B2E56}</Project>
       <Name>GameEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GameServer\GameServer.csproj">
+      <Project>{F5178BA3-B95E-4ED8-8B08-7B0947CC3E16}</Project>
+      <Name>GameServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Lidgren.Network\Lidgren.Network.csproj">
       <Project>{49BA1C69-6104-41AC-A5D8-B54FA9F696E8}</Project>

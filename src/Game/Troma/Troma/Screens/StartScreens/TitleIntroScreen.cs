@@ -59,8 +59,11 @@ namespace Troma
 
         public override void HandleInput(GameTime gameTime, InputState input)
         {
-            if (input.IsPressed(Keys.Enter) || input.IsPressed(Buttons.A))
+            if (input.IsPressed(Keys.Enter) || input.IsPressed(Buttons.A) ||
+                input.IsPressed(Buttons.Back) || input.IsPressed(Keys.Escape))
+            {
                 _player.Stop();
+            }
         }
 
         public override void Draw(GameTime gameTime)

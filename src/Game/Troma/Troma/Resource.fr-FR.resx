@@ -228,4 +228,49 @@
   <data name="TotalGameTime" xml:space="preserve">
     <value>Temps de jeu total</value>
   </data>
+  <data name="NewHighScore" xml:space="preserve">
+    <value>Nouveau record</value>
+  </data>
+  <data name="labelWeapon" xml:space="preserve">
+    <value>Changer d'arme</value>
+  </data>
+  <data name="Molette" xml:space="preserve">
+    <value>Molette souris</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>12 Mars 1944, base militaire de Fort Ort en Californie.
+
+Soldat Bryan ! Vous avez quitté votre famille le jour de vos 21 ans pour rejoindre la 
+Easy Compay. Mais cela ne sera pas de tout repos, croyez moi ! Vous allez suivre un 
+entrainement intensif et votre mère ne viendra pas vous border le soir. Nous avons 
+reconstitué une ville française pour vous habituer au terrain, cela vous aidera peut-être 
+le jour où vous serez face aux boschs !
+
+Voilà votre ordre de mission dans le camp d'entrainement. Vous allez être parachuté d'un B17 
+au dessus de la ville prise par les allemands, ils seront caractérisés par des cibles noirs 
+d'entrainements. Vous devez impérativement la reprendre le plus rapidement possible avant
+l'arrivée des renforts ennemis.
+
+Au cours de cet entrainement, nous testerons votre capacité d'adaptation ainsi que vos 
+compétences physiques et intellectuelles. Vous serez muni d'un M1 Guarand et d'un Colt 1911. 
+La précision est de rigueur.</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Rejoindre</value>
+  </data>
+  <data name="Host" xml:space="preserve">
+    <value>Heberger</value>
+  </data>
+  <data name="ConnectFail" xml:space="preserve">
+    <value>Echec de la connexion</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Entrez votre pseudo</value>
+  </data>
+  <data name="IPAddress" xml:space="preserve">
+    <value>Adresse IP du serveur</value>
+  </data>
 </root>

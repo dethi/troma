@@ -150,10 +150,10 @@ namespace Troma
             ScreenManager.AddScreen(new HelpMenu(game));
         }
 
-        private void OnCancel(object sender, EventArgs e)
+        protected override void OnCancel(object sender, EventArgs e)
         {
             Settings.Save();
-            OnCancel();
+            ExitScreen();
         }
 
         private void SetMenuEntryText()
