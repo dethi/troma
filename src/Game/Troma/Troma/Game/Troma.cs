@@ -65,21 +65,9 @@ namespace Troma
             SoundManager.SetVolume(Settings.MusicVolume);
             SFXManager.SetVolume(Settings.MusicVolume);
 
-            screenManager.AddScreen(new SoloScreen(this, Map.Town));
-            //screenManager.AddScreen(new PegiScreen(this));
-            //screenManager.AddScreen(new ScoreMenu(this));
-            //screenManager.AddScreen(new HistoryScreen(this));
+            //screenManager.AddScreen(new SoloScreen(this, Map.Town));
+            screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new MultiplayerScreen(this, "192.168.1.7"));
-
-            /*
-            Tuple<int, string, int>[] top = new Tuple<int, string, int>[10];
-            for(int i = 0; i < top.Length; i++)
-            {
-                top[i] = new Tuple<int, string, int>(i, "Coucou", 1500+i);
-            }
-
-            screenManager.AddScreen(new EndGameMulti(this, top));
-            */
         }
 
         /// <summary>

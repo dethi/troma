@@ -78,6 +78,9 @@ namespace Troma
             arrowRect = new Rectangle(0, 0, 64, 64);
 
             SoundManager.Play("Menu");
+
+            if (Settings.Name == "")
+                TimerManager.Add(300, EventLoadPopUp);
         }
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
@@ -166,6 +169,11 @@ namespace Troma
             scoreMenuEntry.Text = "Score";
             optionsMenuEntry.Text = "Options";
             exitMenuEntry.Text = Resource.Exit;
+        }
+
+        public void EventLoadPopUp(object o, EventArgs e)
+        {
+            ScreenManager.AddScreen(new NameScreen(game));
         }
     }
 }

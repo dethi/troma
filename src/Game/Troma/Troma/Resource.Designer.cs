@@ -447,6 +447,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Validate.
+        /// </summary>
+        internal static string Validate {
+            get {
+                return ResourceManager.GetString("Validate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Victory.
         /// </summary>
         internal static string Victory {
@@ -461,6 +470,15 @@ namespace Troma {
         internal static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter your nick.
+        /// </summary>
+        internal static string YourName {
+            get {
+                return ResourceManager.GetString("YourName", resourceCulture);
             }
         }
     }

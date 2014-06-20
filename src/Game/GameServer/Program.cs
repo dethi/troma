@@ -117,7 +117,7 @@ namespace GameServer
         const int MAX_SCORE = 2000;
 
         static Map TERRAIN = Map.Cracovie;
-        static Vector3 INITIAL_POS = new Vector3(30, 0, 30);
+        static Vector3 INITIAL_POS = new Vector3(450, 5, 450);
         static Vector3 INITIAL_ROT = Vector3.Zero;
 
         #endregion

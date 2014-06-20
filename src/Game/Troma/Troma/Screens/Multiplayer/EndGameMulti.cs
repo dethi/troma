@@ -142,7 +142,8 @@ namespace Troma
 
         protected override void OnCancel(object sender, EventArgs e)
         {
-            ExitScreen();
+            LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
+                new ConnectOrHost(game, ErrorType.None));
         }
 
         private void TriScoring()

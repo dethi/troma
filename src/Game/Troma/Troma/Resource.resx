@@ -261,4 +261,10 @@ You will be provided with an M1 Guarand and a Colt 1911. The precision is requir
   <data name="ConnectFail" xml:space="preserve">
     <value>Connection failed</value>
   </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Enter your nick</value>
+  </data>
 </root>

@@ -15,11 +15,7 @@ namespace Troma
             Entity entity = new Entity();
             entity.AddComponent(new Transform(entity, pos));
             entity.AddComponent(new Model3D(entity, model));
-
-            Effect _effect = effect.Clone();
-            _effect.Name = effect.Name;
-
-            entity.AddComponent(new DrawModel3D(entity, _effect));
+            entity.AddComponent(new DrawModel3D(entity, effect));
             entity.AddComponent(new CollisionBox(entity));
         }
     }

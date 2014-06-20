@@ -37,11 +37,6 @@ namespace Troma
 
             _effect.CurrentTechnique = _effect.Techniques["Technique1"];
 
-            _effect.Parameters["ColorMap"].SetValue(_texture);
-
-            if (hasNormalMap)
-                _effect.Parameters["NormalMap"].SetValue(_normalMap);
-
             _effect.Parameters["AmbientColor"].SetValue(LightInfo.AmbientColor);
             _effect.Parameters["AmbientIntensity"].SetValue(LightInfo.AmbientIntensity);
 
@@ -61,8 +56,13 @@ namespace Troma
             _effect.Parameters["View"].SetValue(camera.View);
             _effect.Parameters["Projection"].SetValue(camera.Projection);
 
+            _effect.Parameters["ColorMap"].SetValue(_texture);
+
             if (hasNormalMap)
+            {
+                _effect.Parameters["NormalMap"].SetValue(_normalMap);
                 _effect.Parameters["EyePosition"].SetValue(camera.Position);
+            }
 
             foreach (ModelMesh mesh in model.Meshes)
             {

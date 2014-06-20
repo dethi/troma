@@ -208,6 +208,7 @@
     <Compile Include="Screens\Multiplayer\MultiplayerScreen.cs" />
     <Compile Include="Screens\MenuScreens\PopUpScreen.cs" />
     <Compile Include="Screens\Solo\SoloScreen.cs" />
+    <Compile Include="Screens\StartScreens\NameScreen.cs" />
     <Compile Include="Screens\StartScreens\PegiScreen.cs" />
     <Compile Include="Screens\StartScreens\TitleIntroScreen.cs" />
     <Compile Include="Game\Settings.cs" />

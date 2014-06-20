@@ -63,13 +63,6 @@ namespace Troma
 
                 #endregion
 
-#if DEBUG
-                XConsole.Reset();
-                XConsole.Initialize();
-                DrawingAxes.Initialize();
-                BoundingSphereRenderer.Initialize(30);
-#endif
-
                 camera = new FirstPersonView(GameServices.GraphicsDevice.Viewport.AspectRatio);
                 player = new Player(client.State.Position, client.State.Rotation, camera);
 
@@ -117,7 +110,7 @@ namespace Troma
 
         public override void HandleInput(GameTime gameTime, InputState input)
         {
-            if (!client.Connected)
+            if (!client.Connected && client.Scoring == null)
                 return;
 
             if (input.IsPressed(Keys.P) || input.IsPressed(Buttons.Start) ||
@@ -148,7 +141,7 @@ namespace Troma
 
         public override void Draw(GameTime gameTime)
         {
-            if (!client.Connected)
+            if (!client.Connected && client.Scoring == null)
                 return;
 
             GameServices.ResetGraphicsDeviceFor3D();
@@ -157,12 +150,6 @@ namespace Troma
 
             foreach (OtherPlayer p in currentList)
                 p.Draw(gameTime, camera);
-
-#if DEBUG
-            CollisionManager.Draw(gameTime, camera);
-            DrawingAxes.Draw(gameTime, camera);
-            XConsole.DrawHUD(gameTime);
-#endif
 
             if (IsActive)
             {
@@ -245,8 +232,8 @@ namespace Troma
 
         public void EndedGame(object o, EventArgs e)
         {
-            LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
-                new ConnectOrHost(game, ErrorType.None), new EndGameMulti(game, client.Scoring));
+            client.Shutdown();
+            ScreenManager.AddScreen(new EndGameMulti(game, client.Scoring));
         }
 
         #endregion
@@ -255,7 +242,7 @@ namespace Troma
         {
             client.Shutdown();
             Troma.KillServer();
-            LoadingScreen.Load(game, ScreenManager, true, new MainMenu(game),
+            LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
                 new ConnectOrHost(game, error));
         }
     }

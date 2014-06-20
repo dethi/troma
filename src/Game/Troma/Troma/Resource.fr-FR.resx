@@ -264,4 +264,10 @@ La précision est de rigueur.</value>
   <data name="ConnectFail" xml:space="preserve">
     <value>Echec de la connexion</value>
   </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Entrez votre pseudo</value>
+  </data>
 </root>

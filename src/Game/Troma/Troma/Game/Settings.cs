@@ -11,8 +11,6 @@ namespace Troma
 {
     public static class Settings
     {
-        public static string Name = "DETHI";
-
         private static float _musicVolume;
         private static string _keyboard;
         private static string _language;
@@ -89,6 +87,8 @@ namespace Troma
 
         public static bool DynamicClouds { get; set; }
 
+        public static string Name { get; set; }
+
         public static void Initialize()
         {
             MusicVolume = App.Default.MusicVolume;
@@ -99,6 +99,8 @@ namespace Troma
             Vsync = App.Default.Vsync;
             Multisampling = App.Default.Multisampling;
             DynamicClouds = App.Default.DynamicClouds;
+
+            Name = App.Default.Name;
         }
 
         public static void Save()
@@ -111,6 +113,8 @@ namespace Troma
             App.Default.Vsync = _vsync;
             App.Default.Multisampling = _multisampling;
             App.Default.DynamicClouds = DynamicClouds;
+
+            App.Default.Name = Name;
 
             App.Default.Save();
         }
