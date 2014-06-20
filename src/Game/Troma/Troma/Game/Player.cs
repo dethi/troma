@@ -224,7 +224,7 @@ namespace Troma
 
         public void Update(GameTime gameTime)
         {
-            GroundCollision();
+            TerrainCollision();
             _weaponActive.GetComponent<Weapon>().Muzzle.Update();
         }
 
@@ -388,7 +388,7 @@ namespace Troma
             }
         }
 
-        private void GroundCollision()
+        private void TerrainCollision()
         {
             if (_terrain.IsOnTerrain(_position))
             {
@@ -397,10 +397,20 @@ namespace Troma
                 if (_touchGround)
                     _position.Y = y;
                 else
-                    _touchGround = (y - 2 <= _position.Y) && (_position.Y <= y + 0.1f);
+                    _touchGround = (_position.Y <= y + 0.2f);
             }
             else
-                _touchGround = false;
+            {
+                if (_position.X < _terrain.Info.Position.X + 2)
+                    _position.X = _terrain.Info.Position.X + 2;
+                else if (_position.X >= _terrain.Info.Position.X + _terrain.Info.Size.Width - 3)
+                    _position.X = _terrain.Info.Position.X + _terrain.Info.Size.Width - 2;
+
+                if (_position.Z < _terrain.Info.Position.Z + 2)
+                    _position.Z = _terrain.Info.Position.X + 2;
+                else if (_position.Z >= _terrain.Info.Position.Z + _terrain.Info.Size.Height - 3)
+                    _position.Z = _terrain.Info.Position.Z + _terrain.Info.Size.Height - 2;
+            }
         }
 
         private void ApplyCollision()
@@ -563,21 +573,6 @@ namespace Troma
         #endregion
 
         #region Public Methods
-
-        public void Reset()
-        {
-            _height = HEIGHT;
-            _position = _initPosition;
-            _rotation = _initRotation;
-
-            newPos = _position;
-            _isCrouched = false;
-            _touchGround = false;
-            _collisionDetected = false;
-            _collisionDetectedDown = false;
-
-            MoveTo(_position, _rotation);
-        }
 
         public int MunitionUsed()
         {

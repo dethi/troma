@@ -65,7 +65,7 @@ namespace Troma
             SoundManager.SetVolume(Settings.MusicVolume);
             SFXManager.SetVolume(Settings.MusicVolume);
 
-            screenManager.AddScreen(new SoloScreen(this, Map.Cracovie));
+            screenManager.AddScreen(new SoloScreen(this, Map.Town));
             //screenManager.AddScreen(new PegiScreen(this));
             //screenManager.AddScreen(new ScoreMenu(this));
             //screenManager.AddScreen(new HistoryScreen(this));

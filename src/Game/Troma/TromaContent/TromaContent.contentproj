@@ -423,13 +423,18 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
+    <None Include="Box\CracovieBox.bin">
+      <Name>CracovieBox</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Box\empty">
       <Name>empty</Name>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Box\PlayerAccroupiBox.bin">
+    <None Include="Box\PlayerAccroupiBox.bin">
       <Name>PlayerAccroupiBox</Name>
-    </Compile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="Models\Soldier_M1.x">
       <Name>Soldier_M1</Name>
       <Importer>XImporter</Importer>
@@ -454,9 +459,14 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Box\PlayerDeboutBox.bin">
+    <None Include="Box\PlayerDeboutBox.bin">
       <Name>PlayerDeboutBox</Name>
-    </Compile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Box\TownBox.bin">
+      <Name>TownBox</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Sounds\Audio.xgs">
       <Name>Audio</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
