@@ -44,6 +44,8 @@ namespace Troma
             {
                 e.GetComponent<CollisionBox>().GenerateBoundingBox();
                 CollisionManager.AddBox(e.GetComponent<CollisionBox>().BoxList);
+
+                //e.GetComponent<AnimatedModel3D>().PlayClip(new AnimInfo(0, 2), 2);
             }
         }
 
@@ -58,6 +60,12 @@ namespace Troma
                 EntityManager.Remove(result.Entity);
                 CollisionManager.Remove(result.Entity.GetComponent<CollisionBox>().BoxList);
                 _masterList.Remove(result.Entity);
+
+                /*
+                result.Entity.GetComponent<AnimatedModel3D>().PlayClip(new AnimInfo(0, 60), 2);
+                CollisionManager.Remove(result.Entity.GetComponent<CollisionBox>().BoxList);
+                _masterList.Remove(result.Entity);
+                 */
             }
 
             if (result.State)
