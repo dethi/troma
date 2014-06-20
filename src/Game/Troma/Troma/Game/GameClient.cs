@@ -115,7 +115,7 @@ namespace Troma
 
         private void WaitInitialData()
         {
-            DateTime expired = DateTime.Now + new TimeSpan(0, 0, 0, 30, 0);
+            DateTime expired = DateTime.Now + new TimeSpan(0, 0, 0, 10, 0);
             bool canStart = false;
 
 #if DEBUG
@@ -247,7 +247,7 @@ namespace Troma
                                     if (p == null)
                                         break;
 
-                                    p.Shoot();
+                                    //p.Shoot();
                                     break;
 
                                 case PacketTypes.SCORE:
