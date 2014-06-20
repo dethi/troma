@@ -126,10 +126,11 @@ namespace Troma
         {
             if (name != "")
             {
-            Settings.Name = name;
-            Settings.Save();
-            ExitScreen();
-                }
+                Settings.Name = name;
+                Settings.Save();
+                EventInput.CharEntered -= new CharEnteredHandler(EventInput_CharEntered);
+                ExitScreen();
+            }
         }
 
         private void EventInput_CharEntered(object sender, CharacterEventArgs e)

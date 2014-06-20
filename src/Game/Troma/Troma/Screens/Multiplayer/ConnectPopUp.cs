@@ -125,6 +125,7 @@ namespace Troma
         {
             if (ip != "")
             {
+                EventInput.CharEntered -= new CharEnteredHandler(EventInput_CharEntered);
                 SoundManager.Stop();
                 LoadingScreen.Load(game, ScreenManager, true, new MultiplayerScreen(game, ip));
             }
