@@ -244,7 +244,8 @@ namespace Troma
 
         public void EndedGame(object o, EventArgs e)
         {
-            //ScreenManager.AddScreen(new EndGameScreen(game, time, _initialNbTarget, player.MunitionUsed()));
+            LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
+                new ConnectOrHost(game, ErrorType.None), new EndGameMulti(game, client.Scoring));
         }
 
         #endregion
@@ -253,7 +254,7 @@ namespace Troma
         {
             client.Shutdown();
             Troma.KillServer();
-            LoadingScreen.Load(game, ScreenManager, false, new MainMenu(game),
+            LoadingScreen.Load(game, ScreenManager, true, new MainMenu(game),
                 new ConnectOrHost(game, error));
         }
     }

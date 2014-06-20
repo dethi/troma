@@ -256,8 +256,8 @@ namespace Troma
 
                 if (m == Map.Town)
                     worldBox.Save("Content/Box/TownBox");
-                //else if (m == Map.Cracovie)
-                    //worldBox.Save("Content/Box/CracovieBox");
+                else if (m == Map.Cracovie)
+                    worldBox.Save("Content/Box/CracovieBox");
             }
 
             CollisionManager.AddBox(worldBox.BoudingBox);

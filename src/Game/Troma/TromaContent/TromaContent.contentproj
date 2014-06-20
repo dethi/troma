@@ -427,10 +427,9 @@
       <Name>empty</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Box\PlayerBox.bin">
-      <Name>PlayerBox</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Compile Include="Box\PlayerAccroupiBox.bin">
+      <Name>PlayerAccroupiBox</Name>
+    </Compile>
     <Compile Include="Models\Soldier_M1.x">
       <Name>Soldier_M1</Name>
       <Importer>XImporter</Importer>
@@ -454,6 +453,9 @@
       <Name>tunnel_2</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Box\PlayerDeboutBox.bin">
+      <Name>PlayerDeboutBox</Name>
     </Compile>
     <None Include="Sounds\Audio.xgs">
       <Name>Audio</Name>

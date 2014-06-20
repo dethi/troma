@@ -183,12 +183,12 @@
       <DependentUpon>Resource.fr-FR.resx</DependentUpon>
     </Compile>
     <Compile Include="Game\Score.cs" />
-    <Compile Include="Screens\HistoryScreen.cs" />
+    <Compile Include="Screens\Solo\HistoryScreen.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Numerous.cs" />
     <Compile Include="Screens\MenuScreens\GraphicsMenu.cs" />
     <Compile Include="Screens\MenuScreens\HelpMenu.cs" />
     <Compile Include="Screens\MenuScreens\Entry\IEntry.cs" />
-    <Compile Include="Screens\MenuScreens\InGameMenu.cs" />
+    <Compile Include="Screens\Solo\InGameMenu.cs" />
     <Compile Include="Screens\LoadingScreen.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -201,12 +201,13 @@
     <Compile Include="Screens\MenuScreens\MenuScreen.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Stepper.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Switch.cs" />
-    <Compile Include="Screens\EndGameScreen.cs" />
+    <Compile Include="Screens\Solo\EndGameScreen.cs" />
     <Compile Include="Screens\Multiplayer\ConnectOrHost.cs" />
+    <Compile Include="Screens\Multiplayer\EndGameMulti.cs" />
     <Compile Include="Screens\Multiplayer\InGameMenuMulti.cs" />
     <Compile Include="Screens\Multiplayer\MultiplayerScreen.cs" />
     <Compile Include="Screens\MenuScreens\PopUpScreen.cs" />
-    <Compile Include="Screens\SoloScreen.cs" />
+    <Compile Include="Screens\Solo\SoloScreen.cs" />
     <Compile Include="Screens\StartScreens\PegiScreen.cs" />
     <Compile Include="Screens\StartScreens\TitleIntroScreen.cs" />
     <Compile Include="Game\Settings.cs" />

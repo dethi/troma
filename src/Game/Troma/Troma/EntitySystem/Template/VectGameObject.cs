@@ -13,7 +13,7 @@ namespace Troma
         public static void BuildEntity(Vector3[] pos, string model, Effect effect)
         {
             Entity entity = new Entity();
-            entity.AddComponent(new Transform(entity)); // Little hack
+            entity.AddComponent(new Transform(entity, new Vector3(0, -50, 0))); // Little hack
             entity.AddComponent(new VectTransform(entity, pos));
             entity.AddComponent(new Model3D(entity, model));
 

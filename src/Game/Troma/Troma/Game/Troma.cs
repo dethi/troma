@@ -70,6 +70,16 @@ namespace Troma
             //screenManager.AddScreen(new ScoreMenu(this));
             //screenManager.AddScreen(new HistoryScreen(this));
             //screenManager.AddScreen(new MultiplayerScreen(this, "192.168.1.7"));
+
+            /*
+            Tuple<int, string, int>[] top = new Tuple<int, string, int>[10];
+            for(int i = 0; i < top.Length; i++)
+            {
+                top[i] = new Tuple<int, string, int>(i, "Coucou", 1500+i);
+            }
+
+            screenManager.AddScreen(new EndGameMulti(this, top));
+            */
         }
 
         /// <summary>
@@ -93,13 +103,13 @@ namespace Troma
             SFXManager.Add("Typewriter", Content.Load<SoundEffect>("Sounds/Typewriter"));
             SFXManager.Add("TypewriterPullback", Content.Load<SoundEffect>("Sounds/TypewriterPullback"));
 
-            // Generate a box file
             /*
-            Model generateBox = Content.Load<Model>("Models/cible");
+            // Generate a box file
+            Model generateBox = Content.Load<Model>("Models/soldier_accroupi");
             Box box = new Box();
             box.Generate(generateBox);
-            box.Save("PlayerBox");
-            */
+            box.Save("PlayerAccroupiBox");
+             * */
         }
 
         #endregion

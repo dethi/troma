@@ -116,7 +116,7 @@ namespace GameServer
         const int DT = 30; // ms
         const int MAX_SCORE = 2000;
 
-        static Map TERRAIN = Map.Town;
+        static Map TERRAIN = Map.Cracovie;
         static Vector3 INITIAL_POS = new Vector3(30, 0, 30);
         static Vector3 INITIAL_ROT = Vector3.Zero;
 
@@ -136,7 +136,8 @@ namespace GameServer
         static List<Player> WaitingQueue;
 
         static Box worldBox;
-        static Box onePlayerBox;
+        static Box playerBox;
+        static Box crouchPlayerBox;
 
         static List<BoundingBox> _boxList;
         static Vector3 _bulletDir;
@@ -228,14 +229,26 @@ namespace GameServer
 
             try
             {
-                Stream stream = File.Open("Content/Box/PlayerBox.bin", FileMode.Open);
+                Stream stream = File.Open("Content/Box/PlayerDeboutBox.bin", FileMode.Open);
                 BinaryFormatter bFormatter = new BinaryFormatter();
-                onePlayerBox = (Box)bFormatter.Deserialize(stream);
+                playerBox = (Box)bFormatter.Deserialize(stream);
                 stream.Close();
             }
             catch
             {
-                onePlayerBox = new Box();
+                playerBox = new Box();
+            }
+
+            try
+            {
+                Stream stream = File.Open("Content/Box/PlayerAccroupiBox.bin", FileMode.Open);
+                BinaryFormatter bFormatter = new BinaryFormatter();
+                crouchPlayerBox = (Box)bFormatter.Deserialize(stream);
+                stream.Close();
+            }
+            catch
+            {
+                crouchPlayerBox = new Box();
             }
         }
 
@@ -512,7 +525,11 @@ namespace GameServer
                 if (p != player && p.Alive)
                 {
                     _boxList.Clear();
-                    _boxList.AddRange(onePlayerBox.ComputeWorldTranslation(p.World));
+
+                    if (p.Input.IsCrouch)
+                        _boxList.AddRange(crouchPlayerBox.ComputeWorldTranslation(p.World));
+                    else
+                        _boxList.AddRange(playerBox.ComputeWorldTranslation(p.World));
 
                     foreach (BoundingBox box in _boxList)
                     {
