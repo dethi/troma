@@ -173,17 +173,18 @@ namespace Troma
                 int width = GameServices.GraphicsDevice.Viewport.Width;
                 int height = GameServices.GraphicsDevice.Viewport.Height;
 
-                string nbrClient = (client.Players.Count + 1).ToString();
+                string nbrClient = String.Format("{0}/{1}", client.Players.Count + 1, 
+                    GameClient.MAX_CLIENT);
 
                 float textScale1 = 0.00080f * width;
                 float textScale2 = 0.00086f * width;
 
                 Vector2 Position1 = new Vector2(
-                    1700 * width / 1920,
+                    1630 * width / 1920,
                     20 * height / 1080);
 
                 Vector2 Position2 = new Vector2(
-                    1698 * width / 1920,
+                    1628 * width / 1920,
                     18 * height / 1080);
 
                 Vector2 Position3 = new Vector2(

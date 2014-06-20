@@ -122,7 +122,7 @@ namespace Troma
             for (float i = 0; i < nbLine; i += 2)
             {
                 bgTransRect.Y = (int)(keyLabelPos.Y - 2 + i * lineSpacing);
-                GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.15f);
+                GameServices.SpriteBatch.Draw(bgTrans, bgTransRect, Color.White * TransitionAlpha * 0.3f);
             }
 
             GameServices.SpriteBatch.DrawString(SpriteFont, keyLabel, keyLabelPos, Color.Black * TransitionAlpha, 0,

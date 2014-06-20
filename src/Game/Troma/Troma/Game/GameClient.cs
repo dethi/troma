@@ -15,7 +15,7 @@ namespace Troma
 
         private const string APP_NAME = "TROMA";
         private const int PORT = 11420;
-        private const int MAX_CLIENT = 10;
+        public const int MAX_CLIENT = 10;
         private const int DT = 30; // ms
 
         #endregion

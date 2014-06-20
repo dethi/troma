@@ -62,7 +62,7 @@ namespace Troma
 #endif
 
             camera = new FirstPersonView(game.GraphicsDevice.Viewport.AspectRatio);
-            player = new Player(new Vector3(15, 10, 15), Vector3.Zero, camera);
+            player = new Player(new Vector3(15, 60, 15), Vector3.Zero, camera);
 
             Scene.Initialize(_map, camera);
 

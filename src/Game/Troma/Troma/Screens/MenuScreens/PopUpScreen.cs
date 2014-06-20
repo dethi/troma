@@ -64,8 +64,8 @@ namespace Troma
 
             bgTransRect.X = (int)(940 * widthScale - (textSize.X / 2));
             bgTransRect.Y = (int)(520 * widthScale - (textSize.Y / 2));
-            bgTransRect.Width = (int)textSize.X + 40;
-            bgTransRect.Height = (int)textSize.Y + 40 + 100;
+            bgTransRect.Width = (int)textSize.X + 80;
+            bgTransRect.Height = (int)(textSize.Y + 80 + 100 * scale);
 
             OkMenuEntry.originPos = new Vector2(
                 960,
