@@ -270,4 +270,7 @@ La précision est de rigueur.</value>
   <data name="YourName" xml:space="preserve">
     <value>Entrez votre pseudo</value>
   </data>
+  <data name="IPAddress" xml:space="preserve">
+    <value>Adresse IP du serveur</value>
+  </data>
 </root>

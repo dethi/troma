@@ -113,8 +113,7 @@ namespace Troma
 
         private void ConnectMenuEntrySelected(object sender, EventArgs e)
         {
-            SoundManager.Stop();
-            LoadingScreen.Load(game, ScreenManager, true, new MultiplayerScreen(game, "192.168.1.7"));
+            ScreenManager.AddScreen(new ConnectPopUp(game));
         }
 
         private void HostMenuEntrySelected(object sender, EventArgs e)

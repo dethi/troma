@@ -267,4 +267,7 @@ You will be provided with an M1 Guarand and a Colt 1911. The precision is requir
   <data name="YourName" xml:space="preserve">
     <value>Enter your nick</value>
   </data>
+  <data name="IPAddress" xml:space="preserve">
+    <value>Server IP address</value>
+  </data>
 </root>

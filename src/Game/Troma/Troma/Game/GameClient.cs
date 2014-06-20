@@ -136,6 +136,7 @@ namespace Troma
                                 case PacketTypes.LOGIN:
                                     ID = IncMsg.ReadInt32();
                                     Terrain = (Map)IncMsg.ReadByte();
+                                    Terrain = Map.Cracovie;
                                     MaxScore = IncMsg.ReadInt32();
                                     canStart = true;
 

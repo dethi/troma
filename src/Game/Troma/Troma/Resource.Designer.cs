@@ -168,6 +168,15 @@ namespace Troma {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Server IP address.
+        /// </summary>
+        internal static string IPAddress {
+            get {
+                return ResourceManager.GetString("IPAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Aim for.
         /// </summary>
         internal static string labelAimfor {

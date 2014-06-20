@@ -183,6 +183,7 @@
       <DependentUpon>Resource.fr-FR.resx</DependentUpon>
     </Compile>
     <Compile Include="Game\Score.cs" />
+    <Compile Include="Screens\Multiplayer\ConnectPopUp.cs" />
     <Compile Include="Screens\Solo\HistoryScreen.cs" />
     <Compile Include="Screens\MenuScreens\Entry\Numerous.cs" />
     <Compile Include="Screens\MenuScreens\GraphicsMenu.cs" />
