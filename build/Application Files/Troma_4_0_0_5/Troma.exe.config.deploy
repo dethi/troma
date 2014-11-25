@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="Troma.App" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <userSettings>
+        <Troma.App>
+            <setting name="MusicVolume" serializeAs="String">
+                <value>0.8</value>
+            </setting>
+            <setting name="Keyboard" serializeAs="String">
+                <value>AZERTY</value>
+            </setting>
+            <setting name="Language" serializeAs="String">
+                <value>Francais</value>
+            </setting>
+            <setting name="FullScreen" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Vsync" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Multisampling" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="DynamicClouds" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Name" serializeAs="String">
+                <value />
+            </setting>
+        </Troma.App>
+    </userSettings>
+</configuration>
